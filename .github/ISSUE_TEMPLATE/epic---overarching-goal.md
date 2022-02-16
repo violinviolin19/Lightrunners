@@ -2,7 +2,7 @@
 name: Epic - Overarching Goal
 about: Template to keep track of Epic.
 title: ''
-labels: ''
+labels: 'EPIC :goal_net:'
 assignees: ''
 
 ---
