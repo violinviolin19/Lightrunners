@@ -22,7 +22,8 @@
 //      2. Altered source versions must be plainly marked as such, and must not
 //      be misrepresented as being the original software.
 //
-//      3. This notice may not be removed or altered from any source distribution.
+//      3. This notice may not be removed or altered from any source
+//      distribution.
 //
 //  Author: Walker White
 //  Version: 7/1/16
@@ -46,33 +47,34 @@ using namespace cugl;
  *
  * @return the exit status of the application
  */
-int main(int argc, char * argv[]) {
-    // Change this to your application class
-    HelloApp app;
-    
-    /// SET YOUR APPLICATION PROPERTIES
-    
-    // The unique application name
-    app.setName("Hello World");
-    
-    // The name of your studio (for organizing save files)
-    app.setOrganization("GDIAC");
+int main(int argc, char *argv[]) {
+  // Change this to your application class
+  HelloApp app;
 
-    // Set the window properties (Only applies to OS X/Windows Desktop)
-    app.setDisplaySize(GAME_WIDTH, GAME_HEIGHT);
-    app.setFPS(60.0f);
-    app.setHighDPI(true);
-    
-    /// DO NOT MODIFY ANYTHING BELOW THIS LINE
-    if (!app.init()) {
-        return 1;
-    }
-    
-    // Run the application until completion
-    app.onStartup();
-    while (app.step());
-    app.onShutdown();
-    
-    exit(0);    // Necessary to quit on mobile devices
-    return 0;   // This line is never reached
+  /// SET YOUR APPLICATION PROPERTIES
+
+  // The unique application name
+  app.setName("Hello World");
+
+  // The name of your studio (for organizing save files)
+  app.setOrganization("GDIAC");
+
+  // Set the window properties (Only applies to OS X/Windows Desktop)
+  app.setDisplaySize(GAME_WIDTH, GAME_HEIGHT);
+  app.setFPS(60.0f);
+  app.setHighDPI(true);
+
+  /// DO NOT MODIFY ANYTHING BELOW THIS LINE
+  if (!app.init()) {
+    return 1;
+  }
+
+  // Run the application until completion
+  app.onStartup();
+  while (app.step())
+    ;
+  app.onShutdown();
+
+  exit(0);  // Necessary to quit on mobile devices
+  return 0; // This line is never reached
 }
