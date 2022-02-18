@@ -1,5 +1,5 @@
-#ifndef APP_H_
-#define APP_H_
+#ifndef GAMEAPP_H_
+#define GAMEAPP_H_
 #include "scenes/GameScene.h"
 #include "scenes/LoadingScene.h"
 #include <cugl/cugl.h>
@@ -80,4 +80,4 @@ public:
   virtual void draw() override;
 };
 
-#endif /* APP_H_ */
+#endif /* GAMEAPP_H_ */
