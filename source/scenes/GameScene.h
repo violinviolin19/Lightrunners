@@ -2,6 +2,8 @@
 #define SCENES_GAME_SCENE_H_
 #include <cugl/cugl.h>
 
+#include "../controllers/InputController.h"
+
 class GameScene : public cugl::Scene2 {
 
 public:

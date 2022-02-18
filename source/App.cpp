@@ -1,4 +1,4 @@
-#include "GameApp.h"
+#include "App.h"
 
 void GameApp::onStartup() {
   _assets = cugl::AssetManager::alloc();

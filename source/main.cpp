@@ -1,4 +1,4 @@
-#include "GameApp.h"
+#include "App.h"
 #include <cugl/cugl.h>
 
 // Window size if not on mobile device.
