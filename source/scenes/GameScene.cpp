@@ -18,7 +18,6 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager> &assets) {
 
 void GameScene::dispose() {}
 
-void GameScene::update(float timestep) {
-}
+void GameScene::update(float timestep) {}
 
 void GameScene::render(const std::shared_ptr<cugl::SpriteBatch> &batch) {}
