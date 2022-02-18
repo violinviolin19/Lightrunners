@@ -1,9 +1,7 @@
 #ifndef CONTROLLERS_ACTIONS_ATTACK_H_
 #define CONTROLLERS_ACTIONS_ATTACK_H_
+#include "Action.h"
 #include <cugl/cugl.h>
-
-// Forward declaration of Action to prevent circular dependencies.
-class Action;
 
 class Attack : public Action {
 protected:
@@ -21,10 +19,6 @@ public:
 
   Attack();
   ~Attack() {}
-
-protected:
-  void mouseDown(const cugl::MouseEvent &event, Uint8 clicks, bool focus);
-  void mouseUp(const cugl::MouseEvent &event, Uint8 clicks, bool focus);
 };
 
 #endif /* CONTROLLERS_ACTIONS_ATTACK_H_ */

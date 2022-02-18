@@ -1,11 +1,15 @@
 #include "InputController.h"
+#include "actions/Action.h"
 #include "actions/Attack.h"
 #include <cugl/cugl.h>
+
+// static
+std::shared_ptr<InputController> InputController::_singleton = nullptr;
 
 InputController::InputController() : _active(false) {}
 
 bool InputController::init() {
-  cugl::Mouse *mouse = cugl::Input::get<Mouse>();
+  cugl::Mouse *mouse = cugl::Input::get<cugl::Mouse>();
   if (mouse) {
     _active = true;
     std::shared_ptr<Attack> attack = std::make_shared<Attack>();
@@ -20,6 +24,7 @@ bool InputController::update() {
   for (auto it = _actions.begin(); it != _actions.end(); ++it) {
     (it->second)->update();
   }
+  return true;
 }
 
 bool InputController::dispose() {

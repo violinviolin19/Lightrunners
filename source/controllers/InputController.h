@@ -1,7 +1,8 @@
 #ifndef CONTROLLERS_INPUT_CONTROLLER_H_
 #define CONTROLLERS_INPUT_CONTROLLER_H_
-#include "actions/Action.h"
 #include <cugl/cugl.h>
+
+class Action;
 
 class InputController {
 protected:
@@ -13,9 +14,9 @@ protected:
 public:
   static std::shared_ptr<InputController> get() {
     if (_singleton == nullptr) {
-      _singleton = std::make_shared<InputController>();
+      _singleton = std::shared_ptr<InputController>{new InputController};
     }
-    return singleton;
+    return _singleton;
   }
 
   template <typename T> static std::shared_ptr<T> get() {
@@ -25,7 +26,7 @@ public:
     std::type_index indx = std::type_index(typeid(T));
     auto it = _singleton->_actions.find(indx);
     if (it != _singleton->_actions.end()) {
-      return static_cast<T *>(it->second);
+      return std::dynamic_pointer_cast<T>(it->second);
     }
     return nullptr;
   }

@@ -8,13 +8,14 @@ protected:
   std::string _name;
 
 public:
-  Action(){};
+  Action() {}
+  ~Action() {}
 
-  virtual bool init();
+  virtual bool init() = 0;
 
-  virtual bool update();
+  virtual bool update() = 0;
 
-  virtual bool dispose();
+  virtual bool dispose() = 0;
 
   std::string getName() { return _name; }
 };
