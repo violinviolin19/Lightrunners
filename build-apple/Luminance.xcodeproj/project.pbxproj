@@ -13,9 +13,9 @@
 		D52E673727BF305A00F8E2B8 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D52E672B27BF305900F8E2B8 /* GameScene.cpp */; };
 		D52E673827BF305A00F8E2B8 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D52E672B27BF305900F8E2B8 /* GameScene.cpp */; };
 		D52E673927BF305A00F8E2B8 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D52E672B27BF305900F8E2B8 /* GameScene.cpp */; };
-		D52E674027BF305A00F8E2B8 /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D52E673327BF305A00F8E2B8 /* App.cpp */; };
-		D52E674127BF305A00F8E2B8 /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D52E673327BF305A00F8E2B8 /* App.cpp */; };
-		D52E674227BF305A00F8E2B8 /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D52E673327BF305A00F8E2B8 /* App.cpp */; };
+		D52E674027BF305A00F8E2B8 /* GameApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D52E673327BF305A00F8E2B8 /* GameApp.cpp */; };
+		D52E674127BF305A00F8E2B8 /* GameApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D52E673327BF305A00F8E2B8 /* GameApp.cpp */; };
+		D52E674227BF305A00F8E2B8 /* GameApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D52E673327BF305A00F8E2B8 /* GameApp.cpp */; };
 		EB07CFB621EFF3F8000CB3A3 /* DeviceMargins.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB07CFB021EFF3EF000CB3A3 /* DeviceMargins.plist */; };
 		EB22BDE025D0E00A002ACE41 /* libcugl-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB22BDC825D0DE75002ACE41 /* libcugl-mac.a */; };
 		EB22BDFC25D0E0E2002ACE41 /* libcugl-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB22BDCA25D0DE75002ACE41 /* libcugl-ios.a */; };
@@ -108,12 +108,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D52E672627BF305900F8E2B8 /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
+		D52E672627BF305900F8E2B8 /* GameApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameApp.h; sourceTree = "<group>"; };
 		D52E672827BF305900F8E2B8 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
 		D52E672927BF305900F8E2B8 /* LoadingScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingScene.h; sourceTree = "<group>"; };
 		D52E672A27BF305900F8E2B8 /* LoadingScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoadingScene.cpp; sourceTree = "<group>"; };
 		D52E672B27BF305900F8E2B8 /* GameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameScene.cpp; sourceTree = "<group>"; };
-		D52E673327BF305A00F8E2B8 /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App.cpp; sourceTree = "<group>"; };
+		D52E673327BF305A00F8E2B8 /* GameApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameApp.cpp; sourceTree = "<group>"; };
 		EB07CFB021EFF3EF000CB3A3 /* DeviceMargins.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DeviceMargins.plist; sourceTree = "<group>"; };
 		EB22BF5E25D0E8BC002ACE41 /* Luminance (Sim).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Luminance (Sim).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB2BE9B41D74952A002FE78B /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -353,8 +353,8 @@
 		EBBF18B11D749176008E2001 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				D52E673327BF305A00F8E2B8 /* App.cpp */,
-				D52E672627BF305900F8E2B8 /* App.h */,
+				D52E673327BF305A00F8E2B8 /* GameApp.cpp */,
+				D52E672627BF305900F8E2B8 /* GameApp.h */,
 				D52E672727BF305900F8E2B8 /* scenes */,
 				EB2BE9B41D74952A002FE78B /* main.cpp */,
 			);
@@ -535,7 +535,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB9CDA3925D0EAB100EE1A09 /* main.cpp in Sources */,
-				D52E674227BF305A00F8E2B8 /* App.cpp in Sources */,
+				D52E674227BF305A00F8E2B8 /* GameApp.cpp in Sources */,
 				D52E673927BF305A00F8E2B8 /* GameScene.cpp in Sources */,
 				D52E673627BF305A00F8E2B8 /* LoadingScene.cpp in Sources */,
 			);
@@ -546,7 +546,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB7454AE1D74D891002FBAE6 /* main.cpp in Sources */,
-				D52E674127BF305A00F8E2B8 /* App.cpp in Sources */,
+				D52E674127BF305A00F8E2B8 /* GameApp.cpp in Sources */,
 				D52E673827BF305A00F8E2B8 /* GameScene.cpp in Sources */,
 				D52E673527BF305A00F8E2B8 /* LoadingScene.cpp in Sources */,
 			);
@@ -557,7 +557,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB2BE9B61D74952A002FE78B /* main.cpp in Sources */,
-				D52E674027BF305A00F8E2B8 /* App.cpp in Sources */,
+				D52E674027BF305A00F8E2B8 /* GameApp.cpp in Sources */,
 				D52E673727BF305A00F8E2B8 /* GameScene.cpp in Sources */,
 				D52E673427BF305A00F8E2B8 /* LoadingScene.cpp in Sources */,
 			);
