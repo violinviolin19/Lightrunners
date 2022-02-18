@@ -1,13 +1,5 @@
 {
 	"textures": {
-		"logo": {
-			"file":     "textures/logo.png",
-			"minfilter":"linear-linear",
-			"magfilter": "linear",
-			"mipmaps":   true,
-			"wrapS":    "clamp",
-			"wrapT":    "clamp"
-		},
 		"close-normal": {
 			"file":     "textures/CloseNormal.png",
 			"minfilter":"nearest",
