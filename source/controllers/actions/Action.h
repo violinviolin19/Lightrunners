@@ -11,10 +11,22 @@ public:
   Action() {}
   ~Action() {}
 
+  /**
+   * Creates input listeners and sets default variable.
+   * @return If initialized correctly.
+   */
   virtual bool init() = 0;
 
+  /**
+   * Updates action state.
+   * @return If updated correctly.
+   */
   virtual bool update() = 0;
 
+  /**
+   * Disposes input listeners and default variables.
+   * @return If disposed correctly.
+   */
   virtual bool dispose() = 0;
 
   std::string getName() { return _name; }

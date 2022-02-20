@@ -2,16 +2,27 @@
 #define CONTROLLERS_INPUT_CONTROLLER_H_
 #include <cugl/cugl.h>
 
+// Forward declaration of Action to prevent circular dependencies.
 class Action;
 
+/**
+ * A singleton class that handles reads inputs and handles actions.
+ */
 class InputController {
 protected:
-  bool _active;
+  /* Single instance of InputController. */
   static std::shared_ptr<InputController> _singleton;
 
+  /* Has been initialized correctly. */
+  bool _active;
+
+  /* A list of all input actions in the game. */
   std::unordered_map<std::type_index, std::shared_ptr<Action>> _actions;
 
 public:
+  /**
+   * @return Singelton instance of InputController
+   */
   static std::shared_ptr<InputController> get() {
     if (_singleton == nullptr) {
       _singleton = std::shared_ptr<InputController>{new InputController};
@@ -19,6 +30,12 @@ public:
     return _singleton;
   }
 
+  /**
+   * Finds and returns the action stored in the class that matches the parameter
+   * T class.
+   * @tparam T, action class (eg. Attack)
+   * @return Instance of the action.
+   */
   template <typename T> static std::shared_ptr<T> get() {
     if (!_singleton) {
       return nullptr;
@@ -31,12 +48,33 @@ public:
     return nullptr;
   }
 
+  /**
+   * Initialize the InputController and all the actions.
+   *
+   * @return true if all actions and cugl input classes initialize correctly.
+   * @return false if one action initializes incorrectly.
+   */
   bool init();
 
+  /**
+   * Call dispose on all the actions and clear the action cache.
+   *
+   * @return true if all actions dispose correctly.
+   * @return false if one action disposes incorrectly.
+   */
   bool dispose();
 
+  /**
+   * Call update on all the actions.
+   *
+   * @return true if all actions update correctly.
+   * @return false if one action update incorrectly.
+   */
   bool update();
 
+  /**
+   * @return If InputController has been activated by calling init()
+   */
   bool isActive() { return _active; }
 
   InputController(InputController const &) = delete;

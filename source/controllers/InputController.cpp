@@ -36,5 +36,6 @@ bool InputController::dispose() {
     }
     _active = false;
   }
+  _actions.clear();
   return successful;
 }
