@@ -16,14 +16,14 @@ void GameApp::onStartup() {
   _assets->attach<cugl::scene2::SceneNode>(
       cugl::Scene2Loader::alloc()->getHook());
 
-  // Create a "loading" screen
+  // Create a "loading" screen.
   _loaded = false;
   _loading.init(_assets);
 
-  // Queue up the other assets (EMPTY in this case)
+  // Queue up the other assets (EMPTY in this case).
   _assets->loadDirectoryAsync("json/assets.json", nullptr);
 
-  cugl::Application::onStartup(); // YOU MUST END with call to parent
+  cugl::Application::onStartup(); // YOU MUST END with call to parent.
 }
 
 void GameApp::onShutdown() {
