@@ -9,10 +9,14 @@ void GameApp::onStartup() {
   cugl::Input::activate<cugl::Touchscreen>();
 #else
   cugl::Input::activate<cugl::Mouse>();
+  // cugl::Mouse does not track mouse drag or move by default.
+  cugl::Input::get<cugl::Mouse>()->setPointerAwareness(
+      cugl::Mouse::PointerAwareness::ALWAYS);
 #endif
 
   // Add asset loaders.
   _assets->attach<cugl::Texture>(cugl::TextureLoader::alloc()->getHook());
+  _assets->attach<cugl::WidgetValue>(cugl::WidgetLoader::alloc()->getHook());
   _assets->attach<cugl::scene2::SceneNode>(
       cugl::Scene2Loader::alloc()->getHook());
 

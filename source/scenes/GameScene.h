@@ -5,6 +5,8 @@
 #include "../controllers/InputController.h"
 
 class GameScene : public cugl::Scene2 {
+  /** The asset manager for loading. */
+  std::shared_ptr<cugl::AssetManager> _assets;
 
 public:
   GameScene() : cugl::Scene2() {}

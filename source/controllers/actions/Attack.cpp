@@ -1,35 +1,36 @@
 #include "Attack.h"
 
-Attack::Attack() : _currDown(false), _prevDown(false) {}
+Attack::Attack() : _curr_down(false), _prev_down(false), _button(nullptr) {}
 
-bool Attack::init() {
-  cugl::Mouse *mouse = cugl::Input::get<cugl::Mouse>();
-  _mouseKey = mouse->acquireKey();
+bool Attack::init(const std::shared_ptr<cugl::AssetManager> &assets,
+                  cugl::Rect bounds) {
 
-  mouse->addPressListener(
-      _mouseKey, [=](const cugl::MouseEvent &event, Uint8 clicks, bool focus) {
-        if (!_mouseDown && event.buttons.hasLeft()) {
-          _mouseDown = true;
-        }
-      });
-  mouse->addReleaseListener(
-      _mouseKey, [=](const cugl::MouseEvent &event, Uint8 clicks, bool focus) {
-        if (_mouseDown && event.buttons.hasLeft()) {
-          _mouseDown = false;
-        }
-      });
+  _button = std::dynamic_pointer_cast<cugl::scene2::Button>(
+      assets->get<cugl::scene2::SceneNode>("ui-scene_attack"));
+
+  _button->addListener(
+      [=](const std::string &name, bool down) { _butt_down = down; });
+
+  _button->activate();
+
   return true;
 }
 
 bool Attack::update() {
-  _prevDown = _currDown;
-  _currDown = _mouseDown;
+  _prev_down = _curr_down;
+  _curr_down = _butt_down;
   return true;
 }
 
 bool Attack::dispose() {
-  cugl::Mouse *mouse = cugl::Input::get<cugl::Mouse>();
-  mouse->removePressListener(_mouseKey);
-  mouse->removeReleaseListener(_mouseKey);
+  _button = nullptr;
   return true;
+}
+
+void Attack::setActive(bool value) {
+  if (value && !_button->isActive()) {
+    _button->activate();
+  } else if (!value && _button->isActive()) {
+    _button->deactivate();
+  }
 }

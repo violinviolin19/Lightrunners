@@ -51,10 +51,13 @@ public:
   /**
    * Initialize the InputController and all the actions.
    *
+   * @param assets The loaded assets for this game mode.
+   * @param bounds The scene2 game bounds.
    * @return true if all actions and cugl input classes initialize correctly.
    * @return false if one action initializes incorrectly.
    */
-  bool init();
+  bool init(const std::shared_ptr<cugl::AssetManager> &assets,
+            cugl::Rect bounds);
 
   /**
    * Call dispose on all the actions and clear the action cache.
