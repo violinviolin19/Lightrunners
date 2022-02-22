@@ -66,8 +66,7 @@ public:
    *
    * @param assets The loaded assets for this game mode.
    * @param bounds The scene2 game bounds.
-   * @return true if all actions and cugl input classes initialize correctly.
-   * @return false if one action initializes incorrectly.
+   * @return If all actions and cugl input classes initialize correctly.
    */
   bool init(const std::shared_ptr<cugl::AssetManager> &assets,
             cugl::Rect bounds);
@@ -75,16 +74,14 @@ public:
   /**
    * Call dispose on all the actions and clear the action cache.
    *
-   * @return true if all actions dispose correctly.
-   * @return false if one action disposes incorrectly.
+   * @return If all actions dispose correctly.
    */
   bool dispose();
 
   /**
    * Call update on all the actions.
    *
-   * @return true if all actions update correctly.
-   * @return false if one action update incorrectly.
+   * @return If all actions update correctly.
    */
   bool update();
 
