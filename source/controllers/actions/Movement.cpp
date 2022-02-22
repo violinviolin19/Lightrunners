@@ -77,7 +77,6 @@ void Movement::touchBegan(const cugl::TouchEvent &event, bool focus) {
 
     _show_joystick = true;
     _joystick_anchor = Action::displayToScreenCoord(pos);
-    _joystick_diff = cugl::Vec2::ZERO;
   }
 }
 
@@ -85,6 +84,7 @@ void Movement::touchEnded(const cugl::TouchEvent &event, bool focus) {
   if (_touch_ids.find(event.touch) != _touch_ids.end()) {
     _show_joystick = false;
     _touch_ids.clear();
+    _joystick_diff = cugl::Vec2::ZERO;
   }
 }
 

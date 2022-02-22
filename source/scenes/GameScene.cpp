@@ -1,5 +1,6 @@
 #include "GameScene.h"
 
+#include "../controllers/actions/Movement.h"
 #include <cugl/cugl.h>
 
 #define SCENE_HEIGHT 720
@@ -29,7 +30,11 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager> &assets) {
 
 void GameScene::dispose() { InputController::get()->dispose(); }
 
-void GameScene::update(float timestep) { InputController::get()->update(); }
+void GameScene::update(float timestep) {
+  InputController::get()->update();
+  CULog("%f, %f", InputController::get<Movement>()->getMovementX(),
+        InputController::get<Movement>()->getMovementY());
+}
 
 void GameScene::render(const std::shared_ptr<cugl::SpriteBatch> &batch) {
   Scene2::render(batch);
