@@ -3,6 +3,15 @@
 #include "Action.h"
 #include <cugl/cugl.h>
 
+/**
+ * This class is an implementation of Action.
+ *
+ * This class provides moving capabilities for the user.
+ *
+ * As with all Actions attach to InputController by calling allocating using
+ * alloc and calling getHook(). This is very similar to Walker White's loader
+ * system.
+ */
 class Movement : public Action {
 protected:
   /* Reference to scene2 joystick base for updating position. */
@@ -64,6 +73,20 @@ public:
    * @return If disposed correctly.
    */
   virtual bool dispose() override;
+
+  /**
+   * This method allocates Movement and initializes it.
+   *
+   * @param assets The loaded assets for this game mode.
+   * @param bounds The scene2 game bounds.
+   * @return A newly allocated Attack action.
+   */
+  static std::shared_ptr<Movement>
+  alloc(const std::shared_ptr<cugl::AssetManager> &assets, cugl::Rect bounds) {
+
+    std::shared_ptr<Movement> result = std::make_shared<Movement>();
+    return (result->init(assets, bounds) ? result : nullptr);
+  }
 
 #pragma mark Listeners
 

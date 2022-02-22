@@ -2,7 +2,14 @@
 #define CONTROLLERS_ACTIONS_ACTION_H_
 #include <cugl/cugl.h>
 
-class Action {
+/**
+ * This class provides a polymorphic base for all actions in the game.
+ *
+ * Every action subclass must override the virtual methods.
+ *
+ * Used by InputController to keep track of all actions.
+ */
+class Action : public std::enable_shared_from_this<Action> {
 protected:
   /* Action has been initialized correctly. */
   bool _action_init = false;
@@ -42,6 +49,16 @@ public:
    * @return If disposed correctly.
    */
   virtual bool dispose() = 0;
+
+  /**
+   * Smart pointers are great, and all Actions should be referenced by one.
+   * However, polymorphism and smart pointers really do not mix and type
+   * casting can be quite tricky. This method provides a simple interface
+   * for handling this type case.
+   *
+   * @return A pointer for attaching this Action to an InputController.
+   */
+  std::shared_ptr<Action> getHook() { return shared_from_this(); }
 
   /**
    * Returns the scene location of a touch

@@ -3,6 +3,15 @@
 #include "Action.h"
 #include <cugl/cugl.h>
 
+/**
+ * This class is an implementation of Action.
+ *
+ * This class provides attacking capabilities for the user.
+ *
+ * As with all Actions attach to InputController by calling allocating using
+ * alloc and calling getHook(). This is very similar to Walker White's loader
+ * system.
+ */
 class Attack : public Action {
 protected:
   /* Reference to attack button for registering listeners to press event. */
@@ -36,6 +45,20 @@ public:
    * @return If disposed correctly.
    */
   virtual bool dispose() override;
+
+  /**
+   * This method allocates Attack and initializes it.
+   *
+   * @param assets The loaded assets for this game mode.
+   * @param bounds The scene2 game bounds.
+   * @return A newly allocated Attack action.
+   */
+  static std::shared_ptr<Attack>
+  alloc(const std::shared_ptr<cugl::AssetManager> &assets, cugl::Rect bounds) {
+
+    std::shared_ptr<Attack> result = std::make_shared<Attack>();
+    return (result->init(assets, bounds) ? result : nullptr);
+  }
 
   /**
    * @return If player is currently attacking.

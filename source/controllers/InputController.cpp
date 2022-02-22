@@ -19,17 +19,14 @@ bool InputController::init(const std::shared_ptr<cugl::AssetManager> &assets,
 #endif
 
   if (input) {
-    // Create, initialize and register all the actions.
+    // Create, initialize and register all basic actions.
     _active = true;
-    std::shared_ptr<Attack> attack = std::make_shared<Attack>();
-    _active = attack->init(assets, bounds);
-    _actions[std::type_index(typeid(Attack))] =
-        std::dynamic_pointer_cast<Action>(attack);
 
-    std::shared_ptr<Movement> movement = std::make_shared<Movement>();
-    _active = movement->init(assets, bounds);
-    _actions[std::type_index(typeid(Movement))] =
-        std::dynamic_pointer_cast<Action>(movement);
+    _active = InputController::attachAction<Attack>(
+        Attack::alloc(assets, bounds)->getHook());
+
+    _active = InputController::attachAction<Movement>(
+        Movement::alloc(assets, bounds)->getHook());
   }
   return _active;
 }

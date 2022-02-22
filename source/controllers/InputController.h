@@ -40,12 +40,25 @@ public:
     if (!_singleton) {
       return nullptr;
     }
-    std::type_index indx = std::type_index(typeid(T));
-    auto it = _singleton->_actions.find(indx);
+    auto it = _singleton->_actions.find(std::type_index(typeid(T)));
     if (it != _singleton->_actions.end()) {
       return std::dynamic_pointer_cast<T>(it->second);
     }
     return nullptr;
+  }
+
+  /**
+   * Attaches action of type T
+   * @tparam T, action class (eg. Attack)
+   * @return Instance of the action.
+   */
+  template <typename T>
+  static bool attachAction(std::shared_ptr<Action> action) {
+    if (_singleton && _singleton->_active && action != nullptr) {
+      _singleton->_actions[std::type_index(typeid(T))] = action;
+      return true;
+    }
+    return false;
   }
 
   /**
