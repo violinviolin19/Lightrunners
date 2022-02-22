@@ -85,7 +85,6 @@ void Movement::touchEnded(const cugl::TouchEvent &event, bool focus) {
   if (_touch_ids.find(event.touch) != _touch_ids.end()) {
     _show_joystick = false;
     _touch_ids.clear();
-    _joystick_diff = cugl::Vec2::ZERO;
   }
 }
 
