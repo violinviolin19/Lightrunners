@@ -37,25 +37,6 @@ bool Movement::init(const std::shared_ptr<cugl::AssetManager> &assets,
       _listener_key,
       [=](const cugl::TouchEvent &event, const cugl::Vec2 &previous,
           bool focus) { this->touchMoved(event, previous, focus); });
-#else
-  cugl::Mouse *mouse = cugl::Input::get<cugl::Mouse>();
-  _listener_key = mouse->acquireKey();
-
-  mouse->addPressListener(_listener_key, [=](const cugl::MouseEvent &event,
-                                             Uint8 clicks, bool focus) {
-    this->mousePressed(event, clicks, focus);
-  });
-
-  mouse->addReleaseListener(_listener_key, [=](const cugl::MouseEvent &event,
-                                               Uint8 clicks, bool focus) {
-    this->mouseReleased(event, clicks, focus);
-  });
-
-  mouse->addDragListener(
-      _listener_key,
-      [=](const cugl::MouseEvent &event, const cugl::Vec2 previous,
-          bool focus) { this->mouseDragged(event, previous, focus); });
-
 #endif // CU_TOUCH_SCREEN
 
   return true;
@@ -86,11 +67,6 @@ bool Movement::dispose() {
   touch->removeBeginListener(_listener_key);
   touch->removeEndListener(_listener_key);
   touch->removeMotionListener(_listener_key);
-#else
-  cugl::Mouse *mouse = cugl::Input::get<cugl::Mouse>();
-  mouse->removePressListener(_listener_key);
-  mouse->removeReleaseListener(_listener_key);
-  mouse->removeDragListener(_listener_key);
 #endif
 
   return true;
@@ -135,39 +111,4 @@ void Movement::touchMoved(const cugl::TouchEvent &event,
     _joystick_diff.normalize().scale(clamped_diff_len);
   }
 }
-
-#else
-
-void Movement::mousePressed(const cugl::MouseEvent &event, Uint8 clicks,
-                            bool focus) {
-  cugl::Vec2 pos = event.position;
-
-  if (_left_screen_bounds.contains(pos)) {
-    _show_joystick = true;
-    _joystick_anchor = Action::displayToScreenCoord(pos);
-    _joystick_diff = cugl::Vec2::ZERO;
-  }
-}
-
-void Movement::mouseReleased(const cugl::MouseEvent &event, Uint8 clicks,
-                             bool focus) {
-  _show_joystick = false;
-  _joystick_diff = cugl::Vec2::ZERO;
-}
-
-void Movement::mouseDragged(const cugl::MouseEvent &event, cugl::Vec2 previous,
-                            bool focus) {
-  if (_show_joystick) {
-    cugl::Vec2 pos = event.position;
-
-    _joystick_diff =
-        Action::displayToScreenCoord(pos).subtract(_joystick_anchor);
-
-    float clamped_diff_len =
-        clampf(_joystick_diff.length(), 0, JOYSTICK_RADIUS);
-
-    _joystick_diff.normalize().scale(clamped_diff_len);
-  }
-}
-
 #endif // CU_TOUCH_SCREEN

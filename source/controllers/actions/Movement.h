@@ -101,17 +101,7 @@ public:
   /** Touch listener for when the player moves their finger. */
   void touchMoved(const cugl::TouchEvent &event, const cugl::Vec2 &previous,
                   bool focus);
-#else
 
-  /** Mouse listener for when the player clicks on screen. */
-  void mousePressed(const cugl::MouseEvent &event, Uint8 clicks, bool focus);
-
-  /** Mouse listener for when the player releases click. */
-  void mouseReleased(const cugl::MouseEvent &event, Uint8 clicks, bool focus);
-
-  /** Mouse listener for when the player moves mouse while button is pressed. */
-  void mouseDragged(const cugl::MouseEvent &event, cugl::Vec2 previous,
-                    bool focus);
 #endif // CU_TOUCH_SCREEN
 
   /**
