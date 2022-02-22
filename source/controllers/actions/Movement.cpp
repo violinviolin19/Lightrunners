@@ -43,15 +43,8 @@ bool Movement::init(const std::shared_ptr<cugl::AssetManager> &assets,
 }
 
 bool Movement::update() {
-  bool update_visibility = (_show_joystick && !_joystick->isVisible() &&
-                            !_joystick_base->isVisible()) ||
-                           (!_show_joystick && _joystick->isVisible() &&
-                            _joystick_base->isVisible());
-
-  if (update_visibility) {
-    _joystick->setVisible(_show_joystick);
-    _joystick_base->setVisible(_show_joystick);
-  }
+  _joystick->setVisible(_show_joystick);
+  _joystick_base->setVisible(_show_joystick);
 
   _joystick_base->setPosition(_joystick_anchor);
   _joystick->setPosition(_joystick_diff + _joystick_anchor);
