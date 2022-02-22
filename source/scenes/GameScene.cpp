@@ -1,7 +1,5 @@
 #include "GameScene.h"
 
-#include "../controllers/actions/Attack.h"
-#include "../controllers/actions/Movement.h"
 #include <cugl/cugl.h>
 
 #define SCENE_HEIGHT 720
