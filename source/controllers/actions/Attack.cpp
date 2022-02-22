@@ -28,9 +28,5 @@ bool Attack::dispose() {
 }
 
 void Attack::setActive(bool value) {
-  if (value && !_button->isActive()) {
-    _button->activate();
-  } else if (!value && _button->isActive()) {
-    _button->deactivate();
-  }
+  (value) ? _button->activate() : _button->deactivate();
 }
