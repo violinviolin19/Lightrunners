@@ -1,18 +1,51 @@
 {
 	"textures": {
 		"close-normal": {
-			"file":     "textures/CloseNormal.png",
-			"minfilter":"nearest",
-			"magfilter":"linear",
-			"wrapS":    "clamp",
-			"wrapT":    "clamp"
+			"file": "textures/CloseNormal.png",
+			"minfilter": "nearest",
+			"magfilter": "linear",
+			"wrapS": "clamp",
+			"wrapT": "clamp"
 		},
 		"close-selected": {
-			"file":     "textures/CloseSelected.png",
-			"minfilter":"nearest",
-			"magfilter":"linear",
-			"wrapS":    "clamp",
-			"wrapT":    "clamp"
+			"file": "textures/CloseSelected.png",
+			"minfilter": "nearest",
+			"magfilter": "linear",
+			"wrapS": "clamp",
+			"wrapT": "clamp"
+		},
+		"joystick": {
+			"file": "textures/joystick.png",
+			"minfilter": "nearest",
+			"magfilter": "linear",
+			"wrapS": "clamp",
+			"wrapT": "clamp"
+		},
+		"joystick-base": {
+			"file": "textures/joystick-base.png",
+			"minfilter": "nearest",
+			"magfilter": "linear",
+			"wrapS": "clamp",
+			"wrapT": "clamp"
+		},
+		"attack": {
+			"file": "textures/attack.png",
+			"minfilter": "nearest",
+			"magfilter": "linear",
+			"wrapS": "clamp",
+			"wrapT": "clamp"
+		}
+	},
+	"widgets": {
+		"ui-scene": "widgets/ui-scene.json"
+	},
+	"scene2s": {
+		"ui-scene": {
+			"type": "Widget",
+			"data": {
+				"key": "ui-scene",
+				"variables": {}
+			}
 		}
 	}
 }

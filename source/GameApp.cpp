@@ -9,21 +9,25 @@ void GameApp::onStartup() {
   cugl::Input::activate<cugl::Touchscreen>();
 #else
   cugl::Input::activate<cugl::Mouse>();
+  // cugl::Mouse does not track mouse drag or move by default.
+  cugl::Input::get<cugl::Mouse>()->setPointerAwareness(
+      cugl::Mouse::PointerAwareness::ALWAYS);
 #endif
 
   // Add asset loaders.
   _assets->attach<cugl::Texture>(cugl::TextureLoader::alloc()->getHook());
+  _assets->attach<cugl::WidgetValue>(cugl::WidgetLoader::alloc()->getHook());
   _assets->attach<cugl::scene2::SceneNode>(
       cugl::Scene2Loader::alloc()->getHook());
 
-  // Create a "loading" screen
+  // Create a "loading" screen.
   _loaded = false;
   _loading.init(_assets);
 
-  // Queue up the other assets (EMPTY in this case)
+  // Queue up the other assets (EMPTY in this case).
   _assets->loadDirectoryAsync("json/assets.json", nullptr);
 
-  cugl::Application::onStartup(); // YOU MUST END with call to parent
+  cugl::Application::onStartup(); // YOU MUST END with call to parent.
 }
 
 void GameApp::onShutdown() {

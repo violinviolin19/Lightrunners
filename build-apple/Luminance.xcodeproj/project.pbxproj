@@ -7,15 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D521FB0F27C43BA500D14172 /* widgets in Resources */ = {isa = PBXBuildFile; fileRef = D521FB0E27C43BA500D14172 /* widgets */; };
+		D521FB1027C43BA500D14172 /* widgets in Resources */ = {isa = PBXBuildFile; fileRef = D521FB0E27C43BA500D14172 /* widgets */; };
+		D521FB1127C43BA500D14172 /* widgets in Resources */ = {isa = PBXBuildFile; fileRef = D521FB0E27C43BA500D14172 /* widgets */; };
 		D52E673427BF305A00F8E2B8 /* LoadingScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D52E672A27BF305900F8E2B8 /* LoadingScene.cpp */; };
 		D52E673527BF305A00F8E2B8 /* LoadingScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D52E672A27BF305900F8E2B8 /* LoadingScene.cpp */; };
 		D52E673627BF305A00F8E2B8 /* LoadingScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D52E672A27BF305900F8E2B8 /* LoadingScene.cpp */; };
 		D52E673727BF305A00F8E2B8 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D52E672B27BF305900F8E2B8 /* GameScene.cpp */; };
 		D52E673827BF305A00F8E2B8 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D52E672B27BF305900F8E2B8 /* GameScene.cpp */; };
 		D52E673927BF305A00F8E2B8 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D52E672B27BF305900F8E2B8 /* GameScene.cpp */; };
+		D52E673A27BF305A00F8E2B8 /* InputController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D52E672D27BF305900F8E2B8 /* InputController.cpp */; };
+		D52E673B27BF305A00F8E2B8 /* InputController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D52E672D27BF305900F8E2B8 /* InputController.cpp */; };
+		D52E673C27BF305A00F8E2B8 /* InputController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D52E672D27BF305900F8E2B8 /* InputController.cpp */; };
+		D52E673D27BF305A00F8E2B8 /* Attack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D52E673127BF305900F8E2B8 /* Attack.cpp */; };
+		D52E673E27BF305A00F8E2B8 /* Attack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D52E673127BF305900F8E2B8 /* Attack.cpp */; };
+		D52E673F27BF305A00F8E2B8 /* Attack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D52E673127BF305900F8E2B8 /* Attack.cpp */; };
 		D52E674027BF305A00F8E2B8 /* GameApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D52E673327BF305A00F8E2B8 /* GameApp.cpp */; };
 		D52E674127BF305A00F8E2B8 /* GameApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D52E673327BF305A00F8E2B8 /* GameApp.cpp */; };
 		D52E674227BF305A00F8E2B8 /* GameApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D52E673327BF305A00F8E2B8 /* GameApp.cpp */; };
+		D5EB744E27C335C7007D157D /* Movement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5EB744C27C335C7007D157D /* Movement.cpp */; };
+		D5EB744F27C335C7007D157D /* Movement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5EB744C27C335C7007D157D /* Movement.cpp */; };
+		D5EB745027C335C7007D157D /* Movement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5EB744C27C335C7007D157D /* Movement.cpp */; };
 		EB07CFB621EFF3F8000CB3A3 /* DeviceMargins.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB07CFB021EFF3EF000CB3A3 /* DeviceMargins.plist */; };
 		EB22BDE025D0E00A002ACE41 /* libcugl-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB22BDC825D0DE75002ACE41 /* libcugl-mac.a */; };
 		EB22BDFC25D0E0E2002ACE41 /* libcugl-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB22BDCA25D0DE75002ACE41 /* libcugl-ios.a */; };
@@ -108,12 +120,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D521FB0E27C43BA500D14172 /* widgets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = widgets; sourceTree = "<group>"; };
 		D52E672627BF305900F8E2B8 /* GameApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameApp.h; sourceTree = "<group>"; };
 		D52E672827BF305900F8E2B8 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
 		D52E672927BF305900F8E2B8 /* LoadingScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingScene.h; sourceTree = "<group>"; };
 		D52E672A27BF305900F8E2B8 /* LoadingScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoadingScene.cpp; sourceTree = "<group>"; };
 		D52E672B27BF305900F8E2B8 /* GameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameScene.cpp; sourceTree = "<group>"; };
+		D52E672D27BF305900F8E2B8 /* InputController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputController.cpp; sourceTree = "<group>"; };
+		D52E672E27BF305900F8E2B8 /* InputController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputController.h; sourceTree = "<group>"; };
+		D52E673127BF305900F8E2B8 /* Attack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Attack.cpp; sourceTree = "<group>"; };
+		D52E673227BF305900F8E2B8 /* Action.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Action.h; sourceTree = "<group>"; };
 		D52E673327BF305A00F8E2B8 /* GameApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameApp.cpp; sourceTree = "<group>"; };
+		D52E674827BF354400F8E2B8 /* Attack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Attack.h; sourceTree = "<group>"; };
+		D5EB744C27C335C7007D157D /* Movement.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Movement.cpp; sourceTree = "<group>"; };
+		D5EB744D27C335C7007D157D /* Movement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Movement.h; sourceTree = "<group>"; };
 		EB07CFB021EFF3EF000CB3A3 /* DeviceMargins.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DeviceMargins.plist; sourceTree = "<group>"; };
 		EB22BF5E25D0E8BC002ACE41 /* Luminance (Sim).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Luminance (Sim).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB2BE9B41D74952A002FE78B /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -242,6 +262,28 @@
 			path = scenes;
 			sourceTree = "<group>";
 		};
+		D52E672C27BF305900F8E2B8 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D52E672D27BF305900F8E2B8 /* InputController.cpp */,
+				D52E672E27BF305900F8E2B8 /* InputController.h */,
+				D52E672F27BF305900F8E2B8 /* actions */,
+			);
+			path = controllers;
+			sourceTree = "<group>";
+		};
+		D52E672F27BF305900F8E2B8 /* actions */ = {
+			isa = PBXGroup;
+			children = (
+				D52E674827BF354400F8E2B8 /* Attack.h */,
+				D52E673127BF305900F8E2B8 /* Attack.cpp */,
+				D52E673227BF305900F8E2B8 /* Action.h */,
+				D5EB744C27C335C7007D157D /* Movement.cpp */,
+				D5EB744D27C335C7007D157D /* Movement.h */,
+			);
+			path = actions;
+			sourceTree = "<group>";
+		};
 		EB22BDC325D0DE75002ACE41 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,6 +297,7 @@
 		EB2BE9B71D749870002FE78B /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				D521FB0E27C43BA500D14172 /* widgets */,
 				EBFE7C041E19B496001007C2 /* json */,
 				EB2BE9BA1D7498D2002FE78B /* textures */,
 			);
@@ -355,6 +398,7 @@
 			children = (
 				D52E673327BF305A00F8E2B8 /* GameApp.cpp */,
 				D52E672627BF305900F8E2B8 /* GameApp.h */,
+				D52E672C27BF305900F8E2B8 /* controllers */,
 				D52E672727BF305900F8E2B8 /* scenes */,
 				EB2BE9B41D74952A002FE78B /* main.cpp */,
 			);
@@ -427,16 +471,16 @@
 				TargetAttributes = {
 					EB22BF5D25D0E8BC002ACE41 = {
 						CreatedOnToolsVersion = 12.4;
-						DevelopmentTeam = 37AKFHT6H5;
+						DevelopmentTeam = LR67JRR3TA;
 						ProvisioningStyle = Automatic;
 					};
 					EB74548B1D74D75C002FBAE6 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 37AKFHT6H5;
+						DevelopmentTeam = LR67JRR3TA;
 					};
 					EBBF18901D74904A008E2001 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 37AKFHT6H5;
+						DevelopmentTeam = LR67JRR3TA;
 					};
 				};
 			};
@@ -499,6 +543,7 @@
 				EB22BF9625D0EA50002ACE41 /* json in Resources */,
 				EB22BF9725D0EA51002ACE41 /* textures in Resources */,
 				EB22BF9025D0EA49002ACE41 /* iOS.xcassets in Resources */,
+				D521FB1127C43BA500D14172 /* widgets in Resources */,
 				EB22BF9125D0EA49002ACE41 /* Landscape.storyboard in Resources */,
 				EB22BF9225D0EA49002ACE41 /* Portrait.storyboard in Resources */,
 			);
@@ -512,6 +557,7 @@
 				EB7454AB1D74D846002FBAE6 /* iOS.xcassets in Resources */,
 				EB7454AC1D74D846002FBAE6 /* Landscape.storyboard in Resources */,
 				EBFE7C051E19B496001007C2 /* json in Resources */,
+				D521FB1027C43BA500D14172 /* widgets in Resources */,
 				EB7454AD1D74D846002FBAE6 /* Portrait.storyboard in Resources */,
 				EB07CFB621EFF3F8000CB3A3 /* DeviceMargins.plist in Resources */,
 			);
@@ -523,6 +569,7 @@
 			files = (
 				EBFE7C091E19B4AC001007C2 /* json in Resources */,
 				EB2BE9BB1D7498D2002FE78B /* textures in Resources */,
+				D521FB0F27C43BA500D14172 /* widgets in Resources */,
 				EBBF189B1D74904A008E2001 /* Mac.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -534,6 +581,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D52E673C27BF305A00F8E2B8 /* InputController.cpp in Sources */,
+				D52E673F27BF305A00F8E2B8 /* Attack.cpp in Sources */,
+				D5EB745027C335C7007D157D /* Movement.cpp in Sources */,
 				EB9CDA3925D0EAB100EE1A09 /* main.cpp in Sources */,
 				D52E674227BF305A00F8E2B8 /* GameApp.cpp in Sources */,
 				D52E673927BF305A00F8E2B8 /* GameScene.cpp in Sources */,
@@ -545,6 +595,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D52E673B27BF305A00F8E2B8 /* InputController.cpp in Sources */,
+				D52E673E27BF305A00F8E2B8 /* Attack.cpp in Sources */,
+				D5EB744F27C335C7007D157D /* Movement.cpp in Sources */,
 				EB7454AE1D74D891002FBAE6 /* main.cpp in Sources */,
 				D52E674127BF305A00F8E2B8 /* GameApp.cpp in Sources */,
 				D52E673827BF305A00F8E2B8 /* GameScene.cpp in Sources */,
@@ -556,6 +609,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D52E673A27BF305A00F8E2B8 /* InputController.cpp in Sources */,
+				D52E673D27BF305A00F8E2B8 /* Attack.cpp in Sources */,
+				D5EB744E27C335C7007D157D /* Movement.cpp in Sources */,
 				EB2BE9B61D74952A002FE78B /* main.cpp in Sources */,
 				D52E674027BF305A00F8E2B8 /* GameApp.cpp in Sources */,
 				D52E673727BF305A00F8E2B8 /* GameScene.cpp in Sources */,
@@ -578,7 +634,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 37AKFHT6H5;
+				DEVELOPMENT_TEAM = LR67JRR3TA;
 				INFOPLIST_FILE = "$(SRCROOT)/../cugl/build-apple/Resources/iOS-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0;
@@ -603,7 +659,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 37AKFHT6H5;
+				DEVELOPMENT_TEAM = LR67JRR3TA;
 				INFOPLIST_FILE = "$(SRCROOT)/../cugl/build-apple/Resources/iOS-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0;
@@ -624,7 +680,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 37AKFHT6H5;
+				DEVELOPMENT_TEAM = LR67JRR3TA;
 				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/iOS-Info.plist";
@@ -645,7 +701,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 37AKFHT6H5;
+				DEVELOPMENT_TEAM = LR67JRR3TA;
 				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/iOS-Info.plist";
@@ -782,7 +838,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 37AKFHT6H5;
+				DEVELOPMENT_TEAM = LR67JRR3TA;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Mac-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.oops.Luminance;
@@ -797,7 +853,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 37AKFHT6H5;
+				DEVELOPMENT_TEAM = LR67JRR3TA;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Mac-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.oops.Luminance;
