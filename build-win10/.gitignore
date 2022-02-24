@@ -6,3 +6,5 @@ Release
 Debug
 x86
 x64
+!dll/x64
+!dll/x86
