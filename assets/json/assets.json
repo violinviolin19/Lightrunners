@@ -35,12 +35,104 @@
 			"wrapS": "clamp",
 			"wrapT": "clamp"
 		},
-        "player": {
-            "file": "textures/player.png"
-        }
+    "player": {
+      "file": "textures/player.png"
+    },
+    "floor-tile-0": {
+      "file": "textures/floor-tile-0.png",
+      "minfilter": "nearest",
+      "magfilter": "linear",
+      "wrapS": "clamp",
+      "wrapT": "clamp"
+    },
+    "floor-tile-1": {
+      "file": "textures/floor-tile-1.png",
+      "minfilter": "nearest",
+      "magfilter": "linear",
+      "wrapS": "clamp",
+      "wrapT": "clamp"
+    },
+    "floor-tile-2": {
+      "file": "textures/floor-tile-2.png",
+      "minfilter": "nearest",
+      "magfilter": "linear",
+      "wrapS": "clamp",
+      "wrapT": "clamp"
+    },
+    "floor-tile-3": {
+      "file": "textures/floor-tile-3.png",
+      "minfilter": "nearest",
+      "magfilter": "linear",
+      "wrapS": "clamp",
+      "wrapT": "clamp"
+    },
+    "floor-tile-4": {
+      "file": "textures/floor-tile-4.png",
+      "minfilter": "nearest",
+      "magfilter": "linear",
+      "wrapS": "clamp",
+      "wrapT": "clamp"
+    },
+    "floor-tile-5": {
+      "file": "textures/floor-tile-5.png",
+      "minfilter": "nearest",
+      "magfilter": "linear",
+      "wrapS": "clamp",
+      "wrapT": "clamp"
+    },
+    "floor-tile-6": {
+      "file": "textures/floor-tile-6.png",
+      "minfilter": "nearest",
+      "magfilter": "linear",
+      "wrapS": "clamp",
+      "wrapT": "clamp"
+    },
+    "floor-tile-7": {
+      "file": "textures/floor-tile-7.png",
+      "minfilter": "nearest",
+      "magfilter": "linear",
+      "wrapS": "clamp",
+      "wrapT": "clamp"
+    },
+    "floor-tile-8": {
+      "file": "textures/floor-tile-8.png",
+      "minfilter": "nearest",
+      "magfilter": "linear",
+      "wrapS": "clamp",
+      "wrapT": "clamp"
+    },
+    "floor-tile-9": {
+      "file": "textures/floor-tile-9.png",
+      "minfilter": "nearest",
+      "magfilter": "linear",
+      "wrapS": "clamp",
+      "wrapT": "clamp"
+    },
+    "floor-tile-10": {
+      "file": "textures/floor-tile-10.png",
+      "minfilter": "nearest",
+      "magfilter": "linear",
+      "wrapS": "clamp",
+      "wrapT": "clamp"
+    },
+    "floor-tile-11": {
+      "file": "textures/floor-tile-11.png",
+      "minfilter": "nearest",
+      "magfilter": "linear",
+      "wrapS": "clamp",
+      "wrapT": "clamp"
+    },
+    "floor-tile-12": {
+      "file": "textures/floor-tile-12.png",
+      "minfilter": "nearest",
+      "magfilter": "linear",
+      "wrapS": "clamp",
+      "wrapT": "clamp"
+    }
 	},
 	"widgets": {
-		"ui-scene": "widgets/ui-scene.json"
+		"ui-scene": "widgets/ui-scene.json",
+    "world-scene": "widgets/world-scene.json"
 	},
 	"scene2s": {
 		"ui-scene": {
@@ -49,6 +141,13 @@
 				"key": "ui-scene",
 				"variables": {}
 			}
-		}
+		},
+    "world-scene": {
+      "type": "Widget",
+      "data": {
+        "key": "world-scene",
+        "variables": {}
+      }
+    }
 	}
 }
