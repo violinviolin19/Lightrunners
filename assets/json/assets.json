@@ -34,7 +34,10 @@
 			"magfilter": "linear",
 			"wrapS": "clamp",
 			"wrapT": "clamp"
-		}
+		},
+		"grunt": {
+			"file": "textures/grunt.png"
+		},
 	},
 	"widgets": {
 		"ui-scene": "widgets/ui-scene.json"
