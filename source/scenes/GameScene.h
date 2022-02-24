@@ -3,10 +3,20 @@
 #include <cugl/cugl.h>
 
 #include "../controllers/InputController.h"
+#include "../Grunt.h"
 
 class GameScene : public cugl::Scene2 {
   /** The asset manager for loading. */
   std::shared_ptr<cugl::AssetManager> _assets;
+
+  /** The grunt  */
+  std::shared_ptr<Grunt> _grunt;
+
+  /** Reference to the physics root of the scene graph */
+  std::shared_ptr<cugl::scene2::SceneNode> _worldnode;
+
+  /** The Box2d world */
+  std::shared_ptr<ObstacleWorld> _world;
 
 public:
   GameScene() : cugl::Scene2() {}
@@ -29,6 +39,13 @@ public:
    * @return true if the controller is initialized properly, false otherwise.
    */
   bool init(const std::shared_ptr<cugl::AssetManager> &assets);
+
+  /**
+ * Populate the scene with the Box2D objects.
+ *
+ * @param dim The dimensions of the screen
+ */
+  void populate(cugl::Size dim);
 
   /**
    * The method called to update the game mode.
