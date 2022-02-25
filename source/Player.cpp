@@ -12,13 +12,6 @@
 /**
  * Initializes a new player with the given position, size, and name.
  *
- * The rocket size is specified in world coordinates.
- *
- * The scene graph is completely decoupled from the physics system.
- * The node does not have to be the same size as the physics body. We
- * only guarantee that the scene graph node is positioned correctly
- * according to the drawing scale.
- *
  * @param  pos      Initial position in world coordinates
  * @param  size       The dimensions of the box.
  * @param name The name of the player

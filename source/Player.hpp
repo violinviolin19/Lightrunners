@@ -33,7 +33,7 @@ public:
     /**
      * Creates a player with the given position and data
      *
-     * @param pos The ship position
+     * @param pos The player position
      * @param data The data defining the player
      */
     Player(void) : CapsuleObstacle() { }
@@ -78,7 +78,7 @@ public:
     /**
      * Sets the current player's health.
      *
-     * @param value The current ship health.
+     * @param value The current player health.
      */
     void setHealth(int value) { _health = value; }
     
@@ -94,7 +94,7 @@ public:
     /**
      * Sets the scene graph node representing this player.
      *
-     * @param node  The scene graph node representing this rocket.
+     * @param node  The scene graph node representing this player.
      */
     void setPlayerNode(const std::shared_ptr<cugl::scene2::PolygonNode>& node);
     
