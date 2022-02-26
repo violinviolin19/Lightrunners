@@ -2,7 +2,8 @@
 //  cu_polygon.h
 //  Cornell University Game Library (CUGL)
 //
-//  This header provides access to all of the publicly accessible elements of this package.
+//  This header provides access to all of the publicly accessible elements of
+//  this package.
 //
 //  CUGL MIT License:
 //      This software is provided 'as-is', without any express or implied
@@ -21,20 +22,22 @@
 //      2. Altered source versions must be plainly marked as such, and must not
 //      be misrepresented as being the original software.
 //
-//      3. This notice may not be removed or altered from any source distribution.
+//      3. This notice may not be removed or altered from any source
+//      distribution.
 //
 //  Author: Walker White
 //  Version: 6/30/16
 #ifndef __CU_POLYGON_PKG_H__
 #define __CU_POLYGON_PKG_H__
 
+#include "CUComplexExtruder.h"
+#include "CUDelaunayTriangulator.h"
+#include "CUEarclipTriangulator.h"
+#include "CUPathFactory.h"
+#include "CUPathSmoother.h"
 #include "CUPolyEnums.h"
 #include "CUPolyFactory.h"
-#include "CUSplinePather.h"
 #include "CUSimpleExtruder.h"
-#include "CUComplexExtruder.h"
-#include "CUEarclipTriangulator.h"
-#include "CUDelaunayTriangulator.h"
-#include "CUPathSmoother.h"
+#include "CUSplinePather.h"
 
 #endif /* __CU_POLYGON_PKG_H__ */
