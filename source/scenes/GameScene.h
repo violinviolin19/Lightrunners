@@ -8,13 +8,13 @@
 class GameScene : public cugl::Scene2 {
   /** The asset manager for loading. */
   std::shared_ptr<cugl::AssetManager> _assets;
-    
+
   /** The player  */
   std::shared_ptr<Player> _player;
-  
+
   /** Reference to the physics root of the scene graph */
   std::shared_ptr<cugl::scene2::SceneNode> _world_node;
-    
+
   /** The Box2d world */
   std::shared_ptr<cugl::physics2::ObstacleWorld> _world;
 
@@ -39,7 +39,7 @@ public:
    * @return true if the controller is initialized properly, false otherwise.
    */
   bool init(const std::shared_ptr<cugl::AssetManager> &assets);
-    
+
   /**
    * Populate the scene with the Box2D objects.
    *
