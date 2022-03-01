@@ -1,18 +1,19 @@
 #ifndef SCENES_LEVEL_GENERATION_DEMO_SCENE_H
 #define SCENES_LEVEL_GENERATION_DEMO_SCENE_H
-#include "../generators/LevelGenerator.h"
-#include "../generators/LevelGeneratorConfig.h"
 #include <cugl/cugl.h>
 
+#include "../generators/LevelGenerator.h"
+#include "../generators/LevelGeneratorConfig.h"
+
 class LevelGenerationDemoScene : public cugl::Scene2 {
-private:
+ private:
   LevelGenerator _level_generator;
   bool _keep_separating_rooms;
   int _ticks;
   std::shared_ptr<cugl::scene2::SceneNode> _map;
   LevelGeneratorConfig _config;
 
-public:
+ public:
   LevelGenerationDemoScene()
       : cugl::Scene2(), _keep_separating_rooms(true), _ticks(0) {}
 

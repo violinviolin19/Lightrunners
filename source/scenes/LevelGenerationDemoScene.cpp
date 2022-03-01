@@ -1,7 +1,8 @@
 #include "LevelGenerationDemoScene.h"
-#include "../generators/LevelGeneratorConfig.h"
 
 #include <cugl/cugl.h>
+
+#include "../generators/LevelGeneratorConfig.h"
 
 #define SCENE_HEIGHT 720
 

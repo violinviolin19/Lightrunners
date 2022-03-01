@@ -3,7 +3,7 @@
 #include <cugl/cugl.h>
 
 class LevelGeneratorConfig {
-private:
+ private:
   float _map_radius;
 
   float _separation_between_layers;
@@ -27,7 +27,7 @@ private:
 
   int _num_separation_iterations;
 
-public:
+ public:
   LevelGeneratorConfig();
   ~LevelGeneratorConfig() {}
 

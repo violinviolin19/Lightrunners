@@ -110,7 +110,6 @@ inline std::pair<double, double> circumcenter(const double ax, const double ay,
 }
 
 struct compare {
-
   std::vector<double> const &coords;
   double cx;
   double cy;
@@ -161,7 +160,7 @@ inline bool check_pts_equal(double x1, double y1, double x2, double y2) {
 // trigonometry
 inline double pseudo_angle(const double dx, const double dy) {
   const double p = dx / (std::abs(dx) + std::abs(dy));
-  return (dy > 0.0 ? 3.0 - p : 1.0 + p) / 4.0; // [0..1)
+  return (dy > 0.0 ? 3.0 - p : 1.0 + p) / 4.0;  // [0..1)
 }
 
 struct DelaunatorPoint {
@@ -175,8 +174,7 @@ struct DelaunatorPoint {
 };
 
 class Delaunator {
-
-public:
+ public:
   std::vector<double> const &coords;
   std::vector<std::size_t> triangles;
   std::vector<std::size_t> halfedges;
@@ -189,7 +187,7 @@ public:
 
   double get_hull_area();
 
-private:
+ private:
   std::vector<std::size_t> m_hash;
   double m_center_x;
   double m_center_y;
@@ -204,9 +202,18 @@ private:
 };
 
 Delaunator::Delaunator(std::vector<double> const &in_coords)
-    : coords(in_coords), triangles(), halfedges(), hull_prev(), hull_next(),
-      hull_tri(), hull_start(), m_hash(), m_center_x(), m_center_y(),
-      m_hash_size(), m_edge_stack() {
+    : coords(in_coords),
+      triangles(),
+      halfedges(),
+      hull_prev(),
+      hull_next(),
+      hull_tri(),
+      hull_start(),
+      m_hash(),
+      m_center_x(),
+      m_center_y(),
+      m_hash_size(),
+      m_edge_stack() {
   std::size_t n = coords.size() >> 1;
 
   double max_x = std::numeric_limits<double>::min();
@@ -220,14 +227,10 @@ Delaunator::Delaunator(std::vector<double> const &in_coords)
     const double x = coords[2 * i];
     const double y = coords[2 * i + 1];
 
-    if (x < min_x)
-      min_x = x;
-    if (y < min_y)
-      min_y = y;
-    if (x > max_x)
-      max_x = x;
-    if (y > max_y)
-      max_y = y;
+    if (x < min_x) min_x = x;
+    if (y < min_y) min_y = y;
+    if (x > max_x) max_x = x;
+    if (y > max_y) max_y = y;
 
     ids.push_back(i);
   }
@@ -255,8 +258,7 @@ Delaunator::Delaunator(std::vector<double> const &in_coords)
 
   // find the point closest to the seed
   for (std::size_t i = 0; i < n; i++) {
-    if (i == i0)
-      continue;
+    if (i == i0) continue;
     const double d = dist(i0x, i0y, coords[2 * i], coords[2 * i + 1]);
     if (d < min_dist && d > 0.0) {
       i1 = i;
@@ -272,8 +274,7 @@ Delaunator::Delaunator(std::vector<double> const &in_coords)
   // find the third point which forms the smallest circumcircle with the first
   // two
   for (std::size_t i = 0; i < n; i++) {
-    if (i == i0 || i == i1)
-      continue;
+    if (i == i0 || i == i1) continue;
 
     const double r =
         circumradius(i0x, i0y, i1x, i1y, coords[2 * i], coords[2 * i + 1]);
@@ -340,8 +341,7 @@ Delaunator::Delaunator(std::vector<double> const &in_coords)
     const double y = coords[2 * i + 1];
 
     // skip near-duplicate points
-    if (k > 0 && check_pts_equal(x, y, xp, yp))
-      continue;
+    if (k > 0 && check_pts_equal(x, y, xp, yp)) continue;
     xp = x;
     yp = y;
 
@@ -356,8 +356,7 @@ Delaunator::Delaunator(std::vector<double> const &in_coords)
     size_t key = hash_key(x, y);
     for (size_t j = 0; j < m_hash_size; j++) {
       start = m_hash[fast_mod(key + j, m_hash_size)];
-      if (start != INVALID_INDEX && start != hull_next[start])
-        break;
+      if (start != INVALID_INDEX && start != hull_next[start]) break;
     }
 
     start = hull_prev[start];
@@ -368,7 +367,7 @@ Delaunator::Delaunator(std::vector<double> const &in_coords)
         q = hull_next[e],
         !orient(
             x, y, coords[2 * e], coords[2 * e + 1], coords[2 * q],
-            coords[2 * q + 1])) { // TODO: does it works in a same way as in JS
+            coords[2 * q + 1])) {  // TODO: does it works in a same way as in JS
       e = q;
       if (e == start) {
         e = INVALID_INDEX;
@@ -376,8 +375,7 @@ Delaunator::Delaunator(std::vector<double> const &in_coords)
       }
     }
 
-    if (e == INVALID_INDEX)
-      continue; // likely a near-duplicate point; skip it
+    if (e == INVALID_INDEX) continue;  // likely a near-duplicate point; skip it
 
     // add the first triangle from the point
     std::size_t t = add_triangle(e, i, hull_next[e], INVALID_INDEX,
@@ -395,7 +393,7 @@ Delaunator::Delaunator(std::vector<double> const &in_coords)
                   coords[2 * q + 1])) {
       t = add_triangle(next, i, q, hull_tri[i], INVALID_INDEX, hull_tri[next]);
       hull_tri[i] = legalize(t + 2);
-      hull_next[next] = next; // mark as removed
+      hull_next[next] = next;  // mark as removed
       hull_size--;
       next = q;
     }
@@ -407,7 +405,7 @@ Delaunator::Delaunator(std::vector<double> const &in_coords)
         t = add_triangle(q, i, e, INVALID_INDEX, hull_tri[e], hull_tri[q]);
         legalize(t + 2);
         hull_tri[q] = t;
-        hull_next[e] = e; // mark as removed
+        hull_next[e] = e;  // mark as removed
         hull_size--;
         e = q;
       }
@@ -573,4 +571,4 @@ void Delaunator::link(const std::size_t a, const std::size_t b) {
   }
 }
 
-} // namespace delaunator
+}  // namespace delaunator

@@ -1,12 +1,13 @@
 #ifndef GENERATORS_LEVEL_GENERATOR_H
 #define GENERATORS_LEVEL_GENERATOR_H
+#include <cugl/cugl.h>
+
 #include "../models/Hallway.h"
 #include "../models/Room.h"
 #include "LevelGeneratorConfig.h"
-#include <cugl/cugl.h>
 
 class LevelGenerator {
-private:
+ private:
   std::shared_ptr<cugl::scene2::SceneNode> _map;
   LevelGeneratorConfig _config;
 
@@ -22,7 +23,7 @@ private:
   std::function<void(void)> _generator_step;
   std::default_random_engine _generator;
 
-public:
+ public:
   static const cugl::Size TERMINAL;
   static const cugl::Size SPAWN;
 
@@ -44,8 +45,8 @@ public:
 
   bool anyRoomsOverlapping();
 
-  std::shared_ptr<Room>
-  roomMostOverlappingWith(const std::shared_ptr<Room> &room);
+  std::shared_ptr<Room> roomMostOverlappingWith(
+      const std::shared_ptr<Room> &room);
 
   void markAndFillHallways();
 
@@ -53,9 +54,10 @@ public:
 
   void establishGates();
 
-private:
-  std::vector<std::shared_ptr<Room>>
-  placeTerminalRooms(int num_rooms, float min_radius, float max_radius);
+ private:
+  std::vector<std::shared_ptr<Room>> placeTerminalRooms(int num_rooms,
+                                                        float min_radius,
+                                                        float max_radius);
 
   void placeRegularRooms(int num_rooms, float min_radius, float max_radius);
 

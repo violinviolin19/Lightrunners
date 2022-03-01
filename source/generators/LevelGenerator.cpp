@@ -49,7 +49,6 @@ void LevelGenerator::update() {
 }
 
 void LevelGenerator::generateRooms() {
-
   _spawn_room = std::make_shared<Room>(LevelGenerator::SPAWN);
   _spawn_room->_type = Room::RoomType::SPAWN;
   _spawn_room->_fixed = true;
@@ -143,8 +142,8 @@ bool LevelGenerator::anyRoomsOverlapping() {
   return false;
 }
 
-std::shared_ptr<Room>
-LevelGenerator::roomMostOverlappingWith(const std::shared_ptr<Room> &room) {
+std::shared_ptr<Room> LevelGenerator::roomMostOverlappingWith(
+    const std::shared_ptr<Room> &room) {
   cugl::Rect room_rect = room->getRect();
 
   auto it = std::max_element(
@@ -184,10 +183,8 @@ void LevelGenerator::placeTerminals() {
   };
 }
 
-std::vector<std::shared_ptr<Room>>
-LevelGenerator::placeTerminalRooms(int num_rooms, float min_radius,
-                                   float max_radius) {
-
+std::vector<std::shared_ptr<Room>> LevelGenerator::placeTerminalRooms(
+    int num_rooms, float min_radius, float max_radius) {
   std::uniform_real_distribution<float> dis(0.0f, 1.0f);
 
   // Make sure the room is always inside of the spawn circle;
@@ -324,9 +321,7 @@ void LevelGenerator::establishGates() { _generator_step = nullptr; }
 
 void LevelGenerator::calculateDelaunayTriangles(
     std::vector<std::shared_ptr<Room>> &rooms, float r) {
-
-  if (rooms.size() == 0)
-    return;
+  if (rooms.size() == 0) return;
 
   std::vector<double> coords;
 
@@ -346,7 +341,6 @@ void LevelGenerator::calculateDelaunayTriangles(
 
     std::shared_ptr<Edge> edge_0_1 = std::make_shared<Edge>(node_0, node_1);
     if (r == 0.0f || !edge_0_1->doesIntersect(cugl::Vec2::ZERO, r)) {
-
       auto adjacent_0_1 = node_0->findEdge(node_1);
       auto adjacent_1_0 = node_1->findEdge(node_0);
 
@@ -459,7 +453,6 @@ void LevelGenerator::addEdgesBack(std::vector<std::shared_ptr<Room>> &rooms) {
 void LevelGenerator::connectLayers(std::vector<std::shared_ptr<Room>> &layer_a,
                                    std::vector<std::shared_ptr<Room>> &layer_b,
                                    int num_connections) {
-
   std::vector<std::shared_ptr<Edge>> connections;
 
   std::uniform_real_distribution<float> dis(0.0f, 1.0f);
@@ -481,7 +474,6 @@ void LevelGenerator::connectLayers(std::vector<std::shared_ptr<Room>> &layer_a,
       if (between_angles && a_room->_type == Room::RoomType::DEFAULT) {
         for (std::shared_ptr<Room> &b_room : layer_b) {
           if (b_room->_type == Room::RoomType::DEFAULT) {
-
             // Find if this edge already been chosen.
             auto curr = std::make_shared<Edge>(a_room, b_room);
             auto res =

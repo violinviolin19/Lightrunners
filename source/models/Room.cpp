@@ -57,7 +57,6 @@ Edge::Edge(const std::shared_ptr<Room> &s, const std::shared_ptr<Room> &n)
 }
 
 bool Edge::doesIntersect(cugl::Vec2 origin, float r) {
-
   cugl::Vec2 d = _neighbor->getMid() - _source->getMid();
   cugl::Vec2 f = _source->getMid() - origin;
 

@@ -5,7 +5,7 @@
 class Edge;
 
 class Room {
-public:
+ public:
   enum RoomType { TERMINAL, SPAWN, DEFAULT };
 
   RoomType _type;
@@ -41,7 +41,7 @@ public:
 };
 
 class Edge {
-public:
+ public:
   std::shared_ptr<Room> _source;
   std::shared_ptr<Room> _neighbor;
   std::shared_ptr<cugl::scene2::PathNode> _path;
@@ -76,4 +76,4 @@ public:
   }
 };
 
-#endif // MODELS_ROOM_H
+#endif  // MODELS_ROOM_H
