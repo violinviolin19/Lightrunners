@@ -31,6 +31,9 @@
 		D56DCD2F27CDAD7A002E8363 /* Room.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D56DCD2A27CDAD7A002E8363 /* Room.cpp */; };
 		D56DCD3027CDAD7A002E8363 /* Room.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D56DCD2A27CDAD7A002E8363 /* Room.cpp */; };
 		D56DCD3127CDAD7A002E8363 /* Room.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D56DCD2A27CDAD7A002E8363 /* Room.cpp */; };
+		D56DCD3C27CE6E0F002E8363 /* Hallway.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D56DCD3B27CE6E0F002E8363 /* Hallway.cpp */; };
+		D56DCD3D27CE6E0F002E8363 /* Hallway.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D56DCD3B27CE6E0F002E8363 /* Hallway.cpp */; };
+		D56DCD3E27CE6E0F002E8363 /* Hallway.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D56DCD3B27CE6E0F002E8363 /* Hallway.cpp */; };
 		D598E69527C578F10039326B /* LevelGenerationDemoScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D598E69327C578F10039326B /* LevelGenerationDemoScene.cpp */; };
 		D598E69627C578F10039326B /* LevelGenerationDemoScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D598E69327C578F10039326B /* LevelGenerationDemoScene.cpp */; };
 		D598E69727C578F10039326B /* LevelGenerationDemoScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D598E69327C578F10039326B /* LevelGenerationDemoScene.cpp */; };
@@ -148,6 +151,8 @@
 		D56B743A27CA9DCE00710CC6 /* LevelGeneratorConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelGeneratorConfig.h; sourceTree = "<group>"; };
 		D56DCD2927CDAD7A002E8363 /* Room.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Room.h; sourceTree = "<group>"; };
 		D56DCD2A27CDAD7A002E8363 /* Room.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Room.cpp; sourceTree = "<group>"; };
+		D56DCD3A27CE6E0F002E8363 /* Hallway.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hallway.h; sourceTree = "<group>"; };
+		D56DCD3B27CE6E0F002E8363 /* Hallway.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Hallway.cpp; sourceTree = "<group>"; };
 		D598E69327C578F10039326B /* LevelGenerationDemoScene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LevelGenerationDemoScene.cpp; sourceTree = "<group>"; };
 		D598E69427C578F10039326B /* LevelGenerationDemoScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LevelGenerationDemoScene.h; sourceTree = "<group>"; };
 		D598E69927C57E3C0039326B /* LevelGenerator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LevelGenerator.cpp; sourceTree = "<group>"; };
@@ -310,6 +315,8 @@
 		D56DCD2727CDAD7A002E8363 /* models */ = {
 			isa = PBXGroup;
 			children = (
+				D56DCD3B27CE6E0F002E8363 /* Hallway.cpp */,
+				D56DCD3A27CE6E0F002E8363 /* Hallway.h */,
 				D56DCD2927CDAD7A002E8363 /* Room.h */,
 				D56DCD2A27CDAD7A002E8363 /* Room.cpp */,
 			);
@@ -629,6 +636,7 @@
 			files = (
 				D598E69D27C57E3C0039326B /* LevelGenerator.cpp in Sources */,
 				D52E673C27BF305A00F8E2B8 /* InputController.cpp in Sources */,
+				D56DCD3E27CE6E0F002E8363 /* Hallway.cpp in Sources */,
 				D52E673F27BF305A00F8E2B8 /* Attack.cpp in Sources */,
 				D5EB745027C335C7007D157D /* Movement.cpp in Sources */,
 				D56DCD3127CDAD7A002E8363 /* Room.cpp in Sources */,
@@ -647,6 +655,7 @@
 			files = (
 				D598E69C27C57E3C0039326B /* LevelGenerator.cpp in Sources */,
 				D52E673B27BF305A00F8E2B8 /* InputController.cpp in Sources */,
+				D56DCD3D27CE6E0F002E8363 /* Hallway.cpp in Sources */,
 				D52E673E27BF305A00F8E2B8 /* Attack.cpp in Sources */,
 				D5EB744F27C335C7007D157D /* Movement.cpp in Sources */,
 				D56DCD3027CDAD7A002E8363 /* Room.cpp in Sources */,
@@ -665,6 +674,7 @@
 			files = (
 				D598E69B27C57E3C0039326B /* LevelGenerator.cpp in Sources */,
 				D52E673A27BF305A00F8E2B8 /* InputController.cpp in Sources */,
+				D56DCD3C27CE6E0F002E8363 /* Hallway.cpp in Sources */,
 				D52E673D27BF305A00F8E2B8 /* Attack.cpp in Sources */,
 				D5EB744E27C335C7007D157D /* Movement.cpp in Sources */,
 				D56DCD2F27CDAD7A002E8363 /* Room.cpp in Sources */,

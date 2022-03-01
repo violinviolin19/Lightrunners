@@ -50,14 +50,14 @@ void LevelGenerator::update() {
 void LevelGenerator::generateRooms() {
 
   _spawn_room = std::make_shared<Room>(LevelGenerator::SPAWN);
-  _spawn_room->type = Room::RoomType::SPAWN;
-  _spawn_room->fixed = true;
-  _spawn_room->node->setAnchor(cugl::Vec2::ANCHOR_BOTTOM_LEFT);
-  _spawn_room->node->setPosition(_spawn_room->node->getContentSize() / -2.0f);
-  _spawn_room->node->setColor(cugl::Color4(14, 14, 205, 127));
+  _spawn_room->_type = Room::RoomType::SPAWN;
+  _spawn_room->_fixed = true;
+  _spawn_room->_node->setAnchor(cugl::Vec2::ANCHOR_BOTTOM_LEFT);
+  _spawn_room->_node->setPosition(_spawn_room->_node->getContentSize() / -2.0f);
+  _spawn_room->_node->setColor(cugl::Color4(14, 14, 205, 127));
   _rooms.push_back(_spawn_room);
   _inside_rooms.push_back(_spawn_room);
-  _map->addChild(_spawn_room->node);
+  _map->addChild(_spawn_room->_node);
 
   float min_radius = _spawn_room->getRadius();
 
@@ -87,12 +87,12 @@ void LevelGenerator::placeRegularRooms(int num_rooms, float min_radius,
     float angle = dis(_generator) * 2 * M_PI;
     cugl::Vec2 pos(floor(r * cosf(angle)), floor(r * sinf(angle)));
 
-    room->node->setAnchor(cugl::Vec2::ANCHOR_BOTTOM_LEFT);
-    room->node->setPosition(pos - (room->node->getContentSize() / 2.0f));
-    room->node->setColor(cugl::Color4(125, 94, 52, 127));
+    room->_node->setAnchor(cugl::Vec2::ANCHOR_BOTTOM_LEFT);
+    room->_node->setPosition(pos - (room->_node->getContentSize() / 2.0f));
+    room->_node->setColor(cugl::Color4(125, 94, 52, 127));
 
     _rooms.push_back(room);
-    _map->addChild(room->node);
+    _map->addChild(room->_node);
   }
 }
 
@@ -202,29 +202,29 @@ LevelGenerator::placeTerminalRooms(int num_rooms, float min_radius,
     std::shared_ptr<Room> room =
         std::make_shared<Room>(LevelGenerator::TERMINAL);
 
-    room->type = Room::RoomType::TERMINAL;
+    room->_type = Room::RoomType::TERMINAL;
 
-    room->node->setAnchor(cugl::Vec2::ANCHOR_BOTTOM_LEFT);
+    room->_node->setAnchor(cugl::Vec2::ANCHOR_BOTTOM_LEFT);
 
     float angle = dis(_generator) * (max_angle - min_angle) + min_angle;
     cugl::Vec2 pos(floor(r * cosf(angle)), floor(r * sinf(angle)));
 
-    room->node->setPosition(pos - (room->node->getContentSize() / 2.0f));
-    room->node->setColor(cugl::Color4(52, 205, 14, 127));
+    room->_node->setPosition(pos - (room->_node->getContentSize() / 2.0f));
+    room->_node->setColor(cugl::Color4(52, 205, 14, 127));
 
     min_angle += 2 * M_PI / num_rooms;
     max_angle += 2 * M_PI / num_rooms;
 
     _rooms.push_back(room);
     terminals.push_back(room);
-    _map->addChild(room->node);
+    _map->addChild(room->_node);
 
     std::shared_ptr<Room> overlapping = roomMostOverlappingWith(room);
     if (overlapping != room) {
-      overlapping->node->setColor(cugl::Color4(205, 14, 14, 127));
+      overlapping->_node->setColor(cugl::Color4(205, 14, 14, 127));
       auto it = std::find(_rooms.begin(), _rooms.end(), overlapping);
       if (it != _rooms.end()) {
-        _map->removeChild(overlapping->node);
+        _map->removeChild(overlapping->_node);
         *it = room;
       }
     }
@@ -237,7 +237,7 @@ void LevelGenerator::segregateLayers() {
   std::vector<std::shared_ptr<Room>> inside_rooms;
   std::copy_if(_rooms.begin(), _rooms.end(), std::back_inserter(inside_rooms),
                [this](const std::shared_ptr<Room> &room) {
-                 return room->type == Room::RoomType::DEFAULT &&
+                 return room->_type == Room::RoomType::DEFAULT &&
                         room->getMid().length() <=
                             this->_config.getInnerCircleRadius();
                });
@@ -246,7 +246,7 @@ void LevelGenerator::segregateLayers() {
   std::copy_if(_rooms.begin(), _rooms.end(), std::back_inserter(middle_rooms),
                [this](const std::shared_ptr<Room> &room) {
                  float r = room->getMid().length();
-                 return room->type == Room::RoomType::DEFAULT &&
+                 return room->_type == Room::RoomType::DEFAULT &&
                         r > this->_config.getInnerCircleRadius() &&
                         r <= this->_config.getMiddleCircleRadius();
                });
@@ -254,7 +254,7 @@ void LevelGenerator::segregateLayers() {
   std::vector<std::shared_ptr<Room>> outside_rooms;
   std::copy_if(_rooms.begin(), _rooms.end(), std::back_inserter(outside_rooms),
                [this](const std::shared_ptr<Room> &room) {
-                 return room->type == Room::RoomType::DEFAULT &&
+                 return room->_type == Room::RoomType::DEFAULT &&
                         room->getMid().length() >
                             this->_config.getMiddleCircleRadius();
                });
@@ -270,18 +270,18 @@ void LevelGenerator::segregateLayers() {
     cugl::Vec2 pos = room->getMid();
     pos += room->getMid().getNormalization() *
            _config.getSeparationBetweenLayers();
-    pos -= room->node->getSize() / 2.0f;
+    pos -= room->_node->getSize() / 2.0f;
 
-    room->node->setPosition(roundf(pos.x), roundf(pos.y));
+    room->_node->setPosition(roundf(pos.x), roundf(pos.y));
   }
 
   for (std::shared_ptr<Room> &room : _outside_rooms) {
     cugl::Vec2 pos = room->getMid();
     pos += room->getMid().getNormalization() *
            _config.getSeparationBetweenLayers() * 2.0f;
-    pos -= room->node->getSize() / 2.0f;
+    pos -= room->_node->getSize() / 2.0f;
 
-    room->node->setPosition(roundf(pos.x), roundf(pos.y));
+    room->_node->setPosition(roundf(pos.x), roundf(pos.y));
   }
 
   _generator_step = [this]() {
@@ -345,13 +345,13 @@ void LevelGenerator::calculateDelaunayTriangles(
       auto adjacent_1_0 = node_1->findEdge(node_0);
 
       if (!adjacent_0_1 && !adjacent_1_0) {
-        _map->addChild(edge_0_1->path);
-        node_0->edges.push_back(edge_0_1);
-        node_1->edges.push_back(edge_0_1);
+        _map->addChild(edge_0_1->_path);
+        node_0->_edges.push_back(edge_0_1);
+        node_1->_edges.push_back(edge_0_1);
       } else if (!adjacent_0_1) {
-        node_0->edges.push_back(adjacent_1_0);
+        node_0->_edges.push_back(adjacent_1_0);
       } else if (!adjacent_1_0) {
-        node_1->edges.push_back(adjacent_0_1);
+        node_1->_edges.push_back(adjacent_0_1);
       }
     }
 
@@ -361,13 +361,13 @@ void LevelGenerator::calculateDelaunayTriangles(
       auto adjacent_2_0 = node_2->findEdge(node_0);
 
       if (!adjacent_0_2 && !adjacent_2_0) {
-        _map->addChild(edge_0_2->path);
-        node_0->edges.push_back(edge_0_2);
-        node_2->edges.push_back(edge_0_2);
+        _map->addChild(edge_0_2->_path);
+        node_0->_edges.push_back(edge_0_2);
+        node_2->_edges.push_back(edge_0_2);
       } else if (!adjacent_0_2) {
-        node_0->edges.push_back(adjacent_2_0);
+        node_0->_edges.push_back(adjacent_2_0);
       } else if (!adjacent_2_0) {
-        node_1->edges.push_back(adjacent_0_2);
+        node_1->_edges.push_back(adjacent_0_2);
       }
     }
 
@@ -377,13 +377,13 @@ void LevelGenerator::calculateDelaunayTriangles(
       auto adjacent_2_1 = node_2->findEdge(node_1);
 
       if (!adjacent_1_2 && !adjacent_2_1) {
-        _map->addChild(edge_1_2->path);
-        node_1->edges.push_back(edge_1_2);
-        node_2->edges.push_back(edge_1_2);
+        _map->addChild(edge_1_2->_path);
+        node_1->_edges.push_back(edge_1_2);
+        node_2->_edges.push_back(edge_1_2);
       } else if (!adjacent_1_2) {
-        node_1->edges.push_back(adjacent_2_1);
+        node_1->_edges.push_back(adjacent_2_1);
       } else if (!adjacent_2_1) {
-        node_2->edges.push_back(adjacent_1_2);
+        node_2->_edges.push_back(adjacent_1_2);
       }
     }
   }
@@ -397,13 +397,13 @@ void LevelGenerator::calculateMinimumSpanningTree(
   std::vector<std::shared_ptr<Edge>> result;
   // Reset tree to start Prim's algorithm.
   for (std::shared_ptr<Room> &room : rooms) {
-    room->visited = false;
-    for (std::shared_ptr<Edge> edge : room->edges) {
-      edge->path->setVisible(false);
-      edge->active = false;
+    room->_visited = false;
+    for (std::shared_ptr<Edge> edge : room->_edges) {
+      edge->_path->setVisible(false);
+      edge->_active = false;
     }
   }
-  rooms[0]->visited = true;
+  rooms[0]->_visited = true;
 
   while (num_edges < rooms.size() - 1) {
     std::shared_ptr<Edge> min_edge = nullptr;
@@ -411,12 +411,12 @@ void LevelGenerator::calculateMinimumSpanningTree(
     float min_weight = FLT_MAX;
 
     for (std::shared_ptr<Room> &room : rooms) {
-      if (room->visited) {
-        for (std::shared_ptr<Edge> edge : room->edges) {
-          if (!edge->getOther(room)->visited && edge->weight < min_weight) {
+      if (room->_visited) {
+        for (std::shared_ptr<Edge> edge : room->_edges) {
+          if (!edge->getOther(room)->_visited && edge->_weight < min_weight) {
             min_edge = edge;
             min_neighbor = edge->getOther(room);
-            min_weight = edge->weight;
+            min_weight = edge->_weight;
           }
         }
       }
@@ -425,27 +425,27 @@ void LevelGenerator::calculateMinimumSpanningTree(
     num_edges++;
 
     if (min_edge) {
-      min_neighbor->visited = true;
+      min_neighbor->_visited = true;
       result.push_back(std::move(min_edge));
     }
   }
 
   for (std::shared_ptr<Edge> &edge : result) {
-    edge->path->setColor(cugl::Color4(255, 14, 14, 124));
-    edge->path->setVisible(true);
-    edge->active = true;
+    edge->_path->setColor(cugl::Color4(255, 14, 14, 124));
+    edge->_path->setVisible(true);
+    edge->_active = true;
   }
 }
 
 void LevelGenerator::addEdgesBack(std::vector<std::shared_ptr<Room>> &rooms) {
   std::uniform_real_distribution<float> rand(0.0f, 1.0f);
   for (std::shared_ptr<Room> &room : rooms) {
-    for (std::shared_ptr<Edge> edge : room->edges) {
-      if (!edge->active && edge->weight < _config.getMaxHallwayLength() &&
+    for (std::shared_ptr<Edge> edge : room->_edges) {
+      if (!edge->_active && edge->_weight < _config.getMaxHallwayLength() &&
           rand(_generator) <= _config.getAddEdgesBackProb()) {
-        edge->active = true;
-        edge->path->setVisible(true);
-        edge->path->setColor(cugl::Color4(255, 14, 14, 124));
+        edge->_active = true;
+        edge->_path->setVisible(true);
+        edge->_path->setColor(cugl::Color4(255, 14, 14, 124));
       }
     }
   }
@@ -473,9 +473,9 @@ void LevelGenerator::connectLayers(std::vector<std::shared_ptr<Room>> &layer_a,
                                 ? (angle >= min_angle && angle <= max_angle)
                                 : (angle >= min_angle || angle <= max_angle);
 
-      if (between_angles && a_room->type == Room::RoomType::DEFAULT) {
+      if (between_angles && a_room->_type == Room::RoomType::DEFAULT) {
         for (std::shared_ptr<Room> &b_room : layer_b) {
-          if (b_room->type == Room::RoomType::DEFAULT) {
+          if (b_room->_type == Room::RoomType::DEFAULT) {
 
             // Find if this edge already been chosen.
             auto curr = std::make_shared<Edge>(a_room, b_room);
@@ -485,8 +485,8 @@ void LevelGenerator::connectLayers(std::vector<std::shared_ptr<Room>> &layer_a,
                                return *edge == *curr || edge->shareRoom(curr);
                              });
 
-            if (curr->weight < winner_dist && res == connections.end()) {
-              winner_dist = curr->weight;
+            if (curr->_weight < winner_dist && res == connections.end()) {
+              winner_dist = curr->_weight;
               winner = std::move(curr);
             }
           }
@@ -502,10 +502,10 @@ void LevelGenerator::connectLayers(std::vector<std::shared_ptr<Room>> &layer_a,
   }
 
   for (std::shared_ptr<Edge> &connection : connections) {
-    connection->source->edges.push_back(connection);
-    connection->neighbor->edges.push_back(connection);
-    connection->path->setColor(cugl::Color4(15, 15, 230, 147));
-    _map->addChild(connection->path);
+    connection->_source->_edges.push_back(connection);
+    connection->_neighbor->_edges.push_back(connection);
+    connection->_path->setColor(cugl::Color4(15, 15, 230, 147));
+    _map->addChild(connection->_path);
   }
   _map->doLayout();
 }

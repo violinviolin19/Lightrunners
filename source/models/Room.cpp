@@ -3,9 +3,9 @@
 #pragma mark Room
 
 Room::Room(cugl::Size size)
-    : type(Room::RoomType::DEFAULT), visited(false), fixed(false) {
-  node = cugl::scene2::PolygonNode::alloc();
-  node->setContentSize(size);
+    : _type(Room::RoomType::DEFAULT), _visited(false), _fixed(false) {
+  _node = cugl::scene2::PolygonNode::alloc();
+  _node->setContentSize(size);
 
   for (float x = 0.0f; x < size.width; x++) {
     for (float y = 0.0f; y < size.height; y++) {
@@ -15,56 +15,51 @@ Room::Room(cugl::Size size)
       tile->setAnchor(cugl::Vec2::ANCHOR_BOTTOM_LEFT);
       tile->setPosition(floorf(x) + 0.1f, floorf(y) + 0.1f);
       tile->setColor(cugl::Color4::BLACK);
-      node->addChild(tile);
+      _node->addChild(tile);
     }
   }
 
-  node->doLayout();
+  _node->doLayout();
 }
 
 void Room::move(cugl::Vec2 dir) {
-  if (!fixed) {
+  if (!_fixed) {
     dir.set(roundf(dir.x), roundf(dir.y));
-    node->setPosition(node->getPosition() + dir);
+    _node->setPosition(_node->getPosition() + dir);
   }
 }
 
-bool Room::hasNeighbor(const std::shared_ptr<Room> room) const {
-  auto result = std::find_if(
-      edges.begin(), edges.end(), [room](const std::shared_ptr<Edge> &edge) {
-        return edge->source == room || edge->neighbor == room;
-      });
-
-  return result != edges.end();
+bool Room::hasNeighbor(const std::shared_ptr<Room> &room) const {
+  return findEdge(room) != nullptr;
 }
 
-std::shared_ptr<Edge> Room::findEdge(const std::shared_ptr<Room> room) const {
+std::shared_ptr<Edge> Room::findEdge(const std::shared_ptr<Room> &room) const {
   auto result = std::find_if(
-      edges.begin(), edges.end(), [room](const std::shared_ptr<Edge> &edge) {
-        return edge->source == room || edge->neighbor == room;
+      _edges.begin(), _edges.end(), [room](const std::shared_ptr<Edge> &edge) {
+        return edge->_source == room || edge->_neighbor == room;
       });
 
-  return (result != edges.end()) ? *result : nullptr;
+  return (result != _edges.end()) ? *result : nullptr;
 }
 
 #pragma mark Edge
 
 Edge::Edge(const std::shared_ptr<Room> &s, const std::shared_ptr<Room> &n)
-    : weight(0), active(true) {
-  source = s;
-  neighbor = n;
-  std::vector<cugl::Vec2> vertices{source->getMid(), neighbor->getMid()};
-  path = cugl::scene2::PathNode::allocWithVertices(vertices, 0.4f);
-  path->setAnchor(cugl::Vec2::ANCHOR_BOTTOM_LEFT);
-  path->setPosition(path->getBoundingRect().origin);
-  path->setColor(cugl::Color4(0, 0, 0, 50));
-  weight = (vertices[1] - vertices[0]).length();
+    : _weight(0), _active(true) {
+  _source = s;
+  _neighbor = n;
+  std::vector<cugl::Vec2> vertices{_source->getMid(), _neighbor->getMid()};
+  _path = cugl::scene2::PathNode::allocWithVertices(vertices, 0.4f);
+  _path->setAnchor(cugl::Vec2::ANCHOR_BOTTOM_LEFT);
+  _path->setPosition(_path->getBoundingRect().origin);
+  _path->setColor(cugl::Color4(0, 0, 0, 50));
+  _weight = (vertices[1] - vertices[0]).length();
 }
 
 bool Edge::doesIntersect(cugl::Vec2 origin, float r) {
 
-  cugl::Vec2 d = neighbor->getMid() - source->getMid();
-  cugl::Vec2 f = source->getMid() - origin;
+  cugl::Vec2 d = _neighbor->getMid() - _source->getMid();
+  cugl::Vec2 f = _source->getMid() - origin;
 
   float a = d.dot(d);
   float b = 2 * f.dot(d);

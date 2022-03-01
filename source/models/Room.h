@@ -2,19 +2,20 @@
 #define MODELS_ROOM_H
 #include <cugl/cugl.h>
 
-struct Edge;
+class Edge;
 
-struct Room {
+class Room {
+public:
   enum RoomType { TERMINAL, SPAWN, DEFAULT };
 
-  RoomType type;
+  RoomType _type;
 
-  std::shared_ptr<cugl::scene2::PolygonNode> node;
+  std::shared_ptr<cugl::scene2::PolygonNode> _node;
 
-  std::vector<std::shared_ptr<Edge>> edges;
+  std::vector<std::shared_ptr<Edge>> _edges;
 
-  bool visited;
-  bool fixed;
+  bool _visited;
+  bool _fixed;
 
   Room(float x, float y) : Room(cugl::Size(x, y)) {}
 
@@ -22,51 +23,56 @@ struct Room {
 
   void move(cugl::Vec2 dir);
 
-  bool hasNeighbor(const std::shared_ptr<Room> room) const;
+  bool hasNeighbor(const std::shared_ptr<Room> &room) const;
 
-  std::shared_ptr<Edge> findEdge(const std::shared_ptr<Room> room) const;
+  std::shared_ptr<Edge> findEdge(const std::shared_ptr<Room> &room) const;
 
   cugl::Rect getRect() const {
-    return cugl::Rect(node->getPosition(), node->getSize());
+    return cugl::Rect(_node->getPosition(), _node->getSize());
   }
 
   cugl::Vec2 getMid() const {
-    return node->getPosition() + node->getSize() / 2.0f;
+    return _node->getPosition() + _node->getSize() / 2.0f;
   }
 
   float getRadius() const {
-    return cugl::Vec2(node->getSize()).length() / 2.0f;
+    return cugl::Vec2(_node->getSize()).length() / 2.0f;
   }
 };
 
-struct Edge {
-  std::shared_ptr<Room> source;
-  std::shared_ptr<Room> neighbor;
-  std::shared_ptr<cugl::scene2::PathNode> path;
-  float weight;
-  bool active;
+class Edge {
+public:
+  std::shared_ptr<Room> _source;
+  std::shared_ptr<Room> _neighbor;
+  std::shared_ptr<cugl::scene2::PathNode> _path;
+  float _weight;
+  bool _active;
 
   Edge(const std::shared_ptr<Room> &s, const std::shared_ptr<Room> &n);
 
   bool doesIntersect(cugl::Vec2 origin, float r);
 
   std::shared_ptr<Room> getOther(const std::shared_ptr<Room> &room) {
-    if (room == source) {
-      return neighbor;
-    } else if (room == neighbor) {
-      return source;
+    if (room == _source) {
+      return _neighbor;
+    } else if (room == _neighbor) {
+      return _source;
     }
     return nullptr;
   }
 
   bool operator==(const Edge &other) const {
-    return (this->source == other.source && this->neighbor == other.neighbor) ||
-           (this->source == other.neighbor && this->neighbor == other.source);
+    return (this->_source == other._source &&
+            this->_neighbor == other._neighbor) ||
+           (this->_source == other._neighbor &&
+            this->_neighbor == other._source);
   }
 
   bool shareRoom(const std::shared_ptr<Edge> &other) const {
-    return this->source == other->source || this->neighbor == other->source ||
-           this->neighbor == other->neighbor || this->source == other->neighbor;
+    return this->_source == other->_source ||
+           this->_neighbor == other->_source ||
+           this->_neighbor == other->_neighbor ||
+           this->_source == other->_neighbor;
   }
 };
 
