@@ -1,5 +1,6 @@
 #ifndef GENERATORS_LEVEL_GENERATOR_H
 #define GENERATORS_LEVEL_GENERATOR_H
+#include "../models/Hallway.h"
 #include "../models/Room.h"
 #include "LevelGeneratorConfig.h"
 #include <cugl/cugl.h>
@@ -13,6 +14,8 @@ private:
   std::vector<std::shared_ptr<Room>> _inside_rooms;
   std::vector<std::shared_ptr<Room>> _middle_rooms;
   std::vector<std::shared_ptr<Room>> _outside_rooms;
+
+  std::vector<std::shared_ptr<Hallway>> _hallways;
 
   std::shared_ptr<Room> _spawn_room;
   bool _active;

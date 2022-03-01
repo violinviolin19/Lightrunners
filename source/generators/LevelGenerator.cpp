@@ -34,6 +34,7 @@ void LevelGenerator::dispose() {
     _inside_rooms.clear();
     _middle_rooms.clear();
     _outside_rooms.clear();
+    _hallways.clear();
     _spawn_room = nullptr;
     _map = nullptr;
     _generator_step = nullptr;
@@ -85,10 +86,13 @@ void LevelGenerator::placeRegularRooms(int num_rooms, float min_radius,
 
     float r = dis(_generator) * (max_r - min_r) + min_r;
     float angle = dis(_generator) * 2 * M_PI;
-    cugl::Vec2 pos(floor(r * cosf(angle)), floor(r * sinf(angle)));
+    cugl::Vec2 pos(r * cosf(angle), r * sinf(angle));
+    pos -= room->_node->getContentSize() / 2.0f;
+    pos.x = floorf(pos.x);
+    pos.y = floorf(pos.y);
 
     room->_node->setAnchor(cugl::Vec2::ANCHOR_BOTTOM_LEFT);
-    room->_node->setPosition(pos - (room->_node->getContentSize() / 2.0f));
+    room->_node->setPosition(pos);
     room->_node->setColor(cugl::Color4(125, 94, 52, 127));
 
     _rooms.push_back(room);
@@ -204,12 +208,14 @@ LevelGenerator::placeTerminalRooms(int num_rooms, float min_radius,
 
     room->_type = Room::RoomType::TERMINAL;
 
-    room->_node->setAnchor(cugl::Vec2::ANCHOR_BOTTOM_LEFT);
-
     float angle = dis(_generator) * (max_angle - min_angle) + min_angle;
-    cugl::Vec2 pos(floor(r * cosf(angle)), floor(r * sinf(angle)));
+    cugl::Vec2 pos(r * cosf(angle), r * sinf(angle));
+    pos -= room->_node->getContentSize() / 2.0f;
+    pos.x = floorf(pos.x);
+    pos.y = floorf(pos.y);
 
-    room->_node->setPosition(pos - (room->_node->getContentSize() / 2.0f));
+    room->_node->setAnchor(cugl::Vec2::ANCHOR_BOTTOM_LEFT);
+    room->_node->setPosition(pos);
     room->_node->setColor(cugl::Color4(52, 205, 14, 127));
 
     min_angle += 2 * M_PI / num_rooms;
@@ -400,7 +406,6 @@ void LevelGenerator::calculateMinimumSpanningTree(
     room->_visited = false;
     for (std::shared_ptr<Edge> edge : room->_edges) {
       edge->_path->setVisible(false);
-      edge->_active = false;
     }
   }
   rooms[0]->_visited = true;
@@ -433,7 +438,6 @@ void LevelGenerator::calculateMinimumSpanningTree(
   for (std::shared_ptr<Edge> &edge : result) {
     edge->_path->setColor(cugl::Color4(255, 14, 14, 124));
     edge->_path->setVisible(true);
-    edge->_active = true;
   }
 }
 
@@ -441,9 +445,10 @@ void LevelGenerator::addEdgesBack(std::vector<std::shared_ptr<Room>> &rooms) {
   std::uniform_real_distribution<float> rand(0.0f, 1.0f);
   for (std::shared_ptr<Room> &room : rooms) {
     for (std::shared_ptr<Edge> edge : room->_edges) {
-      if (!edge->_active && edge->_weight < _config.getMaxHallwayLength() &&
-          rand(_generator) <= _config.getAddEdgesBackProb()) {
-        edge->_active = true;
+      bool add_back = !edge->_path->isVisible();
+      add_back &= edge->_weight < _config.getMaxHallwayLength();
+      add_back &= rand(_generator) <= _config.getAddEdgesBackProb();
+      if (add_back) {
         edge->_path->setVisible(true);
         edge->_path->setColor(cugl::Color4(255, 14, 14, 124));
       }
@@ -510,4 +515,24 @@ void LevelGenerator::connectLayers(std::vector<std::shared_ptr<Room>> &layer_a,
   _map->doLayout();
 }
 
-void LevelGenerator::fillHallways() {}
+void LevelGenerator::fillHallways() {
+  // Reset state of Edges to calculate Hallways.
+  for (std::shared_ptr<Room> &room : _rooms) {
+    for (std::shared_ptr<Edge> &edge : room->_edges) {
+      edge->_calculated = !(edge->_path->isVisible());
+    }
+  }
+
+  for (std::shared_ptr<Room> &room : _rooms) {
+    for (std::shared_ptr<Edge> &edge : room->_edges) {
+      if (!edge->_calculated) {
+        auto hallway =
+            std::make_shared<Hallway>(edge, _config.getHallwayRadius());
+        _map->addChild(hallway->getNode());
+        edge->_calculated = true;
+      }
+    }
+  }
+
+  _map->doLayout();
+}

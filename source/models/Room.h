@@ -17,7 +17,7 @@ public:
   bool _visited;
   bool _fixed;
 
-  Room(float x, float y) : Room(cugl::Size(x, y)) {}
+  Room(float width, float height) : Room(cugl::Size(width, height)) {}
 
   Room(cugl::Size size);
 
@@ -46,7 +46,7 @@ public:
   std::shared_ptr<Room> _neighbor;
   std::shared_ptr<cugl::scene2::PathNode> _path;
   float _weight;
-  bool _active;
+  bool _calculated;
 
   Edge(const std::shared_ptr<Room> &s, const std::shared_ptr<Room> &n);
 

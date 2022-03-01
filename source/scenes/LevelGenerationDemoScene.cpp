@@ -17,7 +17,9 @@ bool LevelGenerationDemoScene::init() {
   _map = cugl::scene2::SceneNode::alloc();
   _map->setContentSize(200.0f, 200.0f);
   _map->setPosition(dim / 2);
-  _map->setScale(cugl::Vec2::ONE * 2.0f);
+  _map->setScale(cugl::Vec2::ONE * 5.0f);
+
+  // _config.setNumRooms(20);
 
   cugl::PolyFactory poly_factory;
 
@@ -31,7 +33,7 @@ bool LevelGenerationDemoScene::init() {
     auto circle = cugl::scene2::PolygonNode::allocWithPoly(circle_poly);
     circle->setAnchor(cugl::Vec2::ANCHOR_CENTER);
     circle->setPosition(dim / 2);
-    circle->setScale(cugl::Vec2::ONE * 2.0f);
+    circle->setScale(cugl::Vec2::ONE * 1.5f);
     circle->setColor(cugl::Color4(0, 0, 0, 20));
     cugl::Scene2::addChild(circle);
   }
@@ -54,6 +56,30 @@ void LevelGenerationDemoScene::update(float timestep) {
     _map->removeAllChildren();
     createLevel();
     _map->doLayout();
+  }
+
+  if (cugl::Input::get<cugl::Keyboard>()->keyDown(cugl::KeyCode::I)) {
+    _map->setScale(_map->getScale() * 1.05f);
+  }
+
+  if (cugl::Input::get<cugl::Keyboard>()->keyDown(cugl::KeyCode::O)) {
+    _map->setScale(_map->getScale() * 0.95f);
+  }
+
+  if (cugl::Input::get<cugl::Keyboard>()->keyDown(cugl::KeyCode::W)) {
+    _map->setPositionY(_map->getPositionY() - 5.0f);
+  }
+
+  if (cugl::Input::get<cugl::Keyboard>()->keyDown(cugl::KeyCode::A)) {
+    _map->setPositionX(_map->getPositionX() + 5.0f);
+  }
+
+  if (cugl::Input::get<cugl::Keyboard>()->keyDown(cugl::KeyCode::S)) {
+    _map->setPositionY(_map->getPositionY() + 5.0f);
+  }
+
+  if (cugl::Input::get<cugl::Keyboard>()->keyDown(cugl::KeyCode::D)) {
+    _map->setPositionX(_map->getPositionX() - 5.0f);
   }
 
   _level_generator.update();

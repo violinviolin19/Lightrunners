@@ -45,7 +45,7 @@ std::shared_ptr<Edge> Room::findEdge(const std::shared_ptr<Room> &room) const {
 #pragma mark Edge
 
 Edge::Edge(const std::shared_ptr<Room> &s, const std::shared_ptr<Room> &n)
-    : _weight(0), _active(true) {
+    : _weight(0), _calculated(false) {
   _source = s;
   _neighbor = n;
   std::vector<cugl::Vec2> vertices{_source->getMid(), _neighbor->getMid()};
