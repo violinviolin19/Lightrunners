@@ -34,7 +34,10 @@
 			"magfilter": "linear",
 			"wrapS": "clamp",
 			"wrapT": "clamp"
-		}
+		},
+        "player": {
+            "file": "textures/player.png"
+        }
 	},
 	"widgets": {
 		"ui-scene": "widgets/ui-scene.json"
