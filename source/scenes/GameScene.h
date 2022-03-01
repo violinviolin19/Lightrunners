@@ -3,7 +3,7 @@
 #include <cugl/cugl.h>
 
 #include "../controllers/InputController.h"
-#include "../Player.hpp"
+#include "../models/Player.h"
 
 class GameScene : public cugl::Scene2 {
   /** The asset manager for loading. */
@@ -13,10 +13,10 @@ class GameScene : public cugl::Scene2 {
   std::shared_ptr<Player> _player;
   
   /** Reference to the physics root of the scene graph */
-  std::shared_ptr<cugl::scene2::SceneNode> _worldnode;
+  std::shared_ptr<cugl::scene2::SceneNode> _world_node;
     
   /** The Box2d world */
-  std::shared_ptr<ObstacleWorld> _world;
+  std::shared_ptr<cugl::physics2::ObstacleWorld> _world;
 
 public:
   GameScene() : cugl::Scene2() {}

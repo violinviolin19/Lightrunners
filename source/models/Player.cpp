@@ -1,12 +1,4 @@
-//
-//  Player.cpp
-//  Luminance
-//
-//  Created by Judy Ng on 2/21/22.
-//  Copyright © 2022 Game Design Initiative at Cornell. All rights reserved.
-//
-
-#include "Player.hpp"
+#include "Player.h"
 
 #pragma mark Init
 /**
@@ -18,11 +10,11 @@
  *
  * @return  true if the obstacle is initialized properly, false otherwise.
  */
-bool Player::init(const Vec2 pos, const Size size, string name) {
+bool Player::init(const cugl::Vec2 pos, const cugl::Size size, string name) {
     CapsuleObstacle::init(pos, size);
     setName(name);
     
-    _playerNode = nullptr;
+    _player_node = nullptr;
     _health = 100;
     
     setDensity(0.01f);
@@ -36,23 +28,14 @@ bool Player::init(const Vec2 pos, const Size size, string name) {
 #pragma mark Animation & Drawing
 
 /**
- * Sets the player scene graph node
- *
- * @param node the node to set it to
- */
-void Player::setPlayerNode(const std::shared_ptr<scene2::PolygonNode>& node) {
-    _playerNode = node;
-}
-
-/**
  * Update the scene graph.
  *
  * @param delta the timing value
  */
 void Player::update(float delta) {
     CapsuleObstacle::update(delta);
-    if (_playerNode != nullptr) {
-        _playerNode->setPosition(getPosition());
+    if (_player_node != nullptr) {
+        _player_node->setPosition(getPosition());
     }
 }
 

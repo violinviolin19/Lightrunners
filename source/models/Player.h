@@ -1,31 +1,20 @@
-//
-//  Player.hpp
-//  Luminance
-//
-//  Created by Judy Ng on 2/21/22.
-//  Copyright © 2022 Game Design Initiative at Cornell. All rights reserved.
-//
-
-#ifndef Player_hpp
-#define Player_hpp
+#ifndef MODELS_PLAYER_H
+#define MODELS_PLAYER_H
 
 #include <stdio.h>
 #include <cugl/cugl.h>
 
-using namespace cugl;
-using namespace physics2;
-
-class Player : public CapsuleObstacle {
+class Player : public cugl::physics2::CapsuleObstacle {
 private:
     
     /** Player health */
     int _health;
 
     /** The scene graph node for the player */
-    std::shared_ptr<cugl::scene2::SceneNode> _playerNode;
+    std::shared_ptr<cugl::scene2::SceneNode> _player_node;
     
     /** Force to be applied to the player */
-    Vec2 _force;
+    cugl::Vec2 _force;
     
 public:
     
@@ -51,7 +40,7 @@ public:
      *
      * @return  true if the obstacle is initialized properly, false otherwise.
      */
-    virtual bool init(const Vec2 pos, const Size size, string name);
+    virtual bool init(const cugl::Vec2 pos, const cugl::Size size, string name);
     
 #pragma mark Static Constructors
     /**
@@ -61,7 +50,7 @@ public:
      *
      * @return a new capsule object at the given point with no size.
      */
-    static std::shared_ptr<Player> alloc(const Vec2 pos, const cugl::Size& size, string name) {
+    static std::shared_ptr<Player> alloc(const cugl::Vec2 pos, const cugl::Size& size, string name) {
         std::shared_ptr<Player> result = std::make_shared<Player>();
         return (result->init(pos, size, name) ? result : nullptr);
     }
@@ -96,7 +85,7 @@ public:
      *
      * @param node  The scene graph node representing this player.
      */
-    void setPlayerNode(const std::shared_ptr<cugl::scene2::PolygonNode>& node);
+    void setPlayerNode(const std::shared_ptr<cugl::scene2::PolygonNode>& node) { _player_node = node; }
     
 #pragma mark Movement
     /**
@@ -107,4 +96,4 @@ public:
      */
     void move(float forwardX, float forwardY);
 };
-#endif /* Player_hpp */
+#endif /* PLAYER_H */

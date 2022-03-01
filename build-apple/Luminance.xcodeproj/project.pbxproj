@@ -123,8 +123,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5728944727CECB7500F9BBA5 /* Player.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		5737DA7727C5E62E00D1692A /* Player.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
-		5737DA7827C5E62E00D1692A /* Player.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Player.hpp; sourceTree = "<group>"; };
 		D521FB0E27C43BA500D14172 /* widgets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = widgets; sourceTree = "<group>"; };
 		D52E672627BF305900F8E2B8 /* GameApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameApp.h; sourceTree = "<group>"; };
 		D52E672827BF305900F8E2B8 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
@@ -256,6 +256,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5728944327CECB5800F9BBA5 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				5737DA7727C5E62E00D1692A /* Player.cpp */,
+				5728944727CECB7500F9BBA5 /* Player.h */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
 		D52E672727BF305900F8E2B8 /* scenes */ = {
 			isa = PBXGroup;
 			children = (
@@ -401,13 +410,12 @@
 		EBBF18B11D749176008E2001 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				5728944327CECB5800F9BBA5 /* models */,
 				D52E673327BF305A00F8E2B8 /* GameApp.cpp */,
 				D52E672627BF305900F8E2B8 /* GameApp.h */,
 				D52E672C27BF305900F8E2B8 /* controllers */,
 				D52E672727BF305900F8E2B8 /* scenes */,
 				EB2BE9B41D74952A002FE78B /* main.cpp */,
-				5737DA7727C5E62E00D1692A /* Player.cpp */,
-				5737DA7827C5E62E00D1692A /* Player.hpp */,
 			);
 			name = Source;
 			path = ../source;
