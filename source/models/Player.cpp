@@ -31,8 +31,6 @@ void Player::update(float delta) {
 void Player::move(float forwardX, float forwardY) {
   setVX(1000 * forwardX);
   setVY(1000 * forwardY);
-  if (forwardX == 0)
-    setVX(0);
-  if (forwardY == 0)
-    setVY(0);
+  if (forwardX == 0) setVX(0);
+  if (forwardY == 0) setVY(0);
 }

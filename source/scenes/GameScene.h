@@ -18,7 +18,7 @@ class GameScene : public cugl::Scene2 {
   /** The Box2d world */
   std::shared_ptr<cugl::physics2::ObstacleWorld> _world;
 
-public:
+ public:
   GameScene() : cugl::Scene2() {}
 
   /**
