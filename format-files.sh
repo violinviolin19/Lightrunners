@@ -9,4 +9,6 @@ if [ -z $(which clang-format) ] ; then
   exit
 fi
 
-find source/ -iname '*.h' -o -iname '*.cpp' | xargs clang-format -i -style=Google
+pushd $(git rev-parse --show-toplevel);
+find source/ -iname '*.h' -o -iname '*.cpp' | xargs clang-format -i -style=Google;
+pwd;
