@@ -16,7 +16,6 @@ private:
 
   float _max_hallway_length;
   float _hallway_radius;
-  float _add_edges_back_prob;
   float _num_rooms;
 
   float _num_terminal_rooms;
@@ -59,18 +58,12 @@ public:
   float getMiddleCircleRadius() const { return _middle_circle_radius; }
   float getMiddleCircleFrac() const { return _middle_circle_frac; }
 
-  void setMaxHallwayLength(int length) {
-    _max_hallway_length = static_cast<float>(length);
-  }
-  float getMaxHallwayLength() const { return _max_hallway_length; }
+  void setMaxHallwayLength(float length) { _max_hallway_length = length; }
 
   void setHallwayRadius(int radius) {
     _hallway_radius = static_cast<float>(radius);
   }
   float getHallwayRadius() const { return _hallway_radius; }
-
-  void setAddEdgesBackProb(float prob) { _add_edges_back_prob = prob; }
-  float getAddEdgesBackProb() const { return _add_edges_back_prob; }
 
   void setNumRooms(int num) { _num_rooms = static_cast<float>(num); }
   float getNumRooms() const { return _num_rooms; }

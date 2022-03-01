@@ -41,12 +41,6 @@ void LevelGenerator::dispose() {
   }
 }
 
-void LevelGenerator::update() {
-  if (_generator_step != nullptr) {
-    _generator_step();
-  }
-}
-
 void LevelGenerator::generateRooms() {
 
   _spawn_room = std::make_shared<Room>(LevelGenerator::SPAWN);
@@ -72,7 +66,7 @@ void LevelGenerator::generateRooms() {
 void LevelGenerator::placeRegularRooms(int num_rooms, float min_radius,
                                        float max_radius) {
   //  Distribution to define the size of normal rooms.
-  std::normal_distribution<float> size_dis(9.0f, 1.0f);
+  std::normal_distribution<float> size_dis(9.0f, 1.5f);
   std::uniform_real_distribution<float> dis(0.0f, 1.0f);
 
   for (float i = 0; i < num_rooms; i++) {
@@ -442,7 +436,7 @@ void LevelGenerator::addEdgesBack(std::vector<std::shared_ptr<Room>> &rooms) {
   for (std::shared_ptr<Room> &room : rooms) {
     for (std::shared_ptr<Edge> edge : room->edges) {
       if (!edge->active && edge->weight < _config.getMaxHallwayLength() &&
-          rand(_generator) <= _config.getAddEdgesBackProb()) {
+          rand(_generator) <= 0.15f) {
         edge->active = true;
         edge->path->setVisible(true);
         edge->path->setColor(cugl::Color4(255, 14, 14, 124));

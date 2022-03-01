@@ -43,7 +43,7 @@ void LevelGenerator::dispose() {
 
 void LevelGenerator::update() {
   if (_generator_step != nullptr) {
-    _generator_step();
+    nextStep();
   }
 }
 

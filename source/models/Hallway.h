@@ -1,0 +1,4 @@
+#ifndef MODELS_HALLWAY_H
+#define MODELS_HALLWAY_H
+
+#endif // MODELS_HALLWAY_H

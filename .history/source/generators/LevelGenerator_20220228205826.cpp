@@ -41,12 +41,6 @@ void LevelGenerator::dispose() {
   }
 }
 
-void LevelGenerator::update() {
-  if (_generator_step != nullptr) {
-    _generator_step();
-  }
-}
-
 void LevelGenerator::generateRooms() {
 
   _spawn_room = std::make_shared<Room>(LevelGenerator::SPAWN);

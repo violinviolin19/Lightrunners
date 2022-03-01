@@ -28,6 +28,9 @@
 		D56B743B27CA9DCE00710CC6 /* LevelGeneratorConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D56B743627CA9DCE00710CC6 /* LevelGeneratorConfig.cpp */; };
 		D56B743C27CA9DCE00710CC6 /* LevelGeneratorConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D56B743627CA9DCE00710CC6 /* LevelGeneratorConfig.cpp */; };
 		D56B743D27CA9DCE00710CC6 /* LevelGeneratorConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D56B743627CA9DCE00710CC6 /* LevelGeneratorConfig.cpp */; };
+		D56DCD2F27CDAD7A002E8363 /* Room.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D56DCD2A27CDAD7A002E8363 /* Room.cpp */; };
+		D56DCD3027CDAD7A002E8363 /* Room.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D56DCD2A27CDAD7A002E8363 /* Room.cpp */; };
+		D56DCD3127CDAD7A002E8363 /* Room.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D56DCD2A27CDAD7A002E8363 /* Room.cpp */; };
 		D598E69527C578F10039326B /* LevelGenerationDemoScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D598E69327C578F10039326B /* LevelGenerationDemoScene.cpp */; };
 		D598E69627C578F10039326B /* LevelGenerationDemoScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D598E69327C578F10039326B /* LevelGenerationDemoScene.cpp */; };
 		D598E69727C578F10039326B /* LevelGenerationDemoScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D598E69327C578F10039326B /* LevelGenerationDemoScene.cpp */; };
@@ -143,6 +146,8 @@
 		D52E674827BF354400F8E2B8 /* Attack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Attack.h; sourceTree = "<group>"; };
 		D56B743627CA9DCE00710CC6 /* LevelGeneratorConfig.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LevelGeneratorConfig.cpp; sourceTree = "<group>"; };
 		D56B743A27CA9DCE00710CC6 /* LevelGeneratorConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelGeneratorConfig.h; sourceTree = "<group>"; };
+		D56DCD2927CDAD7A002E8363 /* Room.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Room.h; sourceTree = "<group>"; };
+		D56DCD2A27CDAD7A002E8363 /* Room.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Room.cpp; sourceTree = "<group>"; };
 		D598E69327C578F10039326B /* LevelGenerationDemoScene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LevelGenerationDemoScene.cpp; sourceTree = "<group>"; };
 		D598E69427C578F10039326B /* LevelGenerationDemoScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LevelGenerationDemoScene.h; sourceTree = "<group>"; };
 		D598E69927C57E3C0039326B /* LevelGenerator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LevelGenerator.cpp; sourceTree = "<group>"; };
@@ -302,6 +307,15 @@
 			path = actions;
 			sourceTree = "<group>";
 		};
+		D56DCD2727CDAD7A002E8363 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				D56DCD2927CDAD7A002E8363 /* Room.h */,
+				D56DCD2A27CDAD7A002E8363 /* Room.cpp */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
 		D598E69827C57D740039326B /* generators */ = {
 			isa = PBXGroup;
 			children = (
@@ -426,6 +440,7 @@
 		EBBF18B11D749176008E2001 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				D56DCD2727CDAD7A002E8363 /* models */,
 				D598E69827C57D740039326B /* generators */,
 				D52E673327BF305A00F8E2B8 /* GameApp.cpp */,
 				D52E672627BF305900F8E2B8 /* GameApp.h */,
@@ -616,6 +631,7 @@
 				D52E673C27BF305A00F8E2B8 /* InputController.cpp in Sources */,
 				D52E673F27BF305A00F8E2B8 /* Attack.cpp in Sources */,
 				D5EB745027C335C7007D157D /* Movement.cpp in Sources */,
+				D56DCD3127CDAD7A002E8363 /* Room.cpp in Sources */,
 				D598E69727C578F10039326B /* LevelGenerationDemoScene.cpp in Sources */,
 				EB9CDA3925D0EAB100EE1A09 /* main.cpp in Sources */,
 				D56B743D27CA9DCE00710CC6 /* LevelGeneratorConfig.cpp in Sources */,
@@ -633,6 +649,7 @@
 				D52E673B27BF305A00F8E2B8 /* InputController.cpp in Sources */,
 				D52E673E27BF305A00F8E2B8 /* Attack.cpp in Sources */,
 				D5EB744F27C335C7007D157D /* Movement.cpp in Sources */,
+				D56DCD3027CDAD7A002E8363 /* Room.cpp in Sources */,
 				D598E69627C578F10039326B /* LevelGenerationDemoScene.cpp in Sources */,
 				EB7454AE1D74D891002FBAE6 /* main.cpp in Sources */,
 				D56B743C27CA9DCE00710CC6 /* LevelGeneratorConfig.cpp in Sources */,
@@ -650,6 +667,7 @@
 				D52E673A27BF305A00F8E2B8 /* InputController.cpp in Sources */,
 				D52E673D27BF305A00F8E2B8 /* Attack.cpp in Sources */,
 				D5EB744E27C335C7007D157D /* Movement.cpp in Sources */,
+				D56DCD2F27CDAD7A002E8363 /* Room.cpp in Sources */,
 				D598E69527C578F10039326B /* LevelGenerationDemoScene.cpp in Sources */,
 				EB2BE9B61D74952A002FE78B /* main.cpp in Sources */,
 				D56B743B27CA9DCE00710CC6 /* LevelGeneratorConfig.cpp in Sources */,

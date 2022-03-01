@@ -1,6 +1,5 @@
 #ifndef GENERATORS_LEVEL_GENERATOR_H
 #define GENERATORS_LEVEL_GENERATOR_H
-#include "../models/Room.h"
 #include "LevelGeneratorConfig.h"
 #include <cugl/cugl.h>
 
@@ -31,8 +30,6 @@ public:
   void init(LevelGeneratorConfig &config,
             const std::shared_ptr<cugl::scene2::SceneNode> &map);
 
-  void update();
-
   void dispose();
 
   void generateRooms();
@@ -49,6 +46,8 @@ public:
   void buildCompositeAreas();
 
   void establishGates();
+
+  std::function<void(void)> getNextStep() { return _generator_step; }
 
 private:
   std::vector<std::shared_ptr<Room>>

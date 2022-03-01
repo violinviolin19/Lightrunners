@@ -305,6 +305,9 @@ void LevelGenerator::markAndFillHallways() {
   connectLayers(_inside_rooms, _middle_rooms, 2);
   connectLayers(_middle_rooms, _outside_rooms, 3);
 
+  for (std::shared_ptr<Rooms> &room : _rooms) {
+  }
+
   fillHallways();
 
   _generator_step = [this]() { this->buildCompositeAreas(); };

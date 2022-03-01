@@ -50,6 +50,8 @@ public:
 
   void establishGates();
 
+  std::function<void(void)> getNextStep() { return _generator_step; }
+
 private:
   std::vector<std::shared_ptr<Room>>
   placeTerminalRooms(int num_rooms, float min_radius, float max_radius);

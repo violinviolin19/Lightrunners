@@ -69,9 +69,6 @@ public:
   }
   float getHallwayRadius() const { return _hallway_radius; }
 
-  void setAddEdgesBackProb(float prob) { _add_edges_back_prob = prob; }
-  float getAddEdgesBackProb() const { return _add_edges_back_prob; }
-
   void setNumRooms(int num) { _num_rooms = static_cast<float>(num); }
   float getNumRooms() const { return _num_rooms; }
 
