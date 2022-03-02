@@ -4,7 +4,7 @@
 
 #include "../controllers/InputController.h"
 #include "../models/Player.h"
-#include "../Grunt.h"
+#include "../models/Grunt.h"
 
 class GameScene : public cugl::Scene2 {
   /** The asset manager for loading. */
