@@ -53,16 +53,17 @@ void GameScene::populate(cugl::Size dim) {
   _world_node->addChild(playerNode);
   _world->addObstacle(_player);
 
-   // The grunt
-   std::shared_ptr<cugl::Texture> grunt = _assets->get<cugl::Texture>("grunt");
-   cugl::Size gruntSize(grunt->getSize());
+  // The grunt
+  std::shared_ptr<cugl::Texture> grunt = _assets->get<cugl::Texture>("grunt");
+  cugl::Size gruntSize(grunt->getSize());
 
-   _grunt = Grunt::alloc(cugl::Vec2(dim.width / 2, dim.height / 2), gruntSize, "Grunt");
+  _grunt = Grunt::alloc(cugl::Vec2(dim.width / 2, dim.height / 2), gruntSize,
+                        "Grunt");
 
-   auto gruntNode = cugl::scene2::PolygonNode::allocWithTexture(grunt);
-   _grunt->setGruntNode(gruntNode);
-   _world_node->addChild(gruntNode);
-   _world->addObstacle(_grunt);
+  auto gruntNode = cugl::scene2::PolygonNode::allocWithTexture(grunt);
+  _grunt->setGruntNode(gruntNode);
+  _world_node->addChild(gruntNode);
+  _world->addObstacle(_grunt);
 }
 
 void GameScene::update(float timestep) {

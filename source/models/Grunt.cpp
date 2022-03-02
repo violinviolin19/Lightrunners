@@ -1,11 +1,3 @@
-//
-//  Grunt.cpp
-//  Luminance
-//
-//  Created by Will Spencer on 2/24/22.
-//  Copyright © 2022 Game Design Initiative at Cornell. All rights reserved.
-//
-
 #include "Grunt.h"
 
 #pragma mark Init
@@ -26,18 +18,18 @@
  * @return  true if the obstacle is initialized properly, false otherwise.
  */
 bool Grunt::init(const Vec2 pos, const Size size, string name) {
-    CapsuleObstacle::init(pos, size);
-    setName(name);
+  CapsuleObstacle::init(pos, size);
+  setName(name);
 
-    _gruntNode = nullptr;
-    _health = 100;
+  _gruntNode = nullptr;
+  _health = 100;
 
-    setDensity(0.01f);
-    setFriction(0.0f);
-    setRestitution(0.01f);
-    setFixedRotation(true);
+  setDensity(0.01f);
+  setFriction(0.0f);
+  setRestitution(0.01f);
+  setFixedRotation(true);
 
-    return true;
+  return true;
 }
 
 #pragma mark Animation & Drawing
@@ -48,7 +40,7 @@ bool Grunt::init(const Vec2 pos, const Size size, string name) {
  * @param node the node to set it to
  */
 void Grunt::setGruntNode(const std::shared_ptr<scene2::PolygonNode>& node) {
-    _gruntNode = node;
+  _gruntNode = node;
 }
 
 /**
@@ -57,10 +49,10 @@ void Grunt::setGruntNode(const std::shared_ptr<scene2::PolygonNode>& node) {
  * @param delta the timing value
  */
 void Grunt::update(float delta) {
-    CapsuleObstacle::update(delta);
-    if (_gruntNode != nullptr) {
-        _gruntNode->setPosition(getPosition());
-    }
+  CapsuleObstacle::update(delta);
+  if (_gruntNode != nullptr) {
+    _gruntNode->setPosition(getPosition());
+  }
 }
 
 #pragma mark Movement
@@ -71,8 +63,8 @@ void Grunt::update(float delta) {
  * @param forwardY Amount to move in the y direction
  */
 void Grunt::move(float forwardX, float forwardY) {
-    setVX(1000 * forwardX);
-    setVY(1000 * forwardY);
-    if (forwardX == 0) setVX(0);
-    if (forwardY == 0) setVY(0);
+  setVX(1000 * forwardX);
+  setVY(1000 * forwardY);
+  if (forwardX == 0) setVX(0);
+  if (forwardY == 0) setVY(0);
 }
