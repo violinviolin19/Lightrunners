@@ -3,22 +3,27 @@
 #include <cugl/cugl.h>
 
 #include "../controllers/InputController.h"
+#include "../models/Player.h"
 #include "../Grunt.h"
 
 class GameScene : public cugl::Scene2 {
   /** The asset manager for loading. */
   std::shared_ptr<cugl::AssetManager> _assets;
 
+  /** The player  */
+  std::shared_ptr<Player> _player;
+
   /** The grunt  */
   std::shared_ptr<Grunt> _grunt;
 
+
   /** Reference to the physics root of the scene graph */
-  std::shared_ptr<cugl::scene2::SceneNode> _worldnode;
+  std::shared_ptr<cugl::scene2::SceneNode> _world_node;
 
   /** The Box2d world */
-  std::shared_ptr<ObstacleWorld> _world;
+  std::shared_ptr<cugl::physics2::ObstacleWorld> _world;
 
-public:
+ public:
   GameScene() : cugl::Scene2() {}
 
   /**
@@ -41,10 +46,10 @@ public:
   bool init(const std::shared_ptr<cugl::AssetManager> &assets);
 
   /**
- * Populate the scene with the Box2D objects.
- *
- * @param dim The dimensions of the screen
- */
+   * Populate the scene with the Box2D objects.
+   *
+   * @param dim The dimensions of the screen
+   */
   void populate(cugl::Size dim);
 
   /**

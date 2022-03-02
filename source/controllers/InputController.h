@@ -9,7 +9,7 @@ class Action;
  * A singleton class that handles reads inputs and handles actions.
  */
 class InputController {
-protected:
+ protected:
   /* Single instance of InputController. */
   static std::shared_ptr<InputController> _singleton;
 
@@ -19,7 +19,7 @@ protected:
   /* A list of all input actions in the game. */
   std::unordered_map<std::type_index, std::shared_ptr<Action>> _actions;
 
-public:
+ public:
   /**
    * @return Singelton instance of InputController
    */
@@ -36,7 +36,8 @@ public:
    * @tparam T, action class (eg. Attack)
    * @return Instance of the action.
    */
-  template <typename T> static std::shared_ptr<T> get() {
+  template <typename T>
+  static std::shared_ptr<T> get() {
     if (!_singleton) {
       return nullptr;
     }
@@ -94,7 +95,7 @@ public:
   void operator=(InputController const &) = delete;
   ~InputController() { dispose(); }
 
-private:
+ private:
   InputController();
 };
 

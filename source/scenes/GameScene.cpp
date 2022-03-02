@@ -1,8 +1,8 @@
 #include "GameScene.h"
 
-#include "../controllers/actions/Movement.h"
-#include "../Grunt.h"
 #include <cugl/cugl.h>
+
+#include "../controllers/actions/Movement.h"
 
 #define SCENE_HEIGHT 720
 
@@ -27,36 +27,52 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager> &assets) {
   cugl::Application::get()->setClearColor(cugl::Color4f::CORNFLOWER);
 
   // Create the world and attach the listeners.
-  _world = physics2::ObstacleWorld::alloc(Rect(0, 0, dim.width, dim.height), Vec2(0, 0));
-  //  _world->activateCollisionCallbacks(true);
+  _world = cugl::physics2::ObstacleWorld::alloc(
+      cugl::Rect(0, 0, dim.width, dim.height), cugl::Vec2(0, 0));
 
-  _worldnode = scene2::SceneNode::alloc();
-  cugl::Scene2::addChild(_worldnode);
+  _world_node = cugl::scene2::SceneNode::alloc();
+  cugl::Scene2::addChild(_world_node);
 
   populate(dim);
-
 
   return true;
 }
 
 void GameScene::dispose() { InputController::get()->dispose(); }
 
-void GameScene::populate(Size dim) {
-    // The grunt
-    std::shared_ptr<cugl::Texture> grunt = _assets->get<cugl::Texture>("grunt");
-    cugl::Size gruntSize(grunt->getSize());
+void GameScene::populate(cugl::Size dim) {
+  // The player
+  std::shared_ptr<cugl::Texture> player = _assets->get<cugl::Texture>("player");
+  cugl::Size playerSize(player->getSize());
 
-    _grunt = Grunt::alloc(cugl::Vec2(dim.width / 2, dim.height / 2), gruntSize, "Grunt");
+  _player = Player::alloc(cugl::Vec2(dim.width / 2, dim.height / 2), playerSize,
+                          "Johnathan");
 
-    auto gruntNode = scene2::PolygonNode::allocWithTexture(grunt);
-    _grunt->setGruntNode(gruntNode);
-    _worldnode->addChild(gruntNode);
-    _world->addObstacle(_grunt);
+  auto playerNode = cugl::scene2::PolygonNode::allocWithTexture(player);
+  _player->setPlayerNode(playerNode);
+  _world_node->addChild(playerNode);
+  _world->addObstacle(_player);
+
+   // The grunt
+   std::shared_ptr<cugl::Texture> grunt = _assets->get<cugl::Texture>("grunt");
+   cugl::Size gruntSize(grunt->getSize());
+
+   _grunt = Grunt::alloc(cugl::Vec2(dim.width / 2, dim.height / 2), gruntSize, "Grunt");
+
+   auto gruntNode = cugl::scene2::PolygonNode::allocWithTexture(grunt);
+   _grunt->setGruntNode(gruntNode);
+   _world_node->addChild(gruntNode);
+   _world->addObstacle(_grunt);
 }
 
 void GameScene::update(float timestep) {
-    _grunt->move(.5, 0);
-    _world->update(timestep);
+  InputController::get()->update();
+  std::shared_ptr<Movement> mvm = InputController::get<Movement>();
+  _player->move(mvm->getMovementX(), mvm->getMovementY());
+
+  _grunt->move(.5, 0);
+
+  _world->update(timestep);
 }
 
 void GameScene::render(const std::shared_ptr<cugl::SpriteBatch> &batch) {

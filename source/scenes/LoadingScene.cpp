@@ -22,7 +22,7 @@ bool LoadingScene::init(const std::shared_ptr<cugl::AssetManager> &assets) {
 
   auto layer = assets->get<cugl::scene2::SceneNode>("load");
   layer->setContentSize(dim);
-  layer->doLayout(); // This rearranges the children to fit the screen.
+  layer->doLayout();  // This rearranges the children to fit the screen.
 
   _bar = std::dynamic_pointer_cast<cugl::scene2::ProgressBar>(
       assets->get<cugl::scene2::SceneNode>("load_bar"));

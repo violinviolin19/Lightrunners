@@ -1,7 +1,8 @@
 #ifndef CONTROLLERS_ACTIONS_ATTACK_H_
 #define CONTROLLERS_ACTIONS_ATTACK_H_
-#include "Action.h"
 #include <cugl/cugl.h>
+
+#include "Action.h"
 
 /**
  * This class is an implementation of Action.
@@ -13,7 +14,7 @@
  * system.
  */
 class Attack : public Action {
-protected:
+ protected:
   /* Reference to attack button for registering listeners to press event. */
   std::shared_ptr<cugl::scene2::Button> _button;
 
@@ -24,7 +25,7 @@ protected:
   /* Scene2 button is pressed. */
   bool _butt_down;
 
-public:
+ public:
   /**
    * Creates input listeners and sets default variable.
    * @param assets The loaded assets for this game mode.
@@ -53,9 +54,8 @@ public:
    * @param bounds The scene2 game bounds.
    * @return A newly allocated Attack action.
    */
-  static std::shared_ptr<Attack>
-  alloc(const std::shared_ptr<cugl::AssetManager> &assets, cugl::Rect bounds) {
-
+  static std::shared_ptr<Attack> alloc(
+      const std::shared_ptr<cugl::AssetManager> &assets, cugl::Rect bounds) {
     std::shared_ptr<Attack> result = std::make_shared<Attack>();
     return (result->init(assets, bounds) ? result : nullptr);
   }

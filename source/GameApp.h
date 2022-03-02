@@ -1,14 +1,15 @@
 #ifndef GAMEAPP_H_
 #define GAMEAPP_H_
+#include <cugl/cugl.h>
+
 #include "scenes/GameScene.h"
 #include "scenes/LoadingScene.h"
-#include <cugl/cugl.h>
 
 /**
  * This class represents the application root for the game.
  */
 class GameApp : public cugl::Application {
-protected:
+ protected:
   /** The global sprite batch for drawing (only want one of these) */
   std::shared_ptr<cugl::SpriteBatch> _batch;
   /** The global asset manager */
@@ -22,7 +23,7 @@ protected:
   /** Whether or not we have finished loading all assets */
   bool _loaded;
 
-public:
+ public:
   GameApp() : cugl::Application(), _loaded(false) {}
   ~GameApp() {}
 

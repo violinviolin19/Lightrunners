@@ -37,7 +37,10 @@
 		},
 		"grunt": {
 			"file": "textures/grunt.png"
-		}
+		},
+        "player": {
+            "file": "textures/player.png"
+        }
 	},
 	"widgets": {
 		"ui-scene": "widgets/ui-scene.json"
