@@ -14,7 +14,7 @@
  * this button will inform the application root to switch to the gameplay mode.
  */
 class LoadingScene : public cugl::Scene2 {
-protected:
+ protected:
   /** The asset manager for loading. */
   std::shared_ptr<cugl::AssetManager> _assets;
   /** The animated progress bar */
@@ -29,7 +29,7 @@ protected:
   /** Whether or not the player has pressed play to continue */
   bool _completed;
 
-public:
+ public:
   LoadingScene() : cugl::Scene2(), _progress(0.0f) {}
 
   /**

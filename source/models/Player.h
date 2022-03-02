@@ -5,7 +5,7 @@
 #include <stdio.h>
 
 class Player : public cugl::physics2::CapsuleObstacle {
-private:
+ private:
   /** Player health */
   int _health;
 
@@ -15,7 +15,7 @@ private:
   /** Force to be applied to the player */
   cugl::Vec2 _force;
 
-public:
+ public:
 #pragma mark Constructors
   /**
    * Creates a player with the given position and data

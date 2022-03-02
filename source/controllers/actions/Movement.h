@@ -1,7 +1,8 @@
 #ifndef CONTROLLERS_ACTIONS_MOVEMENT_H_
 #define CONTROLLERS_ACTIONS_MOVEMENT_H_
-#include "Action.h"
 #include <cugl/cugl.h>
+
+#include "Action.h"
 
 /**
  * This class is an implementation of Action.
@@ -13,7 +14,7 @@
  * system.
  */
 class Movement : public Action {
-protected:
+ protected:
   /* Reference to scene2 joystick base for updating position. */
   std::shared_ptr<cugl::scene2::PolygonNode> _joystick_base;
 
@@ -52,7 +53,7 @@ protected:
      you move. */
   cugl::Vec2 _joystick_diff;
 
-public:
+ public:
   /**
    * Creates input listeners and sets default variable.
    * @param assets The loaded assets for this game mode.
@@ -81,9 +82,8 @@ public:
    * @param bounds The scene2 game bounds.
    * @return A newly allocated Attack action.
    */
-  static std::shared_ptr<Movement>
-  alloc(const std::shared_ptr<cugl::AssetManager> &assets, cugl::Rect bounds) {
-
+  static std::shared_ptr<Movement> alloc(
+      const std::shared_ptr<cugl::AssetManager> &assets, cugl::Rect bounds) {
     std::shared_ptr<Movement> result = std::make_shared<Movement>();
     return (result->init(assets, bounds) ? result : nullptr);
   }
@@ -102,7 +102,7 @@ public:
   void touchMoved(const cugl::TouchEvent &event, const cugl::Vec2 &previous,
                   bool focus);
 
-#endif // CU_TOUCH_SCREEN
+#endif  // CU_TOUCH_SCREEN
 
   /**
    * Get input vector for movement. X and Y values range from -1.0f to 1.0f.
