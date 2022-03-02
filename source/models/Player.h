@@ -5,40 +5,26 @@
 #include <stdio.h>
 
 class Player : public cugl::physics2::CapsuleObstacle {
-    
  private:
-    /** Enum for the player's state (for animation). */
-    enum State { IDLE, MOVING, ATTACKING };
-    
+  /** Enum for the player's state (for animation). */
+  enum State { IDLE, MOVING, ATTACKING };
+
   /** The scene graph node for the player (moving). */
-  std::shared_ptr<cugl::scene2::SpriteNode> _moving_node;
-    
-    /** The scene graph node for the player (attacking). */
-    std::shared_ptr<cugl::scene2::SpriteNode> _attacking_node;
-    
-    /** The scene graph node for the player (idle). */
-    std::shared_ptr<cugl::scene2::PolygonNode> _idle_node;
-    
-    /** The player's current state. */
-    State _current_state;
-    
+  std::shared_ptr<cugl::scene2::SpriteNode> _player_node;
+
+  /** The player's current state. */
+  State _current_state;
+
   /** Player health. */
   int _health;
 
   /** Force to be applied to the player. */
   cugl::Vec2 _force;
-    
+
   /** Countdown to change animation frame. */
   int _frame_count;
-    
-    /** The idle texture. */
-    std::shared_ptr<cugl::Texture> _idle_texture;
-    
-    /** The moving animation texture. */
-    std::shared_ptr<cugl::Texture> _moving_texture;
 
  public:
-    
 #pragma mark Constructors
   /**
    * Creates a player with the given position and data.
@@ -79,21 +65,20 @@ class Player : public cugl::physics2::CapsuleObstacle {
 
 #pragma mark Properties
 
-    /**
-     * Returns the current state of the player.
-     *
-     * @return the current state.
-     */
-    State getState() const { return _current_state; }
-    
-    /**
-     * Sets the current state of the player and changes textures accordingly.
-     *
-     * @param state current state.
-     */
-    void setState(State state);
-    
-    
+  /**
+   * Returns the current state of the player.
+   *
+   * @return the current state.
+   */
+  State getState() const { return _current_state; }
+
+  /**
+   * Sets the current state of the player and changes textures accordingly.
+   *
+   * @param state current state.
+   */
+  void setState(State state) { _current_state = state; }
+
   /**
    * Returns the current health of the player.
    *
@@ -116,25 +101,7 @@ class Player : public cugl::physics2::CapsuleObstacle {
   void update(float delta);
 
 #pragma mark Graphics
-    
-    /**
-     * Sets the idle texture.
-     *
-     * @param node  The player's idle texture.
-     */
-    void setIdleTexture(const std::shared_ptr<cugl::Texture> &texture) {
-      _idle_texture = texture;
-    }
-    
-    /**
-     * Sets the moving texture.
-     *
-     * @param node  The player's moving texture.
-     */
-    void setMovingTexture(const std::shared_ptr<cugl::Texture> &texture) {
-      _moving_texture = texture;
-    }
-    
+
   /**
    * Sets the scene graph node representing this player.
    *
@@ -143,7 +110,7 @@ class Player : public cugl::physics2::CapsuleObstacle {
   void setPlayerNode(const std::shared_ptr<cugl::scene2::SpriteNode> &node) {
     _player_node = node;
   }
-    
+
   /**
    * Sets the frame of the animation.
    *
