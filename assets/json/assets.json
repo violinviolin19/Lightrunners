@@ -138,8 +138,8 @@
 		"ui-scene": {
 			"type": "Widget",
 			"data": {
-				"key": "ui-scene",
-				"variables": {}
+        "key": "ui-scene",
+        "variables": {}
 			}
 		},
     "world-scene": {

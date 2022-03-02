@@ -28,7 +28,7 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager> &assets) {
 
   InputController::get()->init(_assets, cugl::Scene2::getBounds());
 
-  // Set color to BLACK change in real game.
+  // Set color to BLACK.
   cugl::Application::get()->setClearColor(cugl::Color4f::BLACK);
 
   // Create the world and attach the listeners.
