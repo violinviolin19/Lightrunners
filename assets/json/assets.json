@@ -36,8 +36,11 @@
             "wrapT": "clamp"
         },
         "grunt": {
-            "file": "textures/grunt.png"
-
+            "file": "textures/grunt.png",
+            "minfilter": "nearest",
+            "magfilter": "nearest",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
         },
         "player": {
             "file": "textures/player.png"

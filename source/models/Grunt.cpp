@@ -17,11 +17,11 @@
  *
  * @return  true if the obstacle is initialized properly, false otherwise.
  */
-bool Grunt::init(const Vec2 pos, const Size size, string name) {
+bool Grunt::init(const cugl::Vec2 pos, const cugl::Size size, string name) {
   CapsuleObstacle::init(pos, size);
   setName(name);
 
-  _gruntNode = nullptr;
+  _grunt_node = nullptr;
   _health = 100;
 
   setDensity(0.01f);
@@ -35,23 +35,24 @@ bool Grunt::init(const Vec2 pos, const Size size, string name) {
 #pragma mark Animation & Drawing
 
 /**
- * Sets the grunt scene graph node
+ * Sets the grunt scene graph node.
  *
- * @param node the node to set it to
+ * @param node the node to set it to.
  */
-void Grunt::setGruntNode(const std::shared_ptr<scene2::PolygonNode>& node) {
-  _gruntNode = node;
+void Grunt::setGruntNode(
+    const std::shared_ptr<cugl::scene2::PolygonNode>& node) {
+  _grunt_node = node;
 }
 
 /**
  * Update the scene graph.
  *
- * @param delta the timing value
+ * @param delta the timing value.
  */
 void Grunt::update(float delta) {
   CapsuleObstacle::update(delta);
-  if (_gruntNode != nullptr) {
-    _gruntNode->setPosition(getPosition());
+  if (_grunt_node != nullptr) {
+    _grunt_node->setPosition(getPosition());
   }
 }
 
@@ -59,8 +60,8 @@ void Grunt::update(float delta) {
 /**
  * Moves the grunt by the specified amount.
  *
- * @param forwardX Amount to move in the x direction
- * @param forwardY Amount to move in the y direction
+ * @param forwardX Amount to move in the x direction.
+ * @param forwardY Amount to move in the y direction.
  */
 void Grunt::move(float forwardX, float forwardY) {
   setVX(1000 * forwardX);

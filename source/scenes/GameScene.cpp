@@ -41,28 +41,26 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager> &assets) {
 void GameScene::dispose() { InputController::get()->dispose(); }
 
 void GameScene::populate(cugl::Size dim) {
-  // The player
+  // Initialize the player with texture and size, then add to world.
   std::shared_ptr<cugl::Texture> player = _assets->get<cugl::Texture>("player");
   cugl::Size playerSize(player->getSize());
 
-  _player = Player::alloc(cugl::Vec2(dim.width / 2, dim.height / 2), playerSize,
-                          "Johnathan");
+  _player = Player::alloc(dim / 2.0f, playerSize, "Johnathan");
 
-  auto playerNode = cugl::scene2::PolygonNode::allocWithTexture(player);
-  _player->setPlayerNode(playerNode);
-  _world_node->addChild(playerNode);
+  auto player_node = cugl::scene2::PolygonNode::allocWithTexture(player);
+  _player->setPlayerNode(player_node);
+  _world_node->addChild(player_node);
   _world->addObstacle(_player);
 
-  // The grunt
+  // Initialize the grunt with texture and size, then add to world.
   std::shared_ptr<cugl::Texture> grunt = _assets->get<cugl::Texture>("grunt");
   cugl::Size gruntSize(grunt->getSize());
 
-  _grunt = Grunt::alloc(cugl::Vec2(dim.width / 2, dim.height / 2), gruntSize,
-                        "Grunt");
+  _grunt = Grunt::alloc(dim / 2.0f, gruntSize, "Grunt");
 
-  auto gruntNode = cugl::scene2::PolygonNode::allocWithTexture(grunt);
-  _grunt->setGruntNode(gruntNode);
-  _world_node->addChild(gruntNode);
+  auto grunt_node = cugl::scene2::PolygonNode::allocWithTexture(grunt);
+  _grunt->setGruntNode(grunt_node);
+  _world_node->addChild(grunt_node);
   _world->addObstacle(_grunt);
 }
 
