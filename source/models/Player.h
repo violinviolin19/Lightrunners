@@ -1,5 +1,5 @@
-#ifndef MODELS_PLAYER_H
-#define MODELS_PLAYER_H
+#ifndef MODELS_PLAYER_H_
+#define MODELS_PLAYER_H_
 
 #include <cugl/cugl.h>
 #include <stdio.h>
