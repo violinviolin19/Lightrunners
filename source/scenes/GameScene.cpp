@@ -16,10 +16,16 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager> &assets) {
   }
   _assets = assets;
 
-  auto world_layer = assets->get<cugl::scene2::SceneNode>("world-scene");
-  world_layer->setContentSize(dim);
-  world_layer->doLayout();
-  cugl::Scene2::addChild(world_layer);
+  _world_node = assets->get<cugl::scene2::SceneNode>("world-scene");
+  _world_node->setContentSize(dim);
+
+  // Create the world and attach the listeners.
+  cugl::Rect bounds = cugl::Rect(cugl::Vec2::ZERO, dim);
+  _world = cugl::physics2::ObstacleWorld::alloc(bounds);
+  populate(dim);
+
+  _world_node->doLayout();
+  cugl::Scene2::addChild(_world_node);
 
   auto ui_layer = assets->get<cugl::scene2::SceneNode>("ui-scene");
   ui_layer->setContentSize(dim);
@@ -30,15 +36,6 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager> &assets) {
 
   // Set color to BLACK.
   cugl::Application::get()->setClearColor(cugl::Color4f::BLACK);
-
-  // Create the world and attach the listeners.
-  _world = cugl::physics2::ObstacleWorld::alloc(
-      cugl::Rect(0, 0, dim.width, dim.height), cugl::Vec2(0, 0));
-
-  _world_node = cugl::scene2::SceneNode::alloc();
-  cugl::Scene2::addChild(_world_node);
-
-  populate(dim);
 
   return true;
 }
@@ -71,8 +68,10 @@ void GameScene::populate(cugl::Size dim) {
 
 void GameScene::update(float timestep) {
   InputController::get()->update();
-  std::shared_ptr<Movement> mvm = InputController::get<Movement>();
-  _player->move(mvm->getMovementX(), mvm->getMovementY());
+
+  _player->move(InputController::get<Movement>()->getMovement());
+
+  _world_node->setPosition(_player->getPosition());
 
   _grunt->move(-.5, 0);
   _world->update(timestep);

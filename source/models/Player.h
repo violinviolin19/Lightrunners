@@ -92,6 +92,13 @@ class Player : public cugl::physics2::CapsuleObstacle {
   /**
    * Moves the player by the specified amount.
    *
+   * @param forward Amount to move in the x and y direction
+   */
+  void move(cugl::Vec2 forward) { move(forward.x, forward.y); }
+
+  /**
+   * Moves the player by the specified amount.
+   *
    * @param forwardX Amount to move in the x direction
    * @param forwardY Amount to move in the y direction
    */
