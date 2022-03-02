@@ -13,9 +13,9 @@ const levelToScene2 = (fileName) => {
     let jsonData = fs.readFileSync(fileName, 'utf-8');
     let data = JSON.parse(jsonData);
     const { level, width, height, layout } = data;
-    const backgroundColor = "#000000"
-    const pixelWidth = 64, pixelHeight = 64
-    const tileScale = 0.4
+    const backgroundColor = "#000000";
+    const pixelWidth = 64, pixelHeight = 64;
+    const tileScale = 0.4;
     
     return {
         "variables": {},
@@ -39,8 +39,8 @@ const levelToScene2 = (fileName) => {
                         "color": backgroundColor
                     },
                     "children": Object.assign({}, ...layout.map((tileTypeId, index) => {
-                        let row = Math.floor(index / width)
-                        let col = index % width
+                        let row = Math.floor(index / width);
+                        let col = index % width;
                         let obj = {};
                         let tileObj = {};
                         tileObj = {
