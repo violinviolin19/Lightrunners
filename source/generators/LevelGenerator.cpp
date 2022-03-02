@@ -269,8 +269,10 @@ void LevelGenerator::segregateLayers() {
   _outside_rooms.insert(_outside_rooms.end(), outside_rooms.begin(),
                         outside_rooms.end());
 
+  float inner_circle_expansion_factor = 1.2f;
+
   for (std::shared_ptr<Room> &room : _inside_rooms) {
-    cugl::Vec2 pos = room->getMid() * 1.2f;
+    cugl::Vec2 pos = room->getMid() * inner_circle_expansion_factor;
     pos -= room->_node->getSize() / 2.0f;
     room->_node->setPosition(roundf(pos.x), roundf(pos.y));
   }
@@ -278,7 +280,7 @@ void LevelGenerator::segregateLayers() {
   for (std::shared_ptr<Room> &room : _middle_rooms) {
     cugl::Vec2 pos = room->getMid();
     pos += room->getMid().getNormalization() *
-           _config.getSeparationBetweenLayers();
+           _config.getSeparationBetweenLayers() * inner_circle_expansion_factor;
     pos -= room->_node->getSize() / 2.0f;
 
     room->_node->setPosition(roundf(pos.x), roundf(pos.y));
@@ -287,7 +289,8 @@ void LevelGenerator::segregateLayers() {
   for (std::shared_ptr<Room> &room : _outside_rooms) {
     cugl::Vec2 pos = room->getMid();
     pos += room->getMid().getNormalization() *
-           _config.getSeparationBetweenLayers() * 2.0f;
+           _config.getSeparationBetweenLayers() * 2.0f *
+           inner_circle_expansion_factor;
     pos -= room->_node->getSize() / 2.0f;
 
     room->_node->setPosition(roundf(pos.x), roundf(pos.y));
