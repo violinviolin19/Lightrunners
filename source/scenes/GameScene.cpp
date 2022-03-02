@@ -48,23 +48,28 @@ void GameScene::dispose() { InputController::get()->dispose(); }
 void GameScene::populate(cugl::Size dim) {
   // The player
   std::shared_ptr<cugl::Texture> player = _assets->get<cugl::Texture>("player");
+  std::shared_ptr<cugl::Texture> player_move = _assets->get<cugl::Texture>("player-move");
   cugl::Size playerSize(player->getSize());
 
-  _player = Player::alloc(cugl::Vec2(dim.width / 2, dim.height / 2), playerSize,
-                          "Johnathan");
+  _player = Player::alloc(cugl::Vec2(dim.width / 2, dim.height / 2), playerSize, "Johnathan");
+    _player->setIdleTexture(player);
+    _player->setMovingTexture(player_move);
 
-  auto playerNode = cugl::scene2::PolygonNode::allocWithTexture(player);
-  _player->setPlayerNode(playerNode);
-  _world_node->addChild(playerNode);
+  auto player_n = cugl::scene2::SpriteNode::alloc(player, 1, 1);
+  _player->setPlayerNode(player_n);
+  _world_node->addChild(player_n);
   _world->addObstacle(_player);
 }
 
 void GameScene::update(float timestep) {
   InputController::get()->update();
-  std::shared_ptr<Movement> mvm = InputController::get<Movement>();
-  _player->move(mvm->getMovementX(), mvm->getMovementY());
-
-  _world->update(timestep);
+    // Movement
+    std::shared_ptr<Movement> mvm = InputController::get<Movement>();
+    _player->move(mvm->getMovementX(), mvm->getMovementY());
+    _world->update(timestep);
+    
+    // Animation
+    _player->animate(mvm->getMovementX(), mvm->getMovementY());
 }
 
 void GameScene::render(const std::shared_ptr<cugl::SpriteBatch> &batch) {
