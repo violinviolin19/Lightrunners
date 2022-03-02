@@ -9,6 +9,10 @@ if [ -z $(which clang-format) ] ; then
   exit
 fi
 
-pushd $(git rev-parse --show-toplevel);
+echo "Traveling to Luminance root directory.s"
+pushd "$(git rev-parse --show-toplevel)";
 find source/ -iname '*.h' -o -iname '*.cpp' | xargs clang-format -i -style=Google;
+echo "Going back to where you were."
 pwd;
+echo "Done!"
+exit
