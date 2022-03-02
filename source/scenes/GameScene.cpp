@@ -15,16 +15,16 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager> &assets) {
     return false;
   }
   _assets = assets;
+  
+  auto world_layer = assets->get<cugl::scene2::SceneNode>("world-scene");
+  world_layer->setContentSize(dim);
+  world_layer->doLayout();
+  cugl::Scene2::addChild(world_layer);
 
   auto ui_layer = assets->get<cugl::scene2::SceneNode>("ui-scene");
   ui_layer->setContentSize(dim);
   ui_layer->doLayout();
   cugl::Scene2::addChild(ui_layer);
-    
-  auto world_layer = assets->get<cugl::scene2::SceneNode>("world-scene");
-  world_layer->setContentSize(dim);
-  world_layer->doLayout();
-  cugl::Scene2::addChild(world_layer);
 
   InputController::get()->init(_assets, cugl::Scene2::getBounds());
 
