@@ -3,19 +3,23 @@
 #include <cugl/cugl.h>
 
 #include "../controllers/InputController.h"
+#include "../models/Grunt.h"
 #include "../models/Player.h"
 
 class GameScene : public cugl::Scene2 {
   /** The asset manager for loading. */
   std::shared_ptr<cugl::AssetManager> _assets;
 
-  /** The player  */
+  /** The player.  */
   std::shared_ptr<Player> _player;
 
-  /** Reference to the physics root of the scene graph */
+  /** The grunt.  */
+  std::shared_ptr<Grunt> _grunt;
+
+  /** Reference to the physics root of the scene graph. */
   std::shared_ptr<cugl::scene2::SceneNode> _world_node;
 
-  /** The Box2d world */
+  /** The Box2d world. */
   std::shared_ptr<cugl::physics2::ObstacleWorld> _world;
 
  public:
@@ -34,7 +38,7 @@ class GameScene : public cugl::Scene2 {
   /**
    * Initializes the controller contents, and starts the game.
    *
-   * @param assets    The (loaded) assets for this game mode
+   * @param assets    The (loaded) assets for this game mode.
    *
    * @return true if the controller is initialized properly, false otherwise.
    */
@@ -43,7 +47,7 @@ class GameScene : public cugl::Scene2 {
   /**
    * Populate the scene with the Box2D objects.
    *
-   * @param dim The dimensions of the screen
+   * @param dim The dimensions of the screen.
    */
   void populate(cugl::Size dim);
 
@@ -51,7 +55,7 @@ class GameScene : public cugl::Scene2 {
    * The method called to update the game mode.
    * This method contains any gameplay code that is not an OpenGL call.
    *
-   * @param timestep  The amount of time (in seconds) since the last frame
+   * @param timestep  The amount of time (in seconds) since the last frame.
    */
   void update(float timestep) override;
 
