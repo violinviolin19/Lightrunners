@@ -269,6 +269,12 @@ void LevelGenerator::segregateLayers() {
   _outside_rooms.insert(_outside_rooms.end(), outside_rooms.begin(),
                         outside_rooms.end());
 
+  for (std::shared_ptr<Room> &room : _inside_rooms) {
+    cugl::Vec2 pos = room->getMid() * 1.2f;
+    pos -= room->_node->getSize() / 2.0f;
+    room->_node->setPosition(roundf(pos.x), roundf(pos.y));
+  }
+
   for (std::shared_ptr<Room> &room : _middle_rooms) {
     cugl::Vec2 pos = room->getMid();
     pos += room->getMid().getNormalization() *

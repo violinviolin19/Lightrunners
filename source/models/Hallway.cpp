@@ -70,10 +70,10 @@ cugl::Vec2 Hallway::getIntersection(const cugl::Vec2 &start,
 
       if (i % 2 == 0 /* == Intersect on horizontal rectangle face. */) {
         res.x = floorf(res.x) + 0.5f;
-        res.x -= (res.x > rect.getMaxX());
+        res.x -= (res.x > rect.getMaxX()) ? 1.0f : 0.0f;
       } else {
         res.y = floorf(res.y) + 0.5f;
-        res.y -= (res.x > rect.getMaxY());
+        res.y -= (res.y > rect.getMaxY()) ? 1.0f : 0.0f;
       }
 
       return res;
