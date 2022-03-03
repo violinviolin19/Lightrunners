@@ -51,7 +51,7 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
   cugl::Scene2::addChild(_world_node);
   cugl::Scene2::addChild(ui_layer);
   cugl::Scene2::addChild(_debug_node);
-  _debug_node->setVisible(false);
+  // _debug_node->setVisible(false);
 
   InputController::get()->init(_assets, cugl::Scene2::getBounds());
 
@@ -72,7 +72,8 @@ void GameScene::populate(cugl::Size dim) {
   _player = Player::alloc(dim / 2.0f, "Johnathan");
 
   auto player_node = cugl::scene2::SpriteNode::alloc(player, 3, 10);
-  player_node->setPriority(100);  // TODO: Update priority according to position on screen
+  player_node->setPriority(
+      100);  // TODO: Update priority according to position on screen
   _player->setPlayerNode(player_node);
   _world_node->addChild(player_node);
   _world->addObstacle(_player);
@@ -104,8 +105,8 @@ void GameScene::populate(cugl::Size dim) {
   for (std::shared_ptr<BasicTile> tile : loader->getTiles("wall")) {
     auto wall = std::dynamic_pointer_cast<Wall>(tile);
     _world->addObstacle(wall->initBox2d());
-//    wall->getObstacle()->setDebugColor(cugl::Color4::GREEN);
-//    wall->getObstacle()->setDebugScene(_debug_node);
+    wall->getObstacle()->setDebugColor(cugl::Color4::GREEN);
+    wall->getObstacle()->setDebugScene(_debug_node);
   }
 
   // Debug code.
@@ -192,4 +193,5 @@ void GameScene::updateCamera(float timestep) {
                    CAMERA_SMOOTH_SPEED * timestep, &smoothed_position);
 
   _world_node->setPosition(smoothed_position);
+  _debug_node->setPosition(smoothed_position);
 }
