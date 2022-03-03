@@ -42,6 +42,7 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager> &assets) {
     // Debug world
     _debug_node = cugl::scene2::SceneNode::alloc();
     cugl::Scene2::addChild(_debug_node);
+    setDebug(true);
     
   populate(dim);
 
@@ -54,7 +55,7 @@ void GameScene::populate(cugl::Size dim) {
   // Initialize the player with texture and size, then add to world.
   std::shared_ptr<cugl::Texture> player = _assets->get<cugl::Texture>("player");
 
-  _player = Player::alloc(dim/2, cugl::Size(96, 96), "Johnathan");
+  _player = Player::alloc(dim/2, cugl::Size(48, 48), "Johnathan");
 
   auto player_n = cugl::scene2::SpriteNode::alloc(player, 3, 10);
   _player->setPlayerNode(player_n);
@@ -72,6 +73,14 @@ void GameScene::populate(cugl::Size dim) {
   _grunt->setGruntNode(grunt_node);
   _world_node->addChild(grunt_node);
   _world->addObstacle(_grunt);
+    
+    // Debug code.
+    _player->setDebugScene(_debug_node);
+    _player->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
+    _player->getSword()->setDebugScene(_debug_node);
+    _player->getSword()->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
+    _grunt->setDebugScene(_debug_node);
+    _grunt->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
 }
 
 void GameScene::update(float timestep) {
@@ -81,7 +90,7 @@ void GameScene::update(float timestep) {
     _player->move(mvm->getMovementX(), mvm->getMovementY());
     std::shared_ptr<Attack> att =InputController::get<Attack>();
     _player->attack(att->isAttacking());
-    _grunt->move(-.5, 0);
+    _grunt->move(0, 0);
   _world->update(timestep);
 
   // Animation

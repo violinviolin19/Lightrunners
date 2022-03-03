@@ -54,7 +54,7 @@ class GameScene : public cugl::Scene2 {
      *
      * @param value whether debug mode is active.
      */
-    void setDebug(bool value) { _debug = value; _debug_node->setVisible(value); }
+    void setDebug(bool value) { _debug_node->setVisible(value); }
 
   /**
    * Populate the scene with the Box2D objects.
