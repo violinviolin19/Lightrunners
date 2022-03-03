@@ -3,14 +3,18 @@
 #include <cugl/cugl.h>
 
 #include "../controllers/InputController.h"
+#include "../models/Grunt.h"
 #include "../models/Player.h"
 
 class GameScene : public cugl::Scene2 {
   /** The asset manager for loading. */
   std::shared_ptr<cugl::AssetManager> _assets;
 
-  /** The player. */
+  /** The player.  */
   std::shared_ptr<Player> _player;
+
+  /** The grunt.  */
+  std::shared_ptr<Grunt> _grunt;
 
   /** Reference to the physics root of the scene graph. */
   std::shared_ptr<cugl::scene2::SceneNode> _world_node;
