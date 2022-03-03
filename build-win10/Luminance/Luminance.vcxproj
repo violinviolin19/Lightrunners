@@ -191,13 +191,17 @@
     <ClInclude Include="..\..\source\scenes\GameScene.h" />
     <ClInclude Include="..\..\source\scenes\LoadingScene.h" />
     <ClInclude Include="..\..\source\controllers\InputController.h" />
+    <ClInclude Include="..\..\source\controllers\AIController.h" />
     <ClInclude Include="..\..\source\controllers\actions\Action.h" />
     <ClInclude Include="..\..\source\controllers\actions\Attack.h" />
     <ClInclude Include="..\..\source\controllers\actions\Movement.h" />
     <ClInclude Include="..\..\source\models\Player.h" />
-    <ClInclude Include="..\..\source\models\Grunt.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-    </ClInclude>
+    <ClInclude Include="..\..\source\models\Grunt.h" />
+    <ClInclude Include="..\..\source\models\EnemySet.h" />
+    <ClInclude Include="..\..\source\models\Sword.h" />
+    <ClInclude Include="..\..\source\models\tiles\BasicTile.h" />
+    <ClInclude Include="..\..\source\models\tiles\Wall.h" />
+    <ClInclude Include="..\..\source\loaders\CustomScene2Loader.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
@@ -206,10 +210,16 @@
     <ClCompile Include="..\..\source\scenes\GameScene.cpp" />
     <ClCompile Include="..\..\source\scenes\LoadingScene.cpp" />
     <ClCompile Include="..\..\source\controllers\InputController.cpp" />
+    <ClCompile Include="..\..\source\controllers\AIController.cpp" />
     <ClCompile Include="..\..\source\controllers\actions\Attack.cpp" />
     <ClCompile Include="..\..\source\controllers\actions\Movement.cpp" />
     <ClCompile Include="..\..\source\models\Grunt.cpp" />
     <ClCompile Include="..\..\source\models\Player.cpp" />
+    <ClCompile Include="..\..\source\models\EnemySet.cpp" />
+    <ClCompile Include="..\..\source\models\Sword.cpp" />
+    <ClCompile Include="..\..\source\models\tiles\BasicTile.cpp" />
+    <ClCompile Include="..\..\source\models\tiles\Wall.cpp" />
+    <ClCompile Include="..\..\source\loaders\CustomScene2Loader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Luminance.rc" />

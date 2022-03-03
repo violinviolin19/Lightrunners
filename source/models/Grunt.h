@@ -11,6 +11,9 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
   /** Grunt health. */
   int _health;
 
+  /** Grunt speed. */
+  float _speed;
+
   /** The scene graph node for the grunt. */
   std::shared_ptr<cugl::scene2::SpriteNode> _grunt_node;
 
@@ -19,6 +22,9 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
 
   /** Grunt direction. */
   bool _facing_left;
+
+  /** Damage frame count to turn red. */
+  int _damage_count;
 
  public:
 #pragma mark Constructors
@@ -31,9 +37,14 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
   Grunt(void) : CapsuleObstacle() {}
 
   /**
-   * Disposes the grunt
+   * Disposes the grunt.
    */
-  ~Grunt() {}
+  ~Grunt() { dispose(); }
+
+  /**
+   * Disposes the grunt.
+   */
+  void dispose() { _grunt_node = nullptr; }
 
   /**
    * Initializes a new grunt with the given position and size.
@@ -43,7 +54,7 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
    *
    * @return  true if the obstacle is initialized properly, false otherwise.
    */
-  virtual bool init(const cugl::Vec2 pos, const cugl::Size size, string name);
+  virtual bool init(const cugl::Vec2 pos, string name);
 
 #pragma mark Static Constructors
   /**
@@ -53,10 +64,9 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
    *
    * @return a new capsule object at the given point with no size.
    */
-  static std::shared_ptr<Grunt> alloc(const cugl::Vec2 pos,
-                                      const cugl::Size& size, string name) {
+  static std::shared_ptr<Grunt> alloc(const cugl::Vec2 pos, string name) {
     std::shared_ptr<Grunt> result = std::make_shared<Grunt>();
-    return (result->init(pos, size, name) ? result : nullptr);
+    return (result->init(pos, name) ? result : nullptr);
   }
 
 #pragma mark Properties
@@ -76,6 +86,26 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
   void setHealth(int value) { _health = value; }
 
   /**
+   * Reduces the grunt's health.
+   *
+   * @param value The value to reduce the health by.
+   */
+  void reduceHealth(int value) { _health -= value; }
+
+  /**
+   * The grunt took damage.
+   *
+   */
+  void takeDamage();
+
+  /**
+   * Returns the speed of the grunt.
+   *
+   * @return the grunt speed.
+   */
+  float getSpeed() const { return _speed; }
+
+  /**
    * Update the scene graph.
    *
    * @param delta the timing value.
@@ -90,6 +120,13 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
    * @param node  The scene graph node representing this grunt.
    */
   void setGruntNode(const std::shared_ptr<cugl::scene2::SpriteNode>& node);
+
+  /**
+   * Gets the grunt scene graph node.
+   *
+   * @return node the node that has been set.
+   */
+  std::shared_ptr<cugl::scene2::SpriteNode>& getGruntNode();
 
 #pragma mark Movement
   /**

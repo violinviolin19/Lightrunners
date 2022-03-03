@@ -4,6 +4,8 @@
 #include <cugl/cugl.h>
 #include <stdio.h>
 
+#include "Sword.h"
+
 class Player : public cugl::physics2::CapsuleObstacle {
  private:
   /** Enum for the player's state (for animation). */
@@ -23,6 +25,9 @@ class Player : public cugl::physics2::CapsuleObstacle {
 
   /** Countdown to change animation frame. */
   int _frame_count;
+
+  /** Countdown for attacking frames. */
+  int _attack_frame_count;
 
   /** Represents the offset between the center of the player and the center of
    * the capsule obstacle. */
@@ -44,10 +49,10 @@ class Player : public cugl::physics2::CapsuleObstacle {
   ~Player() {}
 
   /**
-   * Initializes a new player with the given position and size.
+   * Initializes a new player with the given position and name.
    *
    * @param  pos      Initial position in world coordinates.
-   * @param  size       The dimensions of the box.
+   * @param  name       The name of the player.
    *
    * @return  true if the obstacle is initialized properly, false otherwise.
    */
@@ -97,6 +102,13 @@ class Player : public cugl::physics2::CapsuleObstacle {
   void setHealth(int value) { _health = value; }
 
   /**
+   * Reduce health by value.
+   *
+   * @param value The value to reduce health by.
+   */
+  void reduceHealth(int value) { _health -= value; }
+
+  /**
    * Update the scene graph.
    *
    * @param delta the timing value.
@@ -112,6 +124,13 @@ class Player : public cugl::physics2::CapsuleObstacle {
    */
   void setPlayerNode(const std::shared_ptr<cugl::scene2::SpriteNode> &node) {
     _player_node = node;
+  }
+
+  /**
+   * Gets the player scene graph node.
+   */
+  std::shared_ptr<cugl::scene2::SpriteNode> getPlayerNode() {
+    return _player_node;
   }
 
   /**
@@ -145,5 +164,12 @@ class Player : public cugl::physics2::CapsuleObstacle {
    * @param forwardY Amount to move in the y direction.
    */
   void move(float forwardX, float forwardY);
+
+  /**
+   * Attacks if the player hit the attack button.
+   *
+   * @param didAttack If the player attacked.
+   */
+  void attack(bool didAttack, std::shared_ptr<Sword> sword);
 };
 #endif /* PLAYER_H */
