@@ -15,7 +15,7 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager> &assets) {
     return false;
   }
   _assets = assets;
-  
+
   auto world_layer = assets->get<cugl::scene2::SceneNode>("world-scene");
   world_layer->setContentSize(dim);
   world_layer->doLayout();
@@ -61,9 +61,9 @@ void GameScene::populate(cugl::Size dim) {
   std::shared_ptr<cugl::Texture> grunt = _assets->get<cugl::Texture>("grunt");
   cugl::Size gruntSize(grunt->getSize());
 
-  _grunt = Grunt::alloc(dim / 2.0f, gruntSize, "Grunt");
+  _grunt = Grunt::alloc(dim / 2.3f, gruntSize, "Grunt");
 
-  auto grunt_node = cugl::scene2::PolygonNode::allocWithTexture(grunt);
+  auto grunt_node = cugl::scene2::SpriteNode::alloc(grunt, 1, 1);
   _grunt->setGruntNode(grunt_node);
   _world_node->addChild(grunt_node);
   _world->addObstacle(_grunt);
@@ -74,8 +74,7 @@ void GameScene::update(float timestep) {
   std::shared_ptr<Movement> mvm = InputController::get<Movement>();
   _player->move(mvm->getMovementX(), mvm->getMovementY());
 
-  _grunt->move(.5, 0);
-
+  _grunt->move(-.5, 0);
   _world->update(timestep);
 }
 
