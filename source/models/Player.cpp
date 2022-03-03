@@ -29,9 +29,9 @@ bool Player::init(const cugl::Vec2 pos, const cugl::Size size, string name) {
   setFixedRotation(true);
 
     // Sword init
-    _sword = cugl::physics2::CapsuleObstacle::alloc(cugl::Vec2(pos.x + 15, pos.y), cugl::Size(33, 33));
+    _sword = cugl::physics2::CapsuleObstacle::alloc(cugl::Vec2(pos.x + 40, pos.y + 10), cugl::Size(20, 20));
     _sword->setBodyType(b2_staticBody);
-    _sword->setSensor(true);
+//    _sword->setSensor(true);
     
   return true;
 }
@@ -133,9 +133,9 @@ void Player::move(float forwardX, float forwardY) {
     
     // Set sword position to adjacent to the player.
     if (_player_node->isFlipHorizontal()) {
-        _sword->setPosition(cugl::Vec2(getPosition().x - 15, getPosition().y));
+        _sword->setPosition(cugl::Vec2(getPosition().x - 40, getPosition().y + 10));
     } else {
-        _sword->setPosition(cugl::Vec2(getPosition().x + 15, getPosition().y));
+        _sword->setPosition(cugl::Vec2(getPosition().x + 40, getPosition().y + 10));
     }
     
     // Switch states.
@@ -147,22 +147,19 @@ void Player::move(float forwardX, float forwardY) {
 }
 
 void Player::attack(bool didAttack) {
-    if (_sword->isEnabled()) {
-        CULog("swording");
-    }
     if (didAttack || _attack_frame_count < ATTACK_FRAMES) {
         if (_attack_frame_count == ATTACK_FRAMES) {
             _frame_count = 0;
         }
         setState(ATTACKING);
-        _sword->setEnabled(true);
+//        _sword->setEnabled(true);
         _attack_frame_count--;
     }
     
     if (_attack_frame_count <= 0) {
         setState(IDLE);
         _frame_count = 0;
-        _sword->setEnabled(false);
+//        _sword->setEnabled(false);
         _attack_frame_count = ATTACK_FRAMES;
     }
 }

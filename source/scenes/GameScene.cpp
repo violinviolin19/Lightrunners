@@ -1,6 +1,8 @@
 #include "GameScene.h"
 
 #include <cugl/cugl.h>
+#include <box2d/b2_contact.h>
+#include <box2d/b2_collision.h>
 
 #include "../controllers/actions/Movement.h"
 #include "../controllers/actions/Attack.h"
@@ -35,6 +37,13 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager> &assets) {
   // Create the world and attach the listeners.
   _world = cugl::physics2::ObstacleWorld::alloc(
       cugl::Rect(0, 0, dim.width, dim.height), cugl::Vec2(0, 0));
+    _world->activateCollisionCallbacks(true);
+    _world->onBeginContact = [this](b2Contact* contact) {
+        beginContact(contact);
+    };
+    _world->beforeSolve = [this](b2Contact* contact, const b2Manifold* oldManifold) {
+        beforeSolve(contact,oldManifold);
+    };
 
   _world_node = cugl::scene2::SceneNode::alloc();
   cugl::Scene2::addChild(_world_node);
@@ -62,6 +71,7 @@ void GameScene::populate(cugl::Size dim) {
   _world_node->addChild(player_n);
   _world->addObstacle(_player);
     _world->addObstacle(_player->getSword());
+//    _player->getSword()->setEnabled(false);
 
   // Initialize the grunt with texture and size, then add to world.
   std::shared_ptr<cugl::Texture> grunt = _assets->get<cugl::Texture>("grunt");
@@ -98,4 +108,28 @@ void GameScene::update(float timestep) {
 
 void GameScene::render(const std::shared_ptr<cugl::SpriteBatch> &batch) {
   Scene2::render(batch);
+}
+    
+void GameScene::beginContact(b2Contact* contact) {
+    b2Body* body1 = contact->GetFixtureA()->GetBody();
+    b2Body* body2 = contact->GetFixtureB()->GetBody();
+    
+    intptr_t pptr = reinterpret_cast<intptr_t>(_player.get());
+    intptr_t psptr = reinterpret_cast<intptr_t>(_player->getSword().get());
+    intptr_t gptr = reinterpret_cast<intptr_t>(_grunt.get());
+
+    // If there is a collision between the sword and the enemy
+    if((body1->GetUserData().pointer == psptr && body2->GetUserData().pointer == gptr) ||
+       (body1->GetUserData().pointer == gptr && body2->GetUserData().pointer == psptr)) {
+        CULog("Sword hit grunt!");
+    }
+    
+    // If there is a collision between the player and the enemy
+    if((body1->GetUserData().pointer == pptr && body2->GetUserData().pointer == gptr) ||
+       (body1->GetUserData().pointer == gptr && body2->GetUserData().pointer == pptr)) {
+        CULog("Player hit grunt!");
+    }
+}
+
+void GameScene::beforeSolve(b2Contact *contact, const b2Manifold *oldManifold) {
 }

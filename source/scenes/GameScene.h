@@ -1,6 +1,7 @@
 #ifndef SCENES_GAME_SCENE_H_
 #define SCENES_GAME_SCENE_H_
 #include <cugl/cugl.h>
+#include <box2d/b2_world_callbacks.h>
 
 #include "../controllers/InputController.h"
 #include "../models/Grunt.h"
@@ -77,6 +78,22 @@ class GameScene : public cugl::Scene2 {
    * @param batch     The SpriteBatch to draw with.
    */
   void render(const std::shared_ptr<cugl::SpriteBatch> &batch) override;
+    
+#pragma mark Collision Handling
+    /**
+     * Processes the start of a collision.
+     *
+     * @param  contact  The two bodies that collided.
+     */
+    void beginContact(b2Contact* contact);
+
+    /**
+     * Handles any modifications necessary before collision resolution.
+     *
+     * @param  contact  The two bodies that collided.
+     * @param  contact  The collision manifold before contact.
+     */
+    void beforeSolve(b2Contact* contact, const b2Manifold* oldManifold);
 };
 
 #endif /* SCENES_GAME_SCENE_H_ */
