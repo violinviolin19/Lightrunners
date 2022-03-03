@@ -1,5 +1,6 @@
 #ifndef SCENES_GAME_SCENE_H_
 #define SCENES_GAME_SCENE_H_
+#include <box2d/b2_world_callbacks.h>
 #include <cugl/cugl.h>
 
 #include "../controllers/AIController.h"
@@ -17,10 +18,13 @@ class GameScene : public cugl::Scene2 {
   /** The set of enemies.  */
   EnemySet _enemies;
 
+  /** The sword. */
+  std::shared_ptr<Sword> _sword;
+
   /** Reference to the physics root of the scene graph. */
   std::shared_ptr<cugl::scene2::SceneNode> _world_node;
 
-  /** Reference to the node for physics debugging. */
+  /** Reference to the debug root of the scene graph */
   std::shared_ptr<cugl::scene2::SceneNode> _debug_node;
 
   /** The Box2d world */
@@ -49,7 +53,16 @@ class GameScene : public cugl::Scene2 {
    *
    * @return true if the controller is initialized properly, false otherwise.
    */
-  bool init(const std::shared_ptr<cugl::AssetManager> &assets);
+  bool init(const std::shared_ptr<cugl::AssetManager>& assets);
+
+  /**
+   * Sets whether debug mode is active.
+   *
+   * If true, all objects will display their physics bodies.
+   *
+   * @param value whether debug mode is active.
+   */
+  void setDebug(bool value) { _debug_node->setVisible(value); }
 
   /**
    * Populate the scene with the Box2D objects.
@@ -71,7 +84,23 @@ class GameScene : public cugl::Scene2 {
    *
    * @param batch     The SpriteBatch to draw with.
    */
-  void render(const std::shared_ptr<cugl::SpriteBatch> &batch) override;
+  void render(const std::shared_ptr<cugl::SpriteBatch>& batch) override;
+
+#pragma mark Collision Handling
+  /**
+   * Processes the start of a collision.
+   *
+   * @param  contact  The two bodies that collided.
+   */
+  void beginContact(b2Contact* contact);
+
+  /**
+   * Handles any modifications necessary before collision resolution.
+   *
+   * @param  contact  The two bodies that collided.
+   * @param  contact  The collision manifold before contact.
+   */
+  void beforeSolve(b2Contact* contact, const b2Manifold* oldManifold);
 
   /**
    * The method called to update the camera in terms of the player position.
