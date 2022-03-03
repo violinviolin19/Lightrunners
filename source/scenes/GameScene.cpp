@@ -51,7 +51,7 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
   cugl::Scene2::addChild(_world_node);
   cugl::Scene2::addChild(ui_layer);
   cugl::Scene2::addChild(_debug_node);
-  // _debug_node->setVisible(false);
+  _debug_node->setVisible(false);
 
   InputController::get()->init(_assets, cugl::Scene2::getBounds());
 
@@ -124,7 +124,7 @@ void GameScene::update(float timestep) {
   InputController::get()->update();
   // Movement
   _player->move(InputController::get<Movement>()->getMovement());
-//  CULog("%f", _player->getPlayerNode()->getPositionY());
+  //  CULog("%f", _player->getPlayerNode()->getPositionY());
 
   std::shared_ptr<Attack> att = InputController::get<Attack>();
   _player->attack(att->isAttacking(), _sword);
