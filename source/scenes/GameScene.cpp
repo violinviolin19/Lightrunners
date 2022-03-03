@@ -77,19 +77,19 @@ void GameScene::populate(cugl::Size dim) {
   _world->addObstacle(_sword);
   _sword->setEnabled(false);
 
-    // Initialize the enemy set and populate with grunts.
-    _enemies.init();
+  // Initialize the enemy set and populate with grunts.
+  _enemies.init();
 
-    // Each grunt has texture and size set, and is added to the world.
-    std::shared_ptr<Grunt> grunt1 =
-        _enemies.spawnEnemy(dim / 2.3f, "Grunt1", _assets);
-    _world_node->addChild(grunt1->getGruntNode());
-    _world->addObstacle(grunt1);
+  // Each grunt has texture and size set, and is added to the world.
+  std::shared_ptr<Grunt> grunt1 =
+      _enemies.spawnEnemy(dim / 2.3f, "Grunt1", _assets);
+  _world_node->addChild(grunt1->getGruntNode());
+  _world->addObstacle(grunt1);
 
-    std::shared_ptr<Grunt> grunt2 =
-        _enemies.spawnEnemy(dim / 5.7f, "Grunt2", _assets);
-    _world_node->addChild(grunt2->getGruntNode());
-    _world->addObstacle(grunt2);
+  std::shared_ptr<Grunt> grunt2 =
+      _enemies.spawnEnemy(dim / 5.7f, "Grunt2", _assets);
+  _world_node->addChild(grunt2->getGruntNode());
+  _world->addObstacle(grunt2);
 
   // Add physics enabled tiles to world node, debug node and box2d physics
   // world.
@@ -109,8 +109,10 @@ void GameScene::populate(cugl::Size dim) {
   _player->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
   _sword->setDebugScene(_debug_node);
   _sword->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
-  _grunt->setDebugScene(_debug_node);
-  _grunt->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
+  for (std::shared_ptr<Grunt> grunt : _enemies.getEnemies()) {
+    grunt->setDebugScene(_debug_node);
+    grunt->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
+  }
 }
 
 void GameScene::update(float timestep) {
@@ -119,23 +121,24 @@ void GameScene::update(float timestep) {
   _player->move(InputController::get<Movement>()->getMovement());
   std::shared_ptr<Attack> att = InputController::get<Attack>();
   _player->attack(att->isAttacking(), _sword);
-    _enemies.update(timestep);
-    
-  if (_grunt != nullptr) {
-    _grunt->move(0, 0);
-  }
+  _enemies.update(timestep);
+
   updateCamera(timestep);
   _world->update(timestep);
 
   // Animation
   _player->animate(InputController::get<Movement>()->getMovement());
 
+  // POST-UPDATE
   // Check for disposal
-  if (_grunt != nullptr && _grunt->getHealth() <= 0) {
-    _world_node->removeChild(_grunt->getGruntNode());
-    _world->removeObstacle(_grunt.get());
-    _grunt->dispose();
-    _grunt = nullptr;
+  for (std::shared_ptr<Grunt> grunt : _enemies.getEnemies()) {
+    if (grunt != nullptr && grunt->getHealth() <= 0) {
+      _enemies.deleteEnemy(grunt);
+      _world_node->removeChild(grunt->getGruntNode());
+      _world->removeObstacle(grunt.get());
+      grunt->dispose();
+      grunt = nullptr;
+    }
   }
 }
 
@@ -145,22 +148,24 @@ void GameScene::beginContact(b2Contact* contact) {
 
   intptr_t pptr = reinterpret_cast<intptr_t>(_player.get());
   intptr_t psptr = reinterpret_cast<intptr_t>(_sword.get());
-  intptr_t gptr = reinterpret_cast<intptr_t>(_grunt.get());
 
-  // If there is a collision between the sword and the enemy
-  if ((body1->GetUserData().pointer == psptr &&
-       body2->GetUserData().pointer == gptr) ||
-      (body1->GetUserData().pointer == gptr &&
-       body2->GetUserData().pointer == psptr)) {
-    _grunt->takeDamage();
-  }
+  // If there is a collision between the sword and the enemies
+  for (std::shared_ptr<Grunt> grunt : _enemies.getEnemies()) {
+    intptr_t gptr = reinterpret_cast<intptr_t>(grunt.get());
+    if ((body1->GetUserData().pointer == psptr &&
+         body2->GetUserData().pointer == gptr) ||
+        (body1->GetUserData().pointer == gptr &&
+         body2->GetUserData().pointer == psptr)) {
+      grunt->takeDamage();
+    }
 
-  // If there is a collision between the player and the enemy
-  if ((body1->GetUserData().pointer == pptr &&
-       body2->GetUserData().pointer == gptr) ||
-      (body1->GetUserData().pointer == gptr &&
-       body2->GetUserData().pointer == pptr)) {
-    _player->reduceHealth(5);
+    // If there is a collision between the player and the enemy
+    if ((body1->GetUserData().pointer == pptr &&
+         body2->GetUserData().pointer == gptr) ||
+        (body1->GetUserData().pointer == gptr &&
+         body2->GetUserData().pointer == pptr)) {
+      _player->reduceHealth(5);
+    }
   }
 }
 

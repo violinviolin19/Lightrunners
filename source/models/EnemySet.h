@@ -46,6 +46,13 @@ class EnemySet {
                                     std::shared_ptr<cugl::AssetManager> a);
 
   /**
+   * Delete this grunt from the set.
+   *
+   * @param grunt grunt to be deleted.
+   */
+  void deleteEnemy(std::shared_ptr<Grunt> grunt) { _enemies.erase(grunt); }
+
+  /**
    * Retrieve list of enemies.
    *
    * @return unordered set of all enemies currently alive.
