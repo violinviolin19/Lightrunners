@@ -49,11 +49,11 @@ void GameScene::populate(cugl::Size dim) {
   // Initialize the player with texture and size, then add to world.
   std::shared_ptr<cugl::Texture> player = _assets->get<cugl::Texture>("player");
 
-  _player = Player::alloc(dim/2, cugl::Size(96, 96), "Johnathan");
+  _player = Player::alloc(dim / 2, "Johnathan");
 
-  auto player_n = cugl::scene2::SpriteNode::alloc(player, 3, 10);
-  _player->setPlayerNode(player_n);
-  _world_node->addChild(player_n);
+  auto player_node = cugl::scene2::SpriteNode::alloc(player, 3, 10);
+  _player->setPlayerNode(player_node);
+  _world_node->addChild(player_node);
   _world->addObstacle(_player);
 
   // Initialize the grunt with texture and size, then add to world.

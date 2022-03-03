@@ -1,5 +1,8 @@
 #include "Player.h"
 
+#define WIDTH 22
+#define HEIGHT 50
+
 #define IDLE_RIGHT 0
 #define IDLE_LEFT 1
 #define IDLE_DOWN 2
@@ -11,8 +14,8 @@
 
 #pragma mark Init
 
-bool Player::init(const cugl::Vec2 pos, const cugl::Size size, string name) {
-  CapsuleObstacle::init(pos, size);
+bool Player::init(const cugl::Vec2 pos, string name) {
+  CapsuleObstacle::init(pos, cugl::Size(WIDTH, HEIGHT));
   setName(name);
 
   _player_node = nullptr;
@@ -48,13 +51,11 @@ void Player::animate(float forwardX, float forwardY) {
   switch (_current_state) {
     case MOVING: {
       // Reverse texture if moving opposite direction.
-      bool movingLeft = (forwardX < 0) ? true : false;
-      if (!_player_node->isFlipHorizontal() && movingLeft) {
-        _player_node->flipHorizontal(true);
-      } else if (_player_node->isFlipHorizontal() && !movingLeft) {
-        _player_node->flipHorizontal(false);
+      bool movingLeft = forwardX < 0;
+      if (_player_node->isFlipHorizontal() != movingLeft) {
+        _player_node->flipHorizontal(movingLeft);
       }
-        
+
       if (_frame_count == 0) {
         _player_node->setFrame(RUN_LOW_LIM);
       }
