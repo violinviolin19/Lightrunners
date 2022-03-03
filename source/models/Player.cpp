@@ -23,7 +23,7 @@ bool Player::init(const cugl::Vec2 pos, string name) {
 
   size_.width *= PLAYER_WIDTH_SHRINK;
   size_.height *= PLAYER_HEIGHT_SHRINK;
-  _offset_from_center.y = size.height / 2.0f - size_.height / 2.0f;
+  _offset_from_center.y = size_.height / 2.0f - size_.height / 2.0f;
   pos_ -= _offset_from_center;
 
   CapsuleObstacle::init(pos_, size_);

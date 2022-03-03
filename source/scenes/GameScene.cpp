@@ -90,6 +90,7 @@ void GameScene::populate(cugl::Size dim) {
 
 void GameScene::update(float timestep) {
   InputController::get()->update();
+
   _player->move(InputController::get<Movement>()->getMovement());
   _grunt->move(-.5, 0);
 
@@ -98,7 +99,7 @@ void GameScene::update(float timestep) {
   _world->update(timestep);
 
   // Animation
-  _player->animate(mvm->getMovementX(), mvm->getMovementY());
+  _player->animate(InputController::get<Movement>()->getMovement());
 }
 
 void GameScene::render(const std::shared_ptr<cugl::SpriteBatch> &batch) {

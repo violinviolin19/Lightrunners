@@ -23,7 +23,7 @@ class Player : public cugl::physics2::CapsuleObstacle {
 
   /** Countdown to change animation frame. */
   int _frame_count;
-  
+
   /** Represents the offset between the center of the player and the center of
    * the capsule obstacle. */
   cugl::Vec2 _offset_from_center;
@@ -117,12 +117,13 @@ class Player : public cugl::physics2::CapsuleObstacle {
   /**
    * Sets the frame of the animation.
    *
-   * @param forward Amount to move in the x and y direction
+   * @param forwardX Amount to move in the x direction
+   * @param forwardY Amount to move in the y direction
    */
-  void move(cugl::Vec2 forward) { move(forward.x, forward.y); }
+  void animate(cugl::Vec2 forward) { animate(forward.x, forward.y); }
 
   /**
-   * Moves the player by the specified amount.
+   * Sets the frame of the animation.
    *
    * @param forwardX Amount to move in the x direction
    * @param forwardY Amount to move in the y direction
@@ -130,6 +131,13 @@ class Player : public cugl::physics2::CapsuleObstacle {
   void animate(float forwardX, float forwardY);
 
 #pragma mark Movement
+  /**
+   * Moves the player by the specified amount.
+   *
+   * @param forward Amount to move in the x and y direction
+   */
+  void move(cugl::Vec2 forward) { move(forward.x, forward.y); }
+
   /**
    * Moves the player by the specified amount.
    *
