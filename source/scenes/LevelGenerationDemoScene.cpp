@@ -53,35 +53,33 @@ bool LevelGenerationDemoScene::init() {
 void LevelGenerationDemoScene::dispose() {}
 
 void LevelGenerationDemoScene::update(float timestep) {
-  if (cugl::Input::get<cugl::Keyboard>()->keyReleased(cugl::KeyCode::R)) {
+  cugl::Keyboard *keyboard = cugl::Input::get<cugl::Keyboard>();
+
+  if (keyboard->keyReleased(cugl::KeyCode::R)) {
     _map->removeAllChildren();
     createLevel();
     _map->doLayout();
   }
 
-  if (cugl::Input::get<cugl::Keyboard>()->keyDown(cugl::KeyCode::I)) {
-    _map->setScale(_map->getScale() * 1.05f);
-  }
+  cugl::Vec2 scale = _map->getScale();
+  if (keyboard->keyDown(cugl::KeyCode::I))
+    scale *= 1.05f;
+  else if (keyboard->keyDown(cugl::KeyCode::O))
+    scale *= 0.95f;
+  _map->setScale(scale);
 
-  if (cugl::Input::get<cugl::Keyboard>()->keyDown(cugl::KeyCode::O)) {
-    _map->setScale(_map->getScale() * 0.95f);
-  }
+  cugl::Vec2 pos = _map->getPosition();
+  if (keyboard->keyDown(cugl::KeyCode::W))
+    pos.x -= 5.0f;
+  else if (keyboard->keyDown(cugl::KeyCode::S))
+    pos.x += 5.0f;
 
-  if (cugl::Input::get<cugl::Keyboard>()->keyDown(cugl::KeyCode::W)) {
-    _map->setPositionY(_map->getPositionY() - 5.0f);
-  }
+  if (keyboard->keyDown(cugl::KeyCode::D))
+    pos.y -= 5.0f;
+  else if (keyboard->keyDown(cugl::KeyCode::A))
+    pos.y += 5.0f;
 
-  if (cugl::Input::get<cugl::Keyboard>()->keyDown(cugl::KeyCode::A)) {
-    _map->setPositionX(_map->getPositionX() + 5.0f);
-  }
-
-  if (cugl::Input::get<cugl::Keyboard>()->keyDown(cugl::KeyCode::S)) {
-    _map->setPositionY(_map->getPositionY() + 5.0f);
-  }
-
-  if (cugl::Input::get<cugl::Keyboard>()->keyDown(cugl::KeyCode::D)) {
-    _map->setPositionX(_map->getPositionX() - 5.0f);
-  }
+  _map->setPosition(pos);
 
   _level_generator.update();
 

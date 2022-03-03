@@ -317,7 +317,7 @@ void LevelGenerator::markAndFillHallways() {
   connectLayers(_inside_rooms, _middle_rooms, 2);
   connectLayers(_middle_rooms, _outside_rooms, 3);
 
-  fillHallways();
+  // fillHallways();
 
   _generator_step = [this]() { this->buildCompositeAreas(); };
 }
