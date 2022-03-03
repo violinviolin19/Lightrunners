@@ -195,8 +195,9 @@
     <ClInclude Include="..\..\source\controllers\actions\Attack.h" />
     <ClInclude Include="..\..\source\controllers\actions\Movement.h" />
     <ClInclude Include="..\..\source\models\Player.h" />
-    <ClInclude Include="..\..\source\models\Grunt.h" />
-    <ClInclude Include="..\..\source\models\EnemySet.h" />
+    <ClInclude Include="..\..\source\models\Grunt.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
@@ -209,7 +210,6 @@
     <ClCompile Include="..\..\source\controllers\actions\Movement.cpp" />
     <ClCompile Include="..\..\source\models\Grunt.cpp" />
     <ClCompile Include="..\..\source\models\Player.cpp" />
-    <ClCompile Include="..\..\source\models\EnemySet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Luminance.rc" />
