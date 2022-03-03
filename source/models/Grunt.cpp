@@ -33,6 +33,12 @@ bool Grunt::init(const cugl::Vec2 pos, const cugl::Size size, string name) {
   return true;
 }
 
+void Grunt::takeDamage() {
+  reduceHealth(20);
+  _grunt_node->setColor(cugl::Color4::RED);
+  _damage_count = 10;
+}
+
 #pragma mark Animation & Drawing
 
 /**
@@ -54,6 +60,13 @@ void Grunt::update(float delta) {
   CapsuleObstacle::update(delta);
   if (_grunt_node != nullptr) {
     _grunt_node->setPosition(getPosition());
+  }
+
+  if (_damage_count <= 0) {
+    _grunt_node->setColor(cugl::Color4::WHITE);
+    _damage_count = 0;
+  } else {
+    _damage_count--;
   }
 }
 

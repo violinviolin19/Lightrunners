@@ -1,18 +1,18 @@
 #include "GameScene.h"
 
-#include <cugl/cugl.h>
-#include <box2d/b2_contact.h>
 #include <box2d/b2_collision.h>
+#include <box2d/b2_contact.h>
+#include <cugl/cugl.h>
 
-#include "../controllers/actions/Movement.h"
 #include "../controllers/actions/Attack.h"
+#include "../controllers/actions/Movement.h"
 #include "../loaders/CustomScene2Loader.h"
 #include "../models/tiles/Wall.h"
 
 #define SCENE_HEIGHT 720
 #define CAMERA_SMOOTH_SPEED 2.0f
 
-bool GameScene::init(const std::shared_ptr<cugl::AssetManager> &assets) {
+bool GameScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
   // Initialize the scene to a locked width.
   cugl::Size dim = cugl::Application::get()->getDisplaySize();
   dim *= SCENE_HEIGHT / ((dim.width > dim.height) ? dim.width : dim.height);
@@ -29,8 +29,17 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager> &assets) {
   _debug_node->setContentSize(dim);
 
   // Create the world and attach the listeners.
-  cugl::Rect bounds = cugl::Rect(cugl::Vec2::ZERO, dim);
-  _world = cugl::physics2::ObstacleWorld::alloc(bounds);
+  _world = cugl::physics2::ObstacleWorld::alloc(
+      cugl::Rect(0, 0, dim.width, dim.height), cugl::Vec2(0, 0));
+  _world->activateCollisionCallbacks(true);
+  _world->onBeginContact = [this](b2Contact* contact) {
+    beginContact(contact);
+  };
+  _world->beforeSolve = [this](b2Contact* contact,
+                               const b2Manifold* oldManifold) {
+    beforeSolve(contact, oldManifold);
+  };
+
   populate(dim);
 
   _world_node->doLayout();
@@ -49,22 +58,6 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager> &assets) {
   // Set color to BLACK.
   cugl::Application::get()->setClearColor(cugl::Color4f::BLACK);
 
-  // Create the world and attach the listeners.
-  _world = cugl::physics2::ObstacleWorld::alloc(
-      cugl::Rect(0, 0, dim.width, dim.height), cugl::Vec2(0, 0));
-    _world->activateCollisionCallbacks(true);
-    _world->onBeginContact = [this](b2Contact* contact) {
-        beginContact(contact);
-    };
-    _world->beforeSolve = [this](b2Contact* contact, const b2Manifold* oldManifold) {
-        beforeSolve(contact,oldManifold);
-    };
-
-  _world_node = cugl::scene2::SceneNode::alloc();
-  cugl::Scene2::addChild(_world_node);
-    
-  populate(dim);
-
   return true;
 }
 
@@ -73,15 +66,16 @@ void GameScene::dispose() { InputController::get()->dispose(); }
 void GameScene::populate(cugl::Size dim) {
   // Initialize the player with texture and size, then add to world.
   std::shared_ptr<cugl::Texture> player = _assets->get<cugl::Texture>("player");
-
-    _player = Player::alloc(dim / 2.0f, "Johnathan");
+  _player = Player::alloc(dim / 2.0f, "Johnathan");
 
   auto player_node = cugl::scene2::SpriteNode::alloc(player, 3, 10);
   _player->setPlayerNode(player_node);
   _world_node->addChild(player_node);
   _world->addObstacle(_player);
-    _world->addObstacle(_player->getSword());
-//    _player->getSword()->setEnabled(false);
+
+  _sword = Sword::alloc(dim / 2.0f);
+  _world->addObstacle(_sword);
+  _sword->setEnabled(false);
 
   // Initialize the grunt with texture and size, then add to world.
   std::shared_ptr<cugl::Texture> grunt = _assets->get<cugl::Texture>("grunt");
@@ -92,62 +86,83 @@ void GameScene::populate(cugl::Size dim) {
   _grunt->setGruntNode(grunt_node);
   _world_node->addChild(grunt_node);
   _world->addObstacle(_grunt);
-    
-    // Debug code.
-    _player->setDebugScene(_debug_node);
-    _player->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
-    _player->getSword()->setDebugScene(_debug_node);
-    _player->getSword()->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
-    _grunt->setDebugScene(_debug_node);
-    _grunt->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
-    
-    // Add physics enabled tiles to world node, debug node and box2d physics
-    // world.
-    std::shared_ptr<cugl::CustomScene2Loader> loader =
-        std::dynamic_pointer_cast<cugl::CustomScene2Loader>(
-            _assets->access<cugl::scene2::SceneNode>());
 
-    for (std::shared_ptr<BasicTile> tile : loader->getTiles("wall")) {
-      auto wall = std::dynamic_pointer_cast<Wall>(tile);
-      _world->addObstacle(wall->initBox2d());
-      wall->getObstacle()->setDebugColor(cugl::Color4::GREEN);
-      wall->getObstacle()->setDebugScene(_debug_node);
-    }
+  // Add physics enabled tiles to world node, debug node and box2d physics
+  // world.
+  std::shared_ptr<cugl::CustomScene2Loader> loader =
+      std::dynamic_pointer_cast<cugl::CustomScene2Loader>(
+          _assets->access<cugl::scene2::SceneNode>());
+
+  for (std::shared_ptr<BasicTile> tile : loader->getTiles("wall")) {
+    auto wall = std::dynamic_pointer_cast<Wall>(tile);
+    _world->addObstacle(wall->initBox2d());
+    wall->getObstacle()->setDebugColor(cugl::Color4::GREEN);
+    wall->getObstacle()->setDebugScene(_debug_node);
+  }
+
+  // Debug code.
+  _player->setDebugScene(_debug_node);
+  _player->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
+  _sword->setDebugScene(_debug_node);
+  _sword->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
+  _grunt->setDebugScene(_debug_node);
+  _grunt->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
 }
 
 void GameScene::update(float timestep) {
   InputController::get()->update();
   // Movement
-    _player->move(InputController::get<Movement>()->getMovement());
-    std::shared_ptr<Attack> att =InputController::get<Attack>();
-    _player->attack(att->isAttacking());
+  _player->move(InputController::get<Movement>()->getMovement());
+  std::shared_ptr<Attack> att = InputController::get<Attack>();
+  _player->attack(att->isAttacking(), _sword);
+  if (_grunt != nullptr) {
     _grunt->move(0, 0);
+  }
+  updateCamera(timestep);
   _world->update(timestep);
+
+  // Animation
+  _player->animate(InputController::get<Movement>()->getMovement());
+
+  // Check for disposal
+  if (_grunt != nullptr && _grunt->getHealth() <= 0) {
+    _world_node->removeChild(_grunt->getGruntNode());
+    _world->removeObstacle(_grunt.get());
+    _grunt->dispose();
+    _grunt = nullptr;
+  }
 }
 
-    
 void GameScene::beginContact(b2Contact* contact) {
-    b2Body* body1 = contact->GetFixtureA()->GetBody();
-    b2Body* body2 = contact->GetFixtureB()->GetBody();
-    
-    intptr_t pptr = reinterpret_cast<intptr_t>(_player.get());
-    intptr_t psptr = reinterpret_cast<intptr_t>(_player->getSword().get());
-    intptr_t gptr = reinterpret_cast<intptr_t>(_grunt.get());
+  b2Body* body1 = contact->GetFixtureA()->GetBody();
+  b2Body* body2 = contact->GetFixtureB()->GetBody();
 
-    // If there is a collision between the sword and the enemy
-    if((body1->GetUserData().pointer == psptr && body2->GetUserData().pointer == gptr) ||
-       (body1->GetUserData().pointer == gptr && body2->GetUserData().pointer == psptr)) {
-        CULog("Sword hit grunt!");
-    }
-    
-    // If there is a collision between the player and the enemy
-    if((body1->GetUserData().pointer == pptr && body2->GetUserData().pointer == gptr) ||
-       (body1->GetUserData().pointer == gptr && body2->GetUserData().pointer == pptr)) {
-        CULog("Player hit grunt!");
-    }
+  intptr_t pptr = reinterpret_cast<intptr_t>(_player.get());
+  intptr_t psptr = reinterpret_cast<intptr_t>(_sword.get());
+  intptr_t gptr = reinterpret_cast<intptr_t>(_grunt.get());
+
+  // If there is a collision between the sword and the enemy
+  if ((body1->GetUserData().pointer == psptr &&
+       body2->GetUserData().pointer == gptr) ||
+      (body1->GetUserData().pointer == gptr &&
+       body2->GetUserData().pointer == psptr)) {
+    _grunt->takeDamage();
+  }
+
+  // If there is a collision between the player and the enemy
+  if ((body1->GetUserData().pointer == pptr &&
+       body2->GetUserData().pointer == gptr) ||
+      (body1->GetUserData().pointer == gptr &&
+       body2->GetUserData().pointer == pptr)) {
+    _player->reduceHealth(5);
+  }
 }
 
-void GameScene::beforeSolve(b2Contact *contact, const b2Manifold *oldManifold) {
+void GameScene::beforeSolve(b2Contact* contact, const b2Manifold* oldManifold) {
+}
+
+void GameScene::render(const std::shared_ptr<cugl::SpriteBatch>& batch) {
+  Scene2::render(batch);
 }
 
 void GameScene::updateCamera(float timestep) {

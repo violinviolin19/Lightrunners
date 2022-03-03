@@ -20,6 +20,9 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
   /** Grunt direction. */
   bool _facing_left;
 
+  /** Damage frame count to turn red. */
+  int _damage_count;
+
  public:
 #pragma mark Constructors
   /**
@@ -31,9 +34,14 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
   Grunt(void) : CapsuleObstacle() {}
 
   /**
-   * Disposes the grunt
+   * Disposes the grunt.
    */
-  ~Grunt() {}
+  ~Grunt() { dispose(); }
+
+  /**
+   * Disposes the grunt.
+   */
+  void dispose() { _grunt_node = nullptr; }
 
   /**
    * Initializes a new grunt with the given position and size.
@@ -76,6 +84,19 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
   void setHealth(int value) { _health = value; }
 
   /**
+   * Reduces the grunt's health.
+   *
+   * @param value The value to reduce the health by.
+   */
+  void reduceHealth(int value) { _health -= value; }
+
+  /**
+   * The grunt took damage.
+   *
+   */
+  void takeDamage();
+
+  /**
    * Update the scene graph.
    *
    * @param delta the timing value.
@@ -90,6 +111,13 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
    * @param node  The scene graph node representing this grunt.
    */
   void setGruntNode(const std::shared_ptr<cugl::scene2::SpriteNode>& node);
+
+  /**
+   * Gets the grunt node.
+   */
+  std::shared_ptr<cugl::scene2::SpriteNode> getGruntNode() {
+    return _grunt_node;
+  }
 
 #pragma mark Movement
   /**
