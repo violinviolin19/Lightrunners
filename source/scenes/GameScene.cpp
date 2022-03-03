@@ -80,7 +80,7 @@ void GameScene::populate(cugl::Size dim) {
   // Initialize the grunt with texture and size, then add to world.
   std::shared_ptr<cugl::Texture> grunt = _assets->get<cugl::Texture>("grunt");
 
-  _grunt = Grunt::alloc(dim / 2.3f, cugl::Size(22, 40), "Grunt");
+  _grunt = Grunt::alloc(dim / 2.3f, "Grunt");
 
   auto grunt_node = cugl::scene2::SpriteNode::alloc(grunt, 1, 1);
   _grunt->setGruntNode(grunt_node);

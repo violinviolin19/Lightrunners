@@ -51,7 +51,7 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
    *
    * @return  true if the obstacle is initialized properly, false otherwise.
    */
-  virtual bool init(const cugl::Vec2 pos, const cugl::Size size, string name);
+  virtual bool init(const cugl::Vec2 pos, string name);
 
 #pragma mark Static Constructors
   /**
@@ -61,10 +61,9 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
    *
    * @return a new capsule object at the given point with no size.
    */
-  static std::shared_ptr<Grunt> alloc(const cugl::Vec2 pos,
-                                      const cugl::Size& size, string name) {
+  static std::shared_ptr<Grunt> alloc(const cugl::Vec2 pos, string name) {
     std::shared_ptr<Grunt> result = std::make_shared<Grunt>();
-    return (result->init(pos, size, name) ? result : nullptr);
+    return (result->init(pos, name) ? result : nullptr);
   }
 
 #pragma mark Properties

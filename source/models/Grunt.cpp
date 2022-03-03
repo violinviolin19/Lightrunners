@@ -1,5 +1,8 @@
 #include "Grunt.h"
 
+#define WIDTH 22
+#define HEIGHT 40
+
 #pragma mark Init
 /**
  * Initializes a new grunt with the given position, size, and name.
@@ -17,8 +20,8 @@
  *
  * @return  true if the obstacle is initialized properly, false otherwise.
  */
-bool Grunt::init(const cugl::Vec2 pos, const cugl::Size size, string name) {
-  CapsuleObstacle::init(pos, size);
+bool Grunt::init(const cugl::Vec2 pos, string name) {
+  CapsuleObstacle::init(pos, cugl::Size(WIDTH, HEIGHT));
   setName(name);
 
   _grunt_node = nullptr;
