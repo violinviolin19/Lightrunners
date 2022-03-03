@@ -1,5 +1,8 @@
 #include "Grunt.h"
 
+#define WIDTH 22
+#define HEIGHT 40
+
 #pragma mark Init
 /**
  * Initializes a new grunt with the given position, size, and name.
@@ -17,8 +20,8 @@
  *
  * @return  true if the obstacle is initialized properly, false otherwise.
  */
-bool Grunt::init(const cugl::Vec2 pos, const cugl::Size size, string name) {
-  CapsuleObstacle::init(pos, size);
+bool Grunt::init(const cugl::Vec2 pos, string name) {
+  CapsuleObstacle::init(pos, cugl::Size(WIDTH, HEIGHT));
   setName(name);
 
   _grunt_node = nullptr;
@@ -31,6 +34,12 @@ bool Grunt::init(const cugl::Vec2 pos, const cugl::Size size, string name) {
   setFixedRotation(true);
 
   return true;
+}
+
+void Grunt::takeDamage() {
+  reduceHealth(20);
+  _grunt_node->setColor(cugl::Color4::RED);
+  _damage_count = 10;
 }
 
 #pragma mark Animation & Drawing
@@ -63,6 +72,13 @@ void Grunt::update(float delta) {
   CapsuleObstacle::update(delta);
   if (_grunt_node != nullptr) {
     _grunt_node->setPosition(getPosition());
+  }
+
+  if (_damage_count <= 0) {
+    _grunt_node->setColor(cugl::Color4::WHITE);
+    _damage_count = 0;
+  } else {
+    _damage_count--;
   }
 }
 
