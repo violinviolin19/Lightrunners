@@ -5,10 +5,10 @@
 #define IDLE_DOWN 2
 #define IDLE_UP 3
 #define ATTACK_LOW_LIM 10
-#define ATTACK_HIGH_LIM 19
+#define ATTACK_HIGH_LIM 16
 #define RUN_LOW_LIM 20
 #define RUN_HIGH_LIM 29
-#define ATTACK_FRAMES 10
+#define ATTACK_FRAMES 14
 #define HEALTH 100
 
 #pragma mark Init
@@ -46,13 +46,6 @@ void Player::update(float delta) {
 }
 
 void Player::animate(float forwardX, float forwardY) {
-  // Switch states.
-  if (forwardX != 0 || forwardY != 0) {
-    setState(MOVING);
-  } else {
-    setState(IDLE);
-  }
-
   switch (_current_state) {
     case MOVING: {
       // Reverse texture if moving opposite direction.
@@ -88,7 +81,7 @@ void Player::animate(float forwardX, float forwardY) {
       _frame_count++;
       break;
     }
-    default: {
+    case IDLE: {
       if (_player_node->isFlipHorizontal()) {
         _player_node->setFrame(10 - IDLE_LEFT);
       } else {
@@ -97,6 +90,36 @@ void Player::animate(float forwardX, float forwardY) {
       _frame_count = 0;
       break;
     }
+      case ATTACKING: {
+          if (_frame_count == 0) {
+              if (_player_node->isFlipHorizontal()) {
+                  _player_node->setFrame(9 + ATTACK_LOW_LIM);
+              } else {
+                  _player_node->setFrame(ATTACK_LOW_LIM);
+              }
+          }
+
+          // Play the next animation frame.
+          if (_frame_count >= 2) {
+            _frame_count = 0;
+
+            if (_player_node->isFlipHorizontal()) {
+              if (_player_node->getFrame() <= 19 - ATTACK_HIGH_LIM + ATTACK_LOW_LIM) {
+                _player_node->setFrame(9 + ATTACK_LOW_LIM);
+              } else {
+                _player_node->setFrame(_player_node->getFrame() - 1);
+              }
+            } else {
+              if (_player_node->getFrame() >= ATTACK_HIGH_LIM) {
+                _player_node->setFrame(ATTACK_LOW_LIM);
+              } else {
+                _player_node->setFrame(_player_node->getFrame() + 1);
+              }
+            }
+          }
+          _frame_count++;
+          break;
+      }
   }
 }
 
@@ -108,22 +131,26 @@ void Player::move(float forwardX, float forwardY) {
   if (forwardX == 0) setVX(0);
   if (forwardY == 0) setVY(0);
     
-    // Set sword position to adjacent to the player
+    // Set sword position to adjacent to the player.
     if (_player_node->isFlipHorizontal()) {
         _sword->setPosition(cugl::Vec2(getPosition().x - 15, getPosition().y));
     } else {
         _sword->setPosition(cugl::Vec2(getPosition().x + 15, getPosition().y));
     }
-
-  if (forwardX != 0 || forwardY != 0) {
-    setState(MOVING);
-  } else {
-    setState(IDLE);
-  }
+    
+    // Switch states.
+    if (forwardX != 0 || forwardY != 0) {
+      setState(MOVING);
+    } else {
+      setState(IDLE);
+    }
 }
 
 void Player::attack(bool didAttack) {
     if (didAttack || _attack_frame_count < ATTACK_FRAMES) {
+        if (_attack_frame_count == ATTACK_FRAMES) {
+            _frame_count = 0;
+        }
         setState(ATTACKING);
         _sword->setEnabled(true);
         _attack_frame_count--;
@@ -131,6 +158,7 @@ void Player::attack(bool didAttack) {
     
     if (_attack_frame_count <= 0) {
         setState(IDLE);
+        _frame_count = 0;
         _sword->setEnabled(false);
         _attack_frame_count = ATTACK_FRAMES;
     }

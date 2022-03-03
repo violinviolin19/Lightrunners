@@ -78,8 +78,8 @@ void GameScene::update(float timestep) {
   InputController::get()->update();
   // Movement
   std::shared_ptr<Movement> mvm = InputController::get<Movement>();
+    _player->move(mvm->getMovementX(), mvm->getMovementY());
     std::shared_ptr<Attack> att =InputController::get<Attack>();
-    _player->attack(att->isAttacking());
     _player->attack(att->isAttacking());
     _grunt->move(-.5, 0);
   _world->update(timestep);
