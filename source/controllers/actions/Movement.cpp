@@ -53,7 +53,10 @@ bool Movement::update() {
 
 #ifndef CU_TOUCH_SCREEN
   cugl::Keyboard *keyboard = cugl::Input::get<cugl::Keyboard>();
-  // _joystick_diff.x = keyboard->keyDown(cugl::KeyCode)
+  _joystick_diff.x = keyboard->keyDown(cugl::KeyCode::D) ? 1.0f : 0.0f;
+  _joystick_diff.x = keyboard->keyDown(cugl::KeyCode::A) ? -1.0f : 0.0f;
+  _joystick_diff.y = keyboard->keyDown(cugl::KeyCode::W) ? 1.0f : 0.0f;
+  _joystick_diff.y = keyboard->keyDown(cugl::KeyCode::S) ? -1.0f : 0.0f;
 #endif
 
   return true;
