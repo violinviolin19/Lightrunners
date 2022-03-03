@@ -75,8 +75,6 @@ void GameScene::update(float timestep) {
   _player->move(mvm->getMovementX(), mvm->getMovementY());
 
   _grunt->move(-.5, 0);
-  _grunt->setFacingLeft(true);
-
   _world->update(timestep);
 }
 

@@ -67,7 +67,14 @@ void Grunt::update(float delta) {
 void Grunt::move(float forwardX, float forwardY) {
   setVX(1000 * forwardX);
   setVY(1000 * forwardY);
-  if (forwardX == 0) setVX(0);
+
+  if (forwardX == 0) {
+    setVX(0);
+  } else {
+    // set facing left appropriately if x direction has changed
+    setFacingLeft(forwardX < 0);
+  }
+
   if (forwardY == 0) setVY(0);
 }
 
