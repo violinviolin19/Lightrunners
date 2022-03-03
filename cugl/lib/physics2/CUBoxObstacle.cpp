@@ -33,7 +33,8 @@
 //      2. Altered source versions must be plainly marked as such, and must not
 //      be misrepresented as being the original software.
 //
-//      3. This notice may not be removed or altered from any source distribution.
+//      3. This notice may not be removed or altered from any source
+//      distribution.
 //
 //  This file is based on the CS 3152 PhysicsDemo Lab by Don Holden, 2007
 //
@@ -59,10 +60,10 @@ using namespace cugl::physics2;
  * @param  size The box size (width and height)
  */
 bool BoxObstacle::init(const Vec2 pos, const Size size) {
-    Obstacle::init(pos);
-    _geometry = nullptr;
-    resize(size);
-    return true;
+  Obstacle::init(pos);
+  _geometry = nullptr;
+  resize(size);
+  return true;
 }
 
 /**
@@ -71,23 +72,22 @@ bool BoxObstacle::init(const Vec2 pos, const Size size) {
  * @param  size The new dimension (width and height)
  */
 void BoxObstacle::resize(const Size size) {
-    // Make the box with the center in the center
-    _dimension = size;
-    b2Vec2 corners[4];
-    corners[0].x = -size.width/2.0f;
-    corners[0].y = -size.height/2.0f;
-    corners[1].x = -size.width/2.0f;
-    corners[1].y =  size.height/2.0f;
-    corners[2].x =  size.width/2.0f;
-    corners[2].y =  size.height/2.0f;
-    corners[3].x =  size.width/2.0f;
-    corners[3].y = -size.height/2.0f;
-    _shape.Set(corners, 4);
-    if (_debug != nullptr) {
-        resetDebug();
-    }
+  // Make the box with the center in the center
+  _dimension = size;
+  b2Vec2 corners[4];
+  corners[0].x = -size.width / 2.0f;
+  corners[0].y = -size.height / 2.0f;
+  corners[1].x = -size.width / 2.0f;
+  corners[1].y = size.height / 2.0f;
+  corners[2].x = size.width / 2.0f;
+  corners[2].y = size.height / 2.0f;
+  corners[3].x = size.width / 2.0f;
+  corners[3].y = -size.height / 2.0f;
+  _shape.Set(corners, 4);
+  if (_debug != nullptr) {
+    resetDebug();
+  }
 }
-
 
 #pragma mark -
 #pragma mark Scene Graph Methods
@@ -107,18 +107,18 @@ void BoxObstacle::resize(const Size size) {
  * of relying on the transforms in the scene graph.
  */
 void BoxObstacle::resetDebug() {
-    if (_debug == nullptr) {
-        _debug = scene2::WireNode::allocWithPath(Rect(Vec2::ZERO,_dimension));
-        _debug->setColor(_dcolor);
-        if (_scene != nullptr) {
-            _scene->addChild(_debug);
-        }
-    } else {
-        _debug->setPath(Rect(Vec2::ZERO,_dimension));
+  if (_debug == nullptr) {
+    _debug = scene2::WireNode::allocWithPath(Rect(Vec2::ZERO, _dimension));
+    _debug->setColor(_dcolor);
+    if (_scene != nullptr) {
+      _scene->addChild(_debug);
     }
-    _debug->setAnchor(Vec2::ANCHOR_CENTER);
-    _debug->setPosition(getPosition());
-
+  } else {
+    _debug->setPath(Rect(Vec2::ZERO, _dimension));
+  }
+  _debug->setAnchor(Vec2::ANCHOR_CENTER);
+  _debug->setPosition(getPosition());
+  _debug->setContentSize(_dimension);
 }
 
 #pragma mark -
@@ -129,16 +129,16 @@ void BoxObstacle::resetDebug() {
  * This is the primary method to override for custom physics objects
  */
 void BoxObstacle::createFixtures() {
-    if (_body == nullptr) {
-        return;
-    }
-    
-    releaseFixtures();
-    
-    // Create the fixture
-    _fixture.shape = &_shape;
-    _geometry = _body->CreateFixture(&_fixture);
-    markDirty(false);
+  if (_body == nullptr) {
+    return;
+  }
+
+  releaseFixtures();
+
+  // Create the fixture
+  _fixture.shape = &_shape;
+  _geometry = _body->CreateFixture(&_fixture);
+  markDirty(false);
 }
 
 /**
@@ -147,8 +147,8 @@ void BoxObstacle::createFixtures() {
  * This is the primary method to override for custom physics objects
  */
 void BoxObstacle::releaseFixtures() {
-    if (_geometry != nullptr) {
-        _body->DestroyFixture(_geometry);
-        _geometry = nullptr;
-    }
+  if (_geometry != nullptr) {
+    _body->DestroyFixture(_geometry);
+    _geometry = nullptr;
+  }
 }
