@@ -54,11 +54,9 @@ void GameScene::dispose() { InputController::get()->dispose(); }
 void GameScene::populate(cugl::Size dim) {
   // Initialize the player with texture and size, then add to world.
   std::shared_ptr<cugl::Texture> player = _assets->get<cugl::Texture>("player");
-  cugl::Size player_size(player->getSize());
+  _player = Player::alloc(dim / 2.0f, "Johnathan");
 
-  _player = Player::alloc(dim / 2.0f, player_size, "Johnathan");
-
-  auto player_node = cugl::scene2::PolygonNode::allocWithTexture(player);
+  auto player_node = cugl::scene2::SpriteNode::alloc(player, 3, 10);
   player_node->setPriority(100);  // TODO: Update priority according to position on screen
   _player->setPlayerNode(player_node);
   _player->setDebugColor(cugl::Color4::RED);
@@ -95,12 +93,14 @@ void GameScene::update(float timestep) {
   InputController::get()->update();
 
   _player->move(InputController::get<Movement>()->getMovement());
-
   _grunt->move(-.5, 0);
 
   updateCamera(timestep);
 
   _world->update(timestep);
+
+  // Animation
+  _player->animate(InputController::get<Movement>()->getMovement());
 }
 
 void GameScene::render(const std::shared_ptr<cugl::SpriteBatch> &batch) {
