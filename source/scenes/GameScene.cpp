@@ -48,12 +48,12 @@ void GameScene::dispose() { InputController::get()->dispose(); }
 void GameScene::populate(cugl::Size dim) {
   // The player
   std::shared_ptr<cugl::Texture> player = _assets->get<cugl::Texture>("player");
-  cugl::Size playerSize(player->getSize());
+  //  cugl::Size playerSize(player->getSize());
 
-  _player = Player::alloc(cugl::Vec2(dim.width / 2, dim.height / 2), playerSize,
-                          "Johnathan");
+  _player = Player::alloc(cugl::Vec2(dim.width / 2, dim.height / 2),
+                          cugl::Size(96, 96), "Johnathan");
 
-  auto player_n = cugl::scene2::SpriteNode::alloc(player, 1, 10);
+  auto player_n = cugl::scene2::SpriteNode::alloc(player, 3, 10);
   _player->setPlayerNode(player_n);
   _world_node->addChild(player_n);
   _world->addObstacle(_player);

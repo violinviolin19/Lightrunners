@@ -1,5 +1,14 @@
 #include "Player.h"
 
+#define IDLE_RIGHT 0
+#define IDLE_LEFT 1
+#define IDLE_DOWN 2
+#define IDLE_UP 3
+#define ATTACK_LOW_LIM 10
+#define ATTACK_HIGH_LIM 19
+#define RUN_LOW_LIM 20
+#define RUN_HIGH_LIM 29
+
 #pragma mark Init
 
 bool Player::init(const cugl::Vec2 pos, const cugl::Size size, string name) {
@@ -29,40 +38,57 @@ void Player::update(float delta) {
 }
 
 void Player::animate(float forwardX, float forwardY) {
-  if (_current_state == MOVING) {
-    // Reverse texture if moving opposite direction
-    bool movingLeft = (forwardX < 0) ? true : false;
-    if (!_player_node->isFlipHorizontal() && movingLeft) {
-      _player_node->flipHorizontal(true);
-    } else if (_player_node->isFlipHorizontal() && !movingLeft) {
-      _player_node->flipHorizontal(false);
-    }
+  // Switch states.
+  if (forwardX != 0 || forwardY != 0) {
+    setState(MOVING);
+  } else {
+    setState(IDLE);
+  }
 
-    // Play the next animation frame
-    if (_frame_count >= 5) {
-      _frame_count = 0;
-      if (_player_node->isFlipHorizontal()) {
-        if (_player_node->getFrame() <= 0) {
-          _player_node->setFrame(_player_node->getSize() - 1);
+  switch (_current_state) {
+    case MOVING: {
+      // Reverse texture if moving opposite direction.
+      bool movingLeft = (forwardX < 0) ? true : false;
+      if (!_player_node->isFlipHorizontal() && movingLeft) {
+        _player_node->flipHorizontal(true);
+      } else if (_player_node->isFlipHorizontal() && !movingLeft) {
+        _player_node->flipHorizontal(false);
+      }
+        
+      if (_frame_count == 0) {
+        _player_node->setFrame(RUN_LOW_LIM);
+      }
+
+      // Play the next animation frame.
+      if (_frame_count >= 5) {
+        _frame_count = 0;
+
+        if (_player_node->isFlipHorizontal()) {
+          if (_player_node->getFrame() <= RUN_LOW_LIM) {
+            _player_node->setFrame(RUN_HIGH_LIM);
+          } else {
+            _player_node->setFrame(_player_node->getFrame() - 1);
+          }
         } else {
-          _player_node->setFrame(_player_node->getFrame() - 1);
-        }
-      } else {
-        if (_player_node->getFrame() >= _player_node->getSize() - 1) {
-          _player_node->setFrame(0);
-        } else {
-          _player_node->setFrame(_player_node->getFrame() + 1);
+          if (_player_node->getFrame() >= RUN_HIGH_LIM) {
+            _player_node->setFrame(RUN_LOW_LIM);
+          } else {
+            _player_node->setFrame(_player_node->getFrame() + 1);
+          }
         }
       }
+      _frame_count++;
+      break;
     }
-    _frame_count++;
-  } else {
-    if (_player_node->isFlipHorizontal()) {
-      _player_node->setFrame(_player_node->getSize() - 1);
-    } else {
-      _player_node->setFrame(0);
+    default: {
+      if (_player_node->isFlipHorizontal()) {
+        _player_node->setFrame(10 - IDLE_LEFT);
+      } else {
+        _player_node->setFrame(IDLE_RIGHT);
+      }
+      _frame_count = 0;
+      break;
     }
-    _frame_count = 0;
   }
 }
 
@@ -73,10 +99,4 @@ void Player::move(float forwardX, float forwardY) {
   setVY(1000 * forwardY);
   if (forwardX == 0) setVX(0);
   if (forwardY == 0) setVY(0);
-
-  if (forwardX != 0 || forwardY != 0) {
-    setState(MOVING);
-  } else {
-    setState(IDLE);
-  }
 }
