@@ -3,6 +3,10 @@
 
 #include <cugl/cugl.h>
 
+/**
+ * This class is a basic tile implementation. Great for floors or other tiles
+ * that do not require any special attributes like physics.
+ */
 class BasicTile : public cugl::scene2::PolygonNode {
  public:
   /**
@@ -12,6 +16,7 @@ class BasicTile : public cugl::scene2::PolygonNode {
    * class.
    */
   BasicTile() { _classname = "BasicTile"; }
+
   /**
    * Deletes this node, releasing all resources.
    */

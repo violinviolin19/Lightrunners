@@ -8,21 +8,8 @@
 namespace cugl {
 
 /**
- * This class is a specific implementation of Loader<Node>
- *
- * This asset loader allows us to specify a scene graph subtree, which can
- * be attached to a new or existing scene graph.  This is particularly useful
- * for desiging UI elements with a JSON directory structure rather than having
- * to create them programmatically.  While not exactly visual wireframing,
- * this makes it easier for UX designers to layout user-interface elements,
- * HUDS and the like.
- *
- * As UI widgets typically require fonts and images to be loaded already,
- * these should always be the last elements loaded in a loading phase.
- *
- * As with all of our loaders, this loader is designed to be attached to an
- * asset manager. Use the method {@link getHook()} to get the appropriate
- * pointer for attaching the loader.
+ * This class is an extention to the default Scene2Loader. It adds the ability
+ * to process tiles and initialize the appropriate classes.
  */
 class CustomScene2Loader : public Scene2Loader {
  private:

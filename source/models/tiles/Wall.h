@@ -5,12 +5,27 @@
 
 #include "BasicTile.h"
 
+/**
+ * This class implements the BasicTile class and adds a physics object that the
+ * player can collide with.
+ */
 class Wall : public BasicTile {
  protected:
+  /** A reference to the physics object of the tile. */
   std::shared_ptr<cugl::physics2::BoxObstacle> _obstacle;
 
  public:
+  /**
+   * Creates an empty scene graph node with the degenerate texture.
+   *
+   * This constructor should never be called directly, as this is an abstract
+   * class.
+   */
   Wall() : BasicTile() { _classname = "Wall"; }
+
+  /**
+   * Deletes this node, releasing all resources.
+   */
   ~Wall() { dispose(); }
 
   /**
@@ -67,8 +82,17 @@ class Wall : public BasicTile {
     return std::dynamic_pointer_cast<SceneNode>(result);
   }
 
+  /**
+   * Initializes the box 2d object for the tile including setting the position
+   * and size.
+   *
+   * @return The obstacle it created for easy chaining.
+   */
   virtual std::shared_ptr<cugl::physics2::BoxObstacle> initBox2d();
 
+  /**
+   * @return Returns the physics object for the tile.
+   */
   std::shared_ptr<cugl::physics2::BoxObstacle> getObstacle() {
     return _obstacle;
   }
