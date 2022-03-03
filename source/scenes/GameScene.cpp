@@ -71,6 +71,8 @@ void GameScene::populate(cugl::Size dim) {
   _grunt = Grunt::alloc(dim / 2.3f, gruntSize, "Grunt");
 
   auto grunt_node = cugl::scene2::SpriteNode::alloc(grunt, 1, 1);
+  grunt_node->setPriority(100);  // TODO: Update priority according to position on screen
+
   _grunt->setGruntNode(grunt_node);
   _world_node->addChild(grunt_node);
   _world->addObstacle(_grunt);

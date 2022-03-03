@@ -60,14 +60,14 @@ const levelToScene2 = (fileName) => {
                             anchorNode["children"]["tile"]["layout"]["y_offset"] = 30 * tileScale;
                         }
                         if (tileTypeId === halfWallTileId) {
-                            anchorNode["children"]["tile"]["layout"]["y_offset"] = 8 * tileScale;
+                            anchorNode["children"]["tile"]["layout"]["y_offset"] = 20 * tileScale;
                         }
                         if (tileTypeId === wallFaceTileId) {
                             // anchorNode["children"]["tile"]["layout"]["y_offset"] = -8 * tileScale;
 
                             let obj = {};
                             const wallAnchorNode = getTileNode(col, row, width, height, halfWallTileId, row);
-                            wallAnchorNode["children"]["tile"]["layout"]["y_offset"] = 40 * tileScale;
+                            wallAnchorNode["children"]["tile"]["layout"]["y_offset"] = 45 * tileScale;
                             obj[`tile-(${row}-${col})-floor`] = wallAnchorNode;
                             acc.push(obj);
                         }
