@@ -50,6 +50,22 @@ bool Movement::update() {
 
   _joystick_base->setPosition(_joystick_anchor);
   _joystick->setPosition(_joystick_diff + _joystick_anchor);
+
+#ifndef CU_TOUCH_SCREEN
+  _joystick_diff.setZero();
+
+  cugl::Keyboard *keyboard = cugl::Input::get<cugl::Keyboard>();
+  if (keyboard->keyDown(cugl::KeyCode::D))
+    _joystick_diff.x = 1.0f;
+  else if (keyboard->keyDown(cugl::KeyCode::A))
+    _joystick_diff.x = -1.0f;
+
+  if (keyboard->keyDown(cugl::KeyCode::W))
+    _joystick_diff.y = 1.0f;
+  else if (keyboard->keyDown(cugl::KeyCode::S))
+    _joystick_diff.y = -1.0f;
+#endif
+
   return true;
 }
 
