@@ -198,6 +198,7 @@
     <ClInclude Include="..\..\source\models\Player.h" />
     <ClInclude Include="..\..\source\models\Grunt.h" />
     <ClInclude Include="..\..\source\models\EnemySet.h" />
+    <ClInclude Include="..\..\source\models\Sword.h" />
     <ClInclude Include="..\..\source\models\tiles\BasicTile.h" />
     <ClInclude Include="..\..\source\models\tiles\Wall.h" />
     <ClInclude Include="..\..\source\loaders\CustomScene2Loader.h" />
@@ -215,6 +216,7 @@
     <ClCompile Include="..\..\source\models\Grunt.cpp" />
     <ClCompile Include="..\..\source\models\Player.cpp" />
     <ClCompile Include="..\..\source\models\EnemySet.cpp" />
+    <ClCompile Include="..\..\source\models\Sword.cpp" />
     <ClCompile Include="..\..\source\models\tiles\BasicTile.cpp" />
     <ClCompile Include="..\..\source\models\tiles\Wall.cpp" />
     <ClCompile Include="..\..\source\loaders\CustomScene2Loader.cpp" />
