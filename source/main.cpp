@@ -1,5 +1,6 @@
-#include "GameApp.h"
 #include <cugl/cugl.h>
+
+#include "GameApp.h"
 
 // Window size if not on mobile device.
 #define GAME_WIDTH 1024
@@ -27,6 +28,6 @@ int main(int argc, char *argv[]) {
     ;
   app.onShutdown();
 
-  exit(0); // Necessary to quit on mobile devices.
+  exit(0);  // Necessary to quit on mobile devices.
   return 0;
 }

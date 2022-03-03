@@ -1,5 +1,5 @@
-#ifndef MODELS_HALLWAY_H
-#define MODELS_HALLWAY_H
+#ifndef MODELS_LEVEL_GEN_HALLWAY_H_
+#define MODELS_LEVEL_GEN_HALLWAY_H_
 #include <cugl/cugl.h>
 
 #include "Room.h"
@@ -19,4 +19,4 @@ class Hallway {
                              const cugl::Rect &rect) const;
 };
 
-#endif  // MODELS_HALLWAY_H
+#endif  // MODELS_LEVEL_GEN_HALLWAY_H_

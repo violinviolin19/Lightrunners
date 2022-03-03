@@ -10,7 +10,7 @@
  * Used by InputController to keep track of all actions.
  */
 class Action : public std::enable_shared_from_this<Action> {
-protected:
+ protected:
   /* Action has been initialized correctly. */
   bool _action_init = false;
 
@@ -20,7 +20,7 @@ protected:
   /* Bounds of the scene2 world, used to scale input */
   cugl::Rect _screen_coord_bounds;
 
-public:
+ public:
   Action() {}
   ~Action() {}
 

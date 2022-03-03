@@ -2,8 +2,8 @@
 #define GENERATORS_LEVEL_GENERATOR_H
 #include <cugl/cugl.h>
 
-#include "../models/Hallway.h"
-#include "../models/Room.h"
+#include "../models/level_gen/Hallway.h"
+#include "../models/level_gen/Room.h"
 #include "LevelGeneratorConfig.h"
 
 class LevelGenerator {

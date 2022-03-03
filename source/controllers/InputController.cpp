@@ -1,8 +1,10 @@
 #include "InputController.h"
+
+#include <cugl/cugl.h>
+
 #include "actions/Action.h"
 #include "actions/Attack.h"
 #include "actions/Movement.h"
-#include <cugl/cugl.h>
 
 // static
 std::shared_ptr<InputController> InputController::_singleton = nullptr;
@@ -11,7 +13,6 @@ InputController::InputController() : _active(false) {}
 
 bool InputController::init(const std::shared_ptr<cugl::AssetManager> &assets,
                            cugl::Rect bounds) {
-
 #ifdef CU_TOUCH_SCREEN
   cugl::Touchscreen *input = cugl::Input::get<cugl::Touchscreen>();
 #else

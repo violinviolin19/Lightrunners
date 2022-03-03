@@ -5,7 +5,9 @@
 #define JOYSTICK_RADIUS 30.0f
 
 Movement::Movement()
-    : _show_joystick(false), _joystick_base(nullptr), _joystick(nullptr),
+    : _show_joystick(false),
+      _joystick_base(nullptr),
+      _joystick(nullptr),
       _listener_key(0) {}
 
 bool Movement::init(const std::shared_ptr<cugl::AssetManager> &assets,
@@ -37,7 +39,7 @@ bool Movement::init(const std::shared_ptr<cugl::AssetManager> &assets,
       _listener_key,
       [=](const cugl::TouchEvent &event, const cugl::Vec2 &previous,
           bool focus) { this->touchMoved(event, previous, focus); });
-#endif // CU_TOUCH_SCREEN
+#endif  // CU_TOUCH_SCREEN
 
   return true;
 }
@@ -48,6 +50,22 @@ bool Movement::update() {
 
   _joystick_base->setPosition(_joystick_anchor);
   _joystick->setPosition(_joystick_diff + _joystick_anchor);
+
+#ifndef CU_TOUCH_SCREEN
+  _joystick_diff.setZero();
+
+  cugl::Keyboard *keyboard = cugl::Input::get<cugl::Keyboard>();
+  if (keyboard->keyDown(cugl::KeyCode::D))
+    _joystick_diff.x = 1.0f;
+  else if (keyboard->keyDown(cugl::KeyCode::A))
+    _joystick_diff.x = -1.0f;
+
+  if (keyboard->keyDown(cugl::KeyCode::W))
+    _joystick_diff.y = 1.0f;
+  else if (keyboard->keyDown(cugl::KeyCode::S))
+    _joystick_diff.y = -1.0f;
+#endif
+
   return true;
 }
 
@@ -90,7 +108,6 @@ void Movement::touchEnded(const cugl::TouchEvent &event, bool focus) {
 
 void Movement::touchMoved(const cugl::TouchEvent &event,
                           const cugl::Vec2 &previous, bool focus) {
-
   if (_touch_ids.find(event.touch) != _touch_ids.end()) {
     cugl::Vec2 pos = event.position;
 
@@ -103,4 +120,4 @@ void Movement::touchMoved(const cugl::TouchEvent &event,
     _joystick_diff.normalize().scale(clamped_diff_len);
   }
 }
-#endif // CU_TOUCH_SCREEN
+#endif  // CU_TOUCH_SCREEN

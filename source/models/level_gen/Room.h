@@ -1,5 +1,5 @@
-#ifndef MODELS_ROOM_H
-#define MODELS_ROOM_H
+#ifndef MODELS_LEVEL_GEN_ROOM_H_
+#define MODELS_LEVEL_GEN_ROOM_H_
 #include <cugl/cugl.h>
 
 class Edge;
@@ -76,4 +76,4 @@ class Edge {
   }
 };
 
-#endif  // MODELS_ROOM_H
+#endif  // MODELS_LEVEL_GEN_ROOM_H_
