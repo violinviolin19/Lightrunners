@@ -1,8 +1,5 @@
 #include "Player.h"
 
-#define WIDTH 70
-#define HEIGHT 160
-
 #define IDLE_RIGHT 0
 #define IDLE_LEFT 1
 #define IDLE_DOWN 2
@@ -14,8 +11,10 @@
 #define ATTACK_FRAMES 14
 #define HEALTH 100
 
-#define PLAYER_WIDTH_SHRINK 0.5f
-#define PLAYER_HEIGHT_SHRINK 0.3f
+#define WIDTH 24
+#define HEIGHT 48
+
+#define HEIGHT_SHRINK 0.3f
 
 #pragma mark Init
 
@@ -23,9 +22,9 @@ bool Player::init(const cugl::Vec2 pos, string name) {
   cugl::Vec2 pos_ = pos;
   cugl::Size size_ = cugl::Size(WIDTH, HEIGHT);
 
-  size_.width *= PLAYER_WIDTH_SHRINK;
-  size_.height *= PLAYER_HEIGHT_SHRINK;
-  _offset_from_center.y = size_.height / 2.0f - size_.height / 2.0f;
+  size_.height *= HEIGHT_SHRINK;
+
+  _offset_from_center.y = HEIGHT / 2.0f - size_.height / 2.0f;
   pos_ -= _offset_from_center;
 
   CapsuleObstacle::init(pos_, size_);
@@ -149,7 +148,8 @@ void Player::move(float forwardX, float forwardY) {
 
 void Player::attack(bool didAttack, std::shared_ptr<Sword> sword) {
   // Set the sword adjacent to the player
-  sword->moveSword(getPosition(), cugl::Vec2(getVX(), getVY()),
+  sword->moveSword(getPosition() + _offset_from_center,
+                   cugl::Vec2(getVX(), getVY()),
                    _player_node->isFlipHorizontal());
 
   if (didAttack || _attack_frame_count < ATTACK_FRAMES) {

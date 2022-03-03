@@ -1,7 +1,9 @@
 #include "Grunt.h"
 
-#define WIDTH 22
-#define HEIGHT 40
+#define WIDTH 24
+#define HEIGHT 48
+
+#define HEIGHT_SHRINK 0.3f
 
 #pragma mark Init
 /**
@@ -21,7 +23,15 @@
  * @return  true if the obstacle is initialized properly, false otherwise.
  */
 bool Grunt::init(const cugl::Vec2 pos, string name) {
-  CapsuleObstacle::init(pos, cugl::Size(WIDTH, HEIGHT));
+  cugl::Vec2 pos_ = pos;
+  cugl::Size size_ = cugl::Size(WIDTH, HEIGHT);
+
+  size_.height *= HEIGHT_SHRINK;
+
+  _offset_from_center.y = HEIGHT / 2.0f - size_.height / 2.0f;
+  pos_ -= _offset_from_center;
+
+  CapsuleObstacle::init(pos_, size_);
   setName(name);
 
   _grunt_node = nullptr;
@@ -72,7 +82,7 @@ std::shared_ptr<cugl::scene2::SpriteNode>& Grunt::getGruntNode() {
 void Grunt::update(float delta) {
   CapsuleObstacle::update(delta);
   if (_grunt_node != nullptr) {
-    _grunt_node->setPosition(getPosition());
+    _grunt_node->setPosition(getPosition() + _offset_from_center);
   }
 
   if (_damage_count <= 0) {
