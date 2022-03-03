@@ -61,7 +61,10 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
   return true;
 }
 
-void GameScene::dispose() { InputController::get()->dispose(); }
+void GameScene::dispose() {
+  InputController::get()->dispose();
+  _ai_controller.~AIController();
+}
 
 void GameScene::populate(cugl::Size dim) {
   // Initialize the player with texture and size, then add to world.
@@ -120,8 +123,11 @@ void GameScene::update(float timestep) {
   InputController::get()->update();
   // Movement
   _player->move(InputController::get<Movement>()->getMovement());
+
   std::shared_ptr<Attack> att = InputController::get<Attack>();
   _player->attack(att->isAttacking(), _sword);
+
+  _ai_controller.moveEnemiesTowardPlayer(_enemies, _player);
   _enemies.update(timestep);
 
   updateCamera(timestep);

@@ -27,6 +27,9 @@
     <ClInclude Include="..\..\source\controllers\InputController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\controllers\AIController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\source\controllers\actions\Action.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -46,6 +49,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\models\Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\models\Sword.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\models\tiles\BasicTile.h">
@@ -74,6 +80,9 @@
     <ClCompile Include="..\..\source\controllers\InputController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\controllers\AIController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\source\controllers\actions\Attack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -87,6 +96,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\models\Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\models\Sword.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\models\tiles\BasicTile.cpp">

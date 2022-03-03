@@ -11,6 +11,9 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
   /** Grunt health. */
   int _health;
 
+  /** Grunt speed. */
+  float _speed;
+
   /** The scene graph node for the grunt. */
   std::shared_ptr<cugl::scene2::SpriteNode> _grunt_node;
 
@@ -94,6 +97,13 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
    *
    */
   void takeDamage();
+
+  /**
+   * Returns the speed of the grunt.
+   *
+   * @return the grunt speed.
+   */
+  float getSpeed() const { return _speed; }
 
   /**
    * Update the scene graph.
