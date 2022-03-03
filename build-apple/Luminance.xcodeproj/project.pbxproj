@@ -46,6 +46,9 @@
 		D57971F227D026E4008FCC5E /* CustomScene2Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D57971EE27D026E4008FCC5E /* CustomScene2Loader.cpp */; };
 		D57971F327D026E4008FCC5E /* CustomScene2Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D57971EE27D026E4008FCC5E /* CustomScene2Loader.cpp */; };
 		D57971F427D026E4008FCC5E /* CustomScene2Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D57971EE27D026E4008FCC5E /* CustomScene2Loader.cpp */; };
+		D579724D27D178CC008FCC5E /* AIController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D579724C27D178CC008FCC5E /* AIController.cpp */; };
+		D579724E27D178CC008FCC5E /* AIController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D579724C27D178CC008FCC5E /* AIController.cpp */; };
+		D579724F27D178CC008FCC5E /* AIController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D579724C27D178CC008FCC5E /* AIController.cpp */; };
 		D5EB744E27C335C7007D157D /* Movement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5EB744C27C335C7007D157D /* Movement.cpp */; };
 		D5EB744F27C335C7007D157D /* Movement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5EB744C27C335C7007D157D /* Movement.cpp */; };
 		D5EB745027C335C7007D157D /* Movement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5EB744C27C335C7007D157D /* Movement.cpp */; };
@@ -167,6 +170,8 @@
 		D579719D27D0230F008FCC5E /* Grunt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Grunt.h; sourceTree = "<group>"; };
 		D57971EE27D026E4008FCC5E /* CustomScene2Loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CustomScene2Loader.cpp; sourceTree = "<group>"; };
 		D57971F827D02C79008FCC5E /* CustomScene2Loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomScene2Loader.h; sourceTree = "<group>"; };
+		D579724827D178CC008FCC5E /* AIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIController.h; sourceTree = "<group>"; };
+		D579724C27D178CC008FCC5E /* AIController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AIController.cpp; sourceTree = "<group>"; };
 		D5EB744C27C335C7007D157D /* Movement.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Movement.cpp; sourceTree = "<group>"; };
 		D5EB744D27C335C7007D157D /* Movement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Movement.h; sourceTree = "<group>"; };
 		EB07CFB021EFF3EF000CB3A3 /* DeviceMargins.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DeviceMargins.plist; sourceTree = "<group>"; };
@@ -327,6 +332,8 @@
 		D52E672C27BF305900F8E2B8 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D579724C27D178CC008FCC5E /* AIController.cpp */,
+				D579724827D178CC008FCC5E /* AIController.h */,
 				D52E672D27BF305900F8E2B8 /* InputController.cpp */,
 				D52E672E27BF305900F8E2B8 /* InputController.h */,
 				D52E672F27BF305900F8E2B8 /* actions */,
@@ -660,6 +667,7 @@
 				572894D527D1684500F9BBA5 /* Sword.cpp in Sources */,
 				D57971A027D02310008FCC5E /* Grunt.cpp in Sources */,
 				D52E673C27BF305A00F8E2B8 /* InputController.cpp in Sources */,
+				D579724F27D178CC008FCC5E /* AIController.cpp in Sources */,
 				D52E673F27BF305A00F8E2B8 /* Attack.cpp in Sources */,
 				D5EB745027C335C7007D157D /* Movement.cpp in Sources */,
 				EB9CDA3925D0EAB100EE1A09 /* main.cpp in Sources */,
@@ -681,6 +689,7 @@
 				572894D427D1684500F9BBA5 /* Sword.cpp in Sources */,
 				D579719F27D02310008FCC5E /* Grunt.cpp in Sources */,
 				D52E673B27BF305A00F8E2B8 /* InputController.cpp in Sources */,
+				D579724E27D178CC008FCC5E /* AIController.cpp in Sources */,
 				D52E673E27BF305A00F8E2B8 /* Attack.cpp in Sources */,
 				D5EB744F27C335C7007D157D /* Movement.cpp in Sources */,
 				EB7454AE1D74D891002FBAE6 /* main.cpp in Sources */,
@@ -702,6 +711,7 @@
 				572894D327D1684500F9BBA5 /* Sword.cpp in Sources */,
 				D579719E27D02310008FCC5E /* Grunt.cpp in Sources */,
 				D52E673A27BF305A00F8E2B8 /* InputController.cpp in Sources */,
+				D579724D27D178CC008FCC5E /* AIController.cpp in Sources */,
 				D52E673D27BF305A00F8E2B8 /* Attack.cpp in Sources */,
 				D5EB744E27C335C7007D157D /* Movement.cpp in Sources */,
 				EB2BE9B61D74952A002FE78B /* main.cpp in Sources */,

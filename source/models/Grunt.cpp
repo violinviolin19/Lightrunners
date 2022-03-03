@@ -27,6 +27,7 @@ bool Grunt::init(const cugl::Vec2 pos, string name) {
   _grunt_node = nullptr;
   _health = 100;
   _facing_left = false;
+  _speed = .0005f;
 
   setDensity(0.01f);
   setFriction(0.0f);

@@ -30,9 +30,6 @@ void EnemySet::update(float dt) {
   auto it = _enemies.begin();
   while (it != _enemies.end()) {
     (*it)->update(dt);
-    // TODO temporary - move grunt if not
-    (*it)->move(-.2, 0);
-
     ++it;
   }
 }
