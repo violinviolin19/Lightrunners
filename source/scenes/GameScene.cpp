@@ -3,6 +3,7 @@
 #include <cugl/cugl.h>
 
 #include "../controllers/actions/Movement.h"
+#include "../controllers/actions/Attack.h"
 
 #define SCENE_HEIGHT 720
 
@@ -57,6 +58,7 @@ void GameScene::populate(cugl::Size dim) {
   _player->setPlayerNode(player_n);
   _world_node->addChild(player_n);
   _world->addObstacle(_player);
+    _world->addObstacle(_player->getSword());
 }
 
 void GameScene::update(float timestep) {
@@ -64,6 +66,8 @@ void GameScene::update(float timestep) {
   // Movement
   std::shared_ptr<Movement> mvm = InputController::get<Movement>();
   _player->move(mvm->getMovementX(), mvm->getMovementY());
+    std::shared_ptr<Attack> att =InputController::get<Attack>();
+    _player->attack(att->isAttacking());
   _world->update(timestep);
 
   // Animation

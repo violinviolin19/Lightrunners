@@ -11,6 +11,9 @@ class Player : public cugl::physics2::CapsuleObstacle {
 
   /** The scene graph node for the player (moving). */
   std::shared_ptr<cugl::scene2::SpriteNode> _player_node;
+    
+    /** The obstacle for the sword */
+    std::shared_ptr<cugl::physics2::CapsuleObstacle> _sword;
 
   /** The player's current state. */
   State _current_state;
@@ -23,6 +26,9 @@ class Player : public cugl::physics2::CapsuleObstacle {
 
   /** Countdown to change animation frame. */
   int _frame_count;
+    
+    /** Countdown for attacking frames. */
+    int _attack_frame_count;
 
  public:
 #pragma mark Constructors
@@ -92,6 +98,13 @@ class Player : public cugl::physics2::CapsuleObstacle {
    * @param value The current player health.
    */
   void setHealth(int value) { _health = value; }
+    
+    /**
+     * Returns the sword of the player.
+     *
+     * @return The sword.
+     */
+    std::shared_ptr<cugl::physics2::CapsuleObstacle> getSword() { return _sword; }
 
   /**
    * Update the scene graph.
@@ -127,5 +140,12 @@ class Player : public cugl::physics2::CapsuleObstacle {
    * @param forwardY Amount to move in the y direction.
    */
   void move(float forwardX, float forwardY);
+    
+    /**
+     * Attacks if the player hit the attack button.
+     *
+     * @param didAttack If the player attacked.
+     */
+    void attack(bool didAttack);
 };
 #endif /* PLAYER_H */
