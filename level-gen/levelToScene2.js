@@ -10,6 +10,9 @@ const floorTileId = 0;
 const wallTileId = 1;
 const halfWallTileId = 13;
 const wallFaceTileId = 14;
+
+// TODO: Find a better data structure to accomplish this.
+const tileIdsThatAreSolid = [1, 2, 3, 4, 7, 13, 14];
 const tilesIdsThatShowFloor = [2, 3, 4, 8, 9, 10, 11, 12];
 
 const pixelWidth = 64, pixelHeight = 64;
@@ -45,7 +48,7 @@ const levelToScene2 = (fileName) => {
                         "height": height
                     },
                     "data": {
-                        "anchor": [0.5, 0.5],
+                        "anchor": [0, 0],
                         "size": [pixelWidth * width * tileScale, pixelHeight * height * tileScale],
                     },
                     "children": Object.assign({}, ...layoutWithSpecialWallTiles.reduce((acc, tileTypeId, index) => {
@@ -82,8 +85,8 @@ const levelToScene2 = (fileName) => {
                         return acc;
                     }, [])),
                     "layout" : {
-                        "x_anchor" : "center",
-                        "y_anchor" : "middle"
+                        "x_anchor" : "bottom",
+                        "y_anchor" : "left"
                     }
                 }
             }
@@ -107,7 +110,7 @@ const getTileNode = (col, row, width, height, tileTypeId, priority) => {
     }
 
     let tileObj = {
-        "type": "Image",
+        "type": tileIdsThatAreSolid.includes(tileTypeId) ? 'Wall' : 'BasicTile',
         "format": {
             "type": "Anchored"
         },

@@ -23,8 +23,8 @@
         },
         "data": {
           "anchor": [
-            0.5,
-            0.5
+            0,
+            0
           ],
           "size": [
             192,
@@ -45,7 +45,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -80,7 +80,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -115,7 +115,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -150,7 +150,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -185,7 +185,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -220,7 +220,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -255,7 +255,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -290,7 +290,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -325,7 +325,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -360,7 +360,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -395,7 +395,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -430,7 +430,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -465,7 +465,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -500,7 +500,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -535,7 +535,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -570,7 +570,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -605,7 +605,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -640,7 +640,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -675,7 +675,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -710,7 +710,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -745,7 +745,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -780,7 +780,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -815,7 +815,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -850,7 +850,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -885,7 +885,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -920,7 +920,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -955,7 +955,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -990,7 +990,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -1025,7 +1025,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -1060,7 +1060,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -1094,7 +1094,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -1128,7 +1128,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -1162,7 +1162,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -1196,7 +1196,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -1230,7 +1230,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -1264,7 +1264,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -1298,7 +1298,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -1332,7 +1332,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -1366,7 +1366,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -1400,7 +1400,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -1435,7 +1435,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -1470,7 +1470,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -1504,7 +1504,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -1538,7 +1538,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -1572,7 +1572,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -1606,7 +1606,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -1640,7 +1640,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -1674,7 +1674,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -1708,7 +1708,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -1742,7 +1742,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -1776,7 +1776,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -1810,7 +1810,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -1845,7 +1845,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -1880,7 +1880,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -1914,7 +1914,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -1948,7 +1948,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -1982,7 +1982,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -2016,7 +2016,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -2050,7 +2050,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -2084,7 +2084,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -2118,7 +2118,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -2152,7 +2152,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -2186,7 +2186,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -2221,7 +2221,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -2256,7 +2256,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -2291,7 +2291,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -2326,7 +2326,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -2361,7 +2361,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -2396,7 +2396,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -2431,7 +2431,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -2465,7 +2465,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -2499,7 +2499,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -2533,7 +2533,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -2568,7 +2568,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -2603,7 +2603,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -2638,7 +2638,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -2673,7 +2673,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -2708,7 +2708,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -2743,7 +2743,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -2778,7 +2778,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -2813,7 +2813,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -2848,7 +2848,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -2883,7 +2883,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -2918,7 +2918,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -2953,7 +2953,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -2987,7 +2987,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -3021,7 +3021,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -3055,7 +3055,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -3090,7 +3090,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -3125,7 +3125,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -3159,7 +3159,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -3193,7 +3193,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -3227,7 +3227,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -3261,7 +3261,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -3295,7 +3295,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -3329,7 +3329,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -3363,7 +3363,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -3397,7 +3397,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -3431,7 +3431,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -3466,7 +3466,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -3501,7 +3501,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -3535,7 +3535,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -3569,7 +3569,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -3603,7 +3603,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -3637,7 +3637,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -3671,7 +3671,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -3705,7 +3705,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -3739,7 +3739,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -3773,7 +3773,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -3807,7 +3807,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -3841,7 +3841,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -3876,7 +3876,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -3911,7 +3911,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -3946,7 +3946,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -3981,7 +3981,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -4016,7 +4016,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -4051,7 +4051,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -4086,7 +4086,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -4120,7 +4120,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -4154,7 +4154,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -4188,7 +4188,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -4222,7 +4222,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -4257,7 +4257,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -4292,7 +4292,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -4327,7 +4327,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -4362,7 +4362,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -4397,7 +4397,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -4432,7 +4432,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -4467,7 +4467,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -4502,7 +4502,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -4537,7 +4537,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -4572,7 +4572,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -4607,7 +4607,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -4642,7 +4642,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -4676,7 +4676,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -4710,7 +4710,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -4744,7 +4744,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -4779,7 +4779,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -4814,7 +4814,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -4848,7 +4848,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -4882,7 +4882,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -4916,7 +4916,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -4950,7 +4950,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -4984,7 +4984,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -5018,7 +5018,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -5052,7 +5052,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -5086,7 +5086,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -5121,7 +5121,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -5156,7 +5156,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -5190,7 +5190,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -5224,7 +5224,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -5258,7 +5258,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -5292,7 +5292,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -5326,7 +5326,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -5360,7 +5360,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -5394,7 +5394,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -5428,7 +5428,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -5462,7 +5462,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "BasicTile",
                 "format": {
                   "type": "Anchored"
                 },
@@ -5496,7 +5496,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -5531,7 +5531,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -5566,7 +5566,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -5601,7 +5601,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -5636,7 +5636,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -5671,7 +5671,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -5706,7 +5706,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -5741,7 +5741,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -5776,7 +5776,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -5811,7 +5811,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -5846,7 +5846,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -5881,7 +5881,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -5916,7 +5916,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -5951,7 +5951,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -5986,7 +5986,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -6021,7 +6021,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -6056,7 +6056,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -6091,7 +6091,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -6126,7 +6126,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -6161,7 +6161,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -6196,7 +6196,7 @@
             },
             "children": {
               "tile": {
-                "type": "Image",
+                "type": "Wall",
                 "format": {
                   "type": "Anchored"
                 },
@@ -6220,8 +6220,8 @@
           }
         },
         "layout": {
-          "x_anchor": "center",
-          "y_anchor": "middle"
+          "x_anchor": "bottom",
+          "y_anchor": "left"
         }
       }
     }
