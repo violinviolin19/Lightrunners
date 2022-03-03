@@ -3,6 +3,7 @@
 #include <cugl/cugl.h>
 
 #include "scenes/GameScene.h"
+#include "scenes/LevelGenerationDemoScene.h"
 #include "scenes/LoadingScene.h"
 
 /**
@@ -20,11 +21,23 @@ class GameApp : public cugl::Application {
   /** The controller for the loading screen */
   LoadingScene _loading;
 
+#ifndef CU_TOUCH_SCREEN
+  /** The controller for the level generation demo scene. */
+  LevelGenerationDemoScene _level_gen_scene;
+  /** If the app should currently update and render the level generation demo
+   * scene. */
+  bool _show_level_gen_scene;
+#endif
+
   /** Whether or not we have finished loading all assets */
   bool _loaded;
 
  public:
-  GameApp() : cugl::Application(), _loaded(false) {}
+  GameApp() : cugl::Application(), _loaded(false) {
+#ifndef CU_TOUCH_SCREEN
+    _show_level_gen_scene = false;
+#endif
+  }
   ~GameApp() {}
 
 #pragma mark Application State
