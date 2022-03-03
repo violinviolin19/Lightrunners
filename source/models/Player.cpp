@@ -29,10 +29,10 @@ bool Player::init(const cugl::Vec2 pos, const cugl::Size size, string name) {
   setFixedRotation(true);
 
     // Sword init
-    _sword = cugl::physics2::CapsuleObstacle::alloc(cugl::Vec2(pos.x + 15, pos.y), size);
+    _sword = cugl::physics2::CapsuleObstacle::alloc(cugl::Vec2(pos.x + 15, pos.y), cugl::Size(33, 33));
     _sword->setBodyType(b2_staticBody);
     _sword->setSensor(true);
-    _sword->setEnabled(false);
+    
   return true;
 }
 
@@ -147,6 +147,9 @@ void Player::move(float forwardX, float forwardY) {
 }
 
 void Player::attack(bool didAttack) {
+    if (_sword->isEnabled()) {
+        CULog("swording");
+    }
     if (didAttack || _attack_frame_count < ATTACK_FRAMES) {
         if (_attack_frame_count == ATTACK_FRAMES) {
             _frame_count = 0;
