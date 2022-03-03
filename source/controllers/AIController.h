@@ -16,7 +16,7 @@ class AIController {
    * @param enemy set of enemies to move
    * @param p position to move enemy towards
    */
-  void moveEnemyTowardLocation(Grunt enemy, cugl::Vec2 p);
+  void moveEnemyTowardLocation(std::shared_ptr<Grunt> enemy, cugl::Vec2 p);
 
  public:
   /**
@@ -35,7 +35,7 @@ class AIController {
    * @param enemies set of enemies to move
    * @param player player for enemies to move towards
    */
-  void moveEnemiesTowardPlayer(EnemySet enemies,
+  void moveEnemiesTowardPlayer(EnemySet enemySet,
                                std::shared_ptr<Player> player);
 };
 

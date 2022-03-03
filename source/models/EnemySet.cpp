@@ -36,9 +36,6 @@ void EnemySet::update(float dt) {
     if ((*it)->getHealth() <= 0) {
       it = _enemies.erase(it);
     } else {
-      // TODO temporary - move grunt if not
-      (*it)->move(-.2, 0);
-
       ++it;
     }
   }

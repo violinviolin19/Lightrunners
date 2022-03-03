@@ -2,6 +2,7 @@
 #define SCENES_GAME_SCENE_H_
 #include <cugl/cugl.h>
 
+#include "../controllers/AIController.h"
 #include "../controllers/InputController.h"
 #include "../models/EnemySet.h"
 #include "../models/Player.h"
@@ -24,6 +25,9 @@ class GameScene : public cugl::Scene2 {
 
   /** The Box2d world */
   std::shared_ptr<cugl::physics2::ObstacleWorld> _world;
+
+  /** The AI Controller for enemies. */
+  AIController _ai_controller;
 
  public:
   GameScene() : cugl::Scene2() {}
