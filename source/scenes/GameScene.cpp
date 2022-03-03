@@ -77,15 +77,19 @@ void GameScene::populate(cugl::Size dim) {
   _world->addObstacle(_sword);
   _sword->setEnabled(false);
 
-  // Initialize the grunt with texture and size, then add to world.
-  std::shared_ptr<cugl::Texture> grunt = _assets->get<cugl::Texture>("grunt");
+    // Initialize the enemy set and populate with grunts.
+    _enemies.init();
 
-  _grunt = Grunt::alloc(dim / 2.3f, "Grunt");
+    // Each grunt has texture and size set, and is added to the world.
+    std::shared_ptr<Grunt> grunt1 =
+        _enemies.spawnEnemy(dim / 2.3f, "Grunt1", _assets);
+    _world_node->addChild(grunt1->getGruntNode());
+    _world->addObstacle(grunt1);
 
-  auto grunt_node = cugl::scene2::SpriteNode::alloc(grunt, 1, 1);
-  _grunt->setGruntNode(grunt_node);
-  _world_node->addChild(grunt_node);
-  _world->addObstacle(_grunt);
+    std::shared_ptr<Grunt> grunt2 =
+        _enemies.spawnEnemy(dim / 5.7f, "Grunt2", _assets);
+    _world_node->addChild(grunt2->getGruntNode());
+    _world->addObstacle(grunt2);
 
   // Add physics enabled tiles to world node, debug node and box2d physics
   // world.
@@ -115,6 +119,8 @@ void GameScene::update(float timestep) {
   _player->move(InputController::get<Movement>()->getMovement());
   std::shared_ptr<Attack> att = InputController::get<Attack>();
   _player->attack(att->isAttacking(), _sword);
+    _enemies.update(timestep);
+    
   if (_grunt != nullptr) {
     _grunt->move(0, 0);
   }

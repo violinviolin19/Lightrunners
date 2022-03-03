@@ -4,7 +4,7 @@
 #include <cugl/cugl.h>
 
 #include "../controllers/InputController.h"
-#include "../models/Grunt.h"
+#include "../models/EnemySet.h"
 #include "../models/Player.h"
 
 class GameScene : public cugl::Scene2 {
@@ -14,8 +14,8 @@ class GameScene : public cugl::Scene2 {
   /** The player.  */
   std::shared_ptr<Player> _player;
 
-  /** The grunt.  */
-  std::shared_ptr<Grunt> _grunt;
+  /** The set of enemies.  */
+  EnemySet _enemies;
 
   /** The sword. */
   std::shared_ptr<Sword> _sword;

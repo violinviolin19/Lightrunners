@@ -112,11 +112,11 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
   void setGruntNode(const std::shared_ptr<cugl::scene2::SpriteNode>& node);
 
   /**
-   * Gets the grunt node.
+   * Gets the grunt scene graph node.
+   *
+   * @return node the node that has been set.
    */
-  std::shared_ptr<cugl::scene2::SpriteNode> getGruntNode() {
-    return _grunt_node;
-  }
+  std::shared_ptr<cugl::scene2::SpriteNode>& getGruntNode();
 
 #pragma mark Movement
   /**
