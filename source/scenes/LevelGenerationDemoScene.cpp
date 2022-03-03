@@ -44,8 +44,7 @@ bool LevelGenerationDemoScene::init() {
   _map->doLayout();
   cugl::Scene2::addChild(_map);
 
-  // Set color to CORNFLOWER for nostalgia, change in real game.
-  cugl::Application::get()->setClearColor(cugl::Color4f::CORNFLOWER);
+  cugl::Application::get()->setClearColor(cugl::Color4f::BLACK);
 
   return true;
 }
@@ -70,14 +69,14 @@ void LevelGenerationDemoScene::update(float timestep) {
 
   cugl::Vec2 pos = _map->getPosition();
   if (keyboard->keyDown(cugl::KeyCode::W))
-    pos.x -= 5.0f;
+    pos.y -= 5.0f;
   else if (keyboard->keyDown(cugl::KeyCode::S))
-    pos.x += 5.0f;
+    pos.y += 5.0f;
 
   if (keyboard->keyDown(cugl::KeyCode::D))
-    pos.y -= 5.0f;
+    pos.x -= 5.0f;
   else if (keyboard->keyDown(cugl::KeyCode::A))
-    pos.y += 5.0f;
+    pos.x += 5.0f;
 
   _map->setPosition(pos);
 
