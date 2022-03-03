@@ -64,7 +64,9 @@ void GameApp::update(float timestep) {
   } else if (!_loaded) {
     _loading.dispose();  // Disables the input listeners in this mode.
     _gameplay.init(_assets);
+#ifndef CU_TOUCH_SCREEN
     _level_gen_scene.init();
+#endif
     _loaded = true;
 #ifndef CU_TOUCH_SCREEN
   } else if (_show_level_gen_scene) {

@@ -33,8 +33,11 @@ class GameApp : public cugl::Application {
   bool _loaded;
 
  public:
-  GameApp()
-      : cugl::Application(), _loaded(false), _show_level_gen_scene(false) {}
+  GameApp() : cugl::Application(), _loaded(false) {
+#ifndef CU_TOUCH_SCREEN
+    _show_level_gen_scene = false;
+#endif
+  }
   ~GameApp() {}
 
 #pragma mark Application State
