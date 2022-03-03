@@ -8,9 +8,7 @@ void AIController::moveEnemyTowardLocation(std::shared_ptr<Grunt> enemy,
                                            cugl::Vec2 p) {
   cugl::Vec2 diff = p - enemy->getPosition();
 
-  // TODO turn this into some sort of variable somewhere
-  float step = 0.0005f;
-  diff.scale(step);
+  diff.scale(enemy->getSpeed());
   enemy->move(diff.x, diff.y);
 }
 
