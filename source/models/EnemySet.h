@@ -13,6 +13,7 @@ class EnemySet {
   /** The collection of all living enemies. */
   std::unordered_set<std::shared_ptr<Grunt>> _enemies;
 
+ public:
   /**
    * Creates an Enemy set with the default values.
    */
@@ -26,21 +27,24 @@ class EnemySet {
   bool init();
 
   /**
-   * Adds an enemy to the set of enemies.
-   *
-   * @param p     The enemy position.
-   * @param a     The ship angle.
-   */
-  void spawnEnemy(cugl::Vec2 p);
-
-  /**
    * Updates all the enemies in the set.
    *
    * @param dt the timing value.
    */
   void update(float dt);
 
- public:
+  /**
+   * Initializes and adds an enemy to the set of enemies.
+   *
+   * @param p     The enemy position.
+   * @param n     The enemy name.
+   * @param a     The asset manager including enemy textures.
+   *
+   * @return a reference to the spawned enemy.
+   */
+  std::shared_ptr<Grunt> spawnEnemy(cugl::Vec2 p, string n,
+                                    std::shared_ptr<cugl::AssetManager> a);
+
   /**
    * Retrieve list of enemies.
    *
