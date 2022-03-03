@@ -13,10 +13,10 @@ const wallFaceTileId = 14;
 
 // TODO: Find a better data structure to accomplish this.
 const tileIdsThatAreSolid = [1, 2, 3, 4, 7, 13, 14];
-const tilesIdsThatShowFloor = [2, 3, 4, 8, 9, 10, 11, 12];
+const tileIdsThatShowFloor = [2, 3, 4, 8, 9, 10, 11, 12];
 
 const pixelWidth = 64, pixelHeight = 64;
-const tileScale = 0.3;
+const tileScale = 1;
 
 const levelToScene2 = (fileName) => {
     let jsonData = fs.readFileSync(fileName, 'utf-8');
@@ -63,7 +63,7 @@ const levelToScene2 = (fileName) => {
                             anchorNode["children"]["tile"]["layout"]["y_offset"] = 8 * tileScale;
                         }
                         if (tileTypeId === wallFaceTileId) {
-                            anchorNode["children"]["tile"]["layout"]["y_offset"] = -8 * tileScale;
+                            // anchorNode["children"]["tile"]["layout"]["y_offset"] = -8 * tileScale;
 
                             let obj = {};
                             const wallAnchorNode = getTileNode(col, row, width, height, halfWallTileId, row);
@@ -76,7 +76,7 @@ const levelToScene2 = (fileName) => {
                         obj[`tile-(${row}-${col})`] = anchorNode;
                         acc.push(obj);
 
-                        if (tilesIdsThatShowFloor.includes(tileTypeId)) {
+                        if (tileIdsThatShowFloor.includes(tileTypeId)) {
                             let obj = {};
                             let floorAnchorNode = getTileNode(col, row, width, height, floorTileId, 0);
                             obj[`tile-(${row}-${col})-floor`] = floorAnchorNode;
@@ -116,7 +116,7 @@ const getTileNode = (col, row, width, height, tileTypeId, priority) => {
         },
         "data": {
             "texture": `floor-tile-${tileTypeId}`,
-            "anchor": [0.5, 0.5],
+            "anchor": [0, 0],
             "scale": tileScale,
             "priority": priority,
         },

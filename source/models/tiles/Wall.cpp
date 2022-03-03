@@ -19,6 +19,8 @@ std::shared_ptr<cugl::physics2::BoxObstacle> Wall::initBox2d() {
   if (_obstacle != nullptr) {
     _obstacle->setPosition(BasicTile::getPosition());
     _obstacle->setName(_classname.c_str());
+    CULog("%f, %f", BasicTile::getPosition().x, BasicTile::getPosition().y);
+
     _obstacle->setBodyType(b2BodyType::b2_staticBody);
   }
 

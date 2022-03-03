@@ -59,6 +59,7 @@ void GameScene::populate(cugl::Size dim) {
   _player = Player::alloc(dim / 2.0f, player_size, "Johnathan");
 
   auto player_node = cugl::scene2::PolygonNode::allocWithTexture(player);
+  player_node->setPriority(100);  // TODO: Update priority according to position on screen
   _player->setPlayerNode(player_node);
   _player->setDebugColor(cugl::Color4::RED);
   _player->setDebugScene(_debug_node);
@@ -85,8 +86,8 @@ void GameScene::populate(cugl::Size dim) {
   for (std::shared_ptr<BasicTile> tile : loader->getTiles("wall")) {
     auto wall = std::dynamic_pointer_cast<Wall>(tile);
     _world->addObstacle(wall->initBox2d());
-    wall->getObstacle()->setDebugColor(cugl::Color4::GREEN);
-    wall->getObstacle()->setDebugScene(_debug_node);
+//    wall->getObstacle()->setDebugColor(cugl::Color4::GREEN);
+//    wall->getObstacle()->setDebugScene(_debug_node);
   }
 }
 
