@@ -8,12 +8,12 @@ if (args.length < 2) {
 
 const floorTileId = 0;
 const wallTileId = 1;
-const halfWallTileId = 13;
-const wallFaceTileId = 14;
+const halfWallTileId = 10;
+const wallFaceTileId = 11;
 
 // TODO: Find a better data structure to accomplish this.
-const tileIdsThatAreSolid = [1, 2, 3, 4, 7, 13, 14];
-const tileIdsThatShowFloor = [2, 3, 4, 8, 9, 10, 11, 12];
+const tileIdsThatAreSolid = [1, 2, 3, 4, 10, 11];
+const tileIdsThatShowFloor = [2, 3, 4, 7, 8, 9];
 
 const pixelWidth = 64, pixelHeight = 64;
 const tileScale = 0.8;
@@ -57,17 +57,17 @@ const levelToScene2 = (fileName) => {
 
                         let anchorNode = getTileNode(col, row, width, height, tileTypeId, row);
                         if (tileTypeId === wallTileId) {
-                            anchorNode["children"]["tile"]["layout"]["y_offset"] = 30 * tileScale;
+                            anchorNode["children"]["tile"]["layout"]["y_offset"] = 46 * tileScale;
                         }
                         if (tileTypeId === halfWallTileId) {
-                            anchorNode["children"]["tile"]["layout"]["y_offset"] = 20 * tileScale;
+                            anchorNode["children"]["tile"]["layout"]["y_offset"] = 46 * tileScale;
                         }
                         if (tileTypeId === wallFaceTileId) {
                             // anchorNode["children"]["tile"]["layout"]["y_offset"] = -8 * tileScale;
 
                             let obj = {};
-                            const wallAnchorNode = getTileNode(col, row, width, height, halfWallTileId, row);
-                            wallAnchorNode["children"]["tile"]["layout"]["y_offset"] = 45 * tileScale;
+                            const wallAnchorNode = getTileNode(col, row, width, height, wallTileId, row);
+                            wallAnchorNode["children"]["tile"]["layout"]["y_offset"] = 46 * tileScale;
                             obj[`tile-(${row}-${col})-floor`] = wallAnchorNode;
                             acc.push(obj);
                         }
@@ -138,11 +138,11 @@ const convertWallTiles = (arr, width, height) => {
             if (arr[i * width + j] === wallTileId) {
                 // Wall tiles with non-wall below them become wall-faces (facing down)
                 if (i < height - 1 && arr[(i + 1) * width + j] !== wallTileId) {
-                    finalArr[(i + 1) * width + j] = wallFaceTileId;
+                    finalArr[i * width + j] = wallFaceTileId;
                 }
                 // Wall tiles with non-wall above them become half-walls
                 else if (i > 0 && arr[(i - 1) * width + j] !== wallTileId) {
-                    finalArr[(i - 1) * width + j] = halfWallTileId;
+                    finalArr[i * width + j] = halfWallTileId;
                 }
             }
         }
