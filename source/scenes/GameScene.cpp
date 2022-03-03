@@ -124,6 +124,7 @@ void GameScene::update(float timestep) {
   InputController::get()->update();
   // Movement
   _player->move(InputController::get<Movement>()->getMovement());
+//  CULog("%f", _player->getPlayerNode()->getPositionY());
 
   std::shared_ptr<Attack> att = InputController::get<Attack>();
   _player->attack(att->isAttacking(), _sword);
