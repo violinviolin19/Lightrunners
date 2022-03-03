@@ -3,7 +3,7 @@
 
 #include <cugl/cugl.h>
 
-class BasicTile : public cugl::scene2::TexturedNode {
+class BasicTile : public cugl::scene2::PolygonNode {
  public:
   /**
    * Creates an empty scene graph node with the degenerate texture.
@@ -11,33 +11,23 @@ class BasicTile : public cugl::scene2::TexturedNode {
    * This constructor should never be called directly, as this is an abstract
    * class.
    */
-  BasicTile() : TexturedNode() { _classname = "BasicTile"; }
+  BasicTile() { _classname = "BasicTile"; }
   /**
    * Deletes this node, releasing all resources.
    */
   ~BasicTile() { dispose(); }
 
   /**
-   * Disposes all of the resources used by this node.
+   * Performs a shallow copy of this Node into dst.
    *
-   * A disposed Node can be safely reinitialized. Any children owned by this
-   * node will be released.  They will be deleted if no other object owns them.
+   * No children from this node are copied, and no children of dst are
+   * modified. In addition, the parents of both Nodes are unchanged. However,
+   * all other attributes of this node are copied.
    *
-   * It is unsafe to call this on a Node that is still currently inside of
-   * a scene graph.
+   * @param dst   The Node to copy into
+   *
+   * @return A reference to dst for chaining.
    */
-  virtual void dispose() override { TexturedNode::dispose(); }
-
-  bool init() override { return TexturedNode::init(); }
-
-  bool initWithFile(const std::string& filename) override {
-    return TexturedNode::initWithFile(filename);
-  }
-
-  bool initWithTexture(const std::shared_ptr<cugl::Texture>& texture) override {
-    return TexturedNode::initWithTexture(texture);
-  }
-
   virtual std::shared_ptr<SceneNode> copy(
       const std::shared_ptr<SceneNode>& dst) const override {
     return TexturedNode::copy(dst);
@@ -110,6 +100,9 @@ class BasicTile : public cugl::scene2::TexturedNode {
   void setContentSize(const cugl::Size size) override {
     return TexturedNode::setContentSize(size);
   }
+
+  /** This macro disables the copy constructor (not allowed on scene graphs) */
+  CU_DISALLOW_COPY_AND_ASSIGN(BasicTile);
 };
 
 #endif  // MODELS_TILES_BASIC_TILE_H_

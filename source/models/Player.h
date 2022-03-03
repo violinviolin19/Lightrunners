@@ -15,6 +15,10 @@ class Player : public cugl::physics2::CapsuleObstacle {
   /** Force to be applied to the player */
   cugl::Vec2 _force;
 
+  /** Represents the offset between the center of the player and the center of
+   * the capsule obstacle. */
+  cugl::Vec2 _offset_from_center;
+
  public:
 #pragma mark Constructors
   /**

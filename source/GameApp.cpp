@@ -1,6 +1,6 @@
 #include "GameApp.h"
 
-#include "loaders/Scene2Loader.h"
+#include "loaders/CustomScene2Loader.h"
 
 void GameApp::onStartup() {
   _assets = cugl::AssetManager::alloc();
@@ -19,8 +19,8 @@ void GameApp::onStartup() {
   // Add asset loaders.
   _assets->attach<cugl::Texture>(cugl::TextureLoader::alloc()->getHook());
   _assets->attach<cugl::WidgetValue>(cugl::WidgetLoader::alloc()->getHook());
-  // Custom Scene2Loader
-  _assets->attach<cugl::scene2::SceneNode>(Scene2Loader::alloc()->getHook());
+  _assets->attach<cugl::scene2::SceneNode>(
+      cugl::CustomScene2Loader::alloc()->getHook());
 
   // Create a "loading" screen.
   _loaded = false;

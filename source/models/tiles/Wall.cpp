@@ -7,13 +7,20 @@ bool Wall::initWithData(const cugl::Scene2Loader* loader,
     return false;
   }
 
-  if (!data) return TexturedNode::init();
-  if (!TexturedNode::initWithData(loader, data)) return false;
+  if (!data) return BasicTile::init();
+  return BasicTile::initWithData(loader, data);
+}
 
-  BoxObstacle::init(TexturedNode::getPosition(),
-                    TexturedNode::getContentSize());
-  BoxObstacle::setName(_classname.c_str());
-  BoxObstacle::setBodyType(b2BodyType::b2_staticBody);
+std::shared_ptr<cugl::physics2::BoxObstacle> Wall::initBox2d() {
+  _obstacle = cugl::physics2::BoxObstacle::alloc(
+      BasicTile::getPosition(),
+      BasicTile::getContentSize() * BasicTile::getScale());
 
-  return true;
+  if (_obstacle != nullptr) {
+    _obstacle->setPosition(BasicTile::getPosition());
+    _obstacle->setName(_classname.c_str());
+    _obstacle->setBodyType(b2BodyType::b2_staticBody);
+  }
+
+  return _obstacle;
 }

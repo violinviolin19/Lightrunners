@@ -1,7 +1,7 @@
 #include "BasicTile.h"
 
 bool BasicTile::initWithData(const cugl::Scene2Loader* loader,
-                             const std::shared_ptr<JsonValue>& data) {
+                             const std::shared_ptr<cugl::JsonValue>& data) {
   if (_texture != nullptr) {
     CUAssertLog(false, "%s is already initialized", _classname.c_str());
     return false;
@@ -9,5 +9,5 @@ bool BasicTile::initWithData(const cugl::Scene2Loader* loader,
 
   if (!data) return init();
 
-  return TexturedNode::initWithData(loader, data);
+  return PolygonNode::initWithData(loader, data);
 }

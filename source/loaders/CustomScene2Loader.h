@@ -1,8 +1,11 @@
-#ifndef LOADERS_SCENE_2_LOADER_H_
-#define LOADERS_SCENE_2_LOADER_H_
-#include <cugl/assets/CULoader.h>
+#ifndef LOADERS_CUSTOM_SCENE_2_LOADER_H_
+#define LOADERS_CUSTOM_SCENE_2_LOADER_H_
+#include <cugl/assets/CUScene2Loader.h>
 #include <cugl/physics2/cu_physics2.h>
-#include <cugl/scene2/graph/CUSceneNode.h>
+
+#include "../models/tiles/BasicTile.h"
+
+namespace cugl {
 
 /**
  * This class is a specific implementation of Loader<Node>
@@ -21,71 +24,12 @@
  * asset manager. Use the method {@link getHook()} to get the appropriate
  * pointer for attaching the loader.
  */
-class Scene2Loader : public cugl::Loader<cugl::scene2::SceneNode> {
+class CustomScene2Loader : public Scene2Loader {
  private:
   /** This macro disables the copy constructor (not allowed on assets) */
-  CU_DISALLOW_COPY_AND_ASSIGN(Scene2Loader);
-  std::vector<std::shared_ptr<cugl::physics2::BoxObstacle>> _tile_box2d;
+  CU_DISALLOW_COPY_AND_ASSIGN(CustomScene2Loader);
 
- protected:
-  /**
-   * This is an enumeration for identifying scene node types.
-   *
-   * Each time you add a new UI widget, it should be added to this list.
-   */
-  enum class Widget {
-    /** The base Node type */
-    NODE,
-    /** An image (PolygoNode) type */
-    IMAGE,
-    /** A rectangular PolygonNode type */
-    SOLID,
-    /** A (complex) PolygonNode type */
-    POLY,
-    /** A PathNode type */
-    PATH,
-    /** A WireNode type */
-    WIRE,
-    /** An animation node type */
-    ANIMATE,
-    /** A nine-patch type */
-    NINE,
-    /** A text label (uneditable) type */
-    LABEL,
-    /** A button type */
-    BUTTON,
-    /** A progress bar type */
-    PROGRESS,
-    /** A slider type */
-    SLIDER,
-    /** A scroll pane */
-    SCROLL,
-    /** A single-line text field type */
-    TEXTFIELD,
-    /** A Node implied by an imported file */
-    EXTERNAL_IMPORT,
-    /** An unsupported type */
-    UNKNOWN
-  };
-
-  /**
-   * This is an enumeration for identifying layout managers.
-   *
-   * Each time you add a new layout, it should be added to this list.
-   */
-  enum class Form {
-    /** The default layout manager, using absolute position */
-    NONE,
-    /** A layout manager using anchor points */
-    ANCHORED,
-    /** A float layout manager */
-    FLOAT,
-    /** A grid layout manager */
-    GRID,
-    /** An unsupported form */
-    UNKNOWN
-  };
-
+ public:
   /**
    * This is an enumeration for identifying tiles types.
    *
@@ -100,32 +44,46 @@ class Scene2Loader : public cugl::Loader<cugl::scene2::SceneNode> {
     UNKOWN
   };
 
-  /** The type map for managing constructors */
-  std::unordered_map<std::string, Widget> _types;
-
+ protected:
   /** The type map for managing tiles */
   std::unordered_map<std::string, Tile> _tile_types;
 
-  /** The type map for managing layout */
-  std::unordered_map<std::string, Form> _forms;
+  /** A list of all the box2d enabled tiles that were created. */
+  std::unordered_map<std::string, std::vector<std::shared_ptr<BasicTile>>>
+      _tile_box2d;
 
   /**
-   * Records the given Node with this loader, so that it may be unloaded later.
+   * Initializes a new asset loader.
    *
-   * This method finishes the asset loading started in {@link load}. This
-   * step is not safe to be done in a separate thread, as it accesses the
-   * main asset table.  Therefore, it takes place in the main CUGL thread
-   * via {@link Application#schedule}.  The scene is stored using the name
-   * of the root Node as a key.
+   * This method bootstraps the loader with any initial resources that it
+   * needs to load assets. Attempts to load an asset before this method is
+   * called will fail.
    *
-   * This method supports an optional callback function which reports whether
-   * the asset was successfully materialized.
+   * This loader will have no associated threads. That means any asynchronous
+   * loading will fail until a thread is provided via {@link setThreadPool}.
    *
-   * @param node      The scene asset
-   * @param callback  An optional callback for asynchronous loading
+   * This method is abstract and should be overridden in the specific
+   * implementation for each asset.
+   *
+   * @return true if the asset loader was initialized successfully
    */
-  void materialize(const std::shared_ptr<cugl::scene2::SceneNode>& node,
-                   cugl::LoaderCallback callback);
+  virtual bool init() override { return init(nullptr); }
+
+  /**
+   * Initializes a new asset loader.
+   *
+   * This method bootstraps the loader with any initial resources that it
+   * needs to load assets. Attempts to load an asset before this method is
+   * called will fail.
+   *
+   * This method is abstract and should be overridden in the specific
+   * implementation for each asset.
+   *
+   * @param threads   The thread pool for asynchronous loading support
+   *
+   * @return true if the asset loader was initialized successfully
+   */
+  virtual bool init(const std::shared_ptr<ThreadPool>& threads) override;
 
   /**
    * Internal method to support asset loading.
@@ -162,7 +120,9 @@ class Scene2Loader : public cugl::Loader<cugl::scene2::SceneNode> {
    * @return true if the asset was successfully loaded
    */
   virtual bool read(const std::string key, const std::string source,
-                    cugl::LoaderCallback callback, bool async) override;
+                    LoaderCallback callback, bool async) override {
+    return Scene2Loader::read(key, source, callback, async);
+  }
 
   /**
    * Internal method to support asset loading.
@@ -180,8 +140,11 @@ class Scene2Loader : public cugl::Loader<cugl::scene2::SceneNode> {
    *
    * @return true if the asset was successfully loaded
    */
-  virtual bool read(const std::shared_ptr<cugl::JsonValue>& json,
-                    cugl::LoaderCallback callback, bool async) override;
+  virtual bool read(const std::shared_ptr<JsonValue>& json,
+                    LoaderCallback callback, bool async) override {
+    return Scene2Loader::read(json, callback, async);
+  }
+
   /**
    * Unloads the asset for the given directory entry
    *
@@ -198,7 +161,9 @@ class Scene2Loader : public cugl::Loader<cugl::scene2::SceneNode> {
    *
    * @return true if the asset was successfully unloaded
    */
-  virtual bool purge(const std::shared_ptr<cugl::JsonValue>& json) override;
+  virtual bool purge(const std::shared_ptr<JsonValue>& json) override {
+    return Scene2Loader::purge(json);
+  }
 
   /**
    * Attaches all generate nodes to the asset dictionary.
@@ -212,23 +177,8 @@ class Scene2Loader : public cugl::Loader<cugl::scene2::SceneNode> {
    *
    * @return true if the node was successfully attached
    */
-  bool attach(const std::string& key,
-              const std::shared_ptr<cugl::scene2::SceneNode>& node);
-
-  /**
-   * Translates the JSON of a widget to the JSON of the node that it encodes.
-   *
-   * If this scene is built before the JSON of any used widgets have been
-   * loaded, this will fail.
-   *
-   * @param json      The JSON object specifying the widget's file and the
-   * values for its exposed variables
-   *
-   * @return the JSON loaded from the widget file with all variables set based
-   * on the values presented in json.
-   */
-  std::shared_ptr<cugl::JsonValue> getWidgetJson(
-      const std::shared_ptr<cugl::JsonValue>& json) const;
+  virtual bool attach(const std::string& key,
+                      const std::shared_ptr<scene2::SceneNode>& node) override;
 
  public:
 #pragma mark -
@@ -239,40 +189,7 @@ class Scene2Loader : public cugl::Loader<cugl::scene2::SceneNode> {
    * NEVER USE A CONSTRUCTOR WITH NEW. If you want to allocate a loader on
    * the heap, use one of the static constructors instead.
    */
-  Scene2Loader() {}
-
-  /**
-   * Initializes a new asset loader.
-   *
-   * This method bootstraps the loader with any initial resources that it
-   * needs to load assets. Attempts to load an asset before this method is
-   * called will fail.
-   *
-   * This loader will have no associated threads. That means any asynchronous
-   * loading will fail until a thread is provided via {@link setThreadPool}.
-   *
-   * This method is abstract and should be overridden in the specific
-   * implementation for each asset.
-   *
-   * @return true if the asset loader was initialized successfully
-   */
-  virtual bool init() override { return init(nullptr); }
-
-  /**
-   * Initializes a new asset loader.
-   *
-   * This method bootstraps the loader with any initial resources that it
-   * needs to load assets. Attempts to load an asset before this method is
-   * called will fail.
-   *
-   * This method is abstract and should be overridden in the specific
-   * implementation for each asset.
-   *
-   * @param threads   The thread pool for asynchronous loading support
-   *
-   * @return true if the asset loader was initialized successfully
-   */
-  virtual bool init(const std::shared_ptr<cugl::ThreadPool>& threads) override;
+  CustomScene2Loader() {}
 
   /**
    * Disposes all resources and assets of this loader
@@ -285,12 +202,10 @@ class Scene2Loader : public cugl::Loader<cugl::scene2::SceneNode> {
    * Once the loader is disposed, any attempts to load a new asset will
    * fail.  You must reinitialize the loader to begin loading assets again.
    */
-  void dispose() override {
-    _manager = nullptr;
-    _assets.clear();
-    _loader = nullptr;
-    _types.clear();
-    _forms.clear();
+  virtual void dispose() override {
+    Scene2Loader::dispose();
+    _tile_box2d.clear();
+    _tile_types.clear();
   }
 
   /**
@@ -305,8 +220,9 @@ class Scene2Loader : public cugl::Loader<cugl::scene2::SceneNode> {
    *
    * @return a newly allocated texture loader.
    */
-  static std::shared_ptr<Scene2Loader> alloc() {
-    std::shared_ptr<Scene2Loader> result = std::make_shared<Scene2Loader>();
+  static std::shared_ptr<CustomScene2Loader> alloc() {
+    std::shared_ptr<CustomScene2Loader> result =
+        std::make_shared<CustomScene2Loader>();
     return (result->init() ? result : nullptr);
   }
 
@@ -321,9 +237,10 @@ class Scene2Loader : public cugl::Loader<cugl::scene2::SceneNode> {
    *
    * @return a newly allocated texture loader.
    */
-  static std::shared_ptr<Scene2Loader> alloc(
-      const std::shared_ptr<cugl::ThreadPool>& threads) {
-    std::shared_ptr<Scene2Loader> result = std::make_shared<Scene2Loader>();
+  static std::shared_ptr<CustomScene2Loader> alloc(
+      const std::shared_ptr<ThreadPool>& threads) {
+    std::shared_ptr<CustomScene2Loader> result =
+        std::make_shared<CustomScene2Loader>();
     return (result->init(threads) ? result : nullptr);
   }
 
@@ -356,19 +273,20 @@ class Scene2Loader : public cugl::Loader<cugl::scene2::SceneNode> {
    *
    * @return the SDL_Surface with the texture information
    */
-  std::shared_ptr<cugl::scene2::SceneNode> build(
+  virtual std::shared_ptr<scene2::SceneNode> build(
       const std::string& key,
-      const std::shared_ptr<cugl::JsonValue>& json) const;
+      const std::shared_ptr<JsonValue>& json) const override;
 
 #pragma mark CustomGetters
 
   /**
    * @return The list of box2d objects loaded in the scene2 graph.
    */
-  std::vector<std::shared_ptr<cugl::physics2::BoxObstacle>> getTileBox2d()
-      const {
-    return _tile_box2d;
+  std::vector<std::shared_ptr<BasicTile>> getTiles(std::string type) const {
+    return _tile_box2d.at(type);
   }
 };
 
-#endif /* LOADERS_SCENE_2_LOADER_H_ */
+}  // namespace cugl
+
+#endif /* LOADERS_CUSTOM_SCENE_2_LOADER_H_ */

@@ -5,9 +5,12 @@
 
 #include "BasicTile.h"
 
-class Wall : public BasicTile, public cugl::physics2::BoxObstacle {
+class Wall : public BasicTile {
+ protected:
+  std::shared_ptr<cugl::physics2::BoxObstacle> _obstacle;
+
  public:
-  Wall() : BasicTile(), BoxObstacle() { _classname = "Wall"; }
+  Wall() : BasicTile() { _classname = "Wall"; }
   ~Wall() { dispose(); }
 
   /**
@@ -57,11 +60,17 @@ class Wall : public BasicTile, public cugl::physics2::BoxObstacle {
   static std::shared_ptr<SceneNode> allocWithData(
       const cugl::Scene2Loader* loader,
       const std::shared_ptr<cugl::JsonValue>& data) {
-    std::shared_ptr<BasicTile> result = std::make_shared<BasicTile>();
+    std::shared_ptr<Wall> result = std::make_shared<Wall>();
     if (!result->initWithData(loader, data)) {
       result = nullptr;
     }
     return std::dynamic_pointer_cast<SceneNode>(result);
+  }
+
+  virtual std::shared_ptr<cugl::physics2::BoxObstacle> initBox2d();
+
+  std::shared_ptr<cugl::physics2::BoxObstacle> getObstacle() {
+    return _obstacle;
   }
 };
 
