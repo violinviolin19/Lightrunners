@@ -12,10 +12,13 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
   int _health;
 
   /** The scene graph node for the grunt. */
-  std::shared_ptr<cugl::scene2::SceneNode> _grunt_node;
+  std::shared_ptr<cugl::scene2::SpriteNode> _grunt_node;
 
   /** Force to be applied to the grunt. */
   cugl::Vec2 _force;
+
+  /** Grunt direction. */
+  bool _facing_left;
 
  public:
 #pragma mark Constructors
@@ -86,7 +89,7 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
    *
    * @param node  The scene graph node representing this grunt.
    */
-  void setGruntNode(const std::shared_ptr<cugl::scene2::PolygonNode>& node);
+  void setGruntNode(const std::shared_ptr<cugl::scene2::SpriteNode>& node);
 
 #pragma mark Movement
   /**
@@ -96,5 +99,12 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
    * @param forwardY Amount to move in the y direction.
    */
   void move(float forwardX, float forwardY);
+
+  /**
+   * Changes the direction of the grunt.
+   *
+   * @param facing_left is true if character should face left, false otherwise.
+   */
+  void setFacingLeft(bool facing_left);
 };
 #endif /* Player_hpp */

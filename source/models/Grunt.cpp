@@ -23,6 +23,7 @@ bool Grunt::init(const cugl::Vec2 pos, const cugl::Size size, string name) {
 
   _grunt_node = nullptr;
   _health = 100;
+  _facing_left = false;
 
   setDensity(0.01f);
   setFriction(0.0f);
@@ -40,7 +41,7 @@ bool Grunt::init(const cugl::Vec2 pos, const cugl::Size size, string name) {
  * @param node the node to set it to.
  */
 void Grunt::setGruntNode(
-    const std::shared_ptr<cugl::scene2::PolygonNode>& node) {
+    const std::shared_ptr<cugl::scene2::SpriteNode>& node) {
   _grunt_node = node;
 }
 
@@ -68,4 +69,12 @@ void Grunt::move(float forwardX, float forwardY) {
   setVY(1000 * forwardY);
   if (forwardX == 0) setVX(0);
   if (forwardY == 0) setVY(0);
+}
+
+void Grunt::setFacingLeft(bool facing_left) {
+  // flip texture if direction has changed
+  if (_facing_left != facing_left) {
+    _facing_left = facing_left;
+    _grunt_node->flipHorizontal(_facing_left);
+  }
 }
