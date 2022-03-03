@@ -90,6 +90,8 @@ bool Scene2Loader::init(const std::shared_ptr<ThreadPool>& threads) {
     _types["wireframe"] = Widget::WIRE;
     _types["wire frame"] = Widget::WIRE;
     _types["sprite"] = Widget::ANIMATE;
+    _types["order"] = Widget::ORDER;
+    _types["canvas"] = Widget::CANVAS;
     _types["ninepatch"] = Widget::NINE;
     _types["label"] = Widget::LABEL;
     _types["button"] = Widget::BUTTON;
@@ -99,7 +101,7 @@ bool Scene2Loader::init(const std::shared_ptr<ThreadPool>& threads) {
     _types["scroll pane"] = Widget::SCROLL;
     _types["textfield"] = Widget::TEXTFIELD;
     _types["text field"] = Widget::TEXTFIELD;
-	_types["widget"] = Widget::EXTERNAL_IMPORT;
+  _types["widget"] = Widget::EXTERNAL_IMPORT;
 
     // Define the supported layouts
     _forms["none"] = Form::NONE;
@@ -173,6 +175,12 @@ std::shared_ptr<scene2::SceneNode> Scene2Loader::build(const std::string& key,
     case Widget::WIRE:
         node = scene2::WireNode::allocWithData(this,data);
         break;
+    case Widget::ORDER:
+        node = scene2::OrderedNode::allocWithData(this,data);
+        break;
+    case Widget::CANVAS:
+        node = scene2::CanvasNode::allocWithData(this,data);
+        break;
     case Widget::ANIMATE:
         node = scene2::SpriteNode::allocWithData(this,data);
         break;
@@ -197,11 +205,11 @@ std::shared_ptr<scene2::SceneNode> Scene2Loader::build(const std::string& key,
     case Widget::TEXTFIELD:
         node = scene2::TextField::allocWithData(this,data);
         break;
-	case Widget::EXTERNAL_IMPORT:
-	{
-		const std::shared_ptr<JsonValue> widgetJson = getWidgetJson(json);
-		return build(key, widgetJson);
-	}
+  case Widget::EXTERNAL_IMPORT:
+  {
+    const std::shared_ptr<JsonValue> widgetJson = getWidgetJson(json);
+    return build(key, widgetJson);
+  }
     case Widget::UNKNOWN:
         break;
     }
@@ -240,29 +248,29 @@ std::shared_ptr<scene2::SceneNode> Scene2Loader::build(const std::string& key,
     node->setLayout(layout);
     
     std::shared_ptr<JsonValue> children = json->get("children");
-	if (children != nullptr) {
-		for (int ii = 0; ii < children->size(); ii++) {
-			std::shared_ptr<JsonValue> item = children->get(ii);
-			std::string key = item->key();
-			if (key != "comment") {
-				// If this is a widget, use the loaded widget json instead
-				if (item->has("type") && item->getString("type") == "Widget") {
-					item = getWidgetJson(item);
-				}
+  if (children != nullptr) {
+    for (int ii = 0; ii < children->size(); ii++) {
+      std::shared_ptr<JsonValue> item = children->get(ii);
+      std::string key = item->key();
+      if (key != "comment") {
+        // If this is a widget, use the loaded widget json instead
+        if (item->has("type") && item->getString("type") == "Widget") {
+          item = getWidgetJson(item);
+        }
 
-				std::shared_ptr<scene2::SceneNode> kid = build(key, item);
+        std::shared_ptr<scene2::SceneNode> kid = build(key, item);
                 if (nonrelative) {
                     kid->setRelativeColor(false);
                 }
-				node->addChild(kid);
+        node->addChild(kid);
 
-				if (layout != nullptr && item->has("layout")) {
-					std::shared_ptr<JsonValue> posit = item->get("layout");
-					layout->add(key, posit);
-				}
-			}
-		}
-	}
+        if (layout != nullptr && item->has("layout")) {
+          std::shared_ptr<JsonValue> posit = item->get("layout");
+          layout->add(key, posit);
+        }
+      }
+    }
+  }
     
     // Do not perform layout yet.
     node->setName(key);
@@ -280,21 +288,21 @@ std::shared_ptr<scene2::SceneNode> Scene2Loader::build(const std::string& key,
  * @return the JSON loaded from the widget file with all variables set based on the values presented in json.
  */
 std::shared_ptr<JsonValue> Scene2Loader::getWidgetJson(const std::shared_ptr<JsonValue>& json) const {
-	std::shared_ptr<JsonValue> data = json->get("data");
-	std::string widgetSource = data->getString("key");
-	std::shared_ptr<JsonValue> widgetVars = data->get("variables");
-	std::shared_ptr<JsonValue> layout = json->get("layout");
+  std::shared_ptr<JsonValue> data = json->get("data");
+  std::string widgetSource = data->getString("key");
+  std::shared_ptr<JsonValue> widgetVars = data->get("variables");
+  std::shared_ptr<JsonValue> layout = json->get("layout");
 
-	const std::shared_ptr<WidgetValue> widget = _manager->get<WidgetValue>(widgetSource);
+  const std::shared_ptr<WidgetValue> widget = _manager->get<WidgetValue>(widgetSource);
 
-	CUAssertLog(widget != nullptr, "No widget found with name %s", widgetSource.c_str());
+  CUAssertLog(widget != nullptr, "No widget found with name %s", widgetSource.c_str());
 
-	const std::shared_ptr<JsonValue> widgetJson = widget->getJson();
+  const std::shared_ptr<JsonValue> widgetJson = widget->getJson();
 
-	std::shared_ptr<JsonValue> variables = widgetJson->get("variables");
-	std::shared_ptr<JsonValue> contents = widgetJson->get("contents");
-	std::string contentString = contents->toString();
-	std::shared_ptr<JsonValue> contentCopy = JsonValue::allocWithJson(contentString);
+  std::shared_ptr<JsonValue> variables = widgetJson->get("variables");
+  std::shared_ptr<JsonValue> contents = widgetJson->get("contents");
+  std::string contentString = contents->toString();
+  std::shared_ptr<JsonValue> contentCopy = JsonValue::allocWithJson(contentString);
     if (widgetVars) {
         for (int ii = 0; ii < widgetVars->size(); ii++) {
             auto child = widgetVars->get(ii);
@@ -319,23 +327,23 @@ std::shared_ptr<JsonValue> Scene2Loader::getWidgetJson(const std::shared_ptr<Jso
                 }
             }
         }
-	}
+  }
 
-	// reassign the layout if it exists
-	if (layout != nullptr) {
-		std::shared_ptr<JsonValue> contentsLayout = contentCopy->get("layout");
-		if (contentsLayout == nullptr) {
-			contentCopy->appendChild("layout", std::make_shared<JsonValue>());
-			contentsLayout = contentCopy->get("layout");
-		}
-		contentsLayout->merge(layout);
-	}
+  // reassign the layout if it exists
+  if (layout != nullptr) {
+    std::shared_ptr<JsonValue> contentsLayout = contentCopy->get("layout");
+    if (contentsLayout == nullptr) {
+      contentCopy->appendChild("layout", std::make_shared<JsonValue>());
+      contentsLayout = contentCopy->get("layout");
+    }
+    contentsLayout->merge(layout);
+  }
 
-	// now recursively check to see if this was a widget
-	if (contentCopy->has("type") && contentCopy->getString("type") == "Widget") {
-		return getWidgetJson(contentCopy);
-	}
-	return contentCopy;
+  // now recursively check to see if this was a widget
+  if (contentCopy->has("type") && contentCopy->getString("type") == "Widget") {
+    return getWidgetJson(contentCopy);
+  }
+  return contentCopy;
 }
 
 
@@ -530,6 +538,5 @@ bool Scene2Loader::attach(const std::string& key, const std::shared_ptr<scene2::
     }
     return success;
 }
-
 
 

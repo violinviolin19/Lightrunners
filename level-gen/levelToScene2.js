@@ -21,13 +21,20 @@ const levelToScene2 = (fileName) => {
         "variables": {},
         "contents": {
             "comments": `This is the root node for the world scene for level ${level}.`,
-            "type": "Node",
+            "type": "Order",
+            "data": {
+                "order": "ascend",
+            },
             "format": {
                 "type": "Anchored"
             },
+            "layout": {
+                "x_anchor": "center",
+                "y_anchor": "middle"
+            },
             "children": {
                 "tiles": {
-                    "type": "Solid",
+                    "type": "Node",
                     "format": {
                         "type": "Grid",
                         "width": width,
@@ -36,9 +43,8 @@ const levelToScene2 = (fileName) => {
                     "data": {
                         "anchor": [0.5, 0.5],
                         "size": [pixelWidth * width * tileScale, pixelHeight * height * tileScale],
-                        "color": backgroundColor
                     },
-                    "children": Object.assign({}, ...layout.map((tileTypeId, index) => {
+                    "children": Object.assign({}, ...layout.reduce((acc, tileTypeId, index) => {
                         let row = Math.floor(index / width);
                         let col = index % width;
                         let obj = {};
@@ -49,40 +55,49 @@ const levelToScene2 = (fileName) => {
                                 "type": "Anchored"
                             },
                             "data": {
-                                "texture": tilesIdsThatShowFloor.includes(tileTypeId) ? `floor-tile-${floorTileId}` : `floor-tile-${tileTypeId}`,
+                                "texture": `floor-tile-${tileTypeId}`,
                                 "anchor": [0.5, 0.5],
-                                "scale": tileScale
+                                "scale": tileScale,
+                                "priority": row,
+                                // "size": [80, 64]
                             },
                             "layout": {
-                                "x_index": row,
-                                "y_index": col,
-                                "x_anchor": "center",
-                                "y_anchor": "middle"
+                                "x_index": col,
+                                "y_index": height - row,
+                                "x_anchor": "left",
+                                "y_anchor": "bottom"
                             }
                         }
+                        obj[`tile-(${row}-${col})`] = tileObj;
+                        acc.push(obj);
+
                         if (tilesIdsThatShowFloor.includes(tileTypeId)) {
-                            tileObj["children"] = {}
-                            tileObj["children"][`tile-(${row}-${col})-floor`] = {
+                            let floorObj = {};
+                            let floorTileObj = {};
+
+                            floorTileObj = {
                                 "type": "Image",
                                 "format": {
                                     "type": "Anchored"
                                 },
                                 "data": {
-                                    "texture": `floor-tile-${tileTypeId}`,
+                                    "texture": `floor-tile-${floorTileId}`,
                                     "anchor": [0.5, 0.5],
-                                    "scale": 1
+                                    "scale": tileScale,
+                                    "priority": 0,
                                 },
                                 "layout": {
-                                    "x_index": row,
-                                    "y_index": col,
-                                    "x_anchor": "center",
-                                    "y_anchor": "middle"
+                                    "x_index": col,
+                                    "y_index": height - row,
+                                    "x_anchor": "left",
+                                    "y_anchor": "bottom"
                                 }
                             }
+                            floorObj[`tile-(${row}-${col})-floor`] = floorTileObj;
+                            acc.push(floorObj);
                         }
-                        obj[`tile-(${row}-${col})`] = tileObj;
-                        return obj;
-                    })),
+                        return acc;
+                    }, [])),
                     "layout" : {
                         "x_anchor" : "center",
                         "y_anchor" : "middle"
@@ -92,6 +107,7 @@ const levelToScene2 = (fileName) => {
         }
     }
 }
+
 const saveToFile = (fileName, scene2Obj) => {
     const data = JSON.stringify(scene2Obj, null, 2);
 

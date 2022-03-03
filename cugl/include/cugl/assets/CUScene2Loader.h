@@ -98,6 +98,10 @@ protected:
         PATH,
         /** A WireNode type */
         WIRE,
+        /** An ordered node (for non pre-traversals) */
+        ORDER,
+        /** A canvas node for vector graphics */
+        CANVAS,
         /** An animation node type */
         ANIMATE,
         /** A nine-patch type */
@@ -114,8 +118,8 @@ protected:
         SCROLL,
         /** A single-line text field type */
         TEXTFIELD,
-		/** A Node implied by an imported file */
-		EXTERNAL_IMPORT,
+    /** A Node implied by an imported file */
+    EXTERNAL_IMPORT,
         /** An unsupported type */
         UNKNOWN
     };
@@ -248,16 +252,16 @@ protected:
      */
     bool attach(const std::string& key, const std::shared_ptr<scene2::SceneNode>& node);
 
-	/**
-	 * Translates the JSON of a widget to the JSON of the node that it encodes.
-	 *
-	 * If this scene is built before the JSON of any used widgets have been loaded, this will fail.
-	 *
-	 * @param json      The JSON object specifying the widget's file and the values for its exposed variables
-	 *
-	 * @return the JSON loaded from the widget file with all variables set based on the values presented in json.
-	 */
-	std::shared_ptr<JsonValue> getWidgetJson(const std::shared_ptr<JsonValue>& json) const;
+  /**
+   * Translates the JSON of a widget to the JSON of the node that it encodes.
+   *
+   * If this scene is built before the JSON of any used widgets have been loaded, this will fail.
+   *
+   * @param json      The JSON object specifying the widget's file and the values for its exposed variables
+   *
+   * @return the JSON loaded from the widget file with all variables set based on the values presented in json.
+   */
+  std::shared_ptr<JsonValue> getWidgetJson(const std::shared_ptr<JsonValue>& json) const;
     
 public:
 #pragma mark -
