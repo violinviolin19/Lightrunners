@@ -46,6 +46,15 @@ void Grunt::setGruntNode(
 }
 
 /**
+ * Gets the grunt scene graph node.
+ *
+ * @return node the node that has been set.
+ */
+std::shared_ptr<cugl::scene2::SpriteNode>& Grunt::getGruntNode() {
+  return _grunt_node;
+}
+
+/**
  * Update the scene graph.
  *
  * @param delta the timing value.
