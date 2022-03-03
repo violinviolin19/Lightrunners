@@ -28,6 +28,9 @@
 		D52E674027BF305A00F8E2B8 /* GameApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D52E673327BF305A00F8E2B8 /* GameApp.cpp */; };
 		D52E674127BF305A00F8E2B8 /* GameApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D52E673327BF305A00F8E2B8 /* GameApp.cpp */; };
 		D52E674227BF305A00F8E2B8 /* GameApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D52E673327BF305A00F8E2B8 /* GameApp.cpp */; };
+		D579719E27D02310008FCC5E /* Grunt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D579719927D0230F008FCC5E /* Grunt.cpp */; };
+		D579719F27D02310008FCC5E /* Grunt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D579719927D0230F008FCC5E /* Grunt.cpp */; };
+		D57971A027D02310008FCC5E /* Grunt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D579719927D0230F008FCC5E /* Grunt.cpp */; };
 		D5EB744E27C335C7007D157D /* Movement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5EB744C27C335C7007D157D /* Movement.cpp */; };
 		D5EB744F27C335C7007D157D /* Movement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5EB744C27C335C7007D157D /* Movement.cpp */; };
 		D5EB745027C335C7007D157D /* Movement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5EB744C27C335C7007D157D /* Movement.cpp */; };
@@ -137,6 +140,8 @@
 		D52E673227BF305900F8E2B8 /* Action.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Action.h; sourceTree = "<group>"; };
 		D52E673327BF305A00F8E2B8 /* GameApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameApp.cpp; sourceTree = "<group>"; };
 		D52E674827BF354400F8E2B8 /* Attack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Attack.h; sourceTree = "<group>"; };
+		D579719927D0230F008FCC5E /* Grunt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Grunt.cpp; sourceTree = "<group>"; };
+		D579719D27D0230F008FCC5E /* Grunt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Grunt.h; sourceTree = "<group>"; };
 		D5EB744C27C335C7007D157D /* Movement.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Movement.cpp; sourceTree = "<group>"; };
 		D5EB744D27C335C7007D157D /* Movement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Movement.h; sourceTree = "<group>"; };
 		EB07CFB021EFF3EF000CB3A3 /* DeviceMargins.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DeviceMargins.plist; sourceTree = "<group>"; };
@@ -259,6 +264,8 @@
 		5728944327CECB5800F9BBA5 /* models */ = {
 			isa = PBXGroup;
 			children = (
+				D579719927D0230F008FCC5E /* Grunt.cpp */,
+				D579719D27D0230F008FCC5E /* Grunt.h */,
 				5737DA7727C5E62E00D1692A /* Player.cpp */,
 				5728944727CECB7500F9BBA5 /* Player.h */,
 			);
@@ -597,6 +604,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5737DA7B27C5E62E00D1692A /* Player.cpp in Sources */,
+				D57971A027D02310008FCC5E /* Grunt.cpp in Sources */,
 				D52E673C27BF305A00F8E2B8 /* InputController.cpp in Sources */,
 				D52E673F27BF305A00F8E2B8 /* Attack.cpp in Sources */,
 				D5EB745027C335C7007D157D /* Movement.cpp in Sources */,
@@ -612,6 +620,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5737DA7A27C5E62E00D1692A /* Player.cpp in Sources */,
+				D579719F27D02310008FCC5E /* Grunt.cpp in Sources */,
 				D52E673B27BF305A00F8E2B8 /* InputController.cpp in Sources */,
 				D52E673E27BF305A00F8E2B8 /* Attack.cpp in Sources */,
 				D5EB744F27C335C7007D157D /* Movement.cpp in Sources */,
@@ -627,6 +636,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5737DA7927C5E62E00D1692A /* Player.cpp in Sources */,
+				D579719E27D02310008FCC5E /* Grunt.cpp in Sources */,
 				D52E673A27BF305A00F8E2B8 /* InputController.cpp in Sources */,
 				D52E673D27BF305A00F8E2B8 /* Attack.cpp in Sources */,
 				D5EB744E27C335C7007D157D /* Movement.cpp in Sources */,

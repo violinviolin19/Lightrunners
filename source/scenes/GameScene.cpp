@@ -51,27 +51,37 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager> &assets) {
 void GameScene::dispose() { InputController::get()->dispose(); }
 
 void GameScene::populate(cugl::Size dim) {
-  // The player
+  // Initialize the player with texture and size, then add to world.
   std::shared_ptr<cugl::Texture> player = _assets->get<cugl::Texture>("player");
-  cugl::Size playerSize(player->getSize());
 
-  _player = Player::alloc(cugl::Vec2(dim.width / 2, dim.height / 2), playerSize,
-                          "Johnathan");
+  _player = Player::alloc(dim/2, cugl::Size(96, 96), "Johnathan");
 
-  auto player_n = cugl::scene2::SpriteNode::alloc(player, 1, 10);
+  auto player_n = cugl::scene2::SpriteNode::alloc(player, 3, 10);
   _player->setPlayerNode(player_n);
   _world_node->addChild(player_n);
   _world->addObstacle(_player);
     _world->addObstacle(_player->getSword());
+
+  // Initialize the grunt with texture and size, then add to world.
+  std::shared_ptr<cugl::Texture> grunt = _assets->get<cugl::Texture>("grunt");
+  cugl::Size gruntSize(grunt->getSize());
+
+  _grunt = Grunt::alloc(dim / 2.3f, gruntSize, "Grunt");
+
+  auto grunt_node = cugl::scene2::SpriteNode::alloc(grunt, 1, 1);
+  _grunt->setGruntNode(grunt_node);
+  _world_node->addChild(grunt_node);
+  _world->addObstacle(_grunt);
 }
 
 void GameScene::update(float timestep) {
   InputController::get()->update();
   // Movement
   std::shared_ptr<Movement> mvm = InputController::get<Movement>();
-  _player->move(mvm->getMovementX(), mvm->getMovementY());
     std::shared_ptr<Attack> att =InputController::get<Attack>();
     _player->attack(att->isAttacking());
+    _player->attack(att->isAttacking());
+    _grunt->move(-.5, 0);
   _world->update(timestep);
 
   // Animation

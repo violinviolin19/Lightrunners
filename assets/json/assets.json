@@ -1,153 +1,160 @@
 {
-	"textures": {
-		"close-normal": {
-			"file": "textures/CloseNormal.png",
-			"minfilter": "nearest",
-			"magfilter": "linear",
-			"wrapS": "clamp",
-			"wrapT": "clamp"
-		},
-		"close-selected": {
-			"file": "textures/CloseSelected.png",
-			"minfilter": "nearest",
-			"magfilter": "linear",
-			"wrapS": "clamp",
-			"wrapT": "clamp"
-		},
-		"joystick": {
-			"file": "textures/joystick.png",
-			"minfilter": "nearest",
-			"magfilter": "linear",
-			"wrapS": "clamp",
-			"wrapT": "clamp"
-		},
-		"joystick-base": {
-			"file": "textures/joystick-base.png",
-			"minfilter": "nearest",
-			"magfilter": "linear",
-			"wrapS": "clamp",
-			"wrapT": "clamp"
-		},
-		"attack": {
-			"file": "textures/attack.png",
-			"minfilter": "nearest",
-			"magfilter": "linear",
-			"wrapS": "clamp",
-			"wrapT": "clamp"
-		},
-    "player": {
-      "file": "textures/player.png"
+    "textures": {
+        "close-normal": {
+            "file": "textures/CloseNormal.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "close-selected": {
+            "file": "textures/CloseSelected.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "joystick": {
+            "file": "textures/joystick.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "joystick-base": {
+            "file": "textures/joystick-base.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "attack": {
+            "file": "textures/attack.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "player": {
+            "file": "textures/player.png"
+        },
+        "grunt": {
+            "file": "textures/grunt.png",
+            "minfilter": "nearest",
+            "magfilter": "nearest",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "floor-tile-0": {
+            "file": "textures/floor-tile-0.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "floor-tile-1": {
+            "file": "textures/floor-tile-1.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "floor-tile-2": {
+            "file": "textures/floor-tile-2.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "floor-tile-3": {
+            "file": "textures/floor-tile-3.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "floor-tile-4": {
+            "file": "textures/floor-tile-4.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "floor-tile-5": {
+            "file": "textures/floor-tile-5.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "floor-tile-6": {
+            "file": "textures/floor-tile-6.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "floor-tile-7": {
+            "file": "textures/floor-tile-7.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "floor-tile-8": {
+            "file": "textures/floor-tile-8.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "floor-tile-9": {
+            "file": "textures/floor-tile-9.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "floor-tile-10": {
+            "file": "textures/floor-tile-10.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "floor-tile-11": {
+            "file": "textures/floor-tile-11.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "floor-tile-12": {
+            "file": "textures/floor-tile-12.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        }
     },
-    "floor-tile-0": {
-      "file": "textures/floor-tile-0.png",
-      "minfilter": "nearest",
-      "magfilter": "linear",
-      "wrapS": "clamp",
-      "wrapT": "clamp"
+    "widgets": {
+        "ui-scene": "widgets/ui-scene.json",
+        "world-scene": "widgets/world-scene.json"
     },
-    "floor-tile-1": {
-      "file": "textures/floor-tile-1.png",
-      "minfilter": "nearest",
-      "magfilter": "linear",
-      "wrapS": "clamp",
-      "wrapT": "clamp"
-    },
-    "floor-tile-2": {
-      "file": "textures/floor-tile-2.png",
-      "minfilter": "nearest",
-      "magfilter": "linear",
-      "wrapS": "clamp",
-      "wrapT": "clamp"
-    },
-    "floor-tile-3": {
-      "file": "textures/floor-tile-3.png",
-      "minfilter": "nearest",
-      "magfilter": "linear",
-      "wrapS": "clamp",
-      "wrapT": "clamp"
-    },
-    "floor-tile-4": {
-      "file": "textures/floor-tile-4.png",
-      "minfilter": "nearest",
-      "magfilter": "linear",
-      "wrapS": "clamp",
-      "wrapT": "clamp"
-    },
-    "floor-tile-5": {
-      "file": "textures/floor-tile-5.png",
-      "minfilter": "nearest",
-      "magfilter": "linear",
-      "wrapS": "clamp",
-      "wrapT": "clamp"
-    },
-    "floor-tile-6": {
-      "file": "textures/floor-tile-6.png",
-      "minfilter": "nearest",
-      "magfilter": "linear",
-      "wrapS": "clamp",
-      "wrapT": "clamp"
-    },
-    "floor-tile-7": {
-      "file": "textures/floor-tile-7.png",
-      "minfilter": "nearest",
-      "magfilter": "linear",
-      "wrapS": "clamp",
-      "wrapT": "clamp"
-    },
-    "floor-tile-8": {
-      "file": "textures/floor-tile-8.png",
-      "minfilter": "nearest",
-      "magfilter": "linear",
-      "wrapS": "clamp",
-      "wrapT": "clamp"
-    },
-    "floor-tile-9": {
-      "file": "textures/floor-tile-9.png",
-      "minfilter": "nearest",
-      "magfilter": "linear",
-      "wrapS": "clamp",
-      "wrapT": "clamp"
-    },
-    "floor-tile-10": {
-      "file": "textures/floor-tile-10.png",
-      "minfilter": "nearest",
-      "magfilter": "linear",
-      "wrapS": "clamp",
-      "wrapT": "clamp"
-    },
-    "floor-tile-11": {
-      "file": "textures/floor-tile-11.png",
-      "minfilter": "nearest",
-      "magfilter": "linear",
-      "wrapS": "clamp",
-      "wrapT": "clamp"
-    },
-    "floor-tile-12": {
-      "file": "textures/floor-tile-12.png",
-      "minfilter": "nearest",
-      "magfilter": "linear",
-      "wrapS": "clamp",
-      "wrapT": "clamp"
+    "scene2s": {
+        "ui-scene": {
+            "type": "Widget",
+            "data": {
+                "key": "ui-scene",
+                "variables": {}
+            }
+        },
+        "world-scene": {
+            "type": "Widget",
+            "data": {
+                "key": "world-scene",
+                "variables": {}
+            }
+        }
     }
-	},
-	"widgets": {
-		"ui-scene": "widgets/ui-scene.json",
-    "world-scene": "widgets/world-scene.json"
-	},
-	"scene2s": {
-		"ui-scene": {
-			"type": "Widget",
-			"data": {
-        "key": "ui-scene",
-        "variables": {}
-			}
-		},
-    "world-scene": {
-      "type": "Widget",
-      "data": {
-        "key": "world-scene",
-        "variables": {}
-      }
-    }
-	}
 }
