@@ -128,6 +128,20 @@
       "magfilter": "linear",
       "wrapS": "clamp",
       "wrapT": "clamp"
+    },
+    "floor-tile-13": {
+      "file": "textures/floor-tile-13.png",
+      "minfilter": "nearest",
+      "magfilter": "linear",
+      "wrapS": "clamp",
+      "wrapT": "clamp"
+    },
+    "floor-tile-14": {
+      "file": "textures/floor-tile-14.png",
+      "minfilter": "nearest",
+      "magfilter": "linear",
+      "wrapS": "clamp",
+      "wrapT": "clamp"
     }
 	},
 	"widgets": {

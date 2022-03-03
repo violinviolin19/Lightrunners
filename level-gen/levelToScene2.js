@@ -6,16 +6,20 @@ if (args.length < 2) {
     process.exit(1)
 }
 
-const tilesIdsThatShowFloor = [2, 3, 4, 8, 9, 10, 11, 12];
 const floorTileId = 0;
+const wallTileId = 1;
+const halfWallTileId = 13;
+const wallFaceTileId = 14;
+const tilesIdsThatShowFloor = [2, 3, 4, 8, 9, 10, 11, 12];
+
+const pixelWidth = 64, pixelHeight = 64;
+const tileScale = 0.3;
 
 const levelToScene2 = (fileName) => {
     let jsonData = fs.readFileSync(fileName, 'utf-8');
     let data = JSON.parse(jsonData);
     const { level, width, height, layout } = data;
-    const backgroundColor = "#000000";
-    const pixelWidth = 64, pixelHeight = 64;
-    const tileScale = 0.4;
+    const layoutWithSpecialWallTiles = convertWallTiles(layout, width, height);
     
     return {
         "variables": {},
@@ -44,57 +48,36 @@ const levelToScene2 = (fileName) => {
                         "anchor": [0.5, 0.5],
                         "size": [pixelWidth * width * tileScale, pixelHeight * height * tileScale],
                     },
-                    "children": Object.assign({}, ...layout.reduce((acc, tileTypeId, index) => {
+                    "children": Object.assign({}, ...layoutWithSpecialWallTiles.reduce((acc, tileTypeId, index) => {
                         let row = Math.floor(index / width);
                         let col = index % width;
-                        let obj = {};
-                        let tileObj = {};
-                        tileObj = {
-                            "type": "Image",
-                            "format": {
-                                "type": "Anchored"
-                            },
-                            "data": {
-                                "texture": `floor-tile-${tileTypeId}`,
-                                "anchor": [0.5, 0.5],
-                                "scale": tileScale,
-                                "priority": row,
-                                // "size": [80, 64]
-                            },
-                            "layout": {
-                                "x_index": col,
-                                "y_index": height - row,
-                                "x_anchor": "left",
-                                "y_anchor": "bottom"
-                            }
+
+                        let anchorNode = getTileNode(col, row, width, height, tileTypeId, row);
+                        if (tileTypeId === wallTileId) {
+                            anchorNode["children"]["tile"]["layout"]["y_offset"] = 30 * tileScale;
                         }
-                        obj[`tile-(${row}-${col})`] = tileObj;
+                        if (tileTypeId === halfWallTileId) {
+                            anchorNode["children"]["tile"]["layout"]["y_offset"] = 8 * tileScale;
+                        }
+                        if (tileTypeId === wallFaceTileId) {
+                            anchorNode["children"]["tile"]["layout"]["y_offset"] = -8 * tileScale;
+
+                            let obj = {};
+                            const wallAnchorNode = getTileNode(col, row, width, height, halfWallTileId, row);
+                            wallAnchorNode["children"]["tile"]["layout"]["y_offset"] = 40 * tileScale;
+                            obj[`tile-(${row}-${col})-floor`] = wallAnchorNode;
+                            acc.push(obj);
+                        }
+
+                        let obj = {};
+                        obj[`tile-(${row}-${col})`] = anchorNode;
                         acc.push(obj);
 
                         if (tilesIdsThatShowFloor.includes(tileTypeId)) {
-                            let floorObj = {};
-                            let floorTileObj = {};
-
-                            floorTileObj = {
-                                "type": "Image",
-                                "format": {
-                                    "type": "Anchored"
-                                },
-                                "data": {
-                                    "texture": `floor-tile-${floorTileId}`,
-                                    "anchor": [0.5, 0.5],
-                                    "scale": tileScale,
-                                    "priority": 0,
-                                },
-                                "layout": {
-                                    "x_index": col,
-                                    "y_index": height - row,
-                                    "x_anchor": "left",
-                                    "y_anchor": "bottom"
-                                }
-                            }
-                            floorObj[`tile-(${row}-${col})-floor`] = floorTileObj;
-                            acc.push(floorObj);
+                            let obj = {};
+                            let floorAnchorNode = getTileNode(col, row, width, height, floorTileId, 0);
+                            obj[`tile-(${row}-${col})-floor`] = floorAnchorNode;
+                            acc.push(obj);
                         }
                         return acc;
                     }, [])),
@@ -106,6 +89,62 @@ const levelToScene2 = (fileName) => {
             }
         }
     }
+}
+
+const getTileNode = (col, row, width, height, tileTypeId, priority) => {
+    let anchorNode = {
+        "type": "Node",
+        "format": {
+            "type": "Anchored"
+        },
+        "layout": {
+            "x_index": col,
+            "y_index": height - row,
+            "x_anchor": "left",
+            "y_anchor": "bottom",
+        },
+        "children": {}
+    }
+
+    let tileObj = {
+        "type": "Image",
+        "format": {
+            "type": "Anchored"
+        },
+        "data": {
+            "texture": `floor-tile-${tileTypeId}`,
+            "anchor": [0.5, 0.5],
+            "scale": tileScale,
+            "priority": priority,
+        },
+        "layout": {
+            "x_anchor": "left",
+            "y_anchor": "bottom",
+            "absolute": true
+        }
+    }
+
+    anchorNode["children"]["tile"] = tileObj;
+    return anchorNode;
+}
+
+const convertWallTiles = (arr, width, height) => {
+    const finalArr = [...arr];
+    for (let i = 0; i < height; i++) {   // Rows
+        for (let j = 0; j < width; j++) {   // Columns
+            if (arr[i * width + j] === wallTileId) {
+                // Wall tiles with non-wall below them become wall-faces (facing down)
+                if (i < height - 1 && arr[(i + 1) * width + j] !== wallTileId) {
+                    finalArr[(i + 1) * width + j] = wallFaceTileId;
+                }
+                // Wall tiles with non-wall above them become half-walls
+                else if (i > 0 && arr[(i - 1) * width + j] !== wallTileId) {
+                    finalArr[(i - 1) * width + j] = halfWallTileId;
+                }
+            }
+        }
+    }
+    return finalArr;
 }
 
 const saveToFile = (fileName, scene2Obj) => {
