@@ -39,6 +39,10 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager> &assets) {
   _world_node = cugl::scene2::SceneNode::alloc();
   cugl::Scene2::addChild(_world_node);
 
+    // Debug world
+    _debug_node = cugl::scene2::SceneNode::alloc();
+    cugl::Scene2::addChild(_debug_node);
+    
   populate(dim);
 
   return true;

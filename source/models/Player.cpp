@@ -101,7 +101,6 @@ void Player::attack(bool didAttack) {
     if (didAttack || _attack_frame_count < ATTACK_FRAMES) {
         setState(ATTACKING);
         _sword->setEnabled(true);
-        CULog("I attacked");
         _attack_frame_count--;
     }
     

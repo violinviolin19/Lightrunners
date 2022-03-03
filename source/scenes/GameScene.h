@@ -14,6 +14,9 @@ class GameScene : public cugl::Scene2 {
 
   /** Reference to the physics root of the scene graph. */
   std::shared_ptr<cugl::scene2::SceneNode> _world_node;
+    
+    /** Reference to the debug root of the scene graph */
+    std::shared_ptr<cugl::scene2::SceneNode> _debug_node;
 
   /** The Box2d world. */
   std::shared_ptr<cugl::physics2::ObstacleWorld> _world;
@@ -39,6 +42,15 @@ class GameScene : public cugl::Scene2 {
    * @return true if the controller is initialized properly, false otherwise.
    */
   bool init(const std::shared_ptr<cugl::AssetManager> &assets);
+    
+    /**
+     * Sets whether debug mode is active.
+     *
+     * If true, all objects will display their physics bodies.
+     *
+     * @param value whether debug mode is active.
+     */
+    void setDebug(bool value) { _debug = value; _debug_node->setVisible(value); }
 
   /**
    * Populate the scene with the Box2D objects.
