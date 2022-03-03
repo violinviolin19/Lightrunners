@@ -23,7 +23,10 @@ class GameScene : public cugl::Scene2 {
     /** Reference to the debug root of the scene graph */
     std::shared_ptr<cugl::scene2::SceneNode> _debug_node;
 
-  /** The Box2d world. */
+  /** Reference to the node for physics debugging. */
+  std::shared_ptr<cugl::scene2::SceneNode> _debug_node;
+
+  /** The Box2d world */
   std::shared_ptr<cugl::physics2::ObstacleWorld> _world;
 
  public:
@@ -94,6 +97,13 @@ class GameScene : public cugl::Scene2 {
      * @param  contact  The collision manifold before contact.
      */
     void beforeSolve(b2Contact* contact, const b2Manifold* oldManifold);
+    
+  /**
+   * The method called to update the camera in terms of the player position.
+   *
+   * @param timestep The amount of time (in seconds) since the last frame.
+   */
+  void updateCamera(float timestep);
 };
 
 #endif /* SCENES_GAME_SCENE_H_ */

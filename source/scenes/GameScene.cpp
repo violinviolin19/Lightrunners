@@ -6,8 +6,11 @@
 
 #include "../controllers/actions/Movement.h"
 #include "../controllers/actions/Attack.h"
+#include "../loaders/CustomScene2Loader.h"
+#include "../models/tiles/Wall.h"
 
 #define SCENE_HEIGHT 720
+#define CAMERA_SMOOTH_SPEED 2.0f
 
 bool GameScene::init(const std::shared_ptr<cugl::AssetManager> &assets) {
   // Initialize the scene to a locked width.
@@ -19,15 +22,27 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager> &assets) {
   }
   _assets = assets;
 
-  auto world_layer = assets->get<cugl::scene2::SceneNode>("world-scene");
-  world_layer->setContentSize(dim);
-  world_layer->doLayout();
-  cugl::Scene2::addChild(world_layer);
+  _world_node = assets->get<cugl::scene2::SceneNode>("world-scene");
+  _world_node->setContentSize(dim);
+
+  _debug_node = cugl::scene2::SceneNode::alloc();
+  _debug_node->setContentSize(dim);
+
+  // Create the world and attach the listeners.
+  cugl::Rect bounds = cugl::Rect(cugl::Vec2::ZERO, dim);
+  _world = cugl::physics2::ObstacleWorld::alloc(bounds);
+  populate(dim);
+
+  _world_node->doLayout();
 
   auto ui_layer = assets->get<cugl::scene2::SceneNode>("ui-scene");
   ui_layer->setContentSize(dim);
   ui_layer->doLayout();
+
+  cugl::Scene2::addChild(_world_node);
   cugl::Scene2::addChild(ui_layer);
+  cugl::Scene2::addChild(_debug_node);
+  _debug_node->setVisible(false);
 
   InputController::get()->init(_assets, cugl::Scene2::getBounds());
 
@@ -47,11 +62,6 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager> &assets) {
 
   _world_node = cugl::scene2::SceneNode::alloc();
   cugl::Scene2::addChild(_world_node);
-
-    // Debug world
-    _debug_node = cugl::scene2::SceneNode::alloc();
-    cugl::Scene2::addChild(_debug_node);
-    setDebug(true);
     
   populate(dim);
 
@@ -64,11 +74,11 @@ void GameScene::populate(cugl::Size dim) {
   // Initialize the player with texture and size, then add to world.
   std::shared_ptr<cugl::Texture> player = _assets->get<cugl::Texture>("player");
 
-  _player = Player::alloc(dim/2, cugl::Size(22, 50), "Johnathan");
+    _player = Player::alloc(dim / 2.0f, "Johnathan");
 
-  auto player_n = cugl::scene2::SpriteNode::alloc(player, 3, 10);
-  _player->setPlayerNode(player_n);
-  _world_node->addChild(player_n);
+  auto player_node = cugl::scene2::SpriteNode::alloc(player, 3, 10);
+  _player->setPlayerNode(player_node);
+  _world_node->addChild(player_node);
   _world->addObstacle(_player);
     _world->addObstacle(_player->getSword());
 //    _player->getSword()->setEnabled(false);
@@ -90,25 +100,31 @@ void GameScene::populate(cugl::Size dim) {
     _player->getSword()->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
     _grunt->setDebugScene(_debug_node);
     _grunt->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
+    
+    // Add physics enabled tiles to world node, debug node and box2d physics
+    // world.
+    std::shared_ptr<cugl::CustomScene2Loader> loader =
+        std::dynamic_pointer_cast<cugl::CustomScene2Loader>(
+            _assets->access<cugl::scene2::SceneNode>());
+
+    for (std::shared_ptr<BasicTile> tile : loader->getTiles("wall")) {
+      auto wall = std::dynamic_pointer_cast<Wall>(tile);
+      _world->addObstacle(wall->initBox2d());
+      wall->getObstacle()->setDebugColor(cugl::Color4::GREEN);
+      wall->getObstacle()->setDebugScene(_debug_node);
+    }
 }
 
 void GameScene::update(float timestep) {
   InputController::get()->update();
   // Movement
-  std::shared_ptr<Movement> mvm = InputController::get<Movement>();
-    _player->move(mvm->getMovementX(), mvm->getMovementY());
+    _player->move(InputController::get<Movement>()->getMovement());
     std::shared_ptr<Attack> att =InputController::get<Attack>();
     _player->attack(att->isAttacking());
     _grunt->move(0, 0);
   _world->update(timestep);
-
-  // Animation
-  _player->animate(mvm->getMovementX(), mvm->getMovementY());
 }
 
-void GameScene::render(const std::shared_ptr<cugl::SpriteBatch> &batch) {
-  Scene2::render(batch);
-}
     
 void GameScene::beginContact(b2Contact* contact) {
     b2Body* body1 = contact->GetFixtureA()->GetBody();
@@ -132,4 +148,15 @@ void GameScene::beginContact(b2Contact* contact) {
 }
 
 void GameScene::beforeSolve(b2Contact *contact, const b2Manifold *oldManifold) {
+}
+
+void GameScene::updateCamera(float timestep) {
+  cugl::Vec2 desired_position =
+      _world_node->getSize() / 2.0f - _player->getPosition();
+
+  cugl::Vec2 smoothed_position;
+  cugl::Vec2::lerp(_world_node->getPosition(), desired_position,
+                   CAMERA_SMOOTH_SPEED * timestep, &smoothed_position);
+
+  _world_node->setPosition(smoothed_position);
 }

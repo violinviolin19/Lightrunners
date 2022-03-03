@@ -6,7 +6,10 @@ if (args.length < 2) {
     process.exit(1)
 }
 
-const tilesIdsThatShowFloor = [2, 3, 4, 8, 9, 10, 11, 12];
+const tileIdsThatShowFloor = [2, 3, 4, 8, 9, 10, 11, 12];
+
+// TODO: Find a better data structure to accomplish this.
+const tileIdsThatAreSolid = [1, 2, 3, 4, 7];
 const floorTileId = 0;
 
 const levelToScene2 = (fileName) => {
@@ -34,7 +37,7 @@ const levelToScene2 = (fileName) => {
                         "height": height
                     },
                     "data": {
-                        "anchor": [0.5, 0.5],
+                        "anchor": [0, 0],
                         "size": [pixelWidth * width * tileScale, pixelHeight * height * tileScale],
                         "color": backgroundColor
                     },
@@ -44,12 +47,12 @@ const levelToScene2 = (fileName) => {
                         let obj = {};
                         let tileObj = {};
                         tileObj = {
-                            "type": "Image",
+                            "type": tileIdsThatAreSolid.includes(tileTypeId) ? 'Wall' : 'BasicTile',
                             "format": {
                                 "type": "Anchored"
                             },
                             "data": {
-                                "texture": tilesIdsThatShowFloor.includes(tileTypeId) ? `floor-tile-${floorTileId}` : `floor-tile-${tileTypeId}`,
+                                "texture": tileIdsThatShowFloor.includes(tileTypeId) ? `floor-tile-${floorTileId}` : `floor-tile-${tileTypeId}`,
                                 "anchor": [0.5, 0.5],
                                 "scale": tileScale
                             },
@@ -60,10 +63,10 @@ const levelToScene2 = (fileName) => {
                                 "y_anchor": "middle"
                             }
                         }
-                        if (tilesIdsThatShowFloor.includes(tileTypeId)) {
+                        if (tileIdsThatShowFloor.includes(tileTypeId)) {
                             tileObj["children"] = {}
                             tileObj["children"][`tile-(${row}-${col})-floor`] = {
-                                "type": "Image",
+                                "type": 'BasicTile',
                                 "format": {
                                     "type": "Anchored"
                                 },
@@ -84,8 +87,8 @@ const levelToScene2 = (fileName) => {
                         return obj;
                     })),
                     "layout" : {
-                        "x_anchor" : "center",
-                        "y_anchor" : "middle"
+                        "x_anchor" : "bottom",
+                        "y_anchor" : "left"
                     }
                 }
             }
