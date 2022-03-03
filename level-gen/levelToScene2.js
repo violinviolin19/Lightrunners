@@ -16,7 +16,7 @@ const tileIdsThatAreSolid = [1, 2, 3, 4, 7, 13, 14];
 const tileIdsThatShowFloor = [2, 3, 4, 8, 9, 10, 11, 12];
 
 const pixelWidth = 64, pixelHeight = 64;
-const tileScale = 1;
+const tileScale = 0.8;
 
 const levelToScene2 = (fileName) => {
     let jsonData = fs.readFileSync(fileName, 'utf-8');
