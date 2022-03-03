@@ -9,55 +9,56 @@
 // TODO: COMMENT THIS FILE
 #ifndef __CU_MATH_BASE_H__
 #define __CU_MATH_BASE_H__
+#include <string>
+#include <math.h>
 #include <algorithm>
 #include <cugl/base/CUBase.h>
-#include <math.h>
-#include <string>
 
 #ifndef M_PI
-#define M_PI 3.14159265358979323846264338327
+    #define M_PI        3.14159265358979323846264338327
 #endif
 
-#if defined(__WINDOWS__)
-#define M_PI_2 1.57079632679489661923f  // pi/2
-#define M_PI_4 0.785398163397448309616f // pi/4
-#define __attribute__(x)                /** Not visual studio compatible */
+#if defined (__WINDOWS__)
+    #define M_PI_2     1.57079632679489661923f   // pi/2
+    #define M_PI_4     0.785398163397448309616f  // pi/4
+	#define __attribute__(x)	/** Not visual studio compatible */
 #endif
 
 // More PI variations
-#define M_3_PI_4 (3 * M_PI / 4)
+#define M_3_PI_4    (3 * M_PI / 4)
+
 
 /** Util macro for conversion from degrees to radians.*/
-#define CU_MATH_DEG_TO_RAD(x) ((x)*0.0174532925f)
+#define CU_MATH_DEG_TO_RAD(x)          ((x) * 0.0174532925f)
 /** Util macro for conversion from radians to degrees.*/
-#define CU_MATH_RAD_TO_DEG(x) ((x)*57.29577951f)
+#define CU_MATH_RAD_TO_DEG(x)          ((x)* 57.29577951f)
 /** Compare two values for approximate equality */
-#define CU_MATH_APPROX(x, y, t) (-(t) < (x) - (y) && (x) - (y) < (t))
+#define CU_MATH_APPROX(x,y,t)          ( -(t) < (x)-(y) && (x)-(y) < (t) )
 
 /** Small epsilon for high precision */
-#define CU_MATH_FLOAT_SMALL 1.0e-30f // Set by SSE
+#define CU_MATH_FLOAT_SMALL            1.0e-30f     // Set by SSE
 /** Normal epsilon for testing and other applications */
-#define CU_MATH_EPSILON 5.0e-4f // Set by SSE
+#define CU_MATH_EPSILON                5.0e-4f      // Set by SSE
 
-#if defined(__WINDOWS__)
-#define NOMAXMIN
+#if defined (__WINDOWS__)
+    #define NOMAXMIN
 #endif
 
-#if defined(__ANDROID__)
-#include <android/cpu-features.h>
+#if defined (__ANDROID__)
+    #include <android/cpu-features.h>
 #endif
 
 // Define the vectorization support
 // By experimentation, there are only two vectorizations worth supporting.
 // And even Neon64 is questionable on -Os (autovectoization is better).
-#if defined(CU_VECTORIZE) && defined(__arm64__)
-#define CU_MATH_VECTOR_NEON64
-#include <arm_neon.h>
-#elif defined(CU_VECTORIZE) && defined(__SSE__)
-#define CU_MATH_VECTOR_SSE
-#include "immintrin.h"
-#include "smmintrin.h"
-#include "xmmintrin.h"
+#if defined (CU_VECTORIZE) && defined (__arm64__)
+    #define CU_MATH_VECTOR_NEON64
+    #include <arm_neon.h>
+#elif defined (CU_VECTORIZE) && defined (__SSE__)
+    #define CU_MATH_VECTOR_SSE
+    #include "immintrin.h"
+    #include "smmintrin.h"
+    #include "xmmintrin.h"
 #endif
 
 /**
@@ -72,7 +73,7 @@
  * @return value, clamped to the range [min,max]
  */
 inline float clampf(float value, float min, float max) {
-  return value < min ? min : value < max ? value : max;
+    return value < min ? min : value < max? value : max;
 }
 
 /**
@@ -87,7 +88,7 @@ inline float clampf(float value, float min, float max) {
  * @return value, clamped to the range [min,max]
  */
 inline GLubyte clampb(GLuint value, GLubyte min, GLubyte max) {
-  return static_cast<GLubyte>(value < min ? min : value < max ? value : max);
+    return static_cast<GLubyte>(value < min ? min : value < max? value : max);
 }
 
 /**
@@ -102,7 +103,7 @@ inline GLubyte clampb(GLuint value, GLubyte min, GLubyte max) {
  * @return value, clamped to the range [min,max]
  */
 inline int clampi(int value, int min, int max) {
-  return value < min ? min : value < max ? value : max;
+    return value < min ? min : value < max? value : max;
 }
 
 /**
@@ -118,8 +119,8 @@ inline int clampi(int value, int min, int max) {
  * @return the number of segments necessary for the given tolerance
  */
 inline Uint32 curveSegs(float rad, float arc, float tol) {
-  float da = acosf(rad / (rad + tol)) * 2.0f;
-  return std::max(2, (int)(ceilf(arc / da)));
+    float da = acosf(rad / (rad + tol)) * 2.0f;
+    return std::max(2, (int)(ceilf(arc / da)));
 }
 
 /**

@@ -8,8 +8,8 @@
 //  Because math objects are intended to be on the stack, we do not provide
 //  any shared pointer support in this class.
 //
-//  This module is based on an original file from GamePlay3D:
-//  http://gameplay3d.org. It has been modified to support the CUGL framework.
+//  This module is based on an original file from GamePlay3D: http://gameplay3d.org.
+//  It has been modified to support the CUGL framework.
 //
 //  CUGL MIT License:
 //      This software is provided 'as-is', without any express or implied
@@ -28,8 +28,7 @@
 //      2. Altered source versions must be plainly marked as such, and must not
 //      be misrepresented as being the original software.
 //
-//      3. This notice may not be removed or altered from any source
-//      distribution.
+//      3. This notice may not be removed or altered from any source distribution.
 //
 //  Author: Walker White
 //  Version: 5/30/16
@@ -38,12 +37,12 @@
 #include <iostream>
 #include <sstream>
 
-#include <cugl/math/CUSize.h>
+#include <cugl/util/CUDebug.h>
+#include <cugl/util/CUStrings.h>
 #include <cugl/math/CUVec2.h>
 #include <cugl/math/CUVec3.h>
 #include <cugl/math/CUVec4.h>
-#include <cugl/util/CUDebug.h>
-#include <cugl/util/CUStrings.h>
+#include <cugl/math/CUSize.h>
 
 using namespace cugl;
 
@@ -60,11 +59,11 @@ using namespace cugl;
  *
  * @return A reference to dst for chaining
  */
-Vec2 *Vec2::clamp(const Vec2 v, const Vec2 min, const Vec2 max, Vec2 *dst) {
-  CUAssertLog(dst, "Assignment vector is null");
-  dst->x = clampf(v.x, min.x, max.x);
-  dst->y = clampf(v.y, min.y, max.y);
-  return dst;
+Vec2* Vec2::clamp(const Vec2 v, const Vec2 min, const Vec2 max, Vec2* dst) {
+    CUAssertLog(dst, "Assignment vector is null");
+    dst->x = clampf(v.x,min.x,max.x);
+    dst->y = clampf(v.y,min.y,max.y);
+    return dst;
 }
 
 /**
@@ -78,10 +77,8 @@ Vec2 *Vec2::clamp(const Vec2 v, const Vec2 min, const Vec2 max, Vec2 *dst) {
  * @return The angle between the two vectors (in radians).
  */
 float Vec2::angle(const Vec2 v1, const Vec2 v2) {
-  float dz = v1.x * v2.y - v1.y * v2.x;
-  return (dz < CU_MATH_EPSILON && dz > -CU_MATH_EPSILON
-              ? 0.0f
-              : atan2f(dz, dot(v1, v2)));
+    float dz = v1.x * v2.y - v1.y * v2.x;
+    return (dz < CU_MATH_EPSILON && dz > -CU_MATH_EPSILON ? 0.0f : atan2f(dz, dot(v1, v2)));
 }
 
 /**
@@ -93,11 +90,12 @@ float Vec2::angle(const Vec2 v1, const Vec2 v2) {
  *
  * @return A reference to dst for chaining
  */
-Vec2 *Vec2::add(const Vec2 v1, const Vec2 v2, Vec2 *dst) {
-  CUAssertLog(dst, "Assignment vector is null");
-  dst->x = v1.x + v2.x;
-  dst->y = v1.y + v2.y;
-  return dst;
+Vec2* Vec2::add(const Vec2 v1, const Vec2 v2, Vec2* dst) {
+    CUAssertLog(dst, "Assignment vector is null");
+    dst->x = v1.x+v2.x;
+    dst->y = v1.y+v2.y;
+    return dst;
+
 }
 
 /**
@@ -110,11 +108,11 @@ Vec2 *Vec2::add(const Vec2 v1, const Vec2 v2, Vec2 *dst) {
  *
  * @return A reference to dst for chaining
  */
-Vec2 *Vec2::subtract(const Vec2 v1, const Vec2 v2, Vec2 *dst) {
-  CUAssertLog(dst, "Assignment vector is null");
-  dst->x = v1.x - v2.x;
-  dst->y = v1.y - v2.y;
-  return dst;
+Vec2* Vec2::subtract(const Vec2 v1, const Vec2 v2, Vec2* dst) {
+    CUAssertLog(dst, "Assignment vector is null");
+    dst->x = v1.x-v2.x;
+    dst->y = v1.y-v2.y;
+    return dst;
 }
 
 /**
@@ -128,11 +126,11 @@ Vec2 *Vec2::subtract(const Vec2 v1, const Vec2 v2, Vec2 *dst) {
  *
  * @return A reference to dst for chaining
  */
-Vec2 *Vec2::scale(const Vec2 v, float s, Vec2 *dst) {
-  CUAssertLog(dst, "Assignment vector is null");
-  dst->x = v.x * s;
-  dst->y = v.y * s;
-  return dst;
+Vec2* Vec2::scale(const Vec2 v, float s, Vec2* dst) {
+    CUAssertLog(dst, "Assignment vector is null");
+    dst->x = v.x*s;
+    dst->y = v.y*s;
+    return dst;
 }
 
 /**
@@ -146,11 +144,11 @@ Vec2 *Vec2::scale(const Vec2 v, float s, Vec2 *dst) {
  *
  * @return A reference to dst for chaining
  */
-Vec2 *Vec2::scale(const Vec2 v1, const Vec2 v2, Vec2 *dst) {
-  CUAssertLog(dst, "Assignment vector is null");
-  dst->x = v1.x * v2.x;
-  dst->y = v1.y * v2.y;
-  return dst;
+Vec2* Vec2::scale(const Vec2 v1, const Vec2 v2, Vec2* dst) {
+    CUAssertLog(dst, "Assignment vector is null");
+    dst->x = v1.x*v2.x;
+    dst->y = v1.y*v2.y;
+    return dst;
 }
 
 /**
@@ -164,11 +162,11 @@ Vec2 *Vec2::scale(const Vec2 v1, const Vec2 v2, Vec2 *dst) {
  *
  * @return A reference to dst for chaining
  */
-Vec2 *Vec2::divide(const Vec2 v, float s, Vec2 *dst) {
-  CUAssertLog(dst, "Assignment vector is null");
-  dst->x = v.x / s;
-  dst->y = v.y / s;
-  return dst;
+Vec2* Vec2::divide(const Vec2 v, float s, Vec2* dst) {
+    CUAssertLog(dst, "Assignment vector is null");
+    dst->x = v.x/s;
+    dst->y = v.y/s;
+    return dst;
 }
 
 /**
@@ -182,11 +180,11 @@ Vec2 *Vec2::divide(const Vec2 v, float s, Vec2 *dst) {
  *
  * @return A reference to dst for chaining
  */
-Vec2 *Vec2::divide(const Vec2 v1, const Vec2 v2, Vec2 *dst) {
-  CUAssertLog(dst, "Assignment vector is null");
-  dst->x = v1.x / v2.x;
-  dst->y = v1.y / v2.y;
-  return dst;
+Vec2* Vec2::divide(const Vec2 v1, const Vec2 v2, Vec2* dst) {
+    CUAssertLog(dst, "Assignment vector is null");
+    dst->x = v1.x/v2.x;
+    dst->y = v1.y/v2.y;
+    return dst;
 }
 
 /**
@@ -201,12 +199,11 @@ Vec2 *Vec2::divide(const Vec2 v1, const Vec2 v2, Vec2 *dst) {
  *
  * @return A reference to dst for chaining
  */
-Vec2 *Vec2::reciprocate(const Vec2 v, Vec2 *dst) {
-  CUAssertLog(dst, "Assignment vector is null");
-  CUAssertLog(v.x != 0 && v.y != 0, "Reciprocating zero value");
-  dst->x = 1.0f / v.x;
-  dst->y = 1.0f / v.y;
-  return dst;
+Vec2* Vec2::reciprocate(const Vec2 v, Vec2* dst) {
+    CUAssertLog(dst, "Assignment vector is null");
+    CUAssertLog(v.x != 0 && v.y != 0, "Reciprocating zero value");
+    dst->x = 1.0f/v.x; dst->y = 1.0f/v.y;
+    return dst;
 }
 
 /**
@@ -217,12 +214,12 @@ Vec2 *Vec2::reciprocate(const Vec2 v, Vec2 *dst) {
  *
  * @return A reference to dst for chaining
  */
-Vec2 *Vec2::negate(const Vec2 v, Vec2 *dst) {
-  CUAssertLog(dst, "Assignment vector is null");
-  dst->x = -v.x;
-  dst->y = -v.y;
-  return dst;
+Vec2* Vec2::negate(const Vec2 v, Vec2* dst) {
+    CUAssertLog(dst, "Assignment vector is null");
+    dst->x = -v.x; dst->y = -v.y;
+    return dst;
 }
+
 
 #pragma mark -
 #pragma mark Arithmetic
@@ -234,11 +231,10 @@ Vec2 *Vec2::negate(const Vec2 v, Vec2 *dst) {
  *
  * @return A reference to this (modified) Vec2 for chaining.
  */
-Vec2 &Vec2::divide(float s) {
-  CUAssertLog(s != 0, "Division by zero");
-  x /= s;
-  y /= s;
-  return *this;
+Vec2& Vec2::divide(float s) {
+    CUAssertLog(s != 0,"Division by zero");
+    x /= s; y /= s;
+    return *this;
 }
 
 /**
@@ -249,11 +245,10 @@ Vec2 &Vec2::divide(float s) {
  *
  * @return A reference to this (modified) Vec2 for chaining.
  */
-Vec2 &Vec2::divide(float sx, float sy) {
-  CUAssertLog(sx != 0 && sy != 0, "Division by zero");
-  x /= sx;
-  y /= sy;
-  return *this;
+Vec2& Vec2::divide(float sx, float sy) {
+    CUAssertLog(sx != 0 && sy != 0,"Division by zero");
+    x /= sx; y /= sy;
+    return *this;
 }
 
 /**
@@ -265,11 +260,10 @@ Vec2 &Vec2::divide(float sx, float sy) {
  *
  * @return A reference to this (modified) Vec2 for chaining.
  */
-Vec2 &Vec2::divide(const Vec2 v) {
-  CUAssertLog(v.x != 0 && v.y != 0, "Division by zero");
-  x /= v.x;
-  y /= v.y;
-  return *this;
+Vec2& Vec2::divide(const Vec2 v) {
+    CUAssertLog(v.x != 0 && v.y != 0,"Division by zero");
+    x /= v.x; y /= v.y;
+    return *this;
 }
 
 #pragma mark -
@@ -277,7 +271,7 @@ Vec2 &Vec2::divide(const Vec2 v) {
 /**
  * Returns the angle between this vector and other.
  *
- * The angle is directionaly and measured starting at this one.  If either
+ * The angle is directionaly and measured starting at this one.  If either 
  * vector is zero, the result is undefined.
  *
  * @param other The vector to sweep towards.
@@ -285,10 +279,8 @@ Vec2 &Vec2::divide(const Vec2 v) {
  * @return the angle between this vector and other.
  */
 float Vec2::getAngle(const Vec2 other) const {
-  float dz = x * other.y - y * other.x;
-  return (dz < CU_MATH_EPSILON && dz > -CU_MATH_EPSILON
-              ? 0.0f
-              : atan2f(dz, dot(other)));
+    float dz = x * other.y - y * other.x;
+    return (dz < CU_MATH_EPSILON && dz > -CU_MATH_EPSILON ? 0.0f : atan2f(dz, dot(other)));
 }
 
 /**
@@ -301,26 +293,27 @@ float Vec2::getAngle(const Vec2 other) const {
  *
  * @return This vector, after the normalization occurs.
  */
-Vec2 &Vec2::normalize() {
-  float n = x * x + y * y;
-  // Already normalized.
-  if (n == 1.0f) {
+Vec2& Vec2::normalize() {
+    float n = x * x + y * y;
+    // Already normalized.
+    if (n == 1.0f) {
+        return *this;
+    }
+    
+    n = sqrt(n);
+
+    // Too close to zero.
+    if (n < CU_MATH_FLOAT_SMALL) {
+        return *this;
+    }
+    
+    n = 1.0f / n;
+    x *= n;
+    y *= n;
+
     return *this;
-  }
-
-  n = sqrt(n);
-
-  // Too close to zero.
-  if (n < CU_MATH_FLOAT_SMALL) {
-    return *this;
-  }
-
-  n = 1.0f / n;
-  x *= n;
-  y *= n;
-
-  return *this;
 }
+
 
 /**
  * Rotates this vector by the angle (in radians) around the origin.
@@ -330,7 +323,9 @@ Vec2 &Vec2::normalize() {
  *
  * @return This vector, after the rotation occurs.
  */
-Vec2 &Vec2::rotate(float angle) { return rotate(Vec2::forAngle(angle)); }
+Vec2& Vec2::rotate(float angle) {
+    return rotate(Vec2::forAngle(angle));
+}
 
 /**
  * Rotates this vector by the angle (in radians) around the given point.
@@ -340,10 +335,10 @@ Vec2 &Vec2::rotate(float angle) { return rotate(Vec2::forAngle(angle)); }
  *
  * @return This vector, after the rotation occurs.
  */
-Vec2 &Vec2::rotate(float angle, const Vec2 point) {
-  *this -= point;
-  rotate(Vec2::forAngle(angle));
-  return *this += point;
+Vec2& Vec2::rotate(float angle, const Vec2 point) {
+    *this -= point;
+    rotate(Vec2::forAngle(angle));
+    return *this += point;
 }
 
 /**
@@ -358,7 +353,7 @@ Vec2 &Vec2::rotate(float angle, const Vec2 point) {
  * @return a copy of this vector rotated by the angle around the origin.
  */
 Vec2 Vec2::getRotation(float angle) {
-  return getRotation(Vec2::forAngle(angle));
+    return getRotation(Vec2::forAngle(angle));
 }
 
 /**
@@ -373,9 +368,9 @@ Vec2 Vec2::getRotation(float angle) {
  * @return a copy of this vector rotated by the angle around the given point.
  */
 Vec2 Vec2::getRotation(float angle, const Vec2 point) {
-  Vec2 result = (*this - point);
-  result.rotate(Vec2::forAngle(angle));
-  return result + point;
+    Vec2 result = (*this-point);
+    result.rotate(Vec2::forAngle(angle));
+    return result + point;
 }
 
 /**
@@ -394,21 +389,20 @@ Vec2 Vec2::getRotation(float angle, const Vec2 point) {
  * {@see distanceSegment}
  */
 float Vec2::distanceSegmentSquared(const Vec2 a, const Vec2 b) const {
-  Vec2 ab = b - a;
-  Vec2 pa = *this - a;
-  float d = ab.x * ab.x + ab.y * ab.y;
-  float t = ab.x * pa.x + ab.y * pa.y;
-  if (d > 0) {
-    t /= d;
-  }
-  if (t < 0) {
-    t = 0;
-  } else if (t > 1) {
-    t = 1;
-  }
-  pa.set(a.x + t * ab.x - x, a.y + t * ab.y - y);
-  return pa.lengthSquared();
+    Vec2 ab = b-a;
+    Vec2 pa = *this-a;
+    float d = ab.x*ab.x + ab.y*ab.y;
+    float t = ab.x*pa.x + ab.y*pa.y;
+    if (d > 0) { t /= d; }
+    if (t < 0) {
+        t = 0;
+    } else if (t > 1) {
+        t = 1;
+    }
+    pa.set(a.x + t*ab.x - x, a.y + t*ab.y - y);
+    return pa.lengthSquared();
 }
+
 
 #pragma mark -
 #pragma mark Static Linear Algebra
@@ -421,7 +415,7 @@ float Vec2::distanceSegmentSquared(const Vec2 a, const Vec2 b) const {
  * @return The dot product between the vectors.
  */
 float Vec2::dot(const Vec2 v1, const Vec2 v2) {
-  return (v1.x * v2.x + v1.y * v2.y);
+    return (v1.x * v2.x + v1.y * v2.y);
 }
 
 /**
@@ -436,7 +430,7 @@ float Vec2::dot(const Vec2 v1, const Vec2 v2) {
  * @return the cross product between the vectors.
  */
 float Vec2::cross(const Vec2 v1, const Vec2 v2) {
-  return v1.x * v2.y - v1.y * v2.x;
+    return v1.x*v2.y - v1.y*v2.x;
 }
 
 /**
@@ -450,24 +444,24 @@ float Vec2::cross(const Vec2 v1, const Vec2 v2) {
  *
  * @return A reference to dst for chaining
  */
-Vec2 *Vec2::normalize(const Vec2 v, Vec2 *dst) {
-  float n = v.x * v.x + v.y * v.y;
-  // Already normalized.
-  if (n == 1.0f) {
-    *dst = v;
+Vec2* Vec2::normalize(const Vec2 v, Vec2* dst) {
+    float n = v.x * v.x + v.y * v.y;
+    // Already normalized.
+    if (n == 1.0f) {
+        *dst = v;
+        return dst;
+    }
+    
+    n = sqrt(n);
+    
+    // Do nothing if too close to zero.
+    if (n >= CU_MATH_FLOAT_SMALL) {
+        n = 1.0f / n;
+        dst->x = v.x*n;
+        dst->y = v.y*n;
+    }
+    
     return dst;
-  }
-
-  n = sqrt(n);
-
-  // Do nothing if too close to zero.
-  if (n >= CU_MATH_FLOAT_SMALL) {
-    n = 1.0f / n;
-    dst->x = v.x * n;
-    dst->y = v.y * n;
-  }
-
-  return dst;
 }
 
 /**
@@ -479,11 +473,11 @@ Vec2 *Vec2::normalize(const Vec2 v, Vec2 *dst) {
  *
  * @return A reference to dst for chaining
  */
-Vec2 *Vec2::midpoint(const Vec2 v1, const Vec2 v2, Vec2 *dst) {
-  CUAssertLog(dst, "Assignment vector is null");
-  dst->x = (v1.x + v2.x) / 2.0f;
-  dst->y = (v1.y + v2.y) / 2.0f;
-  return dst;
+Vec2* Vec2::midpoint(const Vec2 v1, const Vec2 v2, Vec2* dst) {
+    CUAssertLog(dst, "Assignment vector is null");
+    dst->x = (v1.x + v2.x) / 2.0f;
+    dst->y = (v1.y + v2.y) / 2.0f;
+    return dst;
 }
 
 /**
@@ -495,10 +489,10 @@ Vec2 *Vec2::midpoint(const Vec2 v1, const Vec2 v2, Vec2 *dst) {
  *
  * @return A reference to dst for chaining
  */
-Vec2 *Vec2::project(const Vec2 v1, const Vec2 v2, Vec2 *dst) {
-  CUAssertLog(dst, "Assignment vector is null");
-  *dst = v2 * (v1.dot(v2) / v2.dot(v2));
-  return dst;
+Vec2* Vec2::project(const Vec2 v1, const Vec2 v2, Vec2* dst) {
+    CUAssertLog(dst, "Assignment vector is null");
+    *dst = v2 * (v1.dot(v2)/v2.dot(v2));
+    return dst;
 }
 
 /**
@@ -515,10 +509,10 @@ Vec2 *Vec2::project(const Vec2 v1, const Vec2 v2, Vec2 *dst) {
  *
  * @return The linear interpolation of this vector with other.
  */
-Vec2 *Vec2::lerp(const Vec2 v1, const Vec2 v2, float alpha, Vec2 *dst) {
-  CUAssertLog(dst, "Assignment vector is null");
-  *dst = v1 * (1.f - alpha) + v2 * alpha;
-  return dst;
+Vec2* Vec2::lerp(const Vec2 v1, const Vec2 v2, float alpha, Vec2* dst) {
+    CUAssertLog(dst, "Assignment vector is null");
+    *dst = v1 * (1.f - alpha) + v2 * alpha;
+    return dst;
 }
 
 /**
@@ -545,25 +539,24 @@ Vec2 *Vec2::lerp(const Vec2 v1, const Vec2 v2, float alpha, Vec2 *dst) {
  *
  * @return true if lines AB and CD intersect
  */
-bool Vec2::doesLineIntersect(const Vec2 A, const Vec2 B, const Vec2 C,
-                             const Vec2 D, float *S, float *T) {
-  // FAIL: Line undefined
-  if ((A.x == B.x && A.y == B.y) || (C.x == D.x && C.y == D.y)) {
-    return false;
-  }
-
-  const float denom = (B - A).cross(D - C);
-  if (denom == 0) {
-    // Lines parallel or overlap
-    return false;
-  }
-
-  if (S != nullptr)
-    *S = (D - C).cross(A - C) / denom;
-  if (T != nullptr)
-    *T = (B - A).cross(A - C) / denom;
-
-  return true;
+bool Vec2::doesLineIntersect(const Vec2 A, const Vec2 B,
+                             const Vec2 C, const Vec2 D,
+                             float *S, float *T) {
+    // FAIL: Line undefined
+    if ( (A.x==B.x && A.y==B.y) || (C.x==D.x && C.y==D.y) ) {
+        return false;
+    }
+    
+    const float denom = (B-A).cross(D-C);
+    if (denom == 0) {
+        // Lines parallel or overlap
+        return false;
+    }
+    
+    if (S != nullptr) *S = (D-C).cross(A-C) / denom;
+    if (T != nullptr) *T = (B-A).cross(A-C) / denom;
+    
+    return true;
 }
 
 /**
@@ -579,17 +572,17 @@ bool Vec2::doesLineIntersect(const Vec2 A, const Vec2 B, const Vec2 C,
  *
  * @return true if line AB overlaps segment CD.
  */
-bool Vec2::doesLineOverlap(const Vec2 A, const Vec2 B, const Vec2 C,
-                           const Vec2 D) {
-
-  // FAIL: Line undefined
-  if ((A.x == B.x && A.y == B.y) || (C.x == D.x && C.y == D.y)) {
-    return false;
-  }
-
-  return ((B - A).cross(D - C) == 0 &&
-          ((D - C).cross(A - C) == 0 || (B - A).cross(A - C) == 0));
+bool Vec2::doesLineOverlap(const Vec2 A, const Vec2 B,
+                           const Vec2 C, const Vec2 D) {
+    
+    // FAIL: Line undefined
+    if ( (A.x==B.x && A.y==B.y) || (C.x==D.x && C.y==D.y) ) {
+        return false;
+    }
+    
+    return ((B-A).cross(D-C) == 0 && ((D-C).cross(A-C) == 0 || (B-A).cross(A-C) == 0));
 }
+    
 
 /**
  * Returns true if line AB is non-trivially parallel with segment CD.
@@ -604,19 +597,19 @@ bool Vec2::doesLineOverlap(const Vec2 A, const Vec2 B, const Vec2 C,
  *
  * @return true if line AB is non-trivially parallel with segment CD.
  */
-bool Vec2::isLineParallel(const Vec2 A, const Vec2 B, const Vec2 C,
-                          const Vec2 D) {
-  // FAIL: Line undefined
-  if ((A.x == B.x && A.y == B.y) || (C.x == D.x && C.y == D.y)) {
+bool Vec2::isLineParallel(const Vec2 A, const Vec2 B,
+                          const Vec2 C, const Vec2 D) {
+    // FAIL: Line undefined
+    if ( (A.x==B.x && A.y==B.y) || (C.x==D.x && C.y==D.y) ) {
+        return false;
+    }
+    
+    if ((B-A).cross(D-C) == 0) {
+        // Check for line overlap
+        return !((D-C).cross(A-C) == 0 || (B-A).cross(A-C) == 0);
+    }
+    
     return false;
-  }
-
-  if ((B - A).cross(D - C) == 0) {
-    // Check for line overlap
-    return !((D - C).cross(A - C) == 0 || (B - A).cross(A - C) == 0);
-  }
-
-  return false;
 }
 
 /**
@@ -631,52 +624,44 @@ bool Vec2::isLineParallel(const Vec2 A, const Vec2 B, const Vec2 C,
  *
  * @return true if segment AB intersects with segment CD
  */
-bool Vec2::doesSegmentIntersect(const Vec2 A, const Vec2 B, const Vec2 C,
-                                const Vec2 D) {
-  float S, T;
-  return (doesLineIntersect(A, B, C, D, &S, &T) &&
-          (S >= 0.0f && S <= 1.0f && T >= 0.0f && T <= 1.0f));
+bool Vec2::doesSegmentIntersect(const Vec2 A, const Vec2 B, const Vec2 C, const Vec2 D) {
+    float S, T;
+    return (doesLineIntersect(A, B, C, D, &S, &T ) &&
+            (S >= 0.0f && S <= 1.0f && T >= 0.0f && T <= 1.0f));
 }
 
-/**
+/** 
  * Returns true if the lines AB and CD overlap.
  *
  * The lines are all one-dimensional on the number line.  SE is the overlap
  * part with S the initial parameter and E the terminal parameter.  If the
  * lines do not overlap, S and E are left unchanged.
  */
-static bool isOneDimensionSegmentOverlap(float A, float B, float C, float D,
-                                         float *S, float *E) {
-  float ABmin = std::min(A, B);
-  float ABmax = std::max(A, B);
-  float CDmin = std::min(C, D);
-  float CDmax = std::max(C, D);
-
-  if (ABmax < CDmin || CDmax < ABmin) {
-    // ABmin->ABmax->CDmin->CDmax or CDmin->CDmax->ABmin->ABmax
-    return false;
-  } else {
-    if (ABmin >= CDmin && ABmin <= CDmax) {
-      // CDmin->ABmin->CDmax->ABmax or CDmin->ABmin->ABmax->CDmax
-      if (S != nullptr)
-        *S = ABmin;
-      if (E != nullptr)
-        *E = CDmax < ABmax ? CDmax : ABmax;
-    } else if (ABmax >= CDmin && ABmax <= CDmax) {
-      // ABmin->CDmin->ABmax->CDmax
-      if (S != nullptr)
-        *S = CDmin;
-      if (E != nullptr)
-        *E = ABmax;
+static bool isOneDimensionSegmentOverlap(float A, float B, float C, float D, float *S, float * E) {
+    float ABmin = std::min(A, B);
+    float ABmax = std::max(A, B);
+    float CDmin = std::min(C, D);
+    float CDmax = std::max(C, D);
+    
+    if (ABmax < CDmin || CDmax < ABmin) {
+        // ABmin->ABmax->CDmin->CDmax or CDmin->CDmax->ABmin->ABmax
+        return false;
     } else {
-      // ABmin->CDmin->CDmax->ABmax
-      if (S != nullptr)
-        *S = CDmin;
-      if (E != nullptr)
-        *E = CDmax;
+        if (ABmin >= CDmin && ABmin <= CDmax) {
+            // CDmin->ABmin->CDmax->ABmax or CDmin->ABmin->ABmax->CDmax
+            if (S != nullptr) *S = ABmin;
+            if (E != nullptr) *E = CDmax < ABmax ? CDmax : ABmax;
+        } else if (ABmax >= CDmin && ABmax <= CDmax) {
+            // ABmin->CDmin->ABmax->CDmax
+            if (S != nullptr) *S = CDmin;
+            if (E != nullptr) *E = ABmax;
+        } else {
+            // ABmin->CDmin->CDmax->ABmax
+            if (S != nullptr) *S = CDmin;
+            if (E != nullptr) *E = CDmax;
+        }
+        return true;
     }
-    return true;
-  }
 }
 
 /**
@@ -695,14 +680,15 @@ static bool isOneDimensionSegmentOverlap(float A, float B, float C, float D,
  * @param S   the initial overlap position
  * @param E   the terminal overlap position
  */
-bool Vec2::doesSegmentOverlap(const Vec2 A, const Vec2 B, const Vec2 C,
-                              const Vec2 D, Vec2 *S, Vec2 *E) {
-  if (doesLineOverlap(A, B, C, D)) {
-    return isOneDimensionSegmentOverlap(A.x, B.x, C.x, D.x, &S->x, &E->x) &&
-           isOneDimensionSegmentOverlap(A.y, B.y, C.y, D.y, &S->y, &E->y);
-  }
-
-  return false;
+bool Vec2::doesSegmentOverlap(const Vec2 A, const Vec2 B,
+                              const Vec2 C, const Vec2 D,
+                              Vec2* S, Vec2* E) {
+    if (doesLineOverlap(A, B, C, D)) {
+        return isOneDimensionSegmentOverlap(A.x, B.x, C.x, D.x, &S->x, &E->x) &&
+               isOneDimensionSegmentOverlap(A.y, B.y, C.y, D.y, &S->y, &E->y);
+    }
+    
+    return false;
 }
 
 /**
@@ -718,20 +704,20 @@ bool Vec2::doesSegmentOverlap(const Vec2 A, const Vec2 B, const Vec2 C,
  *
  * @return the intersection point of lines AB and CD.
  */
-Vec2 Vec2::getIntersection(const Vec2 A, const Vec2 B, const Vec2 C,
-                           const Vec2 D) {
-  float S, T;
-
-  if (doesLineIntersect(A, B, C, D, &S, &T)) {
-    // Vec2 of intersection
-    Vec2 P;
-    P.x = A.x + S * (B.x - A.x);
-    P.y = A.y + T * (B.y - A.y);
-    return P;
-  }
-
-  return Vec2::ZERO;
+Vec2 Vec2::getIntersection(const Vec2 A, const Vec2 B, const Vec2 C, const Vec2 D) {
+    float S, T;
+    
+    if (doesLineIntersect(A, B, C, D, &S, &T)) {
+        // Vec2 of intersection
+        Vec2 P;
+        P.x = A.x + S * (B.x - A.x);
+        P.y = A.y + S * (B.y - A.y);
+        return P;
+    }
+    
+    return Vec2::ZERO;
 }
+
 
 #pragma mark -
 #pragma mark Conversion Methods
@@ -746,17 +732,20 @@ Vec2 Vec2::getIntersection(const Vec2 A, const Vec2 B, const Vec2 C,
  * @return a string representation of this vector for debuggging purposes.
  */
 std::string Vec2::toString(bool verbose) const {
-  std::stringstream ss;
-  ss << (verbose ? "cugl::Vec2(" : "(");
-  ss << strtool::to_string(x);
-  ss << ",";
-  ss << strtool::to_string(y);
-  ss << ")";
-  return ss.str();
+    std::stringstream ss;
+    ss << (verbose ? "cugl::Vec2(" : "(");
+    ss << strtool::to_string(x);
+    ss << ",";
+    ss << strtool::to_string(y);
+    ss << ")";
+    return ss.str();
 }
 
+
 /** Cast from Vec2 to Size. */
-Vec2::operator Size() const { return Size(x, y); }
+Vec2::operator Size() const {
+    return Size(x,y);
+}
 
 /**
  * Creates a vector from the given size.
@@ -766,8 +755,7 @@ Vec2::operator Size() const { return Size(x, y); }
  * @param size The size to convert
  */
 Vec2::Vec2(const Size size) {
-  x = size.width;
-  y = size.height;
+    x = size.width; y = size.height;
 }
 
 /**
@@ -779,10 +767,9 @@ Vec2::Vec2(const Size size) {
  *
  * @return A reference to this (modified) Vec2 for chaining.
  */
-Vec2 &Vec2::operator=(const Size size) {
-  x = size.width;
-  y = size.height;
-  return *this;
+Vec2& Vec2::operator= (const Size size) {
+    x = size.width; y = size.height;
+    return *this;
 }
 
 /**
@@ -792,10 +779,9 @@ Vec2 &Vec2::operator=(const Size size) {
  *
  * @return A reference to this (modified) Vec2 for chaining.
  */
-Vec2 &Vec2::operator+=(const Size right) {
-  x += right.width;
-  y += right.height;
-  return *this;
+Vec2& Vec2::operator+=(const Size right) {
+    x += right.width; y += right.height;
+    return *this;
 }
 
 /**
@@ -808,8 +794,8 @@ Vec2 &Vec2::operator+=(const Size right) {
  * @return The sum of this vector with the given size.
  */
 const Vec2 Vec2::operator+(const Size right) const {
-  Vec2 result(*this);
-  return result += right;
+    Vec2 result(*this);
+    return result += right;
 }
 
 /**
@@ -821,9 +807,9 @@ const Vec2 Vec2::operator+(const Size right) const {
  *
  * @return The difference of this vector with the given size.
  */
-const Vec2 Vec2::operator-(const Size &right) const {
-  Vec2 result(*this);
-  return result -= right;
+const Vec2 Vec2::operator-(const Size& right) const {
+    Vec2 result(*this);
+    return result -= right;
 }
 
 /**
@@ -833,10 +819,9 @@ const Vec2 Vec2::operator-(const Size &right) const {
  *
  * @return A reference to this (modified) Vec2 for chaining.
  */
-Vec2 &Vec2::operator-=(const Size right) {
-  x -= right.width;
-  y -= right.height;
-  return *this;
+Vec2& Vec2::operator-=(const Size right) {
+    x -= right.width; y -= right.height;
+    return *this;
 }
 
 /**
@@ -844,7 +829,9 @@ Vec2 &Vec2::operator-=(const Size right) {
  *
  * The z-value is set to 0.
  */
-Vec2::operator Vec3() const { return Vec3(x, y, 0); }
+Vec2::operator Vec3() const {
+    return Vec3(x,y,0);
+}
 
 /**
  * Creates a 2d vector from the given 3d one.
@@ -854,8 +841,7 @@ Vec2::operator Vec3() const { return Vec3(x, y, 0); }
  * @param v The vector to convert
  */
 Vec2::Vec2(const Vec3 v) {
-  x = v.x;
-  y = v.y;
+    x = v.x; y = v.y;
 }
 
 /**
@@ -867,10 +853,9 @@ Vec2::Vec2(const Vec3 v) {
  *
  * @return A reference to this (modified) Vec2 for chaining.
  */
-Vec2 &Vec2::operator=(const Vec3 v) {
-  x = v.x;
-  y = v.y;
-  return *this;
+Vec2& Vec2::operator= (const Vec3 v) {
+    x = v.x; y = v.y;
+    return *this;
 }
 
 /**
@@ -879,7 +864,9 @@ Vec2 &Vec2::operator=(const Vec3 v) {
  * The z-value is set to 0, but the w-value is set to 1.  That is
  * because the standard usage of Vec4 objects is homogenous coords.
  */
-Vec2::operator Vec4() const { return Vec4(x, y, 0, 1); }
+Vec2::operator Vec4() const {
+    return Vec4(x,y,0,1);
+}
 
 /**
  * Creates a 2d vector from the given 4d one.
@@ -890,9 +877,8 @@ Vec2::operator Vec4() const { return Vec4(x, y, 0, 1); }
  * @param v The vector to convert
  */
 Vec2::Vec2(const Vec4 v) {
-  float d = v.w == 0 ? 1 : 1 / v.w;
-  x = v.x * d;
-  y = v.y * d;
+    float d = v.w == 0 ? 1 : 1/v.w;
+    x = v.x*d; y = v.y*d;
 }
 
 /**
@@ -905,12 +891,12 @@ Vec2::Vec2(const Vec4 v) {
  *
  * @return A reference to this (modified) Vec2 for chaining.
  */
-Vec2 &Vec2::operator=(const Vec4 v) {
-  float d = v.w == 0 ? 1 : 1 / v.w;
-  x = v.x * d;
-  y = v.y * d;
-  return *this;
+Vec2& Vec2::operator= (const Vec4 v) {
+    float d = v.w == 0 ? 1 : 1/v.w;
+    x = v.x*d; y = v.y*d;
+    return *this;
 }
+
 
 #pragma mark -
 #pragma mark Constants
