@@ -94,8 +94,6 @@ void GameScene::update(float timestep) {
 
   _player->move(InputController::get<Movement>()->getMovement());
 
-  _world_node->setPosition(_player->getPosition());
-
   _grunt->move(-.5, 0);
   _world->update(timestep);
 }
