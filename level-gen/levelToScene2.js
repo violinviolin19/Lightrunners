@@ -16,7 +16,7 @@ const tileIdsThatAreSolid = [1, 2, 3, 4, 10, 11];
 const tileIdsThatShowFloor = [2, 3, 4, 7, 8, 9];
 
 const pixelWidth = 64, pixelHeight = 64;
-const tileScale = 0.8;
+const tileScale = 0.6;
 
 const levelToScene2 = (fileName) => {
     let jsonData = fs.readFileSync(fileName, 'utf-8');
@@ -63,8 +63,6 @@ const levelToScene2 = (fileName) => {
                             anchorNode["children"]["tile"]["layout"]["y_offset"] = 46 * tileScale;
                         }
                         if (tileTypeId === wallFaceTileId) {
-                            // anchorNode["children"]["tile"]["layout"]["y_offset"] = -8 * tileScale;
-
                             let obj = {};
                             const wallAnchorNode = getTileNode(col, row, width, height, wallTileId, row);
                             wallAnchorNode["children"]["tile"]["layout"]["y_offset"] = 46 * tileScale;
