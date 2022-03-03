@@ -1,5 +1,5 @@
-#ifndef MODELS_PLAYER_H
-#define MODELS_PLAYER_H
+#ifndef MODELS_PLAYER_H_
+#define MODELS_PLAYER_H_
 
 #include <cugl/cugl.h>
 #include <stdio.h>
@@ -23,6 +23,10 @@ class Player : public cugl::physics2::CapsuleObstacle {
 
   /** Countdown to change animation frame. */
   int _frame_count;
+  
+  /** Represents the offset between the center of the player and the center of
+   * the capsule obstacle. */
+  cugl::Vec2 _offset_from_center;
 
  public:
 #pragma mark Constructors
@@ -112,6 +116,13 @@ class Player : public cugl::physics2::CapsuleObstacle {
 
   /**
    * Sets the frame of the animation.
+   *
+   * @param forward Amount to move in the x and y direction
+   */
+  void move(cugl::Vec2 forward) { move(forward.x, forward.y); }
+
+  /**
+   * Moves the player by the specified amount.
    *
    * @param forwardX Amount to move in the x direction
    * @param forwardY Amount to move in the y direction
