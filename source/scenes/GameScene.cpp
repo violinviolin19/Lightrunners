@@ -7,6 +7,7 @@
 #include "../models/tiles/Wall.h"
 
 #define SCENE_HEIGHT 720
+#define CAMERA_SMOOTH_SPEED 2.0f
 
 bool GameScene::init(const std::shared_ptr<cugl::AssetManager> &assets) {
   // Initialize the scene to a locked width.
@@ -95,9 +96,23 @@ void GameScene::update(float timestep) {
   _player->move(InputController::get<Movement>()->getMovement());
 
   _grunt->move(-.5, 0);
+
+  updateCamera(timestep);
+
   _world->update(timestep);
 }
 
 void GameScene::render(const std::shared_ptr<cugl::SpriteBatch> &batch) {
   Scene2::render(batch);
+}
+
+void GameScene::updateCamera(float timestep) {
+  cugl::Vec2 desired_position =
+      _world_node->getSize() / 2.0f - _player->getPosition();
+
+  cugl::Vec2 smoothed_position;
+  cugl::Vec2::lerp(_world_node->getPosition(), desired_position,
+                   CAMERA_SMOOTH_SPEED * timestep, &smoothed_position);
+
+  _world_node->setPosition(smoothed_position);
 }

@@ -68,6 +68,13 @@ class GameScene : public cugl::Scene2 {
    * @param batch     The SpriteBatch to draw with.
    */
   void render(const std::shared_ptr<cugl::SpriteBatch> &batch) override;
+
+  /**
+   * The method called to update the camera in terms of the player position.
+   *
+   * @param timestep The amount of time (in seconds) since the last frame.
+   */
+  void updateCamera(float timestep);
 };
 
 #endif /* SCENES_GAME_SCENE_H_ */
