@@ -1,7 +1,7 @@
 #include "Player.h"
 
-#define WIDTH 22
-#define HEIGHT 50
+#define WIDTH 70
+#define HEIGHT 160
 
 #define IDLE_RIGHT 0
 #define IDLE_LEFT 1
