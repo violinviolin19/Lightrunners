@@ -102,18 +102,6 @@ void GameScene::populate(cugl::Size dim) {
     _world_node->addChild(grunt->getGruntNode());
     _world->addObstacle(grunt);
   }
-  
-  
-  // Each grunt has texture and size set, and is added to the world.
-  std::shared_ptr<Grunt> grunt1 =
-      _enemies.spawnEnemy(dim / 2.3f, "Grunt1", _assets);
-  _world_node->addChild(grunt1->getGruntNode());
-  _world->addObstacle(grunt1);
-
- std::shared_ptr<Grunt> grunt2 =
-     _enemies.spawnEnemy(dim / 5.7f, "Grunt2", _assets);
- _world_node->addChild(grunt2->getGruntNode());
- _world->addObstacle(grunt2);
 
   // Add physics enabled tiles to world node, debug node and box2d physics
   // world.

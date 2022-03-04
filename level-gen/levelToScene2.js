@@ -67,7 +67,7 @@ const levelToScene2 = (fileName) => {
                             acc.push(obj);
 
                             // Enemies are added to the "enemies" node, just need to add floor
-                            if (tileTypeId === enemyTileId) {
+                            if (tileTypeId === enemyTileId || tileTypeId === floorTileId) {
                                 return acc;
                             }
                         }
