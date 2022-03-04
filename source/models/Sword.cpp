@@ -1,7 +1,7 @@
 #include "Sword.h"
 
 // Offset from the player
-#define OFFSET_X 20
+#define OFFSET_X 30
 #define OFFSET_Y 5
 
 #define SIZE 25

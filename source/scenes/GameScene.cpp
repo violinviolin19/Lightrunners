@@ -25,12 +25,24 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
   _world_node = assets->get<cugl::scene2::SceneNode>("world-scene");
   _world_node->setContentSize(dim);
 
+  std::shared_ptr<cugl::scene2::SceneNode> grid_node =
+      _world_node->getChildByName("tiles");
+  std::shared_ptr<cugl::scene2::Layout> layout = grid_node->getLayout();
+  std::shared_ptr<cugl::scene2::GridLayout> grid_layout =
+      dynamic_pointer_cast<cugl::scene2::GridLayout>(layout);
+
+  float map_height = grid_node->getContentHeight();
+  _row_count = grid_layout->getGridSize().height;
+  _tile_height = map_height / _row_count;
+
   _debug_node = cugl::scene2::SceneNode::alloc();
   _debug_node->setContentSize(dim);
 
   // Create the world and attach the listeners.
   _world = cugl::physics2::ObstacleWorld::alloc(
-      cugl::Rect(0, 0, dim.width, dim.height), cugl::Vec2(0, 0));
+      cugl::Rect(0, 0, grid_node->getContentWidth(),
+                 grid_node->getContentHeight()),
+      cugl::Vec2(0, 0));
   _world->activateCollisionCallbacks(true);
   _world->onBeginContact = [this](b2Contact* contact) {
     beginContact(contact);
@@ -131,6 +143,9 @@ void GameScene::update(float timestep) {
   _player->step(timestep, InputController::get<Movement>()->getMovement(),
                 InputController::get<Attack>()->isAttacking(), _sword);
 
+  int row = (int)floor(_player->getBody()->GetPosition().y / _tile_height);
+  _player->getPlayerNode()->setPriority(_row_count - row);
+
   _ai_controller.moveEnemiesTowardPlayer(_enemies, _player);
   _enemies.update(timestep);
 
@@ -149,6 +164,7 @@ void GameScene::update(float timestep) {
   // Check for disposal
   for (std::shared_ptr<Grunt> grunt : _enemies.getEnemies()) {
     if (grunt != nullptr && grunt->getHealth() <= 0) {
+      grunt->deactivatePhysics(*_world->getWorld());
       _enemies.deleteEnemy(grunt);
       _world_node->removeChild(grunt->getGruntNode());
       _world->removeObstacle(grunt.get());
@@ -159,29 +175,39 @@ void GameScene::update(float timestep) {
 }
 
 void GameScene::beginContact(b2Contact* contact) {
-  b2Body* body1 = contact->GetFixtureA()->GetBody();
-  b2Body* body2 = contact->GetFixtureB()->GetBody();
+  b2Fixture* fx1 = contact->GetFixtureA();
+  b2Fixture* fx2 = contact->GetFixtureB();
 
-  intptr_t pptr = reinterpret_cast<intptr_t>(_player.get());
-  intptr_t psptr = reinterpret_cast<intptr_t>(_sword.get());
+  void* fx1_d = (void*)fx1->GetUserData().pointer;
+  void* fx2_d = (void*)fx2->GetUserData().pointer;
 
-  // If there is a collision between the sword and the enemies
-  for (std::shared_ptr<Grunt> grunt : _enemies.getEnemies()) {
-    intptr_t gptr = reinterpret_cast<intptr_t>(grunt.get());
-    if ((body1->GetUserData().pointer == psptr &&
-         body2->GetUserData().pointer == gptr) ||
-        (body1->GetUserData().pointer == gptr &&
-         body2->GetUserData().pointer == psptr)) {
-      grunt->takeDamage();
-    }
+  std::string fx1_name;
+  if (static_cast<std::string*>(fx1_d) != nullptr)
+    fx1_name.assign(*static_cast<std::string*>(fx1_d));
+  std::string fx2_name;
+  if (static_cast<std::string*>(fx2_d) != nullptr)
+    fx1_name.assign(*static_cast<std::string*>(fx2_d));
 
-    // If there is a collision between the player and the enemy
-    if ((body1->GetUserData().pointer == pptr &&
-         body2->GetUserData().pointer == gptr) ||
-        (body1->GetUserData().pointer == gptr &&
-         body2->GetUserData().pointer == pptr)) {
-      _player->takeDamage();
-    }
+  b2Body* body1 = fx1->GetBody();
+  b2Body* body2 = fx2->GetBody();
+
+  cugl::physics2::Obstacle* ob1 = static_cast<cugl::physics2::Obstacle*>(
+      (void*)body1->GetUserData().pointer);
+  cugl::physics2::Obstacle* ob2 = static_cast<cugl::physics2::Obstacle*>(
+      (void*)body2->GetUserData().pointer);
+
+  if (!ob1 || !ob2) return;
+
+  if (fx1_name == "grunt_hitbox" && ob2 == _sword.get()) {
+    dynamic_cast<Grunt*>(ob1)->takeDamage();
+  } else if (fx2_name == "grunt_hitbox" && ob1 == _sword.get()) {
+    dynamic_cast<Grunt*>(ob2)->takeDamage();
+  }
+
+  if (fx1_name == "grunt_damage" && ob2 == _player.get()) {
+    dynamic_cast<Player*>(ob2)->takeDamage();
+  } else if (fx2_name == "grunt_damage" && ob1 == _player.get()) {
+    dynamic_cast<Player*>(ob1)->takeDamage();
   }
 }
 
