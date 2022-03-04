@@ -60,6 +60,12 @@
     <ClInclude Include="..\..\source\models\tiles\Wall.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\models\level_gen\Hallway.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\models\level_gen\Room.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\source\loaders\CustomScene2Loader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -114,6 +120,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\models\tiles\Wall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\models\level_gen\Hallway.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\models\level_gen\Room.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\loaders\CustomScene2Loader.cpp">
