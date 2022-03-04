@@ -82,11 +82,11 @@ std::shared_ptr<scene2::SceneNode> CustomScene2Loader::build(
         nonrelative = true;
         break;
       case Widget::ORDER:
-          node = scene2::OrderedNode::allocWithData(this,data);
-          break;
+        node = scene2::OrderedNode::allocWithData(this, data);
+        break;
       case Widget::CANVAS:
-          node = scene2::CanvasNode::allocWithData(this,data);
-          break;
+        node = scene2::CanvasNode::allocWithData(this, data);
+        break;
       case Widget::POLY:
         node = scene2::PolygonNode::allocWithData(this, data);
         break;
