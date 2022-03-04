@@ -20,6 +20,8 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
   /** Represents the hit area for the grunt. */
   b2Fixture* _hitbox_sensor;
 
+  std::shared_ptr<std::string> _hitbox_sensor_name;
+
   /** The node for debugging the hitbox sensor */
   std::shared_ptr<cugl::scene2::WireNode> _hitbox_sensor_node;
 
@@ -44,7 +46,10 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
    * @param pos The grunt position.
    * @param data The data defining the grunt.
    */
-  Grunt(void) : CapsuleObstacle(), _hitbox_sensor(nullptr) {}
+  Grunt(void)
+      : CapsuleObstacle(),
+        _hitbox_sensor(nullptr),
+        _hitbox_sensor_name(nullptr) {}
 
   /**
    * Disposes the grunt.

@@ -6,22 +6,6 @@
 #define HEIGHT_SHRINK 0.3f
 
 #pragma mark Init
-/**
- * Initializes a new grunt with the given position, size, and name.
- *
- * The grunt size is specified in world coordinates.
- *
- * The scene graph is completely decoupled from the physics system.
- * The node does not have to be the same size as the physics body. We
- * only guarantee that the scene graph node is positioned correctly
- * according to the drawing scale.
- *
- * @param  pos      Initial position in world coordinates
- * @param  size       The dimensions of the box.
- * @param name The name of the grunt
- *
- * @return  true if the obstacle is initialized properly, false otherwise.
- */
 bool Grunt::init(const cugl::Vec2 pos, string name) {
   cugl::Vec2 pos_ = pos;
   cugl::Size size_ = cugl::Size(WIDTH, HEIGHT);
@@ -55,21 +39,11 @@ void Grunt::takeDamage() {
 
 #pragma mark Animation & Drawing
 
-/**
- * Sets the grunt scene graph node.
- *
- * @param node the node to set it to.
- */
 void Grunt::setGruntNode(
     const std::shared_ptr<cugl::scene2::SpriteNode>& node) {
   _grunt_node = node;
 }
 
-/**
- * Gets the grunt scene graph node.
- *
- * @return node the node that has been set.
- */
 std::shared_ptr<cugl::scene2::SpriteNode>& Grunt::getGruntNode() {
   return _grunt_node;
 }
@@ -85,20 +59,20 @@ void Grunt::createFixtures() {
   b2FixtureDef sensorDef;
   sensorDef.density = 0.0f;
   sensorDef.isSensor = true;
-  std::string fixture_name = "grunt_hitbox";
-  CULog("grunt: %p", &fixture_name);
-  sensorDef.userData.pointer = reinterpret_cast<uintptr_t>(&fixture_name);
+  _hitbox_sensor_name = std::make_shared<std::string>("grunt_hitbox");
+  sensorDef.userData.pointer =
+      reinterpret_cast<uintptr_t>(_hitbox_sensor_name.get());
 
   // Sensor dimensions
   b2Vec2 corners[4];
   corners[0].x = -CapsuleObstacle::getWidth() / 2.0f;
-  corners[0].y = (-CapsuleObstacle::getHeight() + HEIGHT) / 2.0f;
+  corners[0].y = HEIGHT;
   corners[1].x = -CapsuleObstacle::getWidth() / 2.0f;
-  corners[1].y = (-CapsuleObstacle::getHeight() - HEIGHT) / 2.0f;
+  corners[1].y = -HEIGHT / 2.0f;
   corners[2].x = CapsuleObstacle::getWidth() / 2.0f;
-  corners[2].y = (-CapsuleObstacle::getHeight() - HEIGHT) / 2.0f;
+  corners[2].y = -HEIGHT / 2.0f;
   corners[3].x = CapsuleObstacle::getWidth() / 2.0f;
-  corners[3].y = (-CapsuleObstacle::getHeight() + HEIGHT) / 2.0f;
+  corners[3].y = HEIGHT;
 
   b2PolygonShape sensorShape;
   sensorShape.Set(corners, 4);
@@ -132,12 +106,7 @@ void Grunt::update(float delta) {
 }
 
 #pragma mark Movement
-/**
- * Moves the grunt by the specified amount.
- *
- * @param forwardX Amount to move in the x direction.
- * @param forwardY Amount to move in the y direction.
- */
+
 void Grunt::move(float forwardX, float forwardY) {
   setVX(1000 * forwardX);
   setVY(1000 * forwardY);

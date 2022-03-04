@@ -51,7 +51,7 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
   cugl::Scene2::addChild(_world_node);
   cugl::Scene2::addChild(ui_layer);
   cugl::Scene2::addChild(_debug_node);
-  // _debug_node->setVisible(false);
+  _debug_node->setVisible(false);
 
   InputController::get()->init(_assets, cugl::Scene2::getBounds());
 
@@ -160,10 +160,10 @@ void GameScene::beginContact(b2Contact* contact) {
 
   std::string fx1_name;
   if (static_cast<std::string*>(fx1_d) != nullptr)
-    CULog("%p", static_cast<std::string*>(fx1_d));
+    fx1_name.assign(*static_cast<std::string*>(fx1_d));
   std::string fx2_name;
   if (static_cast<std::string*>(fx2_d) != nullptr)
-    CULog("%p", static_cast<std::string*>(fx2_d));
+    fx1_name.assign(*static_cast<std::string*>(fx2_d));
 
   b2Body* body1 = fx1->GetBody();
   b2Body* body2 = fx2->GetBody();
@@ -180,25 +180,6 @@ void GameScene::beginContact(b2Contact* contact) {
   } else if (fx2_name == "grunt_hitbox" && ob1 == _sword.get()) {
     dynamic_cast<Grunt*>(ob2)->takeDamage();
   }
-
-  // If there is a collision between the sword and the enemies
-  // for (std::shared_ptr<Grunt> grunt : _enemies.getEnemies()) {
-  //   intptr_t gptr = reinterpret_cast<intptr_t>(grunt.get());
-  //   if ((body1->GetUserData().pointer == psptr &&
-  //        body2->GetUserData().pointer == gptr) ||
-  //       (body1->GetUserData().pointer == gptr &&
-  //        body2->GetUserData().pointer == psptr)) {
-  //     grunt->takeDamage();
-  //   }
-
-  // If there is a collision between the player and the enemy
-  //   if ((body1->GetUserData().pointer == pptr &&
-  //        body2->GetUserData().pointer == gptr) ||
-  //       (body1->GetUserData().pointer == gptr &&
-  //        body2->GetUserData().pointer == pptr)) {
-  //     _player->reduceHealth(5);
-  //   }
-  // }
 }
 
 void GameScene::beforeSolve(b2Contact* contact, const b2Manifold* oldManifold) {
