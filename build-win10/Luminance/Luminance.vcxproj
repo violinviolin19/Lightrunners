@@ -202,6 +202,9 @@
     <ClInclude Include="..\..\source\models\tiles\BasicTile.h" />
     <ClInclude Include="..\..\source\models\tiles\Wall.h" />
     <ClInclude Include="..\..\source\loaders\CustomScene2Loader.h" />
+    <ClInclude Include="..\..\source\generators\LevelGenerator.h" />
+    <ClInclude Include="..\..\source\generators\LevelGeneratorConfig.h" />
+    <ClInclude Include="..\..\source\generators\Delaunator.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
@@ -220,6 +223,8 @@
     <ClCompile Include="..\..\source\models\tiles\BasicTile.cpp" />
     <ClCompile Include="..\..\source\models\tiles\Wall.cpp" />
     <ClCompile Include="..\..\source\loaders\CustomScene2Loader.cpp" />
+    <ClCompile Include="..\..\source\generators\LevelGenerator.cpp" />
+    <ClCompile Include="..\..\source\generators\LevelGeneratorConfig.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Luminance.rc" />
