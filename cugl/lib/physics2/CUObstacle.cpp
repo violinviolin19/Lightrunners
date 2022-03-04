@@ -91,6 +91,7 @@ bool Obstacle::init(const Vec2 vec) {
     _remove = false;
     
     // Allocate the body information
+    _bodyinfo.userData.pointer = reinterpret_cast<uintptr_t>(this);
     _bodyinfo.awake  = true;
     _bodyinfo.allowSleep = true;
     _bodyinfo.gravityScale = 1.0f;
