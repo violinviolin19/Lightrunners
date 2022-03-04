@@ -130,6 +130,9 @@ const levelToScene2 = (fileName) => {
 }
 
 const getTileNode = (col, row, width, height, tileTypeId, priority) => {
+    if (tileTypeId === floorTileId) {
+        priority = 0;
+    }
     let anchorNode = {
         "type": "Node",
         "format": {
