@@ -63,6 +63,11 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
   ui_layer->setContentSize(dim);
   ui_layer->doLayout();
 
+  auto text = ui_layer->getChildByName<cugl::scene2::Label>("health");
+  std::string msg = cugl::strtool::format("Health: %d", _player->getHealth());
+  text->setText(msg);
+  text->setForeground(cugl::Color4::WHITE);
+
   cugl::Scene2::addChild(_world_node);
   cugl::Scene2::addChild(ui_layer);
   cugl::Scene2::addChild(_debug_node);
@@ -136,18 +141,22 @@ void GameScene::populate(cugl::Size dim) {
 void GameScene::update(float timestep) {
   InputController::get()->update();
   // Movement
-  _player->move(InputController::get<Movement>()->getMovement());
+  _player->step(timestep, InputController::get<Movement>()->getMovement(),
+                InputController::get<Attack>()->isAttacking(), _sword);
+
   int row = (int)floor(_player->getBody()->GetPosition().y / _tile_height);
   _player->getPlayerNode()->setPriority(_row_count - row);
-
-  std::shared_ptr<Attack> att = InputController::get<Attack>();
-  _player->attack(att->isAttacking(), _sword);
 
   _ai_controller.moveEnemiesTowardPlayer(_enemies, _player);
   _enemies.update(timestep);
 
   updateCamera(timestep);
   _world->update(timestep);
+
+  auto ui_layer = _assets->get<cugl::scene2::SceneNode>("ui-scene");
+  auto text = ui_layer->getChildByName<cugl::scene2::Label>("health");
+  std::string msg = cugl::strtool::format("Health: %d", _player->getHealth());
+  text->setText(msg);
 
   // Animation
   _player->animate(InputController::get<Movement>()->getMovement());
@@ -197,6 +206,12 @@ void GameScene::beginContact(b2Contact* contact) {
     dynamic_cast<Grunt*>(ob1)->takeDamage();
   } else if (fx2_name == "grunt_hitbox" && ob1 == _sword.get()) {
     dynamic_cast<Grunt*>(ob2)->takeDamage();
+  }
+
+  if (fx1_name == "grunt_damage" && ob2 == _player.get()) {
+    dynamic_cast<Player*>(ob2)->takeDamage();
+  } else if (fx2_name == "grunt_damage" && ob1 == _player.get()) {
+    dynamic_cast<Player*>(ob1)->takeDamage();
   }
 }
 

@@ -19,11 +19,17 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
 
   /** Represents the hit area for the grunt. */
   b2Fixture* _hitbox_sensor;
-
+  /** Keeps an instance of the name alive for collision detection. */
   std::shared_ptr<std::string> _hitbox_sensor_name;
-
   /** The node for debugging the hitbox sensor */
   std::shared_ptr<cugl::scene2::WireNode> _hitbox_sensor_node;
+
+  /** Represents the hit area for the grunt. */
+  b2Fixture* _damage_sensor;
+  /** Keeps an instance of the name alive for collision detection. */
+  std::shared_ptr<std::string> _damage_sensor_name;
+  /** The node for debugging the damage sensor */
+  std::shared_ptr<cugl::scene2::WireNode> _damage_sensor_node;
 
   /** Force to be applied to the grunt. */
   cugl::Vec2 _force;
@@ -49,7 +55,9 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
   Grunt(void)
       : CapsuleObstacle(),
         _hitbox_sensor(nullptr),
-        _hitbox_sensor_name(nullptr) {}
+        _hitbox_sensor_name(nullptr),
+        _damage_sensor(nullptr),
+        _damage_sensor_name(nullptr) {}
 
   /**
    * Disposes the grunt.
@@ -62,6 +70,7 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
   void dispose() {
     _grunt_node = nullptr;
     _hitbox_sensor = nullptr;
+    _damage_sensor = nullptr;
   }
 
   /**

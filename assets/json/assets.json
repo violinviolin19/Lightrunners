@@ -153,5 +153,11 @@
         "variables": {}
       }
     }
+  },
+  "fonts": {
+      "pixel32": {
+          "file": "fonts/RetroGame.ttf",
+          "size": 16
+      }
   }
 }

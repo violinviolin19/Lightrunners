@@ -56,29 +56,57 @@ void Grunt::createFixtures() {
 
   CapsuleObstacle::createFixtures();
 
-  b2FixtureDef sensorDef;
-  sensorDef.density = 0.0f;
-  sensorDef.isSensor = true;
-  _hitbox_sensor_name = std::make_shared<std::string>("grunt_hitbox");
-  sensorDef.userData.pointer =
-      reinterpret_cast<uintptr_t>(_hitbox_sensor_name.get());
+  if (_hitbox_sensor == nullptr) {
+    b2FixtureDef sensorDef;
+    sensorDef.density = 0.0f;
+    sensorDef.isSensor = true;
+    _hitbox_sensor_name = std::make_shared<std::string>("grunt_hitbox");
+    sensorDef.userData.pointer =
+        reinterpret_cast<uintptr_t>(_hitbox_sensor_name.get());
 
-  // Sensor dimensions
-  b2Vec2 corners[4];
-  corners[0].x = -CapsuleObstacle::getWidth() / 2.0f;
-  corners[0].y = HEIGHT;
-  corners[1].x = -CapsuleObstacle::getWidth() / 2.0f;
-  corners[1].y = -HEIGHT / 2.0f;
-  corners[2].x = CapsuleObstacle::getWidth() / 2.0f;
-  corners[2].y = -HEIGHT / 2.0f;
-  corners[3].x = CapsuleObstacle::getWidth() / 2.0f;
-  corners[3].y = HEIGHT;
+    // Sensor dimensions
+    b2Vec2 corners[4];
+    corners[0].x = -CapsuleObstacle::getWidth() / 2.0f;
+    corners[0].y = HEIGHT;
+    corners[1].x = -CapsuleObstacle::getWidth() / 2.0f;
+    corners[1].y = -HEIGHT / 2.0f;
+    corners[2].x = CapsuleObstacle::getWidth() / 2.0f;
+    corners[2].y = -HEIGHT / 2.0f;
+    corners[3].x = CapsuleObstacle::getWidth() / 2.0f;
+    corners[3].y = HEIGHT;
 
-  b2PolygonShape sensorShape;
-  sensorShape.Set(corners, 4);
+    b2PolygonShape sensorShape;
+    sensorShape.Set(corners, 4);
 
-  sensorDef.shape = &sensorShape;
-  _hitbox_sensor = _body->CreateFixture(&sensorDef);
+    sensorDef.shape = &sensorShape;
+    _hitbox_sensor = _body->CreateFixture(&sensorDef);
+  }
+
+  if (_damage_sensor == nullptr) {
+    b2FixtureDef sensorDef;
+    sensorDef.density = 0.0f;
+    sensorDef.isSensor = true;
+    _damage_sensor_name = std::make_shared<std::string>("grunt_damage");
+    sensorDef.userData.pointer =
+        reinterpret_cast<uintptr_t>(_damage_sensor_name.get());
+
+    // Sensor dimensions
+    b2Vec2 corners[4];
+    corners[0].x = -CapsuleObstacle::getWidth() / 2.0f;
+    corners[0].y = CapsuleObstacle::getHeight() / 2.0f;
+    corners[1].x = -CapsuleObstacle::getWidth() / 2.0f;
+    corners[1].y = -CapsuleObstacle::getHeight() / 2.0f;
+    corners[2].x = CapsuleObstacle::getWidth() / 2.0f;
+    corners[2].y = -CapsuleObstacle::getHeight() / 2.0f;
+    corners[3].x = CapsuleObstacle::getWidth() / 2.0f;
+    corners[3].y = CapsuleObstacle::getHeight() / 2.0f;
+
+    b2PolygonShape sensorShape;
+    sensorShape.Set(corners, 4);
+
+    sensorDef.shape = &sensorShape;
+    _damage_sensor = _body->CreateFixture(&sensorDef);
+  }
 }
 
 void Grunt::releaseFixtures() {
@@ -88,6 +116,11 @@ void Grunt::releaseFixtures() {
   if (_hitbox_sensor != nullptr) {
     _body->DestroyFixture(_hitbox_sensor);
     _hitbox_sensor = nullptr;
+  }
+
+  if (_damage_sensor != nullptr) {
+    _body->DestroyFixture(_damage_sensor);
+    _damage_sensor = nullptr;
   }
 }
 

@@ -22,12 +22,15 @@ class Player : public cugl::physics2::CapsuleObstacle {
 
   /** Force to be applied to the player. */
   cugl::Vec2 _force;
-
   /** Countdown to change animation frame. */
   int _frame_count;
-
   /** Countdown for attacking frames. */
   int _attack_frame_count;
+  /** Countdown for hurting frames. */
+  int _hurt_frames;
+
+  /** Is this player dead? */
+  bool isDead;
 
   /** Represents the offset between the center of the player and the center of
    * the capsule obstacle. */
@@ -109,6 +112,16 @@ class Player : public cugl::physics2::CapsuleObstacle {
   void reduceHealth(int value) { _health -= value; }
 
   /**
+   * Actions for when the player is hit by the grunt.
+   */
+  void takeDamage();
+
+  /**
+   * When a player dies
+   */
+  void dies();
+
+  /**
    * Update the scene graph.
    *
    * @param delta the timing value.
@@ -150,6 +163,12 @@ class Player : public cugl::physics2::CapsuleObstacle {
   void animate(float forwardX, float forwardY);
 
 #pragma mark Movement
+  /**
+   * Updates the player.
+   */
+  void step(float timestep, cugl::Vec2 forward, bool didAttack,
+            std::shared_ptr<Sword> sword);
+
   /**
    * Moves the player by the specified amount.
    *
