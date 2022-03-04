@@ -10,6 +10,7 @@ void GameApp::onStartup() {
 #ifdef CU_TOUCH_SCREEN
   cugl::Input::activate<cugl::Touchscreen>();
 #else
+  cugl::Input::activate<cugl::Keyboard>();
   cugl::Input::activate<cugl::Mouse>();
   cugl::Input::activate<cugl::Keyboard>();
   // cugl::Mouse does not track mouse drag or move by default.
@@ -37,6 +38,9 @@ void GameApp::onStartup() {
 void GameApp::onShutdown() {
   _loading.dispose();
   _gameplay.dispose();
+#ifndef CU_TOUCH_SCREEN
+  _level_gen_scene.dispose();
+#endif
   _assets = nullptr;
   _batch = nullptr;
 
@@ -50,12 +54,25 @@ void GameApp::onShutdown() {
 }
 
 void GameApp::update(float timestep) {
+#ifndef CU_TOUCH_SCREEN
+  if (cugl::Input::get<cugl::Keyboard>()->keyReleased(cugl::KeyCode::L)) {
+    _show_level_gen_scene = !_show_level_gen_scene;
+  }
+#endif
+
   if (!_loaded && _loading.isActive()) {
     _loading.update(0.01f);
   } else if (!_loaded) {
     _loading.dispose();  // Disables the input listeners in this mode.
     _gameplay.init(_assets);
+#ifndef CU_TOUCH_SCREEN
+    _level_gen_scene.init();
+#endif
     _loaded = true;
+#ifndef CU_TOUCH_SCREEN
+  } else if (_show_level_gen_scene) {
+    _level_gen_scene.update(timestep);
+#endif
   } else {
     _gameplay.update(timestep);
   }
@@ -64,6 +81,10 @@ void GameApp::update(float timestep) {
 void GameApp::draw() {
   if (!_loaded) {
     _loading.render(_batch);
+#ifndef CU_TOUCH_SCREEN
+  } else if (_show_level_gen_scene) {
+    _level_gen_scene.render(_batch);
+#endif
   } else {
     _gameplay.render(_batch);
   }

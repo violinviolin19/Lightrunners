@@ -90,6 +90,10 @@ class Scene2Loader : public Loader<scene2::SceneNode> {
   enum class Widget {
     /** The base Node type */
     NODE,
+    /** An ordered node (for non pre-traversals) */
+    ORDER,
+    /** A canvas node for vector graphics */
+    CANVAS,
     /** An image (PolygoNode) type */
     IMAGE,
     /** A rectangular PolygonNode type */
@@ -253,19 +257,19 @@ class Scene2Loader : public Loader<scene2::SceneNode> {
                       const std::shared_ptr<scene2::SceneNode>& node);
 
   /**
-   * Translates the JSON of a widget to the JSON of the node that it encodes.
-   *
-   * If this scene is built before the JSON of any used widgets have been
-   * loaded, this will fail.
-   *
-   * @param json      The JSON object specifying the widget's file and the
-   * values for its exposed variables
-   *
-   * @return the JSON loaded from the widget file with all variables set based
-   * on the values presented in json.
-   */
+     * Translates the JSON of a widget to the JSON of the node that it encodes.
+     *
+     * If this scene is built before the JSON of any used widgets have been
+     * loaded, this will fail.
+     *
+     * @param json      The JSON object specifying the widget's file and the
+     * values for its exposed variables
+     *
+     * @return the JSON loaded from the widget file with all variables set based
+     * on the values presented in json.
+     */
   std::shared_ptr<JsonValue> getWidgetJson(
-      const std::shared_ptr<JsonValue>& json) const;
+        const std::shared_ptr<JsonValue>& json) const;
 
  public:
 #pragma mark -
@@ -279,7 +283,6 @@ class Scene2Loader : public Loader<scene2::SceneNode> {
   Scene2Loader() {}
 
   /**
-   * Initializes a new asset loader.
    *
    * This method bootstraps the loader with any initial resources that it
    * needs to load assets. Attempts to load an asset before this method is

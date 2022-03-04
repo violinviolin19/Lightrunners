@@ -77,6 +77,8 @@ void GameScene::populate(cugl::Size dim) {
   _player = Player::alloc(dim / 2.0f, "Johnathan");
 
   auto player_node = cugl::scene2::SpriteNode::alloc(player, 3, 10);
+  player_node->setPriority(
+      100);  // TODO: Update priority according to position on screen
   _player->setPlayerNode(player_node);
   _world_node->addChild(player_node);
   _world->addObstacle(_player);
@@ -198,4 +200,5 @@ void GameScene::updateCamera(float timestep) {
                    CAMERA_SMOOTH_SPEED * timestep, &smoothed_position);
 
   _world_node->setPosition(smoothed_position);
+  _debug_node->setPosition(smoothed_position);
 }
