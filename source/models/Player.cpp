@@ -17,6 +17,9 @@
 #define PLAYER_WIDTH_SHRINK 0.5f
 #define PLAYER_HEIGHT_SHRINK 0.3f
 
+#define HURT_FRAMES 10
+#define DEAD_FRAMES 175
+
 #pragma mark Init
 
 bool Player::init(const cugl::Vec2 pos, string name) {
@@ -36,6 +39,8 @@ bool Player::init(const cugl::Vec2 pos, string name) {
   _health = HEALTH;
   _frame_count = 0;
   _attack_frame_count = ATTACK_FRAMES;
+    _hurt_frames = 0;
+    isDead = false;
 
   setDensity(0.01f);
   setFriction(0.0f);
@@ -43,6 +48,43 @@ bool Player::init(const cugl::Vec2 pos, string name) {
   setFixedRotation(true);
 
   return true;
+}
+
+void Player::takeDamage() {
+    if (_hurt_frames == 0) {
+        reduceHealth(5);
+        _player_node->setColor(cugl::Color4::RED);
+        _hurt_frames = HURT_FRAMES;
+    }
+}
+
+void Player::dies() {
+    isDead = true;
+    _player_node->setColor(cugl::Color4::RED);
+    _hurt_frames = DEAD_FRAMES;
+}
+
+void Player::step(float timestep, cugl::Vec2 forward, bool didAttack, std::shared_ptr<Sword> sword) {
+    move(forward);
+    attack(didAttack, sword);
+    
+    if (_hurt_frames <= 0) {
+        _player_node->setColor(cugl::Color4::WHITE);
+        _hurt_frames = 0;
+    } else {
+        _hurt_frames--;
+    }
+    
+    // CHECK IF RAN OUT OF HEALTH
+    if (_health <= 0 && !isDead) {
+        dies();
+    }
+    
+    // CHECK IF HAS BEEN DEAD FOR LONG ENOUGH TO REVIVE
+    if (isDead && _hurt_frames == 0) {
+        setHealth(HEALTH);
+        isDead = false;
+    }
 }
 
 #pragma mark Animation & Drawing
@@ -134,37 +176,45 @@ void Player::animate(float forwardX, float forwardY) {
 #pragma mark Movement
 
 void Player::move(float forwardX, float forwardY) {
-  setVX(1000 * forwardX);
-  setVY(1000 * forwardY);
-  if (forwardX == 0) setVX(0);
-  if (forwardY == 0) setVY(0);
+    if (!isDead) {
+      setVX(1000 * forwardX);
+      setVY(1000 * forwardY);
+      if (forwardX == 0) setVX(0);
+      if (forwardY == 0) setVY(0);
 
-  // Switch states.
-  if (forwardX != 0 || forwardY != 0) {
-    setState(MOVING);
-  } else {
-    setState(IDLE);
-  }
+      // Switch states.
+      if (forwardX != 0 || forwardY != 0) {
+        setState(MOVING);
+      } else {
+        setState(IDLE);
+      }
+    } else {
+        setVX(0);
+        setVY(0);
+        setState(IDLE);
+    }
 }
 
 void Player::attack(bool didAttack, std::shared_ptr<Sword> sword) {
-  // Set the sword adjacent to the player
-  sword->moveSword(getPosition(), cugl::Vec2(getVX(), getVY()),
-                   _player_node->isFlipHorizontal());
+    if (!isDead) {
+      // Set the sword adjacent to the player
+      sword->moveSword(getPosition(), cugl::Vec2(getVX(), getVY()),
+                       _player_node->isFlipHorizontal());
 
-  if (didAttack || _attack_frame_count < ATTACK_FRAMES) {
-    if (_attack_frame_count == ATTACK_FRAMES) {
-      _frame_count = 0;
+      if (didAttack || _attack_frame_count < ATTACK_FRAMES) {
+        if (_attack_frame_count == ATTACK_FRAMES) {
+          _frame_count = 0;
+        }
+        setState(ATTACKING);
+        sword->setEnabled(true);
+        _attack_frame_count--;
+      }
+
+      if (_attack_frame_count <= 0) {
+        setState(IDLE);
+        _frame_count = 0;
+        sword->setEnabled(false);
+        _attack_frame_count = ATTACK_FRAMES;
+      }
     }
-    setState(ATTACKING);
-    sword->setEnabled(true);
-    _attack_frame_count--;
-  }
-
-  if (_attack_frame_count <= 0) {
-    setState(IDLE);
-    _frame_count = 0;
-    sword->setEnabled(false);
-    _attack_frame_count = ATTACK_FRAMES;
-  }
 }
