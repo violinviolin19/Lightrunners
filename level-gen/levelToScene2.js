@@ -115,7 +115,9 @@ const levelToScene2 = (fileName) => {
                         if (tileTypeId !== enemyTileId) {
                             return acc;
                         }
-                        let anchorNode = getTileNode(col, row, width, height, enemyTileId, row);
+
+                        // TODO: Make it so this doesn't render
+                        let anchorNode = getTileNode(col, row, width, height, floorTileId, 0);
                         let obj = {};
                         obj[`enemy-(${row}-${col})`] = anchorNode;
                         acc.push(obj);
