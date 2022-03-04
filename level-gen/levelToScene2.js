@@ -8,6 +8,7 @@ if (args.length < 2) {
 
 const floorTileId = 0;
 const wallTileId = 1;
+const enemyTileId = 7;
 const halfWallTileId = 10;
 const wallFaceTileId = 11;
 
@@ -51,9 +52,25 @@ const levelToScene2 = (fileName) => {
                         "anchor": [0, 0],
                         "size": [pixelWidth * width * tileScale, pixelHeight * height * tileScale],
                     },
+                    "layout" : {
+                        "x_anchor" : "bottom",
+                        "y_anchor" : "left"
+                    },
                     "children": Object.assign({}, ...layoutWithSpecialWallTiles.reduce((acc, tileTypeId, index) => {
                         let row = Math.floor(index / width);
                         let col = index % width;
+
+                        if (tileIdsThatShowFloor.includes(tileTypeId)) {
+                            let obj = {};
+                            let floorAnchorNode = getTileNode(col, row, width, height, floorTileId, 0);
+                            obj[`tile-(${row}-${col})-floor`] = floorAnchorNode;
+                            acc.push(obj);
+
+                            // Enemies are added to the "enemies" node, just need to add floor
+                            if (tileTypeId === enemyTileId || tileTypeId === floorTileId) {
+                                return acc;
+                            }
+                        }
 
                         let anchorNode = getTileNode(col, row, width, height, tileTypeId, row);
                         if (tileTypeId === wallTileId) {
@@ -73,19 +90,39 @@ const levelToScene2 = (fileName) => {
                         let obj = {};
                         obj[`tile-(${row}-${col})`] = anchorNode;
                         acc.push(obj);
-
-                        if (tileIdsThatShowFloor.includes(tileTypeId)) {
-                            let obj = {};
-                            let floorAnchorNode = getTileNode(col, row, width, height, floorTileId, 0);
-                            obj[`tile-(${row}-${col})-floor`] = floorAnchorNode;
-                            acc.push(obj);
-                        }
                         return acc;
-                    }, [])),
+                    }, []))
+                },
+                "enemies": {
+                    "type": "Node",
+                    "format": {
+                        "type": "Grid",
+                        "width": width,
+                        "height": height
+                    },
+                    "data": {
+                        "anchor": [0, 0],
+                        "size": [pixelWidth * width * tileScale, pixelHeight * height * tileScale],
+                    },
                     "layout" : {
                         "x_anchor" : "bottom",
                         "y_anchor" : "left"
-                    }
+                    },
+                    "children": Object.assign({}, ...layoutWithSpecialWallTiles.reduce((acc, tileTypeId, index) => {
+                        let row = Math.floor(index / width);
+                        let col = index % width;
+
+                        if (tileTypeId !== enemyTileId) {
+                            return acc;
+                        }
+
+                        // TODO: Make it so this doesn't render
+                        let anchorNode = getTileNode(col, row, width, height, floorTileId, 0);
+                        let obj = {};
+                        obj[`enemy-(${row}-${col})`] = anchorNode;
+                        acc.push(obj);
+                        return acc;
+                    }, []))
                 }
             }
         }
@@ -93,6 +130,9 @@ const levelToScene2 = (fileName) => {
 }
 
 const getTileNode = (col, row, width, height, tileTypeId, priority) => {
+    if (tileTypeId === floorTileId) {
+        priority = 0;
+    }
     let anchorNode = {
         "type": "Node",
         "format": {
