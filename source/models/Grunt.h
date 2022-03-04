@@ -26,6 +26,10 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
   /** Damage frame count to turn red. */
   int _damage_count;
 
+  /** Represents the offset between the center of the player and the center of
+   * the capsule obstacle. */
+  cugl::Vec2 _offset_from_center;
+
  public:
 #pragma mark Constructors
   /**
