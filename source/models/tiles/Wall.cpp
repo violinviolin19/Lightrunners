@@ -12,15 +12,13 @@ bool Wall::initWithData(const cugl::Scene2Loader* loader,
 }
 
 std::shared_ptr<cugl::physics2::BoxObstacle> Wall::initBox2d() {
+  cugl::Vec2 pos = BasicTile::getWorldPosition() - BasicTile::getPosition() + BasicTile::getSize() / 2.0f;
   
-  CULog("%f, %f", BasicTile::getPosition().x, BasicTile::getPosition().y);
-  _obstacle = cugl::physics2::BoxObstacle::alloc(
-      BasicTile::getWorldPosition() - BasicTile::getPosition() + BasicTile::getSize() / 2.0f,
-      BasicTile::getContentSize() * BasicTile::getScale());
+  // TODO: Change this so it is no longer a hard-coded tile size value here
+  _obstacle = cugl::physics2::BoxObstacle::alloc(pos, cugl::Vec2(64, 64) * BasicTile::getScale());
 
   if (_obstacle != nullptr) {
-    _obstacle->setPosition(BasicTile::getWorldPosition() - BasicTile::getPosition() +
-                           BasicTile::getSize() / 2.0f);
+    _obstacle->setPosition(pos);
     _obstacle->setName(_classname.c_str());
 
     _obstacle->setBodyType(b2BodyType::b2_staticBody);
