@@ -48,6 +48,12 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
   ui_layer->setContentSize(dim);
   ui_layer->doLayout();
 
+    auto text = ui_layer->getChildByName<cugl::scene2::Label>("health");
+    
+    std::string msg = cugl::strtool::format("Health: %d", _player->getHealth());
+    text->setText(msg);
+    text->setForeground(cugl::Color4::WHITE);
+    
   cugl::Scene2::addChild(_world_node);
   cugl::Scene2::addChild(ui_layer);
   cugl::Scene2::addChild(_debug_node);
