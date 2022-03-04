@@ -1,7 +1,7 @@
 #include "Grunt.h"
 
-#define WIDTH 24
-#define HEIGHT 48
+#define WIDTH 24.0f
+#define HEIGHT 48.0f
 
 #define HEIGHT_SHRINK 0.3f
 
@@ -27,11 +27,11 @@ bool Grunt::init(const cugl::Vec2 pos, string name) {
   cugl::Size size_ = cugl::Size(WIDTH, HEIGHT);
 
   size_.height *= HEIGHT_SHRINK;
-
   _offset_from_center.y = HEIGHT / 2.0f - size_.height / 2.0f;
   pos_ -= _offset_from_center;
 
   CapsuleObstacle::init(pos_, size_);
+
   setName(name);
 
   _grunt_node = nullptr;
@@ -74,11 +74,49 @@ std::shared_ptr<cugl::scene2::SpriteNode>& Grunt::getGruntNode() {
   return _grunt_node;
 }
 
-/**
- * Update the scene graph.
- *
- * @param delta the timing value.
- */
+#pragma mark -
+#pragma mark Physics Methods
+
+void Grunt::createFixtures() {
+  if (_body == nullptr) return;
+
+  CapsuleObstacle::createFixtures();
+
+  b2FixtureDef sensorDef;
+  sensorDef.density = 0.0f;
+  sensorDef.isSensor = true;
+  std::string fixture_name = "grunt_hitbox";
+  CULog("grunt: %p", &fixture_name);
+  sensorDef.userData.pointer = reinterpret_cast<uintptr_t>(&fixture_name);
+
+  // Sensor dimensions
+  b2Vec2 corners[4];
+  corners[0].x = -CapsuleObstacle::getWidth() / 2.0f;
+  corners[0].y = (-CapsuleObstacle::getHeight() + HEIGHT) / 2.0f;
+  corners[1].x = -CapsuleObstacle::getWidth() / 2.0f;
+  corners[1].y = (-CapsuleObstacle::getHeight() - HEIGHT) / 2.0f;
+  corners[2].x = CapsuleObstacle::getWidth() / 2.0f;
+  corners[2].y = (-CapsuleObstacle::getHeight() - HEIGHT) / 2.0f;
+  corners[3].x = CapsuleObstacle::getWidth() / 2.0f;
+  corners[3].y = (-CapsuleObstacle::getHeight() + HEIGHT) / 2.0f;
+
+  b2PolygonShape sensorShape;
+  sensorShape.Set(corners, 4);
+
+  sensorDef.shape = &sensorShape;
+  _hitbox_sensor = _body->CreateFixture(&sensorDef);
+}
+
+void Grunt::releaseFixtures() {
+  if (_body == nullptr) return;
+
+  CapsuleObstacle::releaseFixtures();
+  if (_hitbox_sensor != nullptr) {
+    _body->DestroyFixture(_hitbox_sensor);
+    _hitbox_sensor = nullptr;
+  }
+}
+
 void Grunt::update(float delta) {
   CapsuleObstacle::update(delta);
   if (_grunt_node != nullptr) {

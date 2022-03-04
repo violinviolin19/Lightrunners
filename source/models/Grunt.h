@@ -17,6 +17,12 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
   /** The scene graph node for the grunt. */
   std::shared_ptr<cugl::scene2::SpriteNode> _grunt_node;
 
+  /** Represents the hit area for the grunt. */
+  b2Fixture* _hitbox_sensor;
+
+  /** The node for debugging the hitbox sensor */
+  std::shared_ptr<cugl::scene2::WireNode> _hitbox_sensor_node;
+
   /** Force to be applied to the grunt. */
   cugl::Vec2 _force;
 
@@ -38,7 +44,7 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
    * @param pos The grunt position.
    * @param data The data defining the grunt.
    */
-  Grunt(void) : CapsuleObstacle() {}
+  Grunt(void) : CapsuleObstacle(), _hitbox_sensor(nullptr) {}
 
   /**
    * Disposes the grunt.
@@ -48,7 +54,10 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
   /**
    * Disposes the grunt.
    */
-  void dispose() { _grunt_node = nullptr; }
+  void dispose() {
+    _grunt_node = nullptr;
+    _hitbox_sensor = nullptr;
+  }
 
   /**
    * Initializes a new grunt with the given position and size.
@@ -109,12 +118,34 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
    */
   float getSpeed() const { return _speed; }
 
+#pragma mark -
+#pragma mark Physics Methods
   /**
-   * Update the scene graph.
+   * Creates the physics Body(s) for this object, adding them to the world.
    *
-   * @param delta the timing value.
+   * This method overrides the base method to keep your ship from spinning.
+   *
+   * @param world Box2D world to store body
+   *
+   * @return true if object allocation succeeded
    */
-  void update(float delta);
+  void createFixtures() override;
+
+  /**
+   * Release the fixtures for this body, reseting the shape
+   *
+   * This is the primary method to override for custom physics objects.
+   */
+  void releaseFixtures() override;
+
+  /**
+   * Updates the object's physics state (NOT GAME LOGIC).
+   *
+   * We use this method to reset cooldowns.
+   *
+   * @param delta Number of seconds since last animation frame
+   */
+  void update(float dt) override;
 
 #pragma mark Graphics
 

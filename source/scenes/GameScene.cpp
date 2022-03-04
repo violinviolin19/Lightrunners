@@ -124,7 +124,6 @@ void GameScene::update(float timestep) {
   InputController::get()->update();
   // Movement
   _player->move(InputController::get<Movement>()->getMovement());
-  //  CULog("%f", _player->getPlayerNode()->getPositionY());
 
   std::shared_ptr<Attack> att = InputController::get<Attack>();
   _player->attack(att->isAttacking(), _sword);
@@ -142,6 +141,7 @@ void GameScene::update(float timestep) {
   // Check for disposal
   for (std::shared_ptr<Grunt> grunt : _enemies.getEnemies()) {
     if (grunt != nullptr && grunt->getHealth() <= 0) {
+      grunt->deactivatePhysics(*_world->getWorld());
       _enemies.deleteEnemy(grunt);
       _world_node->removeChild(grunt->getGruntNode());
       _world->removeObstacle(grunt.get());
@@ -152,30 +152,53 @@ void GameScene::update(float timestep) {
 }
 
 void GameScene::beginContact(b2Contact* contact) {
-  b2Body* body1 = contact->GetFixtureA()->GetBody();
-  b2Body* body2 = contact->GetFixtureB()->GetBody();
+  b2Fixture* fx1 = contact->GetFixtureA();
+  b2Fixture* fx2 = contact->GetFixtureB();
 
-  intptr_t pptr = reinterpret_cast<intptr_t>(_player.get());
-  intptr_t psptr = reinterpret_cast<intptr_t>(_sword.get());
+  void* fx1_d = (void*)fx1->GetUserData().pointer;
+  void* fx2_d = (void*)fx2->GetUserData().pointer;
+
+  std::string fx1_name;
+  if (static_cast<std::string*>(fx1_d) != nullptr)
+    CULog("%p", static_cast<std::string*>(fx1_d));
+  std::string fx2_name;
+  if (static_cast<std::string*>(fx2_d) != nullptr)
+    CULog("%p", static_cast<std::string*>(fx2_d));
+
+  b2Body* body1 = fx1->GetBody();
+  b2Body* body2 = fx2->GetBody();
+
+  cugl::physics2::Obstacle* ob1 = static_cast<cugl::physics2::Obstacle*>(
+      (void*)body1->GetUserData().pointer);
+  cugl::physics2::Obstacle* ob2 = static_cast<cugl::physics2::Obstacle*>(
+      (void*)body2->GetUserData().pointer);
+
+  if (!ob1 || !ob2) return;
+
+  if (fx1_name == "grunt_hitbox" && ob2 == _sword.get()) {
+    dynamic_cast<Grunt*>(ob1)->takeDamage();
+  } else if (fx2_name == "grunt_hitbox" && ob1 == _sword.get()) {
+    dynamic_cast<Grunt*>(ob2)->takeDamage();
+  }
 
   // If there is a collision between the sword and the enemies
-  for (std::shared_ptr<Grunt> grunt : _enemies.getEnemies()) {
-    intptr_t gptr = reinterpret_cast<intptr_t>(grunt.get());
-    if ((body1->GetUserData().pointer == psptr &&
-         body2->GetUserData().pointer == gptr) ||
-        (body1->GetUserData().pointer == gptr &&
-         body2->GetUserData().pointer == psptr)) {
-      grunt->takeDamage();
-    }
+  // for (std::shared_ptr<Grunt> grunt : _enemies.getEnemies()) {
+  //   intptr_t gptr = reinterpret_cast<intptr_t>(grunt.get());
+  //   if ((body1->GetUserData().pointer == psptr &&
+  //        body2->GetUserData().pointer == gptr) ||
+  //       (body1->GetUserData().pointer == gptr &&
+  //        body2->GetUserData().pointer == psptr)) {
+  //     grunt->takeDamage();
+  //   }
 
-    // If there is a collision between the player and the enemy
-    if ((body1->GetUserData().pointer == pptr &&
-         body2->GetUserData().pointer == gptr) ||
-        (body1->GetUserData().pointer == gptr &&
-         body2->GetUserData().pointer == pptr)) {
-      _player->reduceHealth(5);
-    }
-  }
+  // If there is a collision between the player and the enemy
+  //   if ((body1->GetUserData().pointer == pptr &&
+  //        body2->GetUserData().pointer == gptr) ||
+  //       (body1->GetUserData().pointer == gptr &&
+  //        body2->GetUserData().pointer == pptr)) {
+  //     _player->reduceHealth(5);
+  //   }
+  // }
 }
 
 void GameScene::beforeSolve(b2Contact* contact, const b2Manifold* oldManifold) {

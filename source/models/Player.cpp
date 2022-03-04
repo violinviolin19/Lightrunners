@@ -11,10 +11,12 @@
 #define ATTACK_FRAMES 14
 #define HEALTH 100
 
-#define WIDTH 24
-#define HEIGHT 48
+#define WIDTH 24.0f
+#define HEIGHT 48.0f
 
 #define HEIGHT_SHRINK 0.3f
+
+#define SWORD_OFFSET_FROM_CENTER cugl::Vec2(10.0f, 0.0f)
 
 #pragma mark Init
 
@@ -148,9 +150,9 @@ void Player::move(float forwardX, float forwardY) {
 
 void Player::attack(bool didAttack, std::shared_ptr<Sword> sword) {
   // Set the sword adjacent to the player
-  sword->moveSword(getPosition() + _offset_from_center,
-                   cugl::Vec2(getVX(), getVY()),
-                   _player_node->isFlipHorizontal());
+  sword->moveSword(
+      getPosition() + _offset_from_center + SWORD_OFFSET_FROM_CENTER,
+      cugl::Vec2(getVX(), getVY()), _player_node->isFlipHorizontal());
 
   if (didAttack || _attack_frame_count < ATTACK_FRAMES) {
     if (_attack_frame_count == ATTACK_FRAMES) {
