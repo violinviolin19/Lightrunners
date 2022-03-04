@@ -21,7 +21,8 @@ std::shared_ptr<Grunt> EnemySet::spawnEnemy(
 
   auto grunt_node = cugl::scene2::SpriteNode::alloc(grunt_texture, 1, 1);
   grunt->setGruntNode(grunt_node);
-  grunt_node->setPriority(100);  // TODO: Update priority according to position on screen
+  grunt_node->setPriority(
+      100);  // TODO: Update priority according to position on screen
 
   return grunt;
 }

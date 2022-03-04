@@ -32,16 +32,16 @@ class GameScene : public cugl::Scene2 {
 
   /** The AI Controller for enemies. */
   AIController _ai_controller;
-  
+
   /** The height of each tile in the world. */
   float _tile_width;
-  
+
   /** The height of each tile in the world. */
   float _tile_height;
-  
+
   /** The number of rows in the world. */
   float _col_count;
-  
+
   /** The number of rows in the world. */
   float _row_count;
 
