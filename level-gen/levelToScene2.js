@@ -36,8 +36,8 @@ const levelToScene2 = (fileName) => {
                 "type": "Anchored"
             },
             "layout": {
-                "x_anchor": "center",
-                "y_anchor": "middle"
+                "x_anchor": "left",
+                "y_anchor": "bottom"
             },
             "children": {
                 "tiles": {

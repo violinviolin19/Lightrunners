@@ -190,6 +190,7 @@
     <ClInclude Include="..\..\source\GameApp.h" />
     <ClInclude Include="..\..\source\scenes\GameScene.h" />
     <ClInclude Include="..\..\source\scenes\LoadingScene.h" />
+    <ClInclude Include="..\..\source\scenes\LevelGenerationDemoScene.h" />
     <ClInclude Include="..\..\source\controllers\InputController.h" />
     <ClInclude Include="..\..\source\controllers\AIController.h" />
     <ClInclude Include="..\..\source\controllers\actions\Action.h" />
@@ -201,7 +202,12 @@
     <ClInclude Include="..\..\source\models\Sword.h" />
     <ClInclude Include="..\..\source\models\tiles\BasicTile.h" />
     <ClInclude Include="..\..\source\models\tiles\Wall.h" />
+    <ClInclude Include="..\..\source\models\level_gen\Hallway.h" />
+    <ClInclude Include="..\..\source\models\level_gen\Room.h" />
     <ClInclude Include="..\..\source\loaders\CustomScene2Loader.h" />
+    <ClInclude Include="..\..\source\generators\LevelGenerator.h" />
+    <ClInclude Include="..\..\source\generators\LevelGeneratorConfig.h" />
+    <ClInclude Include="..\..\source\generators\Delaunator.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
@@ -209,6 +215,7 @@
     <ClCompile Include="..\..\source\main.cpp" />
     <ClCompile Include="..\..\source\scenes\GameScene.cpp" />
     <ClCompile Include="..\..\source\scenes\LoadingScene.cpp" />
+    <ClCompile Include="..\..\source\scenes\LevelGenerationDemoScene.cpp" />
     <ClCompile Include="..\..\source\controllers\InputController.cpp" />
     <ClCompile Include="..\..\source\controllers\AIController.cpp" />
     <ClCompile Include="..\..\source\controllers\actions\Attack.cpp" />
@@ -219,7 +226,11 @@
     <ClCompile Include="..\..\source\models\Sword.cpp" />
     <ClCompile Include="..\..\source\models\tiles\BasicTile.cpp" />
     <ClCompile Include="..\..\source\models\tiles\Wall.cpp" />
+    <ClCompile Include="..\..\source\models\level_gen\Hallway.cpp" />
+    <ClCompile Include="..\..\source\models\level_gen\Room.cpp" />
     <ClCompile Include="..\..\source\loaders\CustomScene2Loader.cpp" />
+    <ClCompile Include="..\..\source\generators\LevelGenerator.cpp" />
+    <ClCompile Include="..\..\source\generators\LevelGeneratorConfig.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Luminance.rc" />

@@ -25,12 +25,24 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
   _world_node = assets->get<cugl::scene2::SceneNode>("world-scene");
   _world_node->setContentSize(dim);
 
+  std::shared_ptr<cugl::scene2::SceneNode> grid_node =
+      _world_node->getChildByName("tiles");
+  std::shared_ptr<cugl::scene2::Layout> layout = grid_node->getLayout();
+  std::shared_ptr<cugl::scene2::GridLayout> grid_layout =
+      dynamic_pointer_cast<cugl::scene2::GridLayout>(layout);
+
+  float map_height = grid_node->getContentHeight();
+  _row_count = grid_layout->getGridSize().height;
+  _tile_height = map_height / _row_count;
+
   _debug_node = cugl::scene2::SceneNode::alloc();
   _debug_node->setContentSize(dim);
 
   // Create the world and attach the listeners.
   _world = cugl::physics2::ObstacleWorld::alloc(
-      cugl::Rect(0, 0, dim.width, dim.height), cugl::Vec2(0, 0));
+      cugl::Rect(0, 0, grid_node->getContentWidth(),
+                 grid_node->getContentHeight()),
+      cugl::Vec2(0, 0));
   _world->activateCollisionCallbacks(true);
   _world->onBeginContact = [this](b2Contact* contact) {
     beginContact(contact);
@@ -124,6 +136,9 @@ void GameScene::update(float timestep) {
   InputController::get()->update();
   // Movement
   _player->move(InputController::get<Movement>()->getMovement());
+  int row = (int)floor(_player->getBody()->GetPosition().y / _tile_height);
+
+  _player->getPlayerNode()->setPriority(_row_count - row);
 
   std::shared_ptr<Attack> att = InputController::get<Attack>();
   _player->attack(att->isAttacking(), _sword);
