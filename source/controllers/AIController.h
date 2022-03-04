@@ -28,6 +28,13 @@ class AIController {
    * Disposses this input controller, releasing all resources.
    */
   ~AIController() {}
+  
+  /*
+   * Returns whether an enemy should move towards the player.
+   *
+   * @return whether the enemy should move towards the player.
+   */
+  bool shouldMoveTowardsPlayer(std::shared_ptr<Grunt> enemy, cugl::Vec2 playerPos);
 
   /*
    * Moves all the enemies in the enemy set towards the player character.
