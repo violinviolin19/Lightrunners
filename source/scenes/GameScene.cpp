@@ -30,8 +30,11 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
   std::shared_ptr<cugl::scene2::GridLayout> grid_layout = dynamic_pointer_cast<cugl::scene2::GridLayout>(layout);
   
   float map_height = grid_node->getContentHeight();
+  float map_width = grid_node->getContentWidth();
+  _col_count = grid_layout->getGridSize().width;
   _row_count = grid_layout->getGridSize().height;
   _tile_height = map_height / _row_count;
+  _tile_width = map_width / _col_count;
 
   _debug_node = cugl::scene2::SceneNode::alloc();
   _debug_node->setContentSize(dim);
@@ -77,11 +80,9 @@ void GameScene::dispose() {
 void GameScene::populate(cugl::Size dim) {
   // Initialize the player with texture and size, then add to world.
   std::shared_ptr<cugl::Texture> player = _assets->get<cugl::Texture>("player");
-  _player = Player::alloc(dim / 2.0f, "Johnathan");
+  _player = Player::alloc(dim + cugl::Vec2(20, 20), "Johnathan");
 
   auto player_node = cugl::scene2::SpriteNode::alloc(player, 3, 10);
-  player_node->setPriority(
-      100);  // TODO: Update priority according to position on screen
   _player->setPlayerNode(player_node);
   _world_node->addChild(player_node);
   _world->addObstacle(_player);
@@ -93,6 +94,16 @@ void GameScene::populate(cugl::Size dim) {
   // Initialize the enemy set and populate with grunts.
   _enemies.init();
 
+  std::shared_ptr<cugl::scene2::SceneNode> enemies_node = _world_node->getChildByName("enemies");
+  std::vector<std::shared_ptr<cugl::scene2::SceneNode>> enemy_nodes = enemies_node->getChildren();
+  for (std::shared_ptr<cugl::scene2::SceneNode> enemy_node : enemy_nodes) {
+    std::shared_ptr<Grunt> grunt =
+      _enemies.spawnEnemy(enemy_node->getPosition(), enemy_node->getName(), _assets);
+    _world_node->addChild(grunt->getGruntNode());
+    _world->addObstacle(grunt);
+  }
+  
+  
   // Each grunt has texture and size set, and is added to the world.
   std::shared_ptr<Grunt> grunt1 =
       _enemies.spawnEnemy(dim / 2.3f, "Grunt1", _assets);
@@ -133,7 +144,6 @@ void GameScene::update(float timestep) {
   // Movement
   _player->move(InputController::get<Movement>()->getMovement());
   int row = (int) floor(_player->getBody()->GetPosition().y / _tile_height);
-  
   _player->getPlayerNode()->setPriority(_row_count - row);
   
   std::shared_ptr<Attack> att = InputController::get<Attack>();
@@ -151,6 +161,9 @@ void GameScene::update(float timestep) {
   // POST-UPDATE
   // Check for disposal
   for (std::shared_ptr<Grunt> grunt : _enemies.getEnemies()) {
+    int row = (int) floor(grunt->getBody()->GetPosition().y / _tile_height);
+    grunt->getGruntNode()->setPriority(_row_count - row);
+    
     if (grunt != nullptr && grunt->getHealth() <= 0) {
       _enemies.deleteEnemy(grunt);
       _world_node->removeChild(grunt->getGruntNode());
