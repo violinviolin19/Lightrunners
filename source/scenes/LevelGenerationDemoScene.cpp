@@ -44,7 +44,7 @@ bool LevelGenerationDemoScene::init() {
   _map->doLayout();
   cugl::Scene2::addChild(_map);
 
-  cugl::Application::get()->setClearColor(cugl::Color4f::BLACK);
+  cugl::Application::get()->setClearColor(cugl::Color4f::WHITE);
 
   return true;
 }
