@@ -190,7 +190,7 @@ void GameScene::beginContact(b2Contact* contact) {
     fx1_name.assign(*static_cast<std::string*>(fx1_d));
   std::string fx2_name;
   if (static_cast<std::string*>(fx2_d) != nullptr)
-    fx1_name.assign(*static_cast<std::string*>(fx2_d));
+    fx2_name.assign(*static_cast<std::string*>(fx2_d));
 
   b2Body* body1 = fx1->GetBody();
   b2Body* body2 = fx2->GetBody();
