@@ -7,11 +7,7 @@
 
 #include <cugl/cugl.h>
 
-// static
-const cugl::Size LevelGenerator::TERMINAL(10.0f, 10.0f);
-
-// static
-const cugl::Size LevelGenerator::SPAWN(10.0f, 10.0f);
+#include "../models/level_gen/DefaultRooms.h"
 
 LevelGenerator::LevelGenerator() : _active(false), _generator_step(nullptr) {}
 
@@ -49,7 +45,8 @@ void LevelGenerator::update() {
 }
 
 void LevelGenerator::generateRooms() {
-  _spawn_room = std::make_shared<Room>(LevelGenerator::SPAWN);
+  _spawn_room = std::make_shared<Room>(default_rooms::kSpawn.size,
+                                       default_rooms::kSpawn.doors);
   _spawn_room->_type = Room::RoomType::SPAWN;
   _spawn_room->_fixed = true;
   _spawn_room->_node->setAnchor(cugl::Vec2::ANCHOR_BOTTOM_LEFT);
@@ -189,7 +186,7 @@ std::vector<std::shared_ptr<Room>> LevelGenerator::placeTerminalRooms(
 
   // Make sure the room is always inside of the spawn circle;
   float terminal_radius =
-      static_cast<cugl::Vec2>(LevelGenerator::TERMINAL).length() / 2.0f;
+      static_cast<cugl::Vec2>(default_rooms::kTerminal.size).length() / 2.0f;
   min_radius += terminal_radius;
   max_radius -= terminal_radius;
 
@@ -200,8 +197,8 @@ std::vector<std::shared_ptr<Room>> LevelGenerator::placeTerminalRooms(
   std::vector<std::shared_ptr<Room>> terminals;
 
   for (float i = 0; i < num_rooms; i++) {
-    std::shared_ptr<Room> room =
-        std::make_shared<Room>(LevelGenerator::TERMINAL);
+    std::shared_ptr<Room> room = std::make_shared<Room>(
+        default_rooms::kTerminal.size, default_rooms::kTerminal.doors);
 
     room->_type = Room::RoomType::TERMINAL;
 
@@ -240,7 +237,7 @@ void LevelGenerator::segregateLayers() {
   std::vector<std::shared_ptr<Room>> inside_rooms;
   std::copy_if(_rooms.begin(), _rooms.end(), std::back_inserter(inside_rooms),
                [this](const std::shared_ptr<Room> &room) {
-                 return room->_type == Room::RoomType::DEFAULT &&
+                 return room->_type == Room::RoomType::STANDARD &&
                         room->getMid().length() <=
                             this->_config.getInnerCircleRadius();
                });
@@ -249,7 +246,7 @@ void LevelGenerator::segregateLayers() {
   std::copy_if(_rooms.begin(), _rooms.end(), std::back_inserter(middle_rooms),
                [this](const std::shared_ptr<Room> &room) {
                  float r = room->getMid().length();
-                 return room->_type == Room::RoomType::DEFAULT &&
+                 return room->_type == Room::RoomType::STANDARD &&
                         r > this->_config.getInnerCircleRadius() &&
                         r <= this->_config.getMiddleCircleRadius();
                });
@@ -257,7 +254,7 @@ void LevelGenerator::segregateLayers() {
   std::vector<std::shared_ptr<Room>> outside_rooms;
   std::copy_if(_rooms.begin(), _rooms.end(), std::back_inserter(outside_rooms),
                [this](const std::shared_ptr<Room> &room) {
-                 return room->_type == Room::RoomType::DEFAULT &&
+                 return room->_type == Room::RoomType::STANDARD &&
                         room->getMid().length() >
                             this->_config.getMiddleCircleRadius();
                });
@@ -319,17 +316,13 @@ void LevelGenerator::markAndFillHallways() {
 
   fillHallways();
 
-  _generator_step = [this]() { this->buildCompositeAreas(); };
-}
-
-void LevelGenerator::buildCompositeAreas() {
   _generator_step = [this]() { this->establishGates(); };
 }
 
 void LevelGenerator::establishGates() { _generator_step = nullptr; }
 
 void LevelGenerator::calculateDelaunayTriangles(
-    std::vector<std::shared_ptr<Room>> &rooms, float r) {
+    std::vector<std::shared_ptr<Room>> &rooms, float min_r) {
   if (rooms.size() == 0) return;
 
   std::vector<double> coords;
@@ -349,7 +342,7 @@ void LevelGenerator::calculateDelaunayTriangles(
     std::shared_ptr<Room> &node_2 = rooms[d.triangles[i + 2]];
 
     std::shared_ptr<Edge> edge_0_1 = std::make_shared<Edge>(node_0, node_1);
-    if (r == 0.0f || !edge_0_1->doesIntersect(cugl::Vec2::ZERO, r)) {
+    if (min_r == 0.0f || !edge_0_1->doesIntersect(cugl::Vec2::ZERO, min_r)) {
       auto adjacent_0_1 = node_0->findEdge(node_1);
       auto adjacent_1_0 = node_1->findEdge(node_0);
 
@@ -365,7 +358,7 @@ void LevelGenerator::calculateDelaunayTriangles(
     }
 
     std::shared_ptr<Edge> edge_0_2 = std::make_shared<Edge>(node_0, node_2);
-    if (r == 0.0f || !edge_0_2->doesIntersect(cugl::Vec2::ZERO, r)) {
+    if (min_r == 0.0f || !edge_0_2->doesIntersect(cugl::Vec2::ZERO, min_r)) {
       auto adjacent_0_2 = node_0->findEdge(node_2);
       auto adjacent_2_0 = node_2->findEdge(node_0);
 
@@ -381,7 +374,7 @@ void LevelGenerator::calculateDelaunayTriangles(
     }
 
     std::shared_ptr<Edge> edge_1_2 = std::make_shared<Edge>(node_1, node_2);
-    if (r == 0.0f || !edge_1_2->doesIntersect(cugl::Vec2::ZERO, r)) {
+    if (min_r == 0.0f || !edge_1_2->doesIntersect(cugl::Vec2::ZERO, min_r)) {
       auto adjacent_1_2 = node_1->findEdge(node_2);
       auto adjacent_2_1 = node_2->findEdge(node_1);
 
@@ -480,9 +473,9 @@ void LevelGenerator::connectLayers(std::vector<std::shared_ptr<Room>> &layer_a,
                                 ? (angle >= min_angle && angle <= max_angle)
                                 : (angle >= min_angle || angle <= max_angle);
 
-      if (between_angles && a_room->_type == Room::RoomType::DEFAULT) {
+      if (between_angles && a_room->_type == Room::RoomType::STANDARD) {
         for (std::shared_ptr<Room> &b_room : layer_b) {
-          if (b_room->_type == Room::RoomType::DEFAULT) {
+          if (b_room->_type == Room::RoomType::STANDARD) {
             // Find if this edge already been chosen.
             auto curr = std::make_shared<Edge>(a_room, b_room);
             auto res =

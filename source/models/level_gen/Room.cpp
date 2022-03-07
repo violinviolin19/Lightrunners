@@ -3,29 +3,42 @@
 #pragma mark Room
 
 Room::Room(cugl::Size size)
-    : _type(Room::RoomType::DEFAULT), _visited(false), _fixed(false) {
-  _node = cugl::scene2::PolygonNode::alloc();
-  _node->setContentSize(size);
+    : _type(Room::RoomType::STANDARD), _visited(false), _fixed(false) {
+  // If the doors haven't been filled before, then fill it automatically.
+  if (_doors.size() == 0) {
+    // Set the doors to the middle of the four edges in the room.
+    _doors.push_back(cugl::Vec2(floorf(size.width / 2.0f), 0.0f));
+    _doors.push_back(cugl::Vec2(floorf(size.width / 2.0f), size.height - 1.0f));
+    _doors.push_back(cugl::Vec2(0.0f, floorf(size.height / 2.0f)));
+    _doors.push_back(cugl::Vec2(size.width - 1, floorf(size.height / 2.0f)));
+  }
 
-  for (float x = 0.0f; x < size.width; x++) {
-    for (float y = 0.0f; y < size.height; y++) {
-      cugl::Rect tile_rect(cugl::Vec2::ZERO, cugl::Vec2::ONE);
-      auto tile = cugl::scene2::PathNode::allocWithRect(tile_rect, 0.1f);
-      // tile->setContentSize(cugl::Vec2::ONE * 0.8f);
-      tile->setAnchor(cugl::Vec2::ANCHOR_BOTTOM_LEFT);
-      tile->setPosition(floorf(x) + 0.1f, floorf(y) + 0.1f);
-      tile->setColor(cugl::Color4::BLACK);
-      _node->addChild(tile);
+  initScene2(size);
+}
+
+Room::Room(cugl::Size size, std::vector<cugl::Vec2> doors)
+    : _type(Room::RoomType::STANDARD), _visited(false), _fixed(false) {
+  for (cugl::Vec2 &door : doors) {
+    // If the door is within the bounds of the edges of the room then add it to
+    // the rooms doors.
+    if ((door.x == 0.0f || door.x == size.width - 1) &&
+        (door.y > 0.0f && door.y < size.height - 1)) {
+      _doors.push_back(door);
+    }
+
+    if ((door.y == 0.0f || door.y == size.height - 1) &&
+        (door.x > 0.0f && door.x < size.width - 1)) {
+      _doors.push_back(door);
     }
   }
 
-  _node->doLayout();
+  initScene2(size);
 }
 
-void Room::move(cugl::Vec2 dir) {
+void Room::move(cugl::Vec2 dist) {
   if (!_fixed) {
-    dir.set(roundf(dir.x), roundf(dir.y));
-    _node->setPosition(_node->getPosition() + dir);
+    dist.set(roundf(dist.x), roundf(dist.y));
+    _node->setPosition(_node->getPosition() + dist);
   }
 }
 
@@ -40,6 +53,33 @@ std::shared_ptr<Edge> Room::findEdge(const std::shared_ptr<Room> &room) const {
       });
 
   return (result != _edges.end()) ? *result : nullptr;
+}
+
+void Room::initScene2(cugl::Size size) {
+  _node = cugl::scene2::PolygonNode::alloc();
+  _node->setContentSize(size);
+  // Fill the tiles inside of the room.
+  for (float x = 0.0f; x < size.width; x++) {
+    for (float y = 0.0f; y < size.height; y++) {
+      cugl::Rect tile_rect(cugl::Vec2::ZERO, cugl::Vec2::ONE);
+      auto tile = cugl::scene2::PathNode::allocWithRect(tile_rect, 0.1f);
+      // tile->setContentSize(cugl::Vec2::ONE * 0.8f);
+      tile->setAnchor(cugl::Vec2::ANCHOR_BOTTOM_LEFT);
+      cugl::Vec2 pos(floorf(x), floorf(y));
+      tile->setPosition(pos + cugl::Vec2(0.1f, 0.1f));
+
+      // If the tile is a door.
+      if (std::find(_doors.begin(), _doors.end(), pos) != _doors.end()) {
+        tile->setColor(cugl::Color4::ORANGE);
+      } else {
+        tile->setColor(cugl::Color4::BLACK);
+      }
+
+      _node->addChild(tile);
+    }
+  }
+
+  _node->doLayout();
 }
 
 #pragma mark Edge

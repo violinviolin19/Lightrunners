@@ -93,6 +93,5 @@ void LevelGenerationDemoScene::render(
 void LevelGenerationDemoScene::createLevel() {
   _level_generator.dispose();
   _level_generator.init(_config, _map);
-  _level_generator.generateRooms();
   _keep_separating_rooms = true;
 }
