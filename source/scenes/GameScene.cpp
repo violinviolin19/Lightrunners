@@ -75,9 +75,6 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
 
   InputController::get()->init(_assets, cugl::Scene2::getBounds());
 
-  // Set color to BLACK.
-  cugl::Application::get()->setClearColor(cugl::Color4f::BLACK);
-
   return true;
 }
 
@@ -139,6 +136,8 @@ void GameScene::populate(cugl::Size dim) {
 }
 
 void GameScene::update(float timestep) {
+  cugl::Application::get()->setClearColor(cugl::Color4f::BLACK);
+
   InputController::get()->update();
   // Movement
   _player->step(timestep, InputController::get<Movement>()->getMovement(),

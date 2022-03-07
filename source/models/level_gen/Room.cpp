@@ -58,23 +58,29 @@ std::shared_ptr<Edge> Room::findEdge(const std::shared_ptr<Room> &room) const {
 void Room::initScene2(cugl::Size size) {
   _node = cugl::scene2::PolygonNode::alloc();
   _node->setContentSize(size);
+
   // Fill the tiles inside of the room.
   for (float x = 0.0f; x < size.width; x++) {
     for (float y = 0.0f; y < size.height; y++) {
-      cugl::Rect tile_rect(cugl::Vec2::ZERO, cugl::Vec2::ONE);
-      auto tile = cugl::scene2::PathNode::allocWithRect(tile_rect, 0.1f);
-      // tile->setContentSize(cugl::Vec2::ONE * 0.8f);
-      tile->setAnchor(cugl::Vec2::ANCHOR_BOTTOM_LEFT);
+      std::shared_ptr<cugl::scene2::SceneNode> tile;
       cugl::Vec2 pos(floorf(x), floorf(y));
-      tile->setPosition(pos + cugl::Vec2(0.1f, 0.1f));
 
-      // If the tile is a door.
       if (std::find(_doors.begin(), _doors.end(), pos) != _doors.end()) {
+        cugl::PolyFactory poly_factory;
+        cugl::Poly2 poly_rect = poly_factory.makeRoundedRect(
+            cugl::Vec2::ZERO, cugl::Vec2::ONE * 0.9f, 0.1f);
+        tile = cugl::scene2::PolygonNode::allocWithPoly(poly_rect);
         tile->setColor(cugl::Color4::ORANGE);
+        pos += cugl::Vec2(0.05f, 0.05f);
       } else {
+        cugl::Rect tile_rect(cugl::Vec2::ZERO, cugl::Vec2::ONE * 0.8f);
+        tile = cugl::scene2::PathNode::allocWithRect(tile_rect, 0.1f);
         tile->setColor(cugl::Color4::BLACK);
+        pos += cugl::Vec2(0.1f, 0.1f);
       }
 
+      tile->setAnchor(cugl::Vec2::ANCHOR_BOTTOM_LEFT);
+      tile->setPosition(pos);
       _node->addChild(tile);
     }
   }
