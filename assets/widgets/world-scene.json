@@ -15431,18 +15431,18 @@
             },
             "children": {
               "tile": {
-                "type": "BasicTile",
+                "type": "Terminal",
                 "format": {
                   "type": "Anchored"
                 },
                 "data": {
-                  "texture": "floor-tile-0",
+                  "texture": "floor-tile-12",
                   "anchor": [
                     0,
                     0
                   ],
                   "scale": 0.6,
-                  "priority": 0
+                  "priority": 7
                 },
                 "layout": {
                   "x_anchor": "left",

@@ -29,7 +29,8 @@ const tileIdToType = {
     "9": "BasicTile",
     "10": "Wall",
     "11": "Wall",
-    "12": "Door"
+    "12": "Door",
+    "14": "Terminal"
 }
 
 const pixelWidth = 64, pixelHeight = 64;
