@@ -445,6 +445,8 @@ void LevelGenerator::addEdgesBack(std::vector<std::shared_ptr<Room>> &rooms) {
     for (std::shared_ptr<Edge> edge : room->_edges) {
       bool add_back = !edge->_calculated;
       add_back &= edge->_weight < _config.getMaxHallwayLength();
+      add_back &= edge->_source->_edges.size() < _config.getMaxNumEdges();
+      add_back &= edge->_neighbor->_edges.size() < _config.getMaxNumEdges();
       add_back &= rand(_generator) <= _config.getAddEdgesBackProb();
       if (add_back) {
         edge->_path->setVisible(true);
