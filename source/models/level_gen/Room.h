@@ -164,7 +164,7 @@ class Edge {
   float _weight;
 
   /** Used by the level generator to define if the edge has already been
-   * calculated. */
+   * calculated during level generation. */
   bool _calculated;
 
   /**

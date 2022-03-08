@@ -402,6 +402,7 @@ void LevelGenerator::calculateMinimumSpanningTree(
     room->_visited = false;
     for (std::shared_ptr<Edge> edge : room->_edges) {
       edge->_path->setVisible(false);
+      edge->_calculated = false;
     }
   }
   rooms[0]->_visited = true;
@@ -434,6 +435,7 @@ void LevelGenerator::calculateMinimumSpanningTree(
   for (std::shared_ptr<Edge> &edge : result) {
     edge->_path->setColor(cugl::Color4(255, 14, 14, 124));
     edge->_path->setVisible(true);
+    edge->_calculated = true;
   }
 }
 
@@ -441,11 +443,12 @@ void LevelGenerator::addEdgesBack(std::vector<std::shared_ptr<Room>> &rooms) {
   std::uniform_real_distribution<float> rand(0.0f, 1.0f);
   for (std::shared_ptr<Room> &room : rooms) {
     for (std::shared_ptr<Edge> edge : room->_edges) {
-      bool add_back = !edge->_path->isVisible();
+      bool add_back = !edge->_calculated;
       add_back &= edge->_weight < _config.getMaxHallwayLength();
       add_back &= rand(_generator) <= _config.getAddEdgesBackProb();
       if (add_back) {
         edge->_path->setVisible(true);
+        edge->_calculated = true;
         edge->_path->setColor(cugl::Color4(255, 14, 14, 124));
       }
     }
@@ -510,20 +513,12 @@ void LevelGenerator::connectLayers(std::vector<std::shared_ptr<Room>> &layer_a,
 }
 
 void LevelGenerator::fillHallways() {
-  // Reset state of Edges to calculate Hallways.
   for (std::shared_ptr<Room> &room : _rooms) {
     for (std::shared_ptr<Edge> &edge : room->_edges) {
-      edge->_calculated = !(edge->_path->isVisible());
-    }
-  }
-
-  for (std::shared_ptr<Room> &room : _rooms) {
-    for (std::shared_ptr<Edge> &edge : room->_edges) {
-      if (!edge->_calculated) {
+      if (edge->_calculated) {
         auto hallway =
             std::make_shared<Hallway>(edge, _config.getHallwayRadius());
         _map->addChild(hallway->getNode());
-        edge->_calculated = true;
       }
     }
   }
