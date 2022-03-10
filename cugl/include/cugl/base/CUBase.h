@@ -29,11 +29,11 @@
 #ifndef __CU_BASE_H__
 #define __CU_BASE_H__
 
+#define WIN32_LEAN_AND_MEAN
+
 #include <memory>
 #include <string>
 #include <SDL/SDL.h>
-
-#define WIN32_LEAN_AND_MEAN 
 
 // The platforms
 /** An unknown platform not supported by CUGL */
