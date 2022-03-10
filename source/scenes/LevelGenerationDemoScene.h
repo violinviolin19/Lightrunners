@@ -7,19 +7,20 @@
 
 class LevelGenerationDemoScene : public cugl::Scene2 {
  private:
+  /** A level generator for this scene. */
   LevelGenerator _level_generator;
-  bool _keep_separating_rooms;
-  int _ticks;
-  std::shared_ptr<cugl::scene2::SceneNode> _map;
+
+  /** A level generator config for this scene. */
   LevelGeneratorConfig _config;
 
- public:
-  LevelGenerationDemoScene()
-      : cugl::Scene2(), _keep_separating_rooms(true), _ticks(0) {}
+  /** A reference to the scene2 map for rendering. */
+  std::shared_ptr<cugl::scene2::SceneNode> _map;
 
-  /**
-   * Disposes of all resources allocated to this mode.
-   */
+ public:
+  /** Initializes the level generation scene2. */
+  LevelGenerationDemoScene() : cugl::Scene2() {}
+
+  /** Disposes of all resources allocated to this mode. */
   ~LevelGenerationDemoScene() { dispose(); }
 
   /**
@@ -50,8 +51,6 @@ class LevelGenerationDemoScene : public cugl::Scene2 {
    * @param batch     The SpriteBatch to draw with.
    */
   void render(const std::shared_ptr<cugl::SpriteBatch> &batch) override;
-
-  void createLevel();
 };
 
 #endif /* SCENES_LEVEL_GENERATION_DEMO_SCENE_H */
