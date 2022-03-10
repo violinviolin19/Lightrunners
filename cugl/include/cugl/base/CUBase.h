@@ -33,6 +33,8 @@
 #include <string>
 #include <SDL/SDL.h>
 
+#define WIN32_LEAN_AND_MEAN 
+
 // The platforms
 /** An unknown platform not supported by CUGL */
 #define CU_PLATFORM_UNKNOWN 0
@@ -112,13 +114,13 @@
 	#include <windows.h>
 	#include <GL/glew.h>
 	#include <SDL/SDL_opengl.h>
-	#include <GL/gl.h>	
-	#include <GL/glu.h>	
+	#include <GL/gl.h>
+	#include <GL/glu.h>
 	/** The current OpenGL platform */
 	#define CU_GL_PLATFORM   CU_GL_OPENGL
 #endif
 
-#ifdef _MSC_VER 
+#ifdef _MSC_VER
 	//not #if defined(_WIN32) || defined(_WIN64) because we have strncasecmp in mingw
 #define strncasecmp _strnicmp
 #define strcasecmp _stricmp
