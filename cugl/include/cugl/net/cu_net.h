@@ -1,8 +1,8 @@
 //
-//  cugl.h
+//  cu_net.h
 //  Cornell University Game Library (CUGL)
 //
-//  This header provides access to all of the publicly accessible elements of CUGL.
+//  This header provides access to all of the publicly accessible elements of this package.
 //
 //  CUGL MIT License:
 //      This software is provided 'as-is', without any express or implied
@@ -24,21 +24,11 @@
 //      3. This notice may not be removed or altered from any source distribution.
 //
 //  Author: Walker White
-//  Version: 8/29/16
-#ifndef __CUGL_PKG_H__
-#define __CUGL_PKG_H__
+//  Version: 2/2/22
+#ifndef __CU_NET_PKG_H__
+#define __CU_NET_PKG_H__
 
-#include "base/cu_platform.h"
-#include "util/cu_util.h"
-#include "math/cu_math.h"
-#include "input/cu_input.h"
-#include "input/gestures/cu_gesture.h"
-#include "io/cu_io.h"
-#include "assets/cu_assets.h"
-#include "render/cu_render.h"
-#include "audio/cu_audio.h"
-#include "scene2/cu_scene2.h"
-#include "physics2/cu_physics2.h"
-#include "net/cu_net.h"
+#include "CUNetworkConnection.h"
+#include "CUNetworkSerializer.h"
 
-#endif /* __CUGL_PKG_H__ */
+#endif /* __CU_NET_PKG_H__ */
