@@ -192,6 +192,9 @@
     <ClInclude Include="..\..\source\scenes\LoadingScene.h" />
     <ClInclude Include="..\..\source\scenes\LevelGenerationDemoScene.h" />
     <ClInclude Include="..\..\source\scenes\MenuScene.h" />
+    <ClInclude Include="..\..\source\scenes\ClientScene.h" />
+    <ClInclude Include="..\..\source\scenes\HostScene.h" />
+    <ClInclude Include="..\..\source\scenes\PeerScene.h" />
     <ClInclude Include="..\..\source\controllers\InputController.h" />
     <ClInclude Include="..\..\source\controllers\AIController.h" />
     <ClInclude Include="..\..\source\controllers\actions\Action.h" />
@@ -218,6 +221,8 @@
     <ClCompile Include="..\..\source\scenes\LoadingScene.cpp" />
     <ClCompile Include="..\..\source\scenes\LevelGenerationDemoScene.cpp" />
     <ClCompile Include="..\..\source\scenes\MenuScene.cpp" />
+    <ClCompile Include="..\..\source\scenes\ClientScene.cpp" />
+    <ClCompile Include="..\..\source\scenes\HostScene.cpp" />
     <ClCompile Include="..\..\source\controllers\InputController.cpp" />
     <ClCompile Include="..\..\source\controllers\AIController.cpp" />
     <ClCompile Include="..\..\source\controllers\actions\Attack.cpp" />
