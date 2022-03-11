@@ -141,6 +141,9 @@
             "wrapT": "clamp"
         }
     },
+    "jsons": {
+        "server": "json/server.json"
+    },
     "widgets": {
         "ui-scene": "widgets/ui-scene.json",
         "world-scene": "widgets/world-scene.json",
