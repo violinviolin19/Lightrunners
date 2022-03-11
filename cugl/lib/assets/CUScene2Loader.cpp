@@ -80,7 +80,7 @@ using namespace cugl;
  */
 bool Scene2Loader::init(const std::shared_ptr<ThreadPool>& threads) {
     _loader=threads;
-
+    
     // Define the supported types
     _types["node"] = Widget::NODE;
     _types["image"] = Widget::IMAGE;
@@ -149,7 +149,7 @@ std::shared_ptr<scene2::SceneNode> Scene2Loader::build(const std::string& key,
     if (it == _types.end()) {
         return nullptr;
     }
-
+    
     bool nonrelative = false;
     std::shared_ptr<JsonValue> data = json->get("data");
     std::shared_ptr<scene2::SceneNode> node = nullptr;
@@ -213,21 +213,21 @@ std::shared_ptr<scene2::SceneNode> Scene2Loader::build(const std::string& key,
     case Widget::UNKNOWN:
         break;
     }
-
+    
     if (node == nullptr) {
         return nullptr;
     }
-
+    
     if (node->getContentSize() == Size::ZERO) {
         node->setAnchor(Vec2::ANCHOR_BOTTOM_LEFT);
         node->setContentSize(Display::get()->getBounds().size);
     }
-
-
+    
+    
     std::shared_ptr<JsonValue> form = json->get("format");
     std::string ftype =  (form == nullptr ? UNKNOWN_STR : form->getString("type",UNKNOWN_STR));
     auto jt = _forms.find(cugl::strtool::tolower(ftype));
-
+    
     std::shared_ptr<scene2::Layout> layout = nullptr;
     if (jt != _forms.end()) {
         switch (jt->second) {
@@ -246,7 +246,7 @@ std::shared_ptr<scene2::SceneNode> Scene2Loader::build(const std::string& key,
         }
     }
     node->setLayout(layout);
-
+    
     std::shared_ptr<JsonValue> children = json->get("children");
   if (children != nullptr) {
     for (int ii = 0; ii < children->size(); ii++) {
@@ -271,7 +271,7 @@ std::shared_ptr<scene2::SceneNode> Scene2Loader::build(const std::string& key,
       }
     }
   }
-
+    
     // Do not perform layout yet.
     node->setName(key);
     return node;
@@ -364,7 +364,7 @@ std::shared_ptr<JsonValue> Scene2Loader::getWidgetJson(const std::shared_ptr<Jso
  */
 void Scene2Loader::materialize(const std::shared_ptr<scene2::SceneNode>& node, LoaderCallback callback) {
     bool success = false;
-
+    
     std::string key = "";
     if (node != nullptr) {
         key = node->getName();
@@ -428,7 +428,7 @@ bool Scene2Loader::read(const std::string key, const std::string source,
             });
         });
     }
-
+    
     return success;
 }
 
@@ -471,7 +471,7 @@ bool Scene2Loader::read(const std::shared_ptr<JsonValue>& json, LoaderCallback c
         return false;
     }
     _queue.emplace(key);
-
+    
     bool success = false;
     if (_loader == nullptr || !async) {
         std::shared_ptr<scene2::SceneNode> node = build(key,json);
@@ -492,7 +492,7 @@ bool Scene2Loader::read(const std::shared_ptr<JsonValue>& json, LoaderCallback c
             });
         });
     }
-
+    
     return success;
 }
 
@@ -538,3 +538,5 @@ bool Scene2Loader::attach(const std::string& key, const std::shared_ptr<scene2::
     }
     return success;
 }
+
+
