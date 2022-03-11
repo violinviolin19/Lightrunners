@@ -20,31 +20,10 @@ bool LevelGenerationDemoScene::init() {
   _map->setPosition(dim / 2);
   _map->setScale(cugl::Vec2::ONE * 5.0f);
 
-  // _config.setNumRooms(20);
-
-  cugl::PolyFactory poly_factory;
-
-  std::vector<float> radii{
-      _config.getInnerCircleRadius(),
-      _config.getMiddleCircleRadius() + _config.getSeparationBetweenLayers(),
-      _config.getMapRadius() + 2 * _config.getSeparationBetweenLayers()};
-
-  for (float r : radii) {
-    cugl::Poly2 circle_poly = poly_factory.makeCircle(cugl::Vec2::ZERO, r);
-    auto circle = cugl::scene2::PolygonNode::allocWithPoly(circle_poly);
-    circle->setAnchor(cugl::Vec2::ANCHOR_CENTER);
-    circle->setPosition(dim / 2);
-    circle->setScale(cugl::Vec2::ONE * 1.5f);
-    circle->setColor(cugl::Color4(0, 0, 0, 20));
-    cugl::Scene2::addChild(circle);
-  }
-
-  createLevel();
+  _level_generator.init(_config, _map);
 
   _map->doLayout();
   cugl::Scene2::addChild(_map);
-
-  cugl::Application::get()->setClearColor(cugl::Color4f::BLACK);
 
   return true;
 }
@@ -52,11 +31,14 @@ bool LevelGenerationDemoScene::init() {
 void LevelGenerationDemoScene::dispose() {}
 
 void LevelGenerationDemoScene::update(float timestep) {
+  cugl::Application::get()->setClearColor(cugl::Color4f::WHITE);
+
   cugl::Keyboard *keyboard = cugl::Input::get<cugl::Keyboard>();
 
   if (keyboard->keyReleased(cugl::KeyCode::R)) {
     _map->removeAllChildren();
-    createLevel();
+    _level_generator.dispose();
+    _level_generator.init(_config, _map);
     _map->doLayout();
   }
 
@@ -81,18 +63,9 @@ void LevelGenerationDemoScene::update(float timestep) {
   _map->setPosition(pos);
 
   _level_generator.update();
-
-  _ticks++;
 }
 
 void LevelGenerationDemoScene::render(
     const std::shared_ptr<cugl::SpriteBatch> &batch) {
   Scene2::render(batch);
-}
-
-void LevelGenerationDemoScene::createLevel() {
-  _level_generator.dispose();
-  _level_generator.init(_config, _map);
-  _level_generator.generateRooms();
-  _keep_separating_rooms = true;
 }
