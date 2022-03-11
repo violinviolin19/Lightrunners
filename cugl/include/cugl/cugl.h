@@ -2,8 +2,7 @@
 //  cugl.h
 //  Cornell University Game Library (CUGL)
 //
-//  This header provides access to all of the publicly accessible elements of
-//  CUGL.
+//  This header provides access to all of the publicly accessible elements of CUGL.
 //
 //  CUGL MIT License:
 //      This software is provided 'as-is', without any express or implied
@@ -22,25 +21,24 @@
 //      2. Altered source versions must be plainly marked as such, and must not
 //      be misrepresented as being the original software.
 //
-//      3. This notice may not be removed or altered from any source
-//      distribution.
+//      3. This notice may not be removed or altered from any source distribution.
 //
 //  Author: Walker White
 //  Version: 8/29/16
 #ifndef __CUGL_PKG_H__
 #define __CUGL_PKG_H__
 
-#include "assets/cu_assets.h"
-#include "audio/cu_audio.h"
 #include "base/cu_platform.h"
+#include "util/cu_util.h"
+#include "math/cu_math.h"
 #include "input/cu_input.h"
 #include "input/gestures/cu_gesture.h"
 #include "io/cu_io.h"
-#include "math/cu_math.h"
-#include "net/cu_net.h"
-#include "physics2/cu_physics2.h"
+#include "assets/cu_assets.h"
 #include "render/cu_render.h"
+#include "audio/cu_audio.h"
 #include "scene2/cu_scene2.h"
-#include "util/cu_util.h"
+#include "physics2/cu_physics2.h"
+#include "net/cu_net.h"
 
 #endif /* __CUGL_PKG_H__ */
