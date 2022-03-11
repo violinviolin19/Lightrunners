@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D568D23727DBAAA500CA2BA9 /* CUNetworkConnection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D568D23527DBAAA500CA2BA9 /* CUNetworkConnection.cpp */; };
+		D568D23827DBAAA500CA2BA9 /* CUNetworkConnection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D568D23527DBAAA500CA2BA9 /* CUNetworkConnection.cpp */; };
+		D568D23927DBAAA500CA2BA9 /* CUNetworkConnection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D568D23527DBAAA500CA2BA9 /* CUNetworkConnection.cpp */; };
+		D568D23A27DBAAA500CA2BA9 /* CUNetworkSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D568D23627DBAAA500CA2BA9 /* CUNetworkSerializer.cpp */; };
+		D568D23B27DBAAA500CA2BA9 /* CUNetworkSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D568D23627DBAAA500CA2BA9 /* CUNetworkSerializer.cpp */; };
+		D568D23C27DBAAA500CA2BA9 /* CUNetworkSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D568D23627DBAAA500CA2BA9 /* CUNetworkSerializer.cpp */; };
 		EB035D8D20C0D34D0001EAE3 /* CUFIRFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB035D8C20C0D34D0001EAE3 /* CUFIRFilter.cpp */; };
 		EB035D8E20C0D34D0001EAE3 /* CUFIRFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB035D8C20C0D34D0001EAE3 /* CUFIRFilter.cpp */; };
 		EB035D9020C0D3B20001EAE3 /* CUOneZeroFIR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB035D8F20C0D3B20001EAE3 /* CUOneZeroFIR.cpp */; };
@@ -498,6 +504,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D568D22F27DBAA7C00CA2BA9 /* CUNetworkConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUNetworkConnection.h; sourceTree = "<group>"; };
+		D568D23027DBAA7C00CA2BA9 /* CUNetworkSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUNetworkSerializer.h; sourceTree = "<group>"; };
+		D568D23127DBAA7C00CA2BA9 /* cu_net.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cu_net.h; sourceTree = "<group>"; };
+		D568D23527DBAAA500CA2BA9 /* CUNetworkConnection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CUNetworkConnection.cpp; sourceTree = "<group>"; };
+		D568D23627DBAAA500CA2BA9 /* CUNetworkSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CUNetworkSerializer.cpp; sourceTree = "<group>"; };
 		EB035D7A20C0D0F80001EAE3 /* CUFIRFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CUFIRFilter.h; sourceTree = "<group>"; };
 		EB035D8920C0D1590001EAE3 /* CUOneZeroFIR.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CUOneZeroFIR.h; sourceTree = "<group>"; };
 		EB035D8C20C0D34D0001EAE3 /* CUFIRFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CUFIRFilter.cpp; sourceTree = "<group>"; };
@@ -952,6 +963,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D568D22E27DBAA7C00CA2BA9 /* net */ = {
+			isa = PBXGroup;
+			children = (
+				D568D22F27DBAA7C00CA2BA9 /* CUNetworkConnection.h */,
+				D568D23027DBAA7C00CA2BA9 /* CUNetworkSerializer.h */,
+				D568D23127DBAA7C00CA2BA9 /* cu_net.h */,
+			);
+			path = net;
+			sourceTree = "<group>";
+		};
+		D568D23427DBAAA500CA2BA9 /* net */ = {
+			isa = PBXGroup;
+			children = (
+				D568D23527DBAAA500CA2BA9 /* CUNetworkConnection.cpp */,
+				D568D23627DBAAA500CA2BA9 /* CUNetworkSerializer.cpp */,
+			);
+			path = net;
+			sourceTree = "<group>";
+		};
 		EB0789511D302051000BFDF7 /* input */ = {
 			isa = PBXGroup;
 			children = (
@@ -1444,6 +1474,7 @@
 				EBC2F1621D74A6E5007EC7A6 /* input */,
 				EB202C3C1DE39B2400116616 /* io */,
 				EBC2F1641D74A7D8007EC7A6 /* assets */,
+				D568D22E27DBAA7C00CA2BA9 /* net */,
 				EBC2F1661D74A80C007EC7A6 /* render */,
 				EBB1AC5F1DF8E38F00C353B0 /* audio */,
 				EBC2F1631D74A743007EC7A6 /* scene2 */,
@@ -1834,10 +1865,11 @@
 			children = (
 				EB4AEC011CFCB9C70090AF7F /* base */,
 				EB4AEC1B1CFDB98B0090AF7F /* util */,
-				EB4AEC081CFCC09E0090AF7F /* math */,
 				EB0789511D302051000BFDF7 /* input */,
 				EB202C401DE39B8800116616 /* io */,
 				EB4AEC0C1CFCD1B10090AF7F /* assets */,
+				D568D23427DBAAA500CA2BA9 /* net */,
+				EB4AEC081CFCC09E0090AF7F /* math */,
 				EB4AEC031CFCB9EB0090AF7F /* render */,
 				EBB1AC5C1DF8E31400C353B0 /* audio */,
 				EB4AEC171CFD4DB90090AF7F /* scene2 */,
@@ -2048,6 +2080,7 @@
 				EB22BE8A25D0E5ED002ACE41 /* CUObstacle.cpp in Sources */,
 				EB22BED725D0E63D002ACE41 /* CUUniformBuffer.cpp in Sources */,
 				EB22BEC525D0E633002ACE41 /* CUWAVDecoder.cpp in Sources */,
+				D568D23927DBAAA500CA2BA9 /* CUNetworkConnection.cpp in Sources */,
 				EB22BEDE25D0E643002ACE41 /* CUJsonLoader.cpp in Sources */,
 				EB22BF0525D0E660002ACE41 /* CUTwoZeroFIR.cpp in Sources */,
 				EB22BF0A25D0E666002ACE41 /* CUSimpleExtruder.cpp in Sources */,
@@ -2066,6 +2099,7 @@
 				EB22BEBC25D0E62D002ACE41 /* CUAudioDevices.cpp in Sources */,
 				EB22BF3D25D0E69B002ACE41 /* CUAudioFader.cpp in Sources */,
 				EB22BF1E25D0E66C002ACE41 /* CUQuaternion.cpp in Sources */,
+				D568D23C27DBAAA500CA2BA9 /* CUNetworkSerializer.cpp in Sources */,
 				EB22BED425D0E63D002ACE41 /* CUShader.cpp in Sources */,
 				EB22BE9925D0E603002ACE41 /* sweep.cc in Sources */,
 				EB22BF1525D0E66C002ACE41 /* CUMat4.cpp in Sources */,
@@ -2203,6 +2237,7 @@
 				EBDD168225C35C6500154533 /* CUPathNode.cpp in Sources */,
 				EB7454141D74D276002FBAE6 /* CUOrthographicCamera.cpp in Sources */,
 				EB035D9120C0D3B20001EAE3 /* CUOneZeroFIR.cpp in Sources */,
+				D568D23827DBAAA500CA2BA9 /* CUNetworkConnection.cpp in Sources */,
 				EBE91E291DCFE7D300F80D62 /* CUSimpleObstacle.cpp in Sources */,
 				EBDD164B25C35BEF00154533 /* CUFiletools.cpp in Sources */,
 				EB035D8E20C0D34D0001EAE3 /* CUFIRFilter.cpp in Sources */,
@@ -2221,6 +2256,7 @@
 				EBFE7C111E1AB140001007C2 /* CUProgressBar.cpp in Sources */,
 				EBDD166E25C35C5000154533 /* CUSceneNode.cpp in Sources */,
 				EBDC802525B8AF96004DECAE /* shapes.cc in Sources */,
+				D568D23B27DBAAA500CA2BA9 /* CUNetworkSerializer.cpp in Sources */,
 				EBD3CE9F2005DAFC00CFD1BC /* CUScene2Loader.cpp in Sources */,
 				EB74541E1D74D276002FBAE6 /* CUInput.cpp in Sources */,
 				EBDD16FB25C35F6000154533 /* CUPathSmoother.cpp in Sources */,
@@ -2358,6 +2394,7 @@
 				EB035D8D20C0D34D0001EAE3 /* CUFIRFilter.cpp in Sources */,
 				EBDC802725B8AFA3004DECAE /* advancing_front.cc in Sources */,
 				EB77B9232010FD0500713568 /* CUGridLayout.cpp in Sources */,
+				D568D23727DBAAA500CA2BA9 /* CUNetworkConnection.cpp in Sources */,
 				EBBF182E1D7486EA008E2001 /* CUVec3.cpp in Sources */,
 				EBDB28D420CE740C00ADC9AB /* CUBiquadIIR.cpp in Sources */,
 				EBBF182F1D7486EA008E2001 /* CUVec4.cpp in Sources */,
@@ -2376,6 +2413,7 @@
 				EBBF18331D7486EA008E2001 /* CUColor4.cpp in Sources */,
 				EB45FD7625B3563D00974097 /* CUGradient.cpp in Sources */,
 				EBBF18341D7486EA008E2001 /* CUSize.cpp in Sources */,
+				D568D23A27DBAAA500CA2BA9 /* CUNetworkSerializer.cpp in Sources */,
 				EBBF18351D7486EA008E2001 /* CURect.cpp in Sources */,
 				EBBF18361D7486EA008E2001 /* CUPolynomial.cpp in Sources */,
 				EBD3CEA02005DAFC00CFD1BC /* CUScene2Loader.cpp in Sources */,
@@ -2449,6 +2487,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = "-ObjC";
@@ -2475,6 +2514,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2497,6 +2537,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2517,6 +2558,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2538,6 +2580,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -2554,6 +2597,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -2614,7 +2658,7 @@
 				LIBRARY_SEARCH_PATHS = "$(LIB_STATIC)";
 				LIB_INCLUDES = "\"$(SRCROOT)/../include\"";
 				LIB_STATIC = "\"$(SRCROOT)/lib\"";
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -2671,7 +2715,7 @@
 				LIBRARY_SEARCH_PATHS = "$(LIB_STATIC)";
 				LIB_INCLUDES = "\"$(SRCROOT)/../include\"";
 				LIB_STATIC = "\"$(SRCROOT)/lib\"";
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 			};
