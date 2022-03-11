@@ -101,7 +101,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalOptions>/std:c++17</AdditionalOptions>
-      <AdditionalOptions>/D _SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/D _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -130,7 +130,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalOptions>/std:c++17</AdditionalOptions>
-      <AdditionalOptions>/D _SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/D _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -153,7 +153,7 @@
       <DisableSpecificWarnings>4068;4018;4244;4305%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalOptions>/std:c++17</AdditionalOptions>
-      <AdditionalOptions>/D _SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/D _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -186,7 +186,7 @@
       <DisableSpecificWarnings>4068;4018;4244;4305;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalOptions>/std:c++17</AdditionalOptions>
-      <AdditionalOptions>/D _SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/D _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

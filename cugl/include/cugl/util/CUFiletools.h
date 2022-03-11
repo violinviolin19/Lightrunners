@@ -30,8 +30,6 @@
 #ifndef __CU_FILE_TOOLS_H__
 #define __CU_FILE_TOOLS_H__
 
-#define _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS
-
 #include <string>
 #include <vector>
 #include <functional>
