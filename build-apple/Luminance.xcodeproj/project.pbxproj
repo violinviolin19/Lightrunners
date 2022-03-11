@@ -19,6 +19,9 @@
 		CA1BA38127D1545700D636A5 /* EnemySet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA1BA37F27D1545700D636A5 /* EnemySet.cpp */; };
 		CA1BA38227D1546000D636A5 /* EnemySet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA1BA37F27D1545700D636A5 /* EnemySet.cpp */; };
 		CA1BA38327D1546100D636A5 /* EnemySet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA1BA37F27D1545700D636A5 /* EnemySet.cpp */; };
+		CA5F188B27DBC1B70077AEBB /* MenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA5F188627DBC1B70077AEBB /* MenuScene.cpp */; };
+		CA5F188C27DBC1B70077AEBB /* MenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA5F188627DBC1B70077AEBB /* MenuScene.cpp */; };
+		CA5F188D27DBC1B70077AEBB /* MenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA5F188627DBC1B70077AEBB /* MenuScene.cpp */; };
 		D5073C8B27CFEF2C0000426E /* Wall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5073C8727CFEF2C0000426E /* Wall.cpp */; };
 		D5073C8C27CFEF2C0000426E /* Wall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5073C8727CFEF2C0000426E /* Wall.cpp */; };
 		D5073C8D27CFEF2C0000426E /* Wall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5073C8727CFEF2C0000426E /* Wall.cpp */; };
@@ -169,6 +172,8 @@
 		5737DA7727C5E62E00D1692A /* Player.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
 		CA1BA37F27D1545700D636A5 /* EnemySet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EnemySet.cpp; sourceTree = "<group>"; };
 		CA1BA38027D1545700D636A5 /* EnemySet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnemySet.h; sourceTree = "<group>"; };
+		CA5F188627DBC1B70077AEBB /* MenuScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MenuScene.cpp; sourceTree = "<group>"; };
+		CA5F188A27DBC1B70077AEBB /* MenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuScene.h; sourceTree = "<group>"; };
 		D5073C8627CFEF2C0000426E /* Wall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wall.h; sourceTree = "<group>"; };
 		D5073C8727CFEF2C0000426E /* Wall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wall.cpp; sourceTree = "<group>"; };
 		D521FB0E27C43BA500D14172 /* widgets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = widgets; sourceTree = "<group>"; };
@@ -354,9 +359,11 @@
 			isa = PBXGroup;
 			children = (
 				D52E672827BF305900F8E2B8 /* GameScene.h */,
+				D52E672B27BF305900F8E2B8 /* GameScene.cpp */,
 				D52E672927BF305900F8E2B8 /* LoadingScene.h */,
 				D52E672A27BF305900F8E2B8 /* LoadingScene.cpp */,
-				D52E672B27BF305900F8E2B8 /* GameScene.cpp */,
+				CA5F188627DBC1B70077AEBB /* MenuScene.cpp */,
+				CA5F188A27DBC1B70077AEBB /* MenuScene.h */,
 				D598E69327C578F10039326B /* LevelGenerationDemoScene.cpp */,
 				D598E69427C578F10039326B /* LevelGenerationDemoScene.h */,
 			);
@@ -737,6 +744,7 @@
 				D5EB745027C335C7007D157D /* Movement.cpp in Sources */,
 				D56DCD3127CDAD7A002E8363 /* Room.cpp in Sources */,
 				D598E69727C578F10039326B /* LevelGenerationDemoScene.cpp in Sources */,
+				CA5F188D27DBC1B70077AEBB /* MenuScene.cpp in Sources */,
 				EB9CDA3925D0EAB100EE1A09 /* main.cpp in Sources */,
 				D56B743D27CA9DCE00710CC6 /* LevelGeneratorConfig.cpp in Sources */,
 				CA1BA38327D1546100D636A5 /* EnemySet.cpp in Sources */,
@@ -764,6 +772,7 @@
 				D5EB744F27C335C7007D157D /* Movement.cpp in Sources */,
 				D56DCD3027CDAD7A002E8363 /* Room.cpp in Sources */,
 				D598E69627C578F10039326B /* LevelGenerationDemoScene.cpp in Sources */,
+				CA5F188C27DBC1B70077AEBB /* MenuScene.cpp in Sources */,
 				EB7454AE1D74D891002FBAE6 /* main.cpp in Sources */,
 				D56B743C27CA9DCE00710CC6 /* LevelGeneratorConfig.cpp in Sources */,
 				CA1BA38227D1546000D636A5 /* EnemySet.cpp in Sources */,
@@ -791,6 +800,7 @@
 				D5EB744E27C335C7007D157D /* Movement.cpp in Sources */,
 				D56DCD2F27CDAD7A002E8363 /* Room.cpp in Sources */,
 				D598E69527C578F10039326B /* LevelGenerationDemoScene.cpp in Sources */,
+				CA5F188B27DBC1B70077AEBB /* MenuScene.cpp in Sources */,
 				EB2BE9B61D74952A002FE78B /* main.cpp in Sources */,
 				D56B743B27CA9DCE00710CC6 /* LevelGeneratorConfig.cpp in Sources */,
 				CA1BA38127D1545700D636A5 /* EnemySet.cpp in Sources */,
