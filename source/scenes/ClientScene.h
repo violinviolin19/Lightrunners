@@ -12,6 +12,10 @@
  * This class is an implementation of PeerScene.
  */
 class ClientScene : PeerScene {
+ protected:
+  /** The game id label (for updating) */
+  std::shared_ptr<cugl::scene2::TextField> _gameid;
+
  public:
 #pragma mark -
 #pragma mark Constructors

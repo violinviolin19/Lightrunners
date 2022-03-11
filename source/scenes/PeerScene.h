@@ -30,21 +30,17 @@ class PeerScene : public cugl::Scene2 {
   /** The asset manager for this scene. */
   std::shared_ptr<cugl::AssetManager> _assets;
   /** The network connection (as made by this scene) */
-  // TODO add back network
-  // std::shared_ptr<cugl::NetworkConnection> _network;
+  std::shared_ptr<cugl::NetworkConnection> _network;
 
   /** The menu button for starting a game */
   std::shared_ptr<cugl::scene2::Button> _startgame;
   /** The back button for the menu scene */
   std::shared_ptr<cugl::scene2::Button> _backout;
-  /** The game id label (for updating) */
-  std::shared_ptr<cugl::scene2::TextField> _gameid;
   /** The players label (for updating) */
   std::shared_ptr<cugl::scene2::Label> _player;
 
   /** The network configuration */
-  // TODO add back config
-  // cugl::NetworkConnection::ConnectionConfig _config;
+  cugl::NetworkConnection::ConnectionConfig _config;
 
   /** The current status */
   Status _status;
@@ -89,14 +85,13 @@ class PeerScene : public cugl::Scene2 {
    * @return the network connection (as made by this scene)
    */
 
-  // TODO uncomment out
-  /* std::shared_ptr<cugl::NetworkConnection> getConnection() const {
+  std::shared_ptr<cugl::NetworkConnection> getConnection() const {
     return _network;
-  } */
+  }
 
   /**
-   * Returns the scene status. Any value other than WAIT will transition to a
-   * new scene.
+   * Returns the scene status. Any value other than WAIT will transition to
+   * a new scene.
    *
    * @return the scene status
    */
@@ -116,9 +111,7 @@ class PeerScene : public cugl::Scene2 {
    * controller. Since the network controller is a smart pointer, it is only
    * fully disconnected when ALL scenes have been disconnected.
    */
-  // void disconnect() { _network = nullptr; }
-
-  // TODO uncomment
+  void disconnect() { _network = nullptr; }
 
  private:
   /**
