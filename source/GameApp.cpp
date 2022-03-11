@@ -38,6 +38,7 @@ void GameApp::onStartup() {
 void GameApp::onShutdown() {
   _loading.dispose();
   _gameplay.dispose();
+  _menu.dispose();
 #ifndef CU_TOUCH_SCREEN
   _level_gen_scene.dispose();
 #endif
@@ -64,7 +65,10 @@ void GameApp::update(float timestep) {
     _loading.update(0.01f);
   } else if (!_loaded) {
     _loading.dispose();  // Disables the input listeners in this mode.
+    _menu.init(_assets);
     _gameplay.init(_assets);
+    _menu.setActive(true);
+    _gameplay.setActive(false);
 #ifndef CU_TOUCH_SCREEN
     _level_gen_scene.init();
 #endif
@@ -74,7 +78,14 @@ void GameApp::update(float timestep) {
     _level_gen_scene.update(timestep);
 #endif
   } else {
-    _gameplay.update(timestep);
+    if (_menu.getChoice() == MenuScene::Choice::HOST ||
+        _menu.getChoice() == MenuScene::Choice::JOIN) {
+      _gameplay.setActive(true);
+      _menu.setActive(false);
+      _gameplay.update(timestep);
+    } else {
+      _menu.update(timestep);
+    }
   }
 }
 
@@ -86,6 +97,11 @@ void GameApp::draw() {
     _level_gen_scene.render(_batch);
 #endif
   } else {
-    _gameplay.render(_batch);
+    if (_menu.getChoice() == MenuScene::Choice::HOST ||
+        _menu.getChoice() == MenuScene::Choice::JOIN) {
+      _gameplay.render(_batch);
+    } else {
+      _menu.render(_batch);
+    }
   }
 }

@@ -5,6 +5,7 @@
 #include "scenes/GameScene.h"
 #include "scenes/LevelGenerationDemoScene.h"
 #include "scenes/LoadingScene.h"
+#include "scenes/MenuScene.h"
 
 /**
  * This class represents the application root for the game.
@@ -20,6 +21,8 @@ class GameApp : public cugl::Application {
   GameScene _gameplay;
   /** The controller for the loading screen */
   LoadingScene _loading;
+  /** The controller for the main menu */
+  MenuScene _menu;
 
 #ifndef CU_TOUCH_SCREEN
   /** The controller for the level generation demo scene. */

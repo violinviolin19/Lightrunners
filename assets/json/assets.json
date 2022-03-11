@@ -1,163 +1,212 @@
 {
-  "textures": {
-    "close-normal": {
-      "file": "textures/CloseNormal.png",
-      "minfilter": "nearest",
-      "magfilter": "linear",
-      "wrapS": "clamp",
-      "wrapT": "clamp"
+    "textures": {
+        "close-normal": {
+            "file": "textures/CloseNormal.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "close-selected": {
+            "file": "textures/CloseSelected.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "joystick": {
+            "file": "textures/joystick.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "joystick-base": {
+            "file": "textures/joystick-base.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "attack": {
+            "file": "textures/attack.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "player": {
+            "file": "textures/player.png",
+            "minfilter": "nearest",
+            "magfilter": "nearest",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "grunt": {
+            "file": "textures/grunt.png",
+            "minfilter": "nearest",
+            "magfilter": "nearest",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "floor-tile-0": {
+            "file": "textures/floor-tile-0.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "floor-tile-1": {
+            "file": "textures/floor-tile-1.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "floor-tile-2": {
+            "file": "textures/floor-tile-2.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "floor-tile-3": {
+            "file": "textures/floor-tile-3.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "floor-tile-4": {
+            "file": "textures/floor-tile-4.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "floor-tile-5": {
+            "file": "textures/floor-tile-5.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "floor-tile-6": {
+            "file": "textures/floor-tile-6.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "floor-tile-7": {
+            "file": "textures/floor-tile-7.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "floor-tile-8": {
+            "file": "textures/floor-tile-8.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "floor-tile-9": {
+            "file": "textures/floor-tile-9.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "floor-tile-10": {
+            "file": "textures/floor-tile-10.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "floor-tile-11": {
+            "file": "textures/floor-tile-11.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "button": {
+            "file": "textures/button.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        }
     },
-    "close-selected": {
-      "file": "textures/CloseSelected.png",
-      "minfilter": "nearest",
-      "magfilter": "linear",
-      "wrapS": "clamp",
-      "wrapT": "clamp"
+    "widgets": {
+        "ui-scene": "widgets/ui-scene.json",
+        "world-scene": "widgets/world-scene.json",
+        "textbutton": "widgets/textbutton.json"
     },
-    "joystick": {
-      "file": "textures/joystick.png",
-      "minfilter": "nearest",
-      "magfilter": "linear",
-      "wrapS": "clamp",
-      "wrapT": "clamp"
+    "scene2s": {
+        "ui-scene": {
+            "type": "Widget",
+            "data": {
+                "key": "ui-scene",
+                "variables": {}
+            }
+        },
+        "world-scene": {
+            "type": "Widget",
+            "data": {
+                "key": "world-scene",
+                "variables": {}
+            }
+        },
+        "menu": {
+            "type": "Node",
+            "format": {
+                "type": "Float",
+                "orientation": "vertical",
+                "x_alignment": "center",
+                "y_alignment": "middle"
+            },
+            "children": {
+                "host": {
+                    "type": "Widget",
+                    "data": {
+                        "key": "textbutton",
+                        "variables": {
+                            "size": [ 400, 100 ],
+                            "text": "Host Game",
+                            "color": "#000088"
+                        }
+                    },
+                    "layout": {
+                        "priority": 1,
+                        "padding": [ 0, 50, 0, 0 ]
+                    }
+                },
+                "join": {
+                    "type": "Widget",
+                    "data": {
+                        "key": "textbutton",
+                        "variables": {
+                            "size": [ 400, 100 ],
+                            "text": "Join Game",
+                            "color": "#000088"
+                        }
+                    },
+                    "layout": {
+                        "priority": 1,
+                        "padding": [ 0, 0, 0, 0 ]
+                    }
+                }
+            }
+        }
     },
-    "joystick-base": {
-      "file": "textures/joystick-base.png",
-      "minfilter": "nearest",
-      "magfilter": "linear",
-      "wrapS": "clamp",
-      "wrapT": "clamp"
-    },
-    "attack": {
-      "file": "textures/attack.png",
-      "minfilter": "nearest",
-      "magfilter": "linear",
-      "wrapS": "clamp",
-      "wrapT": "clamp"
-    },
-    "player": {
-      "file": "textures/player.png",
-      "minfilter": "nearest",
-      "magfilter": "nearest",
-      "wrapS": "clamp",
-      "wrapT": "clamp"
-    },
-    "grunt": {
-      "file": "textures/grunt.png",
-      "minfilter": "nearest",
-      "magfilter": "nearest",
-      "wrapS": "clamp",
-      "wrapT": "clamp"
-    },
-    "floor-tile-0": {
-      "file": "textures/floor-tile-0.png",
-      "minfilter": "nearest",
-      "magfilter": "linear",
-      "wrapS": "clamp",
-      "wrapT": "clamp"
-    },
-    "floor-tile-1": {
-      "file": "textures/floor-tile-1.png",
-      "minfilter": "nearest",
-      "magfilter": "linear",
-      "wrapS": "clamp",
-      "wrapT": "clamp"
-    },
-    "floor-tile-2": {
-      "file": "textures/floor-tile-2.png",
-      "minfilter": "nearest",
-      "magfilter": "linear",
-      "wrapS": "clamp",
-      "wrapT": "clamp"
-    },
-    "floor-tile-3": {
-      "file": "textures/floor-tile-3.png",
-      "minfilter": "nearest",
-      "magfilter": "linear",
-      "wrapS": "clamp",
-      "wrapT": "clamp"
-    },
-    "floor-tile-4": {
-      "file": "textures/floor-tile-4.png",
-      "minfilter": "nearest",
-      "magfilter": "linear",
-      "wrapS": "clamp",
-      "wrapT": "clamp"
-    },
-    "floor-tile-5": {
-      "file": "textures/floor-tile-5.png",
-      "minfilter": "nearest",
-      "magfilter": "linear",
-      "wrapS": "clamp",
-      "wrapT": "clamp"
-    },
-    "floor-tile-6": {
-      "file": "textures/floor-tile-6.png",
-      "minfilter": "nearest",
-      "magfilter": "linear",
-      "wrapS": "clamp",
-      "wrapT": "clamp"
-    },
-    "floor-tile-7": {
-      "file": "textures/floor-tile-7.png",
-      "minfilter": "nearest",
-      "magfilter": "linear",
-      "wrapS": "clamp",
-      "wrapT": "clamp"
-    },
-    "floor-tile-8": {
-      "file": "textures/floor-tile-8.png",
-      "minfilter": "nearest",
-      "magfilter": "linear",
-      "wrapS": "clamp",
-      "wrapT": "clamp"
-    },
-    "floor-tile-9": {
-      "file": "textures/floor-tile-9.png",
-      "minfilter": "nearest",
-      "magfilter": "linear",
-      "wrapS": "clamp",
-      "wrapT": "clamp"
-    },
-    "floor-tile-10": {
-      "file": "textures/floor-tile-10.png",
-      "minfilter": "nearest",
-      "magfilter": "linear",
-      "wrapS": "clamp",
-      "wrapT": "clamp"
-    },
-    "floor-tile-11": {
-      "file": "textures/floor-tile-11.png",
-      "minfilter": "nearest",
-      "magfilter": "linear",
-      "wrapS": "clamp",
-      "wrapT": "clamp"
+    "fonts": {
+        "pixel32": {
+            "file": "fonts/RetroGame.ttf",
+            "size": 16
+        }
     }
-  },
-  "widgets": {
-    "ui-scene": "widgets/ui-scene.json",
-    "world-scene": "widgets/world-scene.json"
-  },
-  "scene2s": {
-    "ui-scene": {
-      "type": "Widget",
-      "data": {
-        "key": "ui-scene",
-        "variables": {}
-      }
-    },
-    "world-scene": {
-      "type": "Widget",
-      "data": {
-        "key": "world-scene",
-        "variables": {}
-      }
-    }
-  },
-  "fonts": {
-      "pixel32": {
-          "file": "fonts/RetroGame.ttf",
-          "size": 16
-      }
-  }
 }
