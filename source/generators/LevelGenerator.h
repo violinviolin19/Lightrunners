@@ -178,11 +178,13 @@ class LevelGenerator {
 
   /**
    * Add some edges back within the room to make the tree a little easier to
-   * traverse by the player.
+   * traverse by the player. Remove the edges that aren't active and are not
+   * added back.
    *
    * @param rooms The rooms to add edges back to.
    */
-  void addEdgesBack(std::vector<std::shared_ptr<Room>> &rooms);
+  void addEdgesBackAndRemoveUnecessary(
+      std::vector<std::shared_ptr<Room>> &rooms);
 
   /**
    * Connect two layers with some number of connections. Spaces the connections

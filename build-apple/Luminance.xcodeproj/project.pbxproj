@@ -46,6 +46,9 @@
 		D52E674027BF305A00F8E2B8 /* GameApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D52E673327BF305A00F8E2B8 /* GameApp.cpp */; };
 		D52E674127BF305A00F8E2B8 /* GameApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D52E673327BF305A00F8E2B8 /* GameApp.cpp */; };
 		D52E674227BF305A00F8E2B8 /* GameApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D52E673327BF305A00F8E2B8 /* GameApp.cpp */; };
+		D568D22927DB41B400CA2BA9 /* Hungarian.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D568D22427DB41B400CA2BA9 /* Hungarian.cpp */; };
+		D568D22A27DB41B400CA2BA9 /* Hungarian.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D568D22427DB41B400CA2BA9 /* Hungarian.cpp */; };
+		D568D22B27DB41B400CA2BA9 /* Hungarian.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D568D22427DB41B400CA2BA9 /* Hungarian.cpp */; };
 		D56B743B27CA9DCE00710CC6 /* LevelGeneratorConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D56B743627CA9DCE00710CC6 /* LevelGeneratorConfig.cpp */; };
 		D56B743C27CA9DCE00710CC6 /* LevelGeneratorConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D56B743627CA9DCE00710CC6 /* LevelGeneratorConfig.cpp */; };
 		D56B743D27CA9DCE00710CC6 /* LevelGeneratorConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D56B743627CA9DCE00710CC6 /* LevelGeneratorConfig.cpp */; };
@@ -190,6 +193,8 @@
 		D52E673227BF305900F8E2B8 /* Action.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Action.h; sourceTree = "<group>"; };
 		D52E673327BF305A00F8E2B8 /* GameApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameApp.cpp; sourceTree = "<group>"; };
 		D52E674827BF354400F8E2B8 /* Attack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Attack.h; sourceTree = "<group>"; };
+		D568D22427DB41B400CA2BA9 /* Hungarian.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Hungarian.cpp; sourceTree = "<group>"; };
+		D568D22827DB41B400CA2BA9 /* Hungarian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hungarian.h; sourceTree = "<group>"; };
 		D56B743627CA9DCE00710CC6 /* LevelGeneratorConfig.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LevelGeneratorConfig.cpp; sourceTree = "<group>"; };
 		D56B743A27CA9DCE00710CC6 /* LevelGeneratorConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelGeneratorConfig.h; sourceTree = "<group>"; };
 		D56DCD2927CDAD7A002E8363 /* Room.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Room.h; sourceTree = "<group>"; };
@@ -418,6 +423,8 @@
 		D598E69827C57D740039326B /* generators */ = {
 			isa = PBXGroup;
 			children = (
+				D568D22427DB41B400CA2BA9 /* Hungarian.cpp */,
+				D568D22827DB41B400CA2BA9 /* Hungarian.h */,
 				D56B743627CA9DCE00710CC6 /* LevelGeneratorConfig.cpp */,
 				D56B743A27CA9DCE00710CC6 /* LevelGeneratorConfig.h */,
 				D5BA193327C6E0ED009CBEC1 /* Delaunator.h */,
@@ -751,6 +758,7 @@
 				D579718927CFF851008FCC5E /* BasicTile.cpp in Sources */,
 				D52E674227BF305A00F8E2B8 /* GameApp.cpp in Sources */,
 				D52E673927BF305A00F8E2B8 /* GameScene.cpp in Sources */,
+				D568D22B27DB41B400CA2BA9 /* Hungarian.cpp in Sources */,
 				D52E673627BF305A00F8E2B8 /* LoadingScene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -779,6 +787,7 @@
 				D579718827CFF851008FCC5E /* BasicTile.cpp in Sources */,
 				D52E674127BF305A00F8E2B8 /* GameApp.cpp in Sources */,
 				D52E673827BF305A00F8E2B8 /* GameScene.cpp in Sources */,
+				D568D22A27DB41B400CA2BA9 /* Hungarian.cpp in Sources */,
 				D52E673527BF305A00F8E2B8 /* LoadingScene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -807,6 +816,7 @@
 				D579718727CFF851008FCC5E /* BasicTile.cpp in Sources */,
 				D52E674027BF305A00F8E2B8 /* GameApp.cpp in Sources */,
 				D52E673727BF305A00F8E2B8 /* GameScene.cpp in Sources */,
+				D568D22927DB41B400CA2BA9 /* Hungarian.cpp in Sources */,
 				D52E673427BF305A00F8E2B8 /* LoadingScene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
