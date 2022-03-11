@@ -169,7 +169,7 @@ void SimpleObstacle::createSensors() {
         _sensors.push_back(_body->CreateFixture(&def));
     }
 
-    makeDirty(false);
+    markDirty(false);
 }
 
 /**
@@ -223,7 +223,7 @@ void SimpleObstacle::deactivatePhysics(b2World& world) {
     // Should be good for most (simple) applications.
     if (_body != nullptr) {
         releaseFixtures(); // Have to remove these first.
-        removeSensors();
+        releaseSensors();
         // Snapshot the values
         setBodyState(*_body);
         world.DestroyBody(_body);
