@@ -87,6 +87,10 @@ protected:
     b2BodyDef _bodyinfo;
     /** Stores the fixture information for this shape */
     b2FixtureDef _fixture;
+    /** A cache value for the extra sensor fixtures. */
+    std::vector<b2Fixture*> _sensors;
+    /** A cache value for the extra sensor fixture defs. */
+    std::vector<b2FixtureDef> _sensor_defs;
     /** The mass data of this shape (which may override the fixture) */
     b2MassData _massdata;
     /** Whether or not to use the custom mass data */
@@ -198,6 +202,20 @@ public:
      * @param value the body type for Box2D physics
      */
     virtual void setBodyType(b2BodyType value) { _bodyinfo.type = value; }
+
+    /** 
+     * Get the extra sensors for the Box2d physics.
+     * 
+     * @return The extra sensor defs for the body.
+     */
+    virtual std::vector<b2FixtureDef> getSensors() { return _sensor_defs; }
+
+    /** 
+     * Sets the extra sensors for the Box2d physics.
+     * 
+     * @param sensor_defs The extra sensor defs to add the body.
+     */
+    virtual void addSensors(std::vector<b2FixtureDef> &sensor_defs) { _sensor_defs = sensor_defs; }
     
     /**
      * Returns the current position for this physics body

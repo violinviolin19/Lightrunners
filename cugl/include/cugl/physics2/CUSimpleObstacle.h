@@ -869,6 +869,19 @@ public:
      * This is the primary method to override for custom physics objects.
      */
     virtual void releaseFixtures() {}
+
+
+    /**
+     * Add sensors to this body.
+     * 
+     * @param sensors The sensors to be added.
+     */
+    virtual void createSensors();
+
+     /**
+     * Release all sensors added to this body.
+     */
+    virtual void releaseSensors();
     
     /**
      * Updates the object's physics state (NOT GAME LOGIC).

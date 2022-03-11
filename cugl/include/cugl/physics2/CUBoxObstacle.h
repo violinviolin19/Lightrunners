@@ -270,6 +270,15 @@ public:
      * This is the primary method to override for custom physics objects
      */
     virtual void createFixtures() override;
+
+    /**
+     * Create new fixtures for this body, defining the shape
+     *
+     * This is the primary method to override for custom physics objects
+     * 
+     * @param extra_fixtures Add more fixtures to the body.
+     */
+    virtual void createFixtures(std::vector<b2FixtureDef>& extra_fixtures);
     
     /**
      * Release the fixtures for this body, reseting the shape

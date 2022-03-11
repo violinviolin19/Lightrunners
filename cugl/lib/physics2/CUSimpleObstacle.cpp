@@ -158,6 +158,34 @@ void SimpleObstacle::setFilterData(b2Filter value) {
 #pragma mark Physics Methods
 
 /**
+ * Add sensors to this body.
+ * 
+ * @param sensors The sensors to be added.
+ */
+void SimpleObstacle::createSensors() {
+    if (_body == nullptr) return;
+
+    for (b2FixtureDef def : _sensor_defs) {
+        _sensors.push_back(_body->CreateFixture(&def));
+    }
+
+    makeDirty(false);
+}
+
+/**
+ * Release all sensors added to this body.
+ */
+void SimpleObstacle::releaseSensors() {
+    if (_body == nullptr) return;
+
+    for (b2Fixture* sensor : _sensors) {
+        _body->DestroyFixture(sensor);
+    }
+
+    _sensors.clear();
+}
+
+/**
  * Creates the physics Body(s) for this object, adding them to the world.
  *
  * Implementations of this method should NOT retain ownership of the
@@ -176,6 +204,7 @@ bool SimpleObstacle::activatePhysics(b2World& world) {
     // Only initialize if a body was created.
     if (_body != nullptr) {
         createFixtures();
+        createSensors();
         return true;
     }
     
@@ -194,6 +223,7 @@ void SimpleObstacle::deactivatePhysics(b2World& world) {
     // Should be good for most (simple) applications.
     if (_body != nullptr) {
         releaseFixtures(); // Have to remove these first.
+        removeSensors();
         // Snapshot the values
         setBodyState(*_body);
         world.DestroyBody(_body);
