@@ -16,7 +16,7 @@ class LevelController : public Controller {
 
  public:
   /** Construct a new Level Controller */
-  LevelController() : _world(nullptr), _assets(nullptr) {}
+  LevelController() {}
   /** Destroy this Level Controller */
   ~LevelController() { dispose(); }
 

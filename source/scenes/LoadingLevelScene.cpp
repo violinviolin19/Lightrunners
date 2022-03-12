@@ -1,12 +1,11 @@
-#include "LevelGenerationDemoScene.h"
-
 #include <cugl/cugl.h>
 
 #include "../generators/LevelGeneratorConfig.h"
+#include "LoadingLevelScene.h"
 
 #define SCENE_HEIGHT 720
 
-bool LevelGenerationDemoScene::init() {
+bool LoadingLevelScene::init() {
   // Initialize the scene to a locked width.
   cugl::Size dim = cugl::Application::get()->getDisplaySize();
   dim *= SCENE_HEIGHT / ((dim.width > dim.height) ? dim.width : dim.height);
@@ -20,7 +19,8 @@ bool LevelGenerationDemoScene::init() {
   _map->setPosition(dim / 2);
   _map->setScale(cugl::Vec2::ONE * 5.0f);
 
-  _level_generator.init(_config, _map);
+  _level_generator = std::make_shared<LevelGenerator>();
+  _level_generator->init(_config, _map);
 
   _map->doLayout();
   cugl::Scene2::addChild(_map);
@@ -28,9 +28,12 @@ bool LevelGenerationDemoScene::init() {
   return true;
 }
 
-void LevelGenerationDemoScene::dispose() {}
+void LoadingLevelScene::dispose() {
+  _level_generator = nullptr;
+  _map = nullptr;
+}
 
-void LevelGenerationDemoScene::update(float timestep) {
+void LoadingLevelScene::update(float timestep) {
   cugl::Application::get()->setClearColor(cugl::Color4f::WHITE);
 
   cugl::Keyboard *keyboard = cugl::Input::get<cugl::Keyboard>();
@@ -65,7 +68,7 @@ void LevelGenerationDemoScene::update(float timestep) {
   _level_generator.update();
 }
 
-void LevelGenerationDemoScene::render(
+void LoadingLevelScene::render(
     const std::shared_ptr<cugl::SpriteBatch> &batch) {
   Scene2::render(batch);
 }

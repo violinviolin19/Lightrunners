@@ -5,10 +5,10 @@
 #include "../generators/LevelGenerator.h"
 #include "../generators/LevelGeneratorConfig.h"
 
-class LevelGenerationDemoScene : public cugl::Scene2 {
+class LoadingLevelScene : public cugl::Scene2 {
  private:
   /** A level generator for this scene. */
-  LevelGenerator _level_generator;
+  std::shared_ptr<LevelGenerator> _level_generator;
 
   /** A level generator config for this scene. */
   LevelGeneratorConfig _config;
@@ -18,10 +18,14 @@ class LevelGenerationDemoScene : public cugl::Scene2 {
 
  public:
   /** Initializes the level generation scene2. */
-  LevelGenerationDemoScene() : cugl::Scene2() {}
+  LoadingLevelScene() : cugl::Scene2() {}
 
   /** Disposes of all resources allocated to this mode. */
-  ~LevelGenerationDemoScene() { dispose(); }
+  ~LoadingLevelScene() { dispose(); }
+
+  std::shared_ptr<LevelGenerator> getLevelGenerator() {
+    return _level_generator;
+  }
 
   /**
    * Disposes of all (non-static) resources allocated to this mode.
@@ -50,7 +54,7 @@ class LevelGenerationDemoScene : public cugl::Scene2 {
    *
    * @param batch     The SpriteBatch to draw with.
    */
-  void render(const std::shared_ptr<cugl::SpriteBatch> &batch) override;
+  void render(const std::shared_ptr<cugl::SpriteBatch>& batch) override;
 };
 
 #endif /* SCENES_LEVEL_GENERATION_DEMO_SCENE_H */
