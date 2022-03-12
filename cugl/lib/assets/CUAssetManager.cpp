@@ -386,8 +386,6 @@ void AssetManager::loadDirectoryAsync(const std::shared_ptr<JsonValue>& json, Lo
         } else if (child->key() == "fonts") {
             readCategory(typeid(Font).hash_code(),child,callback);
         } else if (child->key() == "jsons") {
-          CULog("im here");
-          CULog("%zu", typeid(JsonValue).hash_code());
             readCategory(typeid(JsonValue).hash_code(),child,callback);
         } else if (child->key() == "widgets") {
             readCategory(typeid(WidgetValue).hash_code(),child,callback);
