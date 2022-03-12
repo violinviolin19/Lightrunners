@@ -14,6 +14,8 @@ class TerminalSensor : public cugl::physics2::BoxObstacle {
   std::shared_ptr<std::string> _terminal_sensor_name;
   /** The node for debugging the terminal sensor */
   std::shared_ptr<cugl::scene2::WireNode> _terminal_sensor_node;
+  /** Whether the terminal has been activated or not. */
+  bool _activated = false;
 
  public:
 #pragma mark Constructors
@@ -35,9 +37,7 @@ class TerminalSensor : public cugl::physics2::BoxObstacle {
   /**
    * Disposes the grunt.
    */
-  void dispose() {
-      _terminal_sensor = nullptr;
-  }
+  void dispose() { _terminal_sensor = nullptr; }
 
   /**
    * Initializes a new terminal sensor with the given position and name.
@@ -57,7 +57,8 @@ class TerminalSensor : public cugl::physics2::BoxObstacle {
    *
    * @return a new box object at the given point with no size.
    */
-  static std::shared_ptr<TerminalSensor> alloc(const cugl::Vec2 pos, string name) {
+  static std::shared_ptr<TerminalSensor> alloc(const cugl::Vec2 pos,
+                                               string name) {
     std::shared_ptr<TerminalSensor> result = std::make_shared<TerminalSensor>();
     return (result->init(pos, name) ? result : nullptr);
   }
@@ -82,6 +83,15 @@ class TerminalSensor : public cugl::physics2::BoxObstacle {
    */
   void releaseFixtures() override;
 
+  /**
+   * @return Returns the activation state of the terminal.
+   */
+  bool isActivated() const { return _activated; }
+
+  /**
+   * Activates a terminal.
+   */
+  void activate() { _activated = true; }
 };
-#endif // MODELS_TILES_TERMINALSENSOR_H_
+#endif  // MODELS_TILES_TERMINALSENSOR_H_
 #pragma once

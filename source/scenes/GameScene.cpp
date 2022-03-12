@@ -67,10 +67,18 @@ bool GameScene::init(
   text->setText(msg);
   text->setForeground(cugl::Color4::WHITE);
 
+  _num_terminals_activated = 0;
+  auto terminal_text =
+      ui_layer->getChildByName<cugl::scene2::Label>("terminal");
+  std::string terminal_msg = cugl::strtool::format("Terminals Activated: %d",
+                                                   _num_terminals_activated);
+  terminal_text->setText(terminal_msg);
+  terminal_text->setForeground(cugl::Color4::RED);
+
   cugl::Scene2::addChild(_world_node);
   cugl::Scene2::addChild(ui_layer);
   cugl::Scene2::addChild(_debug_node);
-  _debug_node->setVisible(true);
+  _debug_node->setVisible(false);
 
   InputController::get()->init(_assets, cugl::Scene2::getBounds());
 
@@ -174,6 +182,16 @@ void GameScene::update(float timestep) {
       cugl::strtool::format("Health: %d", _my_player->getHealth());
   text->setText(msg);
 
+  auto terminal_text =
+      ui_layer->getChildByName<cugl::scene2::Label>("terminal");
+  std::string terminal_msg = cugl::strtool::format("Terminals Activated: %d",
+                                                   _num_terminals_activated);
+  terminal_text->setText(terminal_msg);
+
+  // Animation
+  _player->animate(InputController::get<Movement>()->getMovement());
+
+  // POST-UPDATE
   // Check for disposal
   std::vector<std::shared_ptr<Grunt>>& enemies = current_room->getEnemies();
   auto it = enemies.begin();
@@ -418,9 +436,17 @@ void GameScene::beginContact(b2Contact* contact) {
   }
 
   if (fx1_name == "terminal_range" && ob2 == _player.get()) {
-    CULog("please oh please");
+    CULog("Im here");
+    if (!dynamic_cast<TerminalSensor*>(ob1)->isActivated()) {
+      dynamic_cast<TerminalSensor*>(ob1)->activate();
+      _num_terminals_activated += 1;
+    }
   } else if (fx2_name == "terminal_range" && ob1 == _player.get()) {
-    CULog("please oh please");
+    CULog("Im here");
+    if (!dynamic_cast<TerminalSensor*>(ob2)->isActivated()) {
+      dynamic_cast<TerminalSensor*>(ob2)->activate();
+      _num_terminals_activated += 1;
+    }
   }
 }
 

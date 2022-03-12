@@ -1,8 +1,16 @@
 #include "TerminalSensor.h"
 
+#define WIDTH 128.0f
+#define HEIGHT 128.0f
+
+#define HEIGHT_SHRINK 0.3f
+
 bool TerminalSensor::init(const cugl::Vec2 pos, string name) {
   cugl::Vec2 pos_ = pos;
-  cugl::Size size_ = cugl::Size(64.0f, 64.0f);
+  cugl::Size size_ = cugl::Size(WIDTH, HEIGHT);
+
+  //size_.height *= HEIGHT_SHRINK;
+  pos_.y -= HEIGHT / 2.0f - size_.height / 2.0f;
 
   BoxObstacle::init(pos_, size_);
 
@@ -30,14 +38,14 @@ void TerminalSensor::createFixtures() {
 
     // Sensor dimensions
     b2Vec2 corners[4];
-    corners[0].x = -BoxObstacle::getWidth();
-    corners[0].y = BoxObstacle::getWidth();
-    corners[1].x = -BoxObstacle::getWidth();
-    corners[1].y = -BoxObstacle::getWidth();
-    corners[2].x = BoxObstacle::getWidth();
-    corners[2].y = -BoxObstacle::getWidth();
-    corners[3].x = BoxObstacle::getWidth();
-    corners[3].y = BoxObstacle::getWidth();
+    corners[0].x = -BoxObstacle::getWidth() / 2.0f;
+    corners[0].y = BoxObstacle::getHeight() / 2.0f;
+    corners[1].x = -BoxObstacle::getWidth() / 2.0f;
+    corners[1].y = -BoxObstacle::getHeight() / 2.0f;
+    corners[2].x = BoxObstacle::getWidth() / 2.0f;
+    corners[2].y = -BoxObstacle::getHeight() / 2.0f;
+    corners[3].x = BoxObstacle::getWidth() / 2.0f;
+    corners[3].y = BoxObstacle::getHeight() / 2.0f;
 
     b2PolygonShape sensorShape;
     sensorShape.Set(corners, 4);
@@ -45,7 +53,6 @@ void TerminalSensor::createFixtures() {
     sensorDef.shape = &sensorShape;
     _terminal_sensor = _body->CreateFixture(&sensorDef);
   }
- 
 }
 
 void TerminalSensor::releaseFixtures() {
@@ -56,5 +63,4 @@ void TerminalSensor::releaseFixtures() {
     _body->DestroyFixture(_terminal_sensor);
     _terminal_sensor = nullptr;
   }
-
 }

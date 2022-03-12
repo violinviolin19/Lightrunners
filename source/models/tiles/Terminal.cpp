@@ -16,13 +16,12 @@ std::shared_ptr<TerminalSensor> Terminal::initBox2d() {
                    BasicTile::getSize() / 2.0f;
 
   // TODO: Change this so it is no longer a hard-coded tile size value here
-  _obstacle = TerminalSensor::alloc(
+  _obstacle =TerminalSensor::alloc(
       pos, cugl::Vec2(64, 64) * BasicTile::getScale());
 
   if (_obstacle != nullptr) {
     _obstacle->setPosition(pos);
     _obstacle->setName(_classname.c_str());
-
     _obstacle->setBodyType(b2BodyType::b2_staticBody);
   }
 

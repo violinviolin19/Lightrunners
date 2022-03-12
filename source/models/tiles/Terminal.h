@@ -16,9 +16,6 @@ class Terminal : public BasicTile {
   std::shared_ptr<TerminalSensor> _obstacle;
 
 
-  /** Whether the terminal has been activated or not. */
-  bool _activated;
-
  public:
   /**
    * Creates an empty scene graph node with the degenerate texture.
@@ -104,14 +101,6 @@ class Terminal : public BasicTile {
   std::shared_ptr<TerminalSensor> getObstacle() {
     return _obstacle;
   }
-
-
-  /**
-   * @return Returns the activation state of the terminal.
-   */
-  bool isActivated() const { return _activated; }
-
-  void activate() { _activated = true; }
 
 };
 
