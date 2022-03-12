@@ -14,6 +14,9 @@
 
 bool GameScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
   // Initialize the scene to a locked width.
+  // TODO delete after confirming networking works
+  std::shared_ptr<cugl::NetworkConnection> _network = nullptr;
+
   cugl::Size dim = cugl::Application::get()->getDisplaySize();
   dim *= SCENE_HEIGHT / ((dim.width > dim.height) ? dim.width : dim.height);
 

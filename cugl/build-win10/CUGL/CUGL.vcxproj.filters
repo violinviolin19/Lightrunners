@@ -159,6 +159,12 @@
     <Filter Include="Header Files\scene2\actions">
       <UniqueIdentifier>{d5f98458-2e74-47e0-ae13-ef1d5872de4f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\net">
+      <UniqueIdentifier>{43d572ab-a6f8-4d5e-980a-04ad93be3bee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\net">
+      <UniqueIdentifier>{50e20c4b-9500-4896-aee1-8d54d5dafd67}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\cugl\math\cu_math.h">
@@ -707,6 +713,15 @@
     <ClInclude Include="..\..\include\cugl\scene2\ui\CUScrollPane.h">
       <Filter>Header Files\scene2\ui</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\cugl\net\cu_net.h">
+      <Filter>Header Files\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\cugl\net\CUNetworkConnection.h">
+      <Filter>Header Files\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\cugl\net\CUNetworkSerializer.h">
+      <Filter>Header Files\net</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\external\cJSON\cJSON.c">
@@ -1152,6 +1167,12 @@
     </ClCompile>
     <ClCompile Include="..\..\lib\scene2\ui\CUScrollPane.cpp">
       <Filter>Source Files\scene2\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\net\CUNetworkConnection.cpp">
+      <Filter>Source Files\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\net\CUNetworkSerializer.cpp">
+      <Filter>Source Files\net</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

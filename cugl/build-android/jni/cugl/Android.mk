@@ -36,6 +36,7 @@ LOCAL_SRC_FILES := \
 	$(wildcard $(CUGL_PATH)/lib/scene2/layout/*.cpp) \
 	$(wildcard $(CUGL_PATH)/lib/scene2/actions/*.cpp) \
 	$(wildcard $(CUGL_PATH)/lib/physics2/*.cpp) \
+	$(wildcard $(CUGL_PATH)/lib/net/*.cpp) \
 	$(wildcard $(CUGL_PATH)/external/cJSON/*.c) \
 	$(wildcard $(CUGL_PATH)/external/poly2tri/common/*.cc) \
 	$(wildcard $(CUGL_PATH)/external/poly2tri/sweep/*.cc) \
@@ -43,7 +44,8 @@ LOCAL_SRC_FILES := \
 	$(wildcard $(CUGL_PATH)/external/box2d/collision/*.cpp) \
 	$(wildcard $(CUGL_PATH)/external/box2d/common/*.cpp) \
 	$(wildcard $(CUGL_PATH)/external/box2d/dynamics/*.cpp) \
-	$(wildcard $(CUGL_PATH)/external/box2d/rope/*.cpp))
+	$(wildcard $(CUGL_PATH)/external/box2d/rope/*.cpp) \
+	$(wildcard $(CUGL_PATH)/external/slikenet/Source/src/*.cpp))
 
 LOCAL_CFLAGS += -DGL_GLEXT_PROTOTYPES
 

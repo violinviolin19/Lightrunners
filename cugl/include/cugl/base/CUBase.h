@@ -29,8 +29,6 @@
 #ifndef __CU_BASE_H__
 #define __CU_BASE_H__
 
-#define WIN32_LEAN_AND_MEAN
-
 #include <memory>
 #include <string>
 #include <SDL/SDL.h>
@@ -111,16 +109,17 @@
     #define CU_GL_PLATFORM   CU_GL_OPENGL
 #elif defined (__WINDOWS__)
 	#define NOMINMAX
+    #define _WINSOCKAPI_    // stops windows.h including winsock.h
 	#include <windows.h>
 	#include <GL/glew.h>
 	#include <SDL/SDL_opengl.h>
-	#include <GL/gl.h>
-	#include <GL/glu.h>
+	#include <GL/gl.h>	
+	#include <GL/glu.h>	
 	/** The current OpenGL platform */
 	#define CU_GL_PLATFORM   CU_GL_OPENGL
 #endif
 
-#ifdef _MSC_VER
+#ifdef _MSC_VER 
 	//not #if defined(_WIN32) || defined(_WIN64) because we have strncasecmp in mingw
 #define strncasecmp _strnicmp
 #define strcasecmp _stricmp

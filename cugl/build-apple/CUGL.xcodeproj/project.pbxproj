@@ -7,12 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D568D23727DBAAA500CA2BA9 /* CUNetworkConnection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D568D23527DBAAA500CA2BA9 /* CUNetworkConnection.cpp */; };
-		D568D23827DBAAA500CA2BA9 /* CUNetworkConnection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D568D23527DBAAA500CA2BA9 /* CUNetworkConnection.cpp */; };
-		D568D23927DBAAA500CA2BA9 /* CUNetworkConnection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D568D23527DBAAA500CA2BA9 /* CUNetworkConnection.cpp */; };
-		D568D23A27DBAAA500CA2BA9 /* CUNetworkSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D568D23627DBAAA500CA2BA9 /* CUNetworkSerializer.cpp */; };
-		D568D23B27DBAAA500CA2BA9 /* CUNetworkSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D568D23627DBAAA500CA2BA9 /* CUNetworkSerializer.cpp */; };
-		D568D23C27DBAAA500CA2BA9 /* CUNetworkSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D568D23627DBAAA500CA2BA9 /* CUNetworkSerializer.cpp */; };
 		EB035D8D20C0D34D0001EAE3 /* CUFIRFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB035D8C20C0D34D0001EAE3 /* CUFIRFilter.cpp */; };
 		EB035D8E20C0D34D0001EAE3 /* CUFIRFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB035D8C20C0D34D0001EAE3 /* CUFIRFilter.cpp */; };
 		EB035D9020C0D3B20001EAE3 /* CUOneZeroFIR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB035D8F20C0D3B20001EAE3 /* CUOneZeroFIR.cpp */; };
@@ -21,6 +15,7 @@
 		EB0F491A1E79FE51002E50DB /* CUEasingBezier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB0F49181E79FE51002E50DB /* CUEasingBezier.cpp */; };
 		EB0F491D1E7A10B7002E50DB /* CUEasingFunction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB0F491C1E7A10B7002E50DB /* CUEasingFunction.cpp */; };
 		EB0F491E1E7A10B7002E50DB /* CUEasingFunction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB0F491C1E7A10B7002E50DB /* CUEasingFunction.cpp */; };
+		EB13B3D427B31C030032BF19 /* libslikenet-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB13B38B27B1D1150032BF19 /* libslikenet-ios.a */; };
 		EB1E963721A9CDDD008A0431 /* CUAudioInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB1E963621A9CDDD008A0431 /* CUAudioInput.cpp */; };
 		EB1E963821A9CDDD008A0431 /* CUAudioInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB1E963621A9CDDD008A0431 /* CUAudioInput.cpp */; };
 		EB202C2C1DE3665600116616 /* cJSON.c in Sources */ = {isa = PBXBuildFile; fileRef = EB202C2A1DE3665600116616 /* cJSON.c */; };
@@ -304,6 +299,13 @@
 		EBA6CF101DECCB8B00BC2146 /* CUBinaryWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBA6CF0E1DECCB8B00BC2146 /* CUBinaryWriter.cpp */; };
 		EBA7BC46213B19BA009EB72D /* CUAudioNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBA7BC45213B19BA009EB72D /* CUAudioNode.cpp */; };
 		EBA7BC4E213B1BD4009EB72D /* CUAudioOutput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBA7BC4D213B1BD3009EB72D /* CUAudioOutput.cpp */; };
+		EBADDE4027B19C660003D991 /* libslikenet-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EBADDE3F27B19C660003D991 /* libslikenet-mac.a */; };
+		EBADDE4727B19CCC0003D991 /* CUNetworkSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBADDE4527B19CCC0003D991 /* CUNetworkSerializer.cpp */; };
+		EBADDE4827B19CCC0003D991 /* CUNetworkConnection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBADDE4627B19CCC0003D991 /* CUNetworkConnection.cpp */; };
+		EBADDE4A27B19D4F0003D991 /* CUNetworkConnection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBADDE4627B19CCC0003D991 /* CUNetworkConnection.cpp */; };
+		EBADDE4B27B19D4F0003D991 /* CUNetworkConnection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBADDE4627B19CCC0003D991 /* CUNetworkConnection.cpp */; };
+		EBADDE4C27B19D530003D991 /* CUNetworkSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBADDE4527B19CCC0003D991 /* CUNetworkSerializer.cpp */; };
+		EBADDE4D27B19D530003D991 /* CUNetworkSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBADDE4527B19CCC0003D991 /* CUNetworkSerializer.cpp */; };
 		EBB8FEFF21E198D60039834E /* CUSoundLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBB8FEFE21E198D60039834E /* CUSoundLoader.cpp */; };
 		EBB8FF0021E198D60039834E /* CUSoundLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBB8FEFE21E198D60039834E /* CUSoundLoader.cpp */; };
 		EBBF18101D7486EA008E2001 /* CUApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB4AEC041CFCBA270090AF7F /* CUApplication.cpp */; };
@@ -475,6 +477,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		EB13B38827B1D1150032BF19 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EBADDE3427B19B8D0003D991 /* slikenet.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FC7321AB602646E2BABB8DFB;
+			remoteInfo = "slikenet-mac";
+		};
+		EB13B38A27B1D1150032BF19 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EBADDE3427B19B8D0003D991 /* slikenet.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EB28FCB0279F8BC400D15D07;
+			remoteInfo = "slikenet-ios";
+		};
 		EBD811D1279FA0C900ABE08C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EBD811CC279FA0C900ABE08C /* box2d.xcodeproj */;
@@ -504,11 +520,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		D568D22F27DBAA7C00CA2BA9 /* CUNetworkConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUNetworkConnection.h; sourceTree = "<group>"; };
-		D568D23027DBAA7C00CA2BA9 /* CUNetworkSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUNetworkSerializer.h; sourceTree = "<group>"; };
-		D568D23127DBAA7C00CA2BA9 /* cu_net.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cu_net.h; sourceTree = "<group>"; };
-		D568D23527DBAAA500CA2BA9 /* CUNetworkConnection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CUNetworkConnection.cpp; sourceTree = "<group>"; };
-		D568D23627DBAAA500CA2BA9 /* CUNetworkSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CUNetworkSerializer.cpp; sourceTree = "<group>"; };
 		EB035D7A20C0D0F80001EAE3 /* CUFIRFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CUFIRFilter.h; sourceTree = "<group>"; };
 		EB035D8920C0D1590001EAE3 /* CUOneZeroFIR.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CUOneZeroFIR.h; sourceTree = "<group>"; };
 		EB035D8C20C0D34D0001EAE3 /* CUFIRFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CUFIRFilter.cpp; sourceTree = "<group>"; };
@@ -707,6 +718,14 @@
 		EBA7BC48213B1A8C009EB72D /* cu_audio_graph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cu_audio_graph.h; sourceTree = "<group>"; };
 		EBA7BC49213B1A8C009EB72D /* CUAudioOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUAudioOutput.h; sourceTree = "<group>"; };
 		EBA7BC4D213B1BD3009EB72D /* CUAudioOutput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CUAudioOutput.cpp; sourceTree = "<group>"; };
+		EBADDE3427B19B8D0003D991 /* slikenet.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = slikenet.xcodeproj; sourceTree = "<group>"; };
+		EBADDE3D27B19BE40003D991 /* libslikenet-mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libslikenet-mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EBADDE3F27B19C660003D991 /* libslikenet-mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libslikenet-mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EBADDE4227B19C930003D991 /* CUNetworkConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUNetworkConnection.h; sourceTree = "<group>"; };
+		EBADDE4327B19C930003D991 /* CUNetworkSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUNetworkSerializer.h; sourceTree = "<group>"; };
+		EBADDE4527B19CCC0003D991 /* CUNetworkSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CUNetworkSerializer.cpp; sourceTree = "<group>"; };
+		EBADDE4627B19CCC0003D991 /* CUNetworkConnection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CUNetworkConnection.cpp; sourceTree = "<group>"; };
+		EBADDE4927B19CEB0003D991 /* cu_net.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cu_net.h; sourceTree = "<group>"; };
 		EBB8FEF421E196B30039834E /* CUSoundLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CUSoundLoader.h; sourceTree = "<group>"; };
 		EBB8FEFE21E198D60039834E /* CUSoundLoader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CUSoundLoader.cpp; sourceTree = "<group>"; };
 		EBB96D7B1D31EDB100C2CA07 /* CUMouse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CUMouse.cpp; sourceTree = "<group>"; };
@@ -940,6 +959,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB13B3D427B31C030032BF19 /* libslikenet-ios.a in Frameworks */,
 				EBD811D6279FA0F800ABE08C /* libbox2d-ios.a in Frameworks */,
 				EB22BDFA25D0E0B2002ACE41 /* libSDL2-ios.a in Frameworks */,
 				EB22BDF825D0E0B2002ACE41 /* libSDL2_image-ios.a in Frameworks */,
@@ -952,6 +972,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBADDE4027B19C660003D991 /* libslikenet-mac.a in Frameworks */,
 				EBD811D5279FA0EE00ABE08C /* libbox2d-mac.a in Frameworks */,
 				EB22BDEC25D0E059002ACE41 /* libSDL2-mac.a in Frameworks */,
 				EB22BDEB25D0E059002ACE41 /* libSDL2_image-mac.a in Frameworks */,
@@ -963,25 +984,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D568D22E27DBAA7C00CA2BA9 /* net */ = {
-			isa = PBXGroup;
-			children = (
-				D568D22F27DBAA7C00CA2BA9 /* CUNetworkConnection.h */,
-				D568D23027DBAA7C00CA2BA9 /* CUNetworkSerializer.h */,
-				D568D23127DBAA7C00CA2BA9 /* cu_net.h */,
-			);
-			path = net;
-			sourceTree = "<group>";
-		};
-		D568D23427DBAAA500CA2BA9 /* net */ = {
-			isa = PBXGroup;
-			children = (
-				D568D23527DBAAA500CA2BA9 /* CUNetworkConnection.cpp */,
-				D568D23627DBAAA500CA2BA9 /* CUNetworkSerializer.cpp */,
-			);
-			path = net;
-			sourceTree = "<group>";
-		};
 		EB0789511D302051000BFDF7 /* input */ = {
 			isa = PBXGroup;
 			children = (
@@ -994,6 +996,15 @@
 				EBFE7BC41E0DAF9B001007C2 /* gestures */,
 			);
 			path = input;
+			sourceTree = "<group>";
+		};
+		EB13B38227B1D1140032BF19 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EB13B38927B1D1150032BF19 /* libslikenet-mac.a */,
+				EB13B38B27B1D1150032BF19 /* libslikenet-ios.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		EB202C261DE3663000116616 /* External */ = {
@@ -1046,6 +1057,8 @@
 		EB22BDE125D0E033002ACE41 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EBADDE3F27B19C660003D991 /* libslikenet-mac.a */,
+				EBADDE3D27B19BE40003D991 /* libslikenet-mac.a */,
 				EB22BF8525D0E931002ACE41 /* libSDL2_codec-sim.a */,
 				EB22BF8225D0E931002ACE41 /* libSDL2_image-sim.a */,
 				EB22BF8325D0E931002ACE41 /* libSDL2_ttf-sim.a */,
@@ -1408,6 +1421,25 @@
 			path = shaders;
 			sourceTree = "<group>";
 		};
+		EBADDE4127B19C780003D991 /* net */ = {
+			isa = PBXGroup;
+			children = (
+				EBADDE4927B19CEB0003D991 /* cu_net.h */,
+				EBADDE4227B19C930003D991 /* CUNetworkConnection.h */,
+				EBADDE4327B19C930003D991 /* CUNetworkSerializer.h */,
+			);
+			path = net;
+			sourceTree = "<group>";
+		};
+		EBADDE4427B19CA50003D991 /* net */ = {
+			isa = PBXGroup;
+			children = (
+				EBADDE4627B19CCC0003D991 /* CUNetworkConnection.cpp */,
+				EBADDE4527B19CCC0003D991 /* CUNetworkSerializer.cpp */,
+			);
+			path = net;
+			sourceTree = "<group>";
+		};
 		EBB1AC5C1DF8E31400C353B0 /* audio */ = {
 			isa = PBXGroup;
 			children = (
@@ -1474,11 +1506,11 @@
 				EBC2F1621D74A6E5007EC7A6 /* input */,
 				EB202C3C1DE39B2400116616 /* io */,
 				EBC2F1641D74A7D8007EC7A6 /* assets */,
-				D568D22E27DBAA7C00CA2BA9 /* net */,
 				EBC2F1661D74A80C007EC7A6 /* render */,
 				EBB1AC5F1DF8E38F00C353B0 /* audio */,
 				EBC2F1631D74A743007EC7A6 /* scene2 */,
 				EB839DE61DCD8285001039BC /* physics2 */,
+				EBADDE4127B19C780003D991 /* net */,
 				EBC2F1651D74A7DF007EC7A6 /* external */,
 			);
 			name = Include;
@@ -1847,6 +1879,7 @@
 				EBFFD70D1CFCA12A00E047D2 /* Products */,
 				EB22BDE125D0E033002ACE41 /* Frameworks */,
 				EBD811CC279FA0C900ABE08C /* box2d.xcodeproj */,
+				EBADDE3427B19B8D0003D991 /* slikenet.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1865,15 +1898,15 @@
 			children = (
 				EB4AEC011CFCB9C70090AF7F /* base */,
 				EB4AEC1B1CFDB98B0090AF7F /* util */,
+				EB4AEC081CFCC09E0090AF7F /* math */,
 				EB0789511D302051000BFDF7 /* input */,
 				EB202C401DE39B8800116616 /* io */,
 				EB4AEC0C1CFCD1B10090AF7F /* assets */,
-				D568D23427DBAAA500CA2BA9 /* net */,
-				EB4AEC081CFCC09E0090AF7F /* math */,
 				EB4AEC031CFCB9EB0090AF7F /* render */,
 				EBB1AC5C1DF8E31400C353B0 /* audio */,
 				EB4AEC171CFD4DB90090AF7F /* scene2 */,
 				EB839E021DCD82B5001039BC /* physics2 */,
+				EBADDE4427B19CA50003D991 /* net */,
 			);
 			name = Source;
 			path = ../lib;
@@ -1969,6 +2002,10 @@
 					ProductGroup = EBD811CD279FA0C900ABE08C /* Products */;
 					ProjectRef = EBD811CC279FA0C900ABE08C /* box2d.xcodeproj */;
 				},
+				{
+					ProductGroup = EB13B38227B1D1140032BF19 /* Products */;
+					ProjectRef = EBADDE3427B19B8D0003D991 /* slikenet.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -1980,6 +2017,20 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		EB13B38927B1D1150032BF19 /* libslikenet-mac.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libslikenet-mac.a";
+			remoteRef = EB13B38827B1D1150032BF19 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EB13B38B27B1D1150032BF19 /* libslikenet-ios.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libslikenet-ios.a";
+			remoteRef = EB13B38A27B1D1150032BF19 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		EBD811D2279FA0C900ABE08C /* libbox2d-mac.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -2080,7 +2131,7 @@
 				EB22BE8A25D0E5ED002ACE41 /* CUObstacle.cpp in Sources */,
 				EB22BED725D0E63D002ACE41 /* CUUniformBuffer.cpp in Sources */,
 				EB22BEC525D0E633002ACE41 /* CUWAVDecoder.cpp in Sources */,
-				D568D23927DBAAA500CA2BA9 /* CUNetworkConnection.cpp in Sources */,
+				EBADDE4B27B19D4F0003D991 /* CUNetworkConnection.cpp in Sources */,
 				EB22BEDE25D0E643002ACE41 /* CUJsonLoader.cpp in Sources */,
 				EB22BF0525D0E660002ACE41 /* CUTwoZeroFIR.cpp in Sources */,
 				EB22BF0A25D0E666002ACE41 /* CUSimpleExtruder.cpp in Sources */,
@@ -2099,7 +2150,7 @@
 				EB22BEBC25D0E62D002ACE41 /* CUAudioDevices.cpp in Sources */,
 				EB22BF3D25D0E69B002ACE41 /* CUAudioFader.cpp in Sources */,
 				EB22BF1E25D0E66C002ACE41 /* CUQuaternion.cpp in Sources */,
-				D568D23C27DBAAA500CA2BA9 /* CUNetworkSerializer.cpp in Sources */,
+				EBADDE4D27B19D530003D991 /* CUNetworkSerializer.cpp in Sources */,
 				EB22BED425D0E63D002ACE41 /* CUShader.cpp in Sources */,
 				EB22BE9925D0E603002ACE41 /* sweep.cc in Sources */,
 				EB22BF1525D0E66C002ACE41 /* CUMat4.cpp in Sources */,
@@ -2237,7 +2288,7 @@
 				EBDD168225C35C6500154533 /* CUPathNode.cpp in Sources */,
 				EB7454141D74D276002FBAE6 /* CUOrthographicCamera.cpp in Sources */,
 				EB035D9120C0D3B20001EAE3 /* CUOneZeroFIR.cpp in Sources */,
-				D568D23827DBAAA500CA2BA9 /* CUNetworkConnection.cpp in Sources */,
+				EBADDE4A27B19D4F0003D991 /* CUNetworkConnection.cpp in Sources */,
 				EBE91E291DCFE7D300F80D62 /* CUSimpleObstacle.cpp in Sources */,
 				EBDD164B25C35BEF00154533 /* CUFiletools.cpp in Sources */,
 				EB035D8E20C0D34D0001EAE3 /* CUFIRFilter.cpp in Sources */,
@@ -2256,7 +2307,7 @@
 				EBFE7C111E1AB140001007C2 /* CUProgressBar.cpp in Sources */,
 				EBDD166E25C35C5000154533 /* CUSceneNode.cpp in Sources */,
 				EBDC802525B8AF96004DECAE /* shapes.cc in Sources */,
-				D568D23B27DBAAA500CA2BA9 /* CUNetworkSerializer.cpp in Sources */,
+				EBADDE4C27B19D530003D991 /* CUNetworkSerializer.cpp in Sources */,
 				EBD3CE9F2005DAFC00CFD1BC /* CUScene2Loader.cpp in Sources */,
 				EB74541E1D74D276002FBAE6 /* CUInput.cpp in Sources */,
 				EBDD16FB25C35F6000154533 /* CUPathSmoother.cpp in Sources */,
@@ -2338,6 +2389,7 @@
 				EB45FDBC25B3ADE600974097 /* CUWireNode.cpp in Sources */,
 				EB839E251DCD8305001039BC /* CUObstacleWorld.cpp in Sources */,
 				EBCE54741DED2EC5003B52FE /* CUThreadPool.cpp in Sources */,
+				EBADDE4727B19CCC0003D991 /* CUNetworkSerializer.cpp in Sources */,
 				EB5D70F321E2A6B0003C78F6 /* CUAudioScheduler.cpp in Sources */,
 				EBB8FEFF21E198D60039834E /* CUSoundLoader.cpp in Sources */,
 				EB839E1B1DCD8305001039BC /* CUObstacle.cpp in Sources */,
@@ -2364,6 +2416,7 @@
 				EB202C4D1DE5F9B900116616 /* CUTextWriter.cpp in Sources */,
 				EBA6CF101DECCB8B00BC2146 /* CUBinaryWriter.cpp in Sources */,
 				EB2A1F4A20BDFC4800E1B1F5 /* CUOnePoleIIR.cpp in Sources */,
+				EBADDE4827B19CCC0003D991 /* CUNetworkConnection.cpp in Sources */,
 				EBCD654021FD554300B3FEDE /* CUAudioResampler.cpp in Sources */,
 				EBD0383821E182C600168DB2 /* CUSound.cpp in Sources */,
 				EBBF18221D7486EA008E2001 /* CULabel.cpp in Sources */,
@@ -2394,7 +2447,6 @@
 				EB035D8D20C0D34D0001EAE3 /* CUFIRFilter.cpp in Sources */,
 				EBDC802725B8AFA3004DECAE /* advancing_front.cc in Sources */,
 				EB77B9232010FD0500713568 /* CUGridLayout.cpp in Sources */,
-				D568D23727DBAAA500CA2BA9 /* CUNetworkConnection.cpp in Sources */,
 				EBBF182E1D7486EA008E2001 /* CUVec3.cpp in Sources */,
 				EBDB28D420CE740C00ADC9AB /* CUBiquadIIR.cpp in Sources */,
 				EBBF182F1D7486EA008E2001 /* CUVec4.cpp in Sources */,
@@ -2413,7 +2465,6 @@
 				EBBF18331D7486EA008E2001 /* CUColor4.cpp in Sources */,
 				EB45FD7625B3563D00974097 /* CUGradient.cpp in Sources */,
 				EBBF18341D7486EA008E2001 /* CUSize.cpp in Sources */,
-				D568D23A27DBAAA500CA2BA9 /* CUNetworkSerializer.cpp in Sources */,
 				EBBF18351D7486EA008E2001 /* CURect.cpp in Sources */,
 				EBBF18361D7486EA008E2001 /* CUPolynomial.cpp in Sources */,
 				EBD3CEA02005DAFC00CFD1BC /* CUScene2Loader.cpp in Sources */,
@@ -2487,7 +2538,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = "-ObjC";
@@ -2514,7 +2564,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2537,7 +2586,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2558,7 +2606,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2580,7 +2627,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -2597,7 +2643,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -2658,7 +2703,7 @@
 				LIBRARY_SEARCH_PATHS = "$(LIB_STATIC)";
 				LIB_INCLUDES = "\"$(SRCROOT)/../include\"";
 				LIB_STATIC = "\"$(SRCROOT)/lib\"";
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -2715,7 +2760,7 @@
 				LIBRARY_SEARCH_PATHS = "$(LIB_STATIC)";
 				LIB_INCLUDES = "\"$(SRCROOT)/../include\"";
 				LIB_STATIC = "\"$(SRCROOT)/lib\"";
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 			};
