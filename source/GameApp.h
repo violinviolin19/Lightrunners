@@ -3,7 +3,7 @@
 #include <cugl/cugl.h>
 
 #include "scenes/GameScene.h"
-#include "scenes/LevelGenerationDemoScene.h"
+#include "scenes/LoadingLevelScene.h"
 #include "scenes/LoadingScene.h"
 #include "scenes/MenuScene.h"
 
@@ -17,30 +17,37 @@ class GameApp : public cugl::Application {
   /** The global asset manager */
   std::shared_ptr<cugl::AssetManager> _assets;
 
+  enum Scene {
+    /** Currently loading the loading scene. */
+    LOADING,
+    /** Currently rendering the menu scene. */
+    MENU,
+    /** Currently loading the level loading scene. */
+    LEVEL_LOADING,
+    /** Currently loading the game scene. */
+    GAME,
+  } _current_scene;
+
   /** The primary controller for the game world */
   GameScene _gameplay;
   /** The controller for the loading screen */
   LoadingScene _loading;
   /** The controller for the main menu */
   MenuScene _menu;
-
-#ifndef CU_TOUCH_SCREEN
-  /** The controller for the level generation demo scene. */
-  LevelGenerationDemoScene _level_gen_scene;
-  /** If the app should currently update and render the level generation demo
-   * scene. */
-  bool _show_level_gen_scene;
-#endif
+  /** The controller for the level generation loading scene. */
+  LoadingLevelScene _level_loading;
 
   /** Whether or not we have finished loading all assets */
   bool _loaded;
+  /** Whether or not we have finished loading the level */
+  bool _level_loaded;
 
  public:
-  GameApp() : cugl::Application(), _loaded(false) {
-#ifndef CU_TOUCH_SCREEN
-    _show_level_gen_scene = false;
-#endif
-  }
+  GameApp()
+      : cugl::Application(),
+        _loaded(false),
+        _level_loaded(false),
+        _current_scene(Scene::LOADING) {}
   ~GameApp() {}
 
 #pragma mark Application State

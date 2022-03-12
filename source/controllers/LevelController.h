@@ -26,13 +26,13 @@ class LevelController : public Controller {
    * @param world The scene2 node for the world.
    */
   void init(const std::shared_ptr<cugl::AssetManager> &assets,
-            const std::shared_ptr<cugl::scene2::SceneNode> &world) override;
+            const std::shared_ptr<cugl::scene2::SceneNode> &world);
 
   /** Update the Level Controller. */
   void update() override;
 
   /** Dispose of the level controller and all it's values. */
   void dispose() override;
-}
+};
 
 #endif  // CONTROLLERS_LEVEL_CONTROLLER_H_

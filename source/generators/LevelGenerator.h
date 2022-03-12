@@ -72,8 +72,10 @@ class LevelGenerator {
   /**
    * Update the level generator. Calls the next generator step function.
    * Separates the generation steps to be able to draw the generation.
+   *
+   * @return If the generator is done generating.
    */
-  void update();
+  bool update();
 
   /**
    * Dispose of the level generator. Clear all the references and variables in

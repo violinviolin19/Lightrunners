@@ -13,35 +13,37 @@ LevelGenerator::LevelGenerator() : _active(false), _generator_step(nullptr) {}
 
 void LevelGenerator::init(LevelGeneratorConfig &config,
                           const std::shared_ptr<cugl::scene2::SceneNode> &map) {
-  if (!_active) {
-    _config = config;
-    _map = map;
-    _generator_step = [this]() { this->generateRooms(); };
-    std::random_device my_random_device;
-    unsigned seed = my_random_device();
-    _generator = std::default_random_engine(seed);
-    _active = true;
-  }
+  if (_active) return;
+  _active = true;
+
+  _config = config;
+  _map = map;
+  _generator_step = [this]() { this->generateRooms(); };
+  std::random_device my_random_device;
+  unsigned seed = my_random_device();
+  _generator = std::default_random_engine(seed);
 }
 
 void LevelGenerator::dispose() {
-  if (_active) {
-    _rooms.clear();
-    _inside_rooms.clear();
-    _middle_rooms.clear();
-    _outside_rooms.clear();
-    _hallways.clear();
-    _spawn_room = nullptr;
-    _map = nullptr;
-    _generator_step = nullptr;
-    _active = false;
-  }
+  if (!_active) return;
+  _active = false;
+
+  _rooms.clear();
+  _inside_rooms.clear();
+  _middle_rooms.clear();
+  _outside_rooms.clear();
+  _hallways.clear();
+  _spawn_room = nullptr;
+  _map = nullptr;
+  _generator_step = nullptr;
 }
 
-void LevelGenerator::update() {
+bool LevelGenerator::update() {
   if (_generator_step != nullptr) {
     _generator_step();
+    return false;  // Not done.
   }
+  return true;  // Done!
 }
 
 void LevelGenerator::generateRooms() {

@@ -23,6 +23,7 @@ class LoadingLevelScene : public cugl::Scene2 {
   /** Disposes of all resources allocated to this mode. */
   ~LoadingLevelScene() { dispose(); }
 
+  /** Get the level generator, to pass on to the game scene. */
   std::shared_ptr<LevelGenerator> getLevelGenerator() {
     return _level_generator;
   }

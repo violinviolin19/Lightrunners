@@ -13,6 +13,8 @@
 #define CAMERA_SMOOTH_SPEED 2.0f
 
 bool GameScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
+  if (_active) return false;
+  _active = true;
   // Initialize the scene to a locked width.
   // TODO delete after confirming networking works
   std::shared_ptr<cugl::NetworkConnection> _network = nullptr;
@@ -82,8 +84,10 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
 }
 
 void GameScene::dispose() {
+  if (!_active) return;
   InputController::get()->dispose();
   //  _ai_controller.~AIController(); TODO FIX THIS LATER
+  _active = false;
 }
 
 void GameScene::populate(cugl::Size dim) {

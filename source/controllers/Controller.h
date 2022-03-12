@@ -13,10 +13,10 @@ class Controller {
   ~Controller() { dispose(); }
 
   /** Update the controller state. */
-  virtual void update() = 0;
+  virtual void update() {}
 
   /** Dispose the controller and all its values. */
-  virtual void dispose() = 0;
-}
+  virtual void dispose() {}
+};
 
 #endif  // CONTROLLERS_CONTROLLER_H_
