@@ -209,12 +209,6 @@
     <ClInclude Include="..\..\include\cugl\math\CUVec4.h">
       <Filter>Header Files\math</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\cugl\net\CUNetworkConnection.h">
-      <Filter>Header Files\net</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\cugl\net\CUNetworkSerializer.h">
-      <Filter>Header Files\net</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\cugl\math\polygon\cu_polygon.h">
       <Filter>Header Files\math\polygon</Filter>
     </ClInclude>
@@ -960,12 +954,6 @@
     </ClCompile>
     <ClCompile Include="..\..\lib\math\CUPolynomial.cpp">
       <Filter>Source Files\math</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\net\CUNetworkConnection.cpp">
-      <Filter>Source Files\net</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\net\CUNetworkSerializer.cpp">
-      <Filter>Source Files\net</Filter>
     </ClCompile>
     <ClCompile Include="..\..\lib\math\polygon\CUPolyFactory.cpp">
       <Filter>Source Files\math\polygon</Filter>
