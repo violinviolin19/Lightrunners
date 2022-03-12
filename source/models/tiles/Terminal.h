@@ -121,7 +121,6 @@ class Terminal : public BasicTile {
 
   void activate() { _activated = true; }
 
-
 };
 
 #endif  // MODELS_TILES_TERMINAL_H_#pragma once
