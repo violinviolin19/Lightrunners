@@ -44,6 +44,7 @@ std::shared_ptr<cugl::physics2::BoxObstacle> Terminal::initBox2d() {
       sensorShape.Set(corners, 4);
 
       sensorDef.shape = &sensorShape;
+
       _terminal_sensor = _obstacle->getBody()->CreateFixture(&sensorDef);
     }
   }

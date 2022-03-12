@@ -97,24 +97,6 @@ class Wall : public BasicTile {
     return _obstacle;
   }
 
-  #pragma mark Physics Methods
-  /**
-   * Creates the physics Body(s) for this object, adding them to the world.
-   *
-   * This method overrides the base method to keep your ship from spinning.
-   *
-   * @param world Box2D world to store body
-   *
-   * @return true if object allocation succeeded
-   */
-  void createFixtures() override;
-
-  /**
-   * Release the fixtures for this body, reseting the shape
-   *
-   * This is the primary method to override for custom physics objects.
-   */
-  void releaseFixtures() override;
 };
 
 #endif  // MODELS_TILES_WALL_H_

@@ -120,6 +120,8 @@ class Terminal : public BasicTile {
   bool isActivated() const { return _activated; }
 
   void activate() { _activated = true; }
+
+
 };
 
 #endif  // MODELS_TILES_TERMINAL_H_#pragma once

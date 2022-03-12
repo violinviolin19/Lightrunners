@@ -113,6 +113,13 @@ void GameScene::populate(cugl::Size dim) {
     wall->getObstacle()->setDebugScene(_debug_node);
   }
 
+  for (std::shared_ptr<BasicTile> tile : loader->getTiles("terminal")) {
+    auto terminal = std::dynamic_pointer_cast<Terminal>(tile);
+    _world->addObstacle(terminal->initBox2d());
+    terminal->getObstacle()->setDebugColor(cugl::Color4::RED);
+    terminal->getObstacle()->setDebugScene(_debug_node);
+  }
+
   // Debug code.
   _my_player->setDebugScene(_debug_node);
   _my_player->setDebugColor(cugl::Color4f::BLACK);
