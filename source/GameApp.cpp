@@ -21,6 +21,7 @@ void GameApp::onStartup() {
   // Add asset loaders.
   _assets->attach<cugl::Texture>(cugl::TextureLoader::alloc()->getHook());
   _assets->attach<cugl::Font>(cugl::FontLoader::alloc()->getHook());
+  _assets->attach<cugl::JsonValue>(cugl::JsonLoader::alloc()->getHook());
   _assets->attach<cugl::WidgetValue>(cugl::WidgetLoader::alloc()->getHook());
   _assets->attach<cugl::scene2::SceneNode>(
       cugl::CustomScene2Loader::alloc()->getHook());
