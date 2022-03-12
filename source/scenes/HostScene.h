@@ -4,7 +4,7 @@
 
 #include <vector>
 
-#include "scenes/PeerScene.h"
+#include "PeerScene.h"
 
 /**
  * This class provides the interface to make a new game.

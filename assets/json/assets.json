@@ -139,10 +139,14 @@
             "magfilter": "linear",
             "wrapS": "clamp",
             "wrapT": "clamp"
+        },
+        "left": {
+            "file": "textures/left_arrow.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
         }
-    },
-    "jsons": {
-        "server": "json/server.json"
     },
     "widgets": {
         "ui-scene": "widgets/ui-scene.json",

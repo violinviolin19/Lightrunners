@@ -24,6 +24,7 @@ int main(int argc, char *argv[]) {
 
   // Run the application until completion.
   app.onStartup();
+
   while (app.step())
     ;
   app.onShutdown();

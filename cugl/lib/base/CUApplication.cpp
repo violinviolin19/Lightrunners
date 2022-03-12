@@ -266,7 +266,7 @@ bool Application::getInput() {
 bool Application::step() {
     // Get input before doing the next time
     bool running = getInput();
-
+  
     // Get a (more) precising measurement for simulation
     Timestamp poststep;
     Uint32 micros   = (Uint32)poststep.ellapsedMicros(_start);
