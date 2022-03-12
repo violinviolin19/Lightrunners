@@ -14,6 +14,13 @@ class Terminal : public BasicTile {
   /** A reference to the physics object of the tile. */
   std::shared_ptr<cugl::physics2::BoxObstacle> _obstacle;
 
+  /** Represents the area for terminal activation. */
+  b2Fixture* _terminal_sensor;
+  /** Keeps an instance of the name alive for collision detection. */
+  std::shared_ptr<std::string> _terminal_sensor_name;
+  /** The node for debugging the terminal sensor */
+  std::shared_ptr<cugl::scene2::WireNode> _terminal_sensor_node;
+
   /** Whether the terminal has been activated or not. */
   bool _activated;
 
@@ -24,7 +31,10 @@ class Terminal : public BasicTile {
    * This constructor should never be called directly, as this is an abstract
    * class.
    */
-  Terminal() : BasicTile() { _classname = "Terminal"; }
+  Terminal() : 
+      BasicTile(), 
+      _terminal_sensor(nullptr), 
+      _terminal_sensor_name(nullptr) {_classname = "Terminal";}
 
   /**
    * Deletes this node, releasing all resources.
@@ -40,7 +50,10 @@ class Terminal : public BasicTile {
    * It is unsafe to call this on a Node that is still currently inside of
    * a scene graph.
    */
-  virtual void dispose() override { BasicTile::dispose(); }
+  virtual void dispose() override {
+    BasicTile::dispose();
+    _terminal_sensor = nullptr;
+  }
 
   virtual std::shared_ptr<SceneNode> copy(
       const std::shared_ptr<SceneNode>& dst) const override {
@@ -99,6 +112,7 @@ class Terminal : public BasicTile {
   std::shared_ptr<cugl::physics2::BoxObstacle> getObstacle() {
     return _obstacle;
   }
+
 
   /**
    * @return Returns the activation state of the terminal.

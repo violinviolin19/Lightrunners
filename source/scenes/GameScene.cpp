@@ -70,7 +70,7 @@ bool GameScene::init(
   cugl::Scene2::addChild(_world_node);
   cugl::Scene2::addChild(ui_layer);
   cugl::Scene2::addChild(_debug_node);
-  _debug_node->setVisible(false);
+  _debug_node->setVisible(true);
 
   InputController::get()->init(_assets, cugl::Scene2::getBounds());
 
