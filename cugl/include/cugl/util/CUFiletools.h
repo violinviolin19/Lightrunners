@@ -29,7 +29,6 @@
 //  Version: 2/10/20
 #ifndef __CU_FILE_TOOLS_H__
 #define __CU_FILE_TOOLS_H__
-
 #include <string>
 #include <vector>
 #include <functional>

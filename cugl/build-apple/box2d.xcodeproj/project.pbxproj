@@ -613,7 +613,7 @@
 					"'-std=c++11'",
 				);
 				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_NAME = "box2d-mac";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SECTORDER_FLAGS = "";
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = "$(inherited)";
@@ -652,7 +652,7 @@
 					"'-std=c++11'",
 				);
 				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_NAME = "box2d-mac";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SECTORDER_FLAGS = "";
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = "$(inherited)";
@@ -676,7 +676,7 @@
 					"'-std=c++11'",
 				);
 				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_NAME = "box2d-mac";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SECTORDER_FLAGS = "";
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = "$(inherited)";
@@ -701,7 +701,7 @@
 					"'-std=c++11'",
 				);
 				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_NAME = "box2d-mac";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SECTORDER_FLAGS = "";
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = "$(inherited)";

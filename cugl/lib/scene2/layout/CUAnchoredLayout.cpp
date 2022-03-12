@@ -76,7 +76,6 @@ using namespace cugl::scene2;
  * @return true if the layout information was assigned to that key
  */
 bool AnchoredLayout::add(const std::string key, const std::shared_ptr<JsonValue>& data) {
-
     std::string horz = data->getString("x_anchor","center");
     std::string vert = data->getString("y_anchor","middle");
     Anchor anchor = getAnchor(horz, vert);
@@ -85,7 +84,7 @@ bool AnchoredLayout::add(const std::string key, const std::shared_ptr<JsonValue>
     offset.x = data->getFloat("x_offset",0.0f);
     offset.y = data->getFloat("y_offset",0.0f);
     
-//    CULog("%f", offset.y);
+    
     bool absolute =  data->getBool("absolute",false);
     
     return absolute ? addAbsolute(key,anchor,offset) : addRelative(key, anchor, offset);

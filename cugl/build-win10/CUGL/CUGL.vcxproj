@@ -22,6 +22,9 @@
     <ProjectReference Include="..\Box2D\Box2D.vcxproj">
       <Project>{98400d17-43a5-1a40-95be-c53ac78e7694}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\slikenet\slikenet.vcxproj">
+      <Project>{49e5bff5-8b80-45dd-9809-8de362665d8f}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\clipper\clipper.hpp" />
@@ -130,6 +133,9 @@
     <ClInclude Include="..\..\include\cugl\math\polygon\CUSimpleExtruder.h" />
     <ClInclude Include="..\..\include\cugl\math\polygon\CUSplinePather.h" />
     <ClInclude Include="..\..\include\cugl\math\polygon\cu_polygon.h" />
+    <ClInclude Include="..\..\include\cugl\net\CUNetworkConnection.h" />
+    <ClInclude Include="..\..\include\cugl\net\CUNetworkSerializer.h" />
+    <ClInclude Include="..\..\include\cugl\net\cu_net.h" />
     <ClInclude Include="..\..\include\cugl\physics2\CUBoxObstacle.h" />
     <ClInclude Include="..\..\include\cugl\physics2\CUCapsuleObstacle.h" />
     <ClInclude Include="..\..\include\cugl\physics2\CUComplexObstacle.h" />
@@ -301,6 +307,8 @@
     <ClCompile Include="..\..\lib\math\polygon\CUPolyFactory.cpp" />
     <ClCompile Include="..\..\lib\math\polygon\CUSimpleExtruder.cpp" />
     <ClCompile Include="..\..\lib\math\polygon\CUSplinePather.cpp" />
+    <ClCompile Include="..\..\lib\net\CUNetworkConnection.cpp" />
+    <ClCompile Include="..\..\lib\net\CUNetworkSerializer.cpp" />
     <ClCompile Include="..\..\lib\physics2\CUBoxObstacle.cpp" />
     <ClCompile Include="..\..\lib\physics2\CUCapsuleObstacle.cpp" />
     <ClCompile Include="..\..\lib\physics2\CUComplexObstacle.cpp" />
@@ -439,13 +447,11 @@
       <AdditionalIncludeDirectories>$(ProjectDir)../../include;$(ProjectDir)../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <DisableSpecificWarnings>4068;4018;4800;4267;26812;26495;4305;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4068;4018;4800;4267;26812;26495;4305;4244;4996;26819;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <AdditionalOptions>/IGNORE:4006,4221 %(AdditionalOptions)</AdditionalOptions>
       <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalOptions>/D _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS %(AdditionalOptions)</AdditionalOptions>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -476,13 +482,11 @@
       <AdditionalIncludeDirectories>$(ProjectDir)../../include;$(ProjectDir)../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <DisableSpecificWarnings>4068;4018;4800;4267;26812;26495;4244;4305;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4068;4018;4800;4267;26812;26495;4244;4305;4996;26819;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <AdditionalOptions>/IGNORE:4006,4221 %(AdditionalOptions)</AdditionalOptions>
       <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalOptions>/D _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS %(AdditionalOptions)</AdditionalOptions>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -507,11 +511,10 @@
       <AdditionalIncludeDirectories>$(ProjectDir)../../include;$(ProjectDir)../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <DisableSpecificWarnings>4068;4018;4800;4267;26812;26495;4244;4305%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4068;4018;4800;4267;26812;26495;4244;4996;26819;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <AdditionalOptions>/IGNORE:4006,4221 %(AdditionalOptions)</AdditionalOptions>
       <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -538,11 +541,10 @@
       <AdditionalIncludeDirectories>$(ProjectDir)../../include;$(ProjectDir)../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <DisableSpecificWarnings>4068;4018;4800;4267;26812;26495;4244;4305;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4068;4018;4800;4267;26812;26495;4244;4305;4996;26819;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <AdditionalOptions>/IGNORE:4006,4221 %(AdditionalOptions)</AdditionalOptions>
       <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
