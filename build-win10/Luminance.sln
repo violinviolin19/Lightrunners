@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2018
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Luminance", "Luminance\Luminance.vcxproj", "{EBA7F636-33E8-46A4-9024-D8DDFC250C64}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CUGL", "..\cugl\build-win10\CUGL\CUGL.vcxproj", "{60C028A4-977F-44E9-A709-D79A153D6F69}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Box2D", "..\cugl\build-win10\Box2D\Box2D.vcxproj", "{98400D17-43A5-1A40-95BE-C53AC78E7694}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "slikenet", "..\cugl\build-win10\slikenet\slikenet.vcxproj", "{49E5BFF5-8B80-45DD-9809-8DE362665D8F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,14 @@ Global
 		{98400D17-43A5-1A40-95BE-C53AC78E7694}.Release|x64.Build.0 = Release|x64
 		{98400D17-43A5-1A40-95BE-C53AC78E7694}.Release|x86.ActiveCfg = Release|Win32
 		{98400D17-43A5-1A40-95BE-C53AC78E7694}.Release|x86.Build.0 = Release|Win32
+		{49E5BFF5-8B80-45DD-9809-8DE362665D8F}.Debug|x64.ActiveCfg = Debug|x64
+		{49E5BFF5-8B80-45DD-9809-8DE362665D8F}.Debug|x64.Build.0 = Debug|x64
+		{49E5BFF5-8B80-45DD-9809-8DE362665D8F}.Debug|x86.ActiveCfg = Debug|Win32
+		{49E5BFF5-8B80-45DD-9809-8DE362665D8F}.Debug|x86.Build.0 = Debug|Win32
+		{49E5BFF5-8B80-45DD-9809-8DE362665D8F}.Release|x64.ActiveCfg = Release|x64
+		{49E5BFF5-8B80-45DD-9809-8DE362665D8F}.Release|x64.Build.0 = Release|x64
+		{49E5BFF5-8B80-45DD-9809-8DE362665D8F}.Release|x86.ActiveCfg = Release|Win32
+		{49E5BFF5-8B80-45DD-9809-8DE362665D8F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
