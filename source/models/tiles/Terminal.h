@@ -4,6 +4,7 @@
 #include <cugl/cugl.h>
 
 #include "BasicTile.h"
+#include "TerminalSensor.h"
 
 /**
  * This class implements the BasicTile class and adds a physics object that the
@@ -12,14 +13,8 @@
 class Terminal : public BasicTile {
  protected:
   /** A reference to the physics object of the tile. */
-  std::shared_ptr<cugl::physics2::BoxObstacle> _obstacle;
+  std::shared_ptr<TerminalSensor> _obstacle;
 
-  /** Represents the area for terminal activation. */
-  b2Fixture* _terminal_sensor;
-  /** Keeps an instance of the name alive for collision detection. */
-  std::shared_ptr<std::string> _terminal_sensor_name;
-  /** The node for debugging the terminal sensor */
-  std::shared_ptr<cugl::scene2::WireNode> _terminal_sensor_node;
 
   /** Whether the terminal has been activated or not. */
   bool _activated;
@@ -32,9 +27,7 @@ class Terminal : public BasicTile {
    * class.
    */
   Terminal() : 
-      BasicTile(), 
-      _terminal_sensor(nullptr), 
-      _terminal_sensor_name(nullptr) {_classname = "Terminal";}
+      BasicTile() {_classname = "Terminal";}
 
   /**
    * Deletes this node, releasing all resources.
@@ -52,7 +45,6 @@ class Terminal : public BasicTile {
    */
   virtual void dispose() override {
     BasicTile::dispose();
-    _terminal_sensor = nullptr;
   }
 
   virtual std::shared_ptr<SceneNode> copy(
@@ -104,12 +96,12 @@ class Terminal : public BasicTile {
    *
    * @return The obstacle it created for easy chaining.
    */
-  virtual std::shared_ptr<cugl::physics2::BoxObstacle> initBox2d();
+  virtual std::shared_ptr<TerminalSensor> initBox2d();
 
   /**
    * @return Returns the physics object for the tile.
    */
-  std::shared_ptr<cugl::physics2::BoxObstacle> getObstacle() {
+  std::shared_ptr<TerminalSensor> getObstacle() {
     return _obstacle;
   }
 
