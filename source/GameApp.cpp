@@ -112,15 +112,18 @@ void GameApp::draw() {
       _loading.render(_batch);
       break;
     case MENU:
+      CULog("rendering menu");
       _menu.render(_batch);
       break;
     case HOST:
       _hostgame.render(_batch);
       break;
     case CLIENT:
+      CULog("rendering client joingame");
       _joingame.render(_batch);
       break;
     case GAME:
+      CULog("drawing game");
       _gameplay.render(_batch);
       break;
   }
@@ -215,6 +218,7 @@ void GameApp::updateHostScene(float timestep) {
             break;
         case HostScene::Status::START:
             _hostgame.setActive(false);
+            _menu.setActive(false);
             _gameplay.setActive(true);
             _scene = State::GAME;
             // Transfer connection ownership
@@ -248,6 +252,7 @@ void GameApp::updateClientScene(float timestep) {
             break;
         case ClientScene::Status::START:
             _joingame.setActive(false);
+            _menu.setActive(false);
             _gameplay.setActive(true);
             _scene = State::GAME;
             // Transfer connection ownership
@@ -273,10 +278,10 @@ void GameApp::updateClientScene(float timestep) {
  */
 void GameApp::updateGameScene(float timestep) {
     _gameplay.update(timestep);
-    if (_gameplay.didQuit()) {
-        _gameplay.setActive(false);
-        _menu.setActive(true);
-        _gameplay.disconnect();
-        _scene = State::MENU;
-    }
+//    if (_gameplay.didQuit()) {
+//        _gameplay.setActive(false);
+//        _menu.setActive(true);
+//        _gameplay.disconnect();
+//        _scene = State::MENU;
+//    }
 }

@@ -141,21 +141,36 @@ void ClientScene::processData(const std::vector<uint8_t>& data) {
 }
 
 bool ClientScene::checkConnection() {
-  cugl::NetworkConnection::NetStatus status = _network->getStatus();
-  if (status == cugl::NetworkConnection::NetStatus::Pending) {
-    _status = Status::JOIN;
-  } else if (status == cugl::NetworkConnection::NetStatus::Connected) {
-    if (_status != Status::START) {
-      _status = Status::WAIT;
-    }
-  } else if (status != cugl::NetworkConnection::NetStatus::Reconnecting) {
-    _network->dispose();
-    _status = Status::IDLE;
-    return false;
+  switch(_network->getStatus()) {
+      case cugl::NetworkConnection::NetStatus::Pending:
+          _status = JOIN;
+          break;
+      case cugl::NetworkConnection::NetStatus::Connected:
+          _player->setText(std::to_string(_network->getNumPlayers()));
+          if (_status != START) {
+              _status = WAIT;
+          }
+          break;
+      case cugl::NetworkConnection::NetStatus::Reconnecting:
+          _status = WAIT;
+          break;
+      case cugl::NetworkConnection::NetStatus::RoomNotFound:
+          disconnect();
+          _status = IDLE;
+          break;
+      case cugl::NetworkConnection::NetStatus::ApiMismatch:
+          disconnect();
+          _status = IDLE;
+          break;
+      case cugl::NetworkConnection::NetStatus::GenericError:
+          disconnect();
+          _status = IDLE;
+          break;
+      case cugl::NetworkConnection::NetStatus::Disconnected:
+          disconnect();
+          _status = IDLE;
+          return false;
   }
-
-  _player->setText(std::to_string(_network->getNumPlayers()));
-
   return true;
 }
 

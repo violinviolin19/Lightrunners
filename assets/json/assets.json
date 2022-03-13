@@ -146,6 +146,13 @@
             "magfilter": "linear",
             "wrapS": "clamp",
             "wrapT": "clamp"
+        },
+        "frame": {
+            "file": "textures/frame.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
         }
     },
     "jsons": {
