@@ -1,4 +1,4 @@
-#include "AIController.h"
+#include "EnemyController.h"
 
 #define MIN_DISTANCE 300
 #define HEALTH_LIM 25

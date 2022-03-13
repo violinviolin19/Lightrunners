@@ -1,9 +1,9 @@
-#ifndef CONTROLLERS_AI_CONTROLLER_H_
-#define CONTROLLERS_AI_CONTROLLER_H_
+#ifndef CONTROLLERS_ENEMY_CONTROLLER_H_
+#define CONTROLLERS_ENEMY_CONTROLLER_H_
 #include <cugl/cugl.h>
 
-#include "../models/EnemySet.h"
 #include "../models/Player.h"
+#include "../models/Grunt.h"
 
 /**
  * A class to handle enemy AI.

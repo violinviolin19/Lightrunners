@@ -74,7 +74,7 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
   cugl::Scene2::addChild(_world_node);
   cugl::Scene2::addChild(ui_layer);
   cugl::Scene2::addChild(_debug_node);
-  _debug_node->setVisible(true);
+  _debug_node->setVisible(false);
 
   InputController::get()->init(_assets, cugl::Scene2::getBounds());
 
@@ -131,12 +131,13 @@ void GameScene::populate(cugl::Size dim) {
 
   // Debug code.
   _player->setDebugScene(_debug_node);
-  _player->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
+  _player->setDebugColor(cugl::Color4f::BLACK);
   _sword->setDebugScene(_debug_node);
-  _sword->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
-  for (std::shared_ptr<Grunt> grunt : _enemies.getEnemies()) {
-    grunt->setDebugScene(_debug_node);
-    grunt->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
+  _sword->setDebugColor(cugl::Color4f::BLACK);
+  for (auto e : _e_controllers) {
+    auto enemy = e.second;
+    enemy->getEnemy()->setDebugColor(cugl::Color4f::BLACK);
+    enemy->getEnemy()->setDebugScene(_debug_node);
   }
 }
 
