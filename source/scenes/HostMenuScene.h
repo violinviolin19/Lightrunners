@@ -9,7 +9,7 @@
 /**
  * This class provides the interface to make a new game.
  *
- * This class is an implementation of PeerMenuScene.
+ * This class is an implementation of PeerScene.
  */
 class HostMenuScene : public PeerScene {
  protected:

@@ -139,6 +139,15 @@ void GameScene::populate(cugl::Size dim) {
 }
 
 void GameScene::update(float timestep) {
+  if (_network) {
+      sendNetworkInfo();
+
+      _network->receive([this](const std::vector<uint8_t>& data) {
+          processData(data);
+      });
+      checkConnection();
+  }
+  
   cugl::Application::get()->setClearColor(cugl::Color4f::BLACK);
 
   InputController::get()->update();
@@ -180,6 +189,68 @@ void GameScene::update(float timestep) {
   }
 }
 
+void GameScene::sendNetworkInfo() {
+  if (_ishost) {
+    std::vector<std::shared_ptr<cugl::JsonValue>> player_positions;
+    std::shared_ptr<cugl::JsonValue> player_info = cugl::JsonValue::allocObject();
+
+    std::shared_ptr<cugl::JsonValue> player_id = cugl::JsonValue::alloc(0.0);
+    player_info->appendChild(player_id);
+    player_id->setKey("player_id");
+    
+    std::shared_ptr<cugl::JsonValue> pos = cugl::JsonValue::allocArray();
+    std::shared_ptr<cugl::JsonValue> pos_x = cugl::JsonValue::alloc(_player->getPosition().x);
+    std::shared_ptr<cugl::JsonValue> pos_y = cugl::JsonValue::alloc(_player->getPosition().y);
+    pos->appendChild(pos_x);
+    pos->appendChild(pos_y);
+    player_info->appendChild(pos);
+    pos->setKey("position");
+
+    player_positions.push_back(player_info);
+    
+    // Send all player and enemy information.
+    _serializer.writeSint32(2);
+    _serializer.writeJsonVector(player_positions);
+    std::vector<uint8_t> msg = _serializer.serialize();
+    _serializer.reset();
+    _network->send(msg);
+  } else {
+    // Send just the player information.
+  }
+}
+
+/**
+ * Processes data sent over the network.
+ *
+ * Once connection is established, all data sent over the network consistes of
+ * byte vectors. This function is a call back function to process that data.
+ * Note that this function may be called *multiple times* per animation frame,
+ * as the messages can come from several sources.
+ *
+ * This is where we handle the gameplay. All connected devices should immediately
+ * change their color when directed by the following method. Changing the color
+ * means changing the clear color of the entire {@link Application}.
+ *
+ * @param data  The data received
+ */
+void GameScene::processData(const std::vector<uint8_t>& data) {
+  _deserializer.receive(data);
+  Sint32 code = std::get<Sint32>(_deserializer.read());
+  if (code == 2) {  // Player info update
+    cugl::NetworkDeserializer::Message msg = _deserializer.read();
+    std::vector<std::shared_ptr<cugl::JsonValue>> player_positions = std::get<std::vector<std::shared_ptr<cugl::JsonValue>>>(msg);
+    for (std::shared_ptr<cugl::JsonValue> player: player_positions) {
+      int player_id = player->getInt("player_id");
+      std::shared_ptr<cugl::JsonValue> player_position = player->get("position");
+      float pos_x = player_position->get(0)->asFloat();
+      float pos_y = player_position->get(1)->asFloat();
+      CULog("player_id: %i, position: [%f, %f]", player_id, pos_x, pos_y);
+    }
+  }
+  _deserializer.reset();
+}
+
+
 void GameScene::beginContact(b2Contact* contact) {
   b2Fixture* fx1 = contact->GetFixtureA();
   b2Fixture* fx2 = contact->GetFixtureB();
@@ -215,6 +286,31 @@ void GameScene::beginContact(b2Contact* contact) {
   } else if (fx2_name == "grunt_damage" && ob1 == _player.get()) {
     dynamic_cast<Player*>(ob1)->takeDamage();
   }
+}
+
+/**
+ * Checks that the network connection is still active.
+ *
+ * Even if you are not sending messages all that often, you need to be calling
+ * this method regularly. This method is used to determine the current state
+ * of the scene.
+ *
+ * @return true if the network connection is still active.
+ */
+bool GameScene::checkConnection() {
+    switch(_network->getStatus()) {
+        case cugl::NetworkConnection::NetStatus::Pending:
+        case cugl::NetworkConnection::NetStatus::Connected:
+        case cugl::NetworkConnection::NetStatus::Reconnecting:
+            break;
+        case cugl::NetworkConnection::NetStatus::RoomNotFound:
+        case cugl::NetworkConnection::NetStatus::ApiMismatch:
+        case cugl::NetworkConnection::NetStatus::GenericError:
+        case cugl::NetworkConnection::NetStatus::Disconnected:
+            disconnect();
+            return false;
+    }
+    return true;
 }
 
 void GameScene::beforeSolve(b2Contact* contact, const b2Manifold* oldManifold) {

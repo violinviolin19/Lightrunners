@@ -3,6 +3,7 @@
 #include <cugl/cugl.h>
 
 #include "scenes/GameScene.h"
+//#include "scenes/HostGameScene.h"
 #include "scenes/LevelGenerationDemoScene.h"
 #include "scenes/LoadingScene.h"
 #include "scenes/MenuScene.h"
@@ -37,6 +38,9 @@ class GameApp : public cugl::Application {
 
   /** The primary controller for the game world */
   GameScene _gameplay;
+//  /** The primary controller for the game world (if player is host) */
+//  HostGameScene _hostgameplay;
+
   /** The controller for the loading screen */
   LoadingScene _loading;
   /** The controller for the main menu */
@@ -133,7 +137,7 @@ class GameApp : public cugl::Application {
   void updateLoadingScene(float timestep);
   
   /**
-   * Inidividualized update method for the menu scene.
+   * Individualized update method for the menu scene.
    *
    * This method keeps the primary {@link #update} from being a mess of switch
    * statements. It also handles the transition logic from the menu scene.
@@ -143,7 +147,7 @@ class GameApp : public cugl::Application {
   void updateMenuScene(float timestep);
   
   /**
-   * Inidividualized update method for the host scene.
+   * Individualized update method for the host scene.
    *
    * This method keeps the primary {@link #update} from being a mess of switch
    * statements. It also handles the transition logic from the host scene.
@@ -153,7 +157,7 @@ class GameApp : public cugl::Application {
   void updateHostMenuScene(float timestep);
   
   /**
-   * Inidividualized update method for the client scene.
+   * Individualized update method for the client scene.
    *
    * This method keeps the primary {@link #update} from being a mess of switch
    * statements. It also handles the transition logic from the client scene.
@@ -163,7 +167,7 @@ class GameApp : public cugl::Application {
   void updateClientMenuScene(float timestep);
 
   /**
-   * Inidividualized update method for the game scene.
+   * Individualized update method for the game scene.
    *
    * This method keeps the primary {@link #update} from being a mess of switch
    * statements. It also handles the transition logic from the game scene.
@@ -171,6 +175,16 @@ class GameApp : public cugl::Application {
    * @param timestep  The amount of time (in seconds) since the last frame
    */
   void updateGameScene(float timestep);
+  
+//  /**
+//   * Individualized update method for the game scene.
+//   *
+//   * This method keeps the primary {@link #update} from being a mess of switch
+//   * statements. It also handles the transition logic from the game scene.
+//   *
+//   * @param timestep  The amount of time (in seconds) since the last frame
+//   */
+//  void updateHostGameScene(float timestep);
 };
 
 #endif /* GAMEAPP_H_ */

@@ -36,6 +36,13 @@ class GameScene : public cugl::Scene2 {
   /** The AI Controller for enemies. */
   AIController _ai_controller;
   
+  /** The serializer used to serialize complex data to send through the network. */
+  cugl::NetworkSerializer _serializer;
+  
+  /** The deserializer used to deserialize complex data sent through the network. */
+  cugl::NetworkDeserializer _deserializer;
+
+  
   /** Whether this player is the host. */
   bool _ishost;
   
@@ -149,6 +156,34 @@ class GameScene : public cugl::Scene2 {
    * @param host  Whether the player is host.
    */
   void setHost(bool host)  { _ishost = host; }
+  
+  /**
+   * Checks that the network connection is still active.
+   *
+   * Even if you are not sending messages all that often, you need to be calling
+   * this method regularly. This method is used to determine the current state
+   * of the scene.
+   *
+   * @return true if the network connection is still active.
+   */
+  bool checkConnection();
+  
+  /**
+   * Processes data sent over the network.
+   *
+   * Once connection is established, all data sent over the network consistes of
+   * byte vectors. This function is a call back function to process that data.
+   * Note that this function may be called *multiple times* per animation frame,
+   * as the messages can come from several sources.
+   *
+   * @param data  The data received
+   */
+  void processData(const std::vector<uint8_t>& data);
+  
+  /**
+   * Broadcasts the relevant network information to all clients and/or the host.
+   */
+  void sendNetworkInfo();
   
   /**
    * Returns true if the player quits the game.

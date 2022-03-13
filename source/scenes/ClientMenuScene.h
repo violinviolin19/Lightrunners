@@ -9,7 +9,7 @@
 /**
  * This class provides the interface to join an existing game.
  *
- * This class is an implementation of PeerMenuScene.
+ * This class is an implementation of PeerScene.
  */
 class ClientMenuScene : public PeerScene {
  protected:

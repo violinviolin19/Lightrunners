@@ -39,6 +39,8 @@ void GameApp::onStartup() {
 void GameApp::onShutdown() {
   _loading.dispose();
   _gameplay.dispose();
+  _hostgame.dispose();
+  _joingame.dispose();
   _menu.dispose();
 #ifndef CU_TOUCH_SCREEN
   _level_gen_scene.dispose();
@@ -70,7 +72,7 @@ void GameApp::update(float timestep) {
 //    _gameplay.init(_assets);
 //    _menu.setActive(true);
 //    _gameplay.setActive(false);
-
+//
 //    _loaded = true;
 //#ifndef
 //  if (_show_level_gen_scene) {
@@ -93,17 +95,10 @@ void GameApp::update(float timestep) {
     case GAME:
       updateGameScene(timestep);
       break;
+//    case GAME_HOST:
+//      updateHostGameScene(timestep);
+//      break;
   }
-    
-//    if (_menu.getChoice() == MenuScene::Choice::HOST ||
-//        _menu.getChoice() == MenuScene::Choice::JOIN) {
-//      _gameplay.setActive(true);
-//      _menu.setActive(false);
-//      _gameplay.update(timestep);
-//    } else {
-//      _menu.update(timestep);
-//    }
-//  }
 }
 
 void GameApp::draw() {
@@ -121,25 +116,10 @@ void GameApp::draw() {
       _joingame.render(_batch);
       break;
     case GAME:
+//    case GAME_HOST:
       _gameplay.render(_batch);
       break;
   }
-  
-//  if (!_loaded) {
-//    _loading.render(_batch);
-//#ifndef CU_TOUCH_SCREEN
-//  } else if (_show_level_gen_scene) {
-//    _level_gen_scene.render(_batch);
-//#endif
-//  } else {
-//    if (_menu.getChoice() == MenuScene::Choice::HOST) {
-//
-//    } else if (_menu.getChoice() == MenuScene::Choice::JOIN) {
-////      _gameplay.render(_batch);
-//    } else {
-//      _menu.render(_batch);
-//    }
-//  }
 }
 
 /**
@@ -163,10 +143,11 @@ void GameApp::updateLoadingScene(float timestep) {
       _level_gen_scene.init();
 #endif
       _menu.setActive(true);
+      _hostgame.setActive(false);
+      _joingame.setActive(false);
       _gameplay.setActive(false);
       _scene = State::MENU;
       _loaded = true;
-
     }
 }
 
@@ -215,7 +196,6 @@ void GameApp::updateHostMenuScene(float timestep) {
             break;
         case HostMenuScene::Status::START:
             _hostgame.setActive(false);
-            _menu.setActive(false);
             _gameplay.setActive(true);
             _scene = State::GAME;
             // Transfer connection ownership
@@ -275,10 +255,16 @@ void GameApp::updateClientMenuScene(float timestep) {
  */
 void GameApp::updateGameScene(float timestep) {
     _gameplay.update(timestep);
-//    if (_gameplay.didQuit()) {
-//        _gameplay.setActive(false);
-//        _menu.setActive(true);
-//        _gameplay.disconnect();
-//        _scene = State::MENU;
-//    }
 }
+
+///**
+// * Individualized update method for the game scene.
+// *
+// * This method keeps the primary {@link #update} from being a mess of switch
+// * statements. It also handles the transition logic from the game scene.
+// *
+// * @param timestep  The amount of time (in seconds) since the last frame
+// */
+//void GameApp::updateHostGameScene(float timestep) {
+//    _gameplay.update(timestep);
+//}
