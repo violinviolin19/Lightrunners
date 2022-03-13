@@ -10,13 +10,13 @@ void GameApp::onStartup() {
 #ifdef CU_TOUCH_SCREEN
   cugl::Input::activate<cugl::Touchscreen>();
 #else
-  cugl::Input::activate<cugl::Keyboard>();
   cugl::Input::activate<cugl::Mouse>();
-  cugl::Input::activate<cugl::Keyboard>();
   // cugl::Mouse does not track mouse drag or move by default.
   cugl::Input::get<cugl::Mouse>()->setPointerAwareness(
       cugl::Mouse::PointerAwareness::ALWAYS);
 #endif
+  cugl::Input::activate<cugl::Keyboard>();
+  cugl::Input::activate<cugl::TextInput>();
 
   // Add asset loaders.
   _assets->attach<cugl::Texture>(cugl::TextureLoader::alloc()->getHook());
@@ -62,47 +62,221 @@ void GameApp::update(float timestep) {
   }
 #endif
 
-  if (!_loaded && _loading.isActive()) {
-    _loading.update(0.01f);
-  } else if (!_loaded) {
-    _loading.dispose();  // Disables the input listeners in this mode.
-    _menu.init(_assets);
-    _gameplay.init(_assets);
-    _menu.setActive(true);
-    _gameplay.setActive(false);
-#ifndef CU_TOUCH_SCREEN
-    _level_gen_scene.init();
-#endif
-    _loaded = true;
-#ifndef CU_TOUCH_SCREEN
-  } else if (_show_level_gen_scene) {
-    _level_gen_scene.update(timestep);
-#endif
-  } else {
-    if (_menu.getChoice() == MenuScene::Choice::HOST ||
-        _menu.getChoice() == MenuScene::Choice::JOIN) {
-      _gameplay.setActive(true);
-      _menu.setActive(false);
-      _gameplay.update(timestep);
-    } else {
-      _menu.update(timestep);
-    }
+//  if (!_loaded && _loading.isActive()) {
+//    _loading.update(0.01f);
+//  } else if (!_loaded) {
+//    _loading.dispose();  // Disables the input listeners in this mode.
+//    _menu.init(_assets);
+//    _gameplay.init(_assets);
+//    _menu.setActive(true);
+//    _gameplay.setActive(false);
+
+//    _loaded = true;
+//#ifndef
+//  if (_show_level_gen_scene) {
+//    _level_gen_scene.update(timestep);
+//#endif
+
+  switch (_scene) {
+    case LOAD:
+      updateLoadingScene(timestep);
+      break;
+    case MENU:
+      updateMenuScene(timestep);
+      break;
+    case HOST:
+      updateHostScene(timestep);
+      break;
+    case CLIENT:
+      updateClientScene(timestep);
+      break;
+    case GAME:
+      updateGameScene(timestep);
+      break;
   }
+    
+//    if (_menu.getChoice() == MenuScene::Choice::HOST ||
+//        _menu.getChoice() == MenuScene::Choice::JOIN) {
+//      _gameplay.setActive(true);
+//      _menu.setActive(false);
+//      _gameplay.update(timestep);
+//    } else {
+//      _menu.update(timestep);
+//    }
+//  }
 }
 
 void GameApp::draw() {
-  if (!_loaded) {
-    _loading.render(_batch);
-#ifndef CU_TOUCH_SCREEN
-  } else if (_show_level_gen_scene) {
-    _level_gen_scene.render(_batch);
-#endif
-  } else {
-    if (_menu.getChoice() == MenuScene::Choice::HOST ||
-        _menu.getChoice() == MenuScene::Choice::JOIN) {
-      _gameplay.render(_batch);
-    } else {
+  switch (_scene) {
+    case LOAD:
+      _loading.render(_batch);
+      break;
+    case MENU:
       _menu.render(_batch);
-    }
+      break;
+    case HOST:
+      _hostgame.render(_batch);
+      break;
+    case CLIENT:
+      _joingame.render(_batch);
+      break;
+    case GAME:
+      _gameplay.render(_batch);
+      break;
   }
+  
+//  if (!_loaded) {
+//    _loading.render(_batch);
+//#ifndef CU_TOUCH_SCREEN
+//  } else if (_show_level_gen_scene) {
+//    _level_gen_scene.render(_batch);
+//#endif
+//  } else {
+//    if (_menu.getChoice() == MenuScene::Choice::HOST) {
+//
+//    } else if (_menu.getChoice() == MenuScene::Choice::JOIN) {
+////      _gameplay.render(_batch);
+//    } else {
+//      _menu.render(_batch);
+//    }
+//  }
+}
+
+/**
+ * Individualized update method for the loading scene.
+ *
+ * This method keeps the primary {@link #update} from being a mess of switch
+ * statements. It also handles the transition logic from the loading scene.
+ *
+ * @param timestep  The amount of time (in seconds) since the last frame
+ */
+void GameApp::updateLoadingScene(float timestep) {
+    if (!_loaded && _loading.isActive()) {
+      _loading.update(timestep);
+    } else if (!_loaded) {
+      _loading.dispose(); // Permanently disables the input listeners in this mode.
+      _menu.init(_assets);
+      _hostgame.init(_assets);
+      _joingame.init(_assets);
+      _gameplay.init(_assets);
+#ifndef CU_TOUCH_SCREEN
+      _level_gen_scene.init();
+#endif
+      _menu.setActive(true);
+      _gameplay.setActive(false);
+      _scene = State::MENU;
+      _loaded = true;
+
+    }
+}
+
+/**
+ * Individualized update method for the menu scene.
+ *
+ * This method keeps the primary {@link #update} from being a mess of switch
+ * statements. It also handles the transition logic from the menu scene.
+ *
+ * @param timestep  The amount of time (in seconds) since the last frame
+ */
+void GameApp::updateMenuScene(float timestep) {
+    _menu.update(timestep);
+    switch (_menu.getChoice()) {
+        case MenuScene::Choice::HOST:
+            _menu.setActive(false);
+            _hostgame.setActive(true);
+            _scene = State::HOST;
+            break;
+        case MenuScene::Choice::JOIN:
+            _menu.setActive(false);
+            _joingame.setActive(true);
+            _scene = State::CLIENT;
+            break;
+        case MenuScene::Choice::NONE:
+            // DO NOTHING
+            break;
+    }
+}
+
+/**
+ * Individualized update method for the host scene.
+ *
+ * This method keeps the primary {@link #update} from being a mess of switch
+ * statements. It also handles the transition logic from the host scene.
+ *
+ * @param timestep  The amount of time (in seconds) since the last frame
+ */
+void GameApp::updateHostScene(float timestep) {
+    _hostgame.update(timestep);
+    switch (_hostgame.getStatus()) {
+        case HostScene::Status::ABORT:
+            _hostgame.setActive(false);
+            _menu.setActive(true);
+            _scene = State::MENU;
+            break;
+        case HostScene::Status::START:
+            _hostgame.setActive(false);
+            _gameplay.setActive(true);
+            _scene = State::GAME;
+            // Transfer connection ownership
+            _gameplay.setConnection(_hostgame.getConnection());
+            _hostgame.disconnect();
+            _gameplay.setHost(true);
+            break;
+        case HostScene::Status::WAIT:
+        case HostScene::Status::IDLE:
+        case HostScene::Status::JOIN:
+            // DO NOTHING
+            break;
+    }
+}
+
+/**
+ * Individualized update method for the client scene.
+ *
+ * This method keeps the primary {@link #update} from being a mess of switch
+ * statements. It also handles the transition logic from the client scene.
+ *
+ * @param timestep  The amount of time (in seconds) since the last frame
+ */
+void GameApp::updateClientScene(float timestep) {
+    _joingame.update(timestep);
+    switch (_joingame.getStatus()) {
+        case ClientScene::Status::ABORT:
+            _joingame.setActive(false);
+            _menu.setActive(true);
+            _scene = State::MENU;
+            break;
+        case ClientScene::Status::START:
+            _joingame.setActive(false);
+            _gameplay.setActive(true);
+            _scene = State::GAME;
+            // Transfer connection ownership
+            _gameplay.setConnection(_joingame.getConnection());
+            _joingame.disconnect();
+            _gameplay.setHost(false);
+            break;
+        case ClientScene::Status::WAIT:
+        case ClientScene::Status::IDLE:
+        case ClientScene::Status::JOIN:
+            // DO NOTHING
+            break;
+    }
+}
+
+/**
+ * Individualized update method for the game scene.
+ *
+ * This method keeps the primary {@link #update} from being a mess of switch
+ * statements. It also handles the transition logic from the game scene.
+ *
+ * @param timestep  The amount of time (in seconds) since the last frame
+ */
+void GameApp::updateGameScene(float timestep) {
+    _gameplay.update(timestep);
+    if (_gameplay.didQuit()) {
+        _gameplay.setActive(false);
+        _menu.setActive(true);
+        _gameplay.disconnect();
+        _scene = State::MENU;
+    }
 }

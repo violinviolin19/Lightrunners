@@ -11,7 +11,7 @@
  *
  * This class is an implementation of PeerScene.
  */
-class HostScene : PeerScene {
+class HostScene : public PeerScene {
  protected:
   /** The game id label (for updating) */
   std::shared_ptr<cugl::scene2::Label> _gameid;

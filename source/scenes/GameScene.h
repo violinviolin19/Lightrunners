@@ -11,6 +11,9 @@
 class GameScene : public cugl::Scene2 {
   /** The asset manager for loading. */
   std::shared_ptr<cugl::AssetManager> _assets;
+  
+  /** The network connection (as made by this scene). */
+  std::shared_ptr<cugl::NetworkConnection> _network;
 
   /** The player.  */
   std::shared_ptr<Player> _player;
@@ -32,6 +35,12 @@ class GameScene : public cugl::Scene2 {
 
   /** The AI Controller for enemies. */
   AIController _ai_controller;
+  
+  /** Whether this player is the host. */
+  bool _ishost;
+  
+  /** Whether we quit the game. */
+  bool _quit;
 
   /** The height of each tile in the world. */
   float _tile_width;
@@ -120,6 +129,42 @@ class GameScene : public cugl::Scene2 {
    * @param timestep The amount of time (in seconds) since the last frame.
    */
   void updateCamera(float timestep);
+  
+  /**
+   * Returns the network connection (as made by this scene).
+   *
+   * This value will be reset every time the scene is made active.
+   *
+   * @return the network connection (as made by this scene)
+   */
+  void setConnection(const std::shared_ptr<cugl::NetworkConnection>& network) {
+      _network = network;
+  }
+  
+  /**
+   * Sets whether the player is host.
+   *
+   * We may need to have gameplay specific code for host.
+   *
+   * @param host  Whether the player is host.
+   */
+  void setHost(bool host)  { _ishost = host; }
+  
+  /**
+   * Returns true if the player quits the game.
+   *
+   * @return true if the player quits the game.
+   */
+  bool didQuit() const { return _quit; }
+
+  /**
+   * Disconnects this scene from the network controller.
+   *
+   * Technically, this method does not actually disconnect the network controller.
+   * Since the network controller is a smart pointer, it is only fully disconnected
+   * when ALL scenes have been disconnected.
+   */
+  void disconnect() { _network = nullptr; }
 };
 
 #endif /* SCENES_GAME_SCENE_H_ */
