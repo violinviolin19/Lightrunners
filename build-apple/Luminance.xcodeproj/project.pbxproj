@@ -184,7 +184,7 @@
 		CAAF4CEC27DCA79600024986 /* HostMenuScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HostMenuScene.cpp; sourceTree = "<group>"; };
 		CAAF4CED27DCA79600024986 /* HostMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostMenuScene.h; sourceTree = "<group>"; };
 		CAAF4CEE27DCA79600024986 /* ClientMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientMenuScene.h; sourceTree = "<group>"; };
-		CAAF4CEF27DCA79600024986 /* PeerMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeerMenuScene.h; sourceTree = "<group>"; };
+		CAAF4CEF27DCA79600024986 /* PeerScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeerScene.h; sourceTree = "<group>"; };
 		D5073C8627CFEF2C0000426E /* Wall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wall.h; sourceTree = "<group>"; };
 		D5073C8727CFEF2C0000426E /* Wall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wall.cpp; sourceTree = "<group>"; };
 		D521FB0E27C43BA500D14172 /* widgets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = widgets; sourceTree = "<group>"; };
@@ -375,7 +375,7 @@
 				CAAF4CEE27DCA79600024986 /* ClientMenuScene.h */,
 				CAAF4CEC27DCA79600024986 /* HostMenuScene.cpp */,
 				CAAF4CED27DCA79600024986 /* HostMenuScene.h */,
-				CAAF4CEF27DCA79600024986 /* PeerMenuScene.h */,
+				CAAF4CEF27DCA79600024986 /* PeerScene.h */,
 				D52E672927BF305900F8E2B8 /* LoadingScene.h */,
 				D52E672A27BF305900F8E2B8 /* LoadingScene.cpp */,
 				CA5F188627DBC1B70077AEBB /* MenuScene.cpp */,

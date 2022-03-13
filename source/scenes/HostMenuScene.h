@@ -1,17 +1,17 @@
-#ifndef SCENES_HOST_SCENE_H_
-#define SCENES_HOST_SCENE_H_
+#ifndef SCENES_HOST_MENU_SCENE_H_
+#define SCENES_HOST_MENU_SCENE_H_
 #include <cugl/cugl.h>
 
 #include <vector>
 
-#include "PeerMenuScene.h"
+#include "PeerScene.h"
 
 /**
  * This class provides the interface to make a new game.
  *
  * This class is an implementation of PeerMenuScene.
  */
-class HostMenuScene : public PeerMenuScene {
+class HostMenuScene : public PeerScene {
  protected:
   /** The game id label (for updating) */
   std::shared_ptr<cugl::scene2::Label> _gameid;
@@ -22,7 +22,7 @@ class HostMenuScene : public PeerMenuScene {
   /**
    * Creates a new host scene with the default values.
    */
-  HostMenuScene() : PeerMenuScene() {}
+  HostMenuScene() : PeerScene() {}
 
   /**
    * Disposes of all (non-static) resources allocated to this mode.

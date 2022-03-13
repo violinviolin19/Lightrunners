@@ -232,7 +232,7 @@
                     "data": {
                         "anchor": [ 0.5, 1.0 ],
                         "scale": 1.5,
-                        "font": "pixel32",
+                        "font": "proximanova",
                         "text": "Host View",
                         "padding": [ 20, 20, 20, 20 ],
                         "halign": "center",
@@ -295,7 +295,7 @@
                                     "type": "Label",
                                     "data": {
                                         "anchor": [ 0.5, 0.5 ],
-                                        "font": "pixel32",
+                                        "font": "proximanova",
                                         "text": "Game ID:",
                                         "padding": [ 20, 20, 40, 20 ],
                                         "halign": "left",
@@ -343,7 +343,7 @@
                                     "type": "Label",
                                     "data": {
                                         "anchor": [ 0.5, 0.5 ],
-                                        "font": "pixel32",
+                                        "font": "proximanova",
                                         "text": "Players:",
                                         "padding": [ 20, 20, 20, 20 ],
                                         "halign": "left",
@@ -408,7 +408,7 @@
                     "data": {
                         "anchor": [ 0.5, 1.0 ],
                         "scale": 1.5,
-                        "font": "pixel32",
+                        "font": "proximanova",
                         "text": "Client View",
                         "padding": [ 20, 20, 20, 20 ],
                         "halign": "center",
@@ -471,7 +471,7 @@
                                     "type": "Label",
                                     "data": {
                                         "anchor": [ 0.5, 0.5 ],
-                                        "font": "pixel32",
+                                        "font": "proximanova",
                                         "text": "Game ID:",
                                         "padding": [ 20, 20, 40, 20 ],
                                         "halign": "left",
@@ -519,7 +519,7 @@
                                     "type": "Label",
                                     "data": {
                                         "anchor": [ 0.5, 0.5 ],
-                                        "font": "pixel32",
+                                        "font": "proximanova",
                                         "text": "Players:",
                                         "padding": [ 20, 20, 20, 20 ],
                                         "halign": "left",
@@ -578,6 +578,10 @@
         "pixel32": {
             "file": "fonts/RetroGame.ttf",
             "size": 16
+        },
+        "proximanova": {
+            "file": "fonts/ProximaNova-Regular.otf",
+            "size": 40
         }
     }
 }

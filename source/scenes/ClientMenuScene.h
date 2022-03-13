@@ -1,17 +1,17 @@
-#ifndef SCENES_CLIENT_SCENE_H_
-#define SCENES_CLIENT_SCENE_H_
+#ifndef SCENES_CLIENT_MENU_SCENE_H_
+#define SCENES_CLIENT_MENU_SCENE_H_
 #include <cugl/cugl.h>
 
 #include <vector>
 
-#include "PeerMenuScene.h"
+#include "PeerScene.h"
 
 /**
  * This class provides the interface to join an existing game.
  *
  * This class is an implementation of PeerMenuScene.
  */
-class ClientMenuScene : public PeerMenuScene {
+class ClientMenuScene : public PeerScene {
  protected:
   /** The game id label (for updating) */
   std::shared_ptr<cugl::scene2::TextField> _gameid;
@@ -22,7 +22,7 @@ class ClientMenuScene : public PeerMenuScene {
   /**
    * Creates a new client scene with the default values.
    */
-  ClientMenuScene() : PeerMenuScene() {}
+  ClientMenuScene() : PeerScene() {}
 
   /**
    * Disposes of all (non-static) resources allocated to this mode.

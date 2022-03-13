@@ -60,7 +60,7 @@
           "type": "Label",
           "data": {
               "anchor"   : [0, 0],
-              "font"     : "pixel32",
+              "font"     : "proximanova",
               "text"     : "Health: 100",
               "padding"  : [20, 20, 20, 20],
               "halign"   : "left",

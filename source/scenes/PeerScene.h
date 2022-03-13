@@ -8,7 +8,7 @@
  * This class provides the interface for a networking peer - either host or
  * client.
  */
-class PeerMenuScene : public cugl::Scene2 {
+class PeerScene : public cugl::Scene2 {
  public:
   /**
    * The configuration status.
@@ -51,12 +51,12 @@ class PeerMenuScene : public cugl::Scene2 {
   /**
    * Creates a new peer scene with the default values without starting the game.
    */
-  PeerMenuScene() : cugl::Scene2() {}
+  PeerScene() : cugl::Scene2() {}
 
   /**
    * Disposes of all (non-static) resources allocated to this mode.
    */
-  ~PeerMenuScene() { dispose(); }
+  ~PeerScene() { dispose(); }
 
   /**
    * Disposes of all (non-static) resources allocated to this mode.
