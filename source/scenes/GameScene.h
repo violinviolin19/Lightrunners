@@ -44,7 +44,7 @@ class GameScene : public cugl::Scene2 {
 
   /** The number of rows in the world. */
   float _row_count;
-  
+
   /** The counter for ids for the enemies */
   int _id_counter = 0;
 

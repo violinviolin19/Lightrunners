@@ -8,23 +8,16 @@ class Projectile : public cugl::physics2::CapsuleObstacle {
  private:
   /** Number of frames until dead */
   int _live_frames;
-  
+
   /** Whether need to add to the world or not. */
   bool _in_world;
-  
+
   /** Whether it should die or not. */
   bool _is_dead;
-  
+
   /** The scene graph node for the projectile. */
   std::shared_ptr<cugl::scene2::SpriteNode> _projectile_node;
-  
-  /** Represents the hit area for the grunt. */
-  b2Fixture* _hitbox_sensor;
-  /** Keeps an instance of the name alive for collision detection. */
-  std::shared_ptr<std::string> _hitbox_sensor_name;
-  /** The node for debugging the hitbox sensor */
-  std::shared_ptr<cugl::scene2::WireNode> _hitbox_sensor_node;
-  
+
  public:
 #pragma mark Constructors
   /**
@@ -45,13 +38,11 @@ class Projectile : public cugl::physics2::CapsuleObstacle {
    * @return  true if the obstacle is initialized properly, false otherwise.
    */
   virtual bool init(const cugl::Vec2 pos, const cugl::Vec2 v);
-  
+
   /**
    * Disposes the projectile.
    */
-  void dispose() {
-    _projectile_node = nullptr;
-  }
+  void dispose() { _projectile_node = nullptr; }
 
 #pragma mark Static Constructors
   /**
@@ -62,7 +53,8 @@ class Projectile : public cugl::physics2::CapsuleObstacle {
    *
    * @return a new capsule object at the given point with no size.
    */
-  static std::shared_ptr<Projectile> alloc(const cugl::Vec2 pos, const cugl::Vec2 v) {
+  static std::shared_ptr<Projectile> alloc(const cugl::Vec2 pos,
+                                           const cugl::Vec2 v) {
     std::shared_ptr<Projectile> result = std::make_shared<Projectile>();
     return (result->init(pos, v) ? result : nullptr);
   }
@@ -74,42 +66,42 @@ class Projectile : public cugl::physics2::CapsuleObstacle {
    * @param frames Number to decrement frames by.
    */
   void decrementFrame(int frames) { _live_frames -= frames; }
-  
+
   /**
    * Get the number of frames.
    *
    * @return Number of frames left
    */
   int getFrames() { return _live_frames; }
-  
+
   /**
    * Set the number of frames.
    *
    * @param frames Set number frames to frames
    */
   void setFrames(int frames) { _live_frames = frames; }
-  
+
   /**
    * Sets whether the projectile has been added to the obstacle world.
    *
    * @param in_world if the projectile should have been added to the world.
    */
   void setInWorld(bool in_world) { _in_world = in_world; }
-  
+
   /**
    * If the bullet is in the world.
    *
    * @return if the bullet is in the world.
    */
   bool isInWorld() { return _in_world; }
-  
+
   /**
    * Sets whether the projectile has been hit.
    *
    * @param is_dead if the projectile should be dead.
    */
   void setDead(bool is_dead) { _is_dead = is_dead; }
-  
+
   /**
    * If the bullet is dead.
    *
@@ -118,20 +110,23 @@ class Projectile : public cugl::physics2::CapsuleObstacle {
   bool isDead() { return _is_dead; }
 
 #pragma mark Graphics
-/**
- * Sets the scene graph node representing this projectile.
- *
- * @param node  The scene graph node representing this projectile.
- */
-void setNode(const std::shared_ptr<cugl::scene2::SpriteNode>& node) { _projectile_node = node; }
+  /**
+   * Sets the scene graph node representing this projectile.
+   *
+   * @param node  The scene graph node representing this projectile.
+   */
+  void setNode(const std::shared_ptr<cugl::scene2::SpriteNode>& node) {
+    _projectile_node = node;
+  }
 
-/**
- * Gets the projectile scene graph node.
- *
- * @return node the node that has been set.
- */
-std::shared_ptr<cugl::scene2::SpriteNode>& getNode() { return _projectile_node; }
-  
+  /**
+   * Gets the projectile scene graph node.
+   *
+   * @return node the node that has been set.
+   */
+  std::shared_ptr<cugl::scene2::SpriteNode>& getNode() {
+    return _projectile_node;
+  }
 };
 
 #endif /* Projectile.h */

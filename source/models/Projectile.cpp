@@ -12,10 +12,10 @@ bool Projectile::init(const cugl::Vec2 pos, const cugl::Vec2 v) {
   setFriction(0.0f);
   setRestitution(0.01f);
   setFixedRotation(true);
-  
+
   setName("projectile");
-  
-  _live_frames = 120; // 1 seconds
+
+  _live_frames = 120;  // 1 seconds
   _in_world = false;
 
   return true;
