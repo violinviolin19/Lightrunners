@@ -49,6 +49,13 @@
             "wrapS": "clamp",
             "wrapT": "clamp"
         },
+        "projectile": {
+          "file": "textures/projectile.png",
+          "minfilter": "nearest",
+          "magfilter": "nearest",
+          "wrapS": "clamp",
+          "wrapT": "clamp"
+        },
         "floor-tile-0": {
             "file": "textures/floor-tile-0.png",
             "minfilter": "nearest",

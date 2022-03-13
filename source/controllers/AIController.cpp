@@ -2,106 +2,42 @@
 
 #define MIN_DISTANCE 200
 #define HEALTH_LIM 25
-#define ATTACK_RANGE 30
+#define ATTACK_RANGE 100
 
 #pragma mark EnemyController
 
 EnemyController::EnemyController(){};
 
-//class Idle; class Chasing; class Attacking; class Avoiding;
-
-// ----------------------------------------------------------------------------
-// State: Idle
-//
-//class Idle : public EnemyController {
-//  void entry(void) override {
-//    // Add code with changing the animation state here
-//  }
-//
-//  void react(Range const & e) override {
-//    if (ATTACK_RANGE >= e.distance) {
-//      transit<Attacking>();
-//    } else if (e.distance < MIN_DISTANCE){
-//      transit<Chasing>();
-//    }
-//  }
-//};
-
 void EnemyController::idling() {
   _enemy->move(0, 0);
 }
 
-// ----------------------------------------------------------------------------
-// State: Chasing
-//
-//class Chasing : public EnemyController {
-//  void entry(void) override {
-//    // Add code with changing the animation state here
-//  }
-//
-//  void react(Range const & e) override {
-//    if (ATTACK_RANGE >= e.distance) {
-//      transit<Attacking>();
-//    }
-//  }
-//};
-
-void EnemyController::chasePlayer(cugl::Vec2 p) {
+void EnemyController::chasePlayer(const cugl::Vec2 p) {
   cugl::Vec2 diff = p - _enemy->getPosition();
-  diff.subtract(_enemy->getVX(), _enemy->getVY()); // This is the steering velocity
-//
+  diff.subtract(_enemy->getVX(), _enemy->getVY());
   diff.add(_enemy->getVX(), _enemy->getVY());
   diff.scale(_enemy->getSpeed());
   _enemy->move(diff.x,diff.y);
-  CULog("%f, %f", _enemy->getVX(), _enemy->getVY());
 }
 
-// ----------------------------------------------------------------------------
-// State: Attacking
-//
-//class Attacking : public EnemyController {
-//  void entry(void) override {
-//    // Add code with changing the animation state here
-//  }
-//
-//  void react(Range const & e) override {
-//    if (ATTACK_RANGE < e.distance) {
-//      transit<Chasing>();
-//    }
-//  }
-//};
-
-void EnemyController::attackPlayer() {
-//  CULog("attacking");
+void EnemyController::attackPlayer(const cugl::Vec2 p) {
+  if (_enemy->getAttackCooldown() <= 0) {
+    // need collision filtering?
+    _enemy->addBullet(p);
+    // make bullet
+    _enemy->setAttackCooldown(60);
+  }
 }
 
-// ----------------------------------------------------------------------------
-// State: Avoiding
-//
-//class Avoiding : public EnemyController {
-//  void entry(void) override {
-//    // Add code with changing the animation state here
-//  }
-//};
-
-void EnemyController::avoidPlayer() {
-//  CULog("avoiding");
+void EnemyController::avoidPlayer(const cugl::Vec2 p) {
+  cugl::Vec2 diff = p - _enemy->getPosition();
+  diff.subtract(_enemy->getVX(), _enemy->getVY());
+  diff.add(_enemy->getVX(), _enemy->getVY());
+  diff.scale(_enemy->getSpeed()/2);
+  _enemy->move(-diff.x,-diff.y);
 }
 
-
-// ----------------------------------------------------------------------------
-// Base States
-//
-//void EnemyController::react(Range const & e) {}
-//
-//void EnemyController::react(Health const & e) {
-//  transit<Avoiding>();
-//}
-
-// ----------------------------------------------------------------------------
-//
-
-bool EnemyController::init(const cugl::Vec2 pos, string name, std::shared_ptr<cugl::AssetManager> assets) {
+bool EnemyController::init(const cugl::Vec2 pos, string name, std::shared_ptr<cugl::AssetManager> assets, float tile_height, float row_count) {
   
   std::shared_ptr<cugl::Texture> grunt_texture =
       assets->get<cugl::Texture>("grunt");
@@ -112,18 +48,17 @@ bool EnemyController::init(const cugl::Vec2 pos, string name, std::shared_ptr<cu
   grunt_node->setPriority(
       100);  // TODO: Update priority according to position on screen
   
+  _projectile_texture = assets->get<cugl::Texture>("projectile");
+  
   _current_state = IDLE;
   
-//  start();
+  _tile_height = tile_height;
+  _row_count = row_count;
 
   return true;
 }
 
-void EnemyController::update(float timestep, std::shared_ptr<Player> player) {
-  // Calling dispatch a lot seems to cause a lot of LAG
-//  Health h;
-//  h.health = _enemy->getHealth();
-//  Range r;
+void EnemyController::update(float timestep, std::shared_ptr<Player> player, std::shared_ptr<cugl::physics2::ObstacleWorld> _world, std::shared_ptr<cugl::scene2::SceneNode> _world_node, std::shared_ptr<cugl::scene2::SceneNode> _debug_node) {
   int health = _enemy->getHealth();
   float distance = (_enemy->getPosition()).subtract(player->getPosition()).length();
   if (health <= HEALTH_LIM) {
@@ -152,44 +87,48 @@ void EnemyController::update(float timestep, std::shared_ptr<Player> player) {
       break;
     }
     case ATTACKING: {
-      attackPlayer();
+      attackPlayer(p);
       break;
     }
     case AVOIDING: {
-      avoidPlayer();
+      avoidPlayer(p);
       break;
     }
   }
   
+  if (_enemy->getAttackCooldown() > 0) {
+    _enemy->reduceAttackCooldown(1);
+  }
+  
+  updateProjectiles(timestep, _world, _world_node, _debug_node);
   _enemy->update(timestep);
+  int row = (int)floor(_enemy->getBody()->GetPosition().y / _tile_height);
+  _enemy->getGruntNode()->setPriority(_row_count - row);
 }
-      
 
-//bool EnemyController::shouldMoveTowardsPlayer(std::shared_ptr<Grunt> enemy,
-//                                           cugl::Vec2 playerPos) {
-//  cugl::Vec2 diff = playerPos - enemy->getPosition();
-//
-//  return diff.length() < MIN_DISTANCE;
-//}
-//
-//void EnemyController::moveEnemyTowardLocation(std::shared_ptr<Grunt> enemy,
-//                                           cugl::Vec2 p) {
-//  cugl::Vec2 diff = p - enemy->getPosition();
-//
-//  diff.scale(enemy->getSpeed());
-//  enemy->move(diff.x, diff.y);
-//}
-//
-//void EnemyController::moveEnemiesTowardPlayer(EnemySet enemySet,
-//                                           std::shared_ptr<Player> player) {
-//  std::unordered_set<std::shared_ptr<Grunt>> enemies = enemySet.getEnemies();
-//  auto it = enemies.begin();
-//  while (it != enemies.end()) {
-//    if (shouldMoveTowardsPlayer((*it), player->getPosition())) {
-//      moveEnemyTowardLocation((*it), player->getPosition());
-//    }
-//    ++it;
-//  }
-//}
-
-//FSM_INITIAL_STATE(EnemyController, Idle); // Set the initial FSM state
+void EnemyController::updateProjectiles(float timestep, std::shared_ptr<cugl::physics2::ObstacleWorld> _world, std::shared_ptr<cugl::scene2::SceneNode> _world_node, std::shared_ptr<cugl::scene2::SceneNode> _debug_node) {
+  auto proj = _enemy->getProjectiles();
+  CULog("%d", proj.size());
+  auto itt = proj.begin();
+  while (itt != proj.end()) {
+    // Add to world if needed
+    if ((*itt)->getNode() == nullptr) {
+      _world->addObstacle((*itt));
+      auto proj_node = cugl::scene2::SpriteNode::alloc(_projectile_texture, 1, 1);
+      int row = (int)floor((*itt)->getBody()->GetPosition().y / _tile_height);
+      proj_node->setPriority(_row_count - row);
+      proj_node->setPosition((*itt)->getPosition());
+      (*itt)->setNode(proj_node);
+      _world_node->addChild(proj_node);
+      (*itt)->setDebugScene(_debug_node);
+      (*itt)->setDebugColor(cugl::Color4f::BLACK);
+      (*itt)->setInWorld(true);
+    }
+    
+    (*itt)->decrementFrame(1);
+    (*itt)->getNode()->setPosition((*itt)->getPosition());
+    ++itt;
+  }
+  
+  _enemy->deleteProjectile(_world, _world_node);
+}

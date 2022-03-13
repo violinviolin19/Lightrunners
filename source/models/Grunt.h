@@ -6,6 +6,8 @@
 #include <cugl/cugl.h>
 #include <stdio.h>
 
+#include "Projectile.h"
+
 class Grunt : public cugl::physics2::CapsuleObstacle {
  private:
   /** Grunt health. */
@@ -30,6 +32,9 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
   std::shared_ptr<std::string> _damage_sensor_name;
   /** The node for debugging the damage sensor */
   std::shared_ptr<cugl::scene2::WireNode> _damage_sensor_node;
+  
+  /** The list of projectiles that have been shot by the grunt. */
+  std::unordered_set<std::shared_ptr<Projectile>> _projectiles;
 
   /** Force to be applied to the grunt. */
   cugl::Vec2 _force;
@@ -39,6 +44,9 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
 
   /** Damage frame count to turn red. */
   int _damage_count;
+  
+  /** Attack cooldown. */
+  int _attack_cooldown;
 
   /** Represents the offset between the center of the player and the center of
    * the capsule obstacle. */
@@ -71,6 +79,7 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
     _grunt_node = nullptr;
     _hitbox_sensor = nullptr;
     _damage_sensor = nullptr;
+    _projectiles.clear();
   }
 
   /**
@@ -104,6 +113,13 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
    * @return the current health.
    */
   int getHealth() const { return _health; }
+  
+  /**
+   * Gets the current attack cooldown of the grunt.
+   *
+   * @return the current health.
+   */
+  int getAttackCooldown() const { return _attack_cooldown; }
 
   /**
    * Sets the current grunt's health.
@@ -111,6 +127,13 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
    * @param value The current grunt health.
    */
   void setHealth(int value) { _health = value; }
+  
+  /**
+   * Sets the attack cooldown.
+   *
+   * @param value The attack cooldown.
+   */
+  void setAttackCooldown(int value) { _attack_cooldown = value; }
 
   /**
    * Reduces the grunt's health.
@@ -118,6 +141,13 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
    * @param value The value to reduce the health by.
    */
   void reduceHealth(int value) { _health -= value; }
+  
+  /**
+   * Reduces the grunt's attack cooldown.
+   *
+   * @param value The value to reduce the health by.
+   */
+  void reduceAttackCooldown(int value) { _attack_cooldown -= value; }
 
   /**
    * The grunt took damage.
@@ -131,6 +161,30 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
    * @return the grunt speed.
    */
   float getSpeed() const { return _speed; }
+  
+  /**
+   * Add a bullet.
+   *
+   * @param p the position of the bullet to spawn in.
+   */
+  void addBullet(cugl::Vec2 p);
+  
+  /**
+   * Deletes a bullet if needed.
+   */
+  void deleteProjectile(std::shared_ptr<cugl::physics2::ObstacleWorld> _world, std::shared_ptr<cugl::scene2::SceneNode> _world_node);
+  
+  /**
+   * Deletes all bullets.
+   */
+  void deleteAllProjectiles(std::shared_ptr<cugl::physics2::ObstacleWorld> _world, std::shared_ptr<cugl::scene2::SceneNode> _world_node);
+  
+  /**
+   * Gets the grunt's projectiles.
+   *
+   * @return the projectiles the grunt has shot.
+   */
+  std::unordered_set<std::shared_ptr<Projectile>> getProjectiles() { return _projectiles; }
 
 #pragma mark -
 #pragma mark Physics Methods

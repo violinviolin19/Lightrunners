@@ -74,7 +74,7 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
   cugl::Scene2::addChild(_world_node);
   cugl::Scene2::addChild(ui_layer);
   cugl::Scene2::addChild(_debug_node);
-  _debug_node->setVisible(false);
+  _debug_node->setVisible(true);
 
   InputController::get()->init(_assets, cugl::Scene2::getBounds());
 
@@ -107,7 +107,7 @@ void GameScene::populate(cugl::Size dim) {
   std::vector<std::shared_ptr<cugl::scene2::SceneNode>> enemy_nodes =
       enemies_node->getChildren();
   for (std::shared_ptr<cugl::scene2::SceneNode> enemy_node : enemy_nodes) {
-    std::shared_ptr<EnemyController> ai = EnemyController::alloc(enemy_node->getPosition(), enemy_node->getName(), _assets);
+    std::shared_ptr<EnemyController> ai = EnemyController::alloc(enemy_node->getPosition(), enemy_node->getName(), _assets, _tile_height, _row_count);
     _e_controllers.emplace(std::pair<int, std::shared_ptr<EnemyController>>(_id_counter++, ai));
     _world_node->addChild(ai->getEnemy()->getGruntNode());
     _world->addObstacle(ai->getEnemy());
@@ -148,13 +148,12 @@ void GameScene::update(float timestep) {
   int row = (int)floor(_player->getBody()->GetPosition().y / _tile_height);
   _player->getPlayerNode()->setPriority(_row_count - row);
 
-//  _ai_controller.moveEnemiesTowardPlayer(_enemies, _player);
-//  _enemies.update(timestep);
   
   // Update the AI controllers
   auto it = _e_controllers.begin();
   while (it != _e_controllers.end()) {
-    (*it->second).update(timestep, _player);
+    auto enemy = (*it->second);
+    enemy.update(timestep, _player, _world, _world_node, _debug_node);
     ++it;
   }
 
@@ -171,19 +170,20 @@ void GameScene::update(float timestep) {
 
   // POST-UPDATE
   // Check for disposal
-//  for (std::shared_ptr<Grunt> grunt : _enemies.getEnemies()) {
-//    int row = (int)floor(grunt->getBody()->GetPosition().y / _tile_height);
-//    grunt->getGruntNode()->setPriority(_row_count - row);
-//
-//    if (grunt != nullptr && grunt->getHealth() <= 0) {
-//      grunt->deactivatePhysics(*_world->getWorld());
-//      _enemies.deleteEnemy(grunt);
-//      _world_node->removeChild(grunt->getGruntNode());
-//      _world->removeObstacle(grunt.get());
-//      grunt->dispose();
-//      grunt = nullptr;
-//    }
-//  }
+  auto itt = _e_controllers.begin();
+  while (itt != _e_controllers.end()) {
+    auto enemy = (*itt->second);
+    if (enemy.getEnemy()->getHealth() <= 0) {
+      // Dispose the enemy controller
+      enemy.getEnemy()->deleteAllProjectiles(_world, _world_node);
+      enemy.getEnemy()->deactivatePhysics(*_world->getWorld());
+      _world_node->removeChild(enemy.getEnemy()->getGruntNode());
+      _world->removeObstacle(enemy.getEnemy().get());
+      enemy.dispose();
+      itt = _e_controllers.erase(itt);
+    }
+    ++itt;
+  }
 }
 
 void GameScene::beginContact(b2Contact* contact) {

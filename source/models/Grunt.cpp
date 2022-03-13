@@ -22,6 +22,8 @@ bool Grunt::init(const cugl::Vec2 pos, string name) {
   _health = 100;
   _facing_left = false;
   _speed = .001f;
+  
+  _attack_cooldown = 0;
 
   setDensity(0.01f);
   setFriction(0.0f);
@@ -35,6 +37,39 @@ void Grunt::takeDamage() {
   reduceHealth(20);
   _grunt_node->setColor(cugl::Color4::RED);
   _damage_count = 10;
+}
+
+void Grunt::addBullet(const cugl::Vec2 p) {
+  cugl::Vec2 diff = p - getPosition();
+  auto bullet = Projectile::alloc(getPosition(), diff);
+  
+  _projectiles.emplace(bullet);
+  bullet->setPosition(getPosition());
+}
+
+void Grunt::deleteProjectile( std::shared_ptr<cugl::physics2::ObstacleWorld> _world, std::shared_ptr<cugl::scene2::SceneNode> _world_node) {
+  auto itt = _projectiles.begin();
+  while (itt != _projectiles.end()) {
+    if ((*itt)->getFrames() <= 0) {
+      (*itt)->deactivatePhysics(*_world->getWorld());
+      _world_node->removeChild((*itt)->getNode());
+      _world->removeObstacle((*itt).get());
+      itt = _projectiles.erase(itt);
+    } else {
+      ++itt;
+    }
+  }
+}
+
+void Grunt::deleteAllProjectiles(std::shared_ptr<cugl::physics2::ObstacleWorld> _world, std::shared_ptr<cugl::scene2::SceneNode> _world_node) {
+  auto itt = _projectiles.begin();
+  while (itt != _projectiles.end()) {
+      (*itt)->deactivatePhysics(*_world->getWorld());
+      _world_node->removeChild((*itt)->getNode());
+      _world->removeObstacle((*itt).get());
+    ++itt;
+  }
+  _projectiles.clear();
 }
 
 #pragma mark Animation & Drawing

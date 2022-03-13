@@ -19,6 +19,9 @@
 		57CEFE2E27DD330A00EF2B90 /* include in Resources */ = {isa = PBXBuildFile; fileRef = 57CEFE2D27DD330A00EF2B90 /* include */; };
 		57CEFE2F27DD330A00EF2B90 /* include in Resources */ = {isa = PBXBuildFile; fileRef = 57CEFE2D27DD330A00EF2B90 /* include */; };
 		57CEFE3027DD330A00EF2B90 /* include in Resources */ = {isa = PBXBuildFile; fileRef = 57CEFE2D27DD330A00EF2B90 /* include */; };
+		57CEFE3B27DDA80900EF2B90 /* Projectile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57CEFE3A27DDA80900EF2B90 /* Projectile.cpp */; };
+		57CEFE3C27DDA80900EF2B90 /* Projectile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57CEFE3A27DDA80900EF2B90 /* Projectile.cpp */; };
+		57CEFE3D27DDA80900EF2B90 /* Projectile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57CEFE3A27DDA80900EF2B90 /* Projectile.cpp */; };
 		CA1BA38127D1545700D636A5 /* EnemySet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA1BA37F27D1545700D636A5 /* EnemySet.cpp */; };
 		CA1BA38227D1546000D636A5 /* EnemySet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA1BA37F27D1545700D636A5 /* EnemySet.cpp */; };
 		CA1BA38327D1546100D636A5 /* EnemySet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA1BA37F27D1545700D636A5 /* EnemySet.cpp */; };
@@ -174,6 +177,8 @@
 		572894E827D189E200F9BBA5 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		5737DA7727C5E62E00D1692A /* Player.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
 		57CEFE2D27DD330A00EF2B90 /* include */ = {isa = PBXFileReference; lastKnownFileType = folder; name = include; path = ../include; sourceTree = "<group>"; };
+		57CEFE3A27DDA80900EF2B90 /* Projectile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Projectile.cpp; sourceTree = "<group>"; };
+		57CEFE3E27DDA84A00EF2B90 /* Projectile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Projectile.h; sourceTree = "<group>"; };
 		CA1BA37F27D1545700D636A5 /* EnemySet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EnemySet.cpp; sourceTree = "<group>"; };
 		CA1BA38027D1545700D636A5 /* EnemySet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnemySet.h; sourceTree = "<group>"; };
 		CA5F188627DBC1B70077AEBB /* MenuScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MenuScene.cpp; sourceTree = "<group>"; };
@@ -344,6 +349,8 @@
 				D5073C8527CFEF2C0000426E /* tiles */,
 				5737DA7727C5E62E00D1692A /* Player.cpp */,
 				5728944727CECB7500F9BBA5 /* Player.h */,
+				57CEFE3A27DDA80900EF2B90 /* Projectile.cpp */,
+				57CEFE3E27DDA84A00EF2B90 /* Projectile.h */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -628,7 +635,7 @@
 					};
 					EB74548B1D74D75C002FBAE6 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 37AKFHT6H5;
+						DevelopmentTeam = 3CZ5TUZ2PQ;
 					};
 					EBBF18901D74904A008E2001 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -739,6 +746,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57CEFE3D27DDA80900EF2B90 /* Projectile.cpp in Sources */,
 				D598E69D27C57E3C0039326B /* LevelGenerator.cpp in Sources */,
 				D57971F427D026E4008FCC5E /* CustomScene2Loader.cpp in Sources */,
 				D5073C8D27CFEF2C0000426E /* Wall.cpp in Sources */,
@@ -767,6 +775,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57CEFE3C27DDA80900EF2B90 /* Projectile.cpp in Sources */,
 				D598E69C27C57E3C0039326B /* LevelGenerator.cpp in Sources */,
 				D57971F327D026E4008FCC5E /* CustomScene2Loader.cpp in Sources */,
 				D5073C8C27CFEF2C0000426E /* Wall.cpp in Sources */,
@@ -795,6 +804,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57CEFE3B27DDA80900EF2B90 /* Projectile.cpp in Sources */,
 				D598E69B27C57E3C0039326B /* LevelGenerator.cpp in Sources */,
 				D57971F227D026E4008FCC5E /* CustomScene2Loader.cpp in Sources */,
 				D5073C8B27CFEF2C0000426E /* Wall.cpp in Sources */,
@@ -882,7 +892,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 37AKFHT6H5;
+				DEVELOPMENT_TEAM = 3CZ5TUZ2PQ;
 				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/iOS-Info.plist";
@@ -904,7 +914,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 37AKFHT6H5;
+				DEVELOPMENT_TEAM = 3CZ5TUZ2PQ;
 				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/iOS-Info.plist";
