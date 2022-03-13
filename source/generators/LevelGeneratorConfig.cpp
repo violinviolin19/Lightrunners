@@ -1,5 +1,7 @@
 #include "LevelGeneratorConfig.h"
 
+namespace level_gen {
+
 LevelGeneratorConfig::LevelGeneratorConfig()
     : _inner_circle_frac(0.4f),
       _middle_circle_frac(0.7f),
@@ -12,3 +14,5 @@ LevelGeneratorConfig::LevelGeneratorConfig()
   setMapRadius(120);
   setNumTerminalRooms(7);
 }
+
+}  // namespace level_gen

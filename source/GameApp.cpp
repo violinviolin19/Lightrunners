@@ -71,7 +71,7 @@ void GameApp::update(float timestep) {
         break;
       }
 
-      _level_loading.init();
+      _level_loading.init(_assets);
       _current_scene = Scene::LEVEL_LOADING;
       _menu.dispose();
       break;
@@ -82,7 +82,7 @@ void GameApp::update(float timestep) {
         break;
       }
 
-      _gameplay.init(_assets);
+      _gameplay.init(_assets, _level_loading.getLevelGenerator());
       _current_scene = Scene::GAME;
       _level_loading.dispose();
       break;

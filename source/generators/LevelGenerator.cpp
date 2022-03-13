@@ -9,6 +9,8 @@
 
 #include "../models/level_gen/DefaultRooms.h"
 
+namespace level_gen {
+
 LevelGenerator::LevelGenerator() : _active(false), _generator_step(nullptr) {}
 
 void LevelGenerator::init(LevelGeneratorConfig &config,
@@ -32,7 +34,6 @@ void LevelGenerator::dispose() {
   _inside_rooms.clear();
   _middle_rooms.clear();
   _outside_rooms.clear();
-  _hallways.clear();
   _spawn_room = nullptr;
   _map = nullptr;
   _generator_step = nullptr;
@@ -41,14 +42,13 @@ void LevelGenerator::dispose() {
 bool LevelGenerator::update() {
   if (_generator_step != nullptr) {
     _generator_step();
-    return false;  // Not done.
+    return true;  // Not done.
   }
-  return true;  // Done!
+  return false;  // Done!
 }
 
 void LevelGenerator::generateRooms() {
-  _spawn_room = std::make_shared<Room>(default_rooms::kSpawn.size,
-                                       default_rooms::kSpawn.doors);
+  _spawn_room = std::make_shared<Room>(default_rooms::kSpawn);
   _spawn_room->_type = Room::RoomType::SPAWN;
   _spawn_room->_fixed = true;
   _spawn_room->_node->setAnchor(cugl::Vec2::ANCHOR_BOTTOM_LEFT);
@@ -74,8 +74,12 @@ void LevelGenerator::placeRegularRooms(int num_rooms, float min_radius,
   std::uniform_real_distribution<float> dis(0.0f, 1.0f);
 
   for (float i = 0; i < num_rooms; i++) {
-    std::shared_ptr<Room> room = std::make_shared<Room>(
-        default_rooms::kStandard1.size, default_rooms::kStandard1.doors);
+    int max_room_ii = static_cast<int>(default_rooms::kRegularRooms.size() - 1);
+    std::uniform_int_distribution<> room_iid(0, max_room_ii);
+
+    default_rooms::RoomConfig chosen_room =
+        default_rooms::kRegularRooms[room_iid(_generator)];
+    std::shared_ptr<Room> room = std::make_shared<Room>(chosen_room);
 
     float room_radius = room->getRadius();
     float min_r = min_radius + room_radius;
@@ -198,8 +202,8 @@ std::vector<std::shared_ptr<Room>> LevelGenerator::placeTerminalRooms(
   std::vector<std::shared_ptr<Room>> terminals;
 
   for (float i = 0; i < num_rooms; i++) {
-    std::shared_ptr<Room> room = std::make_shared<Room>(
-        default_rooms::kTerminal.size, default_rooms::kTerminal.doors);
+    std::shared_ptr<Room> room =
+        std::make_shared<Room>(default_rooms::kTerminal);
 
     room->_type = Room::RoomType::TERMINAL;
 
@@ -543,3 +547,5 @@ void LevelGenerator::fillHallways() {
 
   _map->doLayout();
 }
+
+}  // namespace level_gen

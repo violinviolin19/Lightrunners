@@ -27,6 +27,8 @@ class CustomScene2Loader : public Scene2Loader {
     BASIC_TILE,
     /** A wall type with box2d fixed collision. */
     WALL,
+    /** A door type that acts as a sensor for leaving rooms. */
+    DOOR,
     /** An unsupported type */
     UNKOWN
   };

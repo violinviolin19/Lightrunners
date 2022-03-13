@@ -2,9 +2,10 @@
 #define GENERATORS_LEVEL_GENERATOR_H
 #include <cugl/cugl.h>
 
-#include "../models/level_gen/Hallway.h"
 #include "../models/level_gen/Room.h"
 #include "LevelGeneratorConfig.h"
+
+namespace level_gen {
 
 /** A level generator that creates a random level with hallway connections. */
 class LevelGenerator {
@@ -26,9 +27,6 @@ class LevelGenerator {
 
   /** A list of all rooms in the outside ring of the level. */
   std::vector<std::shared_ptr<Room>> _outside_rooms;
-
-  /** A list of all the hallways for the level. */
-  std::vector<std::shared_ptr<Hallway>> _hallways;
 
   /** A reference to the spawn room of the level. */
   std::shared_ptr<Room> _spawn_room;
@@ -73,7 +71,7 @@ class LevelGenerator {
    * Update the level generator. Calls the next generator step function.
    * Separates the generation steps to be able to draw the generation.
    *
-   * @return If the generator is done generating.
+   * @return False if the level generation is done.
    */
   bool update();
 
@@ -205,5 +203,7 @@ class LevelGenerator {
    */
   void fillHallways();
 };
+
+}  // namespace level_gen
 
 #endif /* GENERATORS_LEVELGENERATOR_H */

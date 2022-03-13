@@ -52,6 +52,9 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
    * the capsule obstacle. */
   cugl::Vec2 _offset_from_center;
 
+  /** The position of the room this grunt is in, used for drawing. */
+  cugl::Vec2 _room_pos;
+
  public:
 #pragma mark Constructors
   /**
@@ -235,6 +238,13 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
    * @return node the node that has been set.
    */
   std::shared_ptr<cugl::scene2::SpriteNode>& getGruntNode();
+
+  /**
+   * Sets the position of the room the enemy is in, for drawing purposes.
+   *
+   * @param pos The bottom left corner of the room the enemy is in.
+   */
+  void setRoomPos(cugl::Vec2 pos) { _room_pos = pos; }
 
 #pragma mark Movement
   /**

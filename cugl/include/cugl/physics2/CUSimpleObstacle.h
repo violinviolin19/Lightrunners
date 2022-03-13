@@ -72,7 +72,8 @@ class SimpleObstacle : public Obstacle {
 protected:
     /** The physics body for Box2D. */
     b2Body* _body;
-    
+    /** A cache value for the extra sensor fixtures. */
+    std::vector<b2Fixture*> _sensors;
     /** Number of decimal places to snap position of image to physics body */
     int _posSnap;
     /** Cache of factor to snap position of image to physics body */

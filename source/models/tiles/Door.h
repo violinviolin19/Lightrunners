@@ -14,8 +14,11 @@ class Door : public BasicTile {
   /** A reference to the physics object of the tile. */
   std::shared_ptr<cugl::physics2::BoxObstacle> _obstacle;
 
-  /** A reference tot he sensor name to keep it alive for collisions.*/
+  /** A reference to the sensor name to keep it alive for collisions. */
   std::shared_ptr<std::string> _door_sensor_name;
+
+  /** A reference to the sensor shape to keep it alive for instantiation. */
+  b2PolygonShape _sensor_shape;
 
  public:
   /**
@@ -89,9 +92,12 @@ class Door : public BasicTile {
    * Initializes the box 2d object for the tile including setting the position
    * and size.
    *
+   * @param sensor_name The name for the sensor for future reference.
+   *
    * @return The obstacle it created for easy chaining.
    */
-  virtual std::shared_ptr<cugl::physics2::BoxObstacle> initBox2d();
+  virtual std::shared_ptr<cugl::physics2::BoxObstacle> initBox2d(
+      std::string& sensor_name);
 
   /**
    * @return Returns the physics object for the tile.

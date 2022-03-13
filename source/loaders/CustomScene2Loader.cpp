@@ -1,6 +1,7 @@
 #include "CustomScene2Loader.h"
 
 #include "../models/tiles/BasicTile.h"
+#include "../models/tiles/Door.h"
 #include "../models/tiles/Wall.h"
 
 namespace cugl {
@@ -27,6 +28,7 @@ bool CustomScene2Loader::init(const std::shared_ptr<ThreadPool>& threads) {
 
   _tile_types["basictile"] = Tile::BASIC_TILE;
   _tile_types["wall"] = Tile::WALL;
+  _tile_types["door"] = Tile::DOOR;
 
   return true;
 }
@@ -137,6 +139,9 @@ std::shared_ptr<scene2::SceneNode> CustomScene2Loader::build(
         break;
       case Tile::WALL:
         node = Wall::allocWithData(this, data);
+        break;
+      case Tile::DOOR:
+        node = Door::allocWithData(this, data);
         break;
       case Tile::UNKOWN:
         break;

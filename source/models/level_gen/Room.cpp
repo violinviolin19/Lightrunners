@@ -4,38 +4,29 @@
 
 #pragma mark Room
 
-Room::Room(cugl::Size size)
-    : _type(Room::RoomType::STANDARD), _visited(false), _fixed(false) {
-  // If the doors haven't been filled before, then fill it automatically.
-  if (_doors.size() == 0) {
-    // Set the doors to the middle of the four edges in the room. Counter
-    // clockwise order, with right-most first.
-    _doors.push_back(cugl::Vec2(size.width - 1, floorf(size.height / 2.0f)));
-    _doors.push_back(cugl::Vec2(floorf(size.width / 2.0f), size.height - 1.0f));
-    _doors.push_back(cugl::Vec2(0.0f, floorf(size.height / 2.0f)));
-    _doors.push_back(cugl::Vec2(floorf(size.width / 2.0f), 0.0f));
-  }
+namespace level_gen {
 
-  initScene2(size);
-}
-
-Room::Room(cugl::Size size, std::vector<cugl::Vec2> doors)
-    : _type(Room::RoomType::STANDARD), _visited(false), _fixed(false) {
-  for (cugl::Vec2 &door : doors) {
+Room::Room(default_rooms::RoomConfig config)
+    : _type(Room::RoomType::STANDARD),
+      _visited(false),
+      _fixed(false),
+      _scene2_key(""),
+      _scene2_source(config.scene2_source) {
+  for (cugl::Vec2 &door : config.doors) {
     // If the door is within the bounds of the edges of the room then add it to
     // the rooms doors.
-    if ((door.x == 0.0f || door.x == size.width - 1) &&
-        (door.y > 0.0f && door.y < size.height - 1)) {
+    if ((door.x == 0.0f || door.x == config.size.width - 1) &&
+        (door.y > 0.0f && door.y < config.size.height - 1)) {
       _doors.push_back(door);
     }
 
-    if ((door.y == 0.0f || door.y == size.height - 1) &&
-        (door.x > 0.0f && door.x < size.width - 1)) {
+    if ((door.y == 0.0f || door.y == config.size.height - 1) &&
+        (door.x > 0.0f && door.x < config.size.width - 1)) {
       _doors.push_back(door);
     }
   }
 
-  initScene2(size);
+  initScene2(config.size);
 }
 
 void Room::move(cugl::Vec2 dist) {
@@ -136,26 +127,20 @@ void Room::initScene2(cugl::Size size) {
   _node = cugl::scene2::PolygonNode::alloc();
   _node->setContentSize(size);
 
-  // Fill the tiles inside of the room.
-  for (float x = 0.0f; x < size.width; x++) {
-    for (float y = 0.0f; y < size.height; y++) {
-      cugl::Vec2 pos(floorf(x), floorf(y));
-
-      if (std::find(_doors.begin(), _doors.end(), pos) != _doors.end()) {
-        cugl::PolyFactory poly_factory;
-        cugl::Poly2 poly_rect = poly_factory.makeRoundedRect(
-            cugl::Vec2::ZERO, cugl::Vec2::ONE * 0.9f, 0.1f);
-        auto tile = cugl::scene2::PolygonNode::allocWithPoly(poly_rect);
-        tile->setColor(cugl::Color4::ORANGE);
-        pos += cugl::Vec2(0.05f, 0.05f);
-        tile->setAnchor(cugl::Vec2::ANCHOR_BOTTOM_LEFT);
-        tile->setPosition(pos);
-        _node->addChild(tile);
-      }
-    }
-
-    _node->doLayout();
+  for (cugl::Vec2 door : _doors) {
+    cugl::Vec2 pos(floorf(door.x), floorf(door.y));
+    cugl::PolyFactory poly_factory;
+    cugl::Poly2 poly_rect = poly_factory.makeRoundedRect(
+        cugl::Vec2::ZERO, cugl::Vec2::ONE * 0.9f, 0.1f);
+    auto tile = cugl::scene2::PolygonNode::allocWithPoly(poly_rect);
+    tile->setColor(cugl::Color4::ORANGE);
+    pos += cugl::Vec2(0.05f, 0.05f);
+    tile->setAnchor(cugl::Vec2::ANCHOR_BOTTOM_LEFT);
+    tile->setPosition(pos);
+    _node->addChild(tile);
   }
+
+  _node->doLayout();
 }
 
 #pragma mark Edge
@@ -236,3 +221,5 @@ cugl::Vec2 Edge::getIntersectWithRectSide(const cugl::Rect &rect) const {
   }
   return cugl::Vec2::ZERO;
 }
+
+}  // namespace level_gen

@@ -2,6 +2,7 @@
 #define GENERATORS_LEVEL_GENERATOR_CONFIG_H
 #include <cugl/cugl.h>
 
+namespace level_gen {
 /**
  * A class that sets constants for level generation. Used by LevelGenerator.
  */
@@ -187,5 +188,7 @@ class LevelGeneratorConfig {
   /** @return The max number of edges for a room. (i.e. max number of doors). */
   int getMaxNumEdges() const { return _max_num_of_edges; }
 };
+
+}  // namespace level_gen
 
 #endif /* GENERATORS_LEVEL_GENERATOR_CONFIG_H */

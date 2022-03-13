@@ -12,9 +12,12 @@
 #define SCENE_HEIGHT 720
 #define CAMERA_SMOOTH_SPEED 2.0f
 
-bool GameScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
+bool GameScene::init(
+    const std::shared_ptr<cugl::AssetManager>& assets,
+    const std::shared_ptr<level_gen::LevelGenerator>& level_gen) {
   if (_active) return false;
   _active = true;
+
   // Initialize the scene to a locked width.
   // TODO delete after confirming networking works
   std::shared_ptr<cugl::NetworkConnection> _network = nullptr;
@@ -22,42 +25,29 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
   cugl::Size dim = cugl::Application::get()->getDisplaySize();
   dim *= SCENE_HEIGHT / ((dim.width > dim.height) ? dim.width : dim.height);
 
-  if (assets == nullptr || !cugl::Scene2::init(dim)) {
-    return false;
-  }
+  if (assets == nullptr || !cugl::Scene2::init(dim)) return false;
+
   _assets = assets;
 
-  _world_node = assets->get<cugl::scene2::SceneNode>("world-scene");
+  _world_node = _assets->get<cugl::scene2::SceneNode>("world-scene");
   _world_node->setContentSize(dim);
-
-  std::shared_ptr<cugl::scene2::SceneNode> grid_node =
-      _world_node->getChildByName("tiles");
-  std::shared_ptr<cugl::scene2::Layout> layout = grid_node->getLayout();
-  std::shared_ptr<cugl::scene2::GridLayout> grid_layout =
-      dynamic_pointer_cast<cugl::scene2::GridLayout>(layout);
-
-  float map_height = grid_node->getContentHeight();
-  float map_width = grid_node->getContentWidth();
-  _col_count = grid_layout->getGridSize().width;
-  _row_count = grid_layout->getGridSize().height;
-  _tile_height = map_height / _row_count;
-  _tile_width = map_width / _col_count;
 
   _debug_node = cugl::scene2::SceneNode::alloc();
   _debug_node->setContentSize(dim);
 
-  // Create the world and attach the listeners.
-  _world = cugl::physics2::ObstacleWorld::alloc(
-      cugl::Rect(0, 0, grid_node->getContentWidth(),
-                 grid_node->getContentHeight()),
-      cugl::Vec2(0, 0));
+  _level_controller =
+      LevelController::alloc(_assets, _world_node, _debug_node, level_gen);
+  _controllers.push_back(_level_controller->getHook());
+
+  // Get the world from level controller and attach the listeners.
+  _world = _level_controller->getWorld();
   _world->activateCollisionCallbacks(true);
   _world->onBeginContact = [this](b2Contact* contact) {
-    beginContact(contact);
+    this->beginContact(contact);
   };
   _world->beforeSolve = [this](b2Contact* contact,
                                const b2Manifold* oldManifold) {
-    beforeSolve(contact, oldManifold);
+    this->beforeSolve(contact, oldManifold);
   };
 
   populate(dim);
@@ -93,7 +83,9 @@ void GameScene::dispose() {
 void GameScene::populate(cugl::Size dim) {
   // Initialize the player with texture and size, then add to world.
   std::shared_ptr<cugl::Texture> player = _assets->get<cugl::Texture>("player");
-  _player = Player::alloc(dim + cugl::Vec2(20, 20), "Johnathan");
+  _player = Player::alloc(cugl::Vec2::ZERO, "Johnathan");
+
+  _level_controller->getLevelModel()->setPlayer(_player);
 
   auto player_node = cugl::scene2::SpriteNode::alloc(player, 3, 10);
   _player->setPlayerNode(player_node);
@@ -149,9 +141,15 @@ void GameScene::update(float timestep) {
   cugl::Application::get()->setClearColor(cugl::Color4f::BLACK);
 
   InputController::get()->update();
+
+  for (std::shared_ptr<Controller> controller : _controllers)
+    controller->update();
+
   // Movement
   _player->step(timestep, InputController::get<Movement>()->getMovement(),
                 InputController::get<Attack>()->isAttacking(), _sword);
+  // Animation
+  _player->animate(InputController::get<Movement>()->getMovement());
 
   int row = (int)floor(_player->getBody()->GetPosition().y / _tile_height);
   _player->getPlayerNode()->setPriority(_row_count - row);
@@ -163,19 +161,22 @@ void GameScene::update(float timestep) {
     enemy.update(timestep, _player);
     ++it;
   }
+  // std::shared_ptr<RoomModel> current_room =
+  //     _level_controller->getLevelModel()->getCurrentRoom();
+  // std::shared_ptr<EnemySet> enemy_set = current_room->getEnemies();
+  // _ai_controller.moveEnemiesTowardPlayer(enemy_set, _player);
+  // enemy_set->update(timestep);
 
   updateCamera(timestep);
   _world->update(timestep);
+
+  // ===== POST-UPDATE =======
 
   auto ui_layer = _assets->get<cugl::scene2::SceneNode>("ui-scene");
   auto text = ui_layer->getChildByName<cugl::scene2::Label>("health");
   std::string msg = cugl::strtool::format("Health: %d", _player->getHealth());
   text->setText(msg);
 
-  // Animation
-  _player->animate(InputController::get<Movement>()->getMovement());
-
-  // POST-UPDATE
   // Check for disposal
   auto itt = _e_controllers.begin();
   while (itt != _e_controllers.end()) {
@@ -241,6 +242,13 @@ void GameScene::beginContact(b2Contact* contact) {
     dynamic_cast<Projectile*>(ob1)->setFrames(0);  // Destroy the projectile
   } else if (ob2->getName() == "projectile" && ob1->getName() == "Wall") {
     dynamic_cast<Projectile*>(ob2)->setFrames(0);  // Destroy the projectile
+  }
+
+  if (fx1_name.find("door") != std::string::npos && ob2 == _player.get()) {
+    _level_controller->changeRoom(fx1_name);
+  } else if (fx2_name.find("door") != std::string::npos &&
+             ob1 == _player.get()) {
+    _level_controller->changeRoom(fx2_name);
   }
 }
 

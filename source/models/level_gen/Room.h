@@ -2,6 +2,10 @@
 #define MODELS_LEVEL_GEN_ROOM_H_
 #include <cugl/cugl.h>
 
+#include "DefaultRooms.h"
+
+namespace level_gen {
+
 // Forward declaration for use in Room.
 class Edge;
 
@@ -42,59 +46,20 @@ class Room {
   /** If this room should not move. */
   bool _fixed;
 
-  /**
-   * Create a Room with given width and height in grid units. The doors will be
-   * at created the middle of the four room edges.
-   *
-   * @param width Width of room in grid units.
-   * @param height Height of room in grid units.
-   */
-  Room(float width, float height) : Room(cugl::Size(width, height)) {}
+  /** The key to the scene2 room layout to refer to it by. */
+  std::string _scene2_key;
+  /** The source to the scene2 room layout to load it in. */
+  std::string _scene2_source;
 
   /**
-   * Create a Room with given size. The doors will be created in the middle of
-   * the four room edges.
-   *
-   * @param size Size of room in grid units.
-   */
-  Room(cugl::Size size);
-
-  /**
-   * Create a Room with given width and height in grid units and doors. The
-   * doors are represented by their grid unit coordinates in terlation to the
-   * bottom left of the room. The doors must be in counter-clockwise order with
-   * right-most door first.
-   *
-   * @param width Width of room in grid units.
-   * @param height Height of room in grid units.
-   * @param doors The list of door grid unit coordinates in relation to the
-   * bottom left of the room. Must be in counter-clockwise order with right-most
-   * door first.
-   */
-  Room(float width, float height, std::vector<cugl::Vec2> doors)
-      : Room(cugl::Size(width, height), doors) {}
-
-  /**
-   * Create a Room with given size in grid units and doors. The doors are
+   * Create a Room with the given config. The doors are
    * represented by their grid unit coordinates in terlation to the bottom left
    * of the room. The doors must be in counter-clockwise order with right-most
-   * first.
+   * first. Everything is in grid units.
    *
-   * @param size Size of room in grid units.
-   * @param doors The list of door grid unit coordinates in relation to the
-   * bottom left of the room. Must be in counter-clockwise order with right-most
-   * first.
+   * @param config The config containing size, door positions, and scene2 a key.
    */
-  Room(cugl::Size size, std::vector<cugl::Vec2> doors);
-
-  /**
-   * A copy constructor for Room that copies the type, doors and size.
-   *
-   * @param room The room to copy.
-   */
-  Room(const Room &room) : Room(room._node->getContentSize(), room._doors) {
-    _type = room._type;
-  }
+  Room(default_rooms::RoomConfig config);
 
   /**
    * Move the room by given certain distance.
@@ -288,5 +253,7 @@ class Edge {
            this->_source == other->_neighbor;
   }
 };
+
+}  // namespace level_gen
 
 #endif  // MODELS_LEVEL_GEN_ROOM_H_

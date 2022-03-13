@@ -3,8 +3,11 @@
 #include <box2d/b2_world_callbacks.h>
 #include <cugl/cugl.h>
 
+#include "../controllers/Controller.h"
 #include "../controllers/EnemyController.h"
 #include "../controllers/InputController.h"
+#include "../controllers/LevelController.h"
+#include "../generators/LevelGenerator.h"
 #include "../models/Player.h"
 
 class GameScene : public cugl::Scene2 {
@@ -28,6 +31,12 @@ class GameScene : public cugl::Scene2 {
 
   /** The list of AI Controllers for enemies. */
   std::unordered_map<int, std::shared_ptr<EnemyController>> _e_controllers;
+
+  /** The level controller for the game*/
+  std::shared_ptr<LevelController> _level_controller;
+
+  /** The */
+  std::vector<std::shared_ptr<Controller>> _controllers;
 
   /** The height of each tile in the world. */
   float _tile_width;
@@ -61,10 +70,12 @@ class GameScene : public cugl::Scene2 {
    * Initializes the controller contents, and starts the game.
    *
    * @param assets    The (loaded) assets for this game mode.
+   * @param level_gen The generated level.
    *
    * @return true if the controller is initialized properly, false otherwise.
    */
-  bool init(const std::shared_ptr<cugl::AssetManager>& assets);
+  bool init(const std::shared_ptr<cugl::AssetManager>& assets,
+            const std::shared_ptr<level_gen::LevelGenerator>& level_gen);
 
   /**
    * Sets whether debug mode is active.

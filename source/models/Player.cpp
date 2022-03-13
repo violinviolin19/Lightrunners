@@ -92,6 +92,10 @@ void Player::step(float timestep, cugl::Vec2 forward, bool didAttack,
 void Player::update(float delta) {
   CapsuleObstacle::update(delta);
   if (_player_node != nullptr) {
+    if (_promise) {
+      setPosition(_promise_pos_cache);
+      _promise = false;
+    }
     _player_node->setPosition(getPosition() + _offset_from_center);
   }
 }

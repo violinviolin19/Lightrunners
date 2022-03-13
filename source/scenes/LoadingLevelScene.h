@@ -4,27 +4,40 @@
 
 #include "../generators/LevelGenerator.h"
 #include "../generators/LevelGeneratorConfig.h"
+#include "../models/level_gen/Room.h"
 
 class LoadingLevelScene : public cugl::Scene2 {
  private:
   /** A level generator for this scene. */
-  std::shared_ptr<LevelGenerator> _level_generator;
+  std::shared_ptr<level_gen::LevelGenerator> _level_generator;
 
   /** A level generator config for this scene. */
-  LevelGeneratorConfig _config;
+  level_gen::LevelGeneratorConfig _config;
 
   /** A reference to the scene2 map for rendering. */
   std::shared_ptr<cugl::scene2::SceneNode> _map;
 
+  /** A reference to the assets for the game. */
+  std::shared_ptr<cugl::AssetManager> _assets;
+
+  enum {
+    /** Generate Rooms using the Level Generator. */
+    GENERATE_ROOMS,
+    /** Load in all the used room scene2 graphs. */
+    LOAD_ROOM_SCENE2,
+    /** Level loader is done. */
+    DONE
+  } _loading_phase;
+
  public:
   /** Initializes the level generation scene2. */
-  LoadingLevelScene() : cugl::Scene2() {}
+  LoadingLevelScene() : cugl::Scene2(), _loading_phase(GENERATE_ROOMS) {}
 
   /** Disposes of all resources allocated to this mode. */
   ~LoadingLevelScene() { dispose(); }
 
   /** Get the level generator, to pass on to the game scene. */
-  std::shared_ptr<LevelGenerator> getLevelGenerator() {
+  std::shared_ptr<level_gen::LevelGenerator> getLevelGenerator() {
     return _level_generator;
   }
 
@@ -34,17 +47,16 @@ class LoadingLevelScene : public cugl::Scene2 {
   void dispose() override;
 
   /**
-   * Initializes the controller contents, and starts the game.
+   * Initializes the controller contents, and starts generating the level.
    *
-   * @param assets    The (loaded) assets for this game mode
+   * @param assets    The (loaded) assets for this loading mode
    *
    * @return true if the controller is initialized properly, false otherwise.
    */
-  bool init();
+  bool init(const std::shared_ptr<cugl::AssetManager>& assets);
 
   /**
-   * The method called to update the game mode.
-   * This method contains any gameplay code that is not an OpenGL call.
+   * The method called to update the level loading mode.
    *
    * @param timestep  The amount of time (in seconds) since the last frame
    */
