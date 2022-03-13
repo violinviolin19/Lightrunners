@@ -83,7 +83,7 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
 
 void GameScene::dispose() {
   InputController::get()->dispose();
-  _ai_controller.~AIController();
+//  _ai_controller.~AIController(); TODO FIX THIS LATER
 }
 
 void GameScene::populate(cugl::Size dim) {
@@ -101,17 +101,16 @@ void GameScene::populate(cugl::Size dim) {
   _sword->setEnabled(false);
 
   // Initialize the enemy set and populate with grunts.
-  _enemies.init();
 
   std::shared_ptr<cugl::scene2::SceneNode> enemies_node =
       _world_node->getChildByName("enemies");
   std::vector<std::shared_ptr<cugl::scene2::SceneNode>> enemy_nodes =
       enemies_node->getChildren();
   for (std::shared_ptr<cugl::scene2::SceneNode> enemy_node : enemy_nodes) {
-    std::shared_ptr<Grunt> grunt = _enemies.spawnEnemy(
-        enemy_node->getPosition(), enemy_node->getName(), _assets);
-    _world_node->addChild(grunt->getGruntNode());
-    _world->addObstacle(grunt);
+    std::shared_ptr<EnemyController> ai = EnemyController::alloc(enemy_node->getPosition(), enemy_node->getName(), _assets);
+    _e_controllers.emplace(std::pair<int, std::shared_ptr<EnemyController>>(_id_counter++, ai));
+    _world_node->addChild(ai->getEnemy()->getGruntNode());
+    _world->addObstacle(ai->getEnemy());
   }
 
   // Add physics enabled tiles to world node, debug node and box2d physics
@@ -149,8 +148,15 @@ void GameScene::update(float timestep) {
   int row = (int)floor(_player->getBody()->GetPosition().y / _tile_height);
   _player->getPlayerNode()->setPriority(_row_count - row);
 
-  _ai_controller.moveEnemiesTowardPlayer(_enemies, _player);
-  _enemies.update(timestep);
+//  _ai_controller.moveEnemiesTowardPlayer(_enemies, _player);
+//  _enemies.update(timestep);
+  
+  // Update the AI controllers
+  auto it = _e_controllers.begin();
+  while (it != _e_controllers.end()) {
+    (*it->second).update(timestep, _player);
+    ++it;
+  }
 
   updateCamera(timestep);
   _world->update(timestep);

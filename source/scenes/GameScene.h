@@ -30,8 +30,8 @@ class GameScene : public cugl::Scene2 {
   /** The Box2d world */
   std::shared_ptr<cugl::physics2::ObstacleWorld> _world;
 
-  /** The AI Controller for enemies. */
-  AIController _ai_controller;
+  /** The list of AI Controllers for enemies. */
+  std::unordered_map<int, std::shared_ptr<EnemyController>> _e_controllers;
 
   /** The height of each tile in the world. */
   float _tile_width;
@@ -44,6 +44,9 @@ class GameScene : public cugl::Scene2 {
 
   /** The number of rows in the world. */
   float _row_count;
+  
+  /** The counter for ids for the enemies */
+  int _id_counter = 0;
 
  public:
   GameScene() : cugl::Scene2() {}

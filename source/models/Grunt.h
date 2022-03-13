@@ -81,7 +81,7 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
    *
    * @return  true if the obstacle is initialized properly, false otherwise.
    */
-  virtual bool init(const cugl::Vec2 pos, string name);
+  bool init(const cugl::Vec2 pos, string name);
 
 #pragma mark Static Constructors
   /**
