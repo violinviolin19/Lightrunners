@@ -1,4 +1,4 @@
-#include "ClientScene.h"
+#include "HostMenuScene.h"
 
 #include <cugl/cugl.h>
 
@@ -12,12 +12,9 @@
 #define SCENE_HEIGHT 720
 
 #pragma mark -
-#pragma mark Client Methods
+#pragma mark Host Methods
 
-bool ClientScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
-  // TODO factor out a lot of this common code to peer scene (if we keep the
-  // scene stuff)
-
+bool HostMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
   // Initialize the scene to a locked width
   cugl::Size dimen = cugl::Application::get()->getDisplaySize();
   dimen *= SCENE_HEIGHT / dimen.height;
@@ -32,21 +29,21 @@ bool ClientScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
 
   // Acquire the scene built by the asset loader and resize it the scene
   std::shared_ptr<cugl::scene2::SceneNode> scene =
-      _assets->get<cugl::scene2::SceneNode>("client");
+      _assets->get<cugl::scene2::SceneNode>("host");
   scene->setContentSize(dimen);
   scene->doLayout();  // Repositions the HUD
 
   _startgame = std::dynamic_pointer_cast<cugl::scene2::Button>(
-      _assets->get<cugl::scene2::SceneNode>("client_center_start"));
+      _assets->get<cugl::scene2::SceneNode>("host_center_start"));
   _backout = std::dynamic_pointer_cast<cugl::scene2::Button>(
-      _assets->get<cugl::scene2::SceneNode>("client_back"));
-  _gameid = std::dynamic_pointer_cast<cugl::scene2::TextField>(
-      _assets->get<cugl::scene2::SceneNode>("client_center_game_field_text"));
+      _assets->get<cugl::scene2::SceneNode>("host_back"));
+  _gameid = std::dynamic_pointer_cast<cugl::scene2::Label>(
+      _assets->get<cugl::scene2::SceneNode>("host_center_game_field_text"));
   _player = std::dynamic_pointer_cast<cugl::scene2::Label>(
-      _assets->get<cugl::scene2::SceneNode>(
-          "client_center_players_field_text"));
-  _status = Status::IDLE;
+      _assets->get<cugl::scene2::SceneNode>("host_center_players_field_text"));
+  _status = Status::WAIT;
 
+  // Program the buttons
   _backout->addListener([this](const std::string& name, bool down) {
     if (down) {
       disconnect();
@@ -54,21 +51,11 @@ bool ClientScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
     }
   });
 
-  _startgame->addListener([=](const std::string& name, bool down) {
+  _startgame->addListener([this](const std::string& name, bool down) {
     if (down) {
-      // This will call the _gameid listener
-      if (_gameid->hasFocus()) {
-        _gameid->releaseFocus();
-      } else {
-        connect(_gameid->getText());
-      }
+      startGame();
     }
   });
-
-  _gameid->addExitListener(
-      [this](const std::string& name, const std::string& value) {
-        connect(value);
-      });
 
   // Create the server configuration
   auto json = _assets->get<cugl::JsonValue>("server");
@@ -82,26 +69,22 @@ bool ClientScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
   return true;
 }
 
-void ClientScene::dispose() {
+void HostMenuScene::dispose() {
   if (_active) {
     removeAllChildren();
     _active = false;
   }
 }
 
-void ClientScene::setActive(bool value) {
+void HostMenuScene::setActive(bool value) {
   if (isActive() != value) {
     Scene2::setActive(value);
     if (value) {
-      _status = IDLE;
-      _gameid->activate();
-      _backout->activate();
-      _network = nullptr;
-      _player->setText("1");
+      _status = WAIT;
       configureStartButton();
-      // Don't reset the room id
+      _backout->activate();
+      connect();
     } else {
-      _gameid->deactivate();
       _startgame->deactivate();
       _backout->deactivate();
       // If any were pressed, reset them
@@ -111,15 +94,14 @@ void ClientScene::setActive(bool value) {
   }
 }
 
-void ClientScene::updateText(
-    const std::shared_ptr<cugl::scene2::Button>& button,
-    const std::string text) {
+void HostMenuScene::updateText(const std::shared_ptr<cugl::scene2::Button>& button,
+                           const std::string text) {
   auto label = std::dynamic_pointer_cast<cugl::scene2::Label>(
       button->getChildByName("up")->getChildByName("label"));
   label->setText(text);
 }
 
-void ClientScene::update(float timestep) {
+void HostMenuScene::update(float timestep) {
   if (_network) {
     _network->receive(
         [this](const std::vector<uint8_t>& data) { processData(data); });
@@ -129,59 +111,52 @@ void ClientScene::update(float timestep) {
   }
 }
 
-bool ClientScene::connect(const std::string room) {
-  _network = cugl::NetworkConnection::alloc(_config, room);
+void HostMenuScene::processData(const std::vector<uint8_t>& data) {
+  // TODO process data as needed
+}
+
+bool HostMenuScene::connect() {
+  _network = cugl::NetworkConnection::alloc(_config);
   return checkConnection();
 }
 
-void ClientScene::processData(const std::vector<uint8_t>& data) {
-  if (data[0] == 255) {
-    _status = Status::START;
-  }
-}
-
-bool ClientScene::checkConnection() {
+bool HostMenuScene::checkConnection() {
   switch(_network->getStatus()) {
       case cugl::NetworkConnection::NetStatus::Pending:
-          _status = JOIN;
+          _status = WAIT;
           break;
       case cugl::NetworkConnection::NetStatus::Connected:
+          _gameid->setText(_network->getRoomID());
           _player->setText(std::to_string(_network->getNumPlayers()));
           if (_status != START) {
-              _status = WAIT;
+              _status = IDLE;
           }
           break;
       case cugl::NetworkConnection::NetStatus::Reconnecting:
           _status = WAIT;
           break;
       case cugl::NetworkConnection::NetStatus::RoomNotFound:
-          disconnect();
-          _status = IDLE;
-          break;
       case cugl::NetworkConnection::NetStatus::ApiMismatch:
-          disconnect();
-          _status = IDLE;
-          break;
       case cugl::NetworkConnection::NetStatus::GenericError:
-          disconnect();
-          _status = IDLE;
-          break;
       case cugl::NetworkConnection::NetStatus::Disconnected:
-          disconnect();
-          _status = IDLE;
+          _status = WAIT;
           return false;
   }
   return true;
 }
 
-void ClientScene::configureStartButton() {
-  if (_status == Status::IDLE) {
-    _startgame->activate();
-    updateText(_startgame, "Start Game");
-  } else if (_status == Status::JOIN) {
+void HostMenuScene::configureStartButton() {
+  if (_status == Status::WAIT) {
     _startgame->deactivate();
-    updateText(_startgame, "Connecting");
-  } else if (_status == Status::WAIT) {
     updateText(_startgame, "Waiting");
+  } else {
+    updateText(_startgame, "Start Game");
+    _startgame->activate();
   }
+}
+
+void HostMenuScene::startGame() {
+  std::vector<uint8_t> msg = { 255 };
+  _network->send(msg);
+  _status = START;
 }

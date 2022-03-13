@@ -22,12 +22,12 @@
 		CA5F188B27DBC1B70077AEBB /* MenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA5F188627DBC1B70077AEBB /* MenuScene.cpp */; };
 		CA5F188C27DBC1B70077AEBB /* MenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA5F188627DBC1B70077AEBB /* MenuScene.cpp */; };
 		CA5F188D27DBC1B70077AEBB /* MenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA5F188627DBC1B70077AEBB /* MenuScene.cpp */; };
-		CAAF4CF027DCA79600024986 /* ClientScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CAAF4CE827DCA79600024986 /* ClientScene.cpp */; };
-		CAAF4CF127DCA79600024986 /* ClientScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CAAF4CE827DCA79600024986 /* ClientScene.cpp */; };
-		CAAF4CF227DCA79600024986 /* ClientScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CAAF4CE827DCA79600024986 /* ClientScene.cpp */; };
-		CAAF4CF327DCA79600024986 /* HostScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CAAF4CEC27DCA79600024986 /* HostScene.cpp */; };
-		CAAF4CF427DCA79600024986 /* HostScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CAAF4CEC27DCA79600024986 /* HostScene.cpp */; };
-		CAAF4CF527DCA79600024986 /* HostScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CAAF4CEC27DCA79600024986 /* HostScene.cpp */; };
+		CAAF4CF027DCA79600024986 /* ClientMenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CAAF4CE827DCA79600024986 /* ClientMenuScene.cpp */; };
+		CAAF4CF127DCA79600024986 /* ClientMenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CAAF4CE827DCA79600024986 /* ClientMenuScene.cpp */; };
+		CAAF4CF227DCA79600024986 /* ClientMenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CAAF4CE827DCA79600024986 /* ClientMenuScene.cpp */; };
+		CAAF4CF327DCA79600024986 /* HostMenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CAAF4CEC27DCA79600024986 /* HostMenuScene.cpp */; };
+		CAAF4CF427DCA79600024986 /* HostMenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CAAF4CEC27DCA79600024986 /* HostMenuScene.cpp */; };
+		CAAF4CF527DCA79600024986 /* HostMenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CAAF4CEC27DCA79600024986 /* HostMenuScene.cpp */; };
 		D5073C8B27CFEF2C0000426E /* Wall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5073C8727CFEF2C0000426E /* Wall.cpp */; };
 		D5073C8C27CFEF2C0000426E /* Wall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5073C8727CFEF2C0000426E /* Wall.cpp */; };
 		D5073C8D27CFEF2C0000426E /* Wall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5073C8727CFEF2C0000426E /* Wall.cpp */; };
@@ -180,11 +180,11 @@
 		CA1BA38027D1545700D636A5 /* EnemySet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnemySet.h; sourceTree = "<group>"; };
 		CA5F188627DBC1B70077AEBB /* MenuScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MenuScene.cpp; sourceTree = "<group>"; };
 		CA5F188A27DBC1B70077AEBB /* MenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuScene.h; sourceTree = "<group>"; };
-		CAAF4CE827DCA79600024986 /* ClientScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ClientScene.cpp; sourceTree = "<group>"; };
-		CAAF4CEC27DCA79600024986 /* HostScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HostScene.cpp; sourceTree = "<group>"; };
-		CAAF4CED27DCA79600024986 /* HostScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostScene.h; sourceTree = "<group>"; };
-		CAAF4CEE27DCA79600024986 /* ClientScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientScene.h; sourceTree = "<group>"; };
-		CAAF4CEF27DCA79600024986 /* PeerScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeerScene.h; sourceTree = "<group>"; };
+		CAAF4CE827DCA79600024986 /* ClientMenuScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ClientMenuScene.cpp; sourceTree = "<group>"; };
+		CAAF4CEC27DCA79600024986 /* HostMenuScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HostMenuScene.cpp; sourceTree = "<group>"; };
+		CAAF4CED27DCA79600024986 /* HostMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostMenuScene.h; sourceTree = "<group>"; };
+		CAAF4CEE27DCA79600024986 /* ClientMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientMenuScene.h; sourceTree = "<group>"; };
+		CAAF4CEF27DCA79600024986 /* PeerMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeerMenuScene.h; sourceTree = "<group>"; };
 		D5073C8627CFEF2C0000426E /* Wall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wall.h; sourceTree = "<group>"; };
 		D5073C8727CFEF2C0000426E /* Wall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wall.cpp; sourceTree = "<group>"; };
 		D521FB0E27C43BA500D14172 /* widgets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = widgets; sourceTree = "<group>"; };
@@ -371,11 +371,11 @@
 			children = (
 				D52E672827BF305900F8E2B8 /* GameScene.h */,
 				D52E672B27BF305900F8E2B8 /* GameScene.cpp */,
-				CAAF4CE827DCA79600024986 /* ClientScene.cpp */,
-				CAAF4CEE27DCA79600024986 /* ClientScene.h */,
-				CAAF4CEC27DCA79600024986 /* HostScene.cpp */,
-				CAAF4CED27DCA79600024986 /* HostScene.h */,
-				CAAF4CEF27DCA79600024986 /* PeerScene.h */,
+				CAAF4CE827DCA79600024986 /* ClientMenuScene.cpp */,
+				CAAF4CEE27DCA79600024986 /* ClientMenuScene.h */,
+				CAAF4CEC27DCA79600024986 /* HostMenuScene.cpp */,
+				CAAF4CED27DCA79600024986 /* HostMenuScene.h */,
+				CAAF4CEF27DCA79600024986 /* PeerMenuScene.h */,
 				D52E672927BF305900F8E2B8 /* LoadingScene.h */,
 				D52E672A27BF305900F8E2B8 /* LoadingScene.cpp */,
 				CA5F188627DBC1B70077AEBB /* MenuScene.cpp */,
@@ -764,10 +764,10 @@
 				EB9CDA3925D0EAB100EE1A09 /* main.cpp in Sources */,
 				D56B743D27CA9DCE00710CC6 /* LevelGeneratorConfig.cpp in Sources */,
 				CA1BA38327D1546100D636A5 /* EnemySet.cpp in Sources */,
-				CAAF4CF227DCA79600024986 /* ClientScene.cpp in Sources */,
+				CAAF4CF227DCA79600024986 /* ClientMenuScene.cpp in Sources */,
 				D579718927CFF851008FCC5E /* BasicTile.cpp in Sources */,
 				D52E674227BF305A00F8E2B8 /* GameApp.cpp in Sources */,
-				CAAF4CF527DCA79600024986 /* HostScene.cpp in Sources */,
+				CAAF4CF527DCA79600024986 /* HostMenuScene.cpp in Sources */,
 				D52E673927BF305A00F8E2B8 /* GameScene.cpp in Sources */,
 				D52E673627BF305A00F8E2B8 /* LoadingScene.cpp in Sources */,
 			);
@@ -794,10 +794,10 @@
 				EB7454AE1D74D891002FBAE6 /* main.cpp in Sources */,
 				D56B743C27CA9DCE00710CC6 /* LevelGeneratorConfig.cpp in Sources */,
 				CA1BA38227D1546000D636A5 /* EnemySet.cpp in Sources */,
-				CAAF4CF127DCA79600024986 /* ClientScene.cpp in Sources */,
+				CAAF4CF127DCA79600024986 /* ClientMenuScene.cpp in Sources */,
 				D579718827CFF851008FCC5E /* BasicTile.cpp in Sources */,
 				D52E674127BF305A00F8E2B8 /* GameApp.cpp in Sources */,
-				CAAF4CF427DCA79600024986 /* HostScene.cpp in Sources */,
+				CAAF4CF427DCA79600024986 /* HostMenuScene.cpp in Sources */,
 				D52E673827BF305A00F8E2B8 /* GameScene.cpp in Sources */,
 				D52E673527BF305A00F8E2B8 /* LoadingScene.cpp in Sources */,
 			);
@@ -824,10 +824,10 @@
 				EB2BE9B61D74952A002FE78B /* main.cpp in Sources */,
 				D56B743B27CA9DCE00710CC6 /* LevelGeneratorConfig.cpp in Sources */,
 				CA1BA38127D1545700D636A5 /* EnemySet.cpp in Sources */,
-				CAAF4CF027DCA79600024986 /* ClientScene.cpp in Sources */,
+				CAAF4CF027DCA79600024986 /* ClientMenuScene.cpp in Sources */,
 				D579718727CFF851008FCC5E /* BasicTile.cpp in Sources */,
 				D52E674027BF305A00F8E2B8 /* GameApp.cpp in Sources */,
-				CAAF4CF327DCA79600024986 /* HostScene.cpp in Sources */,
+				CAAF4CF327DCA79600024986 /* HostMenuScene.cpp in Sources */,
 				D52E673727BF305A00F8E2B8 /* GameScene.cpp in Sources */,
 				D52E673427BF305A00F8E2B8 /* LoadingScene.cpp in Sources */,
 			);

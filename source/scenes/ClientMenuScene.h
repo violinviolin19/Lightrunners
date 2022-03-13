@@ -4,14 +4,14 @@
 
 #include <vector>
 
-#include "PeerScene.h"
+#include "PeerMenuScene.h"
 
 /**
  * This class provides the interface to join an existing game.
  *
- * This class is an implementation of PeerScene.
+ * This class is an implementation of PeerMenuScene.
  */
-class ClientScene : public PeerScene {
+class ClientMenuScene : public PeerMenuScene {
  protected:
   /** The game id label (for updating) */
   std::shared_ptr<cugl::scene2::TextField> _gameid;
@@ -22,12 +22,12 @@ class ClientScene : public PeerScene {
   /**
    * Creates a new client scene with the default values.
    */
-  ClientScene() : PeerScene() {}
+  ClientMenuScene() : PeerMenuScene() {}
 
   /**
    * Disposes of all (non-static) resources allocated to this mode.
    */
-  ~ClientScene() { dispose(); }
+  ~ClientMenuScene() { dispose(); }
 
   /**
    * Disposes of all (non-static) resources allocated to this mode.

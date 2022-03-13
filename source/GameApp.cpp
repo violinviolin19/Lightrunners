@@ -85,10 +85,10 @@ void GameApp::update(float timestep) {
       updateMenuScene(timestep);
       break;
     case HOST:
-      updateHostScene(timestep);
+      updateHostMenuScene(timestep);
       break;
     case CLIENT:
-      updateClientScene(timestep);
+      updateClientMenuScene(timestep);
       break;
     case GAME:
       updateGameScene(timestep);
@@ -112,18 +112,15 @@ void GameApp::draw() {
       _loading.render(_batch);
       break;
     case MENU:
-      CULog("rendering menu");
       _menu.render(_batch);
       break;
     case HOST:
       _hostgame.render(_batch);
       break;
     case CLIENT:
-      CULog("rendering client joingame");
       _joingame.render(_batch);
       break;
     case GAME:
-      CULog("drawing game");
       _gameplay.render(_batch);
       break;
   }
@@ -208,15 +205,15 @@ void GameApp::updateMenuScene(float timestep) {
  *
  * @param timestep  The amount of time (in seconds) since the last frame
  */
-void GameApp::updateHostScene(float timestep) {
+void GameApp::updateHostMenuScene(float timestep) {
     _hostgame.update(timestep);
     switch (_hostgame.getStatus()) {
-        case HostScene::Status::ABORT:
+        case HostMenuScene::Status::ABORT:
             _hostgame.setActive(false);
             _menu.setActive(true);
             _scene = State::MENU;
             break;
-        case HostScene::Status::START:
+        case HostMenuScene::Status::START:
             _hostgame.setActive(false);
             _menu.setActive(false);
             _gameplay.setActive(true);
@@ -226,9 +223,9 @@ void GameApp::updateHostScene(float timestep) {
             _hostgame.disconnect();
             _gameplay.setHost(true);
             break;
-        case HostScene::Status::WAIT:
-        case HostScene::Status::IDLE:
-        case HostScene::Status::JOIN:
+        case HostMenuScene::Status::WAIT:
+        case HostMenuScene::Status::IDLE:
+        case HostMenuScene::Status::JOIN:
             // DO NOTHING
             break;
     }
@@ -242,15 +239,15 @@ void GameApp::updateHostScene(float timestep) {
  *
  * @param timestep  The amount of time (in seconds) since the last frame
  */
-void GameApp::updateClientScene(float timestep) {
+void GameApp::updateClientMenuScene(float timestep) {
     _joingame.update(timestep);
     switch (_joingame.getStatus()) {
-        case ClientScene::Status::ABORT:
+        case ClientMenuScene::Status::ABORT:
             _joingame.setActive(false);
             _menu.setActive(true);
             _scene = State::MENU;
             break;
-        case ClientScene::Status::START:
+        case ClientMenuScene::Status::START:
             _joingame.setActive(false);
             _menu.setActive(false);
             _gameplay.setActive(true);
@@ -260,9 +257,9 @@ void GameApp::updateClientScene(float timestep) {
             _joingame.disconnect();
             _gameplay.setHost(false);
             break;
-        case ClientScene::Status::WAIT:
-        case ClientScene::Status::IDLE:
-        case ClientScene::Status::JOIN:
+        case ClientMenuScene::Status::WAIT:
+        case ClientMenuScene::Status::IDLE:
+        case ClientMenuScene::Status::JOIN:
             // DO NOTHING
             break;
     }

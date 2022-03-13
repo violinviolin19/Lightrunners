@@ -6,8 +6,8 @@
 #include "scenes/LevelGenerationDemoScene.h"
 #include "scenes/LoadingScene.h"
 #include "scenes/MenuScene.h"
-#include "scenes/HostScene.h"
-#include "scenes/ClientScene.h"
+#include "scenes/HostMenuScene.h"
+#include "scenes/ClientMenuScene.h"
 
 /**
  * This class represents the application root for the game.
@@ -43,9 +43,9 @@ class GameApp : public cugl::Application {
   MenuScene _menu;
   
   /** The scene to host a game */
-  HostScene _hostgame;
+  HostMenuScene _hostgame;
   /** The scene to join a game */
-  ClientScene _joingame;
+  ClientMenuScene _joingame;
   /** The current active scene */
   State _scene;
 
@@ -150,7 +150,7 @@ class GameApp : public cugl::Application {
    *
    * @param timestep  The amount of time (in seconds) since the last frame
    */
-  void updateHostScene(float timestep);
+  void updateHostMenuScene(float timestep);
   
   /**
    * Inidividualized update method for the client scene.
@@ -160,7 +160,7 @@ class GameApp : public cugl::Application {
    *
    * @param timestep  The amount of time (in seconds) since the last frame
    */
-  void updateClientScene(float timestep);
+  void updateClientMenuScene(float timestep);
 
   /**
    * Inidividualized update method for the game scene.
