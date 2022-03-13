@@ -8,24 +8,24 @@
 
 EnemyController::EnemyController(){};
 
-class Idle; class Chasing; class Attacking; class Avoiding;
+//class Idle; class Chasing; class Attacking; class Avoiding;
 
 // ----------------------------------------------------------------------------
 // State: Idle
 //
-class Idle : public EnemyController {
-  void entry(void) override {
-    // Add code with changing the animation state here
-  }
-  
-  void react(Range const & e) override {
-    if (ATTACK_RANGE >= e.distance) {
-      transit<Attacking>();
-    } else if (e.distance < MIN_DISTANCE){
-      transit<Chasing>();
-    }
-  }
-};
+//class Idle : public EnemyController {
+//  void entry(void) override {
+//    // Add code with changing the animation state here
+//  }
+//
+//  void react(Range const & e) override {
+//    if (ATTACK_RANGE >= e.distance) {
+//      transit<Attacking>();
+//    } else if (e.distance < MIN_DISTANCE){
+//      transit<Chasing>();
+//    }
+//  }
+//};
 
 void EnemyController::idling() {
   _enemy->move(0, 0);
@@ -34,17 +34,17 @@ void EnemyController::idling() {
 // ----------------------------------------------------------------------------
 // State: Chasing
 //
-class Chasing : public EnemyController {
-  void entry(void) override {
-    // Add code with changing the animation state here
-  }
-  
-  void react(Range const & e) override {
-    if (ATTACK_RANGE >= e.distance) {
-      transit<Attacking>();
-    }
-  }
-};
+//class Chasing : public EnemyController {
+//  void entry(void) override {
+//    // Add code with changing the animation state here
+//  }
+//
+//  void react(Range const & e) override {
+//    if (ATTACK_RANGE >= e.distance) {
+//      transit<Attacking>();
+//    }
+//  }
+//};
 
 void EnemyController::chasePlayer(cugl::Vec2 p) {
   cugl::Vec2 diff = p - _enemy->getPosition();
@@ -59,17 +59,17 @@ void EnemyController::chasePlayer(cugl::Vec2 p) {
 // ----------------------------------------------------------------------------
 // State: Attacking
 //
-class Attacking : public EnemyController {
-  void entry(void) override {
-    // Add code with changing the animation state here
-  }
-  
-  void react(Range const & e) override {
-    if (ATTACK_RANGE < e.distance) {
-      transit<Chasing>();
-    }
-  }
-};
+//class Attacking : public EnemyController {
+//  void entry(void) override {
+//    // Add code with changing the animation state here
+//  }
+//
+//  void react(Range const & e) override {
+//    if (ATTACK_RANGE < e.distance) {
+//      transit<Chasing>();
+//    }
+//  }
+//};
 
 void EnemyController::attackPlayer() {
 //  CULog("attacking");
@@ -78,11 +78,11 @@ void EnemyController::attackPlayer() {
 // ----------------------------------------------------------------------------
 // State: Avoiding
 //
-class Avoiding : public EnemyController {
-  void entry(void) override {
-    // Add code with changing the animation state here
-  }
-};
+//class Avoiding : public EnemyController {
+//  void entry(void) override {
+//    // Add code with changing the animation state here
+//  }
+//};
 
 void EnemyController::avoidPlayer() {
 //  CULog("avoiding");
@@ -92,11 +92,11 @@ void EnemyController::avoidPlayer() {
 // ----------------------------------------------------------------------------
 // Base States
 //
-void EnemyController::react(Range const & e) {}
-
-void EnemyController::react(Health const & e) {
-  transit<Avoiding>();
-}
+//void EnemyController::react(Range const & e) {}
+//
+//void EnemyController::react(Health const & e) {
+//  transit<Avoiding>();
+//}
 
 // ----------------------------------------------------------------------------
 //
@@ -112,47 +112,53 @@ bool EnemyController::init(const cugl::Vec2 pos, string name, std::shared_ptr<cu
   grunt_node->setPriority(
       100);  // TODO: Update priority according to position on screen
   
-  start();
+  _current_state = IDLE;
+  
+//  start();
 
   return true;
 }
 
 void EnemyController::update(float timestep, std::shared_ptr<Player> player) {
-  // Reduce computations so only call dispatches when needed
-  Health h;
-  h.health = _enemy->getHealth();
-  Range r;
-  r.distance = (_enemy->getPosition()).subtract(player->getPosition()).length();
-  if (h.health <= HEALTH_LIM) {
-    if (!is_in_state<Avoiding>()) {
-      dispatch(h);
-    }
-    if (r.distance > MIN_DISTANCE) {
-      start();
+  // Calling dispatch a lot seems to cause a lot of LAG
+//  Health h;
+//  h.health = _enemy->getHealth();
+//  Range r;
+  int health = _enemy->getHealth();
+  float distance = (_enemy->getPosition()).subtract(player->getPosition()).length();
+  if (health <= HEALTH_LIM) {
+    _current_state = AVOIDING;
+    if (distance > MIN_DISTANCE) {
+      _current_state = IDLE;
     }
   } else {
-    // Check if the distance is very close to one of the constants, call & dispatch in that case (because can probably just hit threshold to change states)
-    if (r.distance < MIN_DISTANCE) {
-      dispatch(r);
-    } else if (!is_in_state<Idle>()) {
-      start();
+    if (distance <= ATTACK_RANGE) {
+      _current_state = ATTACKING;
+    } else if (distance <= MIN_DISTANCE) {
+      _current_state = CHASING;
+    } else {
+      _current_state = IDLE;
     }
   }
   
   cugl::Vec2 p = player->getPosition();
-  // Do is_in_state checks & calls:
-  if (is_in_state<Chasing>()) {
-//    CULog("Chasing");
-    chasePlayer(p);
-  } else if (is_in_state<Attacking>()) {
-//    CULog("Attacking");
-    attackPlayer();
-  } else if (is_in_state<Avoiding>()) {
-//    CULog("Avoiding");
-    avoidPlayer();
-  } else {
-    idling();
-//    CULog("Idling");
+  switch (_current_state) {
+    case IDLE: {
+      idling();
+      break;
+    }
+    case CHASING: {
+      chasePlayer(p);
+      break;
+    }
+    case ATTACKING: {
+      attackPlayer();
+      break;
+    }
+    case AVOIDING: {
+      avoidPlayer();
+      break;
+    }
   }
   
   _enemy->update(timestep);
@@ -186,4 +192,4 @@ void EnemyController::update(float timestep, std::shared_ptr<Player> player) {
 //  }
 //}
 
-FSM_INITIAL_STATE(EnemyController, Idle); // Set the initial FSM state
+//FSM_INITIAL_STATE(EnemyController, Idle); // Set the initial FSM state

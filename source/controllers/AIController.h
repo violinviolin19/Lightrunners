@@ -5,32 +5,37 @@
 #include "../models/EnemySet.h"
 #include "../models/Player.h"
 
-#include "../../include/tinyfsm.hpp"
+//#include "../../include/tinyfsm.hpp"
 
 /*
  * Event declarations for changing between states for this enemy.
  */
-struct Range : tinyfsm::Event { int distance; }; // Change from chasing to attacking / vice versa
-struct Health : tinyfsm::Event { int health ; }; // Change from attacking/chasing to running away
+//struct Range : tinyfsm::Event { int distance; }; // Change from chasing to attacking / vice versa
+//struct Health : tinyfsm::Event { int health ; }; // Change from attacking/chasing to running away
 
 /**
  * A class to handle enemy AI.
  */
-class EnemyController : public tinyfsm::Fsm<EnemyController> {
-public:
-  friend class Fsm;
+class EnemyController {
 private:
-  /* default reaction for unhandled events */
-  void react(tinyfsm::Event const &) { };
-
-  virtual void react(Range        const &);
-  virtual void react(Health       const &);
-
-  virtual void entry(void) { };  /* entry actions in some states */
-  void         exit(void)  { };  /* no exit actions at all */
+  /** Enum for the player's state (for animation). */
+  enum State { IDLE, CHASING, ATTACKING, AVOIDING };
+//public:
+//  friend class Fsm;
+//private:
+//  /* default reaction for unhandled events */
+//  void react(tinyfsm::Event const &) { };
+//
+//  virtual void react(Range        const &);
+//  virtual void react(Health       const &);
+//
+//  virtual void entry(void) { };  /* entry actions in some states */
+//  void         exit(void)  { };  /* no exit actions at all */
 
 protected:
 
+  State _current_state;
+  
   std::shared_ptr<Grunt> _enemy;
   
 //  /*

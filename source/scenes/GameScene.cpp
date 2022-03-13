@@ -171,19 +171,19 @@ void GameScene::update(float timestep) {
 
   // POST-UPDATE
   // Check for disposal
-  for (std::shared_ptr<Grunt> grunt : _enemies.getEnemies()) {
-    int row = (int)floor(grunt->getBody()->GetPosition().y / _tile_height);
-    grunt->getGruntNode()->setPriority(_row_count - row);
-
-    if (grunt != nullptr && grunt->getHealth() <= 0) {
-      grunt->deactivatePhysics(*_world->getWorld());
-      _enemies.deleteEnemy(grunt);
-      _world_node->removeChild(grunt->getGruntNode());
-      _world->removeObstacle(grunt.get());
-      grunt->dispose();
-      grunt = nullptr;
-    }
-  }
+//  for (std::shared_ptr<Grunt> grunt : _enemies.getEnemies()) {
+//    int row = (int)floor(grunt->getBody()->GetPosition().y / _tile_height);
+//    grunt->getGruntNode()->setPriority(_row_count - row);
+//
+//    if (grunt != nullptr && grunt->getHealth() <= 0) {
+//      grunt->deactivatePhysics(*_world->getWorld());
+//      _enemies.deleteEnemy(grunt);
+//      _world_node->removeChild(grunt->getGruntNode());
+//      _world->removeObstacle(grunt.get());
+//      grunt->dispose();
+//      grunt = nullptr;
+//    }
+//  }
 }
 
 void GameScene::beginContact(b2Contact* contact) {
