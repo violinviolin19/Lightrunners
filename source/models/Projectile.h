@@ -18,6 +18,13 @@ class Projectile : public cugl::physics2::CapsuleObstacle {
   /** The scene graph node for the projectile. */
   std::shared_ptr<cugl::scene2::SpriteNode> _projectile_node;
   
+  /** Represents the hit area for the grunt. */
+  b2Fixture* _hitbox_sensor;
+  /** Keeps an instance of the name alive for collision detection. */
+  std::shared_ptr<std::string> _hitbox_sensor_name;
+  /** The node for debugging the hitbox sensor */
+  std::shared_ptr<cugl::scene2::WireNode> _hitbox_sensor_node;
+  
  public:
 #pragma mark Constructors
   /**
@@ -74,6 +81,13 @@ class Projectile : public cugl::physics2::CapsuleObstacle {
    * @return Number of frames left
    */
   int getFrames() { return _live_frames; }
+  
+  /**
+   * Set the number of frames.
+   *
+   * @param frames Set number frames to frames
+   */
+  void setFrames(int frames) { _live_frames = frames; }
   
   /**
    * Sets whether the projectile has been added to the obstacle world.

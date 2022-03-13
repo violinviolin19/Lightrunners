@@ -1,6 +1,6 @@
 #include "AIController.h"
 
-#define MIN_DISTANCE 200
+#define MIN_DISTANCE 300
 #define HEALTH_LIM 25
 #define ATTACK_RANGE 100
 
@@ -22,11 +22,10 @@ void EnemyController::chasePlayer(const cugl::Vec2 p) {
 
 void EnemyController::attackPlayer(const cugl::Vec2 p) {
   if (_enemy->getAttackCooldown() <= 0) {
-    // need collision filtering?
     _enemy->addBullet(p);
-    // make bullet
-    _enemy->setAttackCooldown(60);
+    _enemy->setAttackCooldown(120);
   }
+  _enemy->move(0, 0);
 }
 
 void EnemyController::avoidPlayer(const cugl::Vec2 p) {
@@ -108,7 +107,6 @@ void EnemyController::update(float timestep, std::shared_ptr<Player> player, std
 
 void EnemyController::updateProjectiles(float timestep, std::shared_ptr<cugl::physics2::ObstacleWorld> _world, std::shared_ptr<cugl::scene2::SceneNode> _world_node, std::shared_ptr<cugl::scene2::SceneNode> _debug_node) {
   auto proj = _enemy->getProjectiles();
-  CULog("%d", proj.size());
   auto itt = proj.begin();
   while (itt != proj.end()) {
     // Add to world if needed

@@ -174,7 +174,6 @@ void GameScene::update(float timestep) {
   while (itt != _e_controllers.end()) {
     auto enemy = (*itt->second);
     if (enemy.getEnemy()->getHealth() <= 0) {
-      // Dispose the enemy controller
       enemy.getEnemy()->deleteAllProjectiles(_world, _world_node);
       enemy.getEnemy()->deactivatePhysics(*_world->getWorld());
       _world_node->removeChild(enemy.getEnemy()->getGruntNode());
@@ -220,6 +219,22 @@ void GameScene::beginContact(b2Contact* contact) {
     dynamic_cast<Player*>(ob2)->takeDamage();
   } else if (fx2_name == "grunt_damage" && ob1 == _player.get()) {
     dynamic_cast<Player*>(ob1)->takeDamage();
+  }
+  
+  if (ob1->getName() == "projectile" && ob2 == _player.get()) {
+    dynamic_cast<Projectile*>(ob1)->setFrames(0); // Destroy the projectile
+    dynamic_cast<Player*>(ob2)->takeDamage();
+  } else if (ob2->getName() == "projectile" && ob1 == _player.get()) {
+    dynamic_cast<Player*>(ob1)->takeDamage();
+    dynamic_cast<Projectile*>(ob2)->setFrames(0); // Destroy the projectile
+  }
+  
+  if (ob1->getName() == "projectile" && ob2->getName() == "Wall") {
+    CULog("hi");
+    dynamic_cast<Projectile*>(ob1)->setFrames(0); // Destroy the projectile
+  } else if (ob2->getName() == "projectile" && ob1->getName() == "Wall") {
+    CULog("hi");
+    dynamic_cast<Projectile*>(ob2)->setFrames(0); // Destroy the projectile
   }
 }
 

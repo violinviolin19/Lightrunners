@@ -25,9 +25,9 @@ bool Grunt::init(const cugl::Vec2 pos, string name) {
   
   _attack_cooldown = 0;
 
-  setDensity(0.01f);
-  setFriction(0.0f);
-  setRestitution(0.01f);
+  setDensity(0.5f);
+  setFriction(0.5f);
+  setRestitution(0.5f);
   setFixedRotation(true);
 
   return true;
