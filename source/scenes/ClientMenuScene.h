@@ -1,5 +1,5 @@
-#ifndef SCENES_CLIENT_SCENE_H_
-#define SCENES_CLIENT_SCENE_H_
+#ifndef SCENES_CLIENT_MENU_SCENE_H_
+#define SCENES_CLIENT_MENU_SCENE_H_
 #include <cugl/cugl.h>
 
 #include <vector>
@@ -11,7 +11,7 @@
  *
  * This class is an implementation of PeerScene.
  */
-class ClientScene : PeerScene {
+class ClientMenuScene : public PeerScene {
  protected:
   /** The game id label (for updating) */
   std::shared_ptr<cugl::scene2::TextField> _gameid;
@@ -22,12 +22,12 @@ class ClientScene : PeerScene {
   /**
    * Creates a new client scene with the default values.
    */
-  ClientScene() : PeerScene() {}
+  ClientMenuScene() : PeerScene() {}
 
   /**
    * Disposes of all (non-static) resources allocated to this mode.
    */
-  ~ClientScene() { dispose(); }
+  ~ClientMenuScene() { dispose(); }
 
   /**
    * Disposes of all (non-static) resources allocated to this mode.

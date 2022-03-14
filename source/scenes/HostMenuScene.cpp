@@ -1,4 +1,4 @@
-#include "HostScene.h"
+#include "HostMenuScene.h"
 
 #include <cugl/cugl.h>
 
@@ -14,7 +14,7 @@
 #pragma mark -
 #pragma mark Host Methods
 
-bool HostScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
+bool HostMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
   // Initialize the scene to a locked width
   cugl::Size dimen = cugl::Application::get()->getDisplaySize();
   dimen *= SCENE_HEIGHT / dimen.height;
@@ -69,14 +69,14 @@ bool HostScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
   return true;
 }
 
-void HostScene::dispose() {
+void HostMenuScene::dispose() {
   if (_active) {
     removeAllChildren();
     _active = false;
   }
 }
 
-void HostScene::setActive(bool value) {
+void HostMenuScene::setActive(bool value) {
   if (isActive() != value) {
     Scene2::setActive(value);
     if (value) {
@@ -94,14 +94,14 @@ void HostScene::setActive(bool value) {
   }
 }
 
-void HostScene::updateText(const std::shared_ptr<cugl::scene2::Button>& button,
+void HostMenuScene::updateText(const std::shared_ptr<cugl::scene2::Button>& button,
                            const std::string text) {
   auto label = std::dynamic_pointer_cast<cugl::scene2::Label>(
       button->getChildByName("up")->getChildByName("label"));
   label->setText(text);
 }
 
-void HostScene::update(float timestep) {
+void HostMenuScene::update(float timestep) {
   if (_network) {
     _network->receive(
         [this](const std::vector<uint8_t>& data) { processData(data); });
@@ -111,39 +111,41 @@ void HostScene::update(float timestep) {
   }
 }
 
-void HostScene::processData(const std::vector<uint8_t>& data) {
+void HostMenuScene::processData(const std::vector<uint8_t>& data) {
   // TODO process data as needed
 }
 
-bool HostScene::connect() {
+bool HostMenuScene::connect() {
   _network = cugl::NetworkConnection::alloc(_config);
   return checkConnection();
 }
 
-bool HostScene::checkConnection() {
-  cugl::NetworkConnection::NetStatus status = _network->getStatus();
-  if (status == cugl::NetworkConnection::NetStatus::Pending) {
-    _status = Status::WAIT;
-  } else if (status == cugl::NetworkConnection::NetStatus::Connected) {
-    if (_status != Status::START) {
-      _status = Status::IDLE;
-      std::string roomid = _network->getRoomID();
-      _gameid->setText(roomid);
-    }
+bool HostMenuScene::checkConnection() {
+  switch(_network->getStatus()) {
+      case cugl::NetworkConnection::NetStatus::Pending:
+          _status = WAIT;
+          break;
+      case cugl::NetworkConnection::NetStatus::Connected:
+          _gameid->setText(_network->getRoomID());
+          _player->setText(std::to_string(_network->getNumPlayers()));
+          if (_status != START) {
+              _status = IDLE;
+          }
+          break;
+      case cugl::NetworkConnection::NetStatus::Reconnecting:
+          _status = WAIT;
+          break;
+      case cugl::NetworkConnection::NetStatus::RoomNotFound:
+      case cugl::NetworkConnection::NetStatus::ApiMismatch:
+      case cugl::NetworkConnection::NetStatus::GenericError:
+      case cugl::NetworkConnection::NetStatus::Disconnected:
+          _status = WAIT;
+          return false;
   }
-  // handle RoomNotFound, ApiMismatch, GenericError or Disconnected
-  else if (status != cugl::NetworkConnection::NetStatus::Reconnecting) {
-    _network->dispose();
-    _status = Status::WAIT;
-    return false;
-  }
-
-  _player->setText(std::to_string(_network->getNumPlayers()));
-
   return true;
 }
 
-void HostScene::configureStartButton() {
+void HostMenuScene::configureStartButton() {
   if (_status == Status::WAIT) {
     _startgame->deactivate();
     updateText(_startgame, "Waiting");
@@ -153,9 +155,8 @@ void HostScene::configureStartButton() {
   }
 }
 
-void HostScene::startGame() {
-  _status = Status::START;
-  std::vector<uint8_t> vect;
-  vect.push_back(255);
-  _network->send(vect);
+void HostMenuScene::startGame() {
+  std::vector<uint8_t> msg = { 255 };
+  _network->send(msg);
+  _status = START;
 }

@@ -3,15 +3,34 @@
 #include <cugl/cugl.h>
 
 #include "scenes/GameScene.h"
+//#include "scenes/HostGameScene.h"
 #include "scenes/LevelGenerationDemoScene.h"
 #include "scenes/LoadingScene.h"
 #include "scenes/MenuScene.h"
+#include "scenes/HostMenuScene.h"
+#include "scenes/ClientMenuScene.h"
 
 /**
  * This class represents the application root for the game.
  */
 class GameApp : public cugl::Application {
  protected:
+  /**
+   * The current active scene
+   */
+  enum State {
+      /** The loading scene */
+      LOAD,
+      /** The main menu scene */
+      MENU,
+      /** The scene to host a game */
+      HOST,
+      /** The scene to join a game */
+      CLIENT,
+      /** The scene to play the game */
+      GAME
+  };
+  
   /** The global sprite batch for drawing (only want one of these) */
   std::shared_ptr<cugl::SpriteBatch> _batch;
   /** The global asset manager */
@@ -19,10 +38,20 @@ class GameApp : public cugl::Application {
 
   /** The primary controller for the game world */
   GameScene _gameplay;
+//  /** The primary controller for the game world (if player is host) */
+//  HostGameScene _hostgameplay;
+
   /** The controller for the loading screen */
   LoadingScene _loading;
   /** The controller for the main menu */
   MenuScene _menu;
+  
+  /** The scene to host a game */
+  HostMenuScene _hostgame;
+  /** The scene to join a game */
+  ClientMenuScene _joingame;
+  /** The current active scene */
+  State _scene;
 
 #ifndef CU_TOUCH_SCREEN
   /** The controller for the level generation demo scene. */
@@ -37,6 +66,7 @@ class GameApp : public cugl::Application {
 
  public:
   GameApp() : cugl::Application(), _loaded(false) {
+    _scene = State::LOAD;
 #ifndef CU_TOUCH_SCREEN
     _show_level_gen_scene = false;
 #endif
@@ -95,6 +125,66 @@ class GameApp : public cugl::Application {
    * at all. The default implmentation does nothing.
    */
   virtual void draw() override;
+  
+  /**
+   * Individualized update method for the loading scene.
+   *
+   * This method keeps the primary {@link #update} from being a mess of switch
+   * statements. It also handles the transition logic from the loading scene.
+   *
+   * @param timestep  The amount of time (in seconds) since the last frame
+   */
+  void updateLoadingScene(float timestep);
+  
+  /**
+   * Individualized update method for the menu scene.
+   *
+   * This method keeps the primary {@link #update} from being a mess of switch
+   * statements. It also handles the transition logic from the menu scene.
+   *
+   * @param timestep  The amount of time (in seconds) since the last frame
+   */
+  void updateMenuScene(float timestep);
+  
+  /**
+   * Individualized update method for the host scene.
+   *
+   * This method keeps the primary {@link #update} from being a mess of switch
+   * statements. It also handles the transition logic from the host scene.
+   *
+   * @param timestep  The amount of time (in seconds) since the last frame
+   */
+  void updateHostMenuScene(float timestep);
+  
+  /**
+   * Individualized update method for the client scene.
+   *
+   * This method keeps the primary {@link #update} from being a mess of switch
+   * statements. It also handles the transition logic from the client scene.
+   *
+   * @param timestep  The amount of time (in seconds) since the last frame
+   */
+  void updateClientMenuScene(float timestep);
+
+  /**
+   * Individualized update method for the game scene.
+   *
+   * This method keeps the primary {@link #update} from being a mess of switch
+   * statements. It also handles the transition logic from the game scene.
+   *
+   * @param timestep  The amount of time (in seconds) since the last frame
+   */
+  void updateGameScene(float timestep);
+  
+//  /**
+//   * Individualized update method for the game scene.
+//   *
+//   * This method keeps the primary {@link #update} from being a mess of switch
+//   * statements. It also handles the transition logic from the game scene.
+//   *
+//   * @param timestep  The amount of time (in seconds) since the last frame
+//   */
+//  void updateHostGameScene(float timestep);
 };
 
 #endif /* GAMEAPP_H_ */

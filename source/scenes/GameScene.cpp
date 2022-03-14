@@ -67,7 +67,7 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
   ui_layer->doLayout();
 
   auto text = ui_layer->getChildByName<cugl::scene2::Label>("health");
-  std::string msg = cugl::strtool::format("Health: %d", _player->getHealth());
+  std::string msg = cugl::strtool::format("Health: %d", _my_player->getHealth());
   text->setText(msg);
   text->setForeground(cugl::Color4::WHITE);
 
@@ -89,12 +89,14 @@ void GameScene::dispose() {
 void GameScene::populate(cugl::Size dim) {
   // Initialize the player with texture and size, then add to world.
   std::shared_ptr<cugl::Texture> player = _assets->get<cugl::Texture>("player");
-  _player = Player::alloc(dim + cugl::Vec2(20, 20), "Johnathan");
+  
+  _my_player = Player::alloc(dim + cugl::Vec2(20, 20), "Johnathan");
+  _players.push_back(_my_player);
 
   auto player_node = cugl::scene2::SpriteNode::alloc(player, 3, 10);
-  _player->setPlayerNode(player_node);
+  _my_player->setPlayerNode(player_node);
   _world_node->addChild(player_node);
-  _world->addObstacle(_player);
+  _world->addObstacle(_my_player);
 
   _sword = Sword::alloc(dim / 2.0f);
   _world->addObstacle(_sword);
@@ -128,8 +130,8 @@ void GameScene::populate(cugl::Size dim) {
   }
 
   // Debug code.
-  _player->setDebugScene(_debug_node);
-  _player->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
+  _my_player->setDebugScene(_debug_node);
+  _my_player->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
   _sword->setDebugScene(_debug_node);
   _sword->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
   for (std::shared_ptr<Grunt> grunt : _enemies.getEnemies()) {
@@ -139,17 +141,26 @@ void GameScene::populate(cugl::Size dim) {
 }
 
 void GameScene::update(float timestep) {
+  if (_network) {
+      sendNetworkInfo();
+
+      _network->receive([this](const std::vector<uint8_t>& data) {
+          processData(data);
+      });
+      checkConnection();
+  }
+  
   cugl::Application::get()->setClearColor(cugl::Color4f::BLACK);
 
   InputController::get()->update();
   // Movement
-  _player->step(timestep, InputController::get<Movement>()->getMovement(),
+  _my_player->step(timestep, InputController::get<Movement>()->getMovement(),
                 InputController::get<Attack>()->isAttacking(), _sword);
 
-  int row = (int)floor(_player->getBody()->GetPosition().y / _tile_height);
-  _player->getPlayerNode()->setPriority(_row_count - row);
+  int row = (int)floor(_my_player->getBody()->GetPosition().y / _tile_height);
+  _my_player->getPlayerNode()->setPriority(_row_count - row);
 
-  _ai_controller.moveEnemiesTowardPlayer(_enemies, _player);
+  _ai_controller.moveEnemiesTowardPlayer(_enemies, _my_player);
   _enemies.update(timestep);
 
   updateCamera(timestep);
@@ -157,11 +168,11 @@ void GameScene::update(float timestep) {
 
   auto ui_layer = _assets->get<cugl::scene2::SceneNode>("ui-scene");
   auto text = ui_layer->getChildByName<cugl::scene2::Label>("health");
-  std::string msg = cugl::strtool::format("Health: %d", _player->getHealth());
+  std::string msg = cugl::strtool::format("Health: %d", _my_player->getHealth());
   text->setText(msg);
 
   // Animation
-  _player->animate(InputController::get<Movement>()->getMovement());
+  _my_player->animate(InputController::get<Movement>()->getMovement());
 
   // POST-UPDATE
   // Check for disposal
@@ -179,6 +190,139 @@ void GameScene::update(float timestep) {
     }
   }
 }
+
+void GameScene::sendNetworkInfo() {
+  if (auto player_id = _network->getPlayerID()) {
+    _my_player->setPlayerId(*player_id);
+  }
+  if (_ishost) {
+    std::vector<std::shared_ptr<cugl::JsonValue>> player_positions;
+    for (std::shared_ptr<Player> player: _players) {
+      std::shared_ptr<cugl::JsonValue> player_info = cugl::JsonValue::allocObject();
+
+      std::shared_ptr<cugl::JsonValue> player_id = cugl::JsonValue::alloc(static_cast<long>(player->getPlayerId()));
+      player_info->appendChild(player_id);
+      player_id->setKey("player_id");
+      
+      std::shared_ptr<cugl::JsonValue> pos = cugl::JsonValue::allocArray();
+      std::shared_ptr<cugl::JsonValue> pos_x = cugl::JsonValue::alloc(player->getPosition().x);
+      std::shared_ptr<cugl::JsonValue> pos_y = cugl::JsonValue::alloc(player->getPosition().y);
+      pos->appendChild(pos_x);
+      pos->appendChild(pos_y);
+      player_info->appendChild(pos);
+      pos->setKey("position");
+
+      player_positions.push_back(player_info);
+    }
+    
+    // Send all player and enemy information.
+    _serializer.writeSint32(2);
+    _serializer.writeJsonVector(player_positions);
+    std::vector<uint8_t> msg = _serializer.serialize();
+    _serializer.reset();
+    _network->send(msg);
+  } else {
+    // Send just the player information.
+    std::shared_ptr<cugl::JsonValue> player_info = cugl::JsonValue::allocObject();
+
+    std::shared_ptr<cugl::JsonValue> player_id = cugl::JsonValue::alloc(static_cast<long>(_my_player->getPlayerId()));
+    player_info->appendChild(player_id);
+    player_id->setKey("player_id");
+    
+    std::shared_ptr<cugl::JsonValue> pos = cugl::JsonValue::allocArray();
+    std::shared_ptr<cugl::JsonValue> pos_x = cugl::JsonValue::alloc(_my_player->getPosition().x);
+    std::shared_ptr<cugl::JsonValue> pos_y = cugl::JsonValue::alloc(_my_player->getPosition().y);
+    pos->appendChild(pos_x);
+    pos->appendChild(pos_y);
+    player_info->appendChild(pos);
+    pos->setKey("position");
+    
+    // Send individual player information.
+    _serializer.writeSint32(4);
+    _serializer.writeJson(player_info);
+    std::vector<uint8_t> msg = _serializer.serialize();
+    _serializer.reset();
+    _network->sendOnlyToHost(msg);
+  }
+}
+
+/**
+ * Processes data sent over the network.
+ *
+ * Once connection is established, all data sent over the network consistes of
+ * byte vectors. This function is a call back function to process that data.
+ * Note that this function may be called *multiple times* per animation frame,
+ * as the messages can come from several sources.
+ *
+ * This is where we handle the gameplay. All connected devices should immediately
+ * change their color when directed by the following method. Changing the color
+ * means changing the clear color of the entire {@link Application}.
+ *
+ * @param data  The data received
+ */
+void GameScene::processData(const std::vector<uint8_t>& data) {
+  _deserializer.receive(data);
+  Sint32 code = std::get<Sint32>(_deserializer.read());
+  if (code == 2) {  // All player info update
+    cugl::NetworkDeserializer::Message msg = _deserializer.read();
+    std::vector<std::shared_ptr<cugl::JsonValue>> player_positions = std::get<std::vector<std::shared_ptr<cugl::JsonValue>>>(msg);
+    for (std::shared_ptr<cugl::JsonValue> player: player_positions) {
+      int player_id = player->getInt("player_id");
+      std::shared_ptr<cugl::JsonValue> player_position = player->get("position");
+      float pos_x = player_position->get(0)->asFloat();
+      float pos_y = player_position->get(1)->asFloat();
+      updatePlayerInfo(player_id, pos_x, pos_y);
+    }
+  } else if (code == 4) {   // Single player info update
+    cugl::NetworkDeserializer::Message msg = _deserializer.read();
+    std::shared_ptr<cugl::JsonValue> player = std::get<std::shared_ptr<cugl::JsonValue>>(msg);
+    int player_id = player->getInt("player_id");
+    std::shared_ptr<cugl::JsonValue> player_position = player->get("position");
+    float pos_x = player_position->get(0)->asFloat();
+    float pos_y = player_position->get(1)->asFloat();
+    updatePlayerInfo(player_id, pos_x, pos_y);
+  }
+  _deserializer.reset();
+}
+
+/**
+ * Updates the position of the player with the corresponding player_id in the _players list.
+ *
+ * @param player_id The player id
+ * @param pos_x The updated player x position
+ * @param pos_y The updated player y position
+ */
+void GameScene::updatePlayerInfo(int player_id, float pos_x, float pos_y) {
+  if (player_id == _my_player->getPlayerId()) {
+    return;
+  }
+  for (std::shared_ptr<Player> player: _players) {
+    if (player->getPlayerId() == player_id) {
+      player->setPosition(pos_x, pos_y);
+      return;
+    }
+  }
+  // Haven't found a player with the player_id, so we must create a new one
+  
+  // Initialize the player with texture and size, then add to world.
+  cugl::Size dim = cugl::Application::get()->getDisplaySize();
+  dim *= SCENE_HEIGHT / ((dim.width > dim.height) ? dim.width : dim.height);
+  
+  std::shared_ptr<cugl::Texture> player = _assets->get<cugl::Texture>("player");
+  
+  std::shared_ptr<Player> new_player = Player::alloc(dim + cugl::Vec2(20, 20), "Johnathan");
+  new_player->setPlayerId(player_id);
+  _players.push_back(new_player);
+
+  auto player_node = cugl::scene2::SpriteNode::alloc(player, 3, 10);
+  new_player->setPlayerNode(player_node);
+  _world_node->addChild(player_node);
+  _world->addObstacle(new_player);
+  
+  new_player->setDebugScene(_debug_node);
+  new_player->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
+}
+
 
 void GameScene::beginContact(b2Contact* contact) {
   b2Fixture* fx1 = contact->GetFixtureA();
@@ -210,11 +354,36 @@ void GameScene::beginContact(b2Contact* contact) {
     dynamic_cast<Grunt*>(ob2)->takeDamage();
   }
 
-  if (fx1_name == "grunt_damage" && ob2 == _player.get()) {
+  if (fx1_name == "grunt_damage" && ob2 == _my_player.get()) {
     dynamic_cast<Player*>(ob2)->takeDamage();
-  } else if (fx2_name == "grunt_damage" && ob1 == _player.get()) {
+  } else if (fx2_name == "grunt_damage" && ob1 == _my_player.get()) {
     dynamic_cast<Player*>(ob1)->takeDamage();
   }
+}
+
+/**
+ * Checks that the network connection is still active.
+ *
+ * Even if you are not sending messages all that often, you need to be calling
+ * this method regularly. This method is used to determine the current state
+ * of the scene.
+ *
+ * @return true if the network connection is still active.
+ */
+bool GameScene::checkConnection() {
+    switch(_network->getStatus()) {
+        case cugl::NetworkConnection::NetStatus::Pending:
+        case cugl::NetworkConnection::NetStatus::Connected:
+        case cugl::NetworkConnection::NetStatus::Reconnecting:
+            break;
+        case cugl::NetworkConnection::NetStatus::RoomNotFound:
+        case cugl::NetworkConnection::NetStatus::ApiMismatch:
+        case cugl::NetworkConnection::NetStatus::GenericError:
+        case cugl::NetworkConnection::NetStatus::Disconnected:
+            disconnect();
+            return false;
+    }
+    return true;
 }
 
 void GameScene::beforeSolve(b2Contact* contact, const b2Manifold* oldManifold) {
@@ -226,7 +395,7 @@ void GameScene::render(const std::shared_ptr<cugl::SpriteBatch>& batch) {
 
 void GameScene::updateCamera(float timestep) {
   cugl::Vec2 desired_position =
-      _world_node->getSize() / 2.0f - _player->getPosition();
+      _world_node->getSize() / 2.0f - _my_player->getPosition();
 
   cugl::Vec2 smoothed_position;
   cugl::Vec2::lerp(_world_node->getPosition(), desired_position,

@@ -1,5 +1,5 @@
-#ifndef SCENES_HOST_SCENE_H_
-#define SCENES_HOST_SCENE_H_
+#ifndef SCENES_HOST_MENU_SCENE_H_
+#define SCENES_HOST_MENU_SCENE_H_
 #include <cugl/cugl.h>
 
 #include <vector>
@@ -11,7 +11,7 @@
  *
  * This class is an implementation of PeerScene.
  */
-class HostScene : PeerScene {
+class HostMenuScene : public PeerScene {
  protected:
   /** The game id label (for updating) */
   std::shared_ptr<cugl::scene2::Label> _gameid;
@@ -22,12 +22,12 @@ class HostScene : PeerScene {
   /**
    * Creates a new host scene with the default values.
    */
-  HostScene() : PeerScene() {}
+  HostMenuScene() : PeerScene() {}
 
   /**
    * Disposes of all (non-static) resources allocated to this mode.
    */
-  ~HostScene() { dispose(); }
+  ~HostMenuScene() { dispose(); }
 
   /**
    * Disposes of all (non-static) resources allocated to this mode.
