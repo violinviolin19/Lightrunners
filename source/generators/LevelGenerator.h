@@ -66,7 +66,16 @@ class LevelGenerator {
    */
   void init(LevelGeneratorConfig &config,
             const std::shared_ptr<cugl::scene2::SceneNode> &map);
-
+  
+  /**
+   * Initialize the generator given a config, scene2 map and seed
+   * @param config A LevelGeneratorConfig used for defining generation
+   * constants.
+   * @param map A reference to the scene2 map for drawing.
+   * @param seed The seed to use.
+   */
+  void init(LevelGeneratorConfig &config,
+           const std::shared_ptr<cugl::scene2::SceneNode> &map, Uint64 seed);
   /**
    * Update the level generator. Calls the next generator step function.
    * Separates the generation steps to be able to draw the generation.

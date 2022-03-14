@@ -172,7 +172,7 @@ void GameApp::updateHostMenuScene(float timestep) {
       break;
     case HostMenuScene::Status::START:
       _hostgame.setActive(false);
-      _level_loading.init(_assets);
+      _level_loading.init(_assets, _hostgame.getSeed());
       _level_loading.setActive(true);
       _scene = State::LEVEL_LOADING;
       // Transfer connection ownership
@@ -207,7 +207,7 @@ void GameApp::updateClientMenuScene(float timestep) {
     case ClientMenuScene::Status::START:
       _joingame.setActive(false);
       _menu.setActive(false);
-      _level_loading.init(_assets);
+      _level_loading.init(_assets, _joingame.getSeed());
       _level_loading.setActive(true);
       _scene = State::LEVEL_LOADING;
       // Transfer connection ownership

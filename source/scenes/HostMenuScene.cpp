@@ -157,7 +157,15 @@ void HostMenuScene::configureStartButton() {
 }
 
 void HostMenuScene::startGame() {
-  std::vector<uint8_t> msg = {255};
+  std::random_device my_random_device;
+  _seed = my_random_device();
+  
+  // Send individual player information.
+  _serializer.writeSint32(255);
+  _serializer.writeUint64(_seed);
+  std::vector<uint8_t> msg = _serializer.serialize();
+  _serializer.reset();
+  
   _network->send(msg);
   _status = START;
 }

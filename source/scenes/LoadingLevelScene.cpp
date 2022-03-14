@@ -7,7 +7,7 @@
 #define SCENE_HEIGHT 720
 
 bool LoadingLevelScene::init(
-    const std::shared_ptr<cugl::AssetManager>& assets) {
+    const std::shared_ptr<cugl::AssetManager>& assets, Uint64 seed) {
   if (_active) return false;
   _active = true;
 
@@ -21,7 +21,7 @@ bool LoadingLevelScene::init(
   _map = cugl::scene2::SceneNode::alloc();
   _map->setPosition(dim / 2);
   _level_generator = std::make_shared<level_gen::LevelGenerator>();
-  _level_generator->init(_config, _map);
+  _level_generator->init(_config, _map, seed);
 
   _map->doLayout();
   cugl::Scene2::addChild(_map);
