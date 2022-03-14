@@ -188,6 +188,15 @@ class GameScene : public cugl::Scene2 {
   void sendNetworkInfo();
   
   /**
+   * Updates the position of the player with the corresponding player_id in the _players list.
+   *
+   * @param player_id The player id
+   * @param pos_x The updated player x position
+   * @param pos_y The updated player y position
+   */
+  void updatePlayerInfo(int player_id, float pos_x, float pos_y);
+  
+  /**
    * Returns true if the player quits the game.
    *
    * @return true if the player quits the game.

@@ -263,7 +263,7 @@ void GameScene::sendNetworkInfo() {
 void GameScene::processData(const std::vector<uint8_t>& data) {
   _deserializer.receive(data);
   Sint32 code = std::get<Sint32>(_deserializer.read());
-  if (code == 2) {  // Player info update
+  if (code == 2) {  // All player info update
     cugl::NetworkDeserializer::Message msg = _deserializer.read();
     std::vector<std::shared_ptr<cugl::JsonValue>> player_positions = std::get<std::vector<std::shared_ptr<cugl::JsonValue>>>(msg);
     for (std::shared_ptr<cugl::JsonValue> player: player_positions) {
@@ -272,9 +272,54 @@ void GameScene::processData(const std::vector<uint8_t>& data) {
       float pos_x = player_position->get(0)->asFloat();
       float pos_y = player_position->get(1)->asFloat();
       CULog("player_id: %i, position: [%f, %f]", player_id, pos_x, pos_y);
+      updatePlayerInfo(player_id, pos_x, pos_y);
     }
+  } else if (code == 4) {   // Single player info update
+    cugl::NetworkDeserializer::Message msg = _deserializer.read();
+    std::shared_ptr<cugl::JsonValue> player = std::get<std::shared_ptr<cugl::JsonValue>>(msg);
+    int player_id = player->getInt("player_id");
+    std::shared_ptr<cugl::JsonValue> player_position = player->get("position");
+    float pos_x = player_position->get(0)->asFloat();
+    float pos_y = player_position->get(1)->asFloat();
+    CULog("player_id: %i, position: [%f, %f]", player_id, pos_x, pos_y);
+    updatePlayerInfo(player_id, pos_x, pos_y);
   }
   _deserializer.reset();
+}
+
+/**
+ * Updates the position of the player with the corresponding player_id in the _players list.
+ *
+ * @param player_id The player id
+ * @param pos_x The updated player x position
+ * @param pos_y The updated player y position
+ */
+void GameScene::updatePlayerInfo(int player_id, float pos_x, float pos_y) {
+  for (std::shared_ptr<Player> player: _players) {
+    if (player->getPlayerId() == player_id) {
+      player->setPosition(pos_x, pos_y);
+      return;
+    }
+  }
+  // Haven't found a player with the player_id, so we must create a new one
+  
+  // Initialize the player with texture and size, then add to world.
+  cugl::Size dim = cugl::Application::get()->getDisplaySize();
+  dim *= SCENE_HEIGHT / ((dim.width > dim.height) ? dim.width : dim.height);
+  
+  std::shared_ptr<cugl::Texture> player = _assets->get<cugl::Texture>("player");
+  
+  std::shared_ptr<Player> new_player = Player::alloc(dim + cugl::Vec2(20, 20), "Johnathan");
+  new_player->setPlayerId(player_id);
+  _players.push_back(new_player);
+
+  auto player_node = cugl::scene2::SpriteNode::alloc(player, 3, 10);
+  new_player->setPlayerNode(player_node);
+  _world_node->addChild(player_node);
+  _world->addObstacle(new_player);
+  
+  new_player->setDebugScene(_debug_node);
+  new_player->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
 }
 
 
