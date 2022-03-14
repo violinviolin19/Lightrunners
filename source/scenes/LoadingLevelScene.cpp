@@ -37,7 +37,7 @@ void LoadingLevelScene::dispose() {
 }
 
 void LoadingLevelScene::update(float timestep) {
-  cugl::Application::get()->setClearColor(cugl::Color4f::WHITE);
+  cugl::Application::get()->setClearColor(cugl::Color4(230, 228, 211));
   switch (_loading_phase) {
     case GENERATE_ROOMS:
       if (!_level_generator->update()) {
@@ -56,7 +56,9 @@ void LoadingLevelScene::update(float timestep) {
       }
       break;
     case LOAD_ROOM_SCENE2:
-      if (_assets->progress() >= 1) _loading_phase = DONE;
+      if (_assets->progress() >= 1) {
+        _loading_phase = DONE;
+      }
       break;
     case DONE:
       _active = false;
