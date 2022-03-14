@@ -64,21 +64,6 @@ void GameApp::update(float timestep) {
   }
 #endif
 
-//  if (!_loaded && _loading.isActive()) {
-//    _loading.update(0.01f);
-//  } else if (!_loaded) {
-//    _loading.dispose();  // Disables the input listeners in this mode.
-//    _menu.init(_assets);
-//    _gameplay.init(_assets);
-//    _menu.setActive(true);
-//    _gameplay.setActive(false);
-//
-//    _loaded = true;
-//#ifndef
-//  if (_show_level_gen_scene) {
-//    _level_gen_scene.update(timestep);
-//#endif
-
   switch (_scene) {
     case LOAD:
       updateLoadingScene(timestep);
@@ -95,9 +80,6 @@ void GameApp::update(float timestep) {
     case GAME:
       updateGameScene(timestep);
       break;
-//    case GAME_HOST:
-//      updateHostGameScene(timestep);
-//      break;
   }
 }
 
@@ -116,7 +98,7 @@ void GameApp::draw() {
       _joingame.render(_batch);
       break;
     case GAME:
-//    case GAME_HOST:
+      //    case GAME_HOST:
       _gameplay.render(_batch);
       break;
   }
@@ -131,24 +113,25 @@ void GameApp::draw() {
  * @param timestep  The amount of time (in seconds) since the last frame
  */
 void GameApp::updateLoadingScene(float timestep) {
-    if (!_loaded && _loading.isActive()) {
-      _loading.update(timestep);
-    } else if (!_loaded) {
-      _loading.dispose(); // Permanently disables the input listeners in this mode.
-      _menu.init(_assets);
-      _hostgame.init(_assets);
-      _joingame.init(_assets);
-      _gameplay.init(_assets);
+  if (!_loaded && _loading.isActive()) {
+    _loading.update(timestep);
+  } else if (!_loaded) {
+    _loading
+        .dispose();  // Permanently disables the input listeners in this mode.
+    _menu.init(_assets);
+    _hostgame.init(_assets);
+    _joingame.init(_assets);
+    _gameplay.init(_assets);
 #ifndef CU_TOUCH_SCREEN
-      _level_gen_scene.init();
+    _level_gen_scene.init();
 #endif
-      _menu.setActive(true);
-      _hostgame.setActive(false);
-      _joingame.setActive(false);
-      _gameplay.setActive(false);
-      _scene = State::MENU;
-      _loaded = true;
-    }
+    _menu.setActive(true);
+    _hostgame.setActive(false);
+    _joingame.setActive(false);
+    _gameplay.setActive(false);
+    _scene = State::MENU;
+    _loaded = true;
+  }
 }
 
 /**
@@ -160,22 +143,22 @@ void GameApp::updateLoadingScene(float timestep) {
  * @param timestep  The amount of time (in seconds) since the last frame
  */
 void GameApp::updateMenuScene(float timestep) {
-    _menu.update(timestep);
-    switch (_menu.getChoice()) {
-        case MenuScene::Choice::HOST:
-            _menu.setActive(false);
-            _hostgame.setActive(true);
-            _scene = State::HOST;
-            break;
-        case MenuScene::Choice::JOIN:
-            _menu.setActive(false);
-            _joingame.setActive(true);
-            _scene = State::CLIENT;
-            break;
-        case MenuScene::Choice::NONE:
-            // DO NOTHING
-            break;
-    }
+  _menu.update(timestep);
+  switch (_menu.getChoice()) {
+    case MenuScene::Choice::HOST:
+      _menu.setActive(false);
+      _hostgame.setActive(true);
+      _scene = State::HOST;
+      break;
+    case MenuScene::Choice::JOIN:
+      _menu.setActive(false);
+      _joingame.setActive(true);
+      _scene = State::CLIENT;
+      break;
+    case MenuScene::Choice::NONE:
+      // DO NOTHING
+      break;
+  }
 }
 
 /**
@@ -187,28 +170,28 @@ void GameApp::updateMenuScene(float timestep) {
  * @param timestep  The amount of time (in seconds) since the last frame
  */
 void GameApp::updateHostMenuScene(float timestep) {
-    _hostgame.update(timestep);
-    switch (_hostgame.getStatus()) {
-        case HostMenuScene::Status::ABORT:
-            _hostgame.setActive(false);
-            _menu.setActive(true);
-            _scene = State::MENU;
-            break;
-        case HostMenuScene::Status::START:
-            _hostgame.setActive(false);
-            _gameplay.setActive(true);
-            _scene = State::GAME;
-            // Transfer connection ownership
-            _gameplay.setConnection(_hostgame.getConnection());
-            _hostgame.disconnect();
-            _gameplay.setHost(true);
-            break;
-        case HostMenuScene::Status::WAIT:
-        case HostMenuScene::Status::IDLE:
-        case HostMenuScene::Status::JOIN:
-            // DO NOTHING
-            break;
-    }
+  _hostgame.update(timestep);
+  switch (_hostgame.getStatus()) {
+    case HostMenuScene::Status::ABORT:
+      _hostgame.setActive(false);
+      _menu.setActive(true);
+      _scene = State::MENU;
+      break;
+    case HostMenuScene::Status::START:
+      _hostgame.setActive(false);
+      _gameplay.setActive(true);
+      _scene = State::GAME;
+      // Transfer connection ownership
+      _gameplay.setConnection(_hostgame.getConnection());
+      _hostgame.disconnect();
+      _gameplay.setHost(true);
+      break;
+    case HostMenuScene::Status::WAIT:
+    case HostMenuScene::Status::IDLE:
+    case HostMenuScene::Status::JOIN:
+      // DO NOTHING
+      break;
+  }
 }
 
 /**
@@ -220,29 +203,29 @@ void GameApp::updateHostMenuScene(float timestep) {
  * @param timestep  The amount of time (in seconds) since the last frame
  */
 void GameApp::updateClientMenuScene(float timestep) {
-    _joingame.update(timestep);
-    switch (_joingame.getStatus()) {
-        case ClientMenuScene::Status::ABORT:
-            _joingame.setActive(false);
-            _menu.setActive(true);
-            _scene = State::MENU;
-            break;
-        case ClientMenuScene::Status::START:
-            _joingame.setActive(false);
-            _menu.setActive(false);
-            _gameplay.setActive(true);
-            _scene = State::GAME;
-            // Transfer connection ownership
-            _gameplay.setConnection(_joingame.getConnection());
-            _joingame.disconnect();
-            _gameplay.setHost(false);
-            break;
-        case ClientMenuScene::Status::WAIT:
-        case ClientMenuScene::Status::IDLE:
-        case ClientMenuScene::Status::JOIN:
-            // DO NOTHING
-            break;
-    }
+  _joingame.update(timestep);
+  switch (_joingame.getStatus()) {
+    case ClientMenuScene::Status::ABORT:
+      _joingame.setActive(false);
+      _menu.setActive(true);
+      _scene = State::MENU;
+      break;
+    case ClientMenuScene::Status::START:
+      _joingame.setActive(false);
+      _menu.setActive(false);
+      _gameplay.setActive(true);
+      _scene = State::GAME;
+      // Transfer connection ownership
+      _gameplay.setConnection(_joingame.getConnection());
+      _joingame.disconnect();
+      _gameplay.setHost(false);
+      break;
+    case ClientMenuScene::Status::WAIT:
+    case ClientMenuScene::Status::IDLE:
+    case ClientMenuScene::Status::JOIN:
+      // DO NOTHING
+      break;
+  }
 }
 
 /**
@@ -253,9 +236,7 @@ void GameApp::updateClientMenuScene(float timestep) {
  *
  * @param timestep  The amount of time (in seconds) since the last frame
  */
-void GameApp::updateGameScene(float timestep) {
-    _gameplay.update(timestep);
-}
+void GameApp::updateGameScene(float timestep) { _gameplay.update(timestep); }
 
 ///**
 // * Individualized update method for the game scene.
@@ -265,6 +246,6 @@ void GameApp::updateGameScene(float timestep) {
 // *
 // * @param timestep  The amount of time (in seconds) since the last frame
 // */
-//void GameApp::updateHostGameScene(float timestep) {
+// void GameApp::updateHostGameScene(float timestep) {
 //    _gameplay.update(timestep);
 //}

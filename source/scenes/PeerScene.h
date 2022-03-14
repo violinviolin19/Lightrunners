@@ -70,7 +70,9 @@ class PeerScene : public cugl::Scene2 {
    *
    * @return true if the controller is initialized properly, false otherwise.
    */
-  virtual bool init(const std::shared_ptr<cugl::AssetManager>& assets){ return true; };
+  virtual bool init(const std::shared_ptr<cugl::AssetManager>& assets) {
+    return true;
+  };
 
   /**
    * Sets whether the scene is currently active
@@ -143,7 +145,7 @@ class PeerScene : public cugl::Scene2 {
    *
    * @return true if the network connection is still active.
    */
-  virtual bool checkConnection(){ return false; };
+  virtual bool checkConnection() { return false; };
 };
 
 #endif /* SCENES_PEER_SCENE_H_ */

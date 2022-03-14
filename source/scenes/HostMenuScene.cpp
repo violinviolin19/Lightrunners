@@ -94,8 +94,9 @@ void HostMenuScene::setActive(bool value) {
   }
 }
 
-void HostMenuScene::updateText(const std::shared_ptr<cugl::scene2::Button>& button,
-                           const std::string text) {
+void HostMenuScene::updateText(
+    const std::shared_ptr<cugl::scene2::Button>& button,
+    const std::string text) {
   auto label = std::dynamic_pointer_cast<cugl::scene2::Label>(
       button->getChildByName("up")->getChildByName("label"));
   label->setText(text);
@@ -121,26 +122,26 @@ bool HostMenuScene::connect() {
 }
 
 bool HostMenuScene::checkConnection() {
-  switch(_network->getStatus()) {
-      case cugl::NetworkConnection::NetStatus::Pending:
-          _status = WAIT;
-          break;
-      case cugl::NetworkConnection::NetStatus::Connected:
-          _gameid->setText(_network->getRoomID());
-          _player->setText(std::to_string(_network->getNumPlayers()));
-          if (_status != START) {
-              _status = IDLE;
-          }
-          break;
-      case cugl::NetworkConnection::NetStatus::Reconnecting:
-          _status = WAIT;
-          break;
-      case cugl::NetworkConnection::NetStatus::RoomNotFound:
-      case cugl::NetworkConnection::NetStatus::ApiMismatch:
-      case cugl::NetworkConnection::NetStatus::GenericError:
-      case cugl::NetworkConnection::NetStatus::Disconnected:
-          _status = WAIT;
-          return false;
+  switch (_network->getStatus()) {
+    case cugl::NetworkConnection::NetStatus::Pending:
+      _status = WAIT;
+      break;
+    case cugl::NetworkConnection::NetStatus::Connected:
+      _gameid->setText(_network->getRoomID());
+      _player->setText(std::to_string(_network->getNumPlayers()));
+      if (_status != START) {
+        _status = IDLE;
+      }
+      break;
+    case cugl::NetworkConnection::NetStatus::Reconnecting:
+      _status = WAIT;
+      break;
+    case cugl::NetworkConnection::NetStatus::RoomNotFound:
+    case cugl::NetworkConnection::NetStatus::ApiMismatch:
+    case cugl::NetworkConnection::NetStatus::GenericError:
+    case cugl::NetworkConnection::NetStatus::Disconnected:
+      _status = WAIT;
+      return false;
   }
   return true;
 }
@@ -156,7 +157,7 @@ void HostMenuScene::configureStartButton() {
 }
 
 void HostMenuScene::startGame() {
-  std::vector<uint8_t> msg = { 255 };
+  std::vector<uint8_t> msg = {255};
   _network->send(msg);
   _status = START;
 }

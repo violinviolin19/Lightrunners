@@ -16,7 +16,7 @@ class Player : public cugl::physics2::CapsuleObstacle {
 
   /** The player's current state. */
   State _current_state;
-  
+
   /** The player's unique id. */
   int _id;
 
@@ -148,21 +148,17 @@ class Player : public cugl::physics2::CapsuleObstacle {
   std::shared_ptr<cugl::scene2::SpriteNode> getPlayerNode() {
     return _player_node;
   }
-  
+
   /**
    * Returns the player id.
    * @return the player id
    */
-  int getPlayerId() {
-    return _id;
-  }
-  
+  int getPlayerId() { return _id; }
+
   /**
    * Sets the player id.
    */
-  void setPlayerId(int player_id) {
-    _id = player_id;
-  }
+  void setPlayerId(int player_id) { _id = player_id; }
 
   /**
    * Sets the frame of the animation.

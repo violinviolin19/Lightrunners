@@ -141,35 +141,35 @@ void ClientMenuScene::processData(const std::vector<uint8_t>& data) {
 }
 
 bool ClientMenuScene::checkConnection() {
-  switch(_network->getStatus()) {
-      case cugl::NetworkConnection::NetStatus::Pending:
-          _status = JOIN;
-          break;
-      case cugl::NetworkConnection::NetStatus::Connected:
-          _player->setText(std::to_string(_network->getNumPlayers()));
-          if (_status != START) {
-              _status = WAIT;
-          }
-          break;
-      case cugl::NetworkConnection::NetStatus::Reconnecting:
-          _status = WAIT;
-          break;
-      case cugl::NetworkConnection::NetStatus::RoomNotFound:
-          disconnect();
-          _status = IDLE;
-          break;
-      case cugl::NetworkConnection::NetStatus::ApiMismatch:
-          disconnect();
-          _status = IDLE;
-          break;
-      case cugl::NetworkConnection::NetStatus::GenericError:
-          disconnect();
-          _status = IDLE;
-          break;
-      case cugl::NetworkConnection::NetStatus::Disconnected:
-          disconnect();
-          _status = IDLE;
-          return false;
+  switch (_network->getStatus()) {
+    case cugl::NetworkConnection::NetStatus::Pending:
+      _status = JOIN;
+      break;
+    case cugl::NetworkConnection::NetStatus::Connected:
+      _player->setText(std::to_string(_network->getNumPlayers()));
+      if (_status != START) {
+        _status = WAIT;
+      }
+      break;
+    case cugl::NetworkConnection::NetStatus::Reconnecting:
+      _status = WAIT;
+      break;
+    case cugl::NetworkConnection::NetStatus::RoomNotFound:
+      disconnect();
+      _status = IDLE;
+      break;
+    case cugl::NetworkConnection::NetStatus::ApiMismatch:
+      disconnect();
+      _status = IDLE;
+      break;
+    case cugl::NetworkConnection::NetStatus::GenericError:
+      disconnect();
+      _status = IDLE;
+      break;
+    case cugl::NetworkConnection::NetStatus::Disconnected:
+      disconnect();
+      _status = IDLE;
+      return false;
   }
   return true;
 }

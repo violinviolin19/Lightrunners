@@ -11,13 +11,13 @@
 class GameScene : public cugl::Scene2 {
   /** The asset manager for loading. */
   std::shared_ptr<cugl::AssetManager> _assets;
-  
+
   /** The network connection (as made by this scene). */
   std::shared_ptr<cugl::NetworkConnection> _network;
 
   /** The player.  */
   std::shared_ptr<Player> _my_player;
-  
+
   /** The list of all players. */
   std::vector<std::shared_ptr<Player>> _players;
 
@@ -38,16 +38,18 @@ class GameScene : public cugl::Scene2 {
 
   /** The AI Controller for enemies. */
   AIController _ai_controller;
-  
-  /** The serializer used to serialize complex data to send through the network. */
+
+  /** The serializer used to serialize complex data to send through the network.
+   */
   cugl::NetworkSerializer _serializer;
-  
-  /** The deserializer used to deserialize complex data sent through the network. */
+
+  /** The deserializer used to deserialize complex data sent through the
+   * network. */
   cugl::NetworkDeserializer _deserializer;
-  
+
   /** Whether this player is the host. */
   bool _ishost;
-  
+
   /** Whether we quit the game. */
   bool _quit;
 
@@ -138,7 +140,7 @@ class GameScene : public cugl::Scene2 {
    * @param timestep The amount of time (in seconds) since the last frame.
    */
   void updateCamera(float timestep);
-  
+
   /**
    * Returns the network connection (as made by this scene).
    *
@@ -147,9 +149,9 @@ class GameScene : public cugl::Scene2 {
    * @return the network connection (as made by this scene)
    */
   void setConnection(const std::shared_ptr<cugl::NetworkConnection>& network) {
-      _network = network;
+    _network = network;
   }
-  
+
   /**
    * Sets whether the player is host.
    *
@@ -157,8 +159,8 @@ class GameScene : public cugl::Scene2 {
    *
    * @param host  Whether the player is host.
    */
-  void setHost(bool host)  { _ishost = host; }
-  
+  void setHost(bool host) { _ishost = host; }
+
   /**
    * Checks that the network connection is still active.
    *
@@ -169,7 +171,7 @@ class GameScene : public cugl::Scene2 {
    * @return true if the network connection is still active.
    */
   bool checkConnection();
-  
+
   /**
    * Processes data sent over the network.
    *
@@ -181,21 +183,22 @@ class GameScene : public cugl::Scene2 {
    * @param data  The data received
    */
   void processData(const std::vector<uint8_t>& data);
-  
+
   /**
    * Broadcasts the relevant network information to all clients and/or the host.
    */
   void sendNetworkInfo();
-  
+
   /**
-   * Updates the position of the player with the corresponding player_id in the _players list.
+   * Updates the position of the player with the corresponding player_id in the
+   * _players list.
    *
    * @param player_id The player id
    * @param pos_x The updated player x position
    * @param pos_y The updated player y position
    */
   void updatePlayerInfo(int player_id, float pos_x, float pos_y);
-  
+
   /**
    * Returns true if the player quits the game.
    *
@@ -206,9 +209,9 @@ class GameScene : public cugl::Scene2 {
   /**
    * Disconnects this scene from the network controller.
    *
-   * Technically, this method does not actually disconnect the network controller.
-   * Since the network controller is a smart pointer, it is only fully disconnected
-   * when ALL scenes have been disconnected.
+   * Technically, this method does not actually disconnect the network
+   * controller. Since the network controller is a smart pointer, it is only
+   * fully disconnected when ALL scenes have been disconnected.
    */
   void disconnect() { _network = nullptr; }
 };

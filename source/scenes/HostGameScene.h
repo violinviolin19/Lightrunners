@@ -6,11 +6,12 @@
 //#include "GameScene.h"
 //
 ///**
-// * This class instantiates and updates all host-specific controllers and views.
+// * This class instantiates and updates all host-specific controllers and
+// views.
 // *
 // * This class is an implementation of GameScene.
 // */
-//class HostGameScene : public GameScene {
+// class HostGameScene : public GameScene {
 // protected:
 //  /** The game id label (for updating) */
 //  std::shared_ptr<cugl::scene2::TextField> _gameid;
@@ -27,7 +28,7 @@
 //   * Disposes of all (non-static) resources allocated to this mode.
 //   */
 //  ~HostGameScene() { dispose(); }
-//  
+//
 //  /**
 //   * Initializes the controller contents, and starts the game.
 //   *
