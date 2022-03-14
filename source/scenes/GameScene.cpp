@@ -295,6 +295,9 @@ void GameScene::processData(const std::vector<uint8_t>& data) {
  * @param pos_y The updated player y position
  */
 void GameScene::updatePlayerInfo(int player_id, float pos_x, float pos_y) {
+  if (player_id == _my_player->getPlayerId()) {
+    return;
+  }
   for (std::shared_ptr<Player> player: _players) {
     if (player->getPlayerId() == player_id) {
       player->setPosition(pos_x, pos_y);
