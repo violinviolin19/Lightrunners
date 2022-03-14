@@ -238,13 +238,14 @@ void GameApp::updateLevelLoadingScene(float timestep) {
     return;
   }
   _gameplay.init(_assets, _level_loading.getLevelGenerator());
-  _scene = State::GAME;
-  _level_loading.dispose();
 
   // Transfer connection ownership
   _gameplay.setConnection(_level_loading.getConnection());
   _level_loading.disconnect();
   _gameplay.setHost(_level_loading.getIsHost());
+  
+  _level_loading.dispose();
+  _scene = State::GAME;
 }
 
 /**

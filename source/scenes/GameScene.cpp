@@ -90,6 +90,11 @@ void GameScene::populate(cugl::Size dim) {
   _my_player = Player::alloc(cugl::Vec2::ZERO, "Johnathan");
   _players.push_back(_my_player);
   _level_controller->getLevelModel()->setPlayer(_my_player);
+  
+  auto player_node = cugl::scene2::SpriteNode::alloc(player, 3, 10);
+  _my_player->setPlayerNode(player_node);
+  _world_node->addChild(player_node);
+  _world->addObstacle(_my_player);
 
   _sword = Sword::alloc(dim / 2.0f);
   _world->addObstacle(_sword);
@@ -135,8 +140,9 @@ void GameScene::update(float timestep) {
 
   InputController::get()->update();
 
-  for (std::shared_ptr<Controller> controller : _controllers)
+  for (std::shared_ptr<Controller> controller : _controllers) {
     controller->update();
+  }
 
   // Movement
   _my_player->step(timestep, InputController::get<Movement>()->getMovement(),
