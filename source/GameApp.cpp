@@ -172,7 +172,6 @@ void GameApp::updateHostMenuScene(float timestep) {
       break;
     case HostMenuScene::Status::START:
       _hostgame.setActive(false);
-      _gameplay.setActive(true);
       _level_loading.init(_assets);
       _level_loading.setActive(true);
       _scene = State::LEVEL_LOADING;
@@ -244,6 +243,9 @@ void GameApp::updateLevelLoadingScene(float timestep) {
   _level_loading.disconnect();
   _gameplay.setHost(_level_loading.getIsHost());
   
+  _level_loading.setActive(false);
+  _gameplay.setActive(true);
+  
   _level_loading.dispose();
   _scene = State::GAME;
 }
@@ -257,15 +259,3 @@ void GameApp::updateLevelLoadingScene(float timestep) {
  * @param timestep  The amount of time (in seconds) since the last frame
  */
 void GameApp::updateGameScene(float timestep) { _gameplay.update(timestep); }
-
-///**
-// * Individualized update method for the game scene.
-// *
-// * This method keeps the primary {@link #update} from being a mess of switch
-// * statements. It also handles the transition logic from the game scene.
-// *
-// * @param timestep  The amount of time (in seconds) since the last frame
-// */
-// void GameApp::updateHostGameScene(float timestep) {
-//    _gameplay.update(timestep);
-//}
