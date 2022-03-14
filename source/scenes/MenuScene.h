@@ -59,15 +59,8 @@ class MenuScene : public cugl::Scene2 {
   bool init(const std::shared_ptr<cugl::AssetManager>& assets);
 
   /**
-   * Sets whether the scene is currently active, and toggle UI respectively.
-   *
-   * @param value whether the scene is currently active
-   */
-  virtual void setActive(bool value) override;
-
-  /**
    * Returns the user's menu choice.
-   *   *
+   *
    * @return the user's menu choice.
    */
   Choice getChoice() const { return _choice; }

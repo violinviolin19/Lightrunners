@@ -9,7 +9,23 @@
 #include "Projectile.h"
 
 class Grunt : public cugl::physics2::CapsuleObstacle {
+ public:
+  /** Enum for the enemy's state (for animation). */
+  enum State {
+    /** The enemy is not moving. */
+    IDLE,
+    /** The enemy is chasing the player. */
+    CHASING,
+    /** The enemy is attacking the player. */
+    ATTACKING,
+    /** The enemy is avoiding the player. */
+    AVOIDING
+  };
+
  private:
+  /** The current state of the grunt. */
+  State _current_state;
+
   /** Grunt health. */
   int _health;
 
@@ -51,6 +67,9 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
   /** Represents the offset between the center of the player and the center of
    * the capsule obstacle. */
   cugl::Vec2 _offset_from_center;
+
+  /** The position of the room this grunt is in, used for drawing. */
+  cugl::Vec2 _room_pos;
 
  public:
 #pragma mark Constructors
@@ -191,6 +210,20 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
     return _projectiles;
   }
 
+  /**
+   * Set the current state of the grunt.  IDLE, ATTACKING, CHASING, AVOIDING...
+   *
+   * @param state The state the enemy should be set to.
+   */
+  void setCurrentState(State state) { _current_state = state; }
+
+  /**
+   * Get the current state of the grunt. IDLE, ATTACKING, CHASING, AVOIDING...
+   *
+   * @return The state of the grunt.
+   */
+  State getCurrentState() { return _current_state; }
+
 #pragma mark -
 #pragma mark Physics Methods
   /**
@@ -235,6 +268,13 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
    * @return node the node that has been set.
    */
   std::shared_ptr<cugl::scene2::SpriteNode>& getGruntNode();
+
+  /**
+   * Sets the position of the room the enemy is in, for drawing purposes.
+   *
+   * @param pos The bottom left corner of the room the enemy is in.
+   */
+  void setRoomPos(cugl::Vec2 pos) { _room_pos = pos; }
 
 #pragma mark Movement
   /**

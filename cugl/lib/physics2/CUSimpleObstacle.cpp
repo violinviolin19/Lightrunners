@@ -35,18 +35,18 @@
 //      2. Altered source versions must be plainly marked as such, and must not
 //      be misrepresented as being the original software.
 //
-//      3. This notice may not be removed or altered from any source distribution.
+//      3. This notice may not be removed or altered from any source
+//      distribution.
 //
 //  This file is based on the CS 3152 PhysicsDemo Lab by Don Holden, 2007
 //
 //  Author: Walker White
 //  Version: 11/6/16
 //
-#include <cugl/physics2/CUSimpleObstacle.h>
 #include <box2d/b2_world.h>
+#include <cugl/physics2/CUSimpleObstacle.h>
 
 using namespace cugl::physics2;
-
 
 #pragma mark -
 #pragma mark Fixture Methods
@@ -61,15 +61,15 @@ using namespace cugl::physics2;
  * @param value  the density of this body
  */
 void SimpleObstacle::setDensity(float value) {
-    _fixture.density = value;
-    if (_body != nullptr) {
-        for (b2Fixture* f = _body->GetFixtureList(); f; f = f->GetNext()) {
-            f->SetDensity(value);
-        }
-        if (!_masseffect) {
-            _body->ResetMassData();
-        }
+  _fixture.density = value;
+  if (_body != nullptr) {
+    for (b2Fixture* f = _body->GetFixtureList(); f; f = f->GetNext()) {
+      f->SetDensity(value);
     }
+    if (!_masseffect) {
+      _body->ResetMassData();
+    }
+  }
 }
 
 /**
@@ -84,12 +84,12 @@ void SimpleObstacle::setDensity(float value) {
  * @param value  the friction coefficient of this body
  */
 void SimpleObstacle::setFriction(float value) {
-    _fixture.friction = value;
-    if (_body != nullptr) {
-        for (b2Fixture* f = _body->GetFixtureList(); f; f = f->GetNext()) {
-            f->SetFriction(value);
-        }
+  _fixture.friction = value;
+  if (_body != nullptr) {
+    for (b2Fixture* f = _body->GetFixtureList(); f; f = f->GetNext()) {
+      f->SetFriction(value);
     }
+  }
 }
 
 /**
@@ -104,12 +104,12 @@ void SimpleObstacle::setFriction(float value) {
  * @param value  the restitution of this body
  */
 void SimpleObstacle::setRestitution(float value) {
-    _fixture.restitution = value;
-    if (_body != nullptr) {
-        for (b2Fixture* f = _body->GetFixtureList(); f; f = f->GetNext()) {
-            f->SetRestitution(value);
-        }
+  _fixture.restitution = value;
+  if (_body != nullptr) {
+    for (b2Fixture* f = _body->GetFixtureList(); f; f = f->GetNext()) {
+      f->SetRestitution(value);
     }
+  }
 }
 
 /**
@@ -122,12 +122,12 @@ void SimpleObstacle::setRestitution(float value) {
  * @param value  whether this object is a sensor.
  */
 void SimpleObstacle::setSensor(bool value) {
-    _fixture.isSensor = value;
-    if (_body != nullptr) {
-        for (b2Fixture* f = _body->GetFixtureList(); f; f = f->GetNext()) {
-            f->SetSensor(value);
-        }
+  _fixture.isSensor = value;
+  if (_body != nullptr) {
+    for (b2Fixture* f = _body->GetFixtureList(); f; f = f->GetNext()) {
+      f->SetSensor(value);
     }
+  }
 }
 
 /**
@@ -145,17 +145,45 @@ void SimpleObstacle::setSensor(bool value) {
  * @param value  the filter data for this object
  */
 void SimpleObstacle::setFilterData(b2Filter value) {
-    _fixture.filter = value;
-    if (_body != nullptr) {
-        for (b2Fixture* f = _body->GetFixtureList(); f; f = f->GetNext()) {
-            f->SetFilterData(value);
-        }
+  _fixture.filter = value;
+  if (_body != nullptr) {
+    for (b2Fixture* f = _body->GetFixtureList(); f; f = f->GetNext()) {
+      f->SetFilterData(value);
     }
+  }
 }
-
 
 #pragma mark -
 #pragma mark Physics Methods
+
+/**
+ * Add sensors to this body.
+ *
+ * @param sensors The sensors to be added.
+ */
+void SimpleObstacle::createSensors() {
+  if (_body == nullptr) return;
+
+  for (std::shared_ptr<b2FixtureDef>& def : _sensor_defs) {
+    _sensors.push_back(_body->CreateFixture(def.get()));
+  }
+
+  markDirty(false);
+}
+
+/**
+ * Release all sensors added to this body.
+ */
+void SimpleObstacle::releaseSensors() {
+  if (_body == nullptr) return;
+
+  for (b2Fixture* sensor : _sensors) {
+    _body->DestroyFixture(sensor);
+    sensor = nullptr;
+  }
+
+  _sensors.clear();
+}
 
 /**
  * Creates the physics Body(s) for this object, adding them to the world.
@@ -168,19 +196,20 @@ void SimpleObstacle::setFilterData(b2Filter value) {
  * @return true if object allocation succeeded
  */
 bool SimpleObstacle::activatePhysics(b2World& world) {
-    // Make a body, if possible
-    _bodyinfo.enabled = true;
-    _body = world.CreateBody(&_bodyinfo);
-    _body->GetUserData().pointer = reinterpret_cast<intptr_t>(this);
-    
-    // Only initialize if a body was created.
-    if (_body != nullptr) {
-        createFixtures();
-        return true;
-    }
-    
-    _bodyinfo.enabled = false;
-    return false;
+  // Make a body, if possible
+  _bodyinfo.enabled = true;
+  _body = world.CreateBody(&_bodyinfo);
+  _body->GetUserData().pointer = reinterpret_cast<intptr_t>(this);
+
+  // Only initialize if a body was created.
+  if (_body != nullptr) {
+    createFixtures();
+    createSensors();
+    return true;
+  }
+
+  _bodyinfo.enabled = false;
+  return false;
 }
 
 /**
@@ -191,15 +220,16 @@ bool SimpleObstacle::activatePhysics(b2World& world) {
  * @param world Box2D world that stores body
  */
 void SimpleObstacle::deactivatePhysics(b2World& world) {
-    // Should be good for most (simple) applications.
-    if (_body != nullptr) {
-        releaseFixtures(); // Have to remove these first.
-        // Snapshot the values
-        setBodyState(*_body);
-        world.DestroyBody(_body);
-        _body = nullptr;
-        _bodyinfo.enabled = false;
-    }
+  // Should be good for most (simple) applications.
+  if (_body != nullptr) {
+    releaseFixtures();  // Have to remove these first.
+    releaseSensors();
+    // Snapshot the values
+    setBodyState(*_body);
+    world.DestroyBody(_body);
+    _body = nullptr;
+    _bodyinfo.enabled = false;
+  }
 }
 
 /**
@@ -216,13 +246,12 @@ void SimpleObstacle::deactivatePhysics(b2World& world) {
  * @param dt Timing values from parent loop
  */
 void SimpleObstacle::update(float delta) {
-    Obstacle::update(delta);
-    // Recreate the fixture object if dimensions changed.
-    if (isDirty()) {
-        createFixtures();
-    }
+  Obstacle::update(delta);
+  // Recreate the fixture object if dimensions changed.
+  if (isDirty()) {
+    createFixtures();
+  }
 }
-
 
 #pragma mark -
 #pragma mark Scene Graph Methods
@@ -235,23 +264,23 @@ void SimpleObstacle::update(float delta) {
  * off.  Hence we have made this virtual.
  */
 void SimpleObstacle::updateDebug() {
-    CUAssertLog(_scene, "Attempt to reposition a wireframe with no parent");
-    Vec2 pos = getPosition();
-    float angle = getAngle();
-    
-    // Positional snap
-    if (_posSnap >= 0) {
-        pos.x = floor((pos.x*_posFact+0.5f)/_posFact);
-        pos.y = floor((pos.y*_posFact+0.5f)/_posFact);
-    }
-    // Rotational snap
-    if (_angSnap >= 0) {
-        angle = (float)(180*angle/M_PI);
-        angle = floor((angle*_angFact+0.5f)/_angFact); // Formula is for degrees
-        angle = (float)(M_PI*angle/180);
-    }
-    
-    _debug->setPosition(pos);
-    _debug->setAngle(angle);
-}
+  CUAssertLog(_scene, "Attempt to reposition a wireframe with no parent");
+  Vec2 pos = getPosition();
+  float angle = getAngle();
 
+  // Positional snap
+  if (_posSnap >= 0) {
+    pos.x = floor((pos.x * _posFact + 0.5f) / _posFact);
+    pos.y = floor((pos.y * _posFact + 0.5f) / _posFact);
+  }
+  // Rotational snap
+  if (_angSnap >= 0) {
+    angle = (float)(180 * angle / M_PI);
+    angle =
+        floor((angle * _angFact + 0.5f) / _angFact);  // Formula is for degrees
+    angle = (float)(M_PI * angle / 180);
+  }
+
+  _debug->setPosition(pos);
+  _debug->setAngle(angle);
+}

@@ -166,7 +166,7 @@ void Grunt::releaseFixtures() {
 void Grunt::update(float delta) {
   CapsuleObstacle::update(delta);
   if (_grunt_node != nullptr) {
-    _grunt_node->setPosition(getPosition() + _offset_from_center);
+    _grunt_node->setPosition(getPosition() + _offset_from_center - _room_pos);
   }
 
   if (_damage_count <= 0) {

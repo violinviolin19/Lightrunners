@@ -72,7 +72,8 @@ class SimpleObstacle : public Obstacle {
 protected:
     /** The physics body for Box2D. */
     b2Body* _body;
-    
+    /** A cache value for the extra sensor fixtures. */
+    std::vector<b2Fixture*> _sensors;
     /** Number of decimal places to snap position of image to physics body */
     int _posSnap;
     /** Cache of factor to snap position of image to physics body */
@@ -869,6 +870,19 @@ public:
      * This is the primary method to override for custom physics objects.
      */
     virtual void releaseFixtures() {}
+
+
+    /**
+     * Add sensors to this body.
+     * 
+     * @param sensors The sensors to be added.
+     */
+    virtual void createSensors();
+
+     /**
+     * Release all sensors added to this body.
+     */
+    virtual void releaseSensors();
     
     /**
      * Updates the object's physics state (NOT GAME LOGIC).
