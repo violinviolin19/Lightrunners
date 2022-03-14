@@ -33,16 +33,20 @@ void LevelController::update() {
   player->getPlayerNode()->setPriority(current->getGridSize().height - row);
 
   for (std::shared_ptr<Grunt> enemy : current->getEnemies()) {
-    float rel_enemy_y =
-        enemy->getBody()->GetPosition().y - current->getNode()->getPosition().y;
-    row = (int)floor(rel_enemy_y / (TILE_SIZE.y * TILE_SCALE.y));
-    enemy->getGruntNode()->setPriority(current->getGridSize().height - row);
+    b2Body *enemy_body = enemy->getBody();
+    if (enemy_body != nullptr) {
+      float rel_enemy_y =
+          enemy_body->GetPosition().y - current->getNode()->getPosition().y;
+      row = (int)floor(rel_enemy_y / (TILE_SIZE.y * TILE_SCALE.y));
+      enemy->getGruntNode()->setPriority(current->getGridSize().height - row);
 
-    for (std::shared_ptr<Projectile> projectile : enemy->getProjectiles()) {
-      float rel_projectile_y = projectile->getBody()->GetPosition().y -
-                               current->getNode()->getPosition().y;
-      row = (int)floor(rel_projectile_y / (TILE_SIZE.y * TILE_SCALE.y));
-      player->getPlayerNode()->setPriority(current->getGridSize().height - row);
+      for (std::shared_ptr<Projectile> projectile : enemy->getProjectiles()) {
+        float rel_projectile_y = projectile->getBody()->GetPosition().y -
+                                 current->getNode()->getPosition().y;
+        row = (int)floor(rel_projectile_y / (TILE_SIZE.y * TILE_SCALE.y));
+        player->getPlayerNode()->setPriority(current->getGridSize().height -
+                                             row);
+      }
     }
   }
 }
@@ -58,6 +62,9 @@ void LevelController::changeRoom(std::string &door_sensor_name) {
 
   cugl::Vec2 door_pos = current->getPosOfDestinationDoor(door_sensor_name);
 
+  for (std::shared_ptr<Grunt> enemy : current->getEnemies())
+    enemy->promiseToChangePhysics(false);
+
   current->setVisible(false);
   _level_model->setCurrentRoom(destination_room_id);
 
@@ -68,6 +75,9 @@ void LevelController::changeRoom(std::string &door_sensor_name) {
   _level_model->getPlayer()->setPosPromise(
       new_current->getNode()->getPosition() +
       door_pos * (TILE_SIZE * TILE_SCALE));
+
+  for (std::shared_ptr<Grunt> enemy : new_current->getEnemies())
+    enemy->promiseToChangePhysics(true);
 
   CULog("%s -> %s", current->getName().c_str(), new_current->getName().c_str());
 }
@@ -162,6 +172,8 @@ void LevelController::populate() {
       grunt->setRoomPos(pos);
       node->addChild(grunt->getGruntNode());
       _world->addObstacle(grunt);
+      if (room->_type != level_gen::Room::RoomType::SPAWN)
+        grunt->setEnabled(false);
 
       grunt->setDebugScene(_debug_node);
       grunt->setDebugColor(cugl::Color4(cugl::Color4::BLACK));

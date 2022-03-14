@@ -55,8 +55,30 @@ const RoomConfig kStandard3 = {
                             cugl::Vec2(0.0f, 10.0f), cugl::Vec2(10.0f, 0.0f)},
     "rooms/room-3-scene.json"};
 
+/** Represents a standard room. */
+const RoomConfig kStandard4 = {
+    cugl::Size(21.0f, 21.0f),
+    std::vector<cugl::Vec2>{cugl::Vec2(20.0f, 10.0f), cugl::Vec2(10.0f, 20.0f),
+                            cugl::Vec2(0.0f, 10.0f), cugl::Vec2(10.0f, 0.0f)},
+    "rooms/room-4-scene.json"};
+
+/** Represents a standard room. */
+const RoomConfig kStandard5 = {
+    cugl::Size(21.0f, 21.0f),
+    std::vector<cugl::Vec2>{cugl::Vec2(20.0f, 10.0f), cugl::Vec2(10.0f, 20.0f),
+                            cugl::Vec2(0.0f, 10.0f), cugl::Vec2(10.0f, 0.0f)},
+    "rooms/room-5-scene.json"};
+
+/** RRepresents a standard rooms. */
+const RoomConfig kStandard6 = {
+    cugl::Size(21.0f, 21.0f),
+    std::vector<cugl::Vec2>{cugl::Vec2(20.0f, 10.0f), cugl::Vec2(10.0f, 20.0f),
+                            cugl::Vec2(0.0f, 10.0f), cugl::Vec2(10.0f, 0.0f)},
+    "rooms/room-6-scene.json"};
+
 /** A list of all the regular rooms. */
-const std::vector<RoomConfig> kRegularRooms{kStandard1, kStandard2, kStandard3};
+const std::vector<RoomConfig> kRegularRooms{kStandard1, kStandard2, kStandard3,
+                                            kStandard4, kStandard5};
 
 };  // namespace default_rooms
 

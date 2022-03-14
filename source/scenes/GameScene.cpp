@@ -181,6 +181,8 @@ void GameScene::update(float timestep) {
       it = enemies.erase(it);
     } else {
       enemy->deleteProjectile(_world, _world_node);
+      if (enemy->getPromiseToChangePhysics())
+        enemy->setEnabled(enemy->getPromiseToEnable());
       ++it;
     }
   }
