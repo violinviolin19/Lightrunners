@@ -8,7 +8,8 @@
 #include "../models/tiles/Door.h"
 #include "Controller.h"
 
-#define TILE_SCALE cugl::Vec2(38.4, 38.4)
+#define TILE_SCALE cugl::Vec2(0.6, 0.6)
+#define TILE_SIZE cugl::Vec2(64, 64)
 
 bool LevelController::init(
     const std::shared_ptr<cugl::AssetManager> &assets,
@@ -28,14 +29,14 @@ void LevelController::update() {
   std::shared_ptr<Player> player = _level_model->getPlayer();
   float rel_player_y =
       player->getBody()->GetPosition().y - current->getNode()->getPosition().y;
-  int row = (int)floor(rel_player_y / TILE_SCALE.y);
+  int row = (int)floor(rel_player_y / TILE_SIZE.y * TILE_SCALE.y);
   player->getPlayerNode()->setPriority(current->getGridSize().height - row);
 
   std::shared_ptr<EnemySet> enemy_set = current->getEnemies();
   for (std::shared_ptr<Grunt> grunt : enemy_set->getEnemies()) {
     float rel_grunt_y =
         grunt->getBody()->GetPosition().y - current->getNode()->getPosition().y;
-    int row = (int)floor(rel_grunt_y / TILE_SCALE.y);
+    int row = (int)floor(rel_grunt_y / TILE_SIZE.y * TILE_SCALE.y);
     grunt->getGruntNode()->setPriority(current->getGridSize().height - row);
   }
 }
@@ -59,7 +60,8 @@ void LevelController::changeRoom(std::string &door_sensor_name) {
 
   new_current->setVisible(true);
   _level_model->getPlayer()->setPosPromise(
-      new_current->getNode()->getPosition() + door_pos * TILE_SCALE);
+      new_current->getNode()->getPosition() +
+      door_pos * TILE_SIZE * TILE_SCALE);
 
   CULog("%s -> %s", current->getName().c_str(), new_current->getName().c_str());
 }
@@ -73,8 +75,9 @@ void LevelController::populate() {
 
   // Get Size of World.
   for (std::shared_ptr<level_gen::Room> room : _level_gen->getRooms()) {
-    cugl::Vec2 pos = room->getRect().origin * TILE_SCALE;
-    cugl::Vec2 size = ((cugl::Vec2)room->getRect().size) * TILE_SCALE;
+    cugl::Vec2 pos = room->getRect().origin * TILE_SIZE * TILE_SCALE;
+    cugl::Vec2 size =
+        ((cugl::Vec2)room->getRect().size) * TILE_SIZE * TILE_SCALE;
     if (pos.x < world_start.x) world_start.x = pos.x;
     if (pos.y < world_start.y) world_start.y = pos.y;
     if (pos.x + size.x > world_end.x) world_end.x = pos.x;
@@ -89,7 +92,7 @@ void LevelController::populate() {
     auto node = _assets->get<cugl::scene2::SceneNode>(room->_scene2_key);
 
     node->setAnchor(cugl::Vec2::ANCHOR_BOTTOM_LEFT);
-    cugl::Vec2 pos = room->getRect().origin * TILE_SCALE;
+    cugl::Vec2 pos = room->getRect().origin * TILE_SIZE * TILE_SCALE;
     node->setPosition(pos);
     node->setVisible(false);
 
