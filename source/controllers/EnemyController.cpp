@@ -34,9 +34,16 @@ void EnemyController::avoidPlayer(const cugl::Vec2 p) {
   _enemy->move(-diff.x, -diff.y);
 }
 
-bool EnemyController::init(const cugl::Vec2 pos, string name,
-                           std::shared_ptr<cugl::AssetManager> assets,
-                           float tile_height, float row_count) {
+bool EnemyController::init(
+    const cugl::Vec2 pos, string name,
+    std::shared_ptr<cugl::AssetManager> assets, float tile_height,
+    float row_count, std::shared_ptr<cugl::physics2::ObstacleWorld> world,
+    std::shared_ptr<cugl::scene2::SceneNode> world_node,
+    std::shared_ptr<cugl::scene2::SceneNode> debug_node) {
+  _world = world;
+  _world_node = world_node;
+  _debug_node = debug_node;
+
   std::shared_ptr<cugl::Texture> grunt_texture =
       assets->get<cugl::Texture>("grunt");
   _enemy = Grunt::alloc(pos, name);
@@ -56,12 +63,7 @@ bool EnemyController::init(const cugl::Vec2 pos, string name,
   return true;
 }
 
-void EnemyController::update(
-    float timestep, std::shared_ptr<Player> player,
-    std::shared_ptr<cugl::physics2::ObstacleWorld> _world,
-    std::shared_ptr<cugl::scene2::SceneNode> _world_node,
-    std::shared_ptr<cugl::scene2::SceneNode> _debug_node) {
-  
+void EnemyController::update(float timestep, std::shared_ptr<Player> player) {
   // Change state if applicable
   float distance =
       (_enemy->getPosition()).subtract(player->getPosition()).length();
@@ -77,9 +79,9 @@ void EnemyController::update(
   }
 
   // Update enemy & projectiles
-  updateProjectiles(timestep, _world, _world_node, _debug_node);
+  updateProjectiles(timestep);
   _enemy->update(timestep);
-  
+
   // Set the priority for drawing
   int row = (int)floor(_enemy->getBody()->GetPosition().y / _tile_height);
   _enemy->getGruntNode()->setPriority(_row_count - row);
@@ -125,10 +127,7 @@ void EnemyController::performAction(cugl::Vec2 p) {
   }
 }
 
-void EnemyController::updateProjectiles(
-    float timestep, std::shared_ptr<cugl::physics2::ObstacleWorld> _world,
-    std::shared_ptr<cugl::scene2::SceneNode> _world_node,
-    std::shared_ptr<cugl::scene2::SceneNode> _debug_node) {
+void EnemyController::updateProjectiles(float timestep) {
   auto proj = _enemy->getProjectiles();
   auto itt = proj.begin();
   while (itt != proj.end()) {

@@ -107,9 +107,9 @@ void GameScene::populate(cugl::Size dim) {
   std::vector<std::shared_ptr<cugl::scene2::SceneNode>> enemy_nodes =
       enemies_node->getChildren();
   for (std::shared_ptr<cugl::scene2::SceneNode> enemy_node : enemy_nodes) {
-    std::shared_ptr<EnemyController> ai =
-        EnemyController::alloc(enemy_node->getPosition(), enemy_node->getName(),
-                               _assets, _tile_height, _row_count);
+    std::shared_ptr<EnemyController> ai = EnemyController::alloc(
+        enemy_node->getPosition(), enemy_node->getName(), _assets, _tile_height,
+        _row_count, _world, _world_node, _debug_node);
     _e_controllers.emplace(
         std::pair<int, std::shared_ptr<EnemyController>>(_id_counter++, ai));
     _world_node->addChild(ai->getEnemy()->getGruntNode());
@@ -156,7 +156,7 @@ void GameScene::update(float timestep) {
   auto it = _e_controllers.begin();
   while (it != _e_controllers.end()) {
     auto enemy = (*it->second);
-    enemy.update(timestep, _player, _world, _world_node, _debug_node);
+    enemy.update(timestep, _player);
     ++it;
   }
 
