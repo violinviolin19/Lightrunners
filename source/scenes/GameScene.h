@@ -16,7 +16,10 @@ class GameScene : public cugl::Scene2 {
   std::shared_ptr<cugl::NetworkConnection> _network;
 
   /** The player.  */
-  std::shared_ptr<Player> _player;
+  std::shared_ptr<Player> _my_player;
+  
+  /** The list of all players. */
+  std::vector<std::shared_ptr<Player>> _players;
 
   /** The set of enemies.  */
   EnemySet _enemies;
@@ -41,7 +44,6 @@ class GameScene : public cugl::Scene2 {
   
   /** The deserializer used to deserialize complex data sent through the network. */
   cugl::NetworkDeserializer _deserializer;
-
   
   /** Whether this player is the host. */
   bool _ishost;
