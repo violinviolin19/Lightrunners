@@ -6,8 +6,26 @@
 #include <cugl/cugl.h>
 #include <stdio.h>
 
+#include "Projectile.h"
+
 class Grunt : public cugl::physics2::CapsuleObstacle {
+ public:
+  /** Enum for the enemy's state (for animation). */
+  enum State {
+    /** The enemy is not moving. */
+    IDLE,
+    /** The enemy is chasing the player. */
+    CHASING,
+    /** The enemy is attacking the player. */
+    ATTACKING,
+    /** The enemy is avoiding the player. */
+    AVOIDING
+  };
+
  private:
+  /** The current state of the grunt. */
+  State _current_state;
+
   /** Grunt health. */
   int _health;
 
@@ -31,6 +49,9 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
   /** The node for debugging the damage sensor */
   std::shared_ptr<cugl::scene2::WireNode> _damage_sensor_node;
 
+  /** The list of projectiles that have been shot by the grunt. */
+  std::unordered_set<std::shared_ptr<Projectile>> _projectiles;
+
   /** Force to be applied to the grunt. */
   cugl::Vec2 _force;
 
@@ -40,9 +61,15 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
   /** Damage frame count to turn red. */
   int _damage_count;
 
+  /** Attack cooldown. */
+  int _attack_cooldown;
+
   /** Represents the offset between the center of the player and the center of
    * the capsule obstacle. */
   cugl::Vec2 _offset_from_center;
+
+  /** The position of the room this grunt is in, used for drawing. */
+  cugl::Vec2 _room_pos;
 
  public:
 #pragma mark Constructors
@@ -71,6 +98,7 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
     _grunt_node = nullptr;
     _hitbox_sensor = nullptr;
     _damage_sensor = nullptr;
+    _projectiles.clear();
   }
 
   /**
@@ -81,7 +109,7 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
    *
    * @return  true if the obstacle is initialized properly, false otherwise.
    */
-  virtual bool init(const cugl::Vec2 pos, string name);
+  bool init(const cugl::Vec2 pos, string name);
 
 #pragma mark Static Constructors
   /**
@@ -106,6 +134,13 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
   int getHealth() const { return _health; }
 
   /**
+   * Gets the current attack cooldown of the grunt.
+   *
+   * @return the current health.
+   */
+  int getAttackCooldown() const { return _attack_cooldown; }
+
+  /**
    * Sets the current grunt's health.
    *
    * @param value The current grunt health.
@@ -113,11 +148,25 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
   void setHealth(int value) { _health = value; }
 
   /**
+   * Sets the attack cooldown.
+   *
+   * @param value The attack cooldown.
+   */
+  void setAttackCooldown(int value) { _attack_cooldown = value; }
+
+  /**
    * Reduces the grunt's health.
    *
    * @param value The value to reduce the health by.
    */
   void reduceHealth(int value) { _health -= value; }
+
+  /**
+   * Reduces the grunt's attack cooldown.
+   *
+   * @param value The value to reduce the health by.
+   */
+  void reduceAttackCooldown(int value) { _attack_cooldown -= value; }
 
   /**
    * The grunt took damage.
@@ -131,6 +180,49 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
    * @return the grunt speed.
    */
   float getSpeed() const { return _speed; }
+
+  /**
+   * Add a bullet.
+   *
+   * @param p the position of the bullet to spawn in.
+   */
+  void addBullet(cugl::Vec2 p);
+
+  /**
+   * Deletes a bullet if needed.
+   */
+  void deleteProjectile(std::shared_ptr<cugl::physics2::ObstacleWorld> _world,
+                        std::shared_ptr<cugl::scene2::SceneNode> _world_node);
+
+  /**
+   * Deletes all bullets.
+   */
+  void deleteAllProjectiles(
+      std::shared_ptr<cugl::physics2::ObstacleWorld> _world,
+      std::shared_ptr<cugl::scene2::SceneNode> _world_node);
+
+  /**
+   * Gets the grunt's projectiles.
+   *
+   * @return the projectiles the grunt has shot.
+   */
+  std::unordered_set<std::shared_ptr<Projectile>> getProjectiles() {
+    return _projectiles;
+  }
+
+  /**
+   * Set the current state of the grunt.  IDLE, ATTACKING, CHASING, AVOIDING...
+   *
+   * @param state The state the enemy should be set to.
+   */
+  void setCurrentState(State state) { _current_state = state; }
+
+  /**
+   * Get the current state of the grunt. IDLE, ATTACKING, CHASING, AVOIDING...
+   *
+   * @return The state of the grunt.
+   */
+  State getCurrentState() { return _current_state; }
 
 #pragma mark -
 #pragma mark Physics Methods
@@ -176,6 +268,13 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
    * @return node the node that has been set.
    */
   std::shared_ptr<cugl::scene2::SpriteNode>& getGruntNode();
+
+  /**
+   * Sets the position of the room the enemy is in, for drawing purposes.
+   *
+   * @param pos The bottom left corner of the room the enemy is in.
+   */
+  void setRoomPos(cugl::Vec2 pos) { _room_pos = pos; }
 
 #pragma mark Movement
   /**

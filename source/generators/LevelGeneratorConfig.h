@@ -2,6 +2,7 @@
 #define GENERATORS_LEVEL_GENERATOR_CONFIG_H
 #include <cugl/cugl.h>
 
+namespace level_gen {
 /**
  * A class that sets constants for level generation. Used by LevelGenerator.
  */
@@ -50,6 +51,9 @@ class LevelGeneratorConfig {
 
   /** The number of terminal rooms in the outer circle of rooms. */
   float _num_terminal_rooms_outer;
+
+  /** The max number of edges to a room. (i.e. max number of doors per room). */
+  int _max_num_of_edges;
 
  public:
   /** Construct a new level generation config object with default values. */
@@ -175,6 +179,16 @@ class LevelGeneratorConfig {
 
   /** @return The number of rooms in the outer circle. */
   float getNumTerminalRoomsOuter() const { return _num_terminal_rooms_outer; }
+
+  /**
+   * Set the max number of edges for a room. (i.e. max number of doors).
+   * @param num the max number of edges for a room.
+   */
+  void setMaxNumEdges(int num) { _max_num_of_edges = num; }
+  /** @return The max number of edges for a room. (i.e. max number of doors). */
+  int getMaxNumEdges() const { return _max_num_of_edges; }
 };
+
+}  // namespace level_gen
 
 #endif /* GENERATORS_LEVEL_GENERATOR_CONFIG_H */

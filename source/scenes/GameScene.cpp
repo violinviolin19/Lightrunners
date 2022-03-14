@@ -12,7 +12,12 @@
 #define SCENE_HEIGHT 720
 #define CAMERA_SMOOTH_SPEED 2.0f
 
-bool GameScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
+bool GameScene::init(
+    const std::shared_ptr<cugl::AssetManager>& assets,
+    const std::shared_ptr<level_gen::LevelGenerator>& level_gen) {
+  if (_active) return false;
+  _active = true;
+
   // Initialize the scene to a locked width.
   // TODO delete after confirming networking works
   std::shared_ptr<cugl::NetworkConnection> _network = nullptr;
@@ -20,43 +25,33 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
   cugl::Size dim = cugl::Application::get()->getDisplaySize();
   dim *= SCENE_HEIGHT / ((dim.width > dim.height) ? dim.width : dim.height);
 
-  if (assets == nullptr || !cugl::Scene2::init(dim)) {
-    return false;
-  }
+  if (assets == nullptr || !cugl::Scene2::init(dim)) return false;
+
   _assets = assets;
 
-  _world_node = assets->get<cugl::scene2::SceneNode>("world-scene");
+  _world_node = _assets->get<cugl::scene2::SceneNode>("world-scene");
   _world_node->setContentSize(dim);
-
-  std::shared_ptr<cugl::scene2::SceneNode> grid_node =
-      _world_node->getChildByName("tiles");
-  std::shared_ptr<cugl::scene2::Layout> layout = grid_node->getLayout();
-  std::shared_ptr<cugl::scene2::GridLayout> grid_layout =
-      dynamic_pointer_cast<cugl::scene2::GridLayout>(layout);
-
-  float map_height = grid_node->getContentHeight();
-  float map_width = grid_node->getContentWidth();
-  _col_count = grid_layout->getGridSize().width;
-  _row_count = grid_layout->getGridSize().height;
-  _tile_height = map_height / _row_count;
-  _tile_width = map_width / _col_count;
 
   _debug_node = cugl::scene2::SceneNode::alloc();
   _debug_node->setContentSize(dim);
 
-  // Create the world and attach the listeners.
-  _world = cugl::physics2::ObstacleWorld::alloc(
-      cugl::Rect(0, 0, grid_node->getContentWidth(),
-                 grid_node->getContentHeight()),
-      cugl::Vec2(0, 0));
+  _level_controller =
+      LevelController::alloc(_assets, _world_node, _debug_node, level_gen);
+  _controllers.push_back(_level_controller->getHook());
+
+  // Get the world from level controller and attach the listeners.
+  _world = _level_controller->getWorld();
   _world->activateCollisionCallbacks(true);
   _world->onBeginContact = [this](b2Contact* contact) {
-    beginContact(contact);
+    this->beginContact(contact);
   };
   _world->beforeSolve = [this](b2Contact* contact,
                                const b2Manifold* oldManifold) {
-    beforeSolve(contact, oldManifold);
+    this->beforeSolve(contact, oldManifold);
   };
+
+  _enemy_controller =
+      EnemyController::alloc(_assets, _world, _world_node, _debug_node);
 
   populate(dim);
 
@@ -83,39 +78,22 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
 }
 
 void GameScene::dispose() {
+  if (!_active) return;
   InputController::get()->dispose();
-  _ai_controller.~AIController();
+  _active = false;
 }
 
 void GameScene::populate(cugl::Size dim) {
   // Initialize the player with texture and size, then add to world.
   std::shared_ptr<cugl::Texture> player = _assets->get<cugl::Texture>("player");
-
-  _my_player = Player::alloc(dim + cugl::Vec2(20, 20), "Johnathan");
+  
+  _my_player = Player::alloc(cugl::Vec2::ZERO, "Johnathan");
   _players.push_back(_my_player);
-
-  auto player_node = cugl::scene2::SpriteNode::alloc(player, 3, 10);
-  _my_player->setPlayerNode(player_node);
-  _world_node->addChild(player_node);
-  _world->addObstacle(_my_player);
+  _level_controller->getLevelModel()->setPlayer(_my_player);
 
   _sword = Sword::alloc(dim / 2.0f);
   _world->addObstacle(_sword);
   _sword->setEnabled(false);
-
-  // Initialize the enemy set and populate with grunts.
-  _enemies.init();
-
-  std::shared_ptr<cugl::scene2::SceneNode> enemies_node =
-      _world_node->getChildByName("enemies");
-  std::vector<std::shared_ptr<cugl::scene2::SceneNode>> enemy_nodes =
-      enemies_node->getChildren();
-  for (std::shared_ptr<cugl::scene2::SceneNode> enemy_node : enemy_nodes) {
-    std::shared_ptr<Grunt> grunt = _enemies.spawnEnemy(
-        enemy_node->getPosition(), enemy_node->getName(), _assets);
-    _world_node->addChild(grunt->getGruntNode());
-    _world->addObstacle(grunt);
-  }
 
   // Add physics enabled tiles to world node, debug node and box2d physics
   // world.
@@ -132,12 +110,15 @@ void GameScene::populate(cugl::Size dim) {
 
   // Debug code.
   _my_player->setDebugScene(_debug_node);
-  _my_player->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
+  _my_player->setDebugColor(cugl::Color4f::BLACK);
   _sword->setDebugScene(_debug_node);
-  _sword->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
-  for (std::shared_ptr<Grunt> grunt : _enemies.getEnemies()) {
-    grunt->setDebugScene(_debug_node);
-    grunt->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
+  _sword->setDebugColor(cugl::Color4f::BLACK);
+
+  std::shared_ptr<RoomModel> current_room =
+      _level_controller->getLevelModel()->getCurrentRoom();
+  for (std::shared_ptr<Grunt> enemy : current_room->getEnemies()) {
+    enemy->setDebugColor(cugl::Color4f::BLACK);
+    enemy->setDebugScene(_debug_node);
   }
 }
 
@@ -153,18 +134,26 @@ void GameScene::update(float timestep) {
   cugl::Application::get()->setClearColor(cugl::Color4f::BLACK);
 
   InputController::get()->update();
+
+  for (std::shared_ptr<Controller> controller : _controllers)
+    controller->update();
+
   // Movement
   _my_player->step(timestep, InputController::get<Movement>()->getMovement(),
                    InputController::get<Attack>()->isAttacking(), _sword);
-
-  int row = (int)floor(_my_player->getBody()->GetPosition().y / _tile_height);
-  _my_player->getPlayerNode()->setPriority(_row_count - row);
-
-  _ai_controller.moveEnemiesTowardPlayer(_enemies, _my_player);
-  _enemies.update(timestep);
+  // Animation
+  _my_player->animate(InputController::get<Movement>()->getMovement());
+  
+  std::shared_ptr<RoomModel> current_room =
+      _level_controller->getLevelModel()->getCurrentRoom();
+  for (std::shared_ptr<Grunt>& enemy : current_room->getEnemies()) {
+    _enemy_controller->update(timestep, enemy, _my_player);
+  }
 
   updateCamera(timestep);
   _world->update(timestep);
+
+  // ===== POST-UPDATE =======
 
   auto ui_layer = _assets->get<cugl::scene2::SceneNode>("ui-scene");
   auto text = ui_layer->getChildByName<cugl::scene2::Label>("health");
@@ -172,22 +161,21 @@ void GameScene::update(float timestep) {
       cugl::strtool::format("Health: %d", _my_player->getHealth());
   text->setText(msg);
 
-  // Animation
-  _my_player->animate(InputController::get<Movement>()->getMovement());
-
-  // POST-UPDATE
   // Check for disposal
-  for (std::shared_ptr<Grunt> grunt : _enemies.getEnemies()) {
-    int row = (int)floor(grunt->getBody()->GetPosition().y / _tile_height);
-    grunt->getGruntNode()->setPriority(_row_count - row);
-
-    if (grunt != nullptr && grunt->getHealth() <= 0) {
-      grunt->deactivatePhysics(*_world->getWorld());
-      _enemies.deleteEnemy(grunt);
-      _world_node->removeChild(grunt->getGruntNode());
-      _world->removeObstacle(grunt.get());
-      grunt->dispose();
-      grunt = nullptr;
+  std::vector<std::shared_ptr<Grunt>>& enemies = current_room->getEnemies();
+  auto it = enemies.begin();
+  while (it != enemies.end()) {
+    auto enemy = *it;
+    if (enemy->getHealth() <= 0) {
+      enemy->deleteAllProjectiles(_world, _world_node);
+      enemy->deactivatePhysics(*_world->getWorld());
+      current_room->getNode()->removeChild(enemy->getGruntNode());
+      _world->removeObstacle(enemy.get());
+      enemy->dispose();
+      it = enemies.erase(it);
+    } else {
+      enemy->deleteProjectile(_world, _world_node);
+      ++it;
     }
   }
 }
@@ -390,6 +378,27 @@ void GameScene::beginContact(b2Contact* contact) {
     dynamic_cast<Player*>(ob2)->takeDamage();
   } else if (fx2_name == "grunt_damage" && ob1 == _my_player.get()) {
     dynamic_cast<Player*>(ob1)->takeDamage();
+  }
+
+  if (ob1->getName() == "projectile" && ob2 == _my_player.get()) {
+    dynamic_cast<Projectile*>(ob1)->setFrames(0);  // Destroy the projectile
+    dynamic_cast<Player*>(ob2)->takeDamage();
+  } else if (ob2->getName() == "projectile" && ob1 == _my_player.get()) {
+    dynamic_cast<Player*>(ob1)->takeDamage();
+    dynamic_cast<Projectile*>(ob2)->setFrames(0);  // Destroy the projectile
+  }
+
+  if (ob1->getName() == "projectile" && ob2->getName() == "Wall") {
+    dynamic_cast<Projectile*>(ob1)->setFrames(0);  // Destroy the projectile
+  } else if (ob2->getName() == "projectile" && ob1->getName() == "Wall") {
+    dynamic_cast<Projectile*>(ob2)->setFrames(0);  // Destroy the projectile
+  }
+
+  if (fx1_name.find("door") != std::string::npos && ob2 == _my_player.get()) {
+    _level_controller->changeRoom(fx1_name);
+  } else if (fx2_name.find("door") != std::string::npos &&
+             ob1 == _my_player.get()) {
+    _level_controller->changeRoom(fx2_name);
   }
 }
 

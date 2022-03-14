@@ -2,9 +2,10 @@
 #define GENERATORS_LEVEL_GENERATOR_H
 #include <cugl/cugl.h>
 
-#include "../models/level_gen/Hallway.h"
 #include "../models/level_gen/Room.h"
 #include "LevelGeneratorConfig.h"
+
+namespace level_gen {
 
 /** A level generator that creates a random level with hallway connections. */
 class LevelGenerator {
@@ -26,9 +27,6 @@ class LevelGenerator {
 
   /** A list of all rooms in the outside ring of the level. */
   std::vector<std::shared_ptr<Room>> _outside_rooms;
-
-  /** A list of all the hallways for the level. */
-  std::vector<std::shared_ptr<Hallway>> _hallways;
 
   /** A reference to the spawn room of the level. */
   std::shared_ptr<Room> _spawn_room;
@@ -72,8 +70,10 @@ class LevelGenerator {
   /**
    * Update the level generator. Calls the next generator step function.
    * Separates the generation steps to be able to draw the generation.
+   *
+   * @return False if the level generation is done.
    */
-  void update();
+  bool update();
 
   /**
    * Dispose of the level generator. Clear all the references and variables in
@@ -178,11 +178,13 @@ class LevelGenerator {
 
   /**
    * Add some edges back within the room to make the tree a little easier to
-   * traverse by the player.
+   * traverse by the player. Remove the edges that aren't active and are not
+   * added back.
    *
    * @param rooms The rooms to add edges back to.
    */
-  void addEdgesBack(std::vector<std::shared_ptr<Room>> &rooms);
+  void addEdgesBackAndRemoveUnecessary(
+      std::vector<std::shared_ptr<Room>> &rooms);
 
   /**
    * Connect two layers with some number of connections. Spaces the connections
@@ -201,5 +203,7 @@ class LevelGenerator {
    */
   void fillHallways();
 };
+
+}  // namespace level_gen
 
 #endif /* GENERATORS_LEVELGENERATOR_H */

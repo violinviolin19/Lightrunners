@@ -2,6 +2,11 @@
 #define MODELS_LEVEL_GEN_ROOM_H_
 #include <cugl/cugl.h>
 
+#include "DefaultRooms.h"
+
+namespace level_gen {
+
+// Forward declaration for use in Room.
 class Edge;
 
 class Room {
@@ -25,12 +30,15 @@ class Room {
   /** A reference to the scene2 node for the room. */
   std::shared_ptr<cugl::scene2::PolygonNode> _node;
 
-  /** A list of all edges to other Rooms. */
+  /** A list of all edges to other Rooms, sorted in counter clockwise order. */
   std::vector<std::shared_ptr<Edge>> _edges;
 
   /** A list of all the doors in the Room given by the grid unit coordinates in
    * relation to the bottom left of the room. */
   std::vector<cugl::Vec2> _doors;
+
+  /** Used to give a door to an edge in the Level Generator algorithm. */
+  std::unordered_map<std::shared_ptr<Edge>, cugl::Vec2> _edge_to_door;
 
   /** If the room has been visited by the level generation algorithm. */
   bool _visited;
@@ -38,55 +46,20 @@ class Room {
   /** If this room should not move. */
   bool _fixed;
 
-  /**
-   * Create a Room with given width and height in grid units. The doors will be
-   * at in the middle of the four room edges.
-   *
-   * @param width Width of room in grid units.
-   * @param height Height of room in grid units.
-   */
-  Room(float width, float height) : Room(cugl::Size(width, height)) {}
+  /** The key to the scene2 room layout to refer to it by. */
+  std::string _scene2_key;
+  /** The source to the scene2 room layout to load it in. */
+  std::string _scene2_source;
 
   /**
-   * Create a Room with given size. The doors will be at in the middle of the
-   * four room edges.
-   *
-   * @param size Size of room in grid units.
-   */
-  Room(cugl::Size size);
-
-  /**
-   * Create a Room with given width and height in grid units and doors. The
-   * doors are represented by their grid unit coordinates in terlation to the
-   * bottom left of the room.
-   *
-   * @param width Width of room in grid units.
-   * @param height Height of room in grid units.
-   * @param doors The list of door grid unit coordinates in relation to the
-   * bottom left of the room.
-   */
-  Room(float width, float height, std::vector<cugl::Vec2> doors)
-      : Room(cugl::Size(width, height), doors) {}
-
-  /**
-   * Create a Room with given size in grid units and doors. The doors are
+   * Create a Room with the given config. The doors are
    * represented by their grid unit coordinates in terlation to the bottom left
-   * of the room.
+   * of the room. The doors must be in counter-clockwise order with right-most
+   * first. Everything is in grid units.
    *
-   * @param size Size of room in grid units.
-   * @param doors The list of door grid unit coordinates in relation to the
-   * bottom left of the room.
+   * @param config The config containing size, door positions, and scene2 a key.
    */
-  Room(cugl::Size size, std::vector<cugl::Vec2> doors);
-
-  /**
-   * A copy constructor for Room that copies the type, doors and size.
-   *
-   * @param room The room to copy.
-   */
-  Room(const Room &room) : Room(room._node->getContentSize(), room._doors) {
-    _type = room._type;
-  }
+  Room(default_rooms::RoomConfig config);
 
   /**
    * Move the room by given certain distance.
@@ -94,6 +67,24 @@ class Room {
    * @param dist The distance to move the room in grid units.
    */
   void move(cugl::Vec2 dist);
+
+  /**
+   * Add an edge in counter clockwise order to the list of edges.
+   *
+   * @param edge The edge to be added.
+   */
+  void addEdge(const std::shared_ptr<Edge> &edge);
+
+  /**
+   * An edge comparator used to sort edges first by side index they hit and then
+   * in counter-clockwise order.
+   *
+   * @param l Left hand side edge.
+   * @param r Right hand side edge.
+   * @return Left is smaller than Right.
+   */
+  bool edgeComparator(const std::shared_ptr<Edge> &l,
+                      const std::shared_ptr<Edge> &r) const;
 
   /**
    * Find if the given room is a neighbor of this room.
@@ -111,6 +102,14 @@ class Room {
    * no edges found.
    */
   std::shared_ptr<Edge> findEdge(const std::shared_ptr<Room> &room) const;
+
+  /**
+   * Get the door that corresponds to this edge.
+   *
+   * @param edge The edge that is connected to this room.
+   * @return The door that it map to.
+   */
+  cugl::Vec2 getDoorForEdge(const std::shared_ptr<Edge> &edge);
 
   /**
    * Get a rectangle representation of the room.
@@ -144,6 +143,12 @@ class Room {
    * @param size The size of the room in grid units.
    */
   void initScene2(cugl::Size size);
+
+  /** Calculate the edge to door pairing. */
+  void initializeEdgeToDoorPairing();
+
+  float angleBetweenEdgeAndDoor(const std::shared_ptr<Edge> &edge,
+                                cugl::Vec2 &door);
 };
 
 /**
@@ -158,7 +163,11 @@ class Edge {
   std::shared_ptr<Room> _neighbor;
 
   /** A reference to the scene2 node for debug drawing. */
-  std::shared_ptr<cugl::scene2::PathNode> _path;
+  std::shared_ptr<cugl::scene2::PathNode> _node;
+
+  /** A pair of vectors that represent the line segment connecting both
+   * rooms. Will always have a size of 2. */
+  std::vector<cugl::Vec2> _path;
 
   /** The length of the edge. */
   float _weight;
@@ -166,6 +175,8 @@ class Edge {
   /** Used by the level generator to define if the edge has already been
    * calculated during level generation. */
   bool _calculated;
+
+  bool _active;
 
   /**
    * Construct an Edge that connects Rooms s and n.
@@ -198,6 +209,26 @@ class Edge {
   }
 
   /**
+   * Get the index of the side the edge line segment hits.
+   * 0 = Right,
+   * 1 = Top,
+   * 2 = Left,
+   * 3 = Bottom,
+   * -1 = No intersect
+   * @param rect A rectangle that we are checking for collision.
+   * @return The index of the side the edge line segment hits.
+   */
+  int getSideIndex(const cugl::Rect &rect) const;
+
+  /**
+   * Get the intersect of the edge and given rectangle sides.
+   *
+   * @param rect A rectangle that we are checking for collision.
+   * @return The intersect of the edge and given rectangle sides.
+   */
+  cugl::Vec2 getIntersectWithRectSide(const cugl::Rect &rect) const;
+
+  /**
    * An equality operator for Edge that checks if the other Edge has the same
    * rooms in any order of source and neighbor.
    * @param other The other edge to check for equality.
@@ -222,5 +253,7 @@ class Edge {
            this->_source == other->_neighbor;
   }
 };
+
+}  // namespace level_gen
 
 #endif  // MODELS_LEVEL_GEN_ROOM_H_

@@ -42,9 +42,7 @@ void GameApp::onShutdown() {
   _hostgame.dispose();
   _joingame.dispose();
   _menu.dispose();
-#ifndef CU_TOUCH_SCREEN
-  _level_gen_scene.dispose();
-#endif
+  _level_loading.dispose();
   _assets = nullptr;
   _batch = nullptr;
 
@@ -58,12 +56,6 @@ void GameApp::onShutdown() {
 }
 
 void GameApp::update(float timestep) {
-#ifndef CU_TOUCH_SCREEN
-  if (cugl::Input::get<cugl::Keyboard>()->keyReleased(cugl::KeyCode::L)) {
-    _show_level_gen_scene = !_show_level_gen_scene;
-  }
-#endif
-
   switch (_scene) {
     case LOAD:
       updateLoadingScene(timestep);
@@ -76,6 +68,9 @@ void GameApp::update(float timestep) {
       break;
     case CLIENT:
       updateClientMenuScene(timestep);
+      break;
+    case LEVEL_LOADING:
+      updateLevelLoadingScene(timestep);
       break;
     case GAME:
       updateGameScene(timestep);
@@ -97,8 +92,10 @@ void GameApp::draw() {
     case CLIENT:
       _joingame.render(_batch);
       break;
+    case LEVEL_LOADING:
+      _level_loading.render(_batch);
+      break;
     case GAME:
-      //    case GAME_HOST:
       _gameplay.render(_batch);
       break;
   }
@@ -121,10 +118,6 @@ void GameApp::updateLoadingScene(float timestep) {
     _menu.init(_assets);
     _hostgame.init(_assets);
     _joingame.init(_assets);
-    _gameplay.init(_assets);
-#ifndef CU_TOUCH_SCREEN
-    _level_gen_scene.init();
-#endif
     _menu.setActive(true);
     _hostgame.setActive(false);
     _joingame.setActive(false);
@@ -180,11 +173,13 @@ void GameApp::updateHostMenuScene(float timestep) {
     case HostMenuScene::Status::START:
       _hostgame.setActive(false);
       _gameplay.setActive(true);
-      _scene = State::GAME;
+      _level_loading.init(_assets);
+      _level_loading.setActive(true);
+      _scene = State::LEVEL_LOADING;
       // Transfer connection ownership
-      _gameplay.setConnection(_hostgame.getConnection());
+      _level_loading.setConnection(_hostgame.getConnection());
       _hostgame.disconnect();
-      _gameplay.setHost(true);
+      _level_loading.setHost(true);
       break;
     case HostMenuScene::Status::WAIT:
     case HostMenuScene::Status::IDLE:
@@ -213,12 +208,13 @@ void GameApp::updateClientMenuScene(float timestep) {
     case ClientMenuScene::Status::START:
       _joingame.setActive(false);
       _menu.setActive(false);
-      _gameplay.setActive(true);
-      _scene = State::GAME;
+      _level_loading.init(_assets);
+      _level_loading.setActive(true);
+      _scene = State::LEVEL_LOADING;
       // Transfer connection ownership
-      _gameplay.setConnection(_joingame.getConnection());
-      _joingame.disconnect();
-      _gameplay.setHost(false);
+      _level_loading.setConnection(_hostgame.getConnection());
+      _hostgame.disconnect();
+      _level_loading.setHost(true);
       break;
     case ClientMenuScene::Status::WAIT:
     case ClientMenuScene::Status::IDLE:
@@ -226,6 +222,29 @@ void GameApp::updateClientMenuScene(float timestep) {
       // DO NOTHING
       break;
   }
+}
+
+/**
+ * Individualized update method for the level loading scene.
+ *
+ * This method keeps the primary {@link #update} from being a mess of switch
+ * statements. It also handles the transition logic from the loading scene.
+ *
+ * @param timestep  The amount of time (in seconds) since the last frame
+ */
+void GameApp::updateLevelLoadingScene(float timestep) {
+  if (_level_loading.isActive()) {
+    _level_loading.update(timestep);
+    return;
+  }
+  _gameplay.init(_assets, _level_loading.getLevelGenerator());
+  _scene = State::GAME;
+  _level_loading.dispose();
+
+  // Transfer connection ownership
+  _gameplay.setConnection(_level_loading.getConnection());
+  _level_loading.disconnect();
+  _gameplay.setHost(_level_loading.getIsHost());
 }
 
 /**

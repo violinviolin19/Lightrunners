@@ -9,44 +9,46 @@
 
 #include "../models/level_gen/DefaultRooms.h"
 
+namespace level_gen {
+
 LevelGenerator::LevelGenerator() : _active(false), _generator_step(nullptr) {}
 
 void LevelGenerator::init(LevelGeneratorConfig &config,
                           const std::shared_ptr<cugl::scene2::SceneNode> &map) {
-  if (!_active) {
-    _config = config;
-    _map = map;
-    _generator_step = [this]() { this->generateRooms(); };
-    std::random_device my_random_device;
-    unsigned seed = my_random_device();
-    _generator = std::default_random_engine(seed);
-    _active = true;
-  }
+  if (_active) return;
+  _active = true;
+
+  _config = config;
+  _map = map;
+  _generator_step = [this]() { this->generateRooms(); };
+  std::random_device my_random_device;
+  unsigned seed = my_random_device();
+  _generator = std::default_random_engine(seed);
 }
 
 void LevelGenerator::dispose() {
-  if (_active) {
-    _rooms.clear();
-    _inside_rooms.clear();
-    _middle_rooms.clear();
-    _outside_rooms.clear();
-    _hallways.clear();
-    _spawn_room = nullptr;
-    _map = nullptr;
-    _generator_step = nullptr;
-    _active = false;
-  }
+  if (!_active) return;
+  _active = false;
+
+  _rooms.clear();
+  _inside_rooms.clear();
+  _middle_rooms.clear();
+  _outside_rooms.clear();
+  _spawn_room = nullptr;
+  _map = nullptr;
+  _generator_step = nullptr;
 }
 
-void LevelGenerator::update() {
+bool LevelGenerator::update() {
   if (_generator_step != nullptr) {
     _generator_step();
+    return true;  // Not done.
   }
+  return false;  // Done!
 }
 
 void LevelGenerator::generateRooms() {
-  _spawn_room = std::make_shared<Room>(default_rooms::kSpawn.size,
-                                       default_rooms::kSpawn.doors);
+  _spawn_room = std::make_shared<Room>(default_rooms::kSpawn);
   _spawn_room->_type = Room::RoomType::SPAWN;
   _spawn_room->_fixed = true;
   _spawn_room->_node->setAnchor(cugl::Vec2::ANCHOR_BOTTOM_LEFT);
@@ -69,12 +71,15 @@ void LevelGenerator::generateRooms() {
 void LevelGenerator::placeRegularRooms(int num_rooms, float min_radius,
                                        float max_radius) {
   //  Distribution to define the size of normal rooms.
-  std::normal_distribution<float> size_dis(9.0f, 1.0f);
   std::uniform_real_distribution<float> dis(0.0f, 1.0f);
 
   for (float i = 0; i < num_rooms; i++) {
-    std::shared_ptr<Room> room = std::make_shared<Room>(
-        floor(size_dis(_generator)), floor(size_dis(_generator)));
+    int max_room_ii = static_cast<int>(default_rooms::kRegularRooms.size() - 1);
+    std::uniform_int_distribution<> room_iid(0, max_room_ii);
+
+    default_rooms::RoomConfig chosen_room =
+        default_rooms::kRegularRooms[room_iid(_generator)];
+    std::shared_ptr<Room> room = std::make_shared<Room>(chosen_room);
 
     float room_radius = room->getRadius();
     float min_r = min_radius + room_radius;
@@ -197,8 +202,8 @@ std::vector<std::shared_ptr<Room>> LevelGenerator::placeTerminalRooms(
   std::vector<std::shared_ptr<Room>> terminals;
 
   for (float i = 0; i < num_rooms; i++) {
-    std::shared_ptr<Room> room = std::make_shared<Room>(
-        default_rooms::kTerminal.size, default_rooms::kTerminal.doors);
+    std::shared_ptr<Room> room =
+        std::make_shared<Room>(default_rooms::kTerminal);
 
     room->_type = Room::RoomType::TERMINAL;
 
@@ -275,7 +280,7 @@ void LevelGenerator::segregateLayers() {
   }
 
   for (std::shared_ptr<Room> &room : _middle_rooms) {
-    cugl::Vec2 pos = room->getMid();
+    cugl::Vec2 pos = room->getMid() * inner_circle_expansion_factor;
     pos += room->getMid().getNormalization() *
            _config.getSeparationBetweenLayers() * inner_circle_expansion_factor;
     pos -= room->_node->getSize() / 2.0f;
@@ -284,7 +289,7 @@ void LevelGenerator::segregateLayers() {
   }
 
   for (std::shared_ptr<Room> &room : _outside_rooms) {
-    cugl::Vec2 pos = room->getMid();
+    cugl::Vec2 pos = room->getMid() * inner_circle_expansion_factor;
     pos += room->getMid().getNormalization() *
            _config.getSeparationBetweenLayers() * 2.0f *
            inner_circle_expansion_factor;
@@ -307,9 +312,9 @@ void LevelGenerator::markAndFillHallways() {
   calculateMinimumSpanningTree(_middle_rooms);
   calculateMinimumSpanningTree(_outside_rooms);
 
-  addEdgesBack(_inside_rooms);
-  addEdgesBack(_middle_rooms);
-  addEdgesBack(_outside_rooms);
+  addEdgesBackAndRemoveUnecessary(_inside_rooms);
+  addEdgesBackAndRemoveUnecessary(_middle_rooms);
+  addEdgesBackAndRemoveUnecessary(_outside_rooms);
 
   connectLayers(_inside_rooms, _middle_rooms, 2);
   connectLayers(_middle_rooms, _outside_rooms, 3);
@@ -336,56 +341,18 @@ void LevelGenerator::calculateDelaunayTriangles(
 
   delaunator::Delaunator d(coords);
 
-  for (std::size_t i = 0; i < d.triangles.size(); i += 3) {
-    std::shared_ptr<Room> &node_0 = rooms[d.triangles[i]];
-    std::shared_ptr<Room> &node_1 = rooms[d.triangles[i + 1]];
-    std::shared_ptr<Room> &node_2 = rooms[d.triangles[i + 2]];
+  for (std::size_t i = 0; i < d.triangles.size(); i++) {
+    if (i < d.halfedges[i]) {
+      std::shared_ptr<Room> &node_0 = rooms[d.triangles[i]];
+      std::size_t next_node_ii = (i % 3 == 2) ? i - 2 : i + 1;
+      std::shared_ptr<Room> &node_1 = rooms[d.triangles[next_node_ii]];
 
-    std::shared_ptr<Edge> edge_0_1 = std::make_shared<Edge>(node_0, node_1);
-    if (min_r == 0.0f || !edge_0_1->doesIntersect(cugl::Vec2::ZERO, min_r)) {
-      auto adjacent_0_1 = node_0->findEdge(node_1);
-      auto adjacent_1_0 = node_1->findEdge(node_0);
+      std::shared_ptr<Edge> edge_0_1 = std::make_shared<Edge>(node_0, node_1);
 
-      if (!adjacent_0_1 && !adjacent_1_0) {
-        _map->addChild(edge_0_1->_path);
-        node_0->_edges.push_back(edge_0_1);
-        node_1->_edges.push_back(edge_0_1);
-      } else if (!adjacent_0_1) {
-        node_0->_edges.push_back(adjacent_1_0);
-      } else if (!adjacent_1_0) {
-        node_1->_edges.push_back(adjacent_0_1);
-      }
-    }
-
-    std::shared_ptr<Edge> edge_0_2 = std::make_shared<Edge>(node_0, node_2);
-    if (min_r == 0.0f || !edge_0_2->doesIntersect(cugl::Vec2::ZERO, min_r)) {
-      auto adjacent_0_2 = node_0->findEdge(node_2);
-      auto adjacent_2_0 = node_2->findEdge(node_0);
-
-      if (!adjacent_0_2 && !adjacent_2_0) {
-        _map->addChild(edge_0_2->_path);
-        node_0->_edges.push_back(edge_0_2);
-        node_2->_edges.push_back(edge_0_2);
-      } else if (!adjacent_0_2) {
-        node_0->_edges.push_back(adjacent_2_0);
-      } else if (!adjacent_2_0) {
-        node_1->_edges.push_back(adjacent_0_2);
-      }
-    }
-
-    std::shared_ptr<Edge> edge_1_2 = std::make_shared<Edge>(node_1, node_2);
-    if (min_r == 0.0f || !edge_1_2->doesIntersect(cugl::Vec2::ZERO, min_r)) {
-      auto adjacent_1_2 = node_1->findEdge(node_2);
-      auto adjacent_2_1 = node_2->findEdge(node_1);
-
-      if (!adjacent_1_2 && !adjacent_2_1) {
-        _map->addChild(edge_1_2->_path);
-        node_1->_edges.push_back(edge_1_2);
-        node_2->_edges.push_back(edge_1_2);
-      } else if (!adjacent_1_2) {
-        node_1->_edges.push_back(adjacent_2_1);
-      } else if (!adjacent_2_1) {
-        node_2->_edges.push_back(adjacent_1_2);
+      if (min_r == 0.0f || !edge_0_1->doesIntersect(cugl::Vec2::ZERO, min_r)) {
+        _map->addChild(edge_0_1->_node);
+        node_0->addEdge(edge_0_1);
+        node_1->addEdge(edge_0_1);
       }
     }
   }
@@ -401,8 +368,8 @@ void LevelGenerator::calculateMinimumSpanningTree(
   for (std::shared_ptr<Room> &room : rooms) {
     room->_visited = false;
     for (std::shared_ptr<Edge> edge : room->_edges) {
-      edge->_path->setVisible(false);
-      edge->_calculated = false;
+      edge->_node->setVisible(false);
+      edge->_active = false;
     }
   }
   rooms[0]->_visited = true;
@@ -433,23 +400,34 @@ void LevelGenerator::calculateMinimumSpanningTree(
   }
 
   for (std::shared_ptr<Edge> &edge : result) {
-    edge->_path->setColor(cugl::Color4(255, 14, 14, 124));
-    edge->_path->setVisible(true);
-    edge->_calculated = true;
+    edge->_node->setColor(cugl::Color4(255, 14, 14, 124));
+    edge->_node->setVisible(true);
+    edge->_active = true;
   }
 }
 
-void LevelGenerator::addEdgesBack(std::vector<std::shared_ptr<Room>> &rooms) {
+void LevelGenerator::addEdgesBackAndRemoveUnecessary(
+    std::vector<std::shared_ptr<Room>> &rooms) {
   std::uniform_real_distribution<float> rand(0.0f, 1.0f);
   for (std::shared_ptr<Room> &room : rooms) {
     for (std::shared_ptr<Edge> edge : room->_edges) {
-      bool add_back = !edge->_calculated;
-      add_back &= edge->_weight < _config.getMaxHallwayLength();
+      bool add_back = edge->_weight < _config.getMaxHallwayLength();
+
+      long num_edges_source = std::count_if(
+          edge->_source->_edges.begin(), edge->_source->_edges.end(),
+          [](const std::shared_ptr<Edge> &edge) { return edge->_active; });
+      long num_edges_neighbor = std::count_if(
+          edge->_neighbor->_edges.begin(), edge->_neighbor->_edges.end(),
+          [](const std::shared_ptr<Edge> &edge) { return edge->_active; });
+
+      add_back &= num_edges_source < _config.getMaxNumEdges();
+      add_back &= num_edges_neighbor < _config.getMaxNumEdges();
+
       add_back &= rand(_generator) <= _config.getAddEdgesBackProb();
-      if (add_back) {
-        edge->_path->setVisible(true);
-        edge->_calculated = true;
-        edge->_path->setColor(cugl::Color4(255, 14, 14, 124));
+      if (!edge->_active && add_back) {
+        edge->_node->setVisible(true);
+        edge->_active = true;
+        edge->_node->setColor(cugl::Color4(255, 14, 14, 124));
       }
     }
   }
@@ -487,7 +465,22 @@ void LevelGenerator::connectLayers(std::vector<std::shared_ptr<Room>> &layer_a,
                                return *edge == *curr || edge->shareRoom(curr);
                              });
 
-            if (curr->_weight < winner_dist && res == connections.end()) {
+            long a_num_edges =
+                std::count_if(a_room->_edges.begin(), a_room->_edges.end(),
+                              [](const std::shared_ptr<Edge> &edge) {
+                                return edge->_active;
+                              });
+            long b_num_edges =
+                std::count_if(b_room->_edges.begin(), b_room->_edges.end(),
+                              [](const std::shared_ptr<Edge> &edge) {
+                                return edge->_active;
+                              });
+
+            bool under_limit = a_num_edges < _config.getMaxNumEdges();
+            under_limit &= b_num_edges < _config.getMaxNumEdges();
+
+            if (curr->_weight < winner_dist && under_limit &&
+                res == connections.end()) {
               winner_dist = curr->_weight;
               winner = std::move(curr);
             }
@@ -504,24 +497,55 @@ void LevelGenerator::connectLayers(std::vector<std::shared_ptr<Room>> &layer_a,
   }
 
   for (std::shared_ptr<Edge> &connection : connections) {
-    connection->_source->_edges.push_back(connection);
-    connection->_neighbor->_edges.push_back(connection);
-    connection->_path->setColor(cugl::Color4(15, 15, 230, 147));
-    _map->addChild(connection->_path);
+    connection->_active = true;
+    connection->_source->addEdge(connection);
+    connection->_neighbor->addEdge(connection);
+    connection->_node->setColor(cugl::Color4(15, 15, 230, 147));
+    _map->addChild(connection->_node);
   }
   _map->doLayout();
 }
 
 void LevelGenerator::fillHallways() {
+  // Resset state of all edges.
   for (std::shared_ptr<Room> &room : _rooms) {
     for (std::shared_ptr<Edge> &edge : room->_edges) {
-      if (edge->_calculated) {
-        auto hallway =
-            std::make_shared<Hallway>(edge, _config.getHallwayRadius());
-        _map->addChild(hallway->getNode());
+      edge->_calculated = false;
+    }
+  }
+
+  for (std::shared_ptr<Room> &room : _rooms) {
+    for (int i = 0; i < room->_edges.size(); i++) {
+      std::shared_ptr<Edge> &edge = room->_edges[i];
+
+      if (!edge->_calculated && edge->_active) {
+        edge->_calculated = true;
+
+        std::shared_ptr<Room> &source = edge->_source;
+        std::shared_ptr<Room> &neighbor = edge->_neighbor;
+
+        cugl::Vec2 start =
+            source->_node->getPosition() + source->getDoorForEdge(edge);
+        cugl::Vec2 end =
+            neighbor->_node->getPosition() + neighbor->getDoorForEdge(edge);
+        cugl::Vec2 start_pos(std::min(start.x, end.x),
+                             std::min(start.y, end.y));
+        cugl::Vec2 end_pos(std::max(start.x, end.x) + 1,
+                           std::max(start.y, end.y) + 1);
+
+        std::vector<cugl::Vec2> path{start, end};
+        auto bounds = cugl::scene2::PathNode::allocWithVertices(path, 0.4f);
+
+        bounds->setColor(cugl::Color4::BLACK);
+        bounds->setAnchor(cugl::Vec2::ANCHOR_BOTTOM_LEFT);
+        bounds->setPosition(start_pos);
+
+        _map->addChild(bounds);
       }
     }
   }
 
   _map->doLayout();
 }
+
+}  // namespace level_gen

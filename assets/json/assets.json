@@ -49,6 +49,13 @@
             "wrapS": "clamp",
             "wrapT": "clamp"
         },
+        "projectile": {
+          "file": "textures/projectile.png",
+          "minfilter": "nearest",
+          "magfilter": "nearest",
+          "wrapS": "clamp",
+          "wrapT": "clamp"
+        },
         "floor-tile-0": {
             "file": "textures/floor-tile-0.png",
             "minfilter": "nearest",
@@ -133,6 +140,13 @@
             "wrapS": "clamp",
             "wrapT": "clamp"
         },
+        "floor-tile-12": {
+            "file": "textures/floor-tile-12.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
         "button": {
             "file": "textures/button.png",
             "minfilter": "nearest",
@@ -174,10 +188,17 @@
             }
         },
         "world-scene": {
-            "type": "Widget",
+            "comments": "This is the root node for the world scene for level 1.",
+            "type": "Order",
             "data": {
-                "key": "world-scene",
-                "variables": {}
+                "order": "ascend"
+            },
+            "format": {
+                "type": "Anchored"
+            },
+            "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom"
             }
         },
         "menu": {
@@ -194,14 +215,14 @@
                     "data": {
                         "key": "textbutton",
                         "variables": {
-                            "size": [ 400, 100 ],
+                            "size": [400, 100],
                             "text": "Host Game",
                             "color": "#000088"
                         }
                     },
                     "layout": {
                         "priority": 1,
-                        "padding": [ 0, 50, 0, 0 ]
+                        "padding": [0, 50, 0, 0]
                     }
                 },
                 "join": {
@@ -209,14 +230,14 @@
                     "data": {
                         "key": "textbutton",
                         "variables": {
-                            "size": [ 400, 100 ],
+                            "size": [400, 100],
                             "text": "Join Game",
                             "color": "#000088"
                         }
                     },
                     "layout": {
                         "priority": 1,
-                        "padding": [ 0, 0, 0, 0 ]
+                        "padding": [0, 0, 0, 0]
                     }
                 }
             }

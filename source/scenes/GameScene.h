@@ -3,9 +3,11 @@
 #include <box2d/b2_world_callbacks.h>
 #include <cugl/cugl.h>
 
-#include "../controllers/AIController.h"
+#include "../controllers/Controller.h"
+#include "../controllers/EnemyController.h"
 #include "../controllers/InputController.h"
-#include "../models/EnemySet.h"
+#include "../controllers/LevelController.h"
+#include "../generators/LevelGenerator.h"
 #include "../models/Player.h"
 
 class GameScene : public cugl::Scene2 {
@@ -21,9 +23,6 @@ class GameScene : public cugl::Scene2 {
   /** The list of all players. */
   std::vector<std::shared_ptr<Player>> _players;
 
-  /** The set of enemies.  */
-  EnemySet _enemies;
-
   /** The sword. */
   std::shared_ptr<Sword> _sword;
 
@@ -36,8 +35,14 @@ class GameScene : public cugl::Scene2 {
   /** The Box2d world */
   std::shared_ptr<cugl::physics2::ObstacleWorld> _world;
 
-  /** The AI Controller for enemies. */
-  AIController _ai_controller;
+  /** The enemy controller for the game. */
+  std::shared_ptr<EnemyController> _enemy_controller;
+
+  /** The level controller for the game*/
+  std::shared_ptr<LevelController> _level_controller;
+
+  /** The */
+  std::vector<std::shared_ptr<Controller>> _controllers;
 
   /** The serializer used to serialize complex data to send through the network.
    */
@@ -65,6 +70,9 @@ class GameScene : public cugl::Scene2 {
   /** The number of rows in the world. */
   float _row_count;
 
+  /** The counter for ids for the enemies */
+  int _id_counter = 0;
+
  public:
   GameScene() : cugl::Scene2() {}
 
@@ -82,10 +90,12 @@ class GameScene : public cugl::Scene2 {
    * Initializes the controller contents, and starts the game.
    *
    * @param assets    The (loaded) assets for this game mode.
+   * @param level_gen The generated level.
    *
    * @return true if the controller is initialized properly, false otherwise.
    */
-  bool init(const std::shared_ptr<cugl::AssetManager>& assets);
+  bool init(const std::shared_ptr<cugl::AssetManager>& assets,
+            const std::shared_ptr<level_gen::LevelGenerator>& level_gen);
 
   /**
    * Sets whether debug mode is active.

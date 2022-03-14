@@ -16,6 +16,12 @@ class Player : public cugl::physics2::CapsuleObstacle {
   /** The scene graph node for the player (moving). */
   std::shared_ptr<cugl::scene2::SpriteNode> _player_node;
 
+  /** Promise to move to this position in next update. */
+  cugl::Vec2 _promise_pos_cache;
+  /** A boolean representing if we should move to the promise pos cache next
+   * udpate call. */
+  bool _promise;
+
   /** The player's current state. */
   State _current_state;
 
@@ -133,6 +139,25 @@ class Player : public cugl::physics2::CapsuleObstacle {
    * @param delta the timing value.
    */
   void update(float delta);
+
+  /**
+   * Set a position promise for the player. The player will move to this
+   * position in the next update call. (Used for teleporting between rooms).
+   *
+   * @param pos The position the player promises to.
+   */
+  void setPosPromise(cugl::Vec2 pos) {
+    _promise_pos_cache = pos;
+    _promise = true;
+  }
+
+  /**
+   * Get the player position promise. The player will move to this
+   * position in the next update call. (Used for teleporting between rooms).
+   *
+   * @return The position promise currently set.
+   */
+  cugl::Vec2 getPosPromise() const { return _promise_pos_cache; }
 
 #pragma mark Graphics
 

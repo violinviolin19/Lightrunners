@@ -6,7 +6,7 @@
 //#include "scenes/HostGameScene.h"
 #include "scenes/ClientMenuScene.h"
 #include "scenes/HostMenuScene.h"
-#include "scenes/LevelGenerationDemoScene.h"
+#include "scenes/LoadingLevelScene.h"
 #include "scenes/LoadingScene.h"
 #include "scenes/MenuScene.h"
 
@@ -27,6 +27,8 @@ class GameApp : public cugl::Application {
     HOST,
     /** The scene to join a game */
     CLIENT,
+    /** The scene when the level is loading */
+    LEVEL_LOADING,
     /** The scene to play the game */
     GAME
   };
@@ -38,8 +40,6 @@ class GameApp : public cugl::Application {
 
   /** The primary controller for the game world */
   GameScene _gameplay;
-  //  /** The primary controller for the game world (if player is host) */
-  //  HostGameScene _hostgameplay;
 
   /** The controller for the loading screen */
   LoadingScene _loading;
@@ -52,25 +52,20 @@ class GameApp : public cugl::Application {
   ClientMenuScene _joingame;
   /** The current active scene */
   State _scene;
-
-#ifndef CU_TOUCH_SCREEN
-  /** The controller for the level generation demo scene. */
-  LevelGenerationDemoScene _level_gen_scene;
-  /** If the app should currently update and render the level generation demo
-   * scene. */
-  bool _show_level_gen_scene;
-#endif
+  /** The controller for the level generation loading scene. */
+  LoadingLevelScene _level_loading;
 
   /** Whether or not we have finished loading all assets */
   bool _loaded;
+  /** Whether or not we have finished loading the level */
+  bool _level_loaded;
 
  public:
-  GameApp() : cugl::Application(), _loaded(false) {
-    _scene = State::LOAD;
-#ifndef CU_TOUCH_SCREEN
-    _show_level_gen_scene = false;
-#endif
-  }
+  GameApp()
+      : cugl::Application(),
+        _loaded(false),
+        _level_loaded(false),
+        _scene(State::LOAD) {}
   ~GameApp() {}
 
 #pragma mark Application State
@@ -165,6 +160,16 @@ class GameApp : public cugl::Application {
    * @param timestep  The amount of time (in seconds) since the last frame
    */
   void updateClientMenuScene(float timestep);
+  
+  /**
+   * Individualized update method for the level loading scene.
+   *
+   * This method keeps the primary {@link #update} from being a mess of switch
+   * statements. It also handles the transition logic from the client scene.
+   *
+   * @param timestep  The amount of time (in seconds) since the last frame
+   */
+  void updateLevelLoadingScene(float timestep);
 
   /**
    * Individualized update method for the game scene.
@@ -175,17 +180,6 @@ class GameApp : public cugl::Application {
    * @param timestep  The amount of time (in seconds) since the last frame
    */
   void updateGameScene(float timestep);
-
-  //  /**
-  //   * Individualized update method for the game scene.
-  //   *
-  //   * This method keeps the primary {@link #update} from being a mess of
-  //   switch
-  //   * statements. It also handles the transition logic from the game scene.
-  //   *
-  //   * @param timestep  The amount of time (in seconds) since the last frame
-  //   */
-  //  void updateHostGameScene(float timestep);
 };
 
 #endif /* GAMEAPP_H_ */
