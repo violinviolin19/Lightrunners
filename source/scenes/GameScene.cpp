@@ -242,7 +242,7 @@ void GameScene::sendNetworkInfo() {
     _serializer.writeJson(player_info);
     std::vector<uint8_t> msg = _serializer.serialize();
     _serializer.reset();
-    _network->send(msg);
+    _network->sendOnlyToHost(msg);
   }
 }
 
@@ -271,7 +271,6 @@ void GameScene::processData(const std::vector<uint8_t>& data) {
       std::shared_ptr<cugl::JsonValue> player_position = player->get("position");
       float pos_x = player_position->get(0)->asFloat();
       float pos_y = player_position->get(1)->asFloat();
-      CULog("player_id: %i, position: [%f, %f]", player_id, pos_x, pos_y);
       updatePlayerInfo(player_id, pos_x, pos_y);
     }
   } else if (code == 4) {   // Single player info update
@@ -281,7 +280,6 @@ void GameScene::processData(const std::vector<uint8_t>& data) {
     std::shared_ptr<cugl::JsonValue> player_position = player->get("position");
     float pos_x = player_position->get(0)->asFloat();
     float pos_y = player_position->get(1)->asFloat();
-    CULog("player_id: %i, position: [%f, %f]", player_id, pos_x, pos_y);
     updatePlayerInfo(player_id, pos_x, pos_y);
   }
   _deserializer.reset();
