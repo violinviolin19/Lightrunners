@@ -30,13 +30,16 @@
     <ClInclude Include="..\..\source\scenes\MenuScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\scenes\ClientScene.h">
+    <ClInclude Include="..\..\source\scenes\ClientMenuScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\scenes\HostScene.h">
+    <ClInclude Include="..\..\source\scenes\HostMenuScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\scenes\PeerScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\scenes\HostGameScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\controllers\InputController.h">
@@ -113,10 +116,13 @@
     <ClCompile Include="..\..\source\scenes\MenuScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\scenes\ClientScene.cpp">
+    <ClCompile Include="..\..\source\scenes\ClientMenuScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\scenes\HostScene.cpp">
+    <ClCompile Include="..\..\source\scenes\HostMenuScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\scenes\HostGameScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\controllers\InputController.cpp">
