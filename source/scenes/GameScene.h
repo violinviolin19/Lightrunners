@@ -3,9 +3,8 @@
 #include <box2d/b2_world_callbacks.h>
 #include <cugl/cugl.h>
 
-#include "../controllers/AIController.h"
+#include "../controllers/EnemyController.h"
 #include "../controllers/InputController.h"
-#include "../models/EnemySet.h"
 #include "../models/Player.h"
 
 class GameScene : public cugl::Scene2 {
@@ -14,9 +13,6 @@ class GameScene : public cugl::Scene2 {
 
   /** The player.  */
   std::shared_ptr<Player> _player;
-
-  /** The set of enemies.  */
-  EnemySet _enemies;
 
   /** The sword. */
   std::shared_ptr<Sword> _sword;
@@ -30,8 +26,8 @@ class GameScene : public cugl::Scene2 {
   /** The Box2d world */
   std::shared_ptr<cugl::physics2::ObstacleWorld> _world;
 
-  /** The AI Controller for enemies. */
-  AIController _ai_controller;
+  /** The list of AI Controllers for enemies. */
+  std::unordered_map<int, std::shared_ptr<EnemyController>> _e_controllers;
 
   /** The height of each tile in the world. */
   float _tile_width;
@@ -44,6 +40,9 @@ class GameScene : public cugl::Scene2 {
 
   /** The number of rows in the world. */
   float _row_count;
+
+  /** The counter for ids for the enemies */
+  int _id_counter = 0;
 
  public:
   GameScene() : cugl::Scene2() {}

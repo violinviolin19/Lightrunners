@@ -83,7 +83,7 @@ bool GameScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
 
 void GameScene::dispose() {
   InputController::get()->dispose();
-  _ai_controller.~AIController();
+  //  _ai_controller.~AIController(); TODO FIX THIS LATER
 }
 
 void GameScene::populate(cugl::Size dim) {
@@ -101,17 +101,19 @@ void GameScene::populate(cugl::Size dim) {
   _sword->setEnabled(false);
 
   // Initialize the enemy set and populate with grunts.
-  _enemies.init();
 
   std::shared_ptr<cugl::scene2::SceneNode> enemies_node =
       _world_node->getChildByName("enemies");
   std::vector<std::shared_ptr<cugl::scene2::SceneNode>> enemy_nodes =
       enemies_node->getChildren();
   for (std::shared_ptr<cugl::scene2::SceneNode> enemy_node : enemy_nodes) {
-    std::shared_ptr<Grunt> grunt = _enemies.spawnEnemy(
-        enemy_node->getPosition(), enemy_node->getName(), _assets);
-    _world_node->addChild(grunt->getGruntNode());
-    _world->addObstacle(grunt);
+    std::shared_ptr<EnemyController> ai = EnemyController::alloc(
+        enemy_node->getPosition(), enemy_node->getName(), _assets, _tile_height,
+        _row_count, _world, _world_node, _debug_node);
+    _e_controllers.emplace(
+        std::pair<int, std::shared_ptr<EnemyController>>(_id_counter++, ai));
+    _world_node->addChild(ai->getEnemy()->getGruntNode());
+    _world->addObstacle(ai->getEnemy());
   }
 
   // Add physics enabled tiles to world node, debug node and box2d physics
@@ -129,12 +131,13 @@ void GameScene::populate(cugl::Size dim) {
 
   // Debug code.
   _player->setDebugScene(_debug_node);
-  _player->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
+  _player->setDebugColor(cugl::Color4f::BLACK);
   _sword->setDebugScene(_debug_node);
-  _sword->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
-  for (std::shared_ptr<Grunt> grunt : _enemies.getEnemies()) {
-    grunt->setDebugScene(_debug_node);
-    grunt->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
+  _sword->setDebugColor(cugl::Color4f::BLACK);
+  for (auto e : _e_controllers) {
+    auto enemy = e.second;
+    enemy->getEnemy()->setDebugColor(cugl::Color4f::BLACK);
+    enemy->getEnemy()->setDebugScene(_debug_node);
   }
 }
 
@@ -149,8 +152,13 @@ void GameScene::update(float timestep) {
   int row = (int)floor(_player->getBody()->GetPosition().y / _tile_height);
   _player->getPlayerNode()->setPriority(_row_count - row);
 
-  _ai_controller.moveEnemiesTowardPlayer(_enemies, _player);
-  _enemies.update(timestep);
+  // Update the AI controllers
+  auto it = _e_controllers.begin();
+  while (it != _e_controllers.end()) {
+    auto enemy = (*it->second);
+    enemy.update(timestep, _player);
+    ++it;
+  }
 
   updateCamera(timestep);
   _world->update(timestep);
@@ -165,18 +173,18 @@ void GameScene::update(float timestep) {
 
   // POST-UPDATE
   // Check for disposal
-  for (std::shared_ptr<Grunt> grunt : _enemies.getEnemies()) {
-    int row = (int)floor(grunt->getBody()->GetPosition().y / _tile_height);
-    grunt->getGruntNode()->setPriority(_row_count - row);
-
-    if (grunt != nullptr && grunt->getHealth() <= 0) {
-      grunt->deactivatePhysics(*_world->getWorld());
-      _enemies.deleteEnemy(grunt);
-      _world_node->removeChild(grunt->getGruntNode());
-      _world->removeObstacle(grunt.get());
-      grunt->dispose();
-      grunt = nullptr;
+  auto itt = _e_controllers.begin();
+  while (itt != _e_controllers.end()) {
+    auto enemy = (*itt->second);
+    if (enemy.getEnemy()->getHealth() <= 0) {
+      enemy.getEnemy()->deleteAllProjectiles(_world, _world_node);
+      enemy.getEnemy()->deactivatePhysics(*_world->getWorld());
+      _world_node->removeChild(enemy.getEnemy()->getGruntNode());
+      _world->removeObstacle(enemy.getEnemy().get());
+      enemy.dispose();
+      itt = _e_controllers.erase(itt);
     }
+    ++itt;
   }
 }
 
@@ -214,6 +222,20 @@ void GameScene::beginContact(b2Contact* contact) {
     dynamic_cast<Player*>(ob2)->takeDamage();
   } else if (fx2_name == "grunt_damage" && ob1 == _player.get()) {
     dynamic_cast<Player*>(ob1)->takeDamage();
+  }
+
+  if (ob1->getName() == "projectile" && ob2 == _player.get()) {
+    dynamic_cast<Projectile*>(ob1)->setFrames(0);  // Destroy the projectile
+    dynamic_cast<Player*>(ob2)->takeDamage();
+  } else if (ob2->getName() == "projectile" && ob1 == _player.get()) {
+    dynamic_cast<Player*>(ob1)->takeDamage();
+    dynamic_cast<Projectile*>(ob2)->setFrames(0);  // Destroy the projectile
+  }
+
+  if (ob1->getName() == "projectile" && ob2->getName() == "Wall") {
+    dynamic_cast<Projectile*>(ob1)->setFrames(0);  // Destroy the projectile
+  } else if (ob2->getName() == "projectile" && ob1->getName() == "Wall") {
+    dynamic_cast<Projectile*>(ob2)->setFrames(0);  // Destroy the projectile
   }
 }
 
