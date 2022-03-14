@@ -1,5 +1,5 @@
 {
-  "comments": "This is the root node for the world scene for level 3.",
+  "comments": "This is the root node for the world scene for level 1.",
   "type": "Node",
   "format": {
     "type": "Anchored"
@@ -66,6 +66,41 @@
             }
           }
         },
+        "tile-(0-1)-floor": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 1,
+            "y_index": 21,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "Wall",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-1",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 0
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true,
+                "y_offset": 27.599999999999998
+              }
+            }
+          }
+        },
         "tile-(0-1)": {
           "type": "Node",
           "format": {
@@ -73,6 +108,40 @@
           },
           "layout": {
             "x_index": 1,
+            "y_index": 21,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "Wall",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-11",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 0
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true
+              }
+            }
+          }
+        },
+        "tile-(0-2)-floor": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 2,
             "y_index": 21,
             "x_anchor": "left",
             "y_anchor": "bottom"
@@ -119,6 +188,40 @@
                 "type": "Anchored"
               },
               "data": {
+                "texture": "floor-tile-11",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 0
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true
+              }
+            }
+          }
+        },
+        "tile-(0-3)-floor": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 3,
+            "y_index": 21,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "Wall",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
                 "texture": "floor-tile-1",
                 "anchor": [
                   0,
@@ -143,6 +246,40 @@
           },
           "layout": {
             "x_index": 3,
+            "y_index": 21,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "Wall",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-11",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 0
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true
+              }
+            }
+          }
+        },
+        "tile-(0-4)-floor": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 4,
             "y_index": 21,
             "x_anchor": "left",
             "y_anchor": "bottom"
@@ -189,6 +326,40 @@
                 "type": "Anchored"
               },
               "data": {
+                "texture": "floor-tile-11",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 0
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true
+              }
+            }
+          }
+        },
+        "tile-(0-5)-floor": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 5,
+            "y_index": 21,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "Wall",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
                 "texture": "floor-tile-1",
                 "anchor": [
                   0,
@@ -213,6 +384,40 @@
           },
           "layout": {
             "x_index": 5,
+            "y_index": 21,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "Wall",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-11",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 0
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true
+              }
+            }
+          }
+        },
+        "tile-(0-6)-floor": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 6,
             "y_index": 21,
             "x_anchor": "left",
             "y_anchor": "bottom"
@@ -259,7 +464,7 @@
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-11",
                 "anchor": [
                   0,
                   0
@@ -270,8 +475,7 @@
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -345,7 +549,7 @@
             }
           }
         },
-        "tile-(0-8)-floor": {
+        "tile-(0-8)": {
           "type": "Node",
           "format": {
             "type": "Anchored"
@@ -376,40 +580,6 @@
                 "y_anchor": "bottom",
                 "absolute": true,
                 "y_offset": 27.599999999999998
-              }
-            }
-          }
-        },
-        "tile-(0-8)": {
-          "type": "Node",
-          "format": {
-            "type": "Anchored"
-          },
-          "layout": {
-            "x_index": 8,
-            "y_index": 21,
-            "x_anchor": "left",
-            "y_anchor": "bottom"
-          },
-          "children": {
-            "tile": {
-              "type": "Wall",
-              "format": {
-                "type": "Anchored"
-              },
-              "data": {
-                "texture": "floor-tile-11",
-                "anchor": [
-                  0,
-                  0
-                ],
-                "scale": 0.6,
-                "priority": 0
-              },
-              "layout": {
-                "x_anchor": "left",
-                "y_anchor": "bottom",
-                "absolute": true
               }
             }
           }
@@ -586,7 +756,7 @@
             }
           }
         },
-        "tile-(0-12)-floor": {
+        "tile-(0-12)": {
           "type": "Node",
           "format": {
             "type": "Anchored"
@@ -617,40 +787,6 @@
                 "y_anchor": "bottom",
                 "absolute": true,
                 "y_offset": 27.599999999999998
-              }
-            }
-          }
-        },
-        "tile-(0-12)": {
-          "type": "Node",
-          "format": {
-            "type": "Anchored"
-          },
-          "layout": {
-            "x_index": 12,
-            "y_index": 21,
-            "x_anchor": "left",
-            "y_anchor": "bottom"
-          },
-          "children": {
-            "tile": {
-              "type": "Wall",
-              "format": {
-                "type": "Anchored"
-              },
-              "data": {
-                "texture": "floor-tile-11",
-                "anchor": [
-                  0,
-                  0
-                ],
-                "scale": 0.6,
-                "priority": 0
-              },
-              "layout": {
-                "x_anchor": "left",
-                "y_anchor": "bottom",
-                "absolute": true
               }
             }
           }
@@ -724,6 +860,41 @@
             }
           }
         },
+        "tile-(0-14)-floor": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 14,
+            "y_index": 21,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "Wall",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-1",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 0
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true,
+                "y_offset": 27.599999999999998
+              }
+            }
+          }
+        },
         "tile-(0-14)": {
           "type": "Node",
           "format": {
@@ -731,6 +902,40 @@
           },
           "layout": {
             "x_index": 14,
+            "y_index": 21,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "Wall",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-11",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 0
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true
+              }
+            }
+          }
+        },
+        "tile-(0-15)-floor": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 15,
             "y_index": 21,
             "x_anchor": "left",
             "y_anchor": "bottom"
@@ -777,6 +982,40 @@
                 "type": "Anchored"
               },
               "data": {
+                "texture": "floor-tile-11",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 0
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true
+              }
+            }
+          }
+        },
+        "tile-(0-16)-floor": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 16,
+            "y_index": 21,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "Wall",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
                 "texture": "floor-tile-1",
                 "anchor": [
                   0,
@@ -801,6 +1040,40 @@
           },
           "layout": {
             "x_index": 16,
+            "y_index": 21,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "Wall",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-11",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 0
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true
+              }
+            }
+          }
+        },
+        "tile-(0-17)-floor": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 17,
             "y_index": 21,
             "x_anchor": "left",
             "y_anchor": "bottom"
@@ -847,6 +1120,40 @@
                 "type": "Anchored"
               },
               "data": {
+                "texture": "floor-tile-11",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 0
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true
+              }
+            }
+          }
+        },
+        "tile-(0-18)-floor": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 18,
+            "y_index": 21,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "Wall",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
                 "texture": "floor-tile-1",
                 "anchor": [
                   0,
@@ -871,6 +1178,40 @@
           },
           "layout": {
             "x_index": 18,
+            "y_index": 21,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "Wall",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-11",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 0
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true
+              }
+            }
+          }
+        },
+        "tile-(0-19)-floor": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 19,
             "y_index": 21,
             "x_anchor": "left",
             "y_anchor": "bottom"
@@ -917,7 +1258,7 @@
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-11",
                 "anchor": [
                   0,
                   0
@@ -928,8 +1269,7 @@
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -1017,24 +1357,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 1
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -1052,24 +1391,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 1
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -1087,24 +1425,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 1
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -1122,24 +1459,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 1
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -1157,59 +1493,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 1
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
-              }
-            }
-          }
-        },
-        "tile-(1-6)-floor": {
-          "type": "Node",
-          "format": {
-            "type": "Anchored"
-          },
-          "layout": {
-            "x_index": 6,
-            "y_index": 20,
-            "x_anchor": "left",
-            "y_anchor": "bottom"
-          },
-          "children": {
-            "tile": {
-              "type": "Wall",
-              "format": {
-                "type": "Anchored"
-              },
-              "data": {
-                "texture": "floor-tile-1",
-                "anchor": [
-                  0,
-                  0
-                ],
-                "scale": 0.6,
-                "priority": 1
-              },
-              "layout": {
-                "x_anchor": "left",
-                "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -1227,18 +1527,18 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-11",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 1
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
@@ -1295,23 +1595,24 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-1",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 1
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true
+                "absolute": true,
+                "y_offset": 27.599999999999998
               }
             }
           }
@@ -1431,23 +1732,24 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-1",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 1
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true
+                "absolute": true,
+                "y_offset": 27.599999999999998
               }
             }
           }
@@ -1486,41 +1788,6 @@
             }
           }
         },
-        "tile-(1-14)-floor": {
-          "type": "Node",
-          "format": {
-            "type": "Anchored"
-          },
-          "layout": {
-            "x_index": 14,
-            "y_index": 20,
-            "x_anchor": "left",
-            "y_anchor": "bottom"
-          },
-          "children": {
-            "tile": {
-              "type": "Wall",
-              "format": {
-                "type": "Anchored"
-              },
-              "data": {
-                "texture": "floor-tile-1",
-                "anchor": [
-                  0,
-                  0
-                ],
-                "scale": 0.6,
-                "priority": 1
-              },
-              "layout": {
-                "x_anchor": "left",
-                "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
-              }
-            }
-          }
-        },
         "tile-(1-14)": {
           "type": "Node",
           "format": {
@@ -1534,18 +1801,18 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-11",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 1
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
@@ -1568,24 +1835,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 1
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -1603,24 +1869,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 1
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -1638,24 +1903,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 1
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -1673,24 +1937,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 1
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -1708,24 +1971,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 1
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -1813,24 +2075,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 2
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -1848,24 +2109,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 2
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -1883,24 +2143,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 2
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -1918,59 +2177,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 2
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
-              }
-            }
-          }
-        },
-        "tile-(2-5)-floor": {
-          "type": "Node",
-          "format": {
-            "type": "Anchored"
-          },
-          "layout": {
-            "x_index": 5,
-            "y_index": 19,
-            "x_anchor": "left",
-            "y_anchor": "bottom"
-          },
-          "children": {
-            "tile": {
-              "type": "Wall",
-              "format": {
-                "type": "Anchored"
-              },
-              "data": {
-                "texture": "floor-tile-1",
-                "anchor": [
-                  0,
-                  0
-                ],
-                "scale": 0.6,
-                "priority": 2
-              },
-              "layout": {
-                "x_anchor": "left",
-                "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -1988,18 +2211,18 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-11",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 2
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
@@ -2090,23 +2313,24 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-1",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 2
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true
+                "absolute": true,
+                "y_offset": 27.599999999999998
               }
             }
           }
@@ -2226,23 +2450,24 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-1",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 2
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true
+                "absolute": true,
+                "y_offset": 27.599999999999998
               }
             }
           }
@@ -2315,41 +2540,6 @@
             }
           }
         },
-        "tile-(2-15)-floor": {
-          "type": "Node",
-          "format": {
-            "type": "Anchored"
-          },
-          "layout": {
-            "x_index": 15,
-            "y_index": 19,
-            "x_anchor": "left",
-            "y_anchor": "bottom"
-          },
-          "children": {
-            "tile": {
-              "type": "Wall",
-              "format": {
-                "type": "Anchored"
-              },
-              "data": {
-                "texture": "floor-tile-1",
-                "anchor": [
-                  0,
-                  0
-                ],
-                "scale": 0.6,
-                "priority": 2
-              },
-              "layout": {
-                "x_anchor": "left",
-                "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
-              }
-            }
-          }
-        },
         "tile-(2-15)": {
           "type": "Node",
           "format": {
@@ -2363,18 +2553,18 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-11",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 2
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
@@ -2397,24 +2587,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 2
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -2432,24 +2621,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 2
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -2467,24 +2655,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 2
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -2502,24 +2689,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 2
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -2607,24 +2793,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 3
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -2642,24 +2827,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 3
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -2677,59 +2861,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 3
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
-              }
-            }
-          }
-        },
-        "tile-(3-4)-floor": {
-          "type": "Node",
-          "format": {
-            "type": "Anchored"
-          },
-          "layout": {
-            "x_index": 4,
-            "y_index": 18,
-            "x_anchor": "left",
-            "y_anchor": "bottom"
-          },
-          "children": {
-            "tile": {
-              "type": "Wall",
-              "format": {
-                "type": "Anchored"
-              },
-              "data": {
-                "texture": "floor-tile-1",
-                "anchor": [
-                  0,
-                  0
-                ],
-                "scale": 0.6,
-                "priority": 3
-              },
-              "layout": {
-                "x_anchor": "left",
-                "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -2747,18 +2895,18 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-11",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 3
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
@@ -2768,7 +2916,7 @@
             }
           }
         },
-        "tile-(3-5)": {
+        "tile-(3-5)-floor": {
           "type": "Node",
           "format": {
             "type": "Anchored"
@@ -2883,23 +3031,24 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-1",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 3
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true
+                "absolute": true,
+                "y_offset": 27.599999999999998
               }
             }
           }
@@ -3019,23 +3168,24 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-1",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 3
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true
+                "absolute": true,
+                "y_offset": 27.599999999999998
               }
             }
           }
@@ -3108,7 +3258,7 @@
             }
           }
         },
-        "tile-(3-15)": {
+        "tile-(3-15)-floor": {
           "type": "Node",
           "format": {
             "type": "Anchored"
@@ -3142,41 +3292,6 @@
             }
           }
         },
-        "tile-(3-16)-floor": {
-          "type": "Node",
-          "format": {
-            "type": "Anchored"
-          },
-          "layout": {
-            "x_index": 16,
-            "y_index": 18,
-            "x_anchor": "left",
-            "y_anchor": "bottom"
-          },
-          "children": {
-            "tile": {
-              "type": "Wall",
-              "format": {
-                "type": "Anchored"
-              },
-              "data": {
-                "texture": "floor-tile-1",
-                "anchor": [
-                  0,
-                  0
-                ],
-                "scale": 0.6,
-                "priority": 3
-              },
-              "layout": {
-                "x_anchor": "left",
-                "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
-              }
-            }
-          }
-        },
         "tile-(3-16)": {
           "type": "Node",
           "format": {
@@ -3190,18 +3305,18 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-11",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 3
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
@@ -3224,24 +3339,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 3
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -3259,24 +3373,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 3
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -3294,24 +3407,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 3
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -3399,24 +3511,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 4
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -3434,59 +3545,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 4
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
-              }
-            }
-          }
-        },
-        "tile-(4-3)-floor": {
-          "type": "Node",
-          "format": {
-            "type": "Anchored"
-          },
-          "layout": {
-            "x_index": 3,
-            "y_index": 17,
-            "x_anchor": "left",
-            "y_anchor": "bottom"
-          },
-          "children": {
-            "tile": {
-              "type": "Wall",
-              "format": {
-                "type": "Anchored"
-              },
-              "data": {
-                "texture": "floor-tile-1",
-                "anchor": [
-                  0,
-                  0
-                ],
-                "scale": 0.6,
-                "priority": 4
-              },
-              "layout": {
-                "x_anchor": "left",
-                "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -3504,18 +3579,18 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-11",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 4
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
@@ -3525,7 +3600,7 @@
             }
           }
         },
-        "tile-(4-4)": {
+        "tile-(4-4)-floor": {
           "type": "Node",
           "format": {
             "type": "Anchored"
@@ -3674,23 +3749,24 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-1",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 4
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true
+                "absolute": true,
+                "y_offset": 27.599999999999998
               }
             }
           }
@@ -3810,23 +3886,24 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-1",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 4
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true
+                "absolute": true,
+                "y_offset": 27.599999999999998
               }
             }
           }
@@ -3933,7 +4010,7 @@
             }
           }
         },
-        "tile-(4-16)": {
+        "tile-(4-16)-floor": {
           "type": "Node",
           "format": {
             "type": "Anchored"
@@ -3967,41 +4044,6 @@
             }
           }
         },
-        "tile-(4-17)-floor": {
-          "type": "Node",
-          "format": {
-            "type": "Anchored"
-          },
-          "layout": {
-            "x_index": 17,
-            "y_index": 17,
-            "x_anchor": "left",
-            "y_anchor": "bottom"
-          },
-          "children": {
-            "tile": {
-              "type": "Wall",
-              "format": {
-                "type": "Anchored"
-              },
-              "data": {
-                "texture": "floor-tile-1",
-                "anchor": [
-                  0,
-                  0
-                ],
-                "scale": 0.6,
-                "priority": 4
-              },
-              "layout": {
-                "x_anchor": "left",
-                "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
-              }
-            }
-          }
-        },
         "tile-(4-17)": {
           "type": "Node",
           "format": {
@@ -4015,18 +4057,18 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-11",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 4
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
@@ -4049,24 +4091,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 4
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -4084,24 +4125,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 4
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -4189,59 +4229,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 5
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
-              }
-            }
-          }
-        },
-        "tile-(5-2)-floor": {
-          "type": "Node",
-          "format": {
-            "type": "Anchored"
-          },
-          "layout": {
-            "x_index": 2,
-            "y_index": 16,
-            "x_anchor": "left",
-            "y_anchor": "bottom"
-          },
-          "children": {
-            "tile": {
-              "type": "Wall",
-              "format": {
-                "type": "Anchored"
-              },
-              "data": {
-                "texture": "floor-tile-1",
-                "anchor": [
-                  0,
-                  0
-                ],
-                "scale": 0.6,
-                "priority": 5
-              },
-              "layout": {
-                "x_anchor": "left",
-                "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -4259,18 +4263,18 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-11",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 5
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
@@ -4463,18 +4467,53 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-1",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 5
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true,
+                "y_offset": 27.599999999999998
+              }
+            }
+          }
+        },
+        "tile-(5-8)": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 8,
+            "y_index": 16,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "Wall",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-11",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 5
               },
               "layout": {
                 "x_anchor": "left",
@@ -4586,6 +4625,41 @@
             }
           }
         },
+        "tile-(5-12)-floor": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 12,
+            "y_index": 16,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "Wall",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-1",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 5
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true,
+                "y_offset": 27.599999999999998
+              }
+            }
+          }
+        },
         "tile-(5-12)": {
           "type": "Node",
           "format": {
@@ -4599,18 +4673,18 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-11",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 5
               },
               "layout": {
                 "x_anchor": "left",
@@ -4790,41 +4864,6 @@
             }
           }
         },
-        "tile-(5-18)-floor": {
-          "type": "Node",
-          "format": {
-            "type": "Anchored"
-          },
-          "layout": {
-            "x_index": 18,
-            "y_index": 16,
-            "x_anchor": "left",
-            "y_anchor": "bottom"
-          },
-          "children": {
-            "tile": {
-              "type": "Wall",
-              "format": {
-                "type": "Anchored"
-              },
-              "data": {
-                "texture": "floor-tile-1",
-                "anchor": [
-                  0,
-                  0
-                ],
-                "scale": 0.6,
-                "priority": 5
-              },
-              "layout": {
-                "x_anchor": "left",
-                "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
-              }
-            }
-          }
-        },
         "tile-(5-18)": {
           "type": "Node",
           "format": {
@@ -4838,18 +4877,18 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-11",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 5
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
@@ -4872,24 +4911,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 5
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -4964,41 +5002,6 @@
             }
           }
         },
-        "tile-(6-1)-floor": {
-          "type": "Node",
-          "format": {
-            "type": "Anchored"
-          },
-          "layout": {
-            "x_index": 1,
-            "y_index": 15,
-            "x_anchor": "left",
-            "y_anchor": "bottom"
-          },
-          "children": {
-            "tile": {
-              "type": "Wall",
-              "format": {
-                "type": "Anchored"
-              },
-              "data": {
-                "texture": "floor-tile-1",
-                "anchor": [
-                  0,
-                  0
-                ],
-                "scale": 0.6,
-                "priority": 6
-              },
-              "layout": {
-                "x_anchor": "left",
-                "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
-              }
-            }
-          }
-        },
         "tile-(6-1)": {
           "type": "Node",
           "format": {
@@ -5012,18 +5015,18 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-11",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 6
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
@@ -5101,7 +5104,7 @@
             }
           }
         },
-        "tile-(6-4)": {
+        "tile-(6-4)-floor": {
           "type": "Node",
           "format": {
             "type": "Anchored"
@@ -5543,7 +5546,7 @@
             }
           }
         },
-        "tile-(6-17)": {
+        "tile-(6-17)-floor": {
           "type": "Node",
           "format": {
             "type": "Anchored"
@@ -5611,41 +5614,6 @@
             }
           }
         },
-        "tile-(6-19)-floor": {
-          "type": "Node",
-          "format": {
-            "type": "Anchored"
-          },
-          "layout": {
-            "x_index": 19,
-            "y_index": 15,
-            "x_anchor": "left",
-            "y_anchor": "bottom"
-          },
-          "children": {
-            "tile": {
-              "type": "Wall",
-              "format": {
-                "type": "Anchored"
-              },
-              "data": {
-                "texture": "floor-tile-1",
-                "anchor": [
-                  0,
-                  0
-                ],
-                "scale": 0.6,
-                "priority": 6
-              },
-              "layout": {
-                "x_anchor": "left",
-                "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
-              }
-            }
-          }
-        },
         "tile-(6-19)": {
           "type": "Node",
           "format": {
@@ -5659,18 +5627,18 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-11",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 6
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
@@ -5920,7 +5888,7 @@
             }
           }
         },
-        "tile-(7-6)-floor": {
+        "tile-(7-6)": {
           "type": "Node",
           "format": {
             "type": "Anchored"
@@ -6158,7 +6126,7 @@
             }
           }
         },
-        "tile-(7-13)-floor": {
+        "tile-(7-13)": {
           "type": "Node",
           "format": {
             "type": "Anchored"
@@ -6466,6 +6434,41 @@
             }
           }
         },
+        "tile-(8-1)-floor": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 1,
+            "y_index": 13,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "Wall",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-1",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 8
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true,
+                "y_offset": 27.599999999999998
+              }
+            }
+          }
+        },
         "tile-(8-1)": {
           "type": "Node",
           "format": {
@@ -6479,23 +6482,58 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-11",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 8
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
                 "absolute": true
+              }
+            }
+          }
+        },
+        "tile-(8-2)-floor": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 2,
+            "y_index": 13,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "Wall",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-1",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 8
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true,
+                "y_offset": 27.599999999999998
               }
             }
           }
@@ -6513,23 +6551,58 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-11",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 8
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
                 "absolute": true
+              }
+            }
+          }
+        },
+        "tile-(8-3)-floor": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 3,
+            "y_index": 13,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "Wall",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-1",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 8
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true,
+                "y_offset": 27.599999999999998
               }
             }
           }
@@ -6547,23 +6620,58 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-11",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 8
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
                 "absolute": true
+              }
+            }
+          }
+        },
+        "tile-(8-4)-floor": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 4,
+            "y_index": 13,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "Wall",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-1",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 8
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true,
+                "y_offset": 27.599999999999998
               }
             }
           }
@@ -6581,23 +6689,58 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-11",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 8
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
                 "absolute": true
+              }
+            }
+          }
+        },
+        "tile-(8-5)-floor": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 5,
+            "y_index": 13,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "Wall",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-1",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 8
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true,
+                "y_offset": 27.599999999999998
               }
             }
           }
@@ -6615,18 +6758,18 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-11",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 8
               },
               "layout": {
                 "x_anchor": "left",
@@ -6942,6 +7085,41 @@
             }
           }
         },
+        "tile-(8-15)-floor": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 15,
+            "y_index": 13,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "Wall",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-1",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 8
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true,
+                "y_offset": 27.599999999999998
+              }
+            }
+          }
+        },
         "tile-(8-15)": {
           "type": "Node",
           "format": {
@@ -6955,23 +7133,58 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-11",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 8
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
                 "absolute": true
+              }
+            }
+          }
+        },
+        "tile-(8-16)-floor": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 16,
+            "y_index": 13,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "Wall",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-1",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 8
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true,
+                "y_offset": 27.599999999999998
               }
             }
           }
@@ -6989,23 +7202,58 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-11",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 8
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
                 "absolute": true
+              }
+            }
+          }
+        },
+        "tile-(8-17)-floor": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 17,
+            "y_index": 13,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "Wall",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-1",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 8
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true,
+                "y_offset": 27.599999999999998
               }
             }
           }
@@ -7023,23 +7271,58 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-11",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 8
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
                 "absolute": true
+              }
+            }
+          }
+        },
+        "tile-(8-18)-floor": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 18,
+            "y_index": 13,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "Wall",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-1",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 8
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true,
+                "y_offset": 27.599999999999998
               }
             }
           }
@@ -7057,23 +7340,58 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-11",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 8
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
                 "absolute": true
+              }
+            }
+          }
+        },
+        "tile-(8-19)-floor": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 19,
+            "y_index": 13,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "Wall",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-1",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 8
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true,
+                "y_offset": 27.599999999999998
               }
             }
           }
@@ -7091,18 +7409,18 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-11",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 8
               },
               "layout": {
                 "x_anchor": "left",
@@ -7488,40 +7806,6 @@
             }
           }
         },
-        "tile-(9-9)-floor": {
-          "type": "Node",
-          "format": {
-            "type": "Anchored"
-          },
-          "layout": {
-            "x_index": 9,
-            "y_index": 12,
-            "x_anchor": "left",
-            "y_anchor": "bottom"
-          },
-          "children": {
-            "tile": {
-              "type": "BasicTile",
-              "format": {
-                "type": "Anchored"
-              },
-              "data": {
-                "texture": "floor-tile-0",
-                "anchor": [
-                  0,
-                  0
-                ],
-                "scale": 0.6,
-                "priority": 0
-              },
-              "layout": {
-                "x_anchor": "left",
-                "y_anchor": "bottom",
-                "absolute": true
-              }
-            }
-          }
-        },
         "tile-(9-9)": {
           "type": "Node",
           "format": {
@@ -7529,40 +7813,6 @@
           },
           "layout": {
             "x_index": 9,
-            "y_index": 12,
-            "x_anchor": "left",
-            "y_anchor": "bottom"
-          },
-          "children": {
-            "tile": {
-              "type": "Wall",
-              "format": {
-                "type": "Anchored"
-              },
-              "data": {
-                "texture": "floor-tile-3",
-                "anchor": [
-                  0,
-                  0
-                ],
-                "scale": 0.6,
-                "priority": 9
-              },
-              "layout": {
-                "x_anchor": "left",
-                "y_anchor": "bottom",
-                "absolute": true
-              }
-            }
-          }
-        },
-        "tile-(9-10)-floor": {
-          "type": "Node",
-          "format": {
-            "type": "Anchored"
-          },
-          "layout": {
-            "x_index": 10,
             "y_index": 12,
             "x_anchor": "left",
             "y_anchor": "bottom"
@@ -7603,40 +7853,6 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
-              "format": {
-                "type": "Anchored"
-              },
-              "data": {
-                "texture": "floor-tile-3",
-                "anchor": [
-                  0,
-                  0
-                ],
-                "scale": 0.6,
-                "priority": 9
-              },
-              "layout": {
-                "x_anchor": "left",
-                "y_anchor": "bottom",
-                "absolute": true
-              }
-            }
-          }
-        },
-        "tile-(9-11)-floor": {
-          "type": "Node",
-          "format": {
-            "type": "Anchored"
-          },
-          "layout": {
-            "x_index": 11,
-            "y_index": 12,
-            "x_anchor": "left",
-            "y_anchor": "bottom"
-          },
-          "children": {
-            "tile": {
               "type": "BasicTile",
               "format": {
                 "type": "Anchored"
@@ -7671,18 +7887,18 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-3",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 9
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
@@ -8339,40 +8555,6 @@
             }
           }
         },
-        "tile-(10-9)-floor": {
-          "type": "Node",
-          "format": {
-            "type": "Anchored"
-          },
-          "layout": {
-            "x_index": 9,
-            "y_index": 11,
-            "x_anchor": "left",
-            "y_anchor": "bottom"
-          },
-          "children": {
-            "tile": {
-              "type": "BasicTile",
-              "format": {
-                "type": "Anchored"
-              },
-              "data": {
-                "texture": "floor-tile-0",
-                "anchor": [
-                  0,
-                  0
-                ],
-                "scale": 0.6,
-                "priority": 0
-              },
-              "layout": {
-                "x_anchor": "left",
-                "y_anchor": "bottom",
-                "absolute": true
-              }
-            }
-          }
-        },
         "tile-(10-9)": {
           "type": "Node",
           "format": {
@@ -8380,40 +8562,6 @@
           },
           "layout": {
             "x_index": 9,
-            "y_index": 11,
-            "x_anchor": "left",
-            "y_anchor": "bottom"
-          },
-          "children": {
-            "tile": {
-              "type": "Wall",
-              "format": {
-                "type": "Anchored"
-              },
-              "data": {
-                "texture": "floor-tile-3",
-                "anchor": [
-                  0,
-                  0
-                ],
-                "scale": 0.6,
-                "priority": 10
-              },
-              "layout": {
-                "x_anchor": "left",
-                "y_anchor": "bottom",
-                "absolute": true
-              }
-            }
-          }
-        },
-        "tile-(10-10)-floor": {
-          "type": "Node",
-          "format": {
-            "type": "Anchored"
-          },
-          "layout": {
-            "x_index": 10,
             "y_index": 11,
             "x_anchor": "left",
             "y_anchor": "bottom"
@@ -8454,40 +8602,6 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
-              "format": {
-                "type": "Anchored"
-              },
-              "data": {
-                "texture": "floor-tile-2",
-                "anchor": [
-                  0,
-                  0
-                ],
-                "scale": 0.6,
-                "priority": 10
-              },
-              "layout": {
-                "x_anchor": "left",
-                "y_anchor": "bottom",
-                "absolute": true
-              }
-            }
-          }
-        },
-        "tile-(10-11)-floor": {
-          "type": "Node",
-          "format": {
-            "type": "Anchored"
-          },
-          "layout": {
-            "x_index": 11,
-            "y_index": 11,
-            "x_anchor": "left",
-            "y_anchor": "bottom"
-          },
-          "children": {
-            "tile": {
               "type": "BasicTile",
               "format": {
                 "type": "Anchored"
@@ -8522,18 +8636,18 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-3",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 10
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
@@ -9156,40 +9270,6 @@
             }
           }
         },
-        "tile-(11-9)-floor": {
-          "type": "Node",
-          "format": {
-            "type": "Anchored"
-          },
-          "layout": {
-            "x_index": 9,
-            "y_index": 10,
-            "x_anchor": "left",
-            "y_anchor": "bottom"
-          },
-          "children": {
-            "tile": {
-              "type": "BasicTile",
-              "format": {
-                "type": "Anchored"
-              },
-              "data": {
-                "texture": "floor-tile-0",
-                "anchor": [
-                  0,
-                  0
-                ],
-                "scale": 0.6,
-                "priority": 0
-              },
-              "layout": {
-                "x_anchor": "left",
-                "y_anchor": "bottom",
-                "absolute": true
-              }
-            }
-          }
-        },
         "tile-(11-9)": {
           "type": "Node",
           "format": {
@@ -9197,40 +9277,6 @@
           },
           "layout": {
             "x_index": 9,
-            "y_index": 10,
-            "x_anchor": "left",
-            "y_anchor": "bottom"
-          },
-          "children": {
-            "tile": {
-              "type": "Wall",
-              "format": {
-                "type": "Anchored"
-              },
-              "data": {
-                "texture": "floor-tile-3",
-                "anchor": [
-                  0,
-                  0
-                ],
-                "scale": 0.6,
-                "priority": 11
-              },
-              "layout": {
-                "x_anchor": "left",
-                "y_anchor": "bottom",
-                "absolute": true
-              }
-            }
-          }
-        },
-        "tile-(11-10)-floor": {
-          "type": "Node",
-          "format": {
-            "type": "Anchored"
-          },
-          "layout": {
-            "x_index": 10,
             "y_index": 10,
             "x_anchor": "left",
             "y_anchor": "bottom"
@@ -9271,40 +9317,6 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
-              "format": {
-                "type": "Anchored"
-              },
-              "data": {
-                "texture": "floor-tile-3",
-                "anchor": [
-                  0,
-                  0
-                ],
-                "scale": 0.6,
-                "priority": 11
-              },
-              "layout": {
-                "x_anchor": "left",
-                "y_anchor": "bottom",
-                "absolute": true
-              }
-            }
-          }
-        },
-        "tile-(11-11)-floor": {
-          "type": "Node",
-          "format": {
-            "type": "Anchored"
-          },
-          "layout": {
-            "x_index": 11,
-            "y_index": 10,
-            "x_anchor": "left",
-            "y_anchor": "bottom"
-          },
-          "children": {
-            "tile": {
               "type": "BasicTile",
               "format": {
                 "type": "Anchored"
@@ -9339,18 +9351,18 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-3",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 11
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
@@ -9702,6 +9714,41 @@
             }
           }
         },
+        "tile-(12-1)-floor": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 1,
+            "y_index": 9,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "Wall",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-1",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 12
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true,
+                "y_offset": 27.599999999999998
+              }
+            }
+          }
+        },
         "tile-(12-1)": {
           "type": "Node",
           "format": {
@@ -9715,23 +9762,58 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-11",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 12
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
                 "absolute": true
+              }
+            }
+          }
+        },
+        "tile-(12-2)-floor": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 2,
+            "y_index": 9,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "Wall",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-1",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 12
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true,
+                "y_offset": 27.599999999999998
               }
             }
           }
@@ -9749,23 +9831,58 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-11",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 12
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
                 "absolute": true
+              }
+            }
+          }
+        },
+        "tile-(12-3)-floor": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 3,
+            "y_index": 9,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "Wall",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-1",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 12
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true,
+                "y_offset": 27.599999999999998
               }
             }
           }
@@ -9783,23 +9900,58 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-11",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 12
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
                 "absolute": true
+              }
+            }
+          }
+        },
+        "tile-(12-4)-floor": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 4,
+            "y_index": 9,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "Wall",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-1",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 12
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true,
+                "y_offset": 27.599999999999998
               }
             }
           }
@@ -9817,23 +9969,58 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-11",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 12
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
                 "absolute": true
+              }
+            }
+          }
+        },
+        "tile-(12-5)-floor": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 5,
+            "y_index": 9,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "Wall",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-1",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 12
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true,
+                "y_offset": 27.599999999999998
               }
             }
           }
@@ -9851,18 +10038,18 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-11",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 12
               },
               "layout": {
                 "x_anchor": "left",
@@ -10144,7 +10331,7 @@
             }
           }
         },
-        "tile-(12-14)-floor": {
+        "tile-(12-14)": {
           "type": "Node",
           "format": {
             "type": "Anchored"
@@ -10178,6 +10365,41 @@
             }
           }
         },
+        "tile-(12-15)-floor": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 15,
+            "y_index": 9,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "Wall",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-1",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 12
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true,
+                "y_offset": 27.599999999999998
+              }
+            }
+          }
+        },
         "tile-(12-15)": {
           "type": "Node",
           "format": {
@@ -10191,23 +10413,58 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-11",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 12
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
                 "absolute": true
+              }
+            }
+          }
+        },
+        "tile-(12-16)-floor": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 16,
+            "y_index": 9,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "Wall",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-1",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 12
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true,
+                "y_offset": 27.599999999999998
               }
             }
           }
@@ -10225,23 +10482,58 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-11",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 12
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
                 "absolute": true
+              }
+            }
+          }
+        },
+        "tile-(12-17)-floor": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 17,
+            "y_index": 9,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "Wall",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-1",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 12
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true,
+                "y_offset": 27.599999999999998
               }
             }
           }
@@ -10259,23 +10551,58 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-11",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 12
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
                 "absolute": true
+              }
+            }
+          }
+        },
+        "tile-(12-18)-floor": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 18,
+            "y_index": 9,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "Wall",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-1",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 12
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true,
+                "y_offset": 27.599999999999998
               }
             }
           }
@@ -10293,23 +10620,58 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-11",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 12
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
                 "absolute": true
+              }
+            }
+          }
+        },
+        "tile-(12-19)-floor": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 19,
+            "y_index": 9,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "Wall",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-1",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 12
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true,
+                "y_offset": 27.599999999999998
               }
             }
           }
@@ -10327,18 +10689,18 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-11",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 12
               },
               "layout": {
                 "x_anchor": "left",
@@ -10588,7 +10950,7 @@
             }
           }
         },
-        "tile-(13-6)-floor": {
+        "tile-(13-6)": {
           "type": "Node",
           "format": {
             "type": "Anchored"
@@ -10962,7 +11324,7 @@
             }
           }
         },
-        "tile-(13-17)": {
+        "tile-(13-17)-floor": {
           "type": "Node",
           "format": {
             "type": "Anchored"
@@ -11168,7 +11530,7 @@
             }
           }
         },
-        "tile-(14-2)": {
+        "tile-(14-2)-floor": {
           "type": "Node",
           "format": {
             "type": "Anchored"
@@ -11440,7 +11802,7 @@
             }
           }
         },
-        "tile-(14-10)-floor": {
+        "tile-(14-10)": {
           "type": "Node",
           "format": {
             "type": "Anchored"
@@ -11759,24 +12121,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-10",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 14
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -11864,24 +12225,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-10",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 15
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -12103,23 +12463,24 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-10",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 15
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true
+                "absolute": true,
+                "y_offset": 27.599999999999998
               }
             }
           }
@@ -12239,23 +12600,24 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-10",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 15
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true
+                "absolute": true,
+                "y_offset": 27.599999999999998
               }
             }
           }
@@ -12443,24 +12805,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-10",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 15
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -12478,24 +12839,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 15
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -12583,24 +12943,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 16
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -12618,24 +12977,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-10",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 16
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -12674,7 +13032,7 @@
             }
           }
         },
-        "tile-(16-4)": {
+        "tile-(16-4)-floor": {
           "type": "Node",
           "format": {
             "type": "Anchored"
@@ -12823,23 +13181,24 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-1",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 16
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true
+                "absolute": true,
+                "y_offset": 27.599999999999998
               }
             }
           }
@@ -12959,23 +13318,24 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-1",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 16
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true
+                "absolute": true,
+                "y_offset": 27.599999999999998
               }
             }
           }
@@ -13082,7 +13442,7 @@
             }
           }
         },
-        "tile-(16-16)": {
+        "tile-(16-16)-floor": {
           "type": "Node",
           "format": {
             "type": "Anchored"
@@ -13129,24 +13489,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-10",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 16
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -13164,24 +13523,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 16
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -13199,24 +13557,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 16
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -13304,24 +13661,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 17
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -13339,24 +13695,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 17
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -13374,24 +13729,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-10",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 17
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -13545,23 +13899,24 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-1",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 17
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true
+                "absolute": true,
+                "y_offset": 27.599999999999998
               }
             }
           }
@@ -13681,28 +14036,29 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-1",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 17
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true
+                "absolute": true,
+                "y_offset": 27.599999999999998
               }
             }
           }
         },
-        "tile-(17-13)-floor": {
+        "tile-(17-13)": {
           "type": "Node",
           "format": {
             "type": "Anchored"
@@ -13804,7 +14160,7 @@
             }
           }
         },
-        "tile-(17-16)": {
+        "tile-(17-16)-floor": {
           "type": "Node",
           "format": {
             "type": "Anchored"
@@ -13817,24 +14173,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-10",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 17
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -13852,24 +14207,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 17
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -13887,24 +14241,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 17
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -13922,24 +14275,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 17
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -14027,24 +14379,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 18
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -14062,29 +14413,28 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 18
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
         },
-        "tile-(18-3)": {
+        "tile-(18-3)-floor": {
           "type": "Node",
           "format": {
             "type": "Anchored"
@@ -14097,24 +14447,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 18
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -14132,24 +14481,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-10",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 18
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -14269,23 +14617,24 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-1",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 18
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true
+                "absolute": true,
+                "y_offset": 27.599999999999998
               }
             }
           }
@@ -14405,23 +14754,24 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-1",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 18
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true
+                "absolute": true,
+                "y_offset": 27.599999999999998
               }
             }
           }
@@ -14507,24 +14857,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-10",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 18
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -14542,24 +14891,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 18
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -14577,24 +14925,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 18
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -14612,24 +14959,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 18
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -14647,24 +14993,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 18
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -14752,24 +15097,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 19
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -14787,24 +15131,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 19
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -14822,24 +15165,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 19
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -14857,24 +15199,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 19
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -14892,24 +15233,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-10",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 19
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -14995,23 +15335,24 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-1",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 19
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true
+                "absolute": true,
+                "y_offset": 27.599999999999998
               }
             }
           }
@@ -15131,23 +15472,24 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Wall",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-0",
+                "texture": "floor-tile-1",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 0
+                "priority": 19
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true
+                "absolute": true,
+                "y_offset": 27.599999999999998
               }
             }
           }
@@ -15199,24 +15541,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-10",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 19
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -15234,24 +15575,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 19
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -15269,24 +15609,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 19
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -15304,24 +15643,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 19
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -15339,24 +15677,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 19
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -15374,24 +15711,23 @@
           },
           "children": {
             "tile": {
-              "type": "Wall",
+              "type": "BasicTile",
               "format": {
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-0",
                 "anchor": [
                   0,
                   0
                 ],
                 "scale": 0.6,
-                "priority": 19
+                "priority": 0
               },
               "layout": {
                 "x_anchor": "left",
                 "y_anchor": "bottom",
-                "absolute": true,
-                "y_offset": 27.599999999999998
+                "absolute": true
               }
             }
           }
@@ -15484,7 +15820,7 @@
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-10",
                 "anchor": [
                   0,
                   0
@@ -15519,7 +15855,7 @@
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-10",
                 "anchor": [
                   0,
                   0
@@ -15554,7 +15890,7 @@
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-10",
                 "anchor": [
                   0,
                   0
@@ -15589,7 +15925,7 @@
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-10",
                 "anchor": [
                   0,
                   0
@@ -15624,7 +15960,7 @@
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-10",
                 "anchor": [
                   0,
                   0
@@ -15729,7 +16065,7 @@
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-10",
+                "texture": "floor-tile-1",
                 "anchor": [
                   0,
                   0
@@ -15868,7 +16204,7 @@
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-10",
+                "texture": "floor-tile-1",
                 "anchor": [
                   0,
                   0
@@ -15938,7 +16274,7 @@
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-10",
                 "anchor": [
                   0,
                   0
@@ -15973,7 +16309,7 @@
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-10",
                 "anchor": [
                   0,
                   0
@@ -16008,7 +16344,7 @@
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-10",
                 "anchor": [
                   0,
                   0
@@ -16043,7 +16379,7 @@
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-10",
                 "anchor": [
                   0,
                   0
@@ -16078,7 +16414,7 @@
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-10",
                 "anchor": [
                   0,
                   0
@@ -16113,7 +16449,7 @@
                 "type": "Anchored"
               },
               "data": {
-                "texture": "floor-tile-1",
+                "texture": "floor-tile-10",
                 "anchor": [
                   0,
                   0
@@ -16189,14 +16525,14 @@
         "y_anchor": "left"
       },
       "children": {
-        "enemy-(5-8)": {
+        "enemy-(3-5)": {
           "type": "Node",
           "format": {
             "type": "Anchored"
           },
           "layout": {
-            "x_index": 8,
-            "y_index": 16,
+            "x_index": 5,
+            "y_index": 18,
             "x_anchor": "left",
             "y_anchor": "bottom"
           },
@@ -16223,14 +16559,14 @@
             }
           }
         },
-        "enemy-(7-6)": {
+        "enemy-(3-15)": {
           "type": "Node",
           "format": {
             "type": "Anchored"
           },
           "layout": {
-            "x_index": 6,
-            "y_index": 14,
+            "x_index": 15,
+            "y_index": 18,
             "x_anchor": "left",
             "y_anchor": "bottom"
           },
@@ -16257,14 +16593,14 @@
             }
           }
         },
-        "enemy-(7-13)": {
+        "enemy-(4-4)": {
           "type": "Node",
           "format": {
             "type": "Anchored"
           },
           "layout": {
-            "x_index": 13,
-            "y_index": 14,
+            "x_index": 4,
+            "y_index": 17,
             "x_anchor": "left",
             "y_anchor": "bottom"
           },
@@ -16291,14 +16627,14 @@
             }
           }
         },
-        "enemy-(12-14)": {
+        "enemy-(4-16)": {
           "type": "Node",
           "format": {
             "type": "Anchored"
           },
           "layout": {
-            "x_index": 14,
-            "y_index": 9,
+            "x_index": 16,
+            "y_index": 17,
             "x_anchor": "left",
             "y_anchor": "bottom"
           },
@@ -16325,13 +16661,81 @@
             }
           }
         },
-        "enemy-(13-6)": {
+        "enemy-(6-4)": {
           "type": "Node",
           "format": {
             "type": "Anchored"
           },
           "layout": {
-            "x_index": 6,
+            "x_index": 4,
+            "y_index": 15,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "BasicTile",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-0",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 0
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true
+              }
+            }
+          }
+        },
+        "enemy-(6-17)": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 17,
+            "y_index": 15,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "BasicTile",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-0",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 0
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true
+              }
+            }
+          }
+        },
+        "enemy-(13-17)": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 17,
             "y_index": 8,
             "x_anchor": "left",
             "y_anchor": "bottom"
@@ -16359,13 +16763,13 @@
             }
           }
         },
-        "enemy-(14-10)": {
+        "enemy-(14-2)": {
           "type": "Node",
           "format": {
             "type": "Anchored"
           },
           "layout": {
-            "x_index": 10,
+            "x_index": 2,
             "y_index": 7,
             "x_anchor": "left",
             "y_anchor": "bottom"
@@ -16393,14 +16797,116 @@
             }
           }
         },
-        "enemy-(17-13)": {
+        "enemy-(16-4)": {
           "type": "Node",
           "format": {
             "type": "Anchored"
           },
           "layout": {
-            "x_index": 13,
+            "x_index": 4,
+            "y_index": 5,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "BasicTile",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-0",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 0
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true
+              }
+            }
+          }
+        },
+        "enemy-(16-16)": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 16,
+            "y_index": 5,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "BasicTile",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-0",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 0
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true
+              }
+            }
+          }
+        },
+        "enemy-(17-16)": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 16,
             "y_index": 4,
+            "x_anchor": "left",
+            "y_anchor": "bottom"
+          },
+          "children": {
+            "tile": {
+              "type": "BasicTile",
+              "format": {
+                "type": "Anchored"
+              },
+              "data": {
+                "texture": "floor-tile-0",
+                "anchor": [
+                  0,
+                  0
+                ],
+                "scale": 0.6,
+                "priority": 0
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "bottom",
+                "absolute": true
+              }
+            }
+          }
+        },
+        "enemy-(18-3)": {
+          "type": "Node",
+          "format": {
+            "type": "Anchored"
+          },
+          "layout": {
+            "x_index": 3,
+            "y_index": 3,
             "x_anchor": "left",
             "y_anchor": "bottom"
           },
