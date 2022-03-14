@@ -183,8 +183,9 @@ void GameScene::update(float timestep) {
       _world->removeObstacle(enemy.getEnemy().get());
       enemy.dispose();
       itt = _e_controllers.erase(itt);
+    } else {
+      ++itt;
     }
-    ++itt;
   }
 }
 
