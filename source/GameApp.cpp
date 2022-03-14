@@ -211,9 +211,9 @@ void GameApp::updateClientMenuScene(float timestep) {
       _level_loading.setActive(true);
       _scene = State::LEVEL_LOADING;
       // Transfer connection ownership
-      _level_loading.setConnection(_hostgame.getConnection());
+      _level_loading.setConnection(_joingame.getConnection());
       _hostgame.disconnect();
-      _level_loading.setHost(true);
+      _level_loading.setHost(false);
       break;
     case ClientMenuScene::Status::WAIT:
     case ClientMenuScene::Status::IDLE:
