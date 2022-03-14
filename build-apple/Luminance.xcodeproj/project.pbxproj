@@ -87,6 +87,10 @@
 		D5EB745027C335C7007D157D /* Movement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5EB744C27C335C7007D157D /* Movement.cpp */; };
 		D5F3D6B427DD6E3B0071DD06 /* LevelModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5F3D6B027DD6E3B0071DD06 /* LevelModel.cpp */; };
 		D5F3D6B527DD6E3B0071DD06 /* RoomModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5F3D6B227DD6E3B0071DD06 /* RoomModel.cpp */; };
+		D5F3D6DD27DEFA320071DD06 /* LevelModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5F3D6B027DD6E3B0071DD06 /* LevelModel.cpp */; };
+		D5F3D6DE27DEFA330071DD06 /* LevelModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5F3D6B027DD6E3B0071DD06 /* LevelModel.cpp */; };
+		D5F3D6DF27DEFA350071DD06 /* RoomModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5F3D6B227DD6E3B0071DD06 /* RoomModel.cpp */; };
+		D5F3D6E027DEFA350071DD06 /* RoomModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5F3D6B227DD6E3B0071DD06 /* RoomModel.cpp */; };
 		EB07CFB621EFF3F8000CB3A3 /* DeviceMargins.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB07CFB021EFF3EF000CB3A3 /* DeviceMargins.plist */; };
 		EB22BDE025D0E00A002ACE41 /* libcugl-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB22BDC825D0DE75002ACE41 /* libcugl-mac.a */; };
 		EB22BDFC25D0E0E2002ACE41 /* libcugl-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB22BDCA25D0DE75002ACE41 /* libcugl-ios.a */; };
@@ -780,6 +784,7 @@
 				D52E673C27BF305A00F8E2B8 /* InputController.cpp in Sources */,
 				D598E69727C578F10039326B /* LevelGenerationDemoScene.cpp in Sources */,
 				57CEFE4527DE5E6100EF2B90 /* EnemyController.cpp in Sources */,
+				D5F3D6DE27DEFA330071DD06 /* LevelModel.cpp in Sources */,
 				D52E673F27BF305A00F8E2B8 /* Attack.cpp in Sources */,
 				D5EB745027C335C7007D157D /* Movement.cpp in Sources */,
 				D56DCD3127CDAD7A002E8363 /* Room.cpp in Sources */,
@@ -787,6 +792,8 @@
 				D58B0FD027DC1BC500E65692 /* LevelController.cpp in Sources */,
 				EB9CDA3925D0EAB100EE1A09 /* main.cpp in Sources */,
 				D56B743D27CA9DCE00710CC6 /* LevelGeneratorConfig.cpp in Sources */,
+				D5F3D6E027DEFA350071DD06 /* RoomModel.cpp in Sources */,
+				CA1BA38327D1546100D636A5 /* EnemySet.cpp in Sources */,
 				D579718927CFF851008FCC5E /* BasicTile.cpp in Sources */,
 				D58B0FDA27DC1DAD00E65692 /* LoadingLevelScene.cpp in Sources */,
 				D52E674227BF305A00F8E2B8 /* GameApp.cpp in Sources */,
@@ -811,6 +818,7 @@
 				D52E673B27BF305A00F8E2B8 /* InputController.cpp in Sources */,
 				D598E69627C578F10039326B /* LevelGenerationDemoScene.cpp in Sources */,
 				57CEFE4427DE5E6100EF2B90 /* EnemyController.cpp in Sources */,
+				D5F3D6DD27DEFA320071DD06 /* LevelModel.cpp in Sources */,
 				D52E673E27BF305A00F8E2B8 /* Attack.cpp in Sources */,
 				D5EB744F27C335C7007D157D /* Movement.cpp in Sources */,
 				D56DCD3027CDAD7A002E8363 /* Room.cpp in Sources */,
@@ -818,6 +826,8 @@
 				D58B0FCF27DC1BC500E65692 /* LevelController.cpp in Sources */,
 				EB7454AE1D74D891002FBAE6 /* main.cpp in Sources */,
 				D56B743C27CA9DCE00710CC6 /* LevelGeneratorConfig.cpp in Sources */,
+				D5F3D6DF27DEFA350071DD06 /* RoomModel.cpp in Sources */,
+				CA1BA38227D1546000D636A5 /* EnemySet.cpp in Sources */,
 				D579718827CFF851008FCC5E /* BasicTile.cpp in Sources */,
 				D58B0FD927DC1DAD00E65692 /* LoadingLevelScene.cpp in Sources */,
 				D52E674127BF305A00F8E2B8 /* GameApp.cpp in Sources */,

@@ -166,7 +166,6 @@ void Grunt::releaseFixtures() {
 void Grunt::update(float delta) {
   CapsuleObstacle::update(delta);
   if (_grunt_node != nullptr) {
-    cugl::Vec2 obstacle_pos = getPosition();
     _grunt_node->setPosition(getPosition() + _offset_from_center - _room_pos);
   }
 
