@@ -318,6 +318,7 @@ bool Button::activate() {
         // Add the mouse listeners
         bool down = touch->addBeginListener(_inputkey, [=](const TouchEvent& event, bool focus) {
             if (this->containsScreen(event.position)) {
+                this->_touch_ids.insert(event.touch);
                 if (this->_toggle) {
                     this->setDown(!this->isDown());
                 } else {
@@ -329,10 +330,11 @@ bool Button::activate() {
         bool up = false;
         if (down) {
             up = touch->addEndListener(_inputkey, [=](const TouchEvent& event, bool focus) {
-                if (this->isDown()) {
+                if (this->_touch_ids.find(event.touch) != this->_touch_ids.end() && this->isDown()) {
                     if (!this->_toggle) {
                         this->setDown(false);
                     }
+                    this->_touch_ids.clear();
                 }
             });
             if (!up) {
