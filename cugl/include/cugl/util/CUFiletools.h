@@ -3,7 +3,7 @@
 //  Cornell University Game Library (CUGL)
 //
 //  This module provides several tools for querying and constructing file paths in
-//  OS indepedent way.  It is largely a collection of namespaced functions, much 
+//  OS indepedent way.  It is largely a collection of namespaced functions, much
 //  like the strings module. It is based off the the os.path module in Python.
 //
 //  CUGL MIT License:
@@ -38,9 +38,9 @@ namespace cugl {
 	/**
 	 * Functions for file management.
 	 *
-	 * This namespace provides several tools for querying and constructing file 
-	 * paths in an OS independent way. It is largely a collection of namespaced 
-	 * functions, much like the stringtool module. It is based off the the `os.path` 
+	 * This namespace provides several tools for querying and constructing file
+	 * paths in an OS independent way. It is largely a collection of namespaced
+	 * functions, much like the stringtool module. It is based off the the `os.path`
 	 * module in Python.
 	 */
     namespace filetool {
@@ -121,7 +121,7 @@ namespace cugl {
      * @return the volume prefix for this path.
      */
     const std::string file_vol(const std::string path);
-    
+
     /**
      * Returns the length of the file denoted by this path name.
      *
@@ -310,7 +310,7 @@ namespace cugl {
      * @return the given path, canonicalized to the current platform
      */
     const std::string canonicalize_path(const std::string path);
-    
+
     /**
      * Returns the common subpath of the given paths.
      *
@@ -425,7 +425,7 @@ namespace cugl {
      * @return true if the file was successfully deleted.
      */
     bool file_delete(const std::string path);
-    
+
     /**
      * Returns a list of strings naming the files and directories in this path
      *
@@ -469,7 +469,7 @@ namespace cugl {
      * @return true if the directory was successfully created.
      */
     bool dir_create(const std::string path);
-    
+
     /**
      * Deletes the directory denoted by this path name.
      *
@@ -557,7 +557,7 @@ namespace cugl {
      * @return true if the file permissions where successfully changed.
      */
     bool set_readable(const std::string path, bool readable);
-    
+
     /**
      * Sets the owner's or everybody's read permission for this path name.
      *
@@ -575,7 +575,7 @@ namespace cugl {
      * @return true if the file permissions where successfully changed.
      */
     bool set_readable(const std::string path, bool readable, bool ownerOnly);
-    
+
     /**
      * Marks this file or directory so that only read operations are allowed.
      *
@@ -611,7 +611,7 @@ namespace cugl {
      * @return true if the file permissions where successfully changed.
      */
     bool set_searchable(const std::string path, bool searchable);
-    
+
     /**
      * Sets the owner's or everybody's execution permission for this path name.
      *
@@ -667,7 +667,7 @@ namespace cugl {
      * @return true if the file permissions where successfully changed.
      */
     bool set_writable(const std::string path, bool writable, bool ownerOnly);
-    
+
 #pragma mark -
 #pragma mark File Volumes
     /**
@@ -723,7 +723,7 @@ namespace cugl {
      * @return the size of the partition named by this path name.
      */
     size_t vol_total_space(const std::string path);
-    
+
     }
 }
 #endif /* __CU_FILE_TOOLS_H__ */

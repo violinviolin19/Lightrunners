@@ -3,6 +3,9 @@
 #include <cugl/cugl.h>
 
 #include "scenes/GameScene.h"
+//#include "scenes/HostGameScene.h"
+#include "scenes/ClientMenuScene.h"
+#include "scenes/HostMenuScene.h"
 #include "scenes/LoadingLevelScene.h"
 #include "scenes/LoadingScene.h"
 #include "scenes/MenuScene.h"
@@ -12,28 +15,43 @@
  */
 class GameApp : public cugl::Application {
  protected:
+  /**
+   * The current active scene
+   */
+  enum State {
+    /** The loading scene */
+    LOAD,
+    /** The main menu scene */
+    MENU,
+    /** The scene to host a game */
+    HOST,
+    /** The scene to join a game */
+    CLIENT,
+    /** The scene when the level is loading */
+    LEVEL_LOADING,
+    /** The scene to play the game */
+    GAME
+  };
+
   /** The global sprite batch for drawing (only want one of these) */
   std::shared_ptr<cugl::SpriteBatch> _batch;
   /** The global asset manager */
   std::shared_ptr<cugl::AssetManager> _assets;
 
-  enum Scene {
-    /** Currently loading the loading scene. */
-    LOADING,
-    /** Currently rendering the menu scene. */
-    MENU,
-    /** Currently loading the level loading scene. */
-    LEVEL_LOADING,
-    /** Currently loading the game scene. */
-    GAME,
-  } _current_scene;
-
   /** The primary controller for the game world */
   GameScene _gameplay;
+
   /** The controller for the loading screen */
   LoadingScene _loading;
   /** The controller for the main menu */
   MenuScene _menu;
+
+  /** The scene to host a game */
+  HostMenuScene _hostgame;
+  /** The scene to join a game */
+  ClientMenuScene _joingame;
+  /** The current active scene */
+  State _scene;
   /** The controller for the level generation loading scene. */
   LoadingLevelScene _level_loading;
 
@@ -47,7 +65,7 @@ class GameApp : public cugl::Application {
       : cugl::Application(),
         _loaded(false),
         _level_loaded(false),
-        _current_scene(Scene::LOADING) {}
+        _scene(State::LOAD) {}
   ~GameApp() {}
 
 #pragma mark Application State
@@ -102,6 +120,66 @@ class GameApp : public cugl::Application {
    * at all. The default implmentation does nothing.
    */
   virtual void draw() override;
+
+  /**
+   * Individualized update method for the loading scene.
+   *
+   * This method keeps the primary {@link #update} from being a mess of switch
+   * statements. It also handles the transition logic from the loading scene.
+   *
+   * @param timestep  The amount of time (in seconds) since the last frame
+   */
+  void updateLoadingScene(float timestep);
+
+  /**
+   * Individualized update method for the menu scene.
+   *
+   * This method keeps the primary {@link #update} from being a mess of switch
+   * statements. It also handles the transition logic from the menu scene.
+   *
+   * @param timestep  The amount of time (in seconds) since the last frame
+   */
+  void updateMenuScene(float timestep);
+
+  /**
+   * Individualized update method for the host scene.
+   *
+   * This method keeps the primary {@link #update} from being a mess of switch
+   * statements. It also handles the transition logic from the host scene.
+   *
+   * @param timestep  The amount of time (in seconds) since the last frame
+   */
+  void updateHostMenuScene(float timestep);
+
+  /**
+   * Individualized update method for the client scene.
+   *
+   * This method keeps the primary {@link #update} from being a mess of switch
+   * statements. It also handles the transition logic from the client scene.
+   *
+   * @param timestep  The amount of time (in seconds) since the last frame
+   */
+  void updateClientMenuScene(float timestep);
+  
+  /**
+   * Individualized update method for the level loading scene.
+   *
+   * This method keeps the primary {@link #update} from being a mess of switch
+   * statements. It also handles the transition logic from the client scene.
+   *
+   * @param timestep  The amount of time (in seconds) since the last frame
+   */
+  void updateLevelLoadingScene(float timestep);
+
+  /**
+   * Individualized update method for the game scene.
+   *
+   * This method keeps the primary {@link #update} from being a mess of switch
+   * statements. It also handles the transition logic from the game scene.
+   *
+   * @param timestep  The amount of time (in seconds) since the last frame
+   */
+  void updateGameScene(float timestep);
 };
 
 #endif /* GAMEAPP_H_ */

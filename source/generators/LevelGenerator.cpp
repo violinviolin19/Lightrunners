@@ -26,6 +26,17 @@ void LevelGenerator::init(LevelGeneratorConfig &config,
   _generator = std::default_random_engine(seed);
 }
 
+void LevelGenerator::init(LevelGeneratorConfig &config,
+                          const std::shared_ptr<cugl::scene2::SceneNode> &map, Uint64 seed) {
+  if (_active) return;
+  _active = true;
+
+  _config = config;
+  _map = map;
+  _generator_step = [this]() { this->generateRooms(); };
+  _generator = std::default_random_engine(seed);
+}
+
 void LevelGenerator::dispose() {
   if (!_active) return;
   _active = false;

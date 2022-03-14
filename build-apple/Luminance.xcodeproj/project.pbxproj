@@ -25,6 +25,15 @@
 		CA5F188B27DBC1B70077AEBB /* MenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA5F188627DBC1B70077AEBB /* MenuScene.cpp */; };
 		CA5F188C27DBC1B70077AEBB /* MenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA5F188627DBC1B70077AEBB /* MenuScene.cpp */; };
 		CA5F188D27DBC1B70077AEBB /* MenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA5F188627DBC1B70077AEBB /* MenuScene.cpp */; };
+		CA9B3EB027DE9A6900755902 /* HostGameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA9B3EAF27DE9A6900755902 /* HostGameScene.cpp */; };
+		CA9B3EB127DE9A6900755902 /* HostGameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA9B3EAF27DE9A6900755902 /* HostGameScene.cpp */; };
+		CA9B3EB227DE9A6900755902 /* HostGameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA9B3EAF27DE9A6900755902 /* HostGameScene.cpp */; };
+		CAAF4CF027DCA79600024986 /* ClientMenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CAAF4CE827DCA79600024986 /* ClientMenuScene.cpp */; };
+		CAAF4CF127DCA79600024986 /* ClientMenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CAAF4CE827DCA79600024986 /* ClientMenuScene.cpp */; };
+		CAAF4CF227DCA79600024986 /* ClientMenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CAAF4CE827DCA79600024986 /* ClientMenuScene.cpp */; };
+		CAAF4CF327DCA79600024986 /* HostMenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CAAF4CEC27DCA79600024986 /* HostMenuScene.cpp */; };
+		CAAF4CF427DCA79600024986 /* HostMenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CAAF4CEC27DCA79600024986 /* HostMenuScene.cpp */; };
+		CAAF4CF527DCA79600024986 /* HostMenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CAAF4CEC27DCA79600024986 /* HostMenuScene.cpp */; };
 		D5073C8B27CFEF2C0000426E /* Wall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5073C8727CFEF2C0000426E /* Wall.cpp */; };
 		D5073C8C27CFEF2C0000426E /* Wall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5073C8727CFEF2C0000426E /* Wall.cpp */; };
 		D5073C8D27CFEF2C0000426E /* Wall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5073C8727CFEF2C0000426E /* Wall.cpp */; };
@@ -191,6 +200,13 @@
 		57CEFE4227DE5E6100EF2B90 /* EnemyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnemyController.h; sourceTree = "<group>"; };
 		CA5F188627DBC1B70077AEBB /* MenuScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MenuScene.cpp; sourceTree = "<group>"; };
 		CA5F188A27DBC1B70077AEBB /* MenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuScene.h; sourceTree = "<group>"; };
+		CA9B3EAB27DE9A6900755902 /* HostGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostGameScene.h; sourceTree = "<group>"; };
+		CA9B3EAF27DE9A6900755902 /* HostGameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HostGameScene.cpp; sourceTree = "<group>"; };
+		CAAF4CE827DCA79600024986 /* ClientMenuScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ClientMenuScene.cpp; sourceTree = "<group>"; };
+		CAAF4CEC27DCA79600024986 /* HostMenuScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HostMenuScene.cpp; sourceTree = "<group>"; };
+		CAAF4CED27DCA79600024986 /* HostMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostMenuScene.h; sourceTree = "<group>"; };
+		CAAF4CEE27DCA79600024986 /* ClientMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientMenuScene.h; sourceTree = "<group>"; };
+		CAAF4CEF27DCA79600024986 /* PeerScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeerScene.h; sourceTree = "<group>"; };
 		D5073C8627CFEF2C0000426E /* Wall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wall.h; sourceTree = "<group>"; };
 		D5073C8727CFEF2C0000426E /* Wall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wall.cpp; sourceTree = "<group>"; };
 		D521FB0E27C43BA500D14172 /* widgets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = widgets; sourceTree = "<group>"; };
@@ -389,14 +405,21 @@
 		D52E672727BF305900F8E2B8 /* scenes */ = {
 			isa = PBXGroup;
 			children = (
-				D58B0FD327DC1DAC00E65692 /* LoadingLevelScene.cpp */,
-				D58B0FD727DC1DAD00E65692 /* LoadingLevelScene.h */,
 				D52E672827BF305900F8E2B8 /* GameScene.h */,
 				D52E672B27BF305900F8E2B8 /* GameScene.cpp */,
+				CA9B3EAB27DE9A6900755902 /* HostGameScene.h */,
+				CA9B3EAF27DE9A6900755902 /* HostGameScene.cpp */,
+				CAAF4CEE27DCA79600024986 /* ClientMenuScene.h */,
+				CAAF4CE827DCA79600024986 /* ClientMenuScene.cpp */,
+				CAAF4CED27DCA79600024986 /* HostMenuScene.h */,
+				CAAF4CEC27DCA79600024986 /* HostMenuScene.cpp */,
+				CAAF4CEF27DCA79600024986 /* PeerScene.h */,
+				D58B0FD727DC1DAD00E65692 /* LoadingLevelScene.h */,
+				D58B0FD327DC1DAC00E65692 /* LoadingLevelScene.cpp */,
 				D52E672927BF305900F8E2B8 /* LoadingScene.h */,
 				D52E672A27BF305900F8E2B8 /* LoadingScene.cpp */,
-				CA5F188627DBC1B70077AEBB /* MenuScene.cpp */,
 				CA5F188A27DBC1B70077AEBB /* MenuScene.h */,
+				CA5F188627DBC1B70077AEBB /* MenuScene.cpp */,
 			);
 			path = scenes;
 			sourceTree = "<group>";
@@ -583,11 +606,11 @@
 		EBBF18B11D749176008E2001 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				D52E672627BF305900F8E2B8 /* GameApp.h */,
+				D52E673327BF305A00F8E2B8 /* GameApp.cpp */,
 				D598E69827C57D740039326B /* generators */,
 				D57971ED27D026E4008FCC5E /* loaders */,
 				5728944327CECB5800F9BBA5 /* models */,
-				D52E673327BF305A00F8E2B8 /* GameApp.cpp */,
-				D52E672627BF305900F8E2B8 /* GameApp.h */,
 				D52E672C27BF305900F8E2B8 /* controllers */,
 				D52E672727BF305900F8E2B8 /* scenes */,
 				EB2BE9B41D74952A002FE78B /* main.cpp */,
@@ -666,7 +689,7 @@
 					};
 					EB74548B1D74D75C002FBAE6 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = LR67JRR3TA;
+						DevelopmentTeam = 37AKFHT6H5;
 					};
 					EBBF18901D74904A008E2001 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -785,6 +808,7 @@
 				572894D527D1684500F9BBA5 /* Sword.cpp in Sources */,
 				D57971A027D02310008FCC5E /* Grunt.cpp in Sources */,
 				D52E673C27BF305A00F8E2B8 /* InputController.cpp in Sources */,
+				CA9B3EB227DE9A6900755902 /* HostGameScene.cpp in Sources */,
 				57CEFE4527DE5E6100EF2B90 /* EnemyController.cpp in Sources */,
 				D5F3D6DE27DEFA330071DD06 /* LevelModel.cpp in Sources */,
 				D52E673F27BF305A00F8E2B8 /* Attack.cpp in Sources */,
@@ -794,10 +818,12 @@
 				D58B0FD027DC1BC500E65692 /* LevelController.cpp in Sources */,
 				EB9CDA3925D0EAB100EE1A09 /* main.cpp in Sources */,
 				D56B743D27CA9DCE00710CC6 /* LevelGeneratorConfig.cpp in Sources */,
+				CAAF4CF227DCA79600024986 /* ClientMenuScene.cpp in Sources */,
 				D5F3D6E027DEFA350071DD06 /* RoomModel.cpp in Sources */,
 				D579718927CFF851008FCC5E /* BasicTile.cpp in Sources */,
 				D58B0FDA27DC1DAD00E65692 /* LoadingLevelScene.cpp in Sources */,
 				D52E674227BF305A00F8E2B8 /* GameApp.cpp in Sources */,
+				CAAF4CF527DCA79600024986 /* HostMenuScene.cpp in Sources */,
 				D52E673927BF305A00F8E2B8 /* GameScene.cpp in Sources */,
 				D58B972B27DD31DE0071D1FC /* Door.cpp in Sources */,
 				D568D22B27DB41B400CA2BA9 /* Hungarian.cpp in Sources */,
@@ -817,6 +843,7 @@
 				572894D427D1684500F9BBA5 /* Sword.cpp in Sources */,
 				D579719F27D02310008FCC5E /* Grunt.cpp in Sources */,
 				D52E673B27BF305A00F8E2B8 /* InputController.cpp in Sources */,
+				CA9B3EB127DE9A6900755902 /* HostGameScene.cpp in Sources */,
 				57CEFE4427DE5E6100EF2B90 /* EnemyController.cpp in Sources */,
 				D5F3D6DD27DEFA320071DD06 /* LevelModel.cpp in Sources */,
 				D52E673E27BF305A00F8E2B8 /* Attack.cpp in Sources */,
@@ -826,10 +853,12 @@
 				D58B0FCF27DC1BC500E65692 /* LevelController.cpp in Sources */,
 				EB7454AE1D74D891002FBAE6 /* main.cpp in Sources */,
 				D56B743C27CA9DCE00710CC6 /* LevelGeneratorConfig.cpp in Sources */,
+				CAAF4CF127DCA79600024986 /* ClientMenuScene.cpp in Sources */,
 				D5F3D6DF27DEFA350071DD06 /* RoomModel.cpp in Sources */,
 				D579718827CFF851008FCC5E /* BasicTile.cpp in Sources */,
 				D58B0FD927DC1DAD00E65692 /* LoadingLevelScene.cpp in Sources */,
 				D52E674127BF305A00F8E2B8 /* GameApp.cpp in Sources */,
+				CAAF4CF427DCA79600024986 /* HostMenuScene.cpp in Sources */,
 				D52E673827BF305A00F8E2B8 /* GameScene.cpp in Sources */,
 				D58B972A27DD31DE0071D1FC /* Door.cpp in Sources */,
 				D568D22A27DB41B400CA2BA9 /* Hungarian.cpp in Sources */,
@@ -849,6 +878,7 @@
 				572894D327D1684500F9BBA5 /* Sword.cpp in Sources */,
 				D579719E27D02310008FCC5E /* Grunt.cpp in Sources */,
 				D52E673A27BF305A00F8E2B8 /* InputController.cpp in Sources */,
+				CA9B3EB027DE9A6900755902 /* HostGameScene.cpp in Sources */,
 				57CEFE4327DE5E6100EF2B90 /* EnemyController.cpp in Sources */,
 				D5F3D6B427DD6E3B0071DD06 /* LevelModel.cpp in Sources */,
 				D52E673D27BF305A00F8E2B8 /* Attack.cpp in Sources */,
@@ -858,10 +888,12 @@
 				D58B0FCE27DC1BC500E65692 /* LevelController.cpp in Sources */,
 				EB2BE9B61D74952A002FE78B /* main.cpp in Sources */,
 				D56B743B27CA9DCE00710CC6 /* LevelGeneratorConfig.cpp in Sources */,
+				CAAF4CF027DCA79600024986 /* ClientMenuScene.cpp in Sources */,
 				D5F3D6B527DD6E3B0071DD06 /* RoomModel.cpp in Sources */,
 				D579718727CFF851008FCC5E /* BasicTile.cpp in Sources */,
 				D58B0FD827DC1DAD00E65692 /* LoadingLevelScene.cpp in Sources */,
 				D52E674027BF305A00F8E2B8 /* GameApp.cpp in Sources */,
+				CAAF4CF327DCA79600024986 /* HostMenuScene.cpp in Sources */,
 				D52E673727BF305A00F8E2B8 /* GameScene.cpp in Sources */,
 				D58B972927DD31DE0071D1FC /* Door.cpp in Sources */,
 				D568D22927DB41B400CA2BA9 /* Hungarian.cpp in Sources */,
@@ -932,7 +964,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = LR67JRR3TA;
+				DEVELOPMENT_TEAM = 37AKFHT6H5;
 				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/iOS-Info.plist";
@@ -954,7 +986,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = LR67JRR3TA;
+				DEVELOPMENT_TEAM = 37AKFHT6H5;
 				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/iOS-Info.plist";
