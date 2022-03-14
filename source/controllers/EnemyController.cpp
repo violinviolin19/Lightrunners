@@ -8,148 +8,134 @@
 
 EnemyController::EnemyController(){};
 
-void EnemyController::idling() { _enemy->move(0, 0); }
-
-void EnemyController::chasePlayer(const cugl::Vec2 p) {
-  cugl::Vec2 diff = p - _enemy->getPosition();
-  diff.subtract(_enemy->getVX(), _enemy->getVY());
-  diff.add(_enemy->getVX(), _enemy->getVY());
-  diff.scale(_enemy->getSpeed());
-  _enemy->move(diff.x, diff.y);
+void EnemyController::idling(std::shared_ptr<Grunt> enemy) {
+  enemy->move(0, 0);
 }
 
-void EnemyController::attackPlayer(const cugl::Vec2 p) {
-  if (_enemy->getAttackCooldown() <= 0) {
-    _enemy->addBullet(p);
-    _enemy->setAttackCooldown(120);
+void EnemyController::chasePlayer(std::shared_ptr<Grunt> enemy,
+                                  const cugl::Vec2 p) {
+  cugl::Vec2 diff = p - enemy->getPosition();
+  diff.subtract(enemy->getVX(), enemy->getVY());
+  diff.add(enemy->getVX(), enemy->getVY());
+  diff.scale(enemy->getSpeed());
+  enemy->move(diff.x, diff.y);
+}
+
+void EnemyController::attackPlayer(std::shared_ptr<Grunt> enemy,
+                                   const cugl::Vec2 p) {
+  if (enemy->getAttackCooldown() <= 0) {
+    enemy->addBullet(p);
+    enemy->setAttackCooldown(120);
   }
-  _enemy->move(0, 0);
+  enemy->move(0, 0);
 }
 
-void EnemyController::avoidPlayer(const cugl::Vec2 p) {
-  cugl::Vec2 diff = p - _enemy->getPosition();
-  diff.subtract(_enemy->getVX(), _enemy->getVY());
-  diff.add(_enemy->getVX(), _enemy->getVY());
-  diff.scale(_enemy->getSpeed() / 2);
-  _enemy->move(-diff.x, -diff.y);
+void EnemyController::avoidPlayer(std::shared_ptr<Grunt> enemy,
+                                  const cugl::Vec2 p) {
+  cugl::Vec2 diff = p - enemy->getPosition();
+  diff.subtract(enemy->getVX(), enemy->getVY());
+  diff.add(enemy->getVX(), enemy->getVY());
+  diff.scale(enemy->getSpeed() / 2);
+  enemy->move(-diff.x, -diff.y);
 }
 
 bool EnemyController::init(
-    const cugl::Vec2 pos, string name,
-    std::shared_ptr<cugl::AssetManager> assets, float tile_height,
-    float row_count, std::shared_ptr<cugl::physics2::ObstacleWorld> world,
+    std::shared_ptr<cugl::AssetManager> assets,
+    std::shared_ptr<cugl::physics2::ObstacleWorld> world,
     std::shared_ptr<cugl::scene2::SceneNode> world_node,
     std::shared_ptr<cugl::scene2::SceneNode> debug_node) {
   _world = world;
   _world_node = world_node;
   _debug_node = debug_node;
 
-  std::shared_ptr<cugl::Texture> grunt_texture =
-      assets->get<cugl::Texture>("grunt");
-  _enemy = Grunt::alloc(pos, name);
-
-  auto grunt_node = cugl::scene2::SpriteNode::alloc(grunt_texture, 1, 1);
-  _enemy->setGruntNode(grunt_node);
-  grunt_node->setPriority(
-      100);  // TODO: Update priority according to position on screen
-
   _projectile_texture = assets->get<cugl::Texture>("projectile");
-
-  _current_state = IDLE;
-
-  _tile_height = tile_height;
-  _row_count = row_count;
 
   return true;
 }
 
-void EnemyController::update(float timestep, std::shared_ptr<Player> player) {
+void EnemyController::update(float timestep, std::shared_ptr<Grunt> enemy,
+                             std::shared_ptr<Player> player) {
   // Change state if applicable
   float distance =
-      (_enemy->getPosition()).subtract(player->getPosition()).length();
-  changeStateIfApplicable(distance);
+      (enemy->getPosition()).subtract(player->getPosition()).length();
+  changeStateIfApplicable(enemy, distance);
 
   // Perform player action
   cugl::Vec2 p = player->getPosition();
-  performAction(p);
+  performAction(enemy, p);
 
   // Reduce attack cooldown if enemy has attacked
-  if (_enemy->getAttackCooldown() > 0) {
-    _enemy->reduceAttackCooldown(1);
+  if (enemy->getAttackCooldown() > 0) {
+    enemy->reduceAttackCooldown(1);
   }
 
   // Update enemy & projectiles
-  updateProjectiles(timestep);
-  _enemy->update(timestep);
-
-  // Set the priority for drawing
-  int row = (int)floor(_enemy->getBody()->GetPosition().y / _tile_height);
-  _enemy->getGruntNode()->setPriority(_row_count - row);
+  updateProjectiles(timestep, enemy);
+  enemy->update(timestep);
 }
 
-void EnemyController::changeStateIfApplicable(float distance) {
+void EnemyController::changeStateIfApplicable(std::shared_ptr<Grunt> enemy,
+                                              float distance) {
   // Change state if applicable
-  int health = _enemy->getHealth();
+  int health = enemy->getHealth();
   if (health <= HEALTH_LIM) {
-    _current_state = AVOIDING;
+    enemy->setCurrentState(Grunt::State::AVOIDING);
     if (distance > MIN_DISTANCE) {
-      _current_state = IDLE;
+      enemy->setCurrentState(Grunt::State::IDLE);
     }
   } else {
     if (distance <= ATTACK_RANGE) {
-      _current_state = ATTACKING;
+      enemy->setCurrentState(Grunt::State::ATTACKING);
     } else if (distance <= MIN_DISTANCE) {
-      _current_state = CHASING;
+      enemy->setCurrentState(Grunt::State::CHASING);
     } else {
-      _current_state = IDLE;
+      enemy->setCurrentState(Grunt::State::IDLE);
     }
   }
 }
 
-void EnemyController::performAction(cugl::Vec2 p) {
-  switch (_current_state) {
-    case IDLE: {
-      idling();
+void EnemyController::performAction(std::shared_ptr<Grunt> enemy,
+                                    cugl::Vec2 p) {
+  switch (enemy->getCurrentState()) {
+    case Grunt::State::IDLE: {
+      idling(enemy);
       break;
     }
-    case CHASING: {
-      chasePlayer(p);
+    case Grunt::State::CHASING: {
+      chasePlayer(enemy, p);
       break;
     }
-    case ATTACKING: {
-      attackPlayer(p);
+    case Grunt::State::ATTACKING: {
+      attackPlayer(enemy, p);
       break;
     }
-    case AVOIDING: {
-      avoidPlayer(p);
+    case Grunt::State::AVOIDING: {
+      avoidPlayer(enemy, p);
       break;
     }
   }
 }
 
-void EnemyController::updateProjectiles(float timestep) {
-  auto proj = _enemy->getProjectiles();
-  auto itt = proj.begin();
-  while (itt != proj.end()) {
+void EnemyController::updateProjectiles(float timestep,
+                                        std::shared_ptr<Grunt> enemy) {
+  auto proj = enemy->getProjectiles();
+  auto it = proj.begin();
+  while (it != proj.end()) {
     // Add to world if needed
-    if ((*itt)->getNode() == nullptr) {
-      _world->addObstacle((*itt));
+    if ((*it)->getNode() == nullptr) {
+      _world->addObstacle((*it));
       auto proj_node =
           cugl::scene2::SpriteNode::alloc(_projectile_texture, 1, 1);
-      int row = (int)floor((*itt)->getBody()->GetPosition().y / _tile_height);
-      proj_node->setPriority(_row_count - row);
-      proj_node->setPosition((*itt)->getPosition());
-      (*itt)->setNode(proj_node);
+      proj_node->setPosition((*it)->getPosition());
+      (*it)->setNode(proj_node);
       _world_node->addChild(proj_node);
-      (*itt)->setDebugScene(_debug_node);
-      (*itt)->setDebugColor(cugl::Color4f::BLACK);
-      (*itt)->setInWorld(true);
+      (*it)->setDebugScene(_debug_node);
+      (*it)->setDebugColor(cugl::Color4f::BLACK);
+      (*it)->setInWorld(true);
     }
 
-    (*itt)->decrementFrame(1);
-    (*itt)->getNode()->setPosition((*itt)->getPosition());
-    ++itt;
+    (*it)->decrementFrame(1);
+    (*it)->getNode()->setPosition((*it)->getPosition());
+    ++it;
   }
-
-  _enemy->deleteProjectile(_world, _world_node);
 }

@@ -9,7 +9,23 @@
 #include "Projectile.h"
 
 class Grunt : public cugl::physics2::CapsuleObstacle {
+ public:
+  /** Enum for the enemy's state (for animation). */
+  enum State {
+    /** The enemy is not moving. */
+    IDLE,
+    /** The enemy is chasing the player. */
+    CHASING,
+    /** The enemy is attacking the player. */
+    ATTACKING,
+    /** The enemy is avoiding the player. */
+    AVOIDING
+  };
+
  private:
+  /** The current state of the grunt. */
+  State _current_state;
+
   /** Grunt health. */
   int _health;
 
@@ -193,6 +209,20 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
   std::unordered_set<std::shared_ptr<Projectile>> getProjectiles() {
     return _projectiles;
   }
+
+  /**
+   * Set the current state of the grunt.  IDLE, ATTACKING, CHASING, AVOIDING...
+   *
+   * @param state The state the enemy should be set to.
+   */
+  void setCurrentState(State state) { _current_state = state; }
+
+  /**
+   * Get the current state of the grunt. IDLE, ATTACKING, CHASING, AVOIDING...
+   *
+   * @return The state of the grunt.
+   */
+  State getCurrentState() { return _current_state; }
 
 #pragma mark -
 #pragma mark Physics Methods

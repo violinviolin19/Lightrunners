@@ -29,8 +29,8 @@ class GameScene : public cugl::Scene2 {
   /** The Box2d world */
   std::shared_ptr<cugl::physics2::ObstacleWorld> _world;
 
-  /** The list of AI Controllers for enemies. */
-  std::unordered_map<int, std::shared_ptr<EnemyController>> _e_controllers;
+  /** The enemy controller for the game. */
+  std::shared_ptr<EnemyController> _enemy_controller;
 
   /** The level controller for the game*/
   std::shared_ptr<LevelController> _level_controller;

@@ -9,48 +9,9 @@
  * A class to handle enemy AI.
  */
 class EnemyController {
- private:
-  /** Enum for the player's state (for animation). */
-  enum State { IDLE, CHASING, ATTACKING, AVOIDING };
-
-  /** Chase the player.
-   *
-   * @param p the player position.
-   */
-  void chasePlayer(cugl::Vec2 p);
-
-  /** Attack the player.
-   *
-   * @param p the player position.
-   */
-  void attackPlayer(cugl::Vec2 p);
-
-  /** Avoid the player.
-   *
-   * @param p the player position.
-   */
-  void avoidPlayer(cugl::Vec2 p);
-
-  /** Idle.
-   */
-  void idling();
-
  protected:
-  /** The current state of the enemy. */
-  State _current_state;
-
-  /** Reference to the enemy */
-  std::shared_ptr<Grunt> _enemy;
-
   /** The projectile texture. */
   std::shared_ptr<cugl::Texture> _projectile_texture;
-
-  /** The tile height for priorities. */
-  float _tile_height;
-
-  /** The row count for priorities. */
-  float _row_count;
-
   /** A reference to the world node. */
   std::shared_ptr<cugl::scene2::SceneNode> _world_node;
   /** A reference to the debug node. */
@@ -60,26 +21,23 @@ class EnemyController {
 
  public:
 #pragma mark Constructors
-  /**
-   * Creates a new AI controller with the default settings.
-   */
+  /** Creates a new enemy controller with the default settings. */
   EnemyController();
 
-  /**
-   * Disposses this input controller, releasing all resources.
-   */
+  /** Disposses this enemy controller, releasing all resources. */
   ~EnemyController() {}
 
   /**
-   * Initializes a new grunt with the given position and size.
+   * Initializes a new Enemy Controller.
    *
-   * @param  pos Initial position in world coordinates.
+   * @param assets The asset manager for the game.
+   * @param world The asset manager for the game.
+   * @param world_node The world node for drawing the game.
+   * @param debug_node The debug node for drawing the debug tools.
    *
    * @return true if the obstacle is initialized properly, false otherwise.
    */
-  bool init(const cugl::Vec2 pos, string name,
-            std::shared_ptr<cugl::AssetManager> assets, float tile_height,
-            float row_count,
+  bool init(std::shared_ptr<cugl::AssetManager> assets,
             std::shared_ptr<cugl::physics2::ObstacleWorld> world,
             std::shared_ptr<cugl::scene2::SceneNode> world_node,
             std::shared_ptr<cugl::scene2::SceneNode> debug_node);
@@ -87,33 +45,28 @@ class EnemyController {
   /**
    * Disposes the controller.
    */
-  void dispose() {
-    _enemy->dispose();
-    _enemy = nullptr;
-    _projectile_texture = nullptr;
-  }
+  void dispose() { _projectile_texture = nullptr; }
 
 #pragma mark Static Constructors
   /**
-   * Returns a new capsule object at the given point with no size.
+   * Returns a new enemy controller.
    *
-   * @param pos Initial position in world coordinates.
-   * @param name The name for the grunt.
    * @param assets The asset manager for the game.
+   * @param world The asset manager for the game.
+   * @param world_node The world node for drawing the game.
+   * @param debug_node The debug node for drawing the debug tools.
    *
    * @return a new capsule object at the given point with no size.
    */
   static std::shared_ptr<EnemyController> alloc(
-      const cugl::Vec2 pos, string name,
-      std::shared_ptr<cugl::AssetManager> assets, float tile_height,
-      float row_count, std::shared_ptr<cugl::physics2::ObstacleWorld> world,
+      std::shared_ptr<cugl::AssetManager> assets,
+      std::shared_ptr<cugl::physics2::ObstacleWorld> world,
       std::shared_ptr<cugl::scene2::SceneNode> world_node,
       std::shared_ptr<cugl::scene2::SceneNode> debug_node) {
     std::shared_ptr<EnemyController> result =
         std::make_shared<EnemyController>();
 
-    if (result->init(pos, name, assets, tile_height, row_count, world,
-                     world_node, debug_node)) {
+    if (result->init(assets, world, world_node, debug_node)) {
       return result;
     }
     return nullptr;
@@ -122,22 +75,41 @@ class EnemyController {
 #pragma mark Properties
 
   /** Update the enemy. */
-  void update(float timestep, std::shared_ptr<Player> player);
+  void update(float timestep, std::shared_ptr<Grunt> enemy,
+              std::shared_ptr<Player> player);
 
   /** Change the enemy state. */
-  void changeStateIfApplicable(float distance);
+  void changeStateIfApplicable(std::shared_ptr<Grunt> enemy, float distance);
 
   /** Perform the action according to the enemy state. */
-  void performAction(cugl::Vec2 p);
+  void performAction(std::shared_ptr<Grunt> enemy, cugl::Vec2 p);
 
   /** Update the projectiles. */
-  void updateProjectiles(float timestep);
+  void updateProjectiles(float timestep, std::shared_ptr<Grunt> enemy);
 
-  std::shared_ptr<Grunt> getEnemy() { return _enemy; }
+#pragma mark Movement
+ private:
+  /** Chase the player.
+   *
+   * @param p the player position.
+   */
+  void chasePlayer(std::shared_ptr<Grunt> enemy, cugl::Vec2 p);
 
-  void deleteAllProjectiles(
-      std::shared_ptr<cugl::physics2::ObstacleWorld> _world,
-      std::shared_ptr<cugl::scene2::SceneNode> _world_node);
+  /** Attack the player.
+   *
+   * @param p the player position.
+   */
+  void attackPlayer(std::shared_ptr<Grunt> enemy, cugl::Vec2 p);
+
+  /** Avoid the player.
+   *
+   * @param p the player position.
+   */
+  void avoidPlayer(std::shared_ptr<Grunt> enemy, cugl::Vec2 p);
+
+  /** Idle.
+   */
+  void idling(std::shared_ptr<Grunt> enemy);
 };
 
 #endif /* CONTROLLERS_AI_CONTROLLER_H_ */

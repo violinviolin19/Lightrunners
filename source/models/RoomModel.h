@@ -1,7 +1,6 @@
 #ifndef MODELS_ROOM_MODEL_H_
 #define MODELS_ROOM_MODEL_H_
 
-#include "EnemySet.h"
 #include "Grunt.h"
 
 class RoomModel {
@@ -10,7 +9,7 @@ class RoomModel {
   std::shared_ptr<cugl::scene2::SceneNode> _node;
 
   /** A list of all the enemies inside of this room. */
-  std::shared_ptr<EnemySet> _enemies;
+  std::vector<std::shared_ptr<Grunt>> _enemies;
 
   /** A map between the door sensor id to the room id it points to. */
   std::unordered_map<std::string, std::string> _door_sensor_id_to_room_id;
@@ -136,7 +135,7 @@ class RoomModel {
    *
    * @param enemies The enemies.
    */
-  void setEnemies(const std::shared_ptr<EnemySet>& enemies) {
+  void setEnemies(std::vector<std::shared_ptr<Grunt>>& enemies) {
     _enemies = enemies;
   }
 
@@ -144,7 +143,7 @@ class RoomModel {
    * Get the enemies for this room.
    * @return The enemies.
    */
-  std::shared_ptr<EnemySet> getEnemies() const { return _enemies; }
+  std::vector<std::shared_ptr<Grunt>>& getEnemies() { return _enemies; }
 };
 
 #endif  // MODELS_ROOM_MODEL_H_

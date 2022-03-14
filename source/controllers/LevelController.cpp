@@ -29,15 +29,21 @@ void LevelController::update() {
   std::shared_ptr<Player> player = _level_model->getPlayer();
   float rel_player_y =
       player->getBody()->GetPosition().y - current->getNode()->getPosition().y;
-  int row = (int)floor(rel_player_y / TILE_SIZE.y * TILE_SCALE.y);
+  int row = (int)floor(rel_player_y / (TILE_SIZE.y * TILE_SCALE.y));
   player->getPlayerNode()->setPriority(current->getGridSize().height - row);
 
-  std::shared_ptr<EnemySet> enemy_set = current->getEnemies();
-  for (std::shared_ptr<Grunt> grunt : enemy_set->getEnemies()) {
-    float rel_grunt_y =
-        grunt->getBody()->GetPosition().y - current->getNode()->getPosition().y;
-    int row = (int)floor(rel_grunt_y / TILE_SIZE.y * TILE_SCALE.y);
-    grunt->getGruntNode()->setPriority(current->getGridSize().height - row);
+  for (std::shared_ptr<Grunt> enemy : current->getEnemies()) {
+    float rel_enemy_y =
+        enemy->getBody()->GetPosition().y - current->getNode()->getPosition().y;
+    row = (int)floor(rel_enemy_y / (TILE_SIZE.y * TILE_SCALE.y));
+    enemy->getGruntNode()->setPriority(current->getGridSize().height - row);
+
+    for (std::shared_ptr<Projectile> projectile : enemy->getProjectiles()) {
+      float rel_projectile_y = projectile->getBody()->GetPosition().y -
+                               current->getNode()->getPosition().y;
+      row = (int)floor(rel_projectile_y / (TILE_SIZE.y * TILE_SCALE.y));
+      player->getPlayerNode()->setPriority(current->getGridSize().height - row);
+    }
   }
 }
 
@@ -61,7 +67,7 @@ void LevelController::changeRoom(std::string &door_sensor_name) {
   new_current->setVisible(true);
   _level_model->getPlayer()->setPosPromise(
       new_current->getNode()->getPosition() +
-      door_pos * TILE_SIZE * TILE_SCALE);
+      door_pos * (TILE_SIZE * TILE_SCALE));
 
   CULog("%s -> %s", current->getName().c_str(), new_current->getName().c_str());
 }
@@ -75,9 +81,9 @@ void LevelController::populate() {
 
   // Get Size of World.
   for (std::shared_ptr<level_gen::Room> room : _level_gen->getRooms()) {
-    cugl::Vec2 pos = room->getRect().origin * TILE_SIZE * TILE_SCALE;
+    cugl::Vec2 pos = room->getRect().origin * (TILE_SIZE * TILE_SCALE);
     cugl::Vec2 size =
-        ((cugl::Vec2)room->getRect().size) * TILE_SIZE * TILE_SCALE;
+        ((cugl::Vec2)room->getRect().size) * (TILE_SIZE * TILE_SCALE);
     if (pos.x < world_start.x) world_start.x = pos.x;
     if (pos.y < world_start.y) world_start.y = pos.y;
     if (pos.x + size.x > world_end.x) world_end.x = pos.x;
@@ -92,7 +98,7 @@ void LevelController::populate() {
     auto node = _assets->get<cugl::scene2::SceneNode>(room->_scene2_key);
 
     node->setAnchor(cugl::Vec2::ANCHOR_BOTTOM_LEFT);
-    cugl::Vec2 pos = room->getRect().origin * TILE_SIZE * TILE_SCALE;
+    cugl::Vec2 pos = room->getRect().origin * (TILE_SIZE * TILE_SCALE);
     node->setPosition(pos);
     node->setVisible(false);
 
@@ -141,13 +147,18 @@ void LevelController::populate() {
       }
     }
 
-    auto enemy_set = std::make_shared<EnemySet>();
-    enemy_set->init();
+    std::vector<std::shared_ptr<Grunt>> enemies;
     // Initialize enemies in room.
     for (std::shared_ptr<cugl::scene2::SceneNode> enemy_node :
          node->getChildByName("enemies")->getChildren()) {
-      std::shared_ptr<Grunt> grunt = enemy_set->spawnEnemy(
-          enemy_node->getWorldPosition(), enemy_node->getName(), _assets);
+      auto grunt_texture = _assets->get<cugl::Texture>("grunt");
+      std::shared_ptr<Grunt> grunt =
+          Grunt::alloc(enemy_node->getWorldPosition(), enemy_node->getName());
+      enemies.push_back(grunt);
+
+      auto grunt_node = cugl::scene2::SpriteNode::alloc(grunt_texture, 1, 1);
+      grunt->setGruntNode(grunt_node);
+
       grunt->setRoomPos(pos);
       node->addChild(grunt->getGruntNode());
       _world->addObstacle(grunt);
@@ -155,7 +166,7 @@ void LevelController::populate() {
       grunt->setDebugScene(_debug_node);
       grunt->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
     }
-    room_model->setEnemies(enemy_set);
+    room_model->setEnemies(enemies);
 
     _world_node->addChild(node);
   }

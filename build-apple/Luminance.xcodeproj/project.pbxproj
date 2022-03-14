@@ -64,9 +64,6 @@
 		D57971F227D026E4008FCC5E /* CustomScene2Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D57971EE27D026E4008FCC5E /* CustomScene2Loader.cpp */; };
 		D57971F327D026E4008FCC5E /* CustomScene2Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D57971EE27D026E4008FCC5E /* CustomScene2Loader.cpp */; };
 		D57971F427D026E4008FCC5E /* CustomScene2Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D57971EE27D026E4008FCC5E /* CustomScene2Loader.cpp */; };
-		D598E69527C578F10039326B /* LevelGenerationDemoScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D598E69327C578F10039326B /* LevelGenerationDemoScene.cpp */; };
-		D598E69627C578F10039326B /* LevelGenerationDemoScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D598E69327C578F10039326B /* LevelGenerationDemoScene.cpp */; };
-		D598E69727C578F10039326B /* LevelGenerationDemoScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D598E69327C578F10039326B /* LevelGenerationDemoScene.cpp */; };
 		D58B0FCE27DC1BC500E65692 /* LevelController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D58B0FCD27DC1BC500E65692 /* LevelController.cpp */; };
 		D58B0FCF27DC1BC500E65692 /* LevelController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D58B0FCD27DC1BC500E65692 /* LevelController.cpp */; };
 		D58B0FD027DC1BC500E65692 /* LevelController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D58B0FCD27DC1BC500E65692 /* LevelController.cpp */; };
@@ -220,8 +217,6 @@
 		D579719D27D0230F008FCC5E /* Grunt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Grunt.h; sourceTree = "<group>"; };
 		D57971EE27D026E4008FCC5E /* CustomScene2Loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CustomScene2Loader.cpp; sourceTree = "<group>"; };
 		D57971F827D02C79008FCC5E /* CustomScene2Loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomScene2Loader.h; sourceTree = "<group>"; };
-		D598E69327C578F10039326B /* LevelGenerationDemoScene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LevelGenerationDemoScene.cpp; sourceTree = "<group>"; };
-		D598E69427C578F10039326B /* LevelGenerationDemoScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LevelGenerationDemoScene.h; sourceTree = "<group>"; };
 		D58B0FC827DC1BC500E65692 /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Controller.h; sourceTree = "<group>"; };
 		D58B0FCC27DC1BC500E65692 /* LevelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelController.h; sourceTree = "<group>"; };
 		D58B0FCD27DC1BC500E65692 /* LevelController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LevelController.cpp; sourceTree = "<group>"; };
@@ -433,6 +428,13 @@
 			path = actions;
 			sourceTree = "<group>";
 		};
+		D537397F27DF086C00997ED1 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		D57971ED27D026E4008FCC5E /* loaders */ = {
 			isa = PBXGroup;
 			children = (
@@ -550,6 +552,7 @@
 				EB4880FC1D74AAB600EFC946 /* Frameworks */,
 				EBBF18921D74904A008E2001 /* Products */,
 				EBB3D284201444B300E6A7CD /* CUGL.xcodeproj */,
+				D537397F27DF086C00997ED1 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -782,7 +785,6 @@
 				572894D527D1684500F9BBA5 /* Sword.cpp in Sources */,
 				D57971A027D02310008FCC5E /* Grunt.cpp in Sources */,
 				D52E673C27BF305A00F8E2B8 /* InputController.cpp in Sources */,
-				D598E69727C578F10039326B /* LevelGenerationDemoScene.cpp in Sources */,
 				57CEFE4527DE5E6100EF2B90 /* EnemyController.cpp in Sources */,
 				D5F3D6DE27DEFA330071DD06 /* LevelModel.cpp in Sources */,
 				D52E673F27BF305A00F8E2B8 /* Attack.cpp in Sources */,
@@ -793,7 +795,6 @@
 				EB9CDA3925D0EAB100EE1A09 /* main.cpp in Sources */,
 				D56B743D27CA9DCE00710CC6 /* LevelGeneratorConfig.cpp in Sources */,
 				D5F3D6E027DEFA350071DD06 /* RoomModel.cpp in Sources */,
-				CA1BA38327D1546100D636A5 /* EnemySet.cpp in Sources */,
 				D579718927CFF851008FCC5E /* BasicTile.cpp in Sources */,
 				D58B0FDA27DC1DAD00E65692 /* LoadingLevelScene.cpp in Sources */,
 				D52E674227BF305A00F8E2B8 /* GameApp.cpp in Sources */,
@@ -816,7 +817,6 @@
 				572894D427D1684500F9BBA5 /* Sword.cpp in Sources */,
 				D579719F27D02310008FCC5E /* Grunt.cpp in Sources */,
 				D52E673B27BF305A00F8E2B8 /* InputController.cpp in Sources */,
-				D598E69627C578F10039326B /* LevelGenerationDemoScene.cpp in Sources */,
 				57CEFE4427DE5E6100EF2B90 /* EnemyController.cpp in Sources */,
 				D5F3D6DD27DEFA320071DD06 /* LevelModel.cpp in Sources */,
 				D52E673E27BF305A00F8E2B8 /* Attack.cpp in Sources */,
@@ -827,7 +827,6 @@
 				EB7454AE1D74D891002FBAE6 /* main.cpp in Sources */,
 				D56B743C27CA9DCE00710CC6 /* LevelGeneratorConfig.cpp in Sources */,
 				D5F3D6DF27DEFA350071DD06 /* RoomModel.cpp in Sources */,
-				CA1BA38227D1546000D636A5 /* EnemySet.cpp in Sources */,
 				D579718827CFF851008FCC5E /* BasicTile.cpp in Sources */,
 				D58B0FD927DC1DAD00E65692 /* LoadingLevelScene.cpp in Sources */,
 				D52E674127BF305A00F8E2B8 /* GameApp.cpp in Sources */,
@@ -850,7 +849,6 @@
 				572894D327D1684500F9BBA5 /* Sword.cpp in Sources */,
 				D579719E27D02310008FCC5E /* Grunt.cpp in Sources */,
 				D52E673A27BF305A00F8E2B8 /* InputController.cpp in Sources */,
-				D598E69527C578F10039326B /* LevelGenerationDemoScene.cpp in Sources */,
 				57CEFE4327DE5E6100EF2B90 /* EnemyController.cpp in Sources */,
 				D5F3D6B427DD6E3B0071DD06 /* LevelModel.cpp in Sources */,
 				D52E673D27BF305A00F8E2B8 /* Attack.cpp in Sources */,
