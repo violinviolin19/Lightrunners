@@ -1,0 +1,23 @@
+{
+  "variables": {},
+  "contents": {
+    "type": "Wall",
+    "format": {
+      "type": "Anchored"
+    },
+    "data": {
+      "texture": "floor-tile-11",
+      "anchor": [
+        0,
+        0
+      ],
+      "scale": 0.6,
+      "priority": 0
+    },
+    "layout": {
+      "x_anchor": "left",
+      "y_anchor": "bottom",
+      "absolute": true
+    }
+  }
+}

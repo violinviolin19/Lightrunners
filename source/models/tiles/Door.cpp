@@ -16,9 +16,7 @@ std::shared_ptr<cugl::physics2::BoxObstacle> Door::initBox2d(
   cugl::Vec2 pos = BasicTile::getWorldPosition() - BasicTile::getPosition() +
                    BasicTile::getSize() / 2.0f;
 
-  // TODO: Change this so it is no longer a hard-coded tile size value here
-  _obstacle = cugl::physics2::BoxObstacle::alloc(
-      pos, cugl::Vec2(64, 64) * BasicTile::getScale());
+  _obstacle = cugl::physics2::BoxObstacle::alloc(pos, BasicTile::getSize());
 
   if (_obstacle != nullptr) {
     _obstacle->setPosition(pos);

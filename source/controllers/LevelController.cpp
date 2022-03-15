@@ -6,6 +6,7 @@
 #include "../generators/LevelGeneratorConfig.h"
 #include "../models/RoomModel.h"
 #include "../models/tiles/Door.h"
+#include "../models/tiles/Wall.h"
 #include "Controller.h"
 
 #define TILE_SCALE cugl::Vec2(0.6, 0.6)
@@ -29,7 +30,7 @@ void LevelController::update() {
   std::shared_ptr<Player> player = _level_model->getPlayer();
   float rel_player_y =
       player->getBody()->GetPosition().y - current->getNode()->getPosition().y;
-  int row = (int)floor(rel_player_y / (TILE_SIZE.y * TILE_SCALE.y));
+  float row = rel_player_y / (TILE_SIZE.y * TILE_SCALE.y);
   player->getPlayerNode()->setPriority(current->getGridSize().height - row);
 
   for (std::shared_ptr<Grunt> enemy : current->getEnemies()) {
@@ -37,13 +38,13 @@ void LevelController::update() {
     if (enemy_body != nullptr) {
       float rel_enemy_y =
           enemy_body->GetPosition().y - current->getNode()->getPosition().y;
-      row = (int)floor(rel_enemy_y / (TILE_SIZE.y * TILE_SCALE.y));
+      row = rel_enemy_y / (TILE_SIZE.y * TILE_SCALE.y);
       enemy->getGruntNode()->setPriority(current->getGridSize().height - row);
 
       for (std::shared_ptr<Projectile> projectile : enemy->getProjectiles()) {
         float rel_projectile_y = projectile->getBody()->GetPosition().y -
                                  current->getNode()->getPosition().y;
-        row = (int)floor(rel_projectile_y / (TILE_SIZE.y * TILE_SCALE.y));
+        row = rel_projectile_y / (TILE_SIZE.y * TILE_SCALE.y);
         player->getPlayerNode()->setPriority(current->getGridSize().height -
                                              row);
       }
@@ -121,15 +122,20 @@ void LevelController::populate() {
       node->setVisible(true);
     }
 
+    std::vector<cugl::Vec2> unused_doors = room->_doors;
+
     // Initialize doors.
     for (auto &it : room->_edge_to_door) {
       std::shared_ptr<level_gen::Edge> edge = it.first;
       cugl::Vec2 door = it.second;
+      unused_doors.erase(
+          std::remove(unused_doors.begin(), unused_doors.end(), door),
+          unused_doors.end());
 
+      int y = room_model->getGridSize().height - static_cast<int>(door.y) - 1;
+      int x = static_cast<int>(door.x);
       std::stringstream ss;
-      ss << room->_scene2_key << "_tiles_tile-("
-         << room_model->getGridSize().height - static_cast<int>(door.y) - 1
-         << "-" << static_cast<int>(door.x) << ")_tile";
+      ss << room->_scene2_key << "_tiles_tile-(" << y << "-" << x << ")_tile";
       std::string door_name = ss.str();
 
       auto door_node = std::dynamic_pointer_cast<Door>(
@@ -154,6 +160,38 @@ void LevelController::populate() {
           room_model->addConnection(door_sensor_name, other_room_id,
                                     destination);
         }
+      }
+    }
+
+    auto wall_top = _assets->get<cugl::scene2::SceneNode>("wall-top");
+    auto wall_side = _assets->get<cugl::scene2::SceneNode>("wall-side");
+    for (cugl::Vec2 door : unused_doors) {
+      int y = room_model->getGridSize().height - static_cast<int>(door.y) - 1;
+      int x = static_cast<int>(door.x);
+      std::stringstream ss;
+      ss << room->_scene2_key << "_tiles_tile-(" << y << "-" << x << ")";
+      std::string door_name = ss.str();
+
+      auto door_tile_copy = cugl::scene2::SceneNode::alloc();
+      auto door_tile = _assets->get<cugl::scene2::SceneNode>(door_name);
+      if (door_tile) {
+        door_tile->copy(door_tile_copy);
+        door_tile_copy->setName(door_name + "-floor");
+
+        auto wall_top_copy = Wall::alloc();
+        auto wall_side_copy = Wall::alloc();
+        wall_top->copy(wall_top_copy);
+        wall_side->copy(wall_side_copy);
+
+        wall_top_copy->setPriority(y);
+        wall_top->setPriority(y);
+
+        door_tile->removeAllChildren();
+        door_tile->addChild(wall_top_copy);
+
+        // door_tile_copy->addChild(wall_top_copy);
+
+        // room_model->getNode()->addChild(door_tile_copy);
       }
     }
 

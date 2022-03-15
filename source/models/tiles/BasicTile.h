@@ -77,6 +77,17 @@ class BasicTile : public cugl::scene2::PolygonNode {
   }
 
   /**
+   * Returns a new Basic Tile node.
+   *
+   * @return A new Basic Tile node.
+   */
+  static std::shared_ptr<SceneNode> alloc() {
+    std::shared_ptr<BasicTile> result = std::make_shared<BasicTile>();
+    if (!result->init()) result = nullptr;
+    return std::dynamic_pointer_cast<SceneNode>(result);
+  }
+
+  /**
    * Returns a string representation of this node for debugging purposes.
    *
    * If verbose is true, the string will include class information.  This

@@ -76,9 +76,18 @@ class Wall : public BasicTile {
       const cugl::Scene2Loader* loader,
       const std::shared_ptr<cugl::JsonValue>& data) {
     std::shared_ptr<Wall> result = std::make_shared<Wall>();
-    if (!result->initWithData(loader, data)) {
-      result = nullptr;
-    }
+    if (!result->initWithData(loader, data)) result = nullptr;
+    return std::dynamic_pointer_cast<SceneNode>(result);
+  }
+
+  /**
+   * Returns a new wall node.
+   *
+   * @return A new wall node.
+   */
+  static std::shared_ptr<SceneNode> alloc() {
+    std::shared_ptr<Wall> result = std::make_shared<Wall>();
+    if (!result->init()) result = nullptr;
     return std::dynamic_pointer_cast<SceneNode>(result);
   }
 
