@@ -86,11 +86,11 @@ void GameScene::dispose() {
 void GameScene::populate(cugl::Size dim) {
   // Initialize the player with texture and size, then add to world.
   std::shared_ptr<cugl::Texture> player = _assets->get<cugl::Texture>("player");
-  
+
   _my_player = Player::alloc(cugl::Vec2::ZERO, "Johnathan");
   _players.push_back(_my_player);
   _level_controller->getLevelModel()->setPlayer(_my_player);
-  
+
   auto player_node = cugl::scene2::SpriteNode::alloc(player, 3, 10);
   _my_player->setPlayerNode(player_node);
   _world_node->addChild(player_node);
@@ -149,7 +149,7 @@ void GameScene::update(float timestep) {
                    InputController::get<Attack>()->isAttacking(), _sword);
   // Animation
   _my_player->animate(InputController::get<Movement>()->getMovement());
-  
+
   std::shared_ptr<RoomModel> current_room =
       _level_controller->getLevelModel()->getCurrentRoom();
   for (std::shared_ptr<Grunt>& enemy : current_room->getEnemies()) {
@@ -241,12 +241,12 @@ void GameScene::sendNetworkInfo() {
     pos->appendChild(pos_y);
     player_info->appendChild(pos);
     pos->setKey("position");
-    
-//    std::shared_ptr<cugl::JsonValue> facing_right =
-//        cugl::JsonValue::alloc(static_cast<long>(_my_player->getPlayerNode()->isFlipHorizontal()));
-//    player_info->appendChild(facing_right);
-//    player_info->setKey("facing_right");
-    
+
+    //    std::shared_ptr<cugl::JsonValue> facing_right =
+    //        cugl::JsonValue::alloc(static_cast<long>(_my_player->getPlayerNode()->isFlipHorizontal()));
+    //    player_info->appendChild(facing_right);
+    //    player_info->setKey("facing_right");
+
     // Send individual player information.
     _serializer.writeSint32(4);
     _serializer.writeJson(player_info);
@@ -280,7 +280,7 @@ void GameScene::processData(const std::vector<uint8_t>& data) {
         std::get<std::vector<std::shared_ptr<cugl::JsonValue>>>(msg);
     for (std::shared_ptr<cugl::JsonValue> player : player_positions) {
       int player_id = player->getInt("player_id");
-//      bool facing_right = player->getBool("facing_right");
+      //      bool facing_right = player->getBool("facing_right");
       std::shared_ptr<cugl::JsonValue> player_position =
           player->get("position");
       float pos_x = player_position->get(0)->asFloat();
@@ -292,7 +292,7 @@ void GameScene::processData(const std::vector<uint8_t>& data) {
     std::shared_ptr<cugl::JsonValue> player =
         std::get<std::shared_ptr<cugl::JsonValue>>(msg);
     int player_id = player->getInt("player_id");
-//    bool facing_right = player->getBool("facing_right");
+    //    bool facing_right = player->getBool("facing_right");
     std::shared_ptr<cugl::JsonValue> player_position = player->get("position");
     float pos_x = player_position->get(0)->asFloat();
     float pos_y = player_position->get(1)->asFloat();
@@ -316,11 +316,12 @@ void GameScene::updatePlayerInfo(int player_id, float pos_x, float pos_y) {
   for (std::shared_ptr<Player> player : _players) {
     if (player->getPlayerId() == player_id) {
       cugl::Vec2 old_position = player->getPosition();
-      
-      const float MOVEMENT_THRESH = 1; // Movement must exceed this value to be animated
+
+      // Movement must exceed this value to be animated
+      const float MOVEMENT_THRESH = 1;
       CULog("diff: %f, %f", pos_x - old_position.x, pos_y - old_position.y);
-      if (abs(pos_x - old_position.x) > MOVEMENT_THRESH
-          || abs(pos_y - old_position.y) > MOVEMENT_THRESH) {
+      if (abs(pos_x - old_position.x) > MOVEMENT_THRESH ||
+          abs(pos_y - old_position.y) > MOVEMENT_THRESH) {
         player->setState(Player::MOVING);
       } else {
         player->setState(Player::IDLE);

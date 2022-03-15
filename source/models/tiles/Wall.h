@@ -21,7 +21,7 @@ class Wall : public BasicTile {
    * This constructor should never be called directly, as this is an abstract
    * class.
    */
-  Wall() : BasicTile() { _classname = "Wall"; }
+  Wall() : _obstacle(nullptr), BasicTile() { _classname = "Wall"; }
 
   /**
    * Deletes this node, releasing all resources.
@@ -37,7 +37,10 @@ class Wall : public BasicTile {
    * It is unsafe to call this on a Node that is still currently inside of
    * a scene graph.
    */
-  virtual void dispose() override { BasicTile::dispose(); }
+  virtual void dispose() override {
+    _obstacle = nullptr;
+    BasicTile::dispose();
+  }
 
   virtual std::shared_ptr<SceneNode> copy(
       const std::shared_ptr<SceneNode>& dst) const override {

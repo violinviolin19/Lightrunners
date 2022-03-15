@@ -1,10 +1,7 @@
 {
   "variables": {},
   "contents": {
-    "type": "Wall",
-    "format": {
-      "type": "Anchored"
-    },
+    "type": "BasicTile",
     "data": {
       "texture": "floor-tile-11",
       "anchor": [
@@ -13,11 +10,6 @@
       ],
       "scale": 0.6,
       "priority": 0
-    },
-    "layout": {
-      "x_anchor": "left",
-      "y_anchor": "bottom",
-      "absolute": true
     }
   }
 }

@@ -75,6 +75,16 @@ class RoomModel {
   }
 
   /**
+   * Get all the connections to other rooms from this room. Returns a map from
+   * the door that connects the room to the room it connects to.
+   *
+   * @return An unordered map from the door sensor id to the room id.
+   */
+  std::unordered_map<std::string, std::string> getAllConnectedRooms() const {
+    return _door_sensor_id_to_room_id;
+  }
+
+  /**
    * Get the Room ID a door sensor ID will take you to.
    *
    * @param door_sensor_id A string that represent the door sensor ID used.

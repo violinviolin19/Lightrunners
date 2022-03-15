@@ -12,11 +12,11 @@ const enemyTileId = 7;
 const halfWallTileId = 10;
 const wallFaceTileId = 11;
 
-const tileIdsThatShowFloor = [2, 3, 4, 7, 8, 9];
+const tileIdsThatShowFloor = [2, 3, 4, 7, 8, 9, 12, 13];
 
 const tileIdToType = {
     "0": "BasicTile",
-    "1": "Wall",
+    "1": "BasicTile",
     "2": "Wall",
     "3": "Wall",
     "4": "Wall",
@@ -25,9 +25,10 @@ const tileIdToType = {
     "7": "BasicTile",
     "8": "BasicTile",
     "9": "BasicTile",
-    "10": "Wall",
+    "10": "BasicTile",
     "11": "Wall",
-    "12": "Door"
+    "12": "Door",
+    "13": "Door",
 }
 
 const pixelWidth = 64, pixelHeight = 64;
@@ -87,6 +88,10 @@ const levelToScene2 = (fileName) => {
                     }
                     if (tileTypeId === halfWallTileId) {
                         anchorNode["children"]["tile"]["layout"]["y_offset"] = 46 * tileScale;
+                    }
+                    if (tileIdToType[tileTypeId] == "Door") {
+                        if (tileTypeId == 12) anchorNode["children"]["tile"]["data"]["horizontal"] = true;
+                        if (tileTypeId == 13) anchorNode["children"]["tile"]["data"]["horizontal"] = false;
                     }
                     if (tileTypeId === wallFaceTileId) {
                         let obj = {};

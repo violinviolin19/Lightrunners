@@ -66,13 +66,17 @@ void LevelController::changeRoom(std::string &door_sensor_name) {
   for (std::shared_ptr<Grunt> enemy : current->getEnemies())
     enemy->promiseToChangePhysics(false);
 
-  current->setVisible(false);
+  if (_room_on_chopping_block != nullptr)
+    _room_on_chopping_block->setVisible(false);
+  _room_on_chopping_block = current;
+
   _level_model->setCurrentRoom(destination_room_id);
 
   std::shared_ptr<RoomModel> new_current =
       _level_model->getCurrentRoom();  // New current level.
 
   new_current->setVisible(true);
+
   _level_model->getPlayer()->setPosPromise(
       new_current->getNode()->getPosition() +
       door_pos * (TILE_SIZE * TILE_SCALE));
@@ -84,11 +88,46 @@ void LevelController::changeRoom(std::string &door_sensor_name) {
 }
 
 void LevelController::populate() {
+  _level_model = LevelModel::alloc();
+
+  instantiateWorld();
+
+  // Initialize every room.
+  for (std::shared_ptr<level_gen::Room> room : _level_gen->getRooms()) {
+    auto room_node = _assets->get<cugl::scene2::SceneNode>(room->_scene2_key);
+
+    room_node->setAnchor(cugl::Vec2::ANCHOR_BOTTOM_LEFT);
+    cugl::Vec2 pos = room->getRect().origin * (TILE_SIZE * TILE_SCALE);
+    room_node->setPosition(pos);
+    room_node->setVisible(false);
+
+    auto room_model = RoomModel::alloc(room_node, room->_scene2_key);
+    _level_model->addRoom(room->_scene2_key, room_model);
+
+    // Make spawn the starting point.
+    if (room->_type == level_gen::Room::RoomType::SPAWN) {
+      _level_model->setCurrentRoom(room->_scene2_key);
+      room_node->setVisible(true);
+    }
+
+    std::vector<cugl::Vec2> unused_doors = instantiateDoors(room, room_model);
+
+    coverUnusedDoors(room, room_model, unused_doors);
+
+    std::vector<std::shared_ptr<Grunt>> enemies;
+
+    instantiateEnemies(room, room_model, enemies);
+
+    room_model->setEnemies(enemies);
+
+    _world_node->addChild(room_node);
+  }
+}
+
+void LevelController::instantiateWorld() {
   // Represent the two corners of the world.
   cugl::Vec2 world_start;
   cugl::Vec2 world_end;
-
-  _level_model = LevelModel::alloc();
 
   // Get Size of World.
   for (std::shared_ptr<level_gen::Room> room : _level_gen->getRooms()) {
@@ -103,121 +142,115 @@ void LevelController::populate() {
 
   _world = cugl::physics2::ObstacleWorld::alloc(
       cugl::Rect(world_start, world_end - world_start));
+}
 
-  // Initialize every room.
-  for (std::shared_ptr<level_gen::Room> room : _level_gen->getRooms()) {
-    auto node = _assets->get<cugl::scene2::SceneNode>(room->_scene2_key);
+std::vector<cugl::Vec2> LevelController::instantiateDoors(
+    const std::shared_ptr<level_gen::Room> &room,
+    const std::shared_ptr<RoomModel> &room_model) {
+  std::vector<cugl::Vec2> unused_doors = room->_doors;
 
-    node->setAnchor(cugl::Vec2::ANCHOR_BOTTOM_LEFT);
-    cugl::Vec2 pos = room->getRect().origin * (TILE_SIZE * TILE_SCALE);
-    node->setPosition(pos);
-    node->setVisible(false);
+  // Initialize doors.
+  for (auto &it : room->_edge_to_door) {
+    std::shared_ptr<level_gen::Edge> edge = it.first;
+    cugl::Vec2 door = it.second;
+    unused_doors.erase(
+        std::remove(unused_doors.begin(), unused_doors.end(), door),
+        unused_doors.end());
 
-    auto room_model = RoomModel::alloc(node, room->_scene2_key);
-    _level_model->addRoom(room->_scene2_key, room_model);
+    int y = room_model->getGridSize().height - static_cast<int>(door.y) - 1;
+    int x = static_cast<int>(door.x);
+    std::stringstream ss;
+    ss << room->_scene2_key << "_tiles_tile-(" << y << "-" << x << ")_tile";
+    std::string door_name = ss.str();
 
-    // Make spawn the starting point.
-    if (room->_type == level_gen::Room::RoomType::SPAWN) {
-      _level_model->setCurrentRoom(room->_scene2_key);
-      node->setVisible(true);
-    }
+    auto door_room_node = std::dynamic_pointer_cast<Door>(
+        _assets->get<cugl::scene2::SceneNode>(door_name));
 
-    std::vector<cugl::Vec2> unused_doors = room->_doors;
+    if (door_room_node) {
+      std::string door_sensor_name = door_name + "-door";
+      _world->addObstacle(door_room_node->initBox2d(door_sensor_name));
 
-    // Initialize doors.
-    for (auto &it : room->_edge_to_door) {
-      std::shared_ptr<level_gen::Edge> edge = it.first;
-      cugl::Vec2 door = it.second;
-      unused_doors.erase(
-          std::remove(unused_doors.begin(), unused_doors.end(), door),
-          unused_doors.end());
+      std::shared_ptr<level_gen::Room> other_room = edge->getOther(room);
+      std::string other_room_id = other_room->_scene2_key;
+      cugl::Vec2 destination = other_room->_edge_to_door[edge];
 
-      int y = room_model->getGridSize().height - static_cast<int>(door.y) - 1;
-      int x = static_cast<int>(door.x);
-      std::stringstream ss;
-      ss << room->_scene2_key << "_tiles_tile-(" << y << "-" << x << ")_tile";
-      std::string door_name = ss.str();
+      if (destination.x == 0) destination.x += 1;
+      if (destination.y == 0) destination.y += 3;
+      if (destination.x == room_model->getGridSize().width - 1)
+        destination.x -= 1;
+      if (destination.y == room_model->getGridSize().height - 1)
+        destination.y -= 1;
 
-      auto door_node = std::dynamic_pointer_cast<Door>(
-          _assets->get<cugl::scene2::SceneNode>(door_name));
-
-      if (door_node) {
-        std::string door_sensor_name = door_name + "-door";
-        _world->addObstacle(door_node->initBox2d(door_sensor_name));
-
-        std::shared_ptr<level_gen::Room> other_room = edge->getOther(room);
-        std::string other_room_id = other_room->_scene2_key;
-        cugl::Vec2 destination = other_room->_edge_to_door[edge];
-
-        if (destination.x == 0) destination.x += 1;
-        if (destination.y == 0) destination.y += 3;
-        if (destination.x == room_model->getGridSize().width - 1)
-          destination.x -= 1;
-        if (destination.y == room_model->getGridSize().height - 1)
-          destination.y -= 1;
-
-        if (other_room_id != "") {
-          room_model->addConnection(door_sensor_name, other_room_id,
-                                    destination);
-        }
+      if (other_room_id != "") {
+        room_model->addConnection(door_sensor_name, other_room_id, destination);
       }
     }
-
-    auto wall_top = _assets->get<cugl::scene2::SceneNode>("wall-top");
-    auto wall_side = _assets->get<cugl::scene2::SceneNode>("wall-side");
-    for (cugl::Vec2 door : unused_doors) {
-      int y = room_model->getGridSize().height - static_cast<int>(door.y) - 1;
-      int x = static_cast<int>(door.x);
-      std::stringstream ss;
-      ss << room->_scene2_key << "_tiles_tile-(" << y << "-" << x << ")";
-      std::string door_name = ss.str();
-
-      auto door_tile_copy = cugl::scene2::SceneNode::alloc();
-      auto door_tile = _assets->get<cugl::scene2::SceneNode>(door_name);
-      if (door_tile) {
-        door_tile->copy(door_tile_copy);
-        door_tile_copy->setName(door_name + "-floor");
-
-        auto wall_top_copy = Wall::alloc();
-        auto wall_side_copy = Wall::alloc();
-        wall_top->copy(wall_top_copy);
-        wall_side->copy(wall_side_copy);
-
-        wall_top_copy->setPriority(y);
-        wall_top->setPriority(y);
-
-        door_tile->removeAllChildren();
-        door_tile->addChild(wall_top_copy);
-
-        // door_tile_copy->addChild(wall_top_copy);
-
-        // room_model->getNode()->addChild(door_tile_copy);
-      }
-    }
-
-    std::vector<std::shared_ptr<Grunt>> enemies;
-    // Initialize enemies in room.
-    for (std::shared_ptr<cugl::scene2::SceneNode> enemy_node :
-         node->getChildByName("enemies")->getChildren()) {
-      auto grunt_texture = _assets->get<cugl::Texture>("grunt");
-      std::shared_ptr<Grunt> grunt =
-          Grunt::alloc(enemy_node->getWorldPosition(), enemy_node->getName());
-      enemies.push_back(grunt);
-
-      auto grunt_node = cugl::scene2::SpriteNode::alloc(grunt_texture, 1, 1);
-      grunt->setGruntNode(grunt_node);
-
-      grunt->setRoomPos(pos);
-      node->addChild(grunt->getGruntNode());
-      _world->addObstacle(grunt);
-      if (room->_type != level_gen::Room::RoomType::SPAWN)
-        grunt->setEnabled(false);
-
-      grunt->setDebugScene(_debug_node);
-      grunt->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
-    }
-    room_model->setEnemies(enemies);
-
-    _world_node->addChild(node);
   }
+
+  return unused_doors;
+}
+
+void LevelController::coverUnusedDoors(
+    const std::shared_ptr<level_gen::Room> &room,
+    const std::shared_ptr<RoomModel> &room_model,
+    std::vector<cugl::Vec2> &unused_doors) {
+  auto wall_top = _assets->get<cugl::scene2::SceneNode>("wall-top");
+  auto wall_side = _assets->get<cugl::scene2::SceneNode>("wall-side");
+  for (cugl::Vec2 door : unused_doors) {
+    int y = room_model->getGridSize().height - static_cast<int>(door.y) - 1;
+    int x = static_cast<int>(door.x);
+    std::stringstream ss;
+    ss << room->_scene2_key << "_tiles_tile-(" << y << "-" << x << ")";
+    std::string door_name = ss.str();
+
+    auto door_tile_copy = cugl::scene2::SceneNode::alloc();
+    auto door_tile = _assets->get<cugl::scene2::SceneNode>(door_name);
+    if (door_tile) {
+      door_tile->copy(door_tile_copy);
+      door_tile_copy->setName(door_name + "-floor");
+
+      auto wall_top_copy = std::dynamic_pointer_cast<Wall>(Wall::alloc());
+      auto wall_side_copy = std::dynamic_pointer_cast<Wall>(Wall::alloc());
+      wall_top->copy(wall_top_copy);
+      wall_side->copy(wall_side_copy);
+      // TODO: change depending on wall
+      wall_top_copy->setPosition(0.0f, 27.599999999999998f);
+
+      wall_top_copy->setPriority(y);
+      wall_side_copy->setPriority(y);
+
+      door_tile->removeAllChildren();
+      door_tile->addChild(wall_side_copy);
+
+      door_tile_copy->addChild(wall_top_copy);
+      room_model->getNode()->addChild(door_tile_copy);
+
+      _world->addObstacle(wall_top_copy->initBox2d());
+      _world->addObstacle(wall_side_copy->initBox2d());
+    }
+  }
+}
+
+void LevelController::instantiateEnemies(
+    const std::shared_ptr<level_gen::Room> &room,
+    const std::shared_ptr<RoomModel> &room_model,
+    std::vector<std::shared_ptr<Grunt>> &enemies) {
+  // Initialize enemies in room.
+  for (std::shared_ptr<cugl::scene2::SceneNode> enemy_node :
+       room_model->getNode()->getChildByName("enemies")->getChildren()) {
+    auto grunt_texture = _assets->get<cugl::Texture>("grunt");
+    std::shared_ptr<Grunt> grunt =
+        Grunt::alloc(enemy_node->getWorldPosition(), enemy_node->getName());
+    enemies.push_back(grunt);
+    auto grunt_node = cugl::scene2::SpriteNode::alloc(grunt_texture, 1, 1);
+    grunt->setGruntNode(grunt_node);
+    grunt->setRoomPos(room_model->getNode()->getPosition());
+    room_model->getNode()->addChild(grunt->getGruntNode());
+    _world->addObstacle(grunt);
+    if (room->_type != level_gen::Room::RoomType::SPAWN)
+      grunt->setEnabled(false);
+    grunt->setDebugScene(_debug_node);
+    grunt->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
+  }
+  room_model->setEnemies(enemies);
 }
