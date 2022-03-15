@@ -33,7 +33,7 @@ void TankController::performAction(std::shared_ptr<Grunt> enemy, cugl::Vec2 p) {
       break;
     }
     default: {
-      idling();
+      idling(enemy);
     }
   }
 }

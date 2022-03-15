@@ -4,7 +4,7 @@
 #include <cugl/cugl.h>
 
 #include "../controllers/Controller.h"
-//#include "../controllers/EnemyController.h"
+#include "../controllers/EnemyController.h"
 #include "../controllers/enemies/GruntController.h"
 #include "../controllers/enemies/ShotgunnerController.h"
 #include "../controllers/enemies/TankController.h"
@@ -40,7 +40,7 @@ class GameScene : public cugl::Scene2 {
   std::shared_ptr<cugl::physics2::ObstacleWorld> _world;
 
   /** The enemy controller for the game. */
-  std::shared_ptr<GruntController> _enemy_controller;
+  std::shared_ptr<EnemyController> _enemy_controller;
 
   /** The level controller for the game*/
   std::shared_ptr<LevelController> _level_controller;

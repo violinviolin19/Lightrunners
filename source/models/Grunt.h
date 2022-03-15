@@ -19,7 +19,11 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
     /** The enemy is attacking the player. */
     ATTACKING,
     /** The enemy is avoiding the player. */
-    AVOIDING
+    AVOIDING,
+    /** The enemy is tanking the player. */
+    TANKING,
+    /** The enemy is skirting the player. */
+    SKIRTING
   };
   
   /** Enum for which enemy this is. */

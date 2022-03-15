@@ -27,9 +27,9 @@ void TurtleController::attackPlayer(std::shared_ptr<Grunt> enemy, const cugl::Ve
         enemy->addBullet(cugl::Vec2(e.x, e.y - p.y));
       }
     }
-    _enemy->setAttackCooldown(120);
+    enemy->setAttackCooldown(120);
   }
-  _enemy->move(0, 0);
+  enemy->move(0, 0);
 }
 
 void TurtleController::tank(std::shared_ptr<Grunt> enemy) {

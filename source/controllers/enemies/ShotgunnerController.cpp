@@ -15,7 +15,7 @@ void ShotgunnerController::skirtPlayer(std::shared_ptr<Grunt> enemy, cugl::Vec2 
   diff.subtract(enemy->getVX(), enemy->getVY());
   diff.add(enemy->getVX(), enemy->getVY());
   diff.scale(enemy->getSpeed() / 3);
-  _enemy->move(-diff.x, -diff.y);
+  enemy->move(-diff.x, -diff.y);
 
   // Attack enemy if you can
   if (enemy->getAttackCooldown() <= 0) {

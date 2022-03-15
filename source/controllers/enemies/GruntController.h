@@ -2,8 +2,6 @@
 #define CONTROLLERS_ENEMIES_GRUNT_CONTROLLER_H_
 #include <cugl/cugl.h>
 
-#include "../../models/Grunt.h"
-#include "../../models/Player.h"
 #include "../EnemyController.h"
 
 /**
@@ -22,7 +20,7 @@ public:
    * Disposses this input controller, releasing all resources.
    */
   ~GruntController() {}
-
+  
 #pragma mark Static Constructors
   /**
    * Returns a new enemy controller.
@@ -42,13 +40,17 @@ public:
     std::shared_ptr<GruntController> result =
         std::make_shared<GruntController>();
 
-    if (result->init(assets, world, world_node, debug_node)) {
+    if (result->EnemyController::init(assets, world, world_node, debug_node)) {
       return result;
     }
     return nullptr;
   }
 
 #pragma mark Properties
+  
+  /** Update the enemy. */
+  void update(float timestep, std::shared_ptr<Grunt> enemy,
+              std::shared_ptr<Player> player);
 
   /** Change the enemy state. */
   void changeStateIfApplicable(std::shared_ptr<Grunt> enemy, float distance) override;
