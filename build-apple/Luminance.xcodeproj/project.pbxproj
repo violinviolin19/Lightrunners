@@ -40,6 +40,12 @@
 		D521FB0F27C43BA500D14172 /* widgets in Resources */ = {isa = PBXBuildFile; fileRef = D521FB0E27C43BA500D14172 /* widgets */; };
 		D521FB1027C43BA500D14172 /* widgets in Resources */ = {isa = PBXBuildFile; fileRef = D521FB0E27C43BA500D14172 /* widgets */; };
 		D521FB1127C43BA500D14172 /* widgets in Resources */ = {isa = PBXBuildFile; fileRef = D521FB0E27C43BA500D14172 /* widgets */; };
+		D529AAE927E13083006E3D5F /* Terminal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D529AAE627E13083006E3D5F /* Terminal.cpp */; };
+		D529AAEA27E13083006E3D5F /* Terminal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D529AAE627E13083006E3D5F /* Terminal.cpp */; };
+		D529AAEB27E13083006E3D5F /* Terminal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D529AAE627E13083006E3D5F /* Terminal.cpp */; };
+		D529AAEC27E13083006E3D5F /* TerminalSensor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D529AAE827E13083006E3D5F /* TerminalSensor.cpp */; };
+		D529AAED27E13083006E3D5F /* TerminalSensor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D529AAE827E13083006E3D5F /* TerminalSensor.cpp */; };
+		D529AAEE27E13083006E3D5F /* TerminalSensor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D529AAE827E13083006E3D5F /* TerminalSensor.cpp */; };
 		D52E673427BF305A00F8E2B8 /* LoadingScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D52E672A27BF305900F8E2B8 /* LoadingScene.cpp */; };
 		D52E673527BF305A00F8E2B8 /* LoadingScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D52E672A27BF305900F8E2B8 /* LoadingScene.cpp */; };
 		D52E673627BF305A00F8E2B8 /* LoadingScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D52E672A27BF305900F8E2B8 /* LoadingScene.cpp */; };
@@ -210,6 +216,10 @@
 		D5073C8627CFEF2C0000426E /* Wall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wall.h; sourceTree = "<group>"; };
 		D5073C8727CFEF2C0000426E /* Wall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wall.cpp; sourceTree = "<group>"; };
 		D521FB0E27C43BA500D14172 /* widgets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = widgets; sourceTree = "<group>"; };
+		D529AAE227E13083006E3D5F /* Terminal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Terminal.h; sourceTree = "<group>"; };
+		D529AAE627E13083006E3D5F /* Terminal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Terminal.cpp; sourceTree = "<group>"; };
+		D529AAE727E13083006E3D5F /* TerminalSensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerminalSensor.h; sourceTree = "<group>"; };
+		D529AAE827E13083006E3D5F /* TerminalSensor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TerminalSensor.cpp; sourceTree = "<group>"; };
 		D52E672627BF305900F8E2B8 /* GameApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameApp.h; sourceTree = "<group>"; };
 		D52E672827BF305900F8E2B8 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
 		D52E672927BF305900F8E2B8 /* LoadingScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingScene.h; sourceTree = "<group>"; };
@@ -392,6 +402,10 @@
 		D5073C8527CFEF2C0000426E /* tiles */ = {
 			isa = PBXGroup;
 			children = (
+				D529AAE627E13083006E3D5F /* Terminal.cpp */,
+				D529AAE227E13083006E3D5F /* Terminal.h */,
+				D529AAE827E13083006E3D5F /* TerminalSensor.cpp */,
+				D529AAE727E13083006E3D5F /* TerminalSensor.h */,
 				D58B972727DD31DE0071D1FC /* Door.cpp */,
 				D58B972827DD31DE0071D1FC /* Door.h */,
 				D579718227CFF851008FCC5E /* BasicTile.cpp */,
@@ -813,7 +827,9 @@
 				D5F3D6DE27DEFA330071DD06 /* LevelModel.cpp in Sources */,
 				D52E673F27BF305A00F8E2B8 /* Attack.cpp in Sources */,
 				D5EB745027C335C7007D157D /* Movement.cpp in Sources */,
+				D529AAEE27E13083006E3D5F /* TerminalSensor.cpp in Sources */,
 				D56DCD3127CDAD7A002E8363 /* Room.cpp in Sources */,
+				D529AAEB27E13083006E3D5F /* Terminal.cpp in Sources */,
 				CA5F188D27DBC1B70077AEBB /* MenuScene.cpp in Sources */,
 				D58B0FD027DC1BC500E65692 /* LevelController.cpp in Sources */,
 				EB9CDA3925D0EAB100EE1A09 /* main.cpp in Sources */,
@@ -848,7 +864,9 @@
 				D5F3D6DD27DEFA320071DD06 /* LevelModel.cpp in Sources */,
 				D52E673E27BF305A00F8E2B8 /* Attack.cpp in Sources */,
 				D5EB744F27C335C7007D157D /* Movement.cpp in Sources */,
+				D529AAED27E13083006E3D5F /* TerminalSensor.cpp in Sources */,
 				D56DCD3027CDAD7A002E8363 /* Room.cpp in Sources */,
+				D529AAEA27E13083006E3D5F /* Terminal.cpp in Sources */,
 				CA5F188C27DBC1B70077AEBB /* MenuScene.cpp in Sources */,
 				D58B0FCF27DC1BC500E65692 /* LevelController.cpp in Sources */,
 				EB7454AE1D74D891002FBAE6 /* main.cpp in Sources */,
@@ -883,7 +901,9 @@
 				D5F3D6B427DD6E3B0071DD06 /* LevelModel.cpp in Sources */,
 				D52E673D27BF305A00F8E2B8 /* Attack.cpp in Sources */,
 				D5EB744E27C335C7007D157D /* Movement.cpp in Sources */,
+				D529AAEC27E13083006E3D5F /* TerminalSensor.cpp in Sources */,
 				D56DCD2F27CDAD7A002E8363 /* Room.cpp in Sources */,
+				D529AAE927E13083006E3D5F /* Terminal.cpp in Sources */,
 				CA5F188B27DBC1B70077AEBB /* MenuScene.cpp in Sources */,
 				D58B0FCE27DC1BC500E65692 /* LevelController.cpp in Sources */,
 				EB2BE9B61D74952A002FE78B /* main.cpp in Sources */,

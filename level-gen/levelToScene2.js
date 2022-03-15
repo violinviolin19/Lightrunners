@@ -12,8 +12,6 @@ const enemyTileId = 7;
 const halfWallTileId = 10;
 const wallFaceTileId = 11;
 
-// TODO: Find a better data structure to accomplish this.
-const tileIdsThatAreSolid = [1, 2, 3, 4, 10, 11];
 const tileIdsThatShowFloor = [2, 3, 4, 7, 8, 9];
 
 const tileIdToType = {
@@ -25,12 +23,11 @@ const tileIdToType = {
     "5": "BasicTile",
     "6": "BasicTile",
     "7": "BasicTile",
-    "8": "BasicTile",
+    "8": "Terminal",
     "9": "BasicTile",
     "10": "Wall",
     "11": "Wall",
-    "12": "Door",
-    "14": "Terminal"
+    "12": "Door"
 }
 
 const pixelWidth = 64, pixelHeight = 64;

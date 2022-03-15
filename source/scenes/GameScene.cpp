@@ -188,9 +188,6 @@ void GameScene::update(float timestep) {
                                                    _num_terminals_activated);
   terminal_text->setText(terminal_msg);
 
-  // Animation
-  _player->animate(InputController::get<Movement>()->getMovement());
-
   // POST-UPDATE
   // Check for disposal
   std::vector<std::shared_ptr<Grunt>>& enemies = current_room->getEnemies();
@@ -435,14 +432,12 @@ void GameScene::beginContact(b2Contact* contact) {
     _level_controller->changeRoom(fx2_name);
   }
 
-  if (fx1_name == "terminal_range" && ob2 == _player.get()) {
-    CULog("Im here");
+  if (fx1_name == "terminal_range" && ob2 == _my_player.get()) {
     if (!dynamic_cast<TerminalSensor*>(ob1)->isActivated()) {
       dynamic_cast<TerminalSensor*>(ob1)->activate();
       _num_terminals_activated += 1;
     }
-  } else if (fx2_name == "terminal_range" && ob1 == _player.get()) {
-    CULog("Im here");
+  } else if (fx2_name == "terminal_range" && ob1 == _my_player.get()) {
     if (!dynamic_cast<TerminalSensor*>(ob2)->isActivated()) {
       dynamic_cast<TerminalSensor*>(ob2)->activate();
       _num_terminals_activated += 1;
