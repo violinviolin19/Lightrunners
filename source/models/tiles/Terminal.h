@@ -1,18 +1,20 @@
-#ifndef MODELS_TILES_WALL_H_
-#define MODELS_TILES_WALL_H_
+#ifndef MODELS_TILES_TERMINAL_H_
+#define MODELS_TILES_TERMINAL_H_
 
 #include <cugl/cugl.h>
 
 #include "BasicTile.h"
+#include "TerminalSensor.h"
 
 /**
  * This class implements the BasicTile class and adds a physics object that the
  * player can collide with.
  */
-class Wall : public BasicTile {
+class Terminal : public BasicTile {
  protected:
   /** A reference to the physics object of the tile. */
-  std::shared_ptr<cugl::physics2::BoxObstacle> _obstacle;
+  std::shared_ptr<TerminalSensor> _obstacle;
+
 
  public:
   /**
@@ -21,12 +23,13 @@ class Wall : public BasicTile {
    * This constructor should never be called directly, as this is an abstract
    * class.
    */
-  Wall() : BasicTile() { _classname = "Wall"; }
+  Terminal() : 
+      BasicTile() {_classname = "Terminal";}
 
   /**
    * Deletes this node, releasing all resources.
    */
-  ~Wall() { dispose(); }
+  ~Terminal() { dispose(); }
 
   /**
    * Disposes all of the resources used by this node.
@@ -37,7 +40,9 @@ class Wall : public BasicTile {
    * It is unsafe to call this on a Node that is still currently inside of
    * a scene graph.
    */
-  virtual void dispose() override { BasicTile::dispose(); }
+  virtual void dispose() override {
+    BasicTile::dispose();
+  }
 
   virtual std::shared_ptr<SceneNode> copy(
       const std::shared_ptr<SceneNode>& dst) const override {
@@ -75,7 +80,7 @@ class Wall : public BasicTile {
   static std::shared_ptr<SceneNode> allocWithData(
       const cugl::Scene2Loader* loader,
       const std::shared_ptr<cugl::JsonValue>& data) {
-    std::shared_ptr<Wall> result = std::make_shared<Wall>();
+    std::shared_ptr<Terminal> result = std::make_shared<Terminal>();
     if (!result->initWithData(loader, data)) {
       result = nullptr;
     }
@@ -88,15 +93,15 @@ class Wall : public BasicTile {
    *
    * @return The obstacle it created for easy chaining.
    */
-  virtual std::shared_ptr<cugl::physics2::BoxObstacle> initBox2d();
+  virtual std::shared_ptr<TerminalSensor> initBox2d();
 
   /**
    * @return Returns the physics object for the tile.
    */
-  std::shared_ptr<cugl::physics2::BoxObstacle> getObstacle() {
+  std::shared_ptr<TerminalSensor> getObstacle() {
     return _obstacle;
   }
 
 };
 
-#endif  // MODELS_TILES_WALL_H_
+#endif  // MODELS_TILES_TERMINAL_H_#pragma once

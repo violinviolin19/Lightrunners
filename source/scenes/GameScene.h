@@ -58,20 +58,8 @@ class GameScene : public cugl::Scene2 {
   /** Whether we quit the game. */
   bool _quit;
 
-  /** The height of each tile in the world. */
-  float _tile_width;
-
-  /** The height of each tile in the world. */
-  float _tile_height;
-
-  /** The number of rows in the world. */
-  float _col_count;
-
-  /** The number of rows in the world. */
-  float _row_count;
-
-  /** The counter for ids for the enemies */
-  int _id_counter = 0;
+  /** The number of terminals activated in the world. */
+  int _num_terminals_activated;
 
  public:
   GameScene() : cugl::Scene2() {}
