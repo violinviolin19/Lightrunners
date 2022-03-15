@@ -123,7 +123,15 @@ class Scene2Loader : public Loader<scene2::SceneNode> {
     /** A Node implied by an imported file */
     EXTERNAL_IMPORT,
     /** An unsupported type */
-    UNKNOWN
+    UNKNOWN,
+    /** Enemy widget: grunt. */
+    GRUNT,
+    /** Enemy widget: shotgunner. */
+    SHOTGUNNER,
+    /** Enemy widget: tank. */
+    TANK,
+    /** Enemy widget: turtle. */
+    TURTLE
   };
 
   /**

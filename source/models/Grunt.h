@@ -21,10 +21,25 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
     /** The enemy is avoiding the player. */
     AVOIDING
   };
+  
+  /** Enum for which enemy this is. */
+  enum EnemyType {
+    /** The grunt enemy type. */
+    GRUNT,
+    /** The shotgunner enemy type. */
+    SHOTGUNNER,
+    /** The tank enemy type. */
+    TANK,
+    /** The turtle enemy type. */
+    TURTLE
+  };
 
  private:
   /** The current state of the grunt. */
   State _current_state;
+  
+  /** The enemy type of this enemy. */
+  EnemyType _enemy_type;
 
   /** Grunt health. */
   int _health;

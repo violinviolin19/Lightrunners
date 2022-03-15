@@ -51,7 +51,7 @@ bool GameScene::init(
   };
 
   _enemy_controller =
-      EnemyController::alloc(_assets, _world, _world_node, _debug_node);
+      GruntController::alloc(_assets, _world, _world_node, _debug_node);
 
   populate(dim);
 
@@ -191,6 +191,9 @@ void GameScene::update(float timestep) {
       _level_controller->getLevelModel()->getCurrentRoom();
   for (std::shared_ptr<Grunt>& enemy : current_room->getEnemies()) {
     _enemy_controller->update(timestep, enemy, _my_player);
+    // Set a flag for the enemy to know which type it is
+    // Pass in enemy into the
+    
   }
 
   updateCamera(timestep);

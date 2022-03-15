@@ -22,6 +22,9 @@
 		57CEFE4327DE5E6100EF2B90 /* EnemyController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57CEFE4127DE5E6100EF2B90 /* EnemyController.cpp */; };
 		57CEFE4427DE5E6100EF2B90 /* EnemyController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57CEFE4127DE5E6100EF2B90 /* EnemyController.cpp */; };
 		57CEFE4527DE5E6100EF2B90 /* EnemyController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57CEFE4127DE5E6100EF2B90 /* EnemyController.cpp */; };
+		57D18F3527E127E70085A52E /* enemies in Resources */ = {isa = PBXBuildFile; fileRef = 57D18F3127E127E70085A52E /* enemies */; };
+		57D18F3627E127E70085A52E /* enemies in Resources */ = {isa = PBXBuildFile; fileRef = 57D18F3127E127E70085A52E /* enemies */; };
+		57D18F3727E127E70085A52E /* enemies in Resources */ = {isa = PBXBuildFile; fileRef = 57D18F3127E127E70085A52E /* enemies */; };
 		CA5F188B27DBC1B70077AEBB /* MenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA5F188627DBC1B70077AEBB /* MenuScene.cpp */; };
 		CA5F188C27DBC1B70077AEBB /* MenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA5F188627DBC1B70077AEBB /* MenuScene.cpp */; };
 		CA5F188D27DBC1B70077AEBB /* MenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA5F188627DBC1B70077AEBB /* MenuScene.cpp */; };
@@ -204,6 +207,7 @@
 		57CEFE3E27DDA84A00EF2B90 /* Projectile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Projectile.h; sourceTree = "<group>"; };
 		57CEFE4127DE5E6100EF2B90 /* EnemyController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EnemyController.cpp; sourceTree = "<group>"; };
 		57CEFE4227DE5E6100EF2B90 /* EnemyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnemyController.h; sourceTree = "<group>"; };
+		57D18F3127E127E70085A52E /* enemies */ = {isa = PBXFileReference; lastKnownFileType = folder; path = enemies; sourceTree = "<group>"; };
 		CA5F188627DBC1B70077AEBB /* MenuScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MenuScene.cpp; sourceTree = "<group>"; };
 		CA5F188A27DBC1B70077AEBB /* MenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuScene.h; sourceTree = "<group>"; };
 		CA9B3EAB27DE9A6900755902 /* HostGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostGameScene.h; sourceTree = "<group>"; };
@@ -441,6 +445,7 @@
 		D52E672C27BF305900F8E2B8 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				57D18F3127E127E70085A52E /* enemies */,
 				57CEFE4127DE5E6100EF2B90 /* EnemyController.cpp */,
 				57CEFE4227DE5E6100EF2B90 /* EnemyController.h */,
 				D58B0FC827DC1BC500E65692 /* Controller.h */,
@@ -767,6 +772,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D58B972627DC7EBD0071D1FC /* rooms in Resources */,
+				57D18F3727E127E70085A52E /* enemies in Resources */,
 				EB22BF9B25D0EA5C002ACE41 /* DeviceMargins.plist in Resources */,
 				EB22BF9625D0EA50002ACE41 /* json in Resources */,
 				EB22BF9725D0EA51002ACE41 /* textures in Resources */,
@@ -783,6 +789,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D58B972527DC7EBD0071D1FC /* rooms in Resources */,
+				57D18F3627E127E70085A52E /* enemies in Resources */,
 				EB7454D01D750623002FBAE6 /* textures in Resources */,
 				EB7454AB1D74D846002FBAE6 /* iOS.xcassets in Resources */,
 				EB7454AC1D74D846002FBAE6 /* Landscape.storyboard in Resources */,
@@ -800,6 +807,7 @@
 			files = (
 				EBFE7C091E19B4AC001007C2 /* json in Resources */,
 				572894E927D189E200F9BBA5 /* fonts in Resources */,
+				57D18F3527E127E70085A52E /* enemies in Resources */,
 				EB2BE9BB1D7498D2002FE78B /* textures in Resources */,
 				D58B972427DC7EBD0071D1FC /* rooms in Resources */,
 				D521FB0F27C43BA500D14172 /* widgets in Resources */,
