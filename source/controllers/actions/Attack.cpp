@@ -1,6 +1,6 @@
 #include "Attack.h"
 
-#define JOYSTICK_RADIUS 40.0f
+#define JOYSTICK_RADIUS 30.0f
 #define TIME_TO_WAIT_FOR_JOYSTICK 40
 
 Attack::Attack()
