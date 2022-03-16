@@ -58,8 +58,12 @@ class GameScene : public cugl::Scene2 {
   /** Whether we quit the game. */
   bool _quit;
 
+  /** The number of terminals in the world. */
+  int _num_terminals;
+
   /** The number of terminals activated in the world. */
   int _num_terminals_activated;
+
 
  public:
   GameScene() : cugl::Scene2() {}
@@ -100,6 +104,13 @@ class GameScene : public cugl::Scene2 {
    * @param dim The dimensions of the screen.
    */
   void populate(cugl::Size dim);
+
+  /**
+   * Check if the cooperators have won.
+   *
+   * @return true if at least half of the terminals have been activated.
+   */
+  bool checkCooperatorWin();
 
   /**
    * The method called to update the game mode.

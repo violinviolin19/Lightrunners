@@ -61,6 +61,11 @@ bool GameScene::init(
   ui_layer->setContentSize(dim);
   ui_layer->doLayout();
 
+  auto win_layer = assets->get<cugl::scene2::SceneNode>("win-scene");
+  win_layer->setContentSize(dim);
+  win_layer->doLayout();
+  win_layer->setVisible(false);
+
   auto text = ui_layer->getChildByName<cugl::scene2::Label>("health");
   std::string msg =
       cugl::strtool::format("Health: %d", _my_player->getHealth());
@@ -77,6 +82,7 @@ bool GameScene::init(
 
   cugl::Scene2::addChild(_world_node);
   cugl::Scene2::addChild(ui_layer);
+  cugl::Scene2::addChild(win_layer);
   cugl::Scene2::addChild(_debug_node);
   _debug_node->setVisible(false);
 
@@ -121,11 +127,13 @@ void GameScene::populate(cugl::Size dim) {
     wall->getObstacle()->setDebugScene(_debug_node);
   }
 
+  _num_terminals = 0;
   for (std::shared_ptr<BasicTile> tile : loader->getTiles("terminal")) {
     auto terminal = std::dynamic_pointer_cast<Terminal>(tile);
     _world->addObstacle(terminal->initBox2d());
     terminal->getObstacle()->setDebugColor(cugl::Color4::RED);
     terminal->getObstacle()->setDebugScene(_debug_node);
+    _num_terminals += 1;
   }
 
   // Debug code.
@@ -142,6 +150,10 @@ void GameScene::populate(cugl::Size dim) {
   }
 }
 
+bool GameScene::checkCooperatorWin() {
+  return _num_terminals / 2 < _num_terminals_activated;
+}
+
 void GameScene::update(float timestep) {
   if (_network) {
     sendNetworkInfo();
@@ -149,6 +161,16 @@ void GameScene::update(float timestep) {
     _network->receive(
         [this](const std::vector<uint8_t>& data) { processData(data); });
     checkConnection();
+  }
+
+  if (checkCooperatorWin()) {
+    auto win_layer = _assets->get<cugl::scene2::SceneNode>("win-scene");
+    auto text = win_layer->getChildByName<cugl::scene2::Label>("cooperator");
+    std::string msg =
+        cugl::strtool::format("Cooperators Win!");
+    text->setText(msg);
+    text->setForeground(cugl::Color4::GREEN);
+    win_layer->setVisible(true);
   }
 
   cugl::Application::get()->setClearColor(cugl::Color4f::BLACK);
