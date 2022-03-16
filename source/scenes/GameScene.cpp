@@ -389,13 +389,8 @@ void GameScene::updatePlayerInfo(int player_id, float pos_x, float pos_y) {
     if (player->getPlayerId() == player_id) {
       cugl::Vec2 old_position = player->getPosition();
 
-<<<<<<< HEAD
       // Movement must exceed this value to be animated
       const float MOVEMENT_THRESH = 1;
-=======
-      const float MOVEMENT_THRESH =
-          1;  // Movement must exceed this value to be animated
->>>>>>> refactored enemies wooo
       CULog("diff: %f, %f", pos_x - old_position.x, pos_y - old_position.y);
       if (abs(pos_x - old_position.x) > MOVEMENT_THRESH ||
           abs(pos_y - old_position.y) > MOVEMENT_THRESH) {
