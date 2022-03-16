@@ -9100,7 +9100,7 @@
           },
           "children": {
             "tile": {
-              "type": "BasicTile",
+              "type": "Terminal",
               "format": {
                 "type": "Anchored"
               },

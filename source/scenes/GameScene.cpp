@@ -67,6 +67,14 @@ bool GameScene::init(
   text->setText(msg);
   text->setForeground(cugl::Color4::WHITE);
 
+  _num_terminals_activated = 0;
+  auto terminal_text =
+      ui_layer->getChildByName<cugl::scene2::Label>("terminal");
+  std::string terminal_msg = cugl::strtool::format("Terminals Activated: %d",
+                                                   _num_terminals_activated);
+  terminal_text->setText(terminal_msg);
+  terminal_text->setForeground(cugl::Color4::RED);
+
   cugl::Scene2::addChild(_world_node);
   cugl::Scene2::addChild(ui_layer);
   cugl::Scene2::addChild(_debug_node);
@@ -111,6 +119,13 @@ void GameScene::populate(cugl::Size dim) {
     _world->addObstacle(wall->initBox2d());
     wall->getObstacle()->setDebugColor(cugl::Color4::GREEN);
     wall->getObstacle()->setDebugScene(_debug_node);
+  }
+
+  for (std::shared_ptr<BasicTile> tile : loader->getTiles("terminal")) {
+    auto terminal = std::dynamic_pointer_cast<Terminal>(tile);
+    _world->addObstacle(terminal->initBox2d());
+    terminal->getObstacle()->setDebugColor(cugl::Color4::RED);
+    terminal->getObstacle()->setDebugScene(_debug_node);
   }
 
   // Debug code.
@@ -167,6 +182,13 @@ void GameScene::update(float timestep) {
       cugl::strtool::format("Health: %d", _my_player->getHealth());
   text->setText(msg);
 
+  auto terminal_text =
+      ui_layer->getChildByName<cugl::scene2::Label>("terminal");
+  std::string terminal_msg = cugl::strtool::format("Terminals Activated: %d",
+                                                   _num_terminals_activated);
+  terminal_text->setText(terminal_msg);
+
+  // POST-UPDATE
   // Check for disposal
   std::vector<std::shared_ptr<Grunt>>& enemies = current_room->getEnemies();
   auto it = enemies.begin();
@@ -408,6 +430,18 @@ void GameScene::beginContact(b2Contact* contact) {
   } else if (fx2_name.find("door") != std::string::npos &&
              ob1 == _my_player.get()) {
     _level_controller->changeRoom(fx2_name);
+  }
+
+  if (fx1_name == "terminal_range" && ob2 == _my_player.get()) {
+    if (!dynamic_cast<TerminalSensor*>(ob1)->isActivated()) {
+      dynamic_cast<TerminalSensor*>(ob1)->activate();
+      _num_terminals_activated += 1;
+    }
+  } else if (fx2_name == "terminal_range" && ob1 == _my_player.get()) {
+    if (!dynamic_cast<TerminalSensor*>(ob2)->isActivated()) {
+      dynamic_cast<TerminalSensor*>(ob2)->activate();
+      _num_terminals_activated += 1;
+    }
   }
 }
 
