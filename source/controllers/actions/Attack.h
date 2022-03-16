@@ -15,6 +15,8 @@
  */
 class Attack : public Action {
  protected:
+  /* Reference to scene2 attack joystick base for updating position. */
+  std::shared_ptr<cugl::scene2::PolygonNode> _attack_base;
   /* Reference to attack button for registering listeners to press event. */
   std::shared_ptr<cugl::scene2::Button> _button;
 
@@ -24,6 +26,33 @@ class Attack : public Action {
   bool _curr_down;
   /* Scene2 button is pressed. */
   bool _butt_down;
+
+  /* Key for all the input listeners, for disposal. */
+  Uint32 _listener_key;
+
+  /* Initial position of the joystick, for math operations on the input.
+       i.e. Where the player placed their finger first. */
+  cugl::Vec2 _joystick_anchor;
+  /* Vector between joystick nob and joystick anchor. Used for defining how much
+     you move. */
+  cugl::Vec2 _joystick_diff;
+
+  // The screen is divided into two zones: Left, Right
+  // These are all shown in the diagram below.
+  //
+  //   |-----------------|
+  //   |        |        |
+  //   | L      |      R |
+  //   |        |        |
+  //   |-----------------|
+  //
+  // Attacking with attack joystick happens on the right side.
+
+  /* Bounds of the right side of screen, for processing input. */
+  cugl::Rect _right_screen_bounds;
+
+  /** If the joystick base should be shown. */
+  bool _show_joystick_base;
 
  public:
   /**
@@ -63,7 +92,7 @@ class Attack : public Action {
   /**
    * @return If player is currently attacking.
    */
-  bool isAttacking() const { return !_prev_down && _curr_down; }
+  bool isAttacking() const { return _prev_down && !_curr_down; }
 
   /**
    * Toggels activation on attack button. When deactivated, the button cannot
@@ -71,6 +100,20 @@ class Attack : public Action {
    * @param value The activation state.
    */
   void setActive(bool value);
+
+#ifdef CU_TOUCH_SCREEN
+
+  /** Touch listener for when the player moves their finger. */
+  void touchMoved(const cugl::TouchEvent &event, const cugl::Vec2 &previous,
+                  bool focus);
+
+#endif  // CU_TOUCH_SCREEN
+
+  /**
+   * Get input vector for attacking. X and Y values range from -1.0f to 1.0f.
+   * @return Movement vector.
+   */
+  cugl::Vec2 getAttackDir() { return cugl::Vec2(_joystick_diff).normalize(); }
 
   Attack();
   ~Attack() {}

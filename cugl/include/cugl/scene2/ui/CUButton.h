@@ -148,6 +148,9 @@ protected:
     Uint32 _nextKey;
     /** The listener callbacks for state changes */
     std::unordered_map<Uint32,Listener> _listeners;
+
+    /* The list of fingers currently touching the button. */
+    std::unordered_set<Sint64> _touch_ids;
     
 public:
 #pragma mark Constructors
@@ -390,6 +393,15 @@ public:
      * before we can apply a layout manager to the children.
      */
     virtual void doLayout() override;
+
+    /**
+     * Get the touch IDs the button event are currently handeling. When the 
+     * button is pressed, the touch event receives a touchID. This touch Id is
+     * stored so that any other input event doesn't deactivate this button.
+     * 
+     * @return The touch ids.
+     */
+    std::unordered_set<Sint64> getTouchIds() { return _touch_ids; }
     
 #pragma mark Button State
     /**
