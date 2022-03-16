@@ -23,7 +23,7 @@ const tileIdToType = {
     "5": "BasicTile",
     "6": "BasicTile",
     "7": "BasicTile",
-    "8": "BasicTile",
+    "8": "Terminal",
     "9": "BasicTile",
     "10": "BasicTile",
     "11": "Wall",

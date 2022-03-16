@@ -4,6 +4,7 @@
 #include <cugl/physics2/cu_physics2.h>
 
 #include "../models/tiles/BasicTile.h"
+#include "../models/tiles/Terminal.h"
 
 namespace cugl {
 
@@ -29,6 +30,8 @@ class CustomScene2Loader : public Scene2Loader {
     WALL,
     /** A door type that acts as a sensor for leaving rooms. */
     DOOR,
+    /** A terminal that acts as a box2d sensor. */
+    TERMINAL,
     /** An unsupported type */
     UNKOWN
   };
