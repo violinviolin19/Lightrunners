@@ -44,7 +44,7 @@ class PeerScene : public cugl::Scene2 {
 
   /** The current status */
   Status _status;
-  
+
   /** The serializer used to serialize complex data to send through the network.
    */
   cugl::NetworkSerializer _serializer;
@@ -52,7 +52,7 @@ class PeerScene : public cugl::Scene2 {
   /** The deserializer used to deserialize complex data sent through the
    * network. */
   cugl::NetworkDeserializer _deserializer;
-  
+
   /** The map seed. */
   Uint64 _seed;
 
@@ -101,21 +101,17 @@ class PeerScene : public cugl::Scene2 {
   std::shared_ptr<cugl::NetworkConnection> getConnection() const {
     return _network;
   }
-  
+
   /**
    * Sets the seed to be broadcast to all clients.
    */
-  void setSeed(unsigned seed) {
-    _seed = seed;
-  }
-  
+  void setSeed(unsigned seed) { _seed = seed; }
+
   /**
    * Returns the seed to be broadcast to all clients.
    * @return The seed for the map
    */
-  Uint64 getSeed() {
-    return _seed;
-  }
+  Uint64 getSeed() { return _seed; }
 
   /**
    * Returns the scene status. Any value other than WAIT will transition to

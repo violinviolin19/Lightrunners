@@ -33,13 +33,13 @@ void LevelController::update() {
   float row = rel_player_y / (TILE_SIZE.y * TILE_SCALE.y);
   player->getPlayerNode()->setPriority(current->getGridSize().height - row);
 
-  for (std::shared_ptr<Grunt> enemy : current->getEnemies()) {
+  for (std::shared_ptr<EnemyModel> enemy : current->getEnemies()) {
     b2Body *enemy_body = enemy->getBody();
     if (enemy_body != nullptr) {
       float rel_enemy_y =
           enemy_body->GetPosition().y - current->getNode()->getPosition().y;
       row = rel_enemy_y / (TILE_SIZE.y * TILE_SCALE.y);
-      enemy->getGruntNode()->setPriority(current->getGridSize().height - row);
+      enemy->getNode()->setPriority(current->getGridSize().height - row);
 
       for (std::shared_ptr<Projectile> projectile : enemy->getProjectiles()) {
         float rel_projectile_y = projectile->getBody()->GetPosition().y -
@@ -63,7 +63,7 @@ void LevelController::changeRoom(std::string &door_sensor_name) {
 
   cugl::Vec2 door_pos = current->getPosOfDestinationDoor(door_sensor_name);
 
-  for (std::shared_ptr<Grunt> enemy : current->getEnemies())
+  for (std::shared_ptr<EnemyModel> enemy : current->getEnemies())
     enemy->promiseToChangePhysics(false);
 
   if (_room_on_chopping_block != nullptr)
@@ -81,7 +81,7 @@ void LevelController::changeRoom(std::string &door_sensor_name) {
       new_current->getNode()->getPosition() +
       door_pos * (TILE_SIZE * TILE_SCALE));
 
-  for (std::shared_ptr<Grunt> enemy : new_current->getEnemies())
+  for (std::shared_ptr<EnemyModel> enemy : new_current->getEnemies())
     enemy->promiseToChangePhysics(true);
 
   CULog("%s -> %s", current->getName().c_str(), new_current->getName().c_str());
@@ -114,7 +114,7 @@ void LevelController::populate() {
 
     coverUnusedDoors(room, room_model, unused_doors);
 
-    std::vector<std::shared_ptr<Grunt>> enemies;
+    std::vector<std::shared_ptr<EnemyModel>> enemies;
 
     instantiateEnemies(room, room_model, enemies);
 
@@ -234,23 +234,26 @@ void LevelController::coverUnusedDoors(
 void LevelController::instantiateEnemies(
     const std::shared_ptr<level_gen::Room> &room,
     const std::shared_ptr<RoomModel> &room_model,
-    std::vector<std::shared_ptr<Grunt>> &enemies) {
+    std::vector<std::shared_ptr<EnemyModel>> &enemies) {
   // Initialize enemies in room.
   for (std::shared_ptr<cugl::scene2::SceneNode> enemy_node :
        room_model->getNode()->getChildByName("enemies")->getChildren()) {
-    auto grunt_texture = _assets->get<cugl::Texture>("grunt");
-    std::shared_ptr<Grunt> grunt =
-        Grunt::alloc(enemy_node->getWorldPosition(), enemy_node->getName());
-    enemies.push_back(grunt);
-    auto grunt_node = cugl::scene2::SpriteNode::alloc(grunt_texture, 1, 1);
-    grunt->setGruntNode(grunt_node);
-    grunt->setRoomPos(room_model->getNode()->getPosition());
-    room_model->getNode()->addChild(grunt->getGruntNode());
-    _world->addObstacle(grunt);
+    std::string enemy_type = enemy_node->getType();
+    auto enemy_texture = _assets->get<cugl::Texture>(enemy_type);
+    std::shared_ptr<EnemyModel> enemy = EnemyModel::alloc(
+        enemy_node->getWorldPosition(), enemy_node->getName(), enemy_type);
+    enemies.push_back(enemy);
+
+    auto e_node = cugl::scene2::SpriteNode::alloc(enemy_texture, 1, 1);
+    enemy->setNode(e_node);
+
+    enemy->setRoomPos(room_model->getNode()->getPosition());
+    room_model->getNode()->addChild(enemy->getNode());
+    _world->addObstacle(enemy);
     if (room->_type != level_gen::Room::RoomType::SPAWN)
-      grunt->setEnabled(false);
-    grunt->setDebugScene(_debug_node);
-    grunt->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
+      enemy->setEnabled(false);
+
+    enemy->setDebugScene(_debug_node);
+    enemy->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
   }
-  room_model->setEnemies(enemies);
 }

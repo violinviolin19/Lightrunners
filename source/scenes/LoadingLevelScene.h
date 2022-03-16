@@ -19,10 +19,10 @@ class LoadingLevelScene : public cugl::Scene2 {
 
   /** A reference to the assets for the game. */
   std::shared_ptr<cugl::AssetManager> _assets;
-  
+
   /** The network connection (as made by this scene). */
   std::shared_ptr<cugl::NetworkConnection> _network;
-  
+
   /** Whether this player is the host. */
   bool _ishost;
 
@@ -74,7 +74,7 @@ class LoadingLevelScene : public cugl::Scene2 {
    * @param batch     The SpriteBatch to draw with.
    */
   void render(const std::shared_ptr<cugl::SpriteBatch>& batch) override;
-  
+
   /**
    * Returns the network connection (as made by this scene).
    *
@@ -94,7 +94,7 @@ class LoadingLevelScene : public cugl::Scene2 {
    * @param host  Whether the player is host.
    */
   void setHost(bool host) { _ishost = host; }
-  
+
   /**
    * Returns whether the player is the host.
    *
@@ -112,7 +112,7 @@ class LoadingLevelScene : public cugl::Scene2 {
    * @return true if the network connection is still active.
    */
   bool checkConnection();
-  
+
   /**
    * Returns the network connection (as made by this scene)
    *
@@ -134,7 +134,7 @@ class LoadingLevelScene : public cugl::Scene2 {
    * @param data  The data received
    */
   void processData(const std::vector<uint8_t>& data);
-  
+
   /**
    * Disconnects this scene from the network controller.
    *

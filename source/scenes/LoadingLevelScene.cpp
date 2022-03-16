@@ -6,8 +6,8 @@
 
 #define SCENE_HEIGHT 720
 
-bool LoadingLevelScene::init(
-    const std::shared_ptr<cugl::AssetManager>& assets, Uint64 seed) {
+bool LoadingLevelScene::init(const std::shared_ptr<cugl::AssetManager>& assets,
+                             Uint64 seed) {
   if (_active) return false;
   _active = true;
 

@@ -137,7 +137,7 @@ bool ClientMenuScene::connect(const std::string room) {
 void ClientMenuScene::processData(const std::vector<uint8_t>& data) {
   _deserializer.receive(data);
   Sint32 code = std::get<Sint32>(_deserializer.read());
-  
+
   if (code == 255) {
     _seed = std::get<Uint64>(_deserializer.read());
     _status = Status::START;

@@ -160,7 +160,7 @@ class GameApp : public cugl::Application {
    * @param timestep  The amount of time (in seconds) since the last frame
    */
   void updateClientMenuScene(float timestep);
-  
+
   /**
    * Individualized update method for the level loading scene.
    *

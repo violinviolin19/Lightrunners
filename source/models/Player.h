@@ -7,12 +7,11 @@
 #include "Sword.h"
 
 class Player : public cugl::physics2::CapsuleObstacle {
-  public:
+ public:
   /** Enum for the player's state (for animation). */
   enum State { IDLE, MOVING, ATTACKING };
-  
- private:
 
+ private:
   /** The scene graph node for the player (moving). */
   std::shared_ptr<cugl::scene2::SpriteNode> _player_node;
 
@@ -48,7 +47,6 @@ class Player : public cugl::physics2::CapsuleObstacle {
   cugl::Vec2 _offset_from_center;
 
  public:
-  
 #pragma mark Constructors
   /**
    * Creates a player with the given position and data.

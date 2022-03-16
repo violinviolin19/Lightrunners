@@ -73,7 +73,12 @@ std::shared_ptr<scene2::SceneNode> CustomScene2Loader::build(
   if (it != _types.end()) {
     switch (it->second) {
       case Widget::NODE:
+      case Widget::SHOTGUNNER:
+      case Widget::GRUNT:
+      case Widget::TURTLE:
+      case Widget::TANK:
         node = scene2::SceneNode::allocWithData(this, data);
+        node->setType(strtool::tolower(type));
         break;
       case Widget::IMAGE:
         node = scene2::PolygonNode::allocWithData(this, data);

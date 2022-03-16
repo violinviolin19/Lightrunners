@@ -17102,7 +17102,7 @@
       },
       "children": {
         "enemy-(3-15)": {
-          "type": "Node",
+          "type": "Turtle",
           "format": {
             "type": "Anchored"
           },
@@ -17136,7 +17136,7 @@
           }
         },
         "enemy-(3-17)": {
-          "type": "Node",
+          "type": "Tank",
           "format": {
             "type": "Anchored"
           },
@@ -17170,7 +17170,7 @@
           }
         },
         "enemy-(5-5)": {
-          "type": "Node",
+          "type": "Shotgunner",
           "format": {
             "type": "Anchored"
           },
@@ -17204,7 +17204,7 @@
           }
         },
         "enemy-(5-15)": {
-          "type": "Node",
+          "type": "Turtle",
           "format": {
             "type": "Anchored"
           },
@@ -17238,7 +17238,7 @@
           }
         },
         "enemy-(5-17)": {
-          "type": "Node",
+          "type": "Grunt",
           "format": {
             "type": "Anchored"
           },
@@ -17272,7 +17272,7 @@
           }
         },
         "enemy-(6-4)": {
-          "type": "Node",
+          "type": "Grunt",
           "format": {
             "type": "Anchored"
           },
@@ -17306,7 +17306,7 @@
           }
         },
         "enemy-(15-3)": {
-          "type": "Node",
+          "type": "Tank",
           "format": {
             "type": "Anchored"
           },
@@ -17340,7 +17340,7 @@
           }
         },
         "enemy-(15-5)": {
-          "type": "Node",
+          "type": "Shotgunner",
           "format": {
             "type": "Anchored"
           },
@@ -17374,7 +17374,7 @@
           }
         },
         "enemy-(15-15)": {
-          "type": "Node",
+          "type": "Turtle",
           "format": {
             "type": "Anchored"
           },
@@ -17408,7 +17408,7 @@
           }
         },
         "enemy-(15-17)": {
-          "type": "Node",
+          "type": "Turtle",
           "format": {
             "type": "Anchored"
           },
@@ -17442,7 +17442,7 @@
           }
         },
         "enemy-(17-3)": {
-          "type": "Node",
+          "type": "Shotgunner",
           "format": {
             "type": "Anchored"
           },
@@ -17476,7 +17476,7 @@
           }
         },
         "enemy-(17-5)": {
-          "type": "Node",
+          "type": "Tank",
           "format": {
             "type": "Anchored"
           },
@@ -17510,7 +17510,7 @@
           }
         },
         "enemy-(17-15)": {
-          "type": "Node",
+          "type": "Turtle",
           "format": {
             "type": "Anchored"
           },
@@ -17544,7 +17544,7 @@
           }
         },
         "enemy-(17-17)": {
-          "type": "Node",
+          "type": "Turtle",
           "format": {
             "type": "Anchored"
           },

@@ -242,10 +242,10 @@ void GameApp::updateLevelLoadingScene(float timestep) {
   _gameplay.setConnection(_level_loading.getConnection());
   _level_loading.disconnect();
   _gameplay.setHost(_level_loading.getIsHost());
-  
+
   _level_loading.setActive(false);
   _gameplay.setActive(true);
-  
+
   _level_loading.dispose();
   _scene = State::GAME;
 }

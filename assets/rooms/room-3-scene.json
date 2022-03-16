@@ -1,5 +1,5 @@
 {
-  "comments": "This is the root node for the world scene for level 3.",
+  "comments": "This is the root Turtle for the world scene for level 3.",
   "type": "Node",
   "format": {
     "type": "Anchored"
@@ -16330,7 +16330,7 @@
       },
       "children": {
         "enemy-(5-8)": {
-          "type": "Node",
+          "type": "Shotgunner",
           "format": {
             "type": "Anchored"
           },
@@ -16364,7 +16364,7 @@
           }
         },
         "enemy-(7-6)": {
-          "type": "Node",
+          "type": "Tank",
           "format": {
             "type": "Anchored"
           },
@@ -16398,7 +16398,7 @@
           }
         },
         "enemy-(7-13)": {
-          "type": "Node",
+          "type": "Grunt",
           "format": {
             "type": "Anchored"
           },
@@ -16432,7 +16432,7 @@
           }
         },
         "enemy-(12-14)": {
-          "type": "Node",
+          "type": "Grunt",
           "format": {
             "type": "Anchored"
           },
@@ -16466,7 +16466,7 @@
           }
         },
         "enemy-(13-6)": {
-          "type": "Node",
+          "type": "Turtle",
           "format": {
             "type": "Anchored"
           },
@@ -16500,7 +16500,7 @@
           }
         },
         "enemy-(14-10)": {
-          "type": "Node",
+          "type": "Tank",
           "format": {
             "type": "Anchored"
           },
@@ -16534,7 +16534,7 @@
           }
         },
         "enemy-(17-13)": {
-          "type": "Node",
+          "type": "Shotgunner",
           "format": {
             "type": "Anchored"
           },

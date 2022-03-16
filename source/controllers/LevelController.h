@@ -134,7 +134,7 @@ class LevelController : public Controller {
    */
   void instantiateEnemies(const std::shared_ptr<level_gen::Room> &room,
                           const std::shared_ptr<RoomModel> &room_model,
-                          std::vector<std::shared_ptr<Grunt>> &enemies);
+                          std::vector<std::shared_ptr<EnemyModel>> &enemies);
 };
 
 #endif  // CONTROLLERS_LEVEL_CONTROLLER_H_

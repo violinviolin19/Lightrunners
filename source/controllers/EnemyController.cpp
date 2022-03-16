@@ -8,11 +8,11 @@
 
 EnemyController::EnemyController(){};
 
-void EnemyController::idling(std::shared_ptr<Grunt> enemy) {
+void EnemyController::idling(std::shared_ptr<EnemyModel> enemy) {
   enemy->move(0, 0);
 }
 
-void EnemyController::chasePlayer(std::shared_ptr<Grunt> enemy,
+void EnemyController::chasePlayer(std::shared_ptr<EnemyModel> enemy,
                                   const cugl::Vec2 p) {
   cugl::Vec2 diff = p - enemy->getPosition();
   diff.subtract(enemy->getVX(), enemy->getVY());
@@ -21,7 +21,7 @@ void EnemyController::chasePlayer(std::shared_ptr<Grunt> enemy,
   enemy->move(diff.x, diff.y);
 }
 
-void EnemyController::attackPlayer(std::shared_ptr<Grunt> enemy,
+void EnemyController::attackPlayer(std::shared_ptr<EnemyModel> enemy,
                                    const cugl::Vec2 p) {
   if (enemy->getAttackCooldown() <= 0) {
     enemy->addBullet(p);
@@ -30,7 +30,7 @@ void EnemyController::attackPlayer(std::shared_ptr<Grunt> enemy,
   enemy->move(0, 0);
 }
 
-void EnemyController::avoidPlayer(std::shared_ptr<Grunt> enemy,
+void EnemyController::avoidPlayer(std::shared_ptr<EnemyModel> enemy,
                                   const cugl::Vec2 p) {
   cugl::Vec2 diff = p - enemy->getPosition();
   diff.subtract(enemy->getVX(), enemy->getVY());
@@ -48,12 +48,10 @@ bool EnemyController::init(
   _world_node = world_node;
   _debug_node = debug_node;
 
-  _projectile_texture = assets->get<cugl::Texture>("projectile");
-
   return true;
 }
 
-void EnemyController::update(float timestep, std::shared_ptr<Grunt> enemy,
+void EnemyController::update(float timestep, std::shared_ptr<EnemyModel> enemy,
                              std::shared_ptr<Player> player) {
   // Change state if applicable
   float distance =
@@ -74,50 +72,8 @@ void EnemyController::update(float timestep, std::shared_ptr<Grunt> enemy,
   enemy->update(timestep);
 }
 
-void EnemyController::changeStateIfApplicable(std::shared_ptr<Grunt> enemy,
-                                              float distance) {
-  // Change state if applicable
-  int health = enemy->getHealth();
-  if (health <= HEALTH_LIM) {
-    enemy->setCurrentState(Grunt::State::AVOIDING);
-    if (distance > MIN_DISTANCE) {
-      enemy->setCurrentState(Grunt::State::IDLE);
-    }
-  } else {
-    if (distance <= ATTACK_RANGE) {
-      enemy->setCurrentState(Grunt::State::ATTACKING);
-    } else if (distance <= MIN_DISTANCE) {
-      enemy->setCurrentState(Grunt::State::CHASING);
-    } else {
-      enemy->setCurrentState(Grunt::State::IDLE);
-    }
-  }
-}
-
-void EnemyController::performAction(std::shared_ptr<Grunt> enemy,
-                                    cugl::Vec2 p) {
-  switch (enemy->getCurrentState()) {
-    case Grunt::State::IDLE: {
-      idling(enemy);
-      break;
-    }
-    case Grunt::State::CHASING: {
-      chasePlayer(enemy, p);
-      break;
-    }
-    case Grunt::State::ATTACKING: {
-      attackPlayer(enemy, p);
-      break;
-    }
-    case Grunt::State::AVOIDING: {
-      avoidPlayer(enemy, p);
-      break;
-    }
-  }
-}
-
 void EnemyController::updateProjectiles(float timestep,
-                                        std::shared_ptr<Grunt> enemy) {
+                                        std::shared_ptr<EnemyModel> enemy) {
   auto proj = enemy->getProjectiles();
   auto it = proj.begin();
   while (it != proj.end()) {

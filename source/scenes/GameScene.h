@@ -4,9 +4,12 @@
 #include <cugl/cugl.h>
 
 #include "../controllers/Controller.h"
-#include "../controllers/EnemyController.h"
 #include "../controllers/InputController.h"
 #include "../controllers/LevelController.h"
+#include "../controllers/enemies/GruntController.h"
+#include "../controllers/enemies/ShotgunnerController.h"
+#include "../controllers/enemies/TankController.h"
+#include "../controllers/enemies/TurtleController.h"
 #include "../generators/LevelGenerator.h"
 #include "../models/Player.h"
 
@@ -35,8 +38,14 @@ class GameScene : public cugl::Scene2 {
   /** The Box2d world */
   std::shared_ptr<cugl::physics2::ObstacleWorld> _world;
 
-  /** The enemy controller for the game. */
-  std::shared_ptr<EnemyController> _enemy_controller;
+  /** The grunt controller for the game. */
+  std::shared_ptr<GruntController> _grunt_controller;
+  /** The shotgunner controller for the game. */
+  std::shared_ptr<ShotgunnerController> _shotgunner_controller;
+  /** The tank controller for the game. */
+  std::shared_ptr<TankController> _tank_controller;
+  /** The turtle controller for the game. */
+  std::shared_ptr<TurtleController> _turtle_controller;
 
   /** The level controller for the game*/
   std::shared_ptr<LevelController> _level_controller;

@@ -1,4 +1,4 @@
-#include "Grunt.h"
+#include "EnemyModel.h"
 
 #define WIDTH 24.0f
 #define HEIGHT 48.0f
@@ -6,7 +6,7 @@
 #define HEIGHT_SHRINK 0.3f
 
 #pragma mark Init
-bool Grunt::init(const cugl::Vec2 pos, string name) {
+bool EnemyModel::init(const cugl::Vec2 pos, string name, string type) {
   cugl::Vec2 pos_ = pos;
   cugl::Size size_ = cugl::Size(WIDTH, HEIGHT);
 
@@ -17,8 +17,9 @@ bool Grunt::init(const cugl::Vec2 pos, string name) {
   CapsuleObstacle::init(pos_, size_);
 
   setName(name);
+  setType(type);
 
-  _grunt_node = nullptr;
+  _enemy_node = nullptr;
   _health = 100;
   _facing_left = false;
   _speed = .001f;
@@ -30,24 +31,31 @@ bool Grunt::init(const cugl::Vec2 pos, string name) {
   setRestitution(0.5f);
   setFixedRotation(true);
 
+  if (_enemy_type == TURTLE) {
+    setBodyType(b2BodyType::b2_staticBody);
+  }
+
   return true;
 }
 
-void Grunt::takeDamage() {
+void EnemyModel::takeDamage() {
   reduceHealth(20);
-  _grunt_node->setColor(cugl::Color4::RED);
+  _enemy_node->setColor(cugl::Color4::RED);
   _damage_count = 10;
 }
 
-void Grunt::addBullet(const cugl::Vec2 p) {
+void EnemyModel::addBullet(const cugl::Vec2 p) {
   cugl::Vec2 diff = p - getPosition();
-  auto bullet = Projectile::alloc(getPosition(), diff);
+  auto bullet = Projectile::alloc(
+      cugl::Vec2(getPosition().x, getPosition().y + _offset_from_center.y),
+      diff);
 
   _projectiles.emplace(bullet);
-  bullet->setPosition(getPosition());
+  bullet->setPosition(
+      cugl::Vec2(getPosition().x, getPosition().y + _offset_from_center.y));
 }
 
-void Grunt::deleteProjectile(
+void EnemyModel::deleteProjectile(
     std::shared_ptr<cugl::physics2::ObstacleWorld> _world,
     std::shared_ptr<cugl::scene2::SceneNode> _world_node) {
   auto itt = _projectiles.begin();
@@ -63,7 +71,7 @@ void Grunt::deleteProjectile(
   }
 }
 
-void Grunt::deleteAllProjectiles(
+void EnemyModel::deleteAllProjectiles(
     std::shared_ptr<cugl::physics2::ObstacleWorld> _world,
     std::shared_ptr<cugl::scene2::SceneNode> _world_node) {
   auto itt = _projectiles.begin();
@@ -76,21 +84,33 @@ void Grunt::deleteAllProjectiles(
   _projectiles.clear();
 }
 
-#pragma mark Animation & Drawing
-
-void Grunt::setGruntNode(
-    const std::shared_ptr<cugl::scene2::SpriteNode>& node) {
-  _grunt_node = node;
+void EnemyModel::setType(std::string type) {
+  if (type == "grunt") {
+    _enemy_type = GRUNT;
+  } else if (type == "shotgunner") {
+    _enemy_type = SHOTGUNNER;
+  } else if (type == "tank") {
+    _enemy_type = TANK;
+  } else if (type == "turtle") {
+    _enemy_type = TURTLE;
+  }
 }
 
-std::shared_ptr<cugl::scene2::SpriteNode>& Grunt::getGruntNode() {
-  return _grunt_node;
+#pragma mark Animation & Drawing
+
+void EnemyModel::setNode(
+    const std::shared_ptr<cugl::scene2::SpriteNode>& node) {
+  _enemy_node = node;
+}
+
+std::shared_ptr<cugl::scene2::SpriteNode>& EnemyModel::getNode() {
+  return _enemy_node;
 }
 
 #pragma mark -
 #pragma mark Physics Methods
 
-void Grunt::createFixtures() {
+void EnemyModel::createFixtures() {
   if (_body == nullptr) return;
 
   CapsuleObstacle::createFixtures();
@@ -99,7 +119,7 @@ void Grunt::createFixtures() {
     b2FixtureDef sensorDef;
     sensorDef.density = 0.0f;
     sensorDef.isSensor = true;
-    _hitbox_sensor_name = std::make_shared<std::string>("grunt_hitbox");
+    _hitbox_sensor_name = std::make_shared<std::string>("enemy_hitbox");
     sensorDef.userData.pointer =
         reinterpret_cast<uintptr_t>(_hitbox_sensor_name.get());
 
@@ -125,7 +145,7 @@ void Grunt::createFixtures() {
     b2FixtureDef sensorDef;
     sensorDef.density = 0.0f;
     sensorDef.isSensor = true;
-    _damage_sensor_name = std::make_shared<std::string>("grunt_damage");
+    _damage_sensor_name = std::make_shared<std::string>("enemy_damage");
     sensorDef.userData.pointer =
         reinterpret_cast<uintptr_t>(_damage_sensor_name.get());
 
@@ -148,7 +168,7 @@ void Grunt::createFixtures() {
   }
 }
 
-void Grunt::releaseFixtures() {
+void EnemyModel::releaseFixtures() {
   if (_body == nullptr) return;
 
   CapsuleObstacle::releaseFixtures();
@@ -163,14 +183,14 @@ void Grunt::releaseFixtures() {
   }
 }
 
-void Grunt::update(float delta) {
+void EnemyModel::update(float delta) {
   CapsuleObstacle::update(delta);
-  if (_grunt_node != nullptr) {
-    _grunt_node->setPosition(getPosition() + _offset_from_center - _room_pos);
+  if (_enemy_node != nullptr) {
+    _enemy_node->setPosition(getPosition() + _offset_from_center - _room_pos);
   }
 
   if (_damage_count <= 0) {
-    _grunt_node->setColor(cugl::Color4::WHITE);
+    _enemy_node->setColor(cugl::Color4::WHITE);
     _damage_count = 0;
   } else {
     _damage_count--;
@@ -179,7 +199,7 @@ void Grunt::update(float delta) {
 
 #pragma mark Movement
 
-void Grunt::move(float forwardX, float forwardY) {
+void EnemyModel::move(float forwardX, float forwardY) {
   setVX(1000 * forwardX);
   setVY(1000 * forwardY);
 
@@ -193,10 +213,10 @@ void Grunt::move(float forwardX, float forwardY) {
   if (forwardY == 0) setVY(0);
 }
 
-void Grunt::setFacingLeft(bool facing_left) {
+void EnemyModel::setFacingLeft(bool facing_left) {
   // flip texture if direction has changed
   if (_facing_left != facing_left) {
     _facing_left = facing_left;
-    _grunt_node->flipHorizontal(_facing_left);
+    _enemy_node->flipHorizontal(_facing_left);
   }
 }
