@@ -242,6 +242,10 @@ void GameScene::sendNetworkInfo() {
     _serializer.writeSint32(2);
     _serializer.writeJsonVector(player_positions);
     std::vector<uint8_t> msg = _serializer.serialize();
+    
+    auto msg_size = sizeof(std::vector<uint8_t>) + (sizeof(uint8_t) * msg.size());
+    CULog("size: %lu", msg_size);
+    
     _serializer.reset();
     _network->send(msg);
   } else {
