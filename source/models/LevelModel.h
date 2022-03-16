@@ -73,6 +73,18 @@ class LevelModel {
   std::shared_ptr<RoomModel> getCurrentRoom() const { return _current_room; }
 
   /**
+   * Get the room given a room key.
+   *
+   * @param room_id The unique key that corresponds to this room.
+   * @return A room that corresponds to the given key. nullptr if room doesn't
+   *exist.
+   */
+  std::shared_ptr<RoomModel> getRoom(std::string& room_id) {
+    if (_rooms.find(room_id) == _rooms.end()) return nullptr;
+    return _rooms[room_id];
+  }
+
+  /**
    * Get the map of all the unique room IDs to all the rooms in the level.
    *
    * @return An unordered map that maps room IDs to room objects.

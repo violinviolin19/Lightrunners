@@ -24,10 +24,19 @@ class LevelController : public Controller {
   std::shared_ptr<level_gen::LevelGenerator> _level_gen;
   /** The level model. */
   std::shared_ptr<LevelModel> _level_model;
+  /** The room to be removed after moving from neighboring tile. */
+  std::shared_ptr<RoomModel> _room_on_chopping_block;
 
  public:
   /** Construct a new Level Controller */
-  LevelController() {}
+  LevelController()
+      : _assets(nullptr),
+        _world_node(nullptr),
+        _debug_node(nullptr),
+        _world(nullptr),
+        _level_gen(nullptr),
+        _level_model(nullptr),
+        _room_on_chopping_block(nullptr) {}
   /** Destroy this Level Controller */
   ~LevelController() { dispose(); }
 
@@ -86,6 +95,46 @@ class LevelController : public Controller {
  private:
   /** Populate the level. */
   void populate();
+
+  /**
+   * Loop through all the rooms and find the bounds of the world.
+   * Instantiates the world with the calculate bounds.
+   */
+  void instantiateWorld();
+
+  /**
+   * Instantiate all the door obstacles and apply the room references for every
+   * room. Returns the unused doors.
+   *
+   * @param room The level generation room data.
+   * @param room_model The room model for the game.
+   * @return The unused doors.
+   */
+  std::vector<cugl::Vec2> instantiateDoors(
+      const std::shared_ptr<level_gen::Room> &room,
+      const std::shared_ptr<RoomModel> &room_model);
+
+  /**
+   * Cover the unused doors with a wall tile.
+   *
+   * @param room The level generation room data.
+   * @param room_model The room model for the game.
+   * @param unused_doors The list of unused door coordinates.
+   */
+  void coverUnusedDoors(const std::shared_ptr<level_gen::Room> &room,
+                        const std::shared_ptr<RoomModel> &room_model,
+                        std::vector<cugl::Vec2> &unused_doors);
+
+  /**
+   * Instantiate all the enemies for the room.
+   *
+   * @param room The level generation room data.
+   * @param room_model The room model for the game.
+   * @param enemies The list to put the enemies in.
+   */
+  void instantiateEnemies(const std::shared_ptr<level_gen::Room> &room,
+                          const std::shared_ptr<RoomModel> &room_model,
+                          std::vector<std::shared_ptr<Grunt>> &enemies);
 };
 
 #endif  // CONTROLLERS_LEVEL_CONTROLLER_H_

@@ -1,0 +1,15 @@
+{
+  "variables": {},
+  "contents": {
+    "type": "BasicTile",
+    "data": {
+      "texture": "floor-tile-11",
+      "anchor": [
+        0,
+        0
+      ],
+      "scale": 0.6,
+      "priority": 0
+    }
+  }
+}

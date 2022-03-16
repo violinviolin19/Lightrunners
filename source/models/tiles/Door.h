@@ -20,6 +20,9 @@ class Door : public BasicTile {
   /** A reference to the sensor shape to keep it alive for instantiation. */
   b2PolygonShape _sensor_shape;
 
+  /** If the door is horizontal or vertical. */
+  bool _horizontal;
+
  public:
   /**
    * Creates an empty scene graph node with the degenerate texture.
@@ -27,7 +30,13 @@ class Door : public BasicTile {
    * This constructor should never be called directly, as this is an abstract
    * class.
    */
-  Door() : BasicTile() { _classname = "Door"; }
+  Door()
+      : _horizontal(true),
+        _door_sensor_name(nullptr),
+        _obstacle(nullptr),
+        BasicTile() {
+    _classname = "Door";
+  }
 
   /**
    * Deletes this node, releasing all resources.
@@ -43,7 +52,11 @@ class Door : public BasicTile {
    * It is unsafe to call this on a Node that is still currently inside of
    * a scene graph.
    */
-  virtual void dispose() override { BasicTile::dispose(); }
+  virtual void dispose() override {
+    _door_sensor_name = nullptr;
+    _obstacle = nullptr;
+    BasicTile::dispose();
+  }
 
   virtual std::shared_ptr<SceneNode> copy(
       const std::shared_ptr<SceneNode>& dst) const override {

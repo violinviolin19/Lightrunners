@@ -8,24 +8,33 @@ bool Door::initWithData(const cugl::Scene2Loader* loader,
   }
 
   if (!data) return BasicTile::init();
+
+  _horizontal = data->getBool("horizontal", true);
+
   return BasicTile::initWithData(loader, data);
 }
 
 std::shared_ptr<cugl::physics2::BoxObstacle> Door::initBox2d(
     std::string& sensor_name) {
-  cugl::Vec2 pos = BasicTile::getWorldPosition() - BasicTile::getPosition() +
-                   BasicTile::getSize() / 2.0f;
+  cugl::Vec2 pos = BasicTile::getWorldPosition() - BasicTile::getPosition();
 
-  // TODO: Change this so it is no longer a hard-coded tile size value here
-  _obstacle = cugl::physics2::BoxObstacle::alloc(
-      pos, cugl::Vec2(64, 64) * BasicTile::getScale());
+  cugl::Size size = BasicTile::getSize();
+
+  if (_horizontal) {
+    size.height *= 0.2f;
+    pos.x += BasicTile::getSize().width / 2;
+    pos.y += BasicTile::getSize().height / 4;
+  } else {
+    size.width *= 0.2f;
+    pos += BasicTile::getSize() / 2;
+  }
+  _obstacle = cugl::physics2::BoxObstacle::alloc(pos, size);
 
   if (_obstacle != nullptr) {
     _obstacle->setPosition(pos);
     _obstacle->setName(_classname.c_str());
 
     _obstacle->setBodyType(b2BodyType::b2_staticBody);
-    _obstacle->setSensor(true);
 
     auto sensor = std::make_shared<b2FixtureDef>();
     sensor->density = 0.0f;
@@ -35,17 +44,8 @@ std::shared_ptr<cugl::physics2::BoxObstacle> Door::initBox2d(
         reinterpret_cast<uintptr_t>(_door_sensor_name.get());
 
     // Sensor dimensions
-    b2Vec2 corners[4];
-    corners[0].x = -_obstacle->getWidth() / 2.0f;
-    corners[0].y = _obstacle->getHeight() / 2.0f;
-    corners[1].x = -_obstacle->getWidth() / 2.0f;
-    corners[1].y = -_obstacle->getHeight() / 2.0f;
-    corners[2].x = _obstacle->getWidth() / 2.0f;
-    corners[2].y = -_obstacle->getHeight() / 2.0f;
-    corners[3].x = _obstacle->getWidth() / 2.0f;
-    corners[3].y = _obstacle->getHeight() / 2.0f;
-
-    _sensor_shape.Set(corners, 4);
+    _sensor_shape.SetAsBox(BasicTile::getSize().width / 2,
+                           BasicTile::getSize().height / 2);
     sensor->shape = &_sensor_shape;
 
     std::vector<std::shared_ptr<b2FixtureDef>> sensors{sensor};

@@ -21,7 +21,7 @@ class Wall : public BasicTile {
    * This constructor should never be called directly, as this is an abstract
    * class.
    */
-  Wall() : BasicTile() { _classname = "Wall"; }
+  Wall() : _obstacle(nullptr), BasicTile() { _classname = "Wall"; }
 
   /**
    * Deletes this node, releasing all resources.
@@ -37,7 +37,10 @@ class Wall : public BasicTile {
    * It is unsafe to call this on a Node that is still currently inside of
    * a scene graph.
    */
-  virtual void dispose() override { BasicTile::dispose(); }
+  virtual void dispose() override {
+    _obstacle = nullptr;
+    BasicTile::dispose();
+  }
 
   virtual std::shared_ptr<SceneNode> copy(
       const std::shared_ptr<SceneNode>& dst) const override {
@@ -76,9 +79,18 @@ class Wall : public BasicTile {
       const cugl::Scene2Loader* loader,
       const std::shared_ptr<cugl::JsonValue>& data) {
     std::shared_ptr<Wall> result = std::make_shared<Wall>();
-    if (!result->initWithData(loader, data)) {
-      result = nullptr;
-    }
+    if (!result->initWithData(loader, data)) result = nullptr;
+    return std::dynamic_pointer_cast<SceneNode>(result);
+  }
+
+  /**
+   * Returns a new wall node.
+   *
+   * @return A new wall node.
+   */
+  static std::shared_ptr<SceneNode> alloc() {
+    std::shared_ptr<Wall> result = std::make_shared<Wall>();
+    if (!result->init()) result = nullptr;
     return std::dynamic_pointer_cast<SceneNode>(result);
   }
 
