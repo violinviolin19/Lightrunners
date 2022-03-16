@@ -50,8 +50,14 @@ bool GameScene::init(
     this->beforeSolve(contact, oldManifold);
   };
 
-  _enemy_controller =
+  _grunt_controller =
       GruntController::alloc(_assets, _world, _world_node, _debug_node);
+  _shotgunner_controller =
+      ShotgunnerController::alloc(_assets, _world, _world_node, _debug_node);
+  _tank_controller =
+      TankController::alloc(_assets, _world, _world_node, _debug_node);
+  _turtle_controller =
+      TurtleController::alloc(_assets, _world, _world_node, _debug_node);
 
   populate(dim);
 
@@ -144,7 +150,7 @@ void GameScene::populate(cugl::Size dim) {
 
   std::shared_ptr<RoomModel> current_room =
       _level_controller->getLevelModel()->getCurrentRoom();
-  for (std::shared_ptr<Grunt> enemy : current_room->getEnemies()) {
+  for (std::shared_ptr<EnemyModel> enemy : current_room->getEnemies()) {
     enemy->setDebugColor(cugl::Color4f::BLACK);
     enemy->setDebugScene(_debug_node);
   }
@@ -189,11 +195,25 @@ void GameScene::update(float timestep) {
 
   std::shared_ptr<RoomModel> current_room =
       _level_controller->getLevelModel()->getCurrentRoom();
-  for (std::shared_ptr<Grunt>& enemy : current_room->getEnemies()) {
-    _enemy_controller->update(timestep, enemy, _my_player);
-    // Set a flag for the enemy to know which type it is
-    // Pass in enemy into the
-    
+  for (std::shared_ptr<EnemyModel>& enemy : current_room->getEnemies()) {
+    switch (enemy->getType()) {
+      case EnemyModel::GRUNT: {
+        _grunt_controller->update(timestep, enemy, _my_player);
+        break;
+      }
+      case EnemyModel::SHOTGUNNER: {
+        _shotgunner_controller->update(timestep, enemy, _my_player);
+        break;
+      }
+      case EnemyModel::TANK: {
+        _tank_controller->update(timestep, enemy, _my_player);
+        break;
+      }
+      case EnemyModel::TURTLE: {
+        _turtle_controller->update(timestep, enemy, _my_player);
+        break;
+      }
+    }
   }
 
   updateCamera(timestep);
@@ -215,14 +235,15 @@ void GameScene::update(float timestep) {
 
   // POST-UPDATE
   // Check for disposal
-  std::vector<std::shared_ptr<Grunt>>& enemies = current_room->getEnemies();
+  std::vector<std::shared_ptr<EnemyModel>>& enemies =
+      current_room->getEnemies();
   auto it = enemies.begin();
   while (it != enemies.end()) {
     auto enemy = *it;
     if (enemy->getHealth() <= 0) {
       enemy->deleteAllProjectiles(_world, _world_node);
       enemy->deactivatePhysics(*_world->getWorld());
-      current_room->getNode()->removeChild(enemy->getGruntNode());
+      current_room->getNode()->removeChild(enemy->getNode());
       _world->removeObstacle(enemy.get());
       enemy->dispose();
       it = enemies.erase(it);
@@ -368,8 +389,13 @@ void GameScene::updatePlayerInfo(int player_id, float pos_x, float pos_y) {
     if (player->getPlayerId() == player_id) {
       cugl::Vec2 old_position = player->getPosition();
 
+<<<<<<< HEAD
       // Movement must exceed this value to be animated
       const float MOVEMENT_THRESH = 1;
+=======
+      const float MOVEMENT_THRESH =
+          1;  // Movement must exceed this value to be animated
+>>>>>>> refactored enemies wooo
       CULog("diff: %f, %f", pos_x - old_position.x, pos_y - old_position.y);
       if (abs(pos_x - old_position.x) > MOVEMENT_THRESH ||
           abs(pos_y - old_position.y) > MOVEMENT_THRESH) {
@@ -428,15 +454,15 @@ void GameScene::beginContact(b2Contact* contact) {
 
   if (!ob1 || !ob2) return;
 
-  if (fx1_name == "grunt_hitbox" && ob2 == _sword.get()) {
-    dynamic_cast<Grunt*>(ob1)->takeDamage();
-  } else if (fx2_name == "grunt_hitbox" && ob1 == _sword.get()) {
-    dynamic_cast<Grunt*>(ob2)->takeDamage();
+  if (fx1_name == "enemy_hitbox" && ob2 == _sword.get()) {
+    dynamic_cast<EnemyModel*>(ob1)->takeDamage();
+  } else if (fx2_name == "enemy_hitbox" && ob1 == _sword.get()) {
+    dynamic_cast<EnemyModel*>(ob2)->takeDamage();
   }
 
-  if (fx1_name == "grunt_damage" && ob2 == _my_player.get()) {
+  if (fx1_name == "enemy_damage" && ob2 == _my_player.get()) {
     dynamic_cast<Player*>(ob2)->takeDamage();
-  } else if (fx2_name == "grunt_damage" && ob1 == _my_player.get()) {
+  } else if (fx2_name == "enemy_damage" && ob1 == _my_player.get()) {
     dynamic_cast<Player*>(ob1)->takeDamage();
   }
 

@@ -2,7 +2,7 @@
 #define CONTROLLERS_SHOTGUNNER_CONTROLLER_H_
 #include <cugl/cugl.h>
 
-#include "../../models/Grunt.h"
+#include "../../models/EnemyModel.h"
 #include "../../models/Player.h"
 #include "../EnemyController.h"
 
@@ -16,7 +16,7 @@ class ShotgunnerController : public EnemyController {
    *
    * @param p the player position.
    */
-  void skirtPlayer(std::shared_ptr<Grunt> enemy, cugl::Vec2 p);
+  void skirtPlayer(std::shared_ptr<EnemyModel> enemy, cugl::Vec2 p);
 
  public:
 #pragma mark Constructors
@@ -29,6 +29,21 @@ class ShotgunnerController : public EnemyController {
    * Disposses this input controller, releasing all resources.
    */
   ~ShotgunnerController() {}
+
+  /**
+   * Initializes a new shotgunner Controller.
+   *
+   * @param assets The asset manager for the game.
+   * @param world The asset manager for the game.
+   * @param world_node The world node for drawing the game.
+   * @param debug_node The debug node for drawing the debug tools.
+   *
+   * @return true if the obstacle is initialized properly, false otherwise.
+   */
+  bool init(std::shared_ptr<cugl::AssetManager> assets,
+            std::shared_ptr<cugl::physics2::ObstacleWorld> world,
+            std::shared_ptr<cugl::scene2::SceneNode> world_node,
+            std::shared_ptr<cugl::scene2::SceneNode> debug_node);
 
 #pragma mark Static Constructors
   /**
@@ -58,10 +73,11 @@ class ShotgunnerController : public EnemyController {
 #pragma mark Properties
 
   /** Change the enemy state. */
-  void changeStateIfApplicable(std::shared_ptr<Grunt> enemy, float distance) override;
+  void changeStateIfApplicable(std::shared_ptr<EnemyModel> enemy,
+                               float distance) override;
 
   /** Perform the action according to the enemy state. */
-  void performAction(std::shared_ptr<Grunt> enemy, cugl::Vec2 p) override;
+  void performAction(std::shared_ptr<EnemyModel> enemy, cugl::Vec2 p) override;
 };
 
 #endif /* CONTROLLERS_SHOTGUNNER_CONTROLLER_H_ */

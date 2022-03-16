@@ -8,11 +8,11 @@
 
 EnemyController::EnemyController(){};
 
-void EnemyController::idling(std::shared_ptr<Grunt> enemy) {
+void EnemyController::idling(std::shared_ptr<EnemyModel> enemy) {
   enemy->move(0, 0);
 }
 
-void EnemyController::chasePlayer(std::shared_ptr<Grunt> enemy,
+void EnemyController::chasePlayer(std::shared_ptr<EnemyModel> enemy,
                                   const cugl::Vec2 p) {
   cugl::Vec2 diff = p - enemy->getPosition();
   diff.subtract(enemy->getVX(), enemy->getVY());
@@ -21,7 +21,7 @@ void EnemyController::chasePlayer(std::shared_ptr<Grunt> enemy,
   enemy->move(diff.x, diff.y);
 }
 
-void EnemyController::attackPlayer(std::shared_ptr<Grunt> enemy,
+void EnemyController::attackPlayer(std::shared_ptr<EnemyModel> enemy,
                                    const cugl::Vec2 p) {
   if (enemy->getAttackCooldown() <= 0) {
     enemy->addBullet(p);
@@ -30,7 +30,7 @@ void EnemyController::attackPlayer(std::shared_ptr<Grunt> enemy,
   enemy->move(0, 0);
 }
 
-void EnemyController::avoidPlayer(std::shared_ptr<Grunt> enemy,
+void EnemyController::avoidPlayer(std::shared_ptr<EnemyModel> enemy,
                                   const cugl::Vec2 p) {
   cugl::Vec2 diff = p - enemy->getPosition();
   diff.subtract(enemy->getVX(), enemy->getVY());
@@ -48,14 +48,11 @@ bool EnemyController::init(
   _world_node = world_node;
   _debug_node = debug_node;
 
-  _projectile_texture = assets->get<cugl::Texture>("projectile");
-
   return true;
 }
 
-void EnemyController::update(
-                             float timestep, std::shared_ptr<Grunt> enemy,
-                                                          std::shared_ptr<Player> player) {
+void EnemyController::update(float timestep, std::shared_ptr<EnemyModel> enemy,
+                             std::shared_ptr<Player> player) {
   // Change state if applicable
   float distance =
       (enemy->getPosition()).subtract(player->getPosition()).length();
@@ -76,7 +73,7 @@ void EnemyController::update(
 }
 
 void EnemyController::updateProjectiles(float timestep,
-                                        std::shared_ptr<Grunt> enemy) {
+                                        std::shared_ptr<EnemyModel> enemy) {
   auto proj = enemy->getProjectiles();
   auto it = proj.begin();
   while (it != proj.end()) {

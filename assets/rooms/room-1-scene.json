@@ -17170,7 +17170,7 @@
       },
       "children": {
         "enemy-(5-10)": {
-          "type": "Node",
+          "type": "Shotgunner",
           "format": {
             "type": "Anchored"
           },
@@ -17204,7 +17204,7 @@
           }
         },
         "enemy-(10-6)": {
-          "type": "Node",
+          "type": "Turtle",
           "format": {
             "type": "Anchored"
           },
@@ -17238,7 +17238,7 @@
           }
         },
         "enemy-(10-14)": {
-          "type": "Node",
+          "type": "Turtle",
           "format": {
             "type": "Anchored"
           },
@@ -17272,7 +17272,7 @@
           }
         },
         "enemy-(15-10)": {
-          "type": "Node",
+          "type": "Shotgunner",
           "format": {
             "type": "Anchored"
           },

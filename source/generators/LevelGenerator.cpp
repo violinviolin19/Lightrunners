@@ -27,7 +27,8 @@ void LevelGenerator::init(LevelGeneratorConfig &config,
 }
 
 void LevelGenerator::init(LevelGeneratorConfig &config,
-                          const std::shared_ptr<cugl::scene2::SceneNode> &map, Uint64 seed) {
+                          const std::shared_ptr<cugl::scene2::SceneNode> &map,
+                          Uint64 seed) {
   if (_active) return;
   _active = true;
 

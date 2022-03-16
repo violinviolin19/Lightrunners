@@ -1,14 +1,14 @@
 #pragma once
 
-#ifndef MODELS_GRUNT_H
-#define MODELS_GRUNT_H
+#ifndef MODELS_ENEMYMODEL_H
+#define MODELS_ENEMYMODEL_H
 
 #include <cugl/cugl.h>
 #include <stdio.h>
 
 #include "Projectile.h"
 
-class Grunt : public cugl::physics2::CapsuleObstacle {
+class EnemyModel : public cugl::physics2::CapsuleObstacle {
  public:
   /** Enum for the enemy's state (for animation). */
   enum State {
@@ -25,10 +25,10 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
     /** The enemy is skirting the player. */
     SKIRTING
   };
-  
+
   /** Enum for which enemy this is. */
   enum EnemyType {
-    /** The grunt enemy type. */
+    /** The EnemyModel enemy type. */
     GRUNT,
     /** The shotgunner enemy type. */
     SHOTGUNNER,
@@ -39,42 +39,42 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
   };
 
  private:
-  /** The current state of the grunt. */
+  /** The current state of the enemy. */
   State _current_state;
-  
+
   /** The enemy type of this enemy. */
   EnemyType _enemy_type;
 
-  /** Grunt health. */
+  /** Enemy health. */
   int _health;
 
-  /** Grunt speed. */
+  /** Enemy speed. */
   float _speed;
 
-  /** The scene graph node for the grunt. */
-  std::shared_ptr<cugl::scene2::SpriteNode> _grunt_node;
+  /** The scene graph node for the enemy. */
+  std::shared_ptr<cugl::scene2::SpriteNode> _enemy_node;
 
-  /** Represents the hit area for the grunt. */
+  /** Represents the hit area for the enemy. */
   b2Fixture* _hitbox_sensor;
   /** Keeps an instance of the name alive for collision detection. */
   std::shared_ptr<std::string> _hitbox_sensor_name;
   /** The node for debugging the hitbox sensor */
   std::shared_ptr<cugl::scene2::WireNode> _hitbox_sensor_node;
 
-  /** Represents the hit area for the grunt. */
+  /** Represents the hit area for the enemy. */
   b2Fixture* _damage_sensor;
   /** Keeps an instance of the name alive for collision detection. */
   std::shared_ptr<std::string> _damage_sensor_name;
   /** The node for debugging the damage sensor */
   std::shared_ptr<cugl::scene2::WireNode> _damage_sensor_node;
 
-  /** The list of projectiles that have been shot by the grunt. */
+  /** The list of projectiles that have been shot by the enemy. */
   std::unordered_set<std::shared_ptr<Projectile>> _projectiles;
 
-  /** Force to be applied to the grunt. */
+  /** Force to be applied to the enemy. */
   cugl::Vec2 _force;
 
-  /** Grunt direction. */
+  /** enemy direction. */
   bool _facing_left;
 
   /** Damage frame count to turn red. */
@@ -87,7 +87,7 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
    * the capsule obstacle. */
   cugl::Vec2 _offset_from_center;
 
-  /** The position of the room this grunt is in, used for drawing. */
+  /** The position of the room this enemy is in, used for drawing. */
   cugl::Vec2 _room_pos;
 
   /** Promise to change the physics state during the update phase. */
@@ -99,12 +99,12 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
  public:
 #pragma mark Constructors
   /**
-   * Creates a grunt with the given position and data.
+   * Creates a enemy with the given position and data.
    *
-   * @param pos The grunt position.
-   * @param data The data defining the grunt.
+   * @param pos The enemy position.
+   * @param data The data defining the enemy.
    */
-  Grunt(void)
+  EnemyModel(void)
       : CapsuleObstacle(),
         _hitbox_sensor(nullptr),
         _hitbox_sensor_name(nullptr),
@@ -114,13 +114,13 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
   /**
    * Disposes the grunt.
    */
-  ~Grunt() { dispose(); }
+  ~EnemyModel() { dispose(); }
 
   /**
    * Disposes the grunt.
    */
   void dispose() {
-    _grunt_node = nullptr;
+    _enemy_node = nullptr;
     _hitbox_sensor = nullptr;
     _damage_sensor = nullptr;
     _projectiles.clear();
@@ -134,7 +134,7 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
    *
    * @return  true if the obstacle is initialized properly, false otherwise.
    */
-  bool init(const cugl::Vec2 pos, string name);
+  bool init(const cugl::Vec2 pos, string name, string type);
 
 #pragma mark Static Constructors
   /**
@@ -144,31 +144,32 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
    *
    * @return a new capsule object at the given point with no size.
    */
-  static std::shared_ptr<Grunt> alloc(const cugl::Vec2 pos, string name) {
-    std::shared_ptr<Grunt> result = std::make_shared<Grunt>();
-    return (result->init(pos, name) ? result : nullptr);
+  static std::shared_ptr<EnemyModel> alloc(const cugl::Vec2 pos, string name,
+                                           string type) {
+    std::shared_ptr<EnemyModel> result = std::make_shared<EnemyModel>();
+    return (result->init(pos, name, type) ? result : nullptr);
   }
 
 #pragma mark Properties
 
   /**
-   * Returns the current health of the grunt.
+   * Returns the current health of the enemy.
    *
    * @return the current health.
    */
   int getHealth() const { return _health; }
 
   /**
-   * Gets the current attack cooldown of the grunt.
+   * Gets the current attack cooldown of the enemy.
    *
    * @return the current health.
    */
   int getAttackCooldown() const { return _attack_cooldown; }
 
   /**
-   * Sets the current grunt's health.
+   * Sets the current enemy's health.
    *
-   * @param value The current grunt health.
+   * @param value The current enemy health.
    */
   void setHealth(int value) { _health = value; }
 
@@ -180,29 +181,29 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
   void setAttackCooldown(int value) { _attack_cooldown = value; }
 
   /**
-   * Reduces the grunt's health.
+   * Reduces the enemy's health.
    *
    * @param value The value to reduce the health by.
    */
   void reduceHealth(int value) { _health -= value; }
 
   /**
-   * Reduces the grunt's attack cooldown.
+   * Reduces the enemy's attack cooldown.
    *
    * @param value The value to reduce the health by.
    */
   void reduceAttackCooldown(int value) { _attack_cooldown -= value; }
 
   /**
-   * The grunt took damage.
+   * The enemy took damage.
    *
    */
   void takeDamage();
 
   /**
-   * Returns the speed of the grunt.
+   * Returns the speed of the enemy.
    *
-   * @return the grunt speed.
+   * @return the enemy speed.
    */
   float getSpeed() const { return _speed; }
 
@@ -227,27 +228,41 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
       std::shared_ptr<cugl::scene2::SceneNode> _world_node);
 
   /**
-   * Gets the grunt's projectiles.
+   * Gets the enemy's projectiles.
    *
-   * @return the projectiles the grunt has shot.
+   * @return the projectiles the enemy has shot.
    */
   std::unordered_set<std::shared_ptr<Projectile>> getProjectiles() {
     return _projectiles;
   }
 
   /**
-   * Set the current state of the grunt.  IDLE, ATTACKING, CHASING, AVOIDING...
+   * Set the current state of the enemy.  IDLE, ATTACKING, CHASING, AVOIDING...
    *
    * @param state The state the enemy should be set to.
    */
   void setCurrentState(State state) { _current_state = state; }
 
   /**
-   * Get the current state of the grunt. IDLE, ATTACKING, CHASING, AVOIDING...
+   * Get the current state of the enemy. IDLE, ATTACKING, CHASING, AVOIDING...
    *
-   * @return The state of the grunt.
+   * @return The state of the enemy.
    */
   State getCurrentState() { return _current_state; }
+
+  /**
+   * Set the enemy type.
+   *
+   * @param state The enemy type in string.
+   */
+  void setType(std::string type);
+
+  /**
+   * Set the enemy type.
+   *
+   * @return The enemy type.
+   */
+  EnemyType getType() { return _enemy_type; }
 
 #pragma mark -
 #pragma mark Physics Methods
@@ -305,18 +320,18 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
 #pragma mark Graphics
 
   /**
-   * Sets the scene graph node representing this grunt.
+   * Sets the scene graph node representing this enemy.
    *
-   * @param node  The scene graph node representing this grunt.
+   * @param node  The scene graph node representing this enemy.
    */
-  void setGruntNode(const std::shared_ptr<cugl::scene2::SpriteNode>& node);
+  void setNode(const std::shared_ptr<cugl::scene2::SpriteNode>& node);
 
   /**
    * Gets the grunt scene graph node.
    *
    * @return node the node that has been set.
    */
-  std::shared_ptr<cugl::scene2::SpriteNode>& getGruntNode();
+  std::shared_ptr<cugl::scene2::SpriteNode>& getNode();
 
   /**
    * Sets the position of the room the enemy is in, for drawing purposes.
@@ -327,7 +342,7 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
 
 #pragma mark Movement
   /**
-   * Moves the grunt by the specified amount.
+   * Moves the enemy by the specified amount.
    *
    * @param forwardX Amount to move in the x direction.
    * @param forwardY Amount to move in the y direction.
@@ -335,10 +350,10 @@ class Grunt : public cugl::physics2::CapsuleObstacle {
   void move(float forwardX, float forwardY);
 
   /**
-   * Changes the direction of the grunt.
+   * Changes the direction of the enemy.
    *
    * @param facing_left is true if character should face left, false otherwise.
    */
   void setFacingLeft(bool facing_left);
 };
-#endif /* Player_hpp */
+#endif /* ENEMY_MODEL_H */

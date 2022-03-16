@@ -6,40 +6,53 @@
 
 #pragma mark GruntController
 
-void GruntController::changeStateIfApplicable(std::shared_ptr<Grunt> enemy, float distance) {
+bool GruntController::init(
+    std::shared_ptr<cugl::AssetManager> assets,
+    std::shared_ptr<cugl::physics2::ObstacleWorld> world,
+    std::shared_ptr<cugl::scene2::SceneNode> world_node,
+    std::shared_ptr<cugl::scene2::SceneNode> debug_node) {
+  _projectile_texture = assets->get<cugl::Texture>("projectile-blue-large");
+  EnemyController::init(assets, world, world_node, debug_node);
+
+  return true;
+}
+
+void GruntController::changeStateIfApplicable(std::shared_ptr<EnemyModel> enemy,
+                                              float distance) {
   // Change state if applicable
   int health = enemy->getHealth();
   if (health <= HEALTH_LIM) {
-    enemy->setCurrentState(Grunt::State::AVOIDING);
+    enemy->setCurrentState(EnemyModel::State::AVOIDING);
     if (distance > MIN_DISTANCE) {
-      enemy->setCurrentState(Grunt::State::IDLE);
+      enemy->setCurrentState(EnemyModel::State::IDLE);
     }
   } else {
     if (distance <= ATTACK_RANGE) {
-      enemy->setCurrentState(Grunt::State::ATTACKING);
+      enemy->setCurrentState(EnemyModel::State::ATTACKING);
     } else if (distance <= MIN_DISTANCE) {
-      enemy->setCurrentState(Grunt::State::CHASING);
+      enemy->setCurrentState(EnemyModel::State::CHASING);
     } else {
-      enemy->setCurrentState(Grunt::State::IDLE);
+      enemy->setCurrentState(EnemyModel::State::IDLE);
     }
   }
 }
 
-void GruntController::performAction(std::shared_ptr<Grunt> enemy, cugl::Vec2 p) {
+void GruntController::performAction(std::shared_ptr<EnemyModel> enemy,
+                                    cugl::Vec2 p) {
   switch (enemy->getCurrentState()) {
-    case Grunt::State::IDLE: {
+    case EnemyModel::State::IDLE: {
       idling(enemy);
       break;
     }
-    case Grunt::State::CHASING: {
+    case EnemyModel::State::CHASING: {
       chasePlayer(enemy, p);
       break;
     }
-    case Grunt::State::ATTACKING: {
+    case EnemyModel::State::ATTACKING: {
       attackPlayer(enemy, p);
       break;
     }
-    case Grunt::State::AVOIDING: {
+    default: {
       avoidPlayer(enemy, p);
       break;
     }

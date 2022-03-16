@@ -102,6 +102,10 @@ bool Scene2Loader::init(const std::shared_ptr<ThreadPool>& threads) {
     _types["textfield"] = Widget::TEXTFIELD;
     _types["text field"] = Widget::TEXTFIELD;
   _types["widget"] = Widget::EXTERNAL_IMPORT;
+  _types["shotgunner"] = Widget::SHOTGUNNER;
+  _types["grunt"] = Widget::GRUNT;
+  _types["tank"] = Widget::TANK;
+  _types["turtle"] = Widget::TURTLE;
 
     // Define the supported layouts
     _forms["none"] = Form::NONE;
@@ -155,6 +159,10 @@ std::shared_ptr<scene2::SceneNode> Scene2Loader::build(const std::string& key,
     std::shared_ptr<scene2::SceneNode> node = nullptr;
     switch (it->second) {
     case Widget::NODE:
+      case Widget::SHOTGUNNER:
+      case Widget::GRUNT:
+      case Widget::TANK:
+      case Widget::TURTLE:
         node = scene2::SceneNode::allocWithData(this,data);
         break;
     case Widget::IMAGE:

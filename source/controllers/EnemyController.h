@@ -2,7 +2,7 @@
 #define CONTROLLERS_ENEMY_CONTROLLER_H_
 #include <cugl/cugl.h>
 
-#include "../models/Grunt.h"
+#include "../models/EnemyModel.h"
 #include "../models/Player.h"
 
 /**
@@ -75,17 +75,18 @@ class EnemyController {
 #pragma mark Properties
 
   /** Update the enemy. */
-  void update(float timestep, std::shared_ptr<Grunt> enemy,
+  void update(float timestep, std::shared_ptr<EnemyModel> enemy,
               std::shared_ptr<Player> player);
 
   /** Change the enemy state. */
-  virtual void changeStateIfApplicable(std::shared_ptr<Grunt> enemy, float distance) {}
+  virtual void changeStateIfApplicable(std::shared_ptr<EnemyModel> enemy,
+                                       float distance) {}
 
   /** Perform the action according to the enemy state. */
-  virtual void performAction(std::shared_ptr<Grunt> enemy, cugl::Vec2 p) {}
+  virtual void performAction(std::shared_ptr<EnemyModel> enemy, cugl::Vec2 p) {}
 
   /** Update the projectiles. */
-  void updateProjectiles(float timestep, std::shared_ptr<Grunt> enemy);
+  void updateProjectiles(float timestep, std::shared_ptr<EnemyModel> enemy);
 
 #pragma mark Movement
  protected:
@@ -93,23 +94,23 @@ class EnemyController {
    *
    * @param p the player position.
    */
-  virtual void chasePlayer(std::shared_ptr<Grunt> enemy, cugl::Vec2 p);
+  virtual void chasePlayer(std::shared_ptr<EnemyModel> enemy, cugl::Vec2 p);
 
   /** Attack the player.
    *
    * @param p the player position.
    */
-  virtual void attackPlayer(std::shared_ptr<Grunt> enemy, cugl::Vec2 p);
+  virtual void attackPlayer(std::shared_ptr<EnemyModel> enemy, cugl::Vec2 p);
 
   /** Avoid the player.
    *
    * @param p the player position.
    */
-  virtual void avoidPlayer(std::shared_ptr<Grunt> enemy, cugl::Vec2 p);
+  virtual void avoidPlayer(std::shared_ptr<EnemyModel> enemy, cugl::Vec2 p);
 
   /** Idle.
    */
-  virtual void idling(std::shared_ptr<Grunt> enemy);
+  virtual void idling(std::shared_ptr<EnemyModel> enemy);
 };
 
 #endif /* CONTROLLERS_ENEMY_CONTROLLER_H_ */

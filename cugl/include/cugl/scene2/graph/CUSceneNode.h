@@ -202,6 +202,9 @@ protected:
      * However, it is more descriptive, and so is useful in debugging.
      */
     std::string _name;
+  
+  /** Specifically for enemies, is the type of the enemy. */
+  std::string _type;
 
     /**
      * A cached has value of _name.
@@ -581,18 +584,34 @@ public:
     const std::string getName() const { return _name; }
     
     /**
-     * Sets a string that is used to identify the node.
+     * Sets a string that is used to identfy the enemy type of this node.
      *
-     * This name is used to access a child node, since child position may
-     * change. In addition, the name is useful for debugging. To work properly,
-     * a name should be unique within a scene graph. It is empty if undefined.
-     *
-     * @param name  A string that is used to identify the node.
+     * @param name  A string that is used to identify the enemy type of this node.
      */
-    void setName(const std::string name) {
-        _name = name;
-        _hashOfName = std::hash<std::string>()(_name);
+    void setType(const std::string type) {
+        _type = type;
     }
+  
+  /**
+   * Returns the string enemy type of this node.
+   *
+   * @return a string that is used to identify the enemy type of this node.
+   */
+  const std::string getType() const { return _type; }
+  
+  /**
+   * Sets a string that is used to identify the node.
+   *
+   * This name is used to access a child node, since child position may
+   * change. In addition, the name is useful for debugging. To work properly,
+   * a name should be unique within a scene graph. It is empty if undefined.
+   *
+   * @param name  A string that is used to identify the node.
+   */
+  void setName(const std::string name) {
+      _name = name;
+      _hashOfName = std::hash<std::string>()(_name);
+  }
 
     /**
      * Returns the class name of this node.

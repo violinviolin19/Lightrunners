@@ -9,7 +9,19 @@
 
 ShotgunnerController::ShotgunnerController(){};
 
-void ShotgunnerController::skirtPlayer(std::shared_ptr<Grunt> enemy, cugl::Vec2 p) {
+bool ShotgunnerController::init(
+    std::shared_ptr<cugl::AssetManager> assets,
+    std::shared_ptr<cugl::physics2::ObstacleWorld> world,
+    std::shared_ptr<cugl::scene2::SceneNode> world_node,
+    std::shared_ptr<cugl::scene2::SceneNode> debug_node) {
+  _projectile_texture = assets->get<cugl::Texture>("projectile-red-large");
+  EnemyController::init(assets, world, world_node, debug_node);
+
+  return true;
+}
+
+void ShotgunnerController::skirtPlayer(std::shared_ptr<EnemyModel> enemy,
+                                       cugl::Vec2 p) {
   // Basically avoid the player, but slower
   cugl::Vec2 diff = p - enemy->getPosition();
   diff.subtract(enemy->getVX(), enemy->getVY());
@@ -24,33 +36,35 @@ void ShotgunnerController::skirtPlayer(std::shared_ptr<Grunt> enemy, cugl::Vec2 
   }
 }
 
-void ShotgunnerController::changeStateIfApplicable(std::shared_ptr<Grunt> enemy, float distance) {
+void ShotgunnerController::changeStateIfApplicable(
+    std::shared_ptr<EnemyModel> enemy, float distance) {
   // Change state if applicable
   int health = enemy->getHealth();
   if (distance <= ATTACK_RANGE) {
     if (health <= HEALTH_LIM) {
-      enemy->setCurrentState(Grunt::State::SKIRTING);
+      enemy->setCurrentState(EnemyModel::State::SKIRTING);
     } else {
-      enemy->setCurrentState(Grunt::State::ATTACKING);
+      enemy->setCurrentState(EnemyModel::State::ATTACKING);
     }
   } else if (distance <= MIN_DISTANCE) {
-    enemy->setCurrentState(Grunt::State::CHASING);
+    enemy->setCurrentState(EnemyModel::State::CHASING);
   } else {
-    enemy->setCurrentState(Grunt::State::IDLE);
+    enemy->setCurrentState(EnemyModel::State::IDLE);
   }
 }
 
-void ShotgunnerController::performAction(std::shared_ptr<Grunt> enemy, cugl::Vec2 p) {
+void ShotgunnerController::performAction(std::shared_ptr<EnemyModel> enemy,
+                                         cugl::Vec2 p) {
   switch (enemy->getCurrentState()) {
-    case Grunt::State::CHASING: {
+    case EnemyModel::State::CHASING: {
       chasePlayer(enemy, p);
       break;
     }
-    case Grunt::State::ATTACKING: {
+    case EnemyModel::State::ATTACKING: {
       attackPlayer(enemy, p);
       break;
     }
-    case Grunt::State::SKIRTING: {
+    case EnemyModel::State::SKIRTING: {
       skirtPlayer(enemy, p);
       break;
     }

@@ -78,7 +78,7 @@ std::shared_ptr<scene2::SceneNode> CustomScene2Loader::build(
       case Widget::TURTLE:
       case Widget::TANK:
         node = scene2::SceneNode::allocWithData(this, data);
-        CULog("%s", node->toString().c_str());
+        node->setType(strtool::tolower(type));
         break;
       case Widget::IMAGE:
         node = scene2::PolygonNode::allocWithData(this, data);
