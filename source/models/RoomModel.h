@@ -12,15 +12,15 @@ class RoomModel {
   std::vector<std::shared_ptr<EnemyModel>> _enemies;
 
   /** A map between the door sensor id to the room id it points to. */
-  std::unordered_map<std::string, std::string> _door_sensor_id_to_room_id;
+  std::unordered_map<std::string, int> _door_sensor_id_to_room_id;
 
   /** A map between the door sensor id and the position the player will teleport
    * to in the other room. */
   std::unordered_map<std::string, cugl::Vec2>
       _door_sensor_id_to_destination_pos;
 
-  /** The name of the room, for debugging purposes. */
-  std::string _name;
+  /** The key for the room. */
+  int _key;
 
   /** The grid layout size for this room (i.e. the width and height of tiles) */
   cugl::Size _grid_size;
@@ -37,10 +37,9 @@ class RoomModel {
    * Initialize the room model with the given scene2 node and name.
    *
    * @param node The scene2 node with all the tiles and enemies for the room.
-   * @param name The name of the room, for debugging purposes.
+   * @param key The key for the room.
    */
-  bool init(const std::shared_ptr<cugl::scene2::SceneNode>& node,
-            std::string& name);
+  bool init(const std::shared_ptr<cugl::scene2::SceneNode>& node, int key);
 
   /** Dispose of all the internal data in the room. */
   void dispose();
@@ -51,9 +50,9 @@ class RoomModel {
    * @return A smart pointer of the instantiated RoomModel.
    */
   static std::shared_ptr<RoomModel> alloc(
-      const std::shared_ptr<cugl::scene2::SceneNode>& node, std::string& name) {
+      const std::shared_ptr<cugl::scene2::SceneNode>& node, int key) {
     std::shared_ptr<RoomModel> result = std::make_shared<RoomModel>();
-    return (result->init(node, name) ? result : nullptr);
+    return (result->init(node, key) ? result : nullptr);
   }
 
   /**
@@ -65,7 +64,7 @@ class RoomModel {
    * @param room_id The ID of the room the door should go to.
    * @param destination The destination of teleporting the player.
    */
-  void addConnection(std::string& door_sensor_id, std::string& room_id,
+  void addConnection(std::string& door_sensor_id, int room_id,
                      cugl::Vec2& destination) {
     if (_door_sensor_id_to_room_id.find(door_sensor_id) ==
         _door_sensor_id_to_room_id.end()) {
@@ -80,7 +79,7 @@ class RoomModel {
    *
    * @return An unordered map from the door sensor id to the room id.
    */
-  std::unordered_map<std::string, std::string> getAllConnectedRooms() const {
+  std::unordered_map<std::string, int> getAllConnectedRooms() const {
     return _door_sensor_id_to_room_id;
   }
 
@@ -90,12 +89,12 @@ class RoomModel {
    * @param door_sensor_id A string that represent the door sensor ID used.
    * @return The room ID.
    */
-  std::string getRoomIdFromDoorSensorId(std::string& door_sensor_id) {
+  int getRoomIdFromDoorSensorId(std::string& door_sensor_id) {
     if (_door_sensor_id_to_room_id.find(door_sensor_id) !=
         _door_sensor_id_to_room_id.end()) {
       return _door_sensor_id_to_room_id[door_sensor_id];
     }
-    return "";
+    return -1;
   }
 
   /**
@@ -127,11 +126,11 @@ class RoomModel {
   std::shared_ptr<cugl::scene2::SceneNode> getNode() const { return _node; }
 
   /**
-   * Get the Name of this room, for debugging purposes.
+   * Get the key of this room, for debugging purposes.
    *
-   * @return The name of the room.
+   * @return The key of the room.
    * */
-  std::string getName() const { return _name; }
+  int getKey() const { return _key; }
 
   /**
    * The grid layout size of the room (i.e. how many tiles in x and y).
