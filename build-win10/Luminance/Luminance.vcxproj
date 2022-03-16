@@ -195,27 +195,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\source\controllers\EnemyController.h" />
+    <ClInclude Include="..\..\source\controllers\LevelController.h" />
     <ClInclude Include="..\..\source\GameApp.h" />
+    <ClInclude Include="..\..\source\generators\Hungarian.h" />
+    <ClInclude Include="..\..\source\models\LevelModel.h" />
+    <ClInclude Include="..\..\source\models\Projectile.h" />
+    <ClInclude Include="..\..\source\models\RoomModel.h" />
+    <ClInclude Include="..\..\source\models\tiles\Door.h" />
     <ClInclude Include="..\..\source\scenes\GameScene.h" />
+    <ClInclude Include="..\..\source\scenes\LoadingLevelScene.h" />
     <ClInclude Include="..\..\source\scenes\LoadingScene.h" />
-    <ClInclude Include="..\..\source\scenes\LevelGenerationDemoScene.h" />
     <ClInclude Include="..\..\source\scenes\MenuScene.h" />
     <ClInclude Include="..\..\source\scenes\ClientMenuScene.h" />
     <ClInclude Include="..\..\source\scenes\HostMenuScene.h" />
     <ClInclude Include="..\..\source\scenes\PeerScene.h" />
     <ClInclude Include="..\..\source\scenes\HostGameScene.h" />
     <ClInclude Include="..\..\source\controllers\InputController.h" />
-    <ClInclude Include="..\..\source\controllers\AIController.h" />
     <ClInclude Include="..\..\source\controllers\actions\Action.h" />
     <ClInclude Include="..\..\source\controllers\actions\Attack.h" />
     <ClInclude Include="..\..\source\controllers\actions\Movement.h" />
     <ClInclude Include="..\..\source\models\Player.h" />
     <ClInclude Include="..\..\source\models\Grunt.h" />
-    <ClInclude Include="..\..\source\models\EnemySet.h" />
     <ClInclude Include="..\..\source\models\Sword.h" />
     <ClInclude Include="..\..\source\models\tiles\BasicTile.h" />
     <ClInclude Include="..\..\source\models\tiles\Wall.h" />
-    <ClInclude Include="..\..\source\models\level_gen\Hallway.h" />
     <ClInclude Include="..\..\source\models\level_gen\Room.h" />
     <ClInclude Include="..\..\source\loaders\CustomScene2Loader.h" />
     <ClInclude Include="..\..\source\generators\LevelGenerator.h" />
@@ -224,26 +228,30 @@
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\source\controllers\EnemyController.cpp" />
+    <ClCompile Include="..\..\source\controllers\LevelController.cpp" />
     <ClCompile Include="..\..\source\GameApp.cpp" />
+    <ClCompile Include="..\..\source\generators\Hungarian.cpp" />
     <ClCompile Include="..\..\source\main.cpp" />
+    <ClCompile Include="..\..\source\models\LevelModel.cpp" />
+    <ClCompile Include="..\..\source\models\Projectile.cpp" />
+    <ClCompile Include="..\..\source\models\RoomModel.cpp" />
+    <ClCompile Include="..\..\source\models\tiles\Door.cpp" />
     <ClCompile Include="..\..\source\scenes\GameScene.cpp" />
+    <ClCompile Include="..\..\source\scenes\LoadingLevelScene.cpp" />
     <ClCompile Include="..\..\source\scenes\LoadingScene.cpp" />
-    <ClCompile Include="..\..\source\scenes\LevelGenerationDemoScene.cpp" />
     <ClCompile Include="..\..\source\scenes\MenuScene.cpp" />
     <ClCompile Include="..\..\source\scenes\ClientMenuScene.cpp" />
     <ClCompile Include="..\..\source\scenes\HostMenuScene.cpp" />
     <ClCompile Include="..\..\source\scenes\HostGameScene.cpp" />
     <ClCompile Include="..\..\source\controllers\InputController.cpp" />
-    <ClCompile Include="..\..\source\controllers\AIController.cpp" />
     <ClCompile Include="..\..\source\controllers\actions\Attack.cpp" />
     <ClCompile Include="..\..\source\controllers\actions\Movement.cpp" />
     <ClCompile Include="..\..\source\models\Grunt.cpp" />
     <ClCompile Include="..\..\source\models\Player.cpp" />
-    <ClCompile Include="..\..\source\models\EnemySet.cpp" />
     <ClCompile Include="..\..\source\models\Sword.cpp" />
     <ClCompile Include="..\..\source\models\tiles\BasicTile.cpp" />
     <ClCompile Include="..\..\source\models\tiles\Wall.cpp" />
-    <ClCompile Include="..\..\source\models\level_gen\Hallway.cpp" />
     <ClCompile Include="..\..\source\models\level_gen\Room.cpp" />
     <ClCompile Include="..\..\source\loaders\CustomScene2Loader.cpp" />
     <ClCompile Include="..\..\source\generators\LevelGenerator.cpp" />
