@@ -181,6 +181,7 @@
     },
     "widgets": {
         "ui-scene": "widgets/ui-scene.json",
+        "win-scene": "widgets/win-scene.json",
         "world-scene": "widgets/world-scene.json",
         "wall-top": "widgets/wall-top.json",
         "wall-side": "widgets/wall-side.json",
@@ -207,6 +208,13 @@
             "type": "Widget",
             "data": {
                 "key": "ui-scene",
+                "variables": {}
+            }
+        },
+        "win-scene": {
+            "type": "Widget",
+            "data": {
+                "key": "win-scene",
                 "variables": {}
             }
         },
