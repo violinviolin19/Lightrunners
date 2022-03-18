@@ -28,7 +28,7 @@
                         "data": {
                             "texture": "button",
                             "anchor": [ 0.5, 0.5 ],
-                            "interior": [ 33, 40, 62, 55 ],
+                            "interior": [ 4, 4, 24, 24 ],
                             "color": "#ffffff"
                         },
                         "layout": {
