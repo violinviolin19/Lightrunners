@@ -150,6 +150,7 @@ void GameScene::populate(cugl::Size dim) {
 
   std::shared_ptr<RoomModel> current_room =
       _level_controller->getLevelModel()->getCurrentRoom();
+  _my_player->setRoomId(current_room->getKey());
   for (std::shared_ptr<EnemyModel> enemy : current_room->getEnemies()) {
     enemy->setDebugColor(cugl::Color4f::BLACK);
     enemy->setDebugScene(_debug_node);
@@ -194,6 +195,7 @@ void GameScene::update(float timestep) {
 
   std::shared_ptr<RoomModel> current_room =
       _level_controller->getLevelModel()->getCurrentRoom();
+  _my_player->setRoomId(current_room->getKey());
   for (std::shared_ptr<EnemyModel>& enemy : current_room->getEnemies()) {
     switch (enemy->getType()) {
       case EnemyModel::GRUNT: {
