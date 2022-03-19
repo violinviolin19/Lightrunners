@@ -263,7 +263,12 @@ void GameScene::sendNetworkInfo() {
   }
   if (_ishost) {
     std::vector<std::shared_ptr<cugl::JsonValue>> player_positions;
+    std::vector<std::shared_ptr<cugl::JsonValue>> enemy_information;
+    std::set<int> rooms_checked_for_enemies;
+
     for (std::shared_ptr<Player> player : _players) {
+      // get player info
+
       std::shared_ptr<cugl::JsonValue> player_info =
           cugl::JsonValue::allocObject();
 
@@ -283,20 +288,63 @@ void GameScene::sendNetworkInfo() {
       pos->setKey("position");
 
       player_positions.push_back(player_info);
+
+      int room_id = player->getRoomId();
+      std::shared_ptr<RoomModel> player_room =
+          _level_controller->getLevelModel()->getRoom(room_id);
+
+      // if room has already been checked, continue without adding enemies
+      if (rooms_checked_for_enemies.count(room_id) > 0) {
+        continue;
+      }
+      rooms_checked_for_enemies.insert(room_id);
+
+      // get enemy info only for the rooms that players are in
+      for (std::shared_ptr<EnemyModel> enemy : player_room->getEnemies()) {
+        std::shared_ptr<cugl::JsonValue> enemy_info =
+            cugl::JsonValue::allocObject();
+
+        std::shared_ptr<cugl::JsonValue> enemy_id =
+            cugl::JsonValue::alloc(static_cast<long>(enemy->getEnemyId()));
+        enemy_info->appendChild(enemy_id);
+        enemy_id->setKey("enemy_id");
+
+        std::shared_ptr<cugl::JsonValue> pos = cugl::JsonValue::allocArray();
+        std::shared_ptr<cugl::JsonValue> pos_x =
+            cugl::JsonValue::alloc(enemy->getPosition().x);
+        std::shared_ptr<cugl::JsonValue> pos_y =
+            cugl::JsonValue::alloc(enemy->getPosition().y);
+        pos->appendChild(pos_x);
+        pos->appendChild(pos_y);
+        enemy_info->appendChild(pos);
+        pos->setKey("position");
+
+        std::shared_ptr<cugl::JsonValue> enemy_health =
+            cugl::JsonValue::alloc(static_cast<long>(enemy->getHealth()));
+        enemy_info->appendChild(enemy_health);
+        enemy_health->setKey("enemy_health");
+
+        enemy_information.push_back(enemy_info);
+      }
     }
 
     // Send all player and enemy information.
     _serializer.writeSint32(2);
     _serializer.writeJsonVector(player_positions);
+    _serializer.writeJsonVector(enemy_information);
+
     std::vector<uint8_t> msg = _serializer.serialize();
 
-    auto msg_size =
-        sizeof(std::vector<uint8_t>) + (sizeof(uint8_t) * msg.size());
+    auto msg_size = sizeof(std::vector<uint8_t>) +
+                    sizeof(std::vector<uint8_t>) +
+                    (sizeof(uint8_t) * msg.size());
 
     _serializer.reset();
     _network->send(msg);
   } else {
-    // Send just the player information.
+    // Send just the current player information.
+
+    // TODO somehow send if enemy was damaged
     std::shared_ptr<cugl::JsonValue> player_info =
         cugl::JsonValue::allocObject();
 
@@ -347,8 +395,10 @@ void GameScene::sendNetworkInfo() {
 void GameScene::processData(const std::vector<uint8_t>& data) {
   _deserializer.receive(data);
   Sint32 code = std::get<Sint32>(_deserializer.read());
-  if (code == 2) {  // All player info update
+  if (code == 2) {  // All player and enemy info update
     cugl::NetworkDeserializer::Message msg = _deserializer.read();
+    cugl::NetworkDeserializer::Message msg2 = _deserializer.read();
+
     std::vector<std::shared_ptr<cugl::JsonValue>> player_positions =
         std::get<std::vector<std::shared_ptr<cugl::JsonValue>>>(msg);
     for (std::shared_ptr<cugl::JsonValue> player : player_positions) {
