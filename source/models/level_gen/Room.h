@@ -50,6 +50,8 @@ class Room {
   std::string _scene2_key;
   /** The source to the scene2 room layout to load it in. */
   std::string _scene2_source;
+  /** The key for the room object. */
+  int _key;
 
   /**
    * Create a Room with the given config. The doors are
