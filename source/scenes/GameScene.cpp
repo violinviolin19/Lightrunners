@@ -172,8 +172,7 @@ void GameScene::update(float timestep) {
   if (checkCooperatorWin()) {
     auto win_layer = _assets->get<cugl::scene2::SceneNode>("win-scene");
     auto text = win_layer->getChildByName<cugl::scene2::Label>("cooperator");
-    std::string msg =
-        cugl::strtool::format("Cooperators Win!");
+    std::string msg = cugl::strtool::format("Cooperators Win!");
     text->setText(msg);
     text->setForeground(cugl::Color4::GREEN);
     win_layer->setVisible(true);
@@ -288,10 +287,10 @@ void GameScene::sendNetworkInfo() {
     _serializer.writeSint32(2);
     _serializer.writeJsonVector(player_positions);
     std::vector<uint8_t> msg = _serializer.serialize();
-    
-    auto msg_size = sizeof(std::vector<uint8_t>) + (sizeof(uint8_t) * msg.size());
-    CULog("size: %lu", msg_size);
-    
+
+    auto msg_size =
+        sizeof(std::vector<uint8_t>) + (sizeof(uint8_t) * msg.size());
+
     _serializer.reset();
     _network->send(msg);
   } else {
@@ -391,7 +390,6 @@ void GameScene::updatePlayerInfo(int player_id, float pos_x, float pos_y) {
 
       // Movement must exceed this value to be animated
       const float MOVEMENT_THRESH = 1;
-      CULog("diff: %f, %f", pos_x - old_position.x, pos_y - old_position.y);
       if (abs(pos_x - old_position.x) > MOVEMENT_THRESH ||
           abs(pos_y - old_position.y) > MOVEMENT_THRESH) {
         player->setState(Player::MOVING);
