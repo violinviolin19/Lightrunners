@@ -50,6 +50,7 @@ void LoadingLevelScene::update(float timestep) {
           std::shared_ptr<level_gen::Room> room = rooms[i];
           std::string key = "room-" + std::to_string(i);
           room->_scene2_key = key;  // Update unique key for future reference.
+          room->_key = i;
           _assets->loadAsync<cugl::scene2::SceneNode>(key, room->_scene2_source,
                                                       nullptr);
         }

@@ -293,7 +293,6 @@ void GameScene::sendNetworkInfo() {
 
     auto msg_size =
         sizeof(std::vector<uint8_t>) + (sizeof(uint8_t) * msg.size());
-    CULog("size: %lu", msg_size);
 
     _serializer.reset();
     _network->send(msg);
@@ -394,7 +393,6 @@ void GameScene::updatePlayerInfo(int player_id, float pos_x, float pos_y) {
 
       // Movement must exceed this value to be animated
       const float MOVEMENT_THRESH = 1;
-      CULog("diff: %f, %f", pos_x - old_position.x, pos_y - old_position.y);
       if (abs(pos_x - old_position.x) > MOVEMENT_THRESH ||
           abs(pos_y - old_position.y) > MOVEMENT_THRESH) {
         player->setState(Player::MOVING);

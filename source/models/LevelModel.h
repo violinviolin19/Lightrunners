@@ -10,7 +10,7 @@ class LevelModel {
 
   /** A map from a room id to the room it corresponds to, useful for switching
    * between rooms when passing through a door. */
-  std::unordered_map<std::string, std::shared_ptr<RoomModel>> _rooms;
+  std::unordered_map<int, std::shared_ptr<RoomModel>> _rooms;
 
   /** A reference to the palyer model. */
   std::shared_ptr<Player> _player;
@@ -46,10 +46,10 @@ class LevelModel {
   /**
    * Add a Room with a unique ID to the level.
    *
-   * @param unique_id A string to access the room later.
+   * @param unique_id An int key to access the room later.
    * @param room The smart pointer referencing the room to be added.
    */
-  void addRoom(std::string& unique_id, const std::shared_ptr<RoomModel>& room) {
+  void addRoom(int unique_id, const std::shared_ptr<RoomModel>& room) {
     // If Room Id doesn't already exists.
     if (_rooms.find(unique_id) == _rooms.end()) _rooms[unique_id] = room;
   }
@@ -60,7 +60,7 @@ class LevelModel {
    *
    * @param room_id The unique ID of the room to be set to.
    */
-  void setCurrentRoom(std::string& room_id) {
+  void setCurrentRoom(int room_id) {
     if (_rooms.find(room_id) == _rooms.end()) return;
     _current_room = _rooms[room_id];
   }
@@ -79,7 +79,7 @@ class LevelModel {
    * @return A room that corresponds to the given key. nullptr if room doesn't
    *exist.
    */
-  std::shared_ptr<RoomModel> getRoom(std::string& room_id) {
+  std::shared_ptr<RoomModel> getRoom(int room_id) {
     if (_rooms.find(room_id) == _rooms.end()) return nullptr;
     return _rooms[room_id];
   }
@@ -89,7 +89,7 @@ class LevelModel {
    *
    * @return An unordered map that maps room IDs to room objects.
    */
-  std::unordered_map<std::string, std::shared_ptr<RoomModel>> getRooms() const {
+  std::unordered_map<int, std::shared_ptr<RoomModel>> getRooms() const {
     return _rooms;
   }
 
