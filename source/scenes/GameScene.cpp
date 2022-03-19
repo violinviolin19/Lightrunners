@@ -19,8 +19,6 @@ bool GameScene::init(
   _active = true;
 
   // Initialize the scene to a locked width.
-  // TODO delete after confirming networking works
-  std::shared_ptr<cugl::NetworkConnection> _network = nullptr;
 
   cugl::Size dim = cugl::Application::get()->getDisplaySize();
   dim *= SCENE_HEIGHT / ((dim.width > dim.height) ? dim.width : dim.height);
@@ -195,23 +193,24 @@ void GameScene::update(float timestep) {
 
   std::shared_ptr<RoomModel> current_room =
       _level_controller->getLevelModel()->getCurrentRoom();
+  int room_id = current_room->getKey();
   _my_player->setRoomId(current_room->getKey());
   for (std::shared_ptr<EnemyModel>& enemy : current_room->getEnemies()) {
     switch (enemy->getType()) {
       case EnemyModel::GRUNT: {
-        _grunt_controller->update(timestep, enemy, _my_player);
+        _grunt_controller->update(timestep, enemy, _players, room_id);
         break;
       }
       case EnemyModel::SHOTGUNNER: {
-        _shotgunner_controller->update(timestep, enemy, _my_player);
+        _shotgunner_controller->update(timestep, enemy, _players, room_id);
         break;
       }
       case EnemyModel::TANK: {
-        _tank_controller->update(timestep, enemy, _my_player);
+        _tank_controller->update(timestep, enemy, _players, room_id);
         break;
       }
       case EnemyModel::TURTLE: {
-        _turtle_controller->update(timestep, enemy, _my_player);
+        _turtle_controller->update(timestep, enemy, _players, room_id);
         break;
       }
     }
@@ -293,6 +292,11 @@ void GameScene::sendNetworkInfo() {
       std::shared_ptr<RoomModel> player_room =
           _level_controller->getLevelModel()->getRoom(room_id);
 
+      // continue loop when player_room not valid at the beginning
+      if (player_room == nullptr) {
+        continue;
+      }
+
       // if room has already been checked, continue without adding enemies
       if (rooms_checked_for_enemies.count(room_id) > 0) {
         continue;
@@ -324,20 +328,36 @@ void GameScene::sendNetworkInfo() {
         enemy_info->appendChild(enemy_health);
         enemy_health->setKey("enemy_health");
 
+        std::shared_ptr<cugl::JsonValue> enemy_room =
+            cugl::JsonValue::alloc(static_cast<long>(room_id));
+        enemy_info->appendChild(enemy_room);
+        enemy_room->setKey("enemy_room");
+
+        // TODO does something need to be sent if enemy has shot a projectile??
+
         enemy_information.push_back(enemy_info);
+
+        // Serialize one enemy at a time to avoid reaching packet limit
+        _serializer.writeSint32(5);
+        _serializer.writeJson(enemy_info);
+
+        std::vector<uint8_t> msg2 = _serializer.serialize();
+
+        auto msg2_size = sizeof(sizeof(uint8_t) * msg2.size());
+
+        _serializer.reset();
+        _network->send(msg2);
       }
     }
 
-    // Send all player and enemy information.
+    // Send all player info
     _serializer.writeSint32(2);
     _serializer.writeJsonVector(player_positions);
-    _serializer.writeJsonVector(enemy_information);
 
     std::vector<uint8_t> msg = _serializer.serialize();
 
-    auto msg_size = sizeof(std::vector<uint8_t>) +
-                    sizeof(std::vector<uint8_t>) +
-                    (sizeof(uint8_t) * msg.size());
+    auto msg_size =
+        sizeof(std::vector<uint8_t>) + (sizeof(uint8_t) * msg.size());
 
     _serializer.reset();
     _network->send(msg);
@@ -395,12 +415,11 @@ void GameScene::sendNetworkInfo() {
 void GameScene::processData(const std::vector<uint8_t>& data) {
   _deserializer.receive(data);
   Sint32 code = std::get<Sint32>(_deserializer.read());
-  if (code == 2) {  // All player and enemy info update
-    cugl::NetworkDeserializer::Message msg = _deserializer.read();
-    cugl::NetworkDeserializer::Message msg2 = _deserializer.read();
+  if (code == 2) {  // All player info update
+    cugl::NetworkDeserializer::Message player_msg = _deserializer.read();
 
     std::vector<std::shared_ptr<cugl::JsonValue>> player_positions =
-        std::get<std::vector<std::shared_ptr<cugl::JsonValue>>>(msg);
+        std::get<std::vector<std::shared_ptr<cugl::JsonValue>>>(player_msg);
     for (std::shared_ptr<cugl::JsonValue> player : player_positions) {
       int player_id = player->getInt("player_id");
       //      bool facing_right = player->getBool("facing_right");
@@ -420,6 +439,19 @@ void GameScene::processData(const std::vector<uint8_t>& data) {
     float pos_x = player_position->get(0)->asFloat();
     float pos_y = player_position->get(1)->asFloat();
     updatePlayerInfo(player_id, pos_x, pos_y);
+  } else if (code == 5) {  // Singular enemy info update
+    cugl::NetworkDeserializer::Message enemy_msg = _deserializer.read();
+
+    std::shared_ptr<cugl::JsonValue> enemy =
+        std::get<std::shared_ptr<cugl::JsonValue>>(enemy_msg);
+
+    int enemy_id = enemy->getInt("enemy_id");
+    int enemy_health = enemy->getInt("enemy_health");
+    int enemy_room = enemy->getInt("enemy_room");
+    std::shared_ptr<cugl::JsonValue> enemy_position = enemy->get("position");
+    float pos_x = enemy_position->get(0)->asFloat();
+    float pos_y = enemy_position->get(1)->asFloat();
+    updateEnemyInfo(enemy_id, enemy_room, enemy_health, pos_x, pos_y);
   }
   _deserializer.reset();
 }
@@ -428,7 +460,7 @@ void GameScene::processData(const std::vector<uint8_t>& data) {
  * Updates the position of the player with the corresponding player_id in the
  * _players list.
  *
- * @param player_id The player id
+ * @param player_id The player ids
  * @param pos_x The updated player x position
  * @param pos_y The updated player y position
  */
@@ -473,6 +505,30 @@ void GameScene::updatePlayerInfo(int player_id, float pos_x, float pos_y) {
 
   new_player->setDebugScene(_debug_node);
   new_player->setDebugColor(cugl::Color4(cugl::Color4::BLACK));
+}
+
+/**
+ * Updates the health and position of the enemy with the corresponding enemy_id
+ * in the room with id enemy_room;
+ *
+ * @param enemy_id      The enemy id.
+ * @param enemy_room    The room id the enemy is in.
+ * @param enemy_health  The updated enemy health.
+ * @param pos_x         The updated enemy x position.
+ * @param pos_y         The updated enemy y position.
+ */
+void GameScene::updateEnemyInfo(int enemy_id, int enemy_room, int enemy_health,
+                                float pos_x, float pos_y) {
+  std::shared_ptr<RoomModel> room =
+      _level_controller->getLevelModel()->getRoom(enemy_room);
+
+  for (std::shared_ptr<EnemyModel> enemy : room->getEnemies()) {
+    if (enemy->getEnemyId() == enemy_id) {
+      enemy->setPosition(pos_x, pos_y);
+      enemy->setHealth(enemy_health);
+      return;
+    }
+  }
 }
 
 void GameScene::beginContact(b2Contact* contact) {
