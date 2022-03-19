@@ -15,7 +15,6 @@ class Terminal : public BasicTile {
   /** A reference to the physics object of the tile. */
   std::shared_ptr<TerminalSensor> _obstacle;
 
-
  public:
   /**
    * Creates an empty scene graph node with the degenerate texture.
@@ -23,8 +22,7 @@ class Terminal : public BasicTile {
    * This constructor should never be called directly, as this is an abstract
    * class.
    */
-  Terminal() : 
-      BasicTile() {_classname = "Terminal";}
+  Terminal() : BasicTile() { _classname = "Terminal"; }
 
   /**
    * Deletes this node, releasing all resources.
@@ -40,9 +38,7 @@ class Terminal : public BasicTile {
    * It is unsafe to call this on a Node that is still currently inside of
    * a scene graph.
    */
-  virtual void dispose() override {
-    BasicTile::dispose();
-  }
+  virtual void dispose() override { BasicTile::dispose(); }
 
   virtual std::shared_ptr<SceneNode> copy(
       const std::shared_ptr<SceneNode>& dst) const override {
@@ -98,10 +94,7 @@ class Terminal : public BasicTile {
   /**
    * @return Returns the physics object for the tile.
    */
-  std::shared_ptr<TerminalSensor> getObstacle() {
-    return _obstacle;
-  }
-
+  std::shared_ptr<TerminalSensor> getObstacle() { return _obstacle; }
 };
 
 #endif  // MODELS_TILES_TERMINAL_H_#pragma once

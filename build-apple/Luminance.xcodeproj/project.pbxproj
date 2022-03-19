@@ -16,6 +16,9 @@
 		5737DA7927C5E62E00D1692A /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5737DA7727C5E62E00D1692A /* Player.cpp */; };
 		5737DA7A27C5E62E00D1692A /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5737DA7727C5E62E00D1692A /* Player.cpp */; };
 		5737DA7B27C5E62E00D1692A /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5737DA7727C5E62E00D1692A /* Player.cpp */; };
+		57A1E54E27E3BF0A009EF19A /* PlayerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57A1E54D27E3BF0A009EF19A /* PlayerController.cpp */; };
+		57A1E54F27E3BF0A009EF19A /* PlayerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57A1E54D27E3BF0A009EF19A /* PlayerController.cpp */; };
+		57A1E55027E3BF0A009EF19A /* PlayerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57A1E54D27E3BF0A009EF19A /* PlayerController.cpp */; };
 		57CEFE3B27DDA80900EF2B90 /* Projectile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57CEFE3A27DDA80900EF2B90 /* Projectile.cpp */; };
 		57CEFE3C27DDA80900EF2B90 /* Projectile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57CEFE3A27DDA80900EF2B90 /* Projectile.cpp */; };
 		57CEFE3D27DDA80900EF2B90 /* Projectile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57CEFE3A27DDA80900EF2B90 /* Projectile.cpp */; };
@@ -212,6 +215,8 @@
 		572894D227D1684500F9BBA5 /* Sword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sword.h; sourceTree = "<group>"; };
 		572894E827D189E200F9BBA5 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		5737DA7727C5E62E00D1692A /* Player.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
+		57A1E54D27E3BF0A009EF19A /* PlayerController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerController.cpp; sourceTree = "<group>"; };
+		57A1E55527E3BF2C009EF19A /* PlayerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerController.h; sourceTree = "<group>"; };
 		57CEFE3A27DDA80900EF2B90 /* Projectile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Projectile.cpp; sourceTree = "<group>"; };
 		57CEFE3E27DDA84A00EF2B90 /* Projectile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Projectile.h; sourceTree = "<group>"; };
 		57CEFE4127DE5E6100EF2B90 /* EnemyController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EnemyController.cpp; sourceTree = "<group>"; };
@@ -485,6 +490,8 @@
 				D52E672D27BF305900F8E2B8 /* InputController.cpp */,
 				D52E672E27BF305900F8E2B8 /* InputController.h */,
 				D52E672F27BF305900F8E2B8 /* actions */,
+				57A1E54D27E3BF0A009EF19A /* PlayerController.cpp */,
+				57A1E55527E3BF2C009EF19A /* PlayerController.h */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -861,6 +868,7 @@
 				D52E673C27BF305A00F8E2B8 /* InputController.cpp in Sources */,
 				CA9B3EB227DE9A6900755902 /* HostGameScene.cpp in Sources */,
 				57CEFE4527DE5E6100EF2B90 /* EnemyController.cpp in Sources */,
+				57A1E55027E3BF0A009EF19A /* PlayerController.cpp in Sources */,
 				57D18F9227E14F100085A52E /* ShotgunnerController.cpp in Sources */,
 				D5F3D6DE27DEFA330071DD06 /* LevelModel.cpp in Sources */,
 				D52E673F27BF305A00F8E2B8 /* Attack.cpp in Sources */,
@@ -902,6 +910,7 @@
 				D52E673B27BF305A00F8E2B8 /* InputController.cpp in Sources */,
 				CA9B3EB127DE9A6900755902 /* HostGameScene.cpp in Sources */,
 				57CEFE4427DE5E6100EF2B90 /* EnemyController.cpp in Sources */,
+				57A1E54F27E3BF0A009EF19A /* PlayerController.cpp in Sources */,
 				57D18F9127E14F100085A52E /* ShotgunnerController.cpp in Sources */,
 				D5F3D6DD27DEFA320071DD06 /* LevelModel.cpp in Sources */,
 				D52E673E27BF305A00F8E2B8 /* Attack.cpp in Sources */,
@@ -943,6 +952,7 @@
 				D52E673A27BF305A00F8E2B8 /* InputController.cpp in Sources */,
 				CA9B3EB027DE9A6900755902 /* HostGameScene.cpp in Sources */,
 				57CEFE4327DE5E6100EF2B90 /* EnemyController.cpp in Sources */,
+				57A1E54E27E3BF0A009EF19A /* PlayerController.cpp in Sources */,
 				57D18F9027E14F100085A52E /* ShotgunnerController.cpp in Sources */,
 				D5F3D6B427DD6E3B0071DD06 /* LevelModel.cpp in Sources */,
 				D52E673D27BF305A00F8E2B8 /* Attack.cpp in Sources */,

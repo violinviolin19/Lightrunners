@@ -74,18 +74,18 @@ void MenuScene::dispose() {
  * @param value whether the scene is currently active
  */
 void MenuScene::setActive(bool value) {
-    if (isActive() != value) {
-        Scene2::setActive(value);
-        if (value) {
-            _choice = NONE;
-            _hostbutton->activate();
-            _joinbutton->activate();
-        } else {
-            _hostbutton->deactivate();
-            _joinbutton->deactivate();
-            // If any were pressed, reset them
-            _hostbutton->setDown(false);
-            _joinbutton->setDown(false);
-        }
+  if (isActive() != value) {
+    Scene2::setActive(value);
+    if (value) {
+      _choice = NONE;
+      _hostbutton->activate();
+      _joinbutton->activate();
+    } else {
+      _hostbutton->deactivate();
+      _joinbutton->deactivate();
+      // If any were pressed, reset them
+      _hostbutton->setDown(false);
+      _joinbutton->setDown(false);
     }
+  }
 }

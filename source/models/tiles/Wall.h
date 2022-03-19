@@ -108,7 +108,6 @@ class Wall : public BasicTile {
   std::shared_ptr<cugl::physics2::BoxObstacle> getObstacle() {
     return _obstacle;
   }
-
 };
 
 #endif  // MODELS_TILES_WALL_H_

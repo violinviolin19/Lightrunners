@@ -6,6 +6,7 @@
 #include "../controllers/Controller.h"
 #include "../controllers/InputController.h"
 #include "../controllers/LevelController.h"
+#include "../controllers/PlayerController.h"
 #include "../controllers/enemies/GruntController.h"
 #include "../controllers/enemies/ShotgunnerController.h"
 #include "../controllers/enemies/TankController.h"
@@ -37,6 +38,9 @@ class GameScene : public cugl::Scene2 {
 
   /** The Box2d world */
   std::shared_ptr<cugl::physics2::ObstacleWorld> _world;
+
+  /** The player controller for the game*/
+  std::shared_ptr<PlayerController> _player_controller;
 
   /** The grunt controller for the game. */
   std::shared_ptr<GruntController> _grunt_controller;
@@ -72,7 +76,6 @@ class GameScene : public cugl::Scene2 {
 
   /** The number of terminals activated in the world. */
   int _num_terminals_activated;
-
 
  public:
   GameScene() : cugl::Scene2() {}

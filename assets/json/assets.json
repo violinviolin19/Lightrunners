@@ -91,6 +91,13 @@
             "wrapS": "clamp",
             "wrapT": "clamp"
         },
+        "energy-slash": {
+            "file": "textures/energy-slash.png",
+            "minfilter": "nearest",
+            "magfilter": "nearest",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
         "floor-tile-0": {
             "file": "textures/floor-tile-0.png",
             "minfilter": "nearest",
