@@ -262,7 +262,6 @@ void GameScene::sendNetworkInfo() {
   }
   if (_ishost) {
     std::vector<std::shared_ptr<cugl::JsonValue>> player_positions;
-    std::vector<std::shared_ptr<cugl::JsonValue>> enemy_information;
     std::set<int> rooms_checked_for_enemies;
 
     for (std::shared_ptr<Player> player : _players) {
@@ -333,9 +332,7 @@ void GameScene::sendNetworkInfo() {
         enemy_info->appendChild(enemy_room);
         enemy_room->setKey("enemy_room");
 
-        // TODO does something need to be sent if enemy has shot a projectile??
-
-        enemy_information.push_back(enemy_info);
+        // TODO network enemy projectiles
 
         // Serialize one enemy at a time to avoid reaching packet limit
         _serializer.writeSint32(5);
@@ -397,6 +394,30 @@ void GameScene::sendNetworkInfo() {
   }
 }
 
+void GameScene::sendEnemyHitNetworkInfo(int id, int room_id) {
+  std::shared_ptr<cugl::JsonValue> enemy_info = cugl::JsonValue::allocObject();
+
+  std::shared_ptr<cugl::JsonValue> enemy_id =
+      cugl::JsonValue::alloc(static_cast<long>(id));
+  enemy_info->appendChild(enemy_id);
+  enemy_id->setKey("enemy_id");
+
+  std::shared_ptr<cugl::JsonValue> enemy_room =
+      cugl::JsonValue::alloc(static_cast<long>(room_id));
+  enemy_info->appendChild(enemy_room);
+  enemy_room->setKey("enemy_room");
+
+  _serializer.writeSint32(6);
+  _serializer.writeJson(enemy_info);
+
+  std::vector<uint8_t> msg = _serializer.serialize();
+
+  auto msg_size = sizeof(sizeof(uint8_t) * msg.size());
+
+  _serializer.reset();
+  _network->sendOnlyToHost(msg);
+}
+
 /**
  * Processes data sent over the network.
  *
@@ -439,7 +460,7 @@ void GameScene::processData(const std::vector<uint8_t>& data) {
     float pos_x = player_position->get(0)->asFloat();
     float pos_y = player_position->get(1)->asFloat();
     updatePlayerInfo(player_id, pos_x, pos_y);
-  } else if (code == 5) {  // Singular enemy info update
+  } else if (code == 5) {  // Singular enemy update from the host
     cugl::NetworkDeserializer::Message enemy_msg = _deserializer.read();
 
     std::shared_ptr<cugl::JsonValue> enemy =
@@ -452,6 +473,24 @@ void GameScene::processData(const std::vector<uint8_t>& data) {
     float pos_x = enemy_position->get(0)->asFloat();
     float pos_y = enemy_position->get(1)->asFloat();
     updateEnemyInfo(enemy_id, enemy_room, enemy_health, pos_x, pos_y);
+  } else if (code == 6) {  // Enemy update from a client that damaged an enemy
+    cugl::NetworkDeserializer::Message enemy_msg = _deserializer.read();
+
+    std::shared_ptr<cugl::JsonValue> enemy =
+        std::get<std::shared_ptr<cugl::JsonValue>>(enemy_msg);
+
+    int enemy_id = enemy->getInt("enemy_id");
+    int enemy_room = enemy->getInt("enemy_room");
+
+    std::shared_ptr<RoomModel> room =
+        _level_controller->getLevelModel()->getRoom(enemy_room);
+
+    for (std::shared_ptr<EnemyModel> enemy : room->getEnemies()) {
+      if (enemy->getEnemyId() == enemy_id) {
+        enemy->takeDamage();
+        return;
+      }
+    }
   }
   _deserializer.reset();
 }
@@ -557,8 +596,12 @@ void GameScene::beginContact(b2Contact* contact) {
 
   if (fx1_name == "enemy_hitbox" && ob2 == _sword.get()) {
     dynamic_cast<EnemyModel*>(ob1)->takeDamage();
+    sendEnemyHitNetworkInfo(dynamic_cast<EnemyModel*>(ob1)->getEnemyId(),
+                            _my_player->getRoomId());
   } else if (fx2_name == "enemy_hitbox" && ob1 == _sword.get()) {
     dynamic_cast<EnemyModel*>(ob2)->takeDamage();
+    sendEnemyHitNetworkInfo(dynamic_cast<EnemyModel*>(ob1)->getEnemyId(),
+                            _my_player->getRoomId());
   }
 
   if (fx1_name == "enemy_damage" && ob2 == _my_player.get()) {

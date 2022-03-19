@@ -207,8 +207,16 @@ class GameScene : public cugl::Scene2 {
   void sendNetworkInfo();
 
   /**
-   * Updates the position of the player with the corresponding player_id in the
-   * _players list.
+   * Broadcasts enemy being hit to the host.
+   *
+   * @param id the enemy that was hit
+   * @param room_id the room the enemy is in
+   */
+  void sendEnemyHitNetworkInfo(int id, int room_id);
+
+  /**
+   * Updates the position of the player with the corresponding player_id in
+   * the _players list.
    *
    * @param player_id The player id
    * @param pos_x The updated player x position
