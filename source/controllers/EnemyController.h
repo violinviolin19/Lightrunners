@@ -76,7 +76,7 @@ class EnemyController {
 
   /** Update the enemy. */
   void update(float timestep, std::shared_ptr<EnemyModel> enemy,
-              std::shared_ptr<Player> player);
+              std::vector<std::shared_ptr<Player>> players, int room_id);
 
   /** Change the enemy state. */
   virtual void changeStateIfApplicable(std::shared_ptr<EnemyModel> enemy,
