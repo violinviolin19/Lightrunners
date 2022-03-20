@@ -195,10 +195,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\source\controllers\AIController.h" />
+    <ClInclude Include="..\..\source\controllers\Controller.h" />
     <ClInclude Include="..\..\source\controllers\EnemyController.h" />
     <ClInclude Include="..\..\source\controllers\LevelController.h" />
+    <ClInclude Include="..\..\source\controllers\enemies\GruntController.h" />
+    <ClInclude Include="..\..\source\controllers\enemies\ShotgunnerController.h" />
+    <ClInclude Include="..\..\source\controllers\enemies\TankController.h" />
+    <ClInclude Include="..\..\source\controllers\enemies\TurtleController.h" />
     <ClInclude Include="..\..\source\GameApp.h" />
     <ClInclude Include="..\..\source\generators\Hungarian.h" />
+    <ClInclude Include="..\..\source\models\EnemyModel.h" />
     <ClInclude Include="..\..\source\models\LevelModel.h" />
     <ClInclude Include="..\..\source\models\Projectile.h" />
     <ClInclude Include="..\..\source\models\RoomModel.h" />
@@ -218,10 +225,10 @@
     <ClInclude Include="..\..\source\controllers\actions\Attack.h" />
     <ClInclude Include="..\..\source\controllers\actions\Movement.h" />
     <ClInclude Include="..\..\source\models\Player.h" />
-    <ClInclude Include="..\..\source\models\Grunt.h" />
     <ClInclude Include="..\..\source\models\Sword.h" />
     <ClInclude Include="..\..\source\models\tiles\BasicTile.h" />
     <ClInclude Include="..\..\source\models\tiles\Wall.h" />
+    <ClInclude Include="..\..\source\models\level_gen\DefaultRooms.h" />
     <ClInclude Include="..\..\source\models\level_gen\Room.h" />
     <ClInclude Include="..\..\source\loaders\CustomScene2Loader.h" />
     <ClInclude Include="..\..\source\generators\LevelGenerator.h" />
@@ -232,9 +239,14 @@
   <ItemGroup>
     <ClCompile Include="..\..\source\controllers\EnemyController.cpp" />
     <ClCompile Include="..\..\source\controllers\LevelController.cpp" />
+    <ClCompile Include="..\..\source\controllers\enemies\GruntController.cpp" />
+    <ClCompile Include="..\..\source\controllers\enemies\ShotgunnerController.cpp" />
+    <ClCompile Include="..\..\source\controllers\enemies\TankController.cpp" />
+    <ClCompile Include="..\..\source\controllers\enemies\TurtleController.cpp" />
     <ClCompile Include="..\..\source\GameApp.cpp" />
     <ClCompile Include="..\..\source\generators\Hungarian.cpp" />
     <ClCompile Include="..\..\source\main.cpp" />
+    <ClCompile Include="..\..\source\models\EnemyModel.cpp" />
     <ClCompile Include="..\..\source\models\LevelModel.cpp" />
     <ClCompile Include="..\..\source\models\Projectile.cpp" />
     <ClCompile Include="..\..\source\models\RoomModel.cpp" />
@@ -251,7 +263,6 @@
     <ClCompile Include="..\..\source\controllers\InputController.cpp" />
     <ClCompile Include="..\..\source\controllers\actions\Attack.cpp" />
     <ClCompile Include="..\..\source\controllers\actions\Movement.cpp" />
-    <ClCompile Include="..\..\source\models\Grunt.cpp" />
     <ClCompile Include="..\..\source\models\Player.cpp" />
     <ClCompile Include="..\..\source\models\Sword.cpp" />
     <ClCompile Include="..\..\source\models\tiles\BasicTile.cpp" />

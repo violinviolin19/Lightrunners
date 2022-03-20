@@ -240,6 +240,8 @@ void LevelController::instantiateEnemies(
     auto enemy_texture = _assets->get<cugl::Texture>(enemy_type);
     std::shared_ptr<EnemyModel> enemy = EnemyModel::alloc(
         enemy_node->getWorldPosition(), enemy_node->getName(), enemy_type);
+    enemy->setEnemyId(next_enemy_id);
+    next_enemy_id = next_enemy_id + 1;
     enemies.push_back(enemy);
 
     auto e_node = cugl::scene2::SpriteNode::alloc(enemy_texture, 1, 1);
