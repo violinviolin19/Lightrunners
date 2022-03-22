@@ -291,9 +291,9 @@
                     "data": {
                         "anchor": [ 0.5, 1.0 ],
                         "scale": 1.5,
-                        "font": "proximanova",
+                        "font": "pixelmix_bold",
                         "text": "LIGHTRUNNERS",
-                        "padding": [ 1000, 5, 1000, 10 ],
+                        "padding": [ 1000, 20, 1000, 20 ],
                         "background": "#efebe3"
                     },
                     "layout": {
@@ -339,6 +339,7 @@
                         "variables": {
                             "size": [ 300, 75 ],
                             "text": "How To Play",
+                            "font": "pixelmix_small",
                             "color": "#efebe3"
                         }
                     },
@@ -354,6 +355,7 @@
                         "variables": {
                             "size": [ 300, 75 ],
                             "text": "Settings",
+                            "font": "pixelmix_small",
                             "color": "#efebe3"
                         }
                     },
@@ -375,7 +377,7 @@
                     "data": {
                         "anchor": [ 0.5, 1.0 ],
                         "scale": 1.5,
-                        "font": "proximanova",
+                        "font": "pixelmix",
                         "text": "Host View",
                         "padding": [ 20, 20, 20, 20 ],
                         "halign": "center",
@@ -438,7 +440,7 @@
                                     "type": "Label",
                                     "data": {
                                         "anchor": [ 0.5, 0.5 ],
-                                        "font": "proximanova",
+                                        "font": "pixelmix",
                                         "text": "Game ID:",
                                         "padding": [ 20, 20, 40, 20 ],
                                         "halign": "left",
@@ -486,7 +488,7 @@
                                     "type": "Label",
                                     "data": {
                                         "anchor": [ 0.5, 0.5 ],
-                                        "font": "proximanova",
+                                        "font": "pixelmix",
                                         "text": "Players:",
                                         "padding": [ 20, 20, 20, 20 ],
                                         "halign": "left",
@@ -551,7 +553,7 @@
                     "data": {
                         "anchor": [ 0.5, 1.0 ],
                         "scale": 1.5,
-                        "font": "proximanova",
+                        "font": "pixelmix",
                         "text": "Client View",
                         "padding": [ 20, 20, 20, 20 ],
                         "halign": "center",
@@ -614,7 +616,7 @@
                                     "type": "Label",
                                     "data": {
                                         "anchor": [ 0.5, 0.5 ],
-                                        "font": "proximanova",
+                                        "font": "pixelmix",
                                         "text": "Game ID:",
                                         "padding": [ 20, 20, 40, 20 ],
                                         "halign": "left",
@@ -662,7 +664,7 @@
                                     "type": "Label",
                                     "data": {
                                         "anchor": [ 0.5, 0.5 ],
-                                        "font": "proximanova",
+                                        "font": "pixelmix",
                                         "text": "Players:",
                                         "padding": [ 20, 20, 20, 20 ],
                                         "halign": "left",
@@ -718,13 +720,21 @@
         }
     },
     "fonts": {
+        "pixelmix": {
+            "file": "fonts/pixelmix.ttf",
+            "size": 24
+        },
+        "pixelmix_bold": {
+            "file": "fonts/pixelmix_bold.ttf",
+            "size": 36
+        },
+        "pixelmix_small": {
+            "file": "fonts/pixelmix.ttf",
+            "size": 18
+        },
         "pixel32": {
             "file": "fonts/RetroGame.ttf",
             "size": 16
-        },
-        "proximanova": {
-            "file": "fonts/ProximaNova-Regular.otf",
-            "size": 40
         }
     }
 }
