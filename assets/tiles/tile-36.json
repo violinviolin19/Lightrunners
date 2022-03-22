@@ -3,15 +3,17 @@
     "priority": ["data", "priority"]
   },
   "contents": {
-    "type": "BasicTile",
+    "type": "Wall",
     "data": {
-      "texture": "tile-set_1",
+      "texture": "tile-36",
       "anchor": [0, 0],
-      "priority": 0
+      "priority": 0,
+      "obstacle": [0, 0, 48, 0, 48, 48, 0, 48]
     },
     "layout": {
       "x_anchor": "left",
-      "y_anchor": "bottom"
+      "y_anchor": "bottom",
+      "absolute": true
     }
   }
 }
