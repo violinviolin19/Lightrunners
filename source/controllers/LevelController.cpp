@@ -9,8 +9,8 @@
 #include "../models/tiles/Wall.h"
 #include "Controller.h"
 
-#define TILE_SCALE cugl::Vec2(0.6, 0.6)
-#define TILE_SIZE cugl::Vec2(64, 64)
+#define TILE_SCALE cugl::Vec2(1, 1)
+#define TILE_SIZE cugl::Vec2(48, 48)
 
 bool LevelController::init(
     const std::shared_ptr<cugl::AssetManager> &assets,
