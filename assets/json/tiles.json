@@ -15,6 +15,510 @@
     "tile-55": "tiles/tile-55.json"
   },
   "textures": {
+    "tile-1": {
+      "file": "textures/tiles/tile-1.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-2": {
+      "file": "textures/tiles/tile-2.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-3": {
+      "file": "textures/tiles/tile-3.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-4": {
+      "file": "textures/tiles/tile-4.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-5": {
+      "file": "textures/tiles/tile-5.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-6": {
+      "file": "textures/tiles/tile-6.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-7": {
+      "file": "textures/tiles/tile-7.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-8": {
+      "file": "textures/tiles/tile-8.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-9": {
+      "file": "textures/tiles/tile-9.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-10": {
+      "file": "textures/tiles/tile-10.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-11": {
+      "file": "textures/tiles/tile-11.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-12": {
+      "file": "textures/tiles/tile-12.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-13": {
+      "file": "textures/tiles/tile-13.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-14": {
+      "file": "textures/tiles/tile-14.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-15": {
+      "file": "textures/tiles/tile-15.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-16": {
+      "file": "textures/tiles/tile-16.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-17": {
+      "file": "textures/tiles/tile-17.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-18": {
+      "file": "textures/tiles/tile-18.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-19": {
+      "file": "textures/tiles/tile-19.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-20": {
+      "file": "textures/tiles/tile-20.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-21": {
+      "file": "textures/tiles/tile-21.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-22": {
+      "file": "textures/tiles/tile-22.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-23": {
+      "file": "textures/tiles/tile-23.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-24": {
+      "file": "textures/tiles/tile-24.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-25": {
+      "file": "textures/tiles/tile-25.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-26": {
+      "file": "textures/tiles/tile-26.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-27": {
+      "file": "textures/tiles/tile-27.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-28": {
+      "file": "textures/tiles/tile-28.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-29": {
+      "file": "textures/tiles/tile-29.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-30": {
+      "file": "textures/tiles/tile-30.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-31": {
+      "file": "textures/tiles/tile-31.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-32": {
+      "file": "textures/tiles/tile-32.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-33": {
+      "file": "textures/tiles/tile-33.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-34": {
+      "file": "textures/tiles/tile-34.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-35": {
+      "file": "textures/tiles/tile-35.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-36": {
+      "file": "textures/tiles/tile-36.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-38": {
+      "file": "textures/tiles/tile-38.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-39": {
+      "file": "textures/tiles/tile-39.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-40": {
+      "file": "textures/tiles/tile-40.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-41": {
+      "file": "textures/tiles/tile-41.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-42": {
+      "file": "textures/tiles/tile-42.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-43": {
+      "file": "textures/tiles/tile-43.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-44": {
+      "file": "textures/tiles/tile-44.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-45": {
+      "file": "textures/tiles/tile-45.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-46": {
+      "file": "textures/tiles/tile-46.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-47": {
+      "file": "textures/tiles/tile-47.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-48": {
+      "file": "textures/tiles/tile-48.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-49": {
+      "file": "textures/tiles/tile-49.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-50": {
+      "file": "textures/tiles/tile-50.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-51": {
+      "file": "textures/tiles/tile-51.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-52": {
+      "file": "textures/tiles/tile-52.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-53": {
+      "file": "textures/tiles/tile-53.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-54": {
+      "file": "textures/tiles/tile-54.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-55": {
+      "file": "textures/tiles/tile-55.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-56": {
+      "file": "textures/tiles/tile-56.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-57": {
+      "file": "textures/tiles/tile-57.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-58": {
+      "file": "textures/tiles/tile-58.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-59": {
+      "file": "textures/tiles/tile-59.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-60": {
+      "file": "textures/tiles/tile-60.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-61": {
+      "file": "textures/tiles/tile-61.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-62": {
+      "file": "textures/tiles/tile-62.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-63": {
+      "file": "textures/tiles/tile-63.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-64": {
+      "file": "textures/tiles/tile-64.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-66": {
+      "file": "textures/tiles/tile-66.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-67": {
+      "file": "textures/tiles/tile-67.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-68": {
+      "file": "textures/tiles/tile-68.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-69": {
+      "file": "textures/tiles/tile-69.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-70": {
+      "file": "textures/tiles/tile-70.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-71": {
+      "file": "textures/tiles/tile-71.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-72": {
+      "file": "textures/tiles/tile-72.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-73": {
+      "file": "textures/tiles/tile-73.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
+    "tile-74": {
+      "file": "textures/tiles/tile-74.png",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "minfilter": "nearest",
+      "magfilter": "nearest"
+    },
     "tile-set": {
       "file": "textures/tile-atlas.png",
       "wrapS": "clamp",

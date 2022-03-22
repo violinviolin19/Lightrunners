@@ -5,14 +5,13 @@
   "contents": {
     "type": "BasicTile",
     "data": {
-      "texture": "grass-tile",
+      "texture": "tile-1",
       "anchor": [0, 0],
       "priority": 0
     },
     "layout": {
       "x_anchor": "left",
-      "y_anchor": "bottom",
-      "absolute": true
+      "y_anchor": "bottom"
     }
   }
 }
