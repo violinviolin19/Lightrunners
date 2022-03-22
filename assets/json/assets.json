@@ -209,6 +209,13 @@
             "magfilter": "linear",
             "wrapS": "clamp",
             "wrapT": "clamp"
+        },
+        "background": {
+            "file": "textures/ui/background_art.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "repeat",
+            "wrapT": "repeat"
         }
     },
     "jsons": {
@@ -268,12 +275,15 @@
             }
         },
         "menu": {
-            "type": "Node",
+            "type": "Image",
             "format": {
                 "type": "Float",
                 "orientation": "vertical",
                 "x_alignment": "center",
                 "y_alignment": "middle"
+            },
+            "data": {
+                "texture": "background"
             },
             "children": {
                 "host": {
@@ -288,7 +298,7 @@
                     },
                     "layout": {
                         "priority": 1,
-                        "padding": [ 0, 50, 0, 0 ]
+                        "padding": [ 0, 25, 0, 0 ]
                     }
                 },
                 "join": {
@@ -303,7 +313,37 @@
                     },
                     "layout": {
                         "priority": 1,
-                        "padding": [ 0, 0, 0, 0 ]
+                        "padding": [ 0, 25, 0, 0 ]
+                    }
+                },
+                "instructions": {
+                    "type": "Widget",
+                    "data": {
+                        "key": "textbutton",
+                        "variables": {
+                            "size": [ 300, 75 ],
+                            "text": "How To Play",
+                            "color": "#efebe3"
+                        }
+                    },
+                    "layout": {
+                        "priority": 1,
+                        "padding": [ 0, 25, 0, 0 ]
+                    }
+                },
+                "settings": {
+                    "type": "Widget",
+                    "data": {
+                        "key": "textbutton",
+                        "variables": {
+                            "size": [ 300, 75 ],
+                            "text": "Settings",
+                            "color": "#efebe3"
+                        }
+                    },
+                    "layout": {
+                        "priority": 1,
+                        "padding": [ 0, 25, 0, 0 ]
                     }
                 }
             }
