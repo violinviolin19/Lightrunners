@@ -52,14 +52,35 @@ bool EnemyController::init(
 }
 
 void EnemyController::update(float timestep, std::shared_ptr<EnemyModel> enemy,
-                             std::shared_ptr<Player> player) {
+                             std::vector<std::shared_ptr<Player>> _players,
+                             int room_id) {
+  float min_distance = std::numeric_limits<float>::max();
+  std::shared_ptr<Player> min_player = _players[0];
+
+  // find closest player to enemy in the same room
+  for (std::shared_ptr<Player> player : _players) {
+    if (player->getRoomId() == room_id) {
+      float distance =
+          (enemy->getPosition()).subtract(player->getPosition()).length();
+      if (distance < min_distance) {
+        min_distance = distance;
+        min_player = player;
+      }
+    }
+  }
+
+  // if player not in room id (i.e. no player found, should not happen, return!)
+  if (min_player->getRoomId() != room_id) {
+    return;
+  }
+
   // Change state if applicable
   float distance =
-      (enemy->getPosition()).subtract(player->getPosition()).length();
+      (enemy->getPosition()).subtract(min_player->getPosition()).length();
   changeStateIfApplicable(enemy, distance);
 
   // Perform player action
-  cugl::Vec2 p = player->getPosition();
+  cugl::Vec2 p = min_player->getPosition();
   performAction(enemy, p);
 
   // Reduce attack cooldown if enemy has attacked

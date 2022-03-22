@@ -57,9 +57,9 @@ void LevelController::dispose() { _level_gen->dispose(); }
 void LevelController::changeRoom(std::string &door_sensor_name) {
   std::shared_ptr<RoomModel> current = _level_model->getCurrentRoom();
 
-  std::string destination_room_id =
+  int destination_room_id =
       current->getRoomIdFromDoorSensorId(door_sensor_name);
-  if (destination_room_id == "") return;
+  if (destination_room_id == -1) return;
 
   cugl::Vec2 door_pos = current->getPosOfDestinationDoor(door_sensor_name);
 
@@ -83,8 +83,6 @@ void LevelController::changeRoom(std::string &door_sensor_name) {
 
   for (std::shared_ptr<EnemyModel> enemy : new_current->getEnemies())
     enemy->promiseToChangePhysics(true);
-
-  CULog("%s -> %s", current->getName().c_str(), new_current->getName().c_str());
 }
 
 void LevelController::populate() {
@@ -101,12 +99,12 @@ void LevelController::populate() {
     room_node->setPosition(pos);
     room_node->setVisible(false);
 
-    auto room_model = RoomModel::alloc(room_node, room->_scene2_key);
-    _level_model->addRoom(room->_scene2_key, room_model);
+    auto room_model = RoomModel::alloc(room_node, room->_key);
+    _level_model->addRoom(room->_key, room_model);
 
     // Make spawn the starting point.
     if (room->_type == level_gen::Room::RoomType::SPAWN) {
-      _level_model->setCurrentRoom(room->_scene2_key);
+      _level_model->setCurrentRoom(room->_key);
       room_node->setVisible(true);
     }
 
@@ -171,7 +169,6 @@ std::vector<cugl::Vec2> LevelController::instantiateDoors(
       _world->addObstacle(door_room_node->initBox2d(door_sensor_name));
 
       std::shared_ptr<level_gen::Room> other_room = edge->getOther(room);
-      std::string other_room_id = other_room->_scene2_key;
       cugl::Vec2 destination = other_room->_edge_to_door[edge];
 
       if (destination.x == 0) destination.x += 1;
@@ -181,8 +178,9 @@ std::vector<cugl::Vec2> LevelController::instantiateDoors(
       if (destination.y == room_model->getGridSize().height - 1)
         destination.y -= 1;
 
-      if (other_room_id != "") {
-        room_model->addConnection(door_sensor_name, other_room_id, destination);
+      if (other_room->_key != -1) {
+        room_model->addConnection(door_sensor_name, other_room->_key,
+                                  destination);
       }
     }
   }
@@ -242,6 +240,8 @@ void LevelController::instantiateEnemies(
     auto enemy_texture = _assets->get<cugl::Texture>(enemy_type);
     std::shared_ptr<EnemyModel> enemy = EnemyModel::alloc(
         enemy_node->getWorldPosition(), enemy_node->getName(), enemy_type);
+    enemy->setEnemyId(next_enemy_id);
+    next_enemy_id = next_enemy_id + 1;
     enemies.push_back(enemy);
 
     auto e_node = cugl::scene2::SpriteNode::alloc(enemy_texture, 1, 1);

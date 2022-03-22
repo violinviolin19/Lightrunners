@@ -27,6 +27,9 @@ class Player : public cugl::physics2::CapsuleObstacle {
   /** The player's unique id. */
   int _id;
 
+  /** The unique id of the room the player is in. */
+  int _room_id;
+
   /** Player health. */
   int _health;
 
@@ -185,6 +188,17 @@ class Player : public cugl::physics2::CapsuleObstacle {
    * Sets the player id.
    */
   void setPlayerId(int player_id) { _id = player_id; }
+
+  /**
+   * Returns the player's room id.
+   * @return the room id
+   */
+  int getRoomId() { return _room_id; }
+
+  /**
+   * Sets the player's room id.
+   */
+  void setRoomId(int id) { _room_id = id; }
 
   /**
    * Sets the frame of the animation.

@@ -73,7 +73,6 @@ class GameScene : public cugl::Scene2 {
   /** The number of terminals activated in the world. */
   int _num_terminals_activated;
 
-
  public:
   GameScene() : cugl::Scene2() {}
 
@@ -208,14 +207,35 @@ class GameScene : public cugl::Scene2 {
   void sendNetworkInfo();
 
   /**
-   * Updates the position of the player with the corresponding player_id in the
-   * _players list.
+   * Broadcasts enemy being hit to the host.
+   *
+   * @param id the enemy that was hit
+   * @param room_id the room the enemy is in
+   */
+  void sendEnemyHitNetworkInfo(int id, int room_id);
+
+  /**
+   * Updates the position of the player with the corresponding player_id in
+   * the _players list.
    *
    * @param player_id The player id
    * @param pos_x The updated player x position
    * @param pos_y The updated player y position
    */
   void updatePlayerInfo(int player_id, float pos_x, float pos_y);
+
+  /**
+   * Updates the health and position of the enemy with the corresponding
+   * enemy_id in the room with id enemy_room;
+   *
+   * @param enemy_id      The enemy id.
+   * @param enemy_room    The room id the enemy is in.
+   * @param enemy_health  The updated enemy health.
+   * @param pos_x         The updated enemy x position.
+   * @param pos_y         The updated enemy y position.
+   */
+  void updateEnemyInfo(int enemy_id, int enemy_room, int enemy_health,
+                       float pos_x, float pos_y);
 
   /**
    * Returns true if the player quits the game.
