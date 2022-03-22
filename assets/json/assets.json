@@ -286,6 +286,22 @@
                 "texture": "background"
             },
             "children": {
+                "title": {
+                    "type": "Label",
+                    "data": {
+                        "anchor": [ 0.5, 1.0 ],
+                        "scale": 1.5,
+                        "font": "proximanova",
+                        "text": "LIGHTRUNNERS",
+                        "padding": [ 1000, 5, 1000, 10 ],
+                        "background": "#efebe3"
+                    },
+                    "layout": {
+                        "priority": 1,
+                        "x_anchor": "center",
+                        "y_anchor": "middle"
+                    }
+                },
                 "host": {
                     "type": "Widget",
                     "data": {
@@ -298,7 +314,7 @@
                     },
                     "layout": {
                         "priority": 1,
-                        "padding": [ 0, 25, 0, 0 ]
+                        "padding": [ 0, 25, 0, 50 ]
                     }
                 },
                 "join": {
