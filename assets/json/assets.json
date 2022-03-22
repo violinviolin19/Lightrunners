@@ -291,7 +291,7 @@
                     "data": {
                         "anchor": [ 0.5, 1.0 ],
                         "scale": 1.5,
-                        "font": "pixelmix_bold",
+                        "font": "pixelmix_title",
                         "text": "LIGHTRUNNERS",
                         "padding": [ 1000, 20, 1000, 20 ],
                         "background": "#efebe3"
@@ -724,13 +724,17 @@
             "file": "fonts/pixelmix.ttf",
             "size": 24
         },
-        "pixelmix_bold": {
-            "file": "fonts/pixelmix_bold.ttf",
+        "pixelmix_title": {
+            "file": "fonts/pixelmix.ttf",
             "size": 36
         },
         "pixelmix_small": {
             "file": "fonts/pixelmix.ttf",
             "size": 18
+        },
+        "pixelmix_bold": {
+            "file": "fonts/pixelmix_bold.ttf",
+            "size": 36
         },
         "pixel32": {
             "file": "fonts/RetroGame.ttf",
