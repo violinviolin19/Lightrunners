@@ -307,8 +307,8 @@
                     "data": {
                         "key": "textbutton",
                         "variables": {
-                            "size": [ 300, 75 ],
-                            "text": "Host Game",
+                            "size": [ 220, 65 ],
+                            "text": "HOST",
                             "color": "#efebe3"
                         }
                     },
@@ -322,8 +322,8 @@
                     "data": {
                         "key": "textbutton",
                         "variables": {
-                            "size": [ 300, 75 ],
-                            "text": "Join Game",
+                            "size": [ 220, 65 ],
+                            "text": "JOIN",
                             "color": "#efebe3"
                         }
                     },
@@ -337,8 +337,8 @@
                     "data": {
                         "key": "textbutton",
                         "variables": {
-                            "size": [ 300, 75 ],
-                            "text": "How To Play",
+                            "size": [ 170, 45 ],
+                            "text": "HOW TO PLAY",
                             "font": "pixelmix_small",
                             "color": "#efebe3"
                         }
@@ -353,8 +353,8 @@
                     "data": {
                         "key": "textbutton",
                         "variables": {
-                            "size": [ 300, 75 ],
-                            "text": "Settings",
+                            "size": [ 140, 45 ],
+                            "text": "SETTINGS",
                             "font": "pixelmix_small",
                             "color": "#efebe3"
                         }
