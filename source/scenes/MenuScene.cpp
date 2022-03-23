@@ -33,9 +33,9 @@ bool MenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
   scene->doLayout();  // Repositions the HUD
   _choice = Choice::NONE;
   _hostbutton = std::dynamic_pointer_cast<cugl::scene2::Button>(
-      _assets->get<cugl::scene2::SceneNode>("menu_host"));
+      _assets->get<cugl::scene2::SceneNode>("menu_play_host"));
   _joinbutton = std::dynamic_pointer_cast<cugl::scene2::Button>(
-      _assets->get<cugl::scene2::SceneNode>("menu_join"));
+      _assets->get<cugl::scene2::SceneNode>("menu_play_join"));
 
   // Program the buttons
   _hostbutton->addListener([this](const std::string& name, bool down) {

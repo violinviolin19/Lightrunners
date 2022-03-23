@@ -302,34 +302,53 @@
                         "y_anchor": "middle"
                     }
                 },
-                "host": {
-                    "type": "Widget",
+                "play": {
+                    "type": "Node",
+                    "format": {
+                        "type": "Float",
+                        "orientation": "horizontal",
+                        "x_alignment": "center",
+                        "y_alignment": "middle"
+                    },
                     "data": {
-                        "key": "textbutton",
-                        "variables": {
-                            "size": [ 220, 65 ],
-                            "text": "HOST",
-                            "color": "#efebe3"
+                        "anchor": [ 0.5, 0.5 ],
+                        "size": [ 500, 65 ]
+                    },
+                    "children": {
+                        "host": {
+                            "type": "Widget",
+                            "data": {
+                                "key": "textbutton",
+                                "variables": {
+                                    "size": [ 220, 65 ],
+                                    "text": "HOST",
+                                    "color": "#efebe3"
+                                }
+                            },
+                            "layout": {
+                                "priority": 1,
+                                "padding": [ 0, 0, 25, 0 ]
+                            }
+                        },
+                        "join": {
+                            "type": "Widget",
+                            "data": {
+                                "key": "textbutton",
+                                "variables": {
+                                    "size": [ 220, 65 ],
+                                    "text": "JOIN",
+                                    "color": "#efebe3"
+                                }
+                            },
+                            "layout": {
+                                "priority": 1,
+                                "padding": [ 0, 0, 0, 0 ]
+                            }
                         }
                     },
                     "layout": {
                         "priority": 1,
                         "padding": [ 0, 25, 0, 50 ]
-                    }
-                },
-                "join": {
-                    "type": "Widget",
-                    "data": {
-                        "key": "textbutton",
-                        "variables": {
-                            "size": [ 220, 65 ],
-                            "text": "JOIN",
-                            "color": "#efebe3"
-                        }
-                    },
-                    "layout": {
-                        "priority": 1,
-                        "padding": [ 0, 25, 0, 0 ]
                     }
                 },
                 "instructions": {
