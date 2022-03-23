@@ -196,6 +196,20 @@
             "wrapS": "clamp",
             "wrapT": "clamp"
         },
+        "button_white": {
+            "file": "textures/ui/button_rounded_white.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
+        "button_beige": {
+            "file": "textures/ui/button_rounded_beige.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
         "left": {
             "file": "textures/left_arrow.png",
             "minfilter": "nearest",
@@ -320,7 +334,7 @@
                             "data": {
                                 "key": "textbutton",
                                 "variables": {
-                                    "size": [ 220, 65 ],
+                                    "size": [ 175, 55 ],
                                     "text": "HOST",
                                     "color": "#efebe3"
                                 }
@@ -335,7 +349,7 @@
                             "data": {
                                 "key": "textbutton",
                                 "variables": {
-                                    "size": [ 220, 65 ],
+                                    "size": [ 175, 55 ],
                                     "text": "JOIN",
                                     "color": "#efebe3"
                                 }
