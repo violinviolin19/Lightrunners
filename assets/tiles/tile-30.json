@@ -5,7 +5,7 @@
   "contents": {
     "type": "Wall",
     "data": {
-      "texture": "tile-30",
+      "texture": "tile-set_30",
       "anchor": [0, 0],
       "priority": 0,
       "obstacle": [0, 0, 48, 0, 48, 48, 0, 48]

@@ -7,7 +7,7 @@
   "contents": {
     "type": "BasicTile",
     "data": {
-      "texture": "tile-3",
+      "texture": "tile-set_3",
       "anchor": [0, 0],
       "priority": 0
     },

@@ -40,6 +40,7 @@ const levelToScene2 = (fileName) => {
                     "y_anchor" : "left"
                 },
                 "children": Object.assign({}, ...layout.reduce((tile, type, index) => {
+                    if (type == 0) return tile;
                     let row = Math.floor(index / width);
                     let col = index % width;
                     let obj = {};
