@@ -6,6 +6,7 @@
 
 #include "../controllers/actions/Attack.h"
 #include "../controllers/actions/Movement.h"
+#include "../controllers/actions/OpenMap.h"
 #include "../loaders/CustomScene2Loader.h"
 #include "../models/tiles/Wall.h"
 
@@ -184,6 +185,10 @@ void GameScene::update(float timestep) {
   for (std::shared_ptr<Controller> controller : _controllers) {
     controller->update();
   }
+  
+  if (InputController::get<OpenMap>()->didOpenMap()) {
+    CULog("opened map");
+  }
 
   // Movement
   _my_player->step(timestep, InputController::get<Movement>()->getMovement(),
@@ -223,6 +228,11 @@ void GameScene::update(float timestep) {
 
   auto ui_layer = _assets->get<cugl::scene2::SceneNode>("ui-scene");
   auto text = ui_layer->getChildByName<cugl::scene2::Label>("health");
+//
+//  auto minimap = ui_layer->getChildByName<cugl::scene2::SceneNode>("minimap");
+//  std::unordered_map<int, std::shared_ptr<RoomModel>> rooms =
+//    _level_controller->getLevelModel()->getRooms();
+  
   std::string msg =
       cugl::strtool::format("Health: %d", _my_player->getHealth());
   text->setText(msg);

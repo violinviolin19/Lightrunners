@@ -37,6 +37,9 @@
 		57D18F9427E184760085A52E /* EnemyModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57D18F9327E184760085A52E /* EnemyModel.cpp */; };
 		57D18F9527E184760085A52E /* EnemyModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57D18F9327E184760085A52E /* EnemyModel.cpp */; };
 		57D18F9627E184760085A52E /* EnemyModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57D18F9327E184760085A52E /* EnemyModel.cpp */; };
+		CA53F11827ED96E800F2699C /* OpenMap.cp in Sources */ = {isa = PBXBuildFile; fileRef = CA53F11727ED96E800F2699C /* OpenMap.cp */; };
+		CA53F11927ED96E800F2699C /* OpenMap.cp in Sources */ = {isa = PBXBuildFile; fileRef = CA53F11727ED96E800F2699C /* OpenMap.cp */; };
+		CA53F11A27ED96E800F2699C /* OpenMap.cp in Sources */ = {isa = PBXBuildFile; fileRef = CA53F11727ED96E800F2699C /* OpenMap.cp */; };
 		CA5F188B27DBC1B70077AEBB /* MenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA5F188627DBC1B70077AEBB /* MenuScene.cpp */; };
 		CA5F188C27DBC1B70077AEBB /* MenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA5F188627DBC1B70077AEBB /* MenuScene.cpp */; };
 		CA5F188D27DBC1B70077AEBB /* MenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA5F188627DBC1B70077AEBB /* MenuScene.cpp */; };
@@ -226,6 +229,8 @@
 		57D18F8627E14F100085A52E /* TurtleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TurtleController.h; sourceTree = "<group>"; };
 		57D18F9327E184760085A52E /* EnemyModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EnemyModel.cpp; sourceTree = "<group>"; };
 		57D18F9727E184900085A52E /* EnemyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnemyModel.h; sourceTree = "<group>"; };
+		CA53F11727ED96E800F2699C /* OpenMap.cp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenMap.cp; sourceTree = "<group>"; };
+		CA53F11B27ED970B00F2699C /* OpenMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenMap.h; sourceTree = "<group>"; };
 		CA5F188627DBC1B70077AEBB /* MenuScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MenuScene.cpp; sourceTree = "<group>"; };
 		CA5F188A27DBC1B70077AEBB /* MenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuScene.h; sourceTree = "<group>"; };
 		CA9B3EAB27DE9A6900755902 /* HostGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostGameScene.h; sourceTree = "<group>"; };
@@ -497,6 +502,8 @@
 				D52E673227BF305900F8E2B8 /* Action.h */,
 				D5EB744C27C335C7007D157D /* Movement.cpp */,
 				D5EB744D27C335C7007D157D /* Movement.h */,
+				CA53F11B27ED970B00F2699C /* OpenMap.h */,
+				CA53F11727ED96E800F2699C /* OpenMap.cp */,
 			);
 			path = actions;
 			sourceTree = "<group>";
@@ -884,6 +891,7 @@
 				D58B972B27DD31DE0071D1FC /* Door.cpp in Sources */,
 				D568D22B27DB41B400CA2BA9 /* Hungarian.cpp in Sources */,
 				D52E673627BF305A00F8E2B8 /* LoadingScene.cpp in Sources */,
+				CA53F11A27ED96E800F2699C /* OpenMap.cp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -925,6 +933,7 @@
 				D58B972A27DD31DE0071D1FC /* Door.cpp in Sources */,
 				D568D22A27DB41B400CA2BA9 /* Hungarian.cpp in Sources */,
 				D52E673527BF305A00F8E2B8 /* LoadingScene.cpp in Sources */,
+				CA53F11927ED96E800F2699C /* OpenMap.cp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -966,6 +975,7 @@
 				D58B972927DD31DE0071D1FC /* Door.cpp in Sources */,
 				D568D22927DB41B400CA2BA9 /* Hungarian.cpp in Sources */,
 				D52E673427BF305A00F8E2B8 /* LoadingScene.cpp in Sources */,
+				CA53F11827ED96E800F2699C /* OpenMap.cp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

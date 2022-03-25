@@ -5,6 +5,7 @@
 #include "actions/Action.h"
 #include "actions/Attack.h"
 #include "actions/Movement.h"
+#include "actions/OpenMap.h"
 
 // static
 std::shared_ptr<InputController> InputController::_singleton = nullptr;
@@ -28,6 +29,9 @@ bool InputController::init(const std::shared_ptr<cugl::AssetManager> &assets,
 
     _active = InputController::attachAction<Movement>(
         Movement::alloc(assets, bounds)->getHook());
+    
+    _active = InputController::attachAction<OpenMap>(
+        OpenMap::alloc(assets, bounds)->getHook());
   }
   return _active;
 }
