@@ -16,24 +16,11 @@
     },
     "children": {
       "tile": {
-        "type": "Wall",
+        "type": "Terminal",
         "data": {
-          "texture": "tile-set_31",
+          "texture": "tile-set_63",
           "anchor": [0, 0],
-          "priority": 0,
-          "obstacle": [38, 0, 48, 0, 48, 48, 38, 48]
-        },
-        "layout": {
-          "x_anchor": "left",
-          "y_anchor": "bottom"
-        }
-      },
-      "shadow": {
-        "type": "Image",
-        "data": {
-          "texture": "tile-set-shadows_31",
-          "anchor": [0, 0],
-          "priority": -0.9
+          "priority": 0
         },
         "layout": {
           "x_anchor": "left",

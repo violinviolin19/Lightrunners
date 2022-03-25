@@ -32,9 +32,7 @@
         "type": "Widget",
         "data": {
           "key": "tile-1",
-          "variables": {
-            "priority": 0
-          }
+          "variables": {}
         }
       }
     }

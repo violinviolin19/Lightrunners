@@ -21,7 +21,8 @@
           "texture": "tile-set_64",
           "anchor": [0, 0],
           "priority": 0,
-          "obstacle": [0, 0, 48, 0, 48, 48, 0, 48]
+          "obstacle": [8, 8, 22, 8, 22, 0, 26, 0, 26, 8, 40, 8, 40, 40, 8, 40],
+          "offset-priority": 8
         },
         "layout": {
           "x_anchor": "left",
@@ -34,7 +35,7 @@
         "data": {
           "texture": "tile-set-shadows_64",
           "anchor": [0, 0],
-          "priority": 0.0001
+          "priority": -0.9
         },
         "layout": {
           "x_anchor": "left",
@@ -45,9 +46,7 @@
         "type": "Widget",
         "data": {
           "key": "tile-1",
-          "variables": {
-            "priority": 0
-          }
+          "variables": {}
         }
       }
     }

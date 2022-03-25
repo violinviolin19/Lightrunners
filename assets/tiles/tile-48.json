@@ -16,16 +16,16 @@
     },
     "children": {
       "tile": {
-        "type": "BasicTile",
+        "type": "Wall",
         "data": {
           "texture": "tile-set_48",
           "anchor": [0, 0],
-          "priority": 0
+          "priority": 0,
+          "obstacle": [0, 0, 10, 0, 10, 48, 0, 48]
         },
         "layout": {
           "x_anchor": "left",
-          "y_anchor": "bottom",
-          "absolute": true
+          "y_anchor": "bottom"
         }
       },
       "shadow": {
@@ -33,7 +33,7 @@
         "data": {
           "texture": "tile-set-shadows_48",
           "anchor": [0, 0],
-          "priority": 0.0001
+          "priority": -0.9
         },
         "layout": {
           "x_anchor": "left",
@@ -44,9 +44,7 @@
         "type": "Widget",
         "data": {
           "key": "tile-1",
-          "variables": {
-            "priority": 0
-          }
+          "variables": {}
         }
       }
     }

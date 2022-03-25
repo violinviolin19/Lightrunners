@@ -18,7 +18,7 @@
         "data": {
           "texture": "tile-set-shadows_61",
           "anchor": [0, 0],
-          "priority": 0.0001
+          "priority": -0.9
         },
         "layout": {
           "x_anchor": "left",
@@ -29,9 +29,7 @@
         "type": "Widget",
         "data": {
           "key": "tile-1",
-          "variables": {
-            "priority": 0
-          }
+          "variables": {}
         }
       }
     }
