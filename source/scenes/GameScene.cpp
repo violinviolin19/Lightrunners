@@ -15,7 +15,8 @@
 
 bool GameScene::init(
     const std::shared_ptr<cugl::AssetManager>& assets,
-    const std::shared_ptr<level_gen::LevelGenerator>& level_gen) {
+    const std::shared_ptr<level_gen::LevelGenerator>& level_gen,
+    const std::shared_ptr<cugl::scene2::SceneNode>& map) {
   if (_active) return false;
   _active = true;
 
@@ -30,6 +31,7 @@ bool GameScene::init(
 
   _world_node = _assets->get<cugl::scene2::SceneNode>("world-scene");
   _world_node->setContentSize(dim);
+  _world_node->setVisible(false);
 
   _debug_node = cugl::scene2::SceneNode::alloc();
   _debug_node->setContentSize(dim);
@@ -37,6 +39,12 @@ bool GameScene::init(
   _level_controller =
       LevelController::alloc(_assets, _world_node, _debug_node, level_gen);
   _controllers.push_back(_level_controller->getHook());
+  
+  _map = map;
+  _map->setContentSize(dim);
+  _map->setVisible(true);
+  _map->setPosition(dim / 2);
+  _map->doLayout();
 
   // Get the world from level controller and attach the listeners.
   _world = _level_controller->getWorld();
@@ -86,6 +94,7 @@ bool GameScene::init(
   terminal_text->setForeground(cugl::Color4::RED);
 
   cugl::Scene2::addChild(_world_node);
+  cugl::Scene2::addChild(_map);
   cugl::Scene2::addChild(ui_layer);
   cugl::Scene2::addChild(win_layer);
   cugl::Scene2::addChild(_debug_node);
@@ -188,6 +197,7 @@ void GameScene::update(float timestep) {
   
   if (InputController::get<OpenMap>()->didOpenMap()) {
     CULog("opened map");
+    
   }
 
   // Movement
