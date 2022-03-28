@@ -11,9 +11,6 @@ class Player : public cugl::physics2::CapsuleObstacle {
   /** Enum for the player's state (for animation). */
   enum State { IDLE, MOVING, ATTACKING };
 
-  /** Enum for the player's social deduction role. */
-  enum Role { BETRAYER, COOPERATOR };
-
  private:
   /** The scene graph node for the player (moving). */
   std::shared_ptr<cugl::scene2::SpriteNode> _player_node;
@@ -27,8 +24,8 @@ class Player : public cugl::physics2::CapsuleObstacle {
   /** The player's current state. */
   State _current_state;
 
-  /** The player's role. */
-  Role _role;
+  /** The player's role, true if betrayer, false otherwise */
+  bool _is_betrayer;
 
   /** The player's unique id. */
   int _id;
@@ -110,25 +107,18 @@ class Player : public cugl::physics2::CapsuleObstacle {
   void setState(State state) { _current_state = state; }
 
   /**
-   * Returns the role of the player.
+   * Returns if the player is a betrayer.
    *
-   * @return the current role.
+   * @return true if player is betrayer, false otherwise.
    */
-  Role getRole() const { return _role; }
+  bool isBetrayer() const { return _is_betrayer; }
 
   /**
-   * Returns the string representation of the role.
+   * Sets the role of the player as betrayer or not.
    *
-   * @return the current role name as a string.
+   * @param set current role to betrayer if true, cooperator if false.
    */
-  std::string getRoleName();
-
-  /**
-   * Sets the role of the player.
-   *
-   * @param set current role.
-   */
-  void setRole(Role role) { _role = role; }
+  void setBetrayer(bool b) { _is_betrayer = b; }
 
   /**
    * Returns the current health of the player.
