@@ -11,6 +11,9 @@ class Player : public cugl::physics2::CapsuleObstacle {
   /** Enum for the player's state (for animation). */
   enum State { IDLE, MOVING, ATTACKING };
 
+  /** Enum for the player's social deduction role. */
+  enum Role { BETRAYER, COOPERATOR };
+
  private:
   /** The scene graph node for the player (moving). */
   std::shared_ptr<cugl::scene2::SpriteNode> _player_node;
@@ -23,6 +26,9 @@ class Player : public cugl::physics2::CapsuleObstacle {
 
   /** The player's current state. */
   State _current_state;
+
+  /** The player's role. */
+  Role _role;
 
   /** The player's unique id. */
   int _id;
@@ -99,9 +105,30 @@ class Player : public cugl::physics2::CapsuleObstacle {
   /**
    * Sets the current state of the player and changes textures accordingly.
    *
-   * @param state current state.
+   * @param set current state.
    */
   void setState(State state) { _current_state = state; }
+
+  /**
+   * Returns the role of the player.
+   *
+   * @return the current role.
+   */
+  Role getRole() const { return _role; }
+
+  /**
+   * Returns the string representation of the role.
+   *
+   * @return the current role name as a string.
+   */
+  std::string getRoleName();
+
+  /**
+   * Sets the role of the player.
+   *
+   * @param set current role.
+   */
+  void setRole(Role role) { _role = role; }
 
   /**
    * Returns the current health of the player.

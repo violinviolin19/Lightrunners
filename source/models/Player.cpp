@@ -46,7 +46,21 @@ bool Player::init(const cugl::Vec2 pos, string name) {
   setRestitution(0.01f);
   setFixedRotation(true);
 
+  // TODO assign role programatically
+  _role = BETRAYER;
+
   return true;
+}
+
+std::string Player::getRoleName() {
+  switch (_role) {
+    case BETRAYER:
+      return "Betrayer";
+    case COOPERATOR:
+      return "Cooperator";
+    default:
+      return "";
+  }
 }
 
 void Player::takeDamage() {
