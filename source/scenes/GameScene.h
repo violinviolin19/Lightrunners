@@ -144,9 +144,11 @@ class GameScene : public cugl::Scene2 {
    * Updates the number of remaining milliseconds by comparing the last
    * timestamp it was updated with the current timestamp.
    *
+   * Note that only the host does this, as clients will just use host timer.
+   *
    * Has the side effect of updating the last timestamp stored.
    */
-  void updateMillisRemaining();
+  void updateMillisRemainingIfHost();
 
   /**
    * Returns a string representing the time remaining based on time remaining.

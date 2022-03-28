@@ -224,7 +224,7 @@ void GameScene::update(float timestep) {
   }
 
   updateCamera(timestep);
-  updateMillisRemaining();
+  updateMillisRemainingIfHost();
   _world->update(timestep);
 
   // ===== POST-UPDATE =======
@@ -360,7 +360,7 @@ void GameScene::sendNetworkInfo() {
       }
     }
 
-    // Send all player info
+    // Send all player info.
     _serializer.writeSint32(2);
     _serializer.writeJsonVector(player_positions);
 
@@ -371,10 +371,24 @@ void GameScene::sendNetworkInfo() {
 
     _serializer.reset();
     _network->send(msg);
+
+    // Send all timer info.
+    std::shared_ptr<cugl::JsonValue> timer_info =
+        cugl::JsonValue::allocObject();
+    std::shared_ptr<cugl::JsonValue> millis_remaining =
+        cugl::JsonValue::alloc(static_cast<long>(getMillisRemaining()));
+    timer_info->appendChild(millis_remaining);
+    millis_remaining->setKey("millis_remaining");
+
+    _serializer.writeSint32(3);
+    _serializer.writeJson(timer_info);
+    std::vector<uint8_t> timer_msg = _serializer.serialize();
+    _serializer.reset();
+    _network->send(timer_msg);
+
   } else {
     // Send just the current player information.
 
-    // TODO somehow send if enemy was damaged
     std::shared_ptr<cugl::JsonValue> player_info =
         cugl::JsonValue::allocObject();
 
@@ -463,6 +477,12 @@ void GameScene::processData(const std::vector<uint8_t>& data) {
       float pos_y = player_position->get(1)->asFloat();
       updatePlayerInfo(player_id, pos_x, pos_y);
     }
+  } else if (code == 3) {  // Timer info update
+    cugl::NetworkDeserializer::Message timer_msg = _deserializer.read();
+    std::shared_ptr<cugl::JsonValue> timer_info =
+        std::get<std::shared_ptr<cugl::JsonValue>>(timer_msg);
+    int millis_remaining = timer_info->getInt("millis_remaining");
+    setMillisRemaining(millis_remaining);
   } else if (code == 4) {  // Single player info update
     cugl::NetworkDeserializer::Message msg = _deserializer.read();
     std::shared_ptr<cugl::JsonValue> player =
@@ -701,12 +721,14 @@ void GameScene::updateCamera(float timestep) {
   _debug_node->setPosition(smoothed_position);
 }
 
-void GameScene::updateMillisRemaining() {
-  cugl::Timestamp stamp = cugl::Timestamp();
-  int milli_difference =
-      cugl::Timestamp::ellapsedMillis(_last_timestamp, stamp);
-  _millis_remaining -= milli_difference;
-  _last_timestamp = stamp;
+void GameScene::updateMillisRemainingIfHost() {
+  if (_ishost) {
+    cugl::Timestamp stamp = cugl::Timestamp();
+    int milli_difference =
+        cugl::Timestamp::ellapsedMillis(_last_timestamp, stamp);
+    _millis_remaining -= milli_difference;
+    _last_timestamp = stamp;
+  }
 
   // TODO handle if milliseconds reaches 0
 }
