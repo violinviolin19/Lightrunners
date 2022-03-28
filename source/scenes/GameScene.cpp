@@ -730,7 +730,8 @@ void GameScene::updateMillisRemainingIfHost() {
     _last_timestamp = stamp;
   }
 
-  // TODO handle if milliseconds reaches 0
+  // TODO if milliseconds reaches 0 - need to activate betrayer win condition
+  // (for host or for everyone?)
 }
 
 std::string GameScene::getTimerString() {
