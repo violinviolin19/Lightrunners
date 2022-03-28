@@ -70,6 +70,11 @@ bool GameScene::init(
   win_layer->doLayout();
   win_layer->setVisible(false);
 
+  auto timer_text = ui_layer->getChildByName<cugl::scene2::Label>("timer");
+  std::string timer_msg = getTimerString();
+  timer_text->setText(timer_msg);
+  timer_text->setForeground(cugl::Color4::WHITE);
+
   auto text = ui_layer->getChildByName<cugl::scene2::Label>("health");
   std::string msg =
       cugl::strtool::format("Health: %d", _my_player->getHealth());
@@ -220,8 +225,13 @@ void GameScene::update(float timestep) {
   _world->update(timestep);
 
   // ===== POST-UPDATE =======
-
   auto ui_layer = _assets->get<cugl::scene2::SceneNode>("ui-scene");
+
+  auto timer_text = ui_layer->getChildByName<cugl::scene2::Label>("timer");
+  std::string timer_msg = getTimerString();
+  timer_text->setText(timer_msg);
+  timer_text->setForeground(cugl::Color4::WHITE);
+
   auto text = ui_layer->getChildByName<cugl::scene2::Label>("health");
   std::string msg =
       cugl::strtool::format("Health: %d", _my_player->getHealth());
@@ -686,4 +696,22 @@ void GameScene::updateCamera(float timestep) {
 
   _world_node->setPosition(smoothed_position);
   _debug_node->setPosition(smoothed_position);
+}
+
+std::string GameScene::getTimerString() {
+  int total_seconds = getMillisRemaining() / 1000;
+  int minutes = total_seconds / 60;
+  int seconds = total_seconds % 60;
+
+  // append leading 0s if numbers are below 10
+  std::string minute_string = cugl::strtool::format("%d:", minutes);
+  if (minutes < 10) {
+    minute_string = "0" + minute_string;
+  }
+  std::string second_string = cugl::strtool::format("%d", seconds);
+  if (seconds < 10) {
+    second_string = "0" + second_string;
+  }
+
+  return minute_string + second_string;
 }
