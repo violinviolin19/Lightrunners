@@ -181,6 +181,8 @@ void HostMenuScene::determineAndSendRoles() {
       num_betrayers_per_num_players[_network->getNumPlayers() - 1];
 
   // assign betrayers randomly
+  srand(time(0));
+
   // pick number between 0 to last player id
   int first_betrayer_id = rand() % _network->getNumPlayers();
 
