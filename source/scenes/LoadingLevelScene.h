@@ -74,15 +74,6 @@ class LoadingLevelScene : public cugl::Scene2 {
    * @param batch     The SpriteBatch to draw with.
    */
   void render(const std::shared_ptr<cugl::SpriteBatch>& batch) override;
-  
-  /**
-   * Returns the pointer to the map SceneNode.
-   *
-   * @return The map SceneNode
-   */
-  std::shared_ptr<cugl::scene2::SceneNode> getMap() {
-    return _map;
-  }
 
   /**
    * Returns the network connection (as made by this scene).

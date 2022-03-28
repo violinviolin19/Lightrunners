@@ -94,13 +94,11 @@ class GameScene : public cugl::Scene2 {
    *
    * @param assets    The (loaded) assets for this game mode.
    * @param level_gen The generated level.
-   * @param map           The map SceneNode
    *
    * @return true if the controller is initialized properly, false otherwise.
    */
   bool init(const std::shared_ptr<cugl::AssetManager>& assets,
-            const std::shared_ptr<level_gen::LevelGenerator>& level_gen,
-            const std::shared_ptr<cugl::scene2::SceneNode>& map);
+            const std::shared_ptr<level_gen::LevelGenerator>& level_gen);
 
   /**
    * Sets whether debug mode is active.
