@@ -84,6 +84,17 @@ bool GameScene::init(
   terminal_text->setText(terminal_msg);
   terminal_text->setForeground(cugl::Color4::RED);
 
+  auto role_text = ui_layer->getChildByName<cugl::scene2::Label>("role");
+  std::string role_msg = "";
+  if (_is_betrayer) {
+    role_msg = "Role: Betrayer";
+    role_text->setForeground(cugl::Color4::RED);
+  } else {
+    role_msg = "Role: Cooperator";
+    role_text->setForeground(cugl::Color4::GREEN);
+  }
+  role_text->setText(role_msg);
+
   cugl::Scene2::addChild(_world_node);
   cugl::Scene2::addChild(ui_layer);
   cugl::Scene2::addChild(win_layer);
@@ -106,6 +117,7 @@ void GameScene::populate(cugl::Size dim) {
   std::shared_ptr<cugl::Texture> player = _assets->get<cugl::Texture>("player");
 
   _my_player = Player::alloc(cugl::Vec2::ZERO, "Johnathan");
+  _my_player->setBetrayer(_is_betrayer);
   _players.push_back(_my_player);
   _level_controller->getLevelModel()->setPlayer(_my_player);
 
@@ -222,6 +234,7 @@ void GameScene::update(float timestep) {
   // ===== POST-UPDATE =======
 
   auto ui_layer = _assets->get<cugl::scene2::SceneNode>("ui-scene");
+
   auto text = ui_layer->getChildByName<cugl::scene2::Label>("health");
   std::string msg =
       cugl::strtool::format("Health: %d", _my_player->getHealth());
@@ -232,6 +245,17 @@ void GameScene::update(float timestep) {
   std::string terminal_msg = cugl::strtool::format("Terminals Activated: %d",
                                                    _num_terminals_activated);
   terminal_text->setText(terminal_msg);
+
+  auto role_text = ui_layer->getChildByName<cugl::scene2::Label>("role");
+  std::string role_msg = "";
+  if (_is_betrayer) {
+    role_msg = "Role: Betrayer";
+    role_text->setForeground(cugl::Color4::RED);
+  } else {
+    role_msg = "Role: Cooperator";
+    role_text->setForeground(cugl::Color4::GREEN);
+  }
+  role_text->setText(role_msg);
 
   // POST-UPDATE
   // Check for disposal

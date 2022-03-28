@@ -64,6 +64,9 @@ class GameScene : public cugl::Scene2 {
   /** Whether this player is the host. */
   bool _ishost;
 
+  /** Whether this player is a betrayer. */
+  bool _is_betrayer;
+
   /** Whether we quit the game. */
   bool _quit;
 
@@ -177,6 +180,13 @@ class GameScene : public cugl::Scene2 {
    * @param host  Whether the player is host.
    */
   void setHost(bool host) { _ishost = host; }
+
+  /**
+   * Sets whether the player is a betrayer or cooperator.
+   *
+   * @param betrayer  Whether the player is a betrayer.
+   */
+  void setBetrayer(bool betrayer) { _is_betrayer = betrayer; }
 
   /**
    * Checks that the network connection is still active.

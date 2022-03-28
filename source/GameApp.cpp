@@ -244,6 +244,12 @@ void GameApp::updateLevelLoadingScene(float timestep) {
   _level_loading.disconnect();
   _gameplay.setHost(_level_loading.getIsHost());
 
+  if (_level_loading.getIsHost()) {
+    _gameplay.setBetrayer(_hostgame.isBetrayer());
+  } else {
+    _gameplay.setBetrayer(_joingame.isBetrayer());
+  }
+
   _level_loading.setActive(false);
   _gameplay.setActive(true);
 
