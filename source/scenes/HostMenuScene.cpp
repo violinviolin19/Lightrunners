@@ -157,6 +157,8 @@ void HostMenuScene::configureStartButton() {
 }
 
 void HostMenuScene::startGame() {
+  determineAndSendRoles();
+
   std::random_device my_random_device;
   _seed = my_random_device();
 
@@ -167,5 +169,65 @@ void HostMenuScene::startGame() {
   _serializer.reset();
 
   _network->send(msg);
+
   _status = START;
+}
+
+void HostMenuScene::determineAndSendRoles() {
+  // determine number of betrayers for number of connected players
+  // TODO make this a constant somewhere
+  int num_betrayers_per_num_players[8] = {1, 1, 1, 1, 1, 2, 2, 2};
+  int num_betrayers =
+      num_betrayers_per_num_players[_network->getNumPlayers() - 1];
+
+  // assign betrayers randomly
+  // pick number between 0 to last player id
+  int first_betrayer_id = rand() % _network->getNumPlayers();
+
+  // pick second betrayer as number between 0 to last player id - 1
+  // if the same id is picked as first betrayer, assign last player
+  int second_betrayer_id = -1;
+  if (num_betrayers > 1) {
+    second_betrayer_id = rand() % _network->getNumPlayers() - 1;
+    if (second_betrayer_id == first_betrayer_id) {
+      second_betrayer_id = _network->getNumPlayers() - 1;
+    }
+  }
+
+  // assign host as betrayer if either id is 0
+  if (first_betrayer_id == 0 || second_betrayer_id == 0) {
+    _is_betrayer = true;
+  } else {
+    _is_betrayer = false;
+  }
+
+  // send number of betrayers and list of ids to all accounts
+  std::shared_ptr<cugl::JsonValue> betrayer_info =
+      cugl::JsonValue::allocObject();
+
+  std::shared_ptr<cugl::JsonValue> json_num_betrayers =
+      cugl::JsonValue::alloc(static_cast<long>(num_betrayers));
+  betrayer_info->appendChild(json_num_betrayers);
+  json_num_betrayers->setKey("num_betrayers");
+
+  std::shared_ptr<cugl::JsonValue> betrayer_ids = cugl::JsonValue::allocArray();
+  std::shared_ptr<cugl::JsonValue> betrayer_1 =
+      cugl::JsonValue::alloc(static_cast<long>(first_betrayer_id));
+
+  betrayer_ids->appendChild(betrayer_1);
+
+  if (num_betrayers > 1) {
+    std::shared_ptr<cugl::JsonValue> betrayer_2 =
+        cugl::JsonValue::alloc(static_cast<long>(second_betrayer_id));
+    betrayer_ids->appendChild(betrayer_2);
+  }
+
+  betrayer_info->appendChild(betrayer_ids);
+  betrayer_ids->setKey("betrayer_ids");
+
+  _serializer.writeSint32(254);
+  _serializer.writeJson(betrayer_info);
+  std::vector<uint8_t> msg = _serializer.serialize();
+  _serializer.reset();
+  _network->send(msg);
 }
