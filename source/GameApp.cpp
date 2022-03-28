@@ -32,6 +32,7 @@ void GameApp::onStartup() {
 
   // Queue up the other assets (EMPTY in this case).
   _assets->loadDirectoryAsync("json/assets.json", nullptr);
+  _assets->loadDirectoryAsync("json/tiles.json", nullptr);
 
   cugl::Application::onStartup();  // YOU MUST END with call to parent.
 }
