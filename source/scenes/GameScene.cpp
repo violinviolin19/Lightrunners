@@ -97,6 +97,8 @@ bool GameScene::init(
 
   InputController::get()->init(_assets, cugl::Scene2::getBounds());
 
+  setMillisRemaining(900000);
+
   return true;
 }
 
@@ -222,6 +224,7 @@ void GameScene::update(float timestep) {
   }
 
   updateCamera(timestep);
+  updateMillisRemaining();
   _world->update(timestep);
 
   // ===== POST-UPDATE =======
@@ -696,6 +699,16 @@ void GameScene::updateCamera(float timestep) {
 
   _world_node->setPosition(smoothed_position);
   _debug_node->setPosition(smoothed_position);
+}
+
+void GameScene::updateMillisRemaining() {
+  cugl::Timestamp stamp = cugl::Timestamp();
+  int milli_difference =
+      cugl::Timestamp::ellapsedMillis(_last_timestamp, stamp);
+  _millis_remaining -= milli_difference;
+  _last_timestamp = stamp;
+
+  // TODO handle if milliseconds reaches 0
 }
 
 std::string GameScene::getTimerString() {

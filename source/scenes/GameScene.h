@@ -74,7 +74,7 @@ class GameScene : public cugl::Scene2 {
   int _num_terminals_activated;
 
   /** The milliseconds remaining in the game before it ends. */
-  int _millis_remaining = 900000;
+  int _millis_remaining;
 
   /** The last timestamp at which the timer was updated. */
   cugl::Timestamp _last_timestamp;
@@ -134,14 +134,19 @@ class GameScene : public cugl::Scene2 {
   int getMillisRemaining() { return _millis_remaining; }
 
   /**
+   * Set the number of milliseconds remaining.
+   *
+   * @param millis left in the game.
+   */
+  void setMillisRemaining(int millis) { _millis_remaining = millis; }
+
+  /**
    * Updates the number of remaining milliseconds by comparing the last
-   * timestamp it was updated with the provided timestamp.
+   * timestamp it was updated with the current timestamp.
    *
    * Has the side effect of updating the last timestamp stored.
-   *
-   * @param timestamp the timestamp to compare with last timestamp.
    */
-  void updateMillisRemaining(cugl::Timestamp timestamp){};
+  void updateMillisRemaining();
 
   /**
    * Returns a string representing the time remaining based on time remaining.
