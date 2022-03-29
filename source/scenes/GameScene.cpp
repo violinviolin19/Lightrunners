@@ -14,7 +14,8 @@
 
 bool GameScene::init(
     const std::shared_ptr<cugl::AssetManager>& assets,
-    const std::shared_ptr<level_gen::LevelGenerator>& level_gen) {
+    const std::shared_ptr<level_gen::LevelGenerator>& level_gen,
+    bool is_betrayer) {
   if (_active) return false;
   _active = true;
 
@@ -56,6 +57,8 @@ bool GameScene::init(
       TankController::alloc(_assets, _world, _world_node, _debug_node);
   _turtle_controller =
       TurtleController::alloc(_assets, _world, _world_node, _debug_node);
+
+  setBetrayer(is_betrayer);
 
   populate(dim);
 

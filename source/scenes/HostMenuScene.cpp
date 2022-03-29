@@ -177,23 +177,44 @@ void HostMenuScene::determineAndSendRoles() {
   // determine number of betrayers for number of connected players
   // TODO make this a constant somewhere
   int num_betrayers_per_num_players[8] = {1, 1, 1, 1, 1, 2, 2, 2};
-  int num_betrayers =
-      num_betrayers_per_num_players[_network->getNumPlayers() - 1];
+  int num_players = _network->getNumPlayers();
+  int num_betrayers = num_betrayers_per_num_players[num_players - 1];
 
   // assign betrayers randomly
   srand(time(0));
 
-  // pick number between 0 to last player id
-  int first_betrayer_id = rand() % _network->getNumPlayers();
+  // pick number between 0 to numPlayers to represent player index
+  int first_betrayer_index = rand() % num_players;
 
-  // pick second betrayer as number between 0 to last player id - 1
-  // if the same id is picked as first betrayer, assign last player
+  // pick second betrayer as number between 0 to last player index - 1
+  // if the same index is picked as first betrayer, assign last player
+  int second_betrayer_index = -1;
+  if (num_betrayers > 1) {
+    second_betrayer_index = rand() % (num_players - 1);
+    if (second_betrayer_index == first_betrayer_index) {
+      second_betrayer_index = num_players - 1;
+    }
+  }
+
+  // find the IDs matched with player indices.
+  // this is necessary if any players disconnect in the lobby, as a player might
+  // have an id that is >= numPlayers.
+  int num_player_ids_found = 0;
+  int current_id = 0;
+  int player_ids[8] = {};  // 8 is max number of players
+  while (num_player_ids_found < num_players) {
+    if (_network->isPlayerActive(current_id)) {
+      player_ids[num_player_ids_found] = current_id;
+      num_player_ids_found += 1;
+    }
+    current_id += 1;
+  }
+
+  // convert index representing player to player ID
+  int first_betrayer_id = player_ids[first_betrayer_index];
   int second_betrayer_id = -1;
   if (num_betrayers > 1) {
-    second_betrayer_id = rand() % _network->getNumPlayers() - 1;
-    if (second_betrayer_id == first_betrayer_id) {
-      second_betrayer_id = _network->getNumPlayers() - 1;
-    }
+    second_betrayer_id = player_ids[second_betrayer_index];
   }
 
   // assign host as betrayer if either id is 0

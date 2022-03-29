@@ -107,7 +107,7 @@ class HostMenuScene : public PeerScene {
    *
    * Assignment algorithm assumes that the number of betrayers is [1, 2].
    */
-  void HostMenuScene::determineAndSendRoles();
+  void determineAndSendRoles();
 };
 
 #endif /* SCENES_HOST_SCENE_H_ */

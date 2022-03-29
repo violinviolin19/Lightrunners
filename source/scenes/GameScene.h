@@ -92,13 +92,15 @@ class GameScene : public cugl::Scene2 {
   /**
    * Initializes the controller contents, and starts the game.
    *
-   * @param assets    The (loaded) assets for this game mode.
-   * @param level_gen The generated level.
+   * @param assets      The (loaded) assets for this game mode.
+   * @param level_gen   The generated level.
+   * @param is_betrayer True if the game is being played by a betrayer.
    *
    * @return true if the controller is initialized properly, false otherwise.
    */
   bool init(const std::shared_ptr<cugl::AssetManager>& assets,
-            const std::shared_ptr<level_gen::LevelGenerator>& level_gen);
+            const std::shared_ptr<level_gen::LevelGenerator>& level_gen,
+            bool is_betrayer);
 
   /**
    * Sets whether debug mode is active.
