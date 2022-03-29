@@ -109,6 +109,9 @@
 		D598E69B27C57E3C0039326B /* LevelGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D598E69927C57E3C0039326B /* LevelGenerator.cpp */; };
 		D598E69C27C57E3C0039326B /* LevelGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D598E69927C57E3C0039326B /* LevelGenerator.cpp */; };
 		D598E69D27C57E3C0039326B /* LevelGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D598E69927C57E3C0039326B /* LevelGenerator.cpp */; };
+		D5A1467927E38A58002B3FFD /* tiles in Resources */ = {isa = PBXBuildFile; fileRef = D5A1467827E38A57002B3FFD /* tiles */; };
+		D5A1467A27E38A58002B3FFD /* tiles in Resources */ = {isa = PBXBuildFile; fileRef = D5A1467827E38A57002B3FFD /* tiles */; };
+		D5A1467B27E38A58002B3FFD /* tiles in Resources */ = {isa = PBXBuildFile; fileRef = D5A1467827E38A57002B3FFD /* tiles */; };
 		D5EB744E27C335C7007D157D /* Movement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5EB744C27C335C7007D157D /* Movement.cpp */; };
 		D5EB744F27C335C7007D157D /* Movement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5EB744C27C335C7007D157D /* Movement.cpp */; };
 		D5EB745027C335C7007D157D /* Movement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5EB744C27C335C7007D157D /* Movement.cpp */; };
@@ -278,6 +281,7 @@
 		D58B972827DD31DE0071D1FC /* Door.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Door.h; sourceTree = "<group>"; };
 		D598E69927C57E3C0039326B /* LevelGenerator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LevelGenerator.cpp; sourceTree = "<group>"; };
 		D598E69A27C57E3C0039326B /* LevelGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LevelGenerator.h; sourceTree = "<group>"; };
+		D5A1467827E38A57002B3FFD /* tiles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tiles; sourceTree = "<group>"; };
 		D5BA193327C6E0ED009CBEC1 /* Delaunator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Delaunator.h; sourceTree = "<group>"; };
 		D5CF094D27D6C94D00880F15 /* DefaultRooms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultRooms.h; sourceTree = "<group>"; };
 		D5EB744C27C335C7007D157D /* Movement.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Movement.cpp; sourceTree = "<group>"; };
@@ -561,6 +565,7 @@
 		EB2BE9B71D749870002FE78B /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				D5A1467827E38A57002B3FFD /* tiles */,
 				D58B972027DC7EBD0071D1FC /* rooms */,
 				572894E827D189E200F9BBA5 /* fonts */,
 				D521FB0E27C43BA500D14172 /* widgets */,
@@ -746,7 +751,7 @@
 					};
 					EB74548B1D74D75C002FBAE6 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 3CZ5TUZ2PQ;
+						DevelopmentTeam = LR67JRR3TA;
 					};
 					EBBF18901D74904A008E2001 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -809,6 +814,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5A1467B27E38A58002B3FFD /* tiles in Resources */,
 				D58B972627DC7EBD0071D1FC /* rooms in Resources */,
 				EB22BF9B25D0EA5C002ACE41 /* DeviceMargins.plist in Resources */,
 				EB22BF9625D0EA50002ACE41 /* json in Resources */,
@@ -825,6 +831,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5A1467A27E38A58002B3FFD /* tiles in Resources */,
 				D58B972527DC7EBD0071D1FC /* rooms in Resources */,
 				EB7454D01D750623002FBAE6 /* textures in Resources */,
 				EB7454AB1D74D846002FBAE6 /* iOS.xcassets in Resources */,
@@ -844,6 +851,7 @@
 				EBFE7C091E19B4AC001007C2 /* json in Resources */,
 				572894E927D189E200F9BBA5 /* fonts in Resources */,
 				EB2BE9BB1D7498D2002FE78B /* textures in Resources */,
+				D5A1467927E38A58002B3FFD /* tiles in Resources */,
 				D58B972427DC7EBD0071D1FC /* rooms in Resources */,
 				D521FB0F27C43BA500D14172 /* widgets in Resources */,
 				EBBF189B1D74904A008E2001 /* Mac.xcassets in Resources */,
@@ -1042,13 +1050,13 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 3CZ5TUZ2PQ;
+				DEVELOPMENT_TEAM = LR67JRR3TA;
 				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/iOS-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				PRODUCT_BUNDLE_IDENTIFIER = com.oops.Luminance;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.oops.Luminance-Marcos";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1064,13 +1072,13 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 3CZ5TUZ2PQ;
+				DEVELOPMENT_TEAM = LR67JRR3TA;
 				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/iOS-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				PRODUCT_BUNDLE_IDENTIFIER = com.oops.Luminance;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.oops.Luminance-Marcos";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
