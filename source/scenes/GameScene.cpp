@@ -6,6 +6,7 @@
 
 #include "../controllers/actions/Attack.h"
 #include "../controllers/actions/Movement.h"
+#include "../controllers/actions/Dash.h"
 #include "../controllers/actions/OpenMap.h"
 #include "../loaders/CustomScene2Loader.h"
 #include "../models/tiles/Wall.h"
@@ -229,7 +230,9 @@ void GameScene::update(float timestep) {
   }
 
   // Movement
-  _my_player->step(timestep, InputController::get<Movement>()->getMovement(),
+  
+  
+  _my_player->step(timestep, InputController::get<Movement>()->getMovement(), InputController::get<Dash>()->isDashing(),
                    InputController::get<Attack>()->isAttacking(), _sword);
   // Animation
   _my_player->animate(InputController::get<Movement>()->getMovement());

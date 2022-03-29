@@ -237,7 +237,7 @@ class Player : public cugl::physics2::CapsuleObstacle {
   /**
    * Updates the player.
    */
-  void step(float timestep, cugl::Vec2 forward, bool didAttack,
+  void step(float timestep, cugl::Vec2 forward, bool didDash, bool didAttack,
             std::shared_ptr<Sword> sword);
 
   /**
