@@ -50,6 +50,9 @@ class Action : public std::enable_shared_from_this<Action> {
    */
   virtual bool dispose() = 0;
 
+  /** Reset all the internal input values. */
+  virtual void reset() = 0;
+
   /**
    * Smart pointers are great, and all Actions should be referenced by one.
    * However, polymorphism and smart pointers really do not mix and type

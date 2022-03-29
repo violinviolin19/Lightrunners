@@ -41,10 +41,20 @@ bool InputController::init(const std::shared_ptr<cugl::AssetManager> &assets,
 }
 
 bool InputController::update() {
+  if (_pause) return true;
+
   for (auto it = _actions.begin(); it != _actions.end(); ++it) {
     (it->second)->update();
   }
   return true;
+}
+
+void InputController::pause() {
+  if (_pause) return;
+  _pause = true;
+  for (auto it = _actions.begin(); it != _actions.end(); ++it) {
+    (it->second)->reset();
+  }
 }
 
 bool InputController::dispose() {

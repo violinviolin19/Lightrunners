@@ -25,7 +25,7 @@ bool LevelController::init(
   return true;
 }
 
-void LevelController::update() {
+void LevelController::update(float timestep) {
   std::shared_ptr<RoomModel> current = _level_model->getCurrentRoom();
   std::shared_ptr<Player> player = _level_model->getPlayer();
   float rel_player_y =

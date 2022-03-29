@@ -76,6 +76,13 @@ class Attack : public Action {
    */
   virtual bool dispose() override;
 
+  /** Reset all the internal input values. */
+  void reset() override {
+    _show_joystick_base = false;
+    _joystick_anchor.set(cugl::Vec2::ZERO);
+    _joystick_diff.set(cugl::Vec2::ZERO);
+  }
+
   /**
    * This method allocates Attack and initializes it.
    *
