@@ -1,5 +1,5 @@
-#ifndef SCENES_VOTING_SCENES_WAIT_FOR_PALYER_H_
-#define SCENES_VOTING_SCENES_WAIT_FOR_PALYER_H_
+#ifndef SCENES_VOTING_SCENES_WAIT_FOR_PLAYERS_H_
+#define SCENES_VOTING_SCENES_WAIT_FOR_PLAYERS_H_
 
 #include <cugl/cugl.h>
 
@@ -96,4 +96,4 @@ class WaitForPlayersScene {
   void setCurrentNumPlayers(int num) { _curr_num_players = num; }
 };
 
-#endif  // SCENES_VOTING_SCENES_WAIT_FOR_PALYER_H_
+#endif  // SCENES_VOTING_SCENES_WAIT_FOR_PLAYERS_H_
