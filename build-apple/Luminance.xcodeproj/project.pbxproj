@@ -297,6 +297,7 @@
 		D598E69927C57E3C0039326B /* LevelGenerator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LevelGenerator.cpp; sourceTree = "<group>"; };
 		D598E69A27C57E3C0039326B /* LevelGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LevelGenerator.h; sourceTree = "<group>"; };
 		D5A1467827E38A57002B3FFD /* tiles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tiles; sourceTree = "<group>"; };
+		D5B8BE5327F421F500A4A836 /* RoomTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomTypes.h; sourceTree = "<group>"; };
 		D5BA193327C6E0ED009CBEC1 /* Delaunator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Delaunator.h; sourceTree = "<group>"; };
 		D5CF094D27D6C94D00880F15 /* DefaultRooms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultRooms.h; sourceTree = "<group>"; };
 		D5EB744C27C335C7007D157D /* Movement.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Movement.cpp; sourceTree = "<group>"; };
@@ -560,6 +561,7 @@
 		D579722427D14F01008FCC5E /* level_gen */ = {
 			isa = PBXGroup;
 			children = (
+				D5B8BE5327F421F500A4A836 /* RoomTypes.h */,
 				D5CF094D27D6C94D00880F15 /* DefaultRooms.h */,
 				D56DCD2927CDAD7A002E8363 /* Room.h */,
 				D56DCD2A27CDAD7A002E8363 /* Room.cpp */,

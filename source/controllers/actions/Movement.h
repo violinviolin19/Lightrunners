@@ -85,6 +85,12 @@ class Movement : public Action {
     _joystick_diff.set(cugl::Vec2::ZERO);
   }
 
+  /** Pause all input. */
+  virtual void pause() override {}
+
+  /** Resume all input. */
+  virtual void resume() override {}
+
   /**
    * This method allocates Movement and initializes it.
    *

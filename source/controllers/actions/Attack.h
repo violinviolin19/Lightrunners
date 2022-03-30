@@ -83,6 +83,12 @@ class Attack : public Action {
     _joystick_diff.set(cugl::Vec2::ZERO);
   }
 
+  /** Pause all input. */
+  virtual void pause() override { _button->deactivate(); }
+
+  /** Resume all input. */
+  virtual void resume() override { _button->activate(); }
+
   /**
    * This method allocates Attack and initializes it.
    *

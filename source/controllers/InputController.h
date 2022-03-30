@@ -93,7 +93,7 @@ class InputController {
   void pause();
 
   /** Resume the Input Controller. */
-  void resume() { _pause = false; }
+  void resume();
 
   /**
    * @return If InputController has been activated by calling init()
