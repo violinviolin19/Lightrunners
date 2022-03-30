@@ -35,6 +35,13 @@
             "wrapS": "clamp",
             "wrapT": "clamp"
         },
+        "map": {
+            "file": "textures/map.png",
+            "minfilter": "nearest",
+            "magfilter": "nearest",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
         "player": {
             "file": "textures/player.png",
             "minfilter": "nearest",

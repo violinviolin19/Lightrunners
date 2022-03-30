@@ -50,9 +50,12 @@ class GameScene : public cugl::Scene2 {
   /** The level controller for the game*/
   std::shared_ptr<LevelController> _level_controller;
 
-  /** The */
+  /** The controllers for the game */
   std::vector<std::shared_ptr<Controller>> _controllers;
-
+  
+  /** A reference to the scene2 map for rendering. */
+  std::shared_ptr<cugl::scene2::SceneNode> _map;
+  
   /** The serializer used to serialize complex data to send through the network.
    */
   cugl::NetworkSerializer _serializer;
@@ -209,6 +212,13 @@ class GameScene : public cugl::Scene2 {
    */
   void setConnection(const std::shared_ptr<cugl::NetworkConnection>& network) {
     _network = network;
+  }
+  
+  /**
+   * Sets the map SceneNode.
+   */
+  void setMap(const std::shared_ptr<cugl::scene2::SceneNode>& map) {
+    _map = map;
   }
 
   /**

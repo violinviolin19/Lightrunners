@@ -14,7 +14,7 @@
                 },
                 "data": {
                     "texture": "joystick-base",
-                    "anchor": [ 0.5, 0.5 ],
+                    "anchor": [0.5, 0.5],
                     "scale": 0.5
                 },
                 "layout": {
@@ -26,7 +26,7 @@
                 "type": "Image",
                 "data": {
                     "texture": "joystick",
-                    "anchor": [ 0.5, 0.5 ],
+                    "anchor": [0.5, 0.5],
                     "scale": 0.7
                 },
                 "layout": {
@@ -41,7 +41,7 @@
                 },
                 "data": {
                     "texture": "joystick-base",
-                    "anchor": [ 0.5, 0.5 ],
+                    "anchor": [0.5, 0.5],
                     "scale": 0.60
                 },
                 "layout": {
@@ -53,7 +53,7 @@
                 "type": "Button",
                 "data": {
                     "upnode": "up",
-                    "anchor": [ 0.5, 0.5 ],
+                    "anchor": [0.5, 0.5],
                     "scale": 0.6
                 },
                 "layout": {
@@ -74,10 +74,10 @@
             "role": {
                 "type": "Label",
                 "data": {
-                    "anchor": [ 0, 0 ],
+                    "anchor": [0, 0],
                     "font": "pixel32",
                     "text": "Role: Cooperator",
-                    "padding": [ 20, 20, 20, 20 ],
+                    "padding": [20, 20, 20, 20],
                     "halign": "left",
                     "valign": "top"
                 },
@@ -92,10 +92,10 @@
             "health": {
                 "type": "Label",
                 "data": {
-                    "anchor": [ 0, 0 ],
+                    "anchor": [0, 0],
                     "font": "pixel32",
                     "text": "Health: 100",
-                    "padding": [ 20, 20, 20, 20 ],
+                    "padding": [20, 20, 20, 20],
                     "halign": "left",
                     "valign": "top"
                 },
@@ -110,10 +110,10 @@
             "terminal": {
                 "type": "Label",
                 "data": {
-                    "anchor": [ -0.5, 0 ],
+                    "anchor": [-0.5, 0],
                     "font": "pixel32",
                     "text": "Terminals Activated: 0",
-                    "padding": [ 20, 20, 20, 20 ],
+                    "padding": [20, 20, 20, 20],
                     "halign": "left",
                     "valign": "top"
                 },
@@ -128,10 +128,10 @@
             "timer": {
                 "type": "Label",
                 "data": {
-                    "anchor": [ -0.5, 0 ],
+                    "anchor": [-0.5, 0],
                     "font": "pixel32",
                     "text": "15:00",
-                    "padding": [ 20, 20, 20, 20 ],
+                    "padding": [20, 20, 20, 20],
                     "halign": "left",
                     "valign": "top"
                 },
@@ -141,6 +141,33 @@
                     "y_anchor": "top",
                     "x_offset": 0.75,
                     "y_offset": -0.15
+                }
+            },
+            "map": {
+                "type": "Button",
+                "format": {
+                    "type": "Anchored"
+                },
+                "data": {
+                    "upnode": "up",
+                    "anchor": [0.5, 0.5],
+                    "scale": 1
+                },
+                "layout": {
+                    "x_anchor": "right",
+                    "y_anchor": "top",
+                    "x_offset": -0.12,
+                    "y_offset": -0.23
+                },
+                "children": {
+                    "up": {
+                        "type": "Image",
+                        "data": {
+                            "texture": "map",
+                            "anchor": [0.5, 0.5],
+                            "scale": 1
+                        }
+                    }
                 }
             }
         }
