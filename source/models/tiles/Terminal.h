@@ -38,7 +38,10 @@ class Terminal : public BasicTile {
    * It is unsafe to call this on a Node that is still currently inside of
    * a scene graph.
    */
-  virtual void dispose() override { BasicTile::dispose(); }
+  virtual void dispose() override {
+    _obstacle = nullptr;
+    BasicTile::dispose();
+  }
 
   virtual std::shared_ptr<SceneNode> copy(
       const std::shared_ptr<SceneNode>& dst) const override {
