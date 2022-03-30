@@ -105,6 +105,13 @@
             "wrapS": "clamp",
             "wrapT": "clamp"
         },
+        "energy-slash": {
+            "file": "textures/energy-slash.png",
+            "minfilter": "nearest",
+            "magfilter": "nearest",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
         "button": {
             "file": "textures/ui/button_rounded.png",
             "minfilter": "nearest",

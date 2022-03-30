@@ -164,6 +164,9 @@ void GameScene::populate(cugl::Size dim) {
   _world_node->addChild(player_node);
   _world->addObstacle(_my_player);
 
+  _player_controller = PlayerController::alloc(_my_player, _assets, _world,
+                                               _world_node, _debug_node);
+
   _sword = Sword::alloc(dim / 2.0f);
   _world->addObstacle(_sword);
   _sword->setEnabled(false);
@@ -240,12 +243,9 @@ void GameScene::update(float timestep) {
   }
 
   // Movement
-
-  _my_player->step(timestep, InputController::get<Movement>()->getMovement(),
-                   InputController::get<Dash>()->isDashing(),
-                   InputController::get<Attack>()->isAttacking(), _sword);
-  // Animation
-  _my_player->animate(InputController::get<Movement>()->getMovement());
+  _player_controller->update(
+      timestep, InputController::get<Movement>()->getMovement(),
+      InputController::get<Attack>()->isAttacking(), InputController::get<Dash>()->isDashing(), InputController::get<Attack>()->holdAttack(), _sword);
 
   std::shared_ptr<RoomModel> current_room =
       _level_controller->getLevelModel()->getCurrentRoom();
@@ -333,6 +333,7 @@ void GameScene::update(float timestep) {
       ++it;
     }
   }
+  _my_player->checkDeleteSlashes(_world, _world_node);
 }
 
 void GameScene::sendNetworkInfo() {
@@ -760,7 +761,7 @@ void GameScene::beginContact(b2Contact* contact) {
                             _my_player->getRoomId());
   } else if (fx2_name == "enemy_hitbox" && ob1 == _sword.get()) {
     dynamic_cast<EnemyModel*>(ob2)->takeDamage();
-    sendEnemyHitNetworkInfo(dynamic_cast<EnemyModel*>(ob1)->getEnemyId(),
+    sendEnemyHitNetworkInfo(dynamic_cast<EnemyModel*>(ob2)->getEnemyId(),
                             _my_player->getRoomId());
   }
 
@@ -778,9 +779,29 @@ void GameScene::beginContact(b2Contact* contact) {
     dynamic_cast<Projectile*>(ob2)->setFrames(0);  // Destroy the projectile
   }
 
-  if (ob1->getName() == "projectile" && ob2->getName() == "Wall") {
+  if (fx1_name == "enemy_hitbox" && ob2->getName() == "slash") {
+    dynamic_cast<EnemyModel*>(ob1)->takeDamage();
+    dynamic_cast<Projectile*>(ob2)->setFrames(0);  // Destroy the projectile
+    sendEnemyHitNetworkInfo(dynamic_cast<EnemyModel*>(ob1)->getEnemyId(),
+                            _my_player->getRoomId());
+  } else if (fx2_name == "enemy_hitbox" && ob1->getName() == "slash") {
+    dynamic_cast<EnemyModel*>(ob2)->takeDamage();
     dynamic_cast<Projectile*>(ob1)->setFrames(0);  // Destroy the projectile
-  } else if (ob2->getName() == "projectile" && ob1->getName() == "Wall") {
+    sendEnemyHitNetworkInfo(dynamic_cast<EnemyModel*>(ob2)->getEnemyId(),
+                            _my_player->getRoomId());
+  }
+
+  if (ob1->getName() == "projectile" && ob2 == _sword.get()) {
+    dynamic_cast<Projectile*>(ob1)->setFrames(0);  // Destroy the projectile
+  } else if (ob2->getName() == "projectile" && ob1 == _sword.get()) {
+    dynamic_cast<Projectile*>(ob2)->setFrames(0);  // Destroy the projectile
+  }
+
+  if ((ob1->getName() == "projectile" || ob1->getName() == "slash") &&
+      ob2->getName() == "Wall") {
+    dynamic_cast<Projectile*>(ob1)->setFrames(0);  // Destroy the projectile
+  } else if ((ob2->getName() == "projectile" || ob1->getName() == "slash") &&
+             ob1->getName() == "Wall") {
     dynamic_cast<Projectile*>(ob2)->setFrames(0);  // Destroy the projectile
   }
 
