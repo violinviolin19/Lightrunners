@@ -9,7 +9,7 @@ bool TerminalController::init(
   _scene->setVisible(false);
   _stage = WAIT_FOR_PLAYERS;
 
-  _wait_for_palyers_scene = WaitForPlayersScene::alloc(_assets);
+  _wait_for_players_scene = WaitForPlayersScene::alloc(_assets);
 
   return true;
 }
@@ -19,16 +19,16 @@ void TerminalController::update(float timestep) {
 
   switch (_stage) {
     case Stage::WAIT_FOR_PLAYERS:
-      if (!_wait_for_palyers_scene->isActive()) {
-        _wait_for_palyers_scene->start(_num_players_req);
+      if (!_wait_for_players_scene->isActive()) {
+        _wait_for_players_scene->start(_num_players_req);
       }
 
-      _wait_for_palyers_scene->update();
-      _wait_for_palyers_scene->setCurrentNumPlayers(
+      _wait_for_players_scene->update();
+      _wait_for_players_scene->setCurrentNumPlayers(
           _voting_info[_terminal_room_id].players.size());
 
-      if (_wait_for_palyers_scene->isDone()) {
-        _wait_for_palyers_scene->dispose();
+      if (_wait_for_players_scene->isDone()) {
+        _wait_for_players_scene->dispose();
         _stage = Stage::VOTE_LEADER;
       }
       break;

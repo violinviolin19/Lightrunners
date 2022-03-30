@@ -27,7 +27,7 @@ class TerminalController : public Controller {
   std::shared_ptr<cugl::scene2::SceneNode> _scene;
 
   /** A reference to the waiting for players scene. */
-  std::shared_ptr<WaitForPlayersScene> _wait_for_palyers_scene;
+  std::shared_ptr<WaitForPlayersScene> _wait_for_players_scene;
 
   /** A reference to the game assets. */
   std::shared_ptr<cugl::AssetManager> _assets;
