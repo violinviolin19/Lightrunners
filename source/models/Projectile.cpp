@@ -8,12 +8,6 @@ bool Projectile::init(const cugl::Vec2 pos, const cugl::Vec2 v) {
   cugl::Vec2 v2 = cugl::Vec2(v * 300);
   setVX(v2.x);
   setVY(v2.y);
-  if (v.x == 0) {
-    setVX(0);
-  }
-  if (v.y == 0) {
-    setVY(0);
-  }
   setSensor(true);
   setDensity(0.01f);
   setFriction(0.0f);

@@ -690,7 +690,7 @@ void GameScene::beginContact(b2Contact* contact) {
                             _my_player->getRoomId());
   } else if (fx2_name == "enemy_hitbox" && ob1 == _sword.get()) {
     dynamic_cast<EnemyModel*>(ob2)->takeDamage();
-    sendEnemyHitNetworkInfo(dynamic_cast<EnemyModel*>(ob1)->getEnemyId(),
+    sendEnemyHitNetworkInfo(dynamic_cast<EnemyModel*>(ob2)->getEnemyId(),
                             _my_player->getRoomId());
   }
 
@@ -711,9 +711,13 @@ void GameScene::beginContact(b2Contact* contact) {
   if (fx1_name == "enemy_hitbox" && ob2->getName() == "slash") {
     dynamic_cast<EnemyModel*>(ob1)->takeDamage();
     dynamic_cast<Projectile*>(ob2)->setFrames(0);  // Destroy the projectile
+    sendEnemyHitNetworkInfo(dynamic_cast<EnemyModel*>(ob1)->getEnemyId(),
+                            _my_player->getRoomId());
   } else if (fx2_name == "enemy_hitbox" && ob1->getName() == "slash") {
     dynamic_cast<EnemyModel*>(ob2)->takeDamage();
     dynamic_cast<Projectile*>(ob1)->setFrames(0);  // Destroy the projectile
+    sendEnemyHitNetworkInfo(dynamic_cast<EnemyModel*>(ob2)->getEnemyId(),
+                            _my_player->getRoomId());
   }
 
   if (ob1->getName() == "projectile" && ob2 == _sword.get()) {
