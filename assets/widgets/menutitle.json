@@ -1,6 +1,6 @@
 {
     "variables": {
-        "text": [ "children", "text", "data", "text" ]
+        "text": [ "data", "text" ]
     },
     "contents": {
         "type": "Label",

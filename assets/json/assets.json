@@ -313,21 +313,22 @@
             }
         },
         "host": {
-            "type": "Node",
+            "type": "Image",
             "format": {
                 "type": "Anchored"
             },
+            "data": {
+                "texture": "background"
+            },
             "children": {
                 "title": {
-                    "type": "Label",
+                    "type": "Widget",
                     "data": {
-                        "anchor": [ 0.5, 1.0 ],
-                        "scale": 1.5,
-                        "font": "pixelmix",
-                        "text": "Host View",
-                        "padding": [ 20, 20, 20, 20 ],
-                        "halign": "center",
-                        "valign": "middle"
+                        "key": "menutitle",
+                        "variables": {
+                            "text": "HOST GAME"
+                        },
+                        "anchor": [ 0.5, 1.0 ]
                     },
                     "layout": {
                         "x_anchor": "center",
@@ -489,21 +490,22 @@
             }
         },
         "client": {
-            "type": "Node",
+            "type": "Image",
             "format": {
                 "type": "Anchored"
             },
+            "data": {
+                "texture": "background"
+            },
             "children": {
                 "title": {
-                    "type": "Label",
+                    "type": "Widget",
                     "data": {
-                        "anchor": [ 0.5, 1.0 ],
-                        "scale": 1.5,
-                        "font": "pixelmix",
-                        "text": "Client View",
-                        "padding": [ 20, 20, 20, 20 ],
-                        "halign": "center",
-                        "valign": "middle"
+                        "key": "menutitle",
+                        "variables": {
+                            "text": "JOIN GAME"
+                        },
+                        "anchor": [ 0.5, 1.0 ]
                     },
                     "layout": {
                         "x_anchor": "center",
