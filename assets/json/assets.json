@@ -164,7 +164,8 @@
         "client": "widgets/client.json",
         "host": "widgets/host.json",
         "menutitle": "widgets/menutitle.json",
-        "keypad": "widgets/keypad.json"
+        "keypad": "widgets/keypad.json",
+        "keypad-button": "widgets/keypad-button.json"
     },
     "scene2s": {
         "wall-side": {
@@ -596,7 +597,7 @@
                                 "padding": [ 0, 50, 0, 0 ]
                             }
                         },
-                        "host": {
+                        "keys": {
                             "type": "Widget",
                             "data": {
                                 "key": "keypad"
