@@ -162,7 +162,8 @@
         "labelbox": "widgets/labelbox.json",
         "menu": "widgets/menu.json",
         "client": "widgets/client.json",
-        "host": "widgets/host.json"
+        "host": "widgets/host.json",
+        "menutitle": "widgets/menutitle.json"
     },
     "scene2s": {
         "wall-side": {
@@ -220,19 +221,12 @@
             },
             "children": {
                 "title": {
-                    "type": "Label",
+                    "type": "Widget",
                     "data": {
-                        "anchor": [ 0.5, 1.0 ],
-                        "scale": 1.5,
-                        "font": "pixelmix_title",
-                        "text": "LIGHTRUNNERS",
-                        "padding": [ 1000, 20, 1000, 20 ],
-                        "background": "#efebe3"
-                    },
-                    "layout": {
-                        "priority": 1,
-                        "x_anchor": "center",
-                        "y_anchor": "middle"
+                        "key": "menutitle",
+                        "variables": {
+                            "text": "LIGHTRUNNERS"
+                        }
                     }
                 },
                 "play": {
