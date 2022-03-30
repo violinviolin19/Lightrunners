@@ -5,8 +5,8 @@
 #include <cugl/cugl.h>
 
 #include "../controllers/actions/Attack.h"
-#include "../controllers/actions/Movement.h"
 #include "../controllers/actions/Dash.h"
+#include "../controllers/actions/Movement.h"
 #include "../controllers/actions/OpenMap.h"
 #include "../loaders/CustomScene2Loader.h"
 #include "../models/tiles/Wall.h"
@@ -39,20 +39,20 @@ bool GameScene::init(
   _level_controller =
       LevelController::alloc(_assets, _world_node, _debug_node, level_gen);
   _controllers.push_back(_level_controller->getHook());
-  
+
   _map = level_gen->getMap();
   _map->setContentSize(dim);
   _map->setPosition(dim / 2);
   _map->doLayout();
   _map->setVisible(false);
-  
-  for (std::shared_ptr<level_gen::Room> &room : level_gen->getRooms()) {
+
+  for (std::shared_ptr<level_gen::Room>& room : level_gen->getRooms()) {
     for (std::shared_ptr<level_gen::Edge> edge : room->_edges) {
       edge->_node->setVisible(false);
     }
     room->_node->setVisible(false);
   }
-  
+
   level_gen->getSpawnRoom()->_node->setVisible(true);
 
   // Get the world from level controller and attach the listeners.
@@ -224,15 +224,15 @@ void GameScene::update(float timestep) {
   for (std::shared_ptr<Controller> controller : _controllers) {
     controller->update();
   }
-  
+
   if (InputController::get<OpenMap>()->didOpenMap()) {
     _map->setVisible(!_map->isVisible());
   }
 
   // Movement
-  
-  
-  _my_player->step(timestep, InputController::get<Movement>()->getMovement(), InputController::get<Dash>()->isDashing(),
+
+  _my_player->step(timestep, InputController::get<Movement>()->getMovement(),
+                   InputController::get<Dash>()->isDashing(),
                    InputController::get<Attack>()->isAttacking(), _sword);
   // Animation
   _my_player->animate(InputController::get<Movement>()->getMovement());
@@ -275,11 +275,12 @@ void GameScene::update(float timestep) {
   timer_text->setForeground(cugl::Color4::WHITE);
 
   auto text = ui_layer->getChildByName<cugl::scene2::Label>("health");
-//
-//  auto minimap = ui_layer->getChildByName<cugl::scene2::SceneNode>("minimap");
-//  std::unordered_map<int, std::shared_ptr<RoomModel>> rooms =
-//    _level_controller->getLevelModel()->getRooms();
-  
+  //
+  //  auto minimap =
+  //  ui_layer->getChildByName<cugl::scene2::SceneNode>("minimap");
+  //  std::unordered_map<int, std::shared_ptr<RoomModel>> rooms =
+  //    _level_controller->getLevelModel()->getRooms();
+
   std::string msg =
       cugl::strtool::format("Health: %d", _my_player->getHealth());
   text->setText(msg);
