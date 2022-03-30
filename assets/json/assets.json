@@ -381,7 +381,7 @@
                             },
                             "data": {
                                 "anchor": [ 0.5, 0.5 ],
-                                "size": [ 500, 100 ]
+                                "size": [ 350, 100 ]
                             },
                             "children": {
                                 "label": {
@@ -389,8 +389,8 @@
                                     "data": {
                                         "key": "labelbox",
                                         "variables": {
-                                            "size": [ 200, 100 ],
-                                            "text": "Game ID:",
+                                            "size": [ 170, 70 ],
+                                            "text": "GAME ID:",
                                             "halign": "center"
                                         }
                                     },
@@ -403,7 +403,7 @@
                                     "data": {
                                         "key": "labelbox",
                                         "variables": {
-                                            "size": [ 200, 100 ],
+                                            "size": [ 170, 70 ],
                                             "text": "",
                                             "halign": "center"
                                         }
@@ -415,7 +415,7 @@
                             },
                             "layout": {
                                 "priority": 1,
-                                "padding": [ 0, 50, 0, 0 ]
+                                "padding": [ 0, 0, 0, 0 ]
                             }
                         },
                         "players": {
@@ -428,7 +428,7 @@
                             },
                             "data": {
                                 "anchor": [ 0.5, 0.5 ],
-                                "size": [ 700, 100 ]
+                                "size": [ 350, 100 ]
                             },
                             "children": {
                                 "label": {
@@ -436,8 +436,8 @@
                                     "data": {
                                         "key": "labelbox",
                                         "variables": {
-                                            "size": [ 200, 100 ],
-                                            "text": "Players:",
+                                            "size": [ 170, 70 ],
+                                            "text": "PLAYERS:",
                                             "halign": "center"
                                         }
                                     },
@@ -450,7 +450,7 @@
                                     "data": {
                                         "key": "labelbox",
                                         "variables": {
-                                            "size": [ 200, 100 ],
+                                            "size": [ 170, 70 ],
                                             "text": "1",
                                             "halign": "center"
                                         }
@@ -462,7 +462,7 @@
                             },
                             "layout": {
                                 "priority": 2,
-                                "padding": [ 0, 50, 0, 0 ]
+                                "padding": [ 0, 25, 0, 0 ]
                             }
                         },
                         "start": {
@@ -478,7 +478,7 @@
                             },
                             "layout": {
                                 "priority": 3,
-                                "padding": [ 0, 50, 0, 0 ]
+                                "padding": [ 0, 25, 0, 0 ]
                             }
                         }
                     },
@@ -580,7 +580,7 @@
                                     },
                                     "data": {
                                         "anchor": [ 0.5, 0.5 ],
-                                        "size": [ 500, 100 ]
+                                        "size": [ 350, 100 ]
                                     },
                                     "children": {
                                         "label": {
@@ -588,8 +588,8 @@
                                             "data": {
                                                 "key": "labelbox",
                                                 "variables": {
-                                                    "size": [ 200, 100 ],
-                                                    "text": "Game ID:",
+                                                    "size": [ 170, 70 ],
+                                                    "text": "GAME ID:",
                                                     "halign": "center"
                                                 }
                                             },
@@ -602,7 +602,7 @@
                                             "data": {
                                                 "key": "labelbox",
                                                 "variables": {
-                                                    "size": [ 200, 100 ],
+                                                    "size": [ 170, 70 ],
                                                     "text": "",
                                                     "halign": "center"
                                                 }
@@ -614,7 +614,7 @@
                                     },
                                     "layout": {
                                         "priority": 1,
-                                        "padding": [ 0, 50, 0, 0 ]
+                                        "padding": [ 0, 0, 0, 0 ]
                                     }
                                 },
                                 "players": {
@@ -627,7 +627,7 @@
                                     },
                                     "data": {
                                         "anchor": [ 0.5, 0.5 ],
-                                        "size": [ 700, 100 ]
+                                        "size": [ 350, 100 ]
                                     },
                                     "children": {
                                         "label": {
@@ -635,8 +635,8 @@
                                             "data": {
                                                 "key": "labelbox",
                                                 "variables": {
-                                                    "size": [ 200, 100 ],
-                                                    "text": "Players:",
+                                                    "size": [ 170, 70 ],
+                                                    "text": "PLAYERS:",
                                                     "halign": "center"
                                                 }
                                             },
@@ -649,7 +649,7 @@
                                             "data": {
                                                 "key": "labelbox",
                                                 "variables": {
-                                                    "size": [ 200, 100 ],
+                                                    "size": [ 170, 70 ],
                                                     "text": "1",
                                                     "halign": "center"
                                                 }
@@ -661,7 +661,7 @@
                                     },
                                     "layout": {
                                         "priority": 2,
-                                        "padding": [ 0, 50, 0, 0 ]
+                                        "padding": [ 0, 25, 0, 0 ]
                                     }
                                 },
                                 "start": {
@@ -677,7 +677,7 @@
                                     },
                                     "layout": {
                                         "priority": 3,
-                                        "padding": [ 0, 50, 0, 0 ]
+                                        "padding": [ 0, 25, 0, 0 ]
                                     }
                                 }
 
