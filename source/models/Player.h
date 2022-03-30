@@ -57,7 +57,11 @@ class Player : public cugl::physics2::CapsuleObstacle {
   int _attack_frame_count;
   /** Countdown for hurting frames. */
   int _hurt_frames;
-
+  /** Countdown for holding attack button. */
+  int _hold_attack;
+  /** Whether the player can make a sword slash. */
+  bool _can_make_slash;
+  
 #pragma mark Constructors
   /**
    * Creates a player with the given position and data.
@@ -270,11 +274,6 @@ class Player : public cugl::physics2::CapsuleObstacle {
   void animate(float forwardX, float forwardY);
 
 #pragma mark Movement
-  /**
-   * Updates the player.
-   */
-  void step(float timestep, cugl::Vec2 forward, bool didDash, bool didAttack,
-            std::shared_ptr<Sword> sword);
 
   /**
    * Moves the player by the specified amount.

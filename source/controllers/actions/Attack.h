@@ -93,6 +93,11 @@ class Attack : public Action {
    * @return If player is currently attacking.
    */
   bool isAttacking() const { return _prev_down && !_curr_down; }
+  
+  /**
+   * @return If player is holding attack button.
+   */
+  bool holdAttack() const { return _prev_down && _curr_down; }
 
   /**
    * Toggels activation on attack button. When deactivated, the button cannot

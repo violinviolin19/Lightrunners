@@ -86,15 +86,15 @@ class PlayerController {
 #pragma mark Properties
 
   /** Update the enemy. */
-  void update(float timestep, cugl::Vec2 forward, bool didAttack,
+  void update(float timestep, cugl::Vec2 forward, bool didAttack, bool didDash, bool holdAttack,
               std::shared_ptr<Sword> sword);
 
   /** Update the projectiles. */
   void updateSlashes(float timestep);
 
-  void move(float timestep, cugl::Vec2 forward);
+  void move(float timestep, bool didDash, cugl::Vec2 forward);
 
-  void attack(bool didAttack, std::shared_ptr<Sword> sword);
+  void attack(bool didAttack, bool holdAttack, std::shared_ptr<Sword> sword);
 };
 
 #endif /* CONTROLLERS_PLAYER_CONTROLLER_H_ */
