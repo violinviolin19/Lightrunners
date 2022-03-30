@@ -36,6 +36,8 @@ class PeerScene : public cugl::Scene2 {
   std::shared_ptr<cugl::scene2::Button> _startgame;
   /** The back button for the menu scene */
   std::shared_ptr<cugl::scene2::Button> _backout;
+  /** The 1 button for the menu scene */
+  std::shared_ptr<cugl::scene2::Button> _one_button;
   /** The players label (for updating) */
   std::shared_ptr<cugl::scene2::Label> _player;
 

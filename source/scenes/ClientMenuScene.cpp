@@ -42,6 +42,8 @@ bool ClientMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
       _assets->get<cugl::scene2::SceneNode>("client_back"));
   _gameid = std::dynamic_pointer_cast<cugl::scene2::TextField>(
       _assets->get<cugl::scene2::SceneNode>("client_center_game_field_text"));
+  _one_button = std::dynamic_pointer_cast<cugl::scene2::Button>(
+      _assets->get<cugl::scene2::SceneNode>("client_center_keys_1"));
   _player = std::dynamic_pointer_cast<cugl::scene2::Label>(
       _assets->get<cugl::scene2::SceneNode>(
           "client_center_players_field_text"));
@@ -62,6 +64,13 @@ bool ClientMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
       } else {
         connect(_gameid->getText());
       }
+    }
+  });
+
+  // add text to game id when button pressed if code not complete
+  _one_button->addListener([=](const std::string& name, bool down) {
+    if (down && _gameid->getText().size() < 5) {
+      _gameid->setText(_gameid->getText() + "1");
     }
   });
 
@@ -96,6 +105,7 @@ void ClientMenuScene::setActive(bool value) {
       _status = IDLE;
       _gameid->activate();
       _backout->activate();
+      _one_button->activate();
       _network = nullptr;
       _player->setText("1");
       configureStartButton();
@@ -104,9 +114,11 @@ void ClientMenuScene::setActive(bool value) {
       _gameid->deactivate();
       _startgame->deactivate();
       _backout->deactivate();
+      _one_button->deactivate();
       // If any were pressed, reset them
       _startgame->setDown(false);
       _backout->setDown(false);
+      _one_button->setDown(false);
     }
   }
 }
