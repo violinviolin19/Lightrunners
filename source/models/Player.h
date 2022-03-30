@@ -25,8 +25,14 @@ class Player : public cugl::physics2::CapsuleObstacle {
   /** The player's current state. */
   State _current_state;
 
+  /** The player's role, true if betrayer, false otherwise */
+  bool _is_betrayer;
+
   /** The player's unique id. */
   int _id;
+
+  /** The unique id of the room the player is in. */
+  int _room_id;
 
   /** Player health. */
   int _health;
@@ -101,9 +107,23 @@ class Player : public cugl::physics2::CapsuleObstacle {
   /**
    * Sets the current state of the player and changes textures accordingly.
    *
-   * @param state current state.
+   * @param set current state.
    */
   void setState(State state) { _current_state = state; }
+
+  /**
+   * Returns if the player is a betrayer.
+   *
+   * @return true if player is betrayer, false otherwise.
+   */
+  bool isBetrayer() const { return _is_betrayer; }
+
+  /**
+   * Sets the role of the player as betrayer or not.
+   *
+   * @param set current role to betrayer if true, cooperator if false.
+   */
+  void setBetrayer(bool b) { _is_betrayer = b; }
 
   /**
    * Returns the current health of the player.
@@ -222,6 +242,17 @@ class Player : public cugl::physics2::CapsuleObstacle {
   void setPlayerId(int player_id) { _id = player_id; }
 
   /**
+   * Returns the player's room id.
+   * @return the room id
+   */
+  int getRoomId() { return _room_id; }
+
+  /**
+   * Sets the player's room id.
+   */
+  void setRoomId(int id) { _room_id = id; }
+
+  /**
    * Sets the frame of the animation.
    *
    * @param forwardX Amount to move in the x direction
@@ -239,6 +270,11 @@ class Player : public cugl::physics2::CapsuleObstacle {
   void animate(float forwardX, float forwardY);
 
 #pragma mark Movement
+  /**
+   * Updates the player.
+   */
+  void step(float timestep, cugl::Vec2 forward, bool didDash, bool didAttack,
+            std::shared_ptr<Sword> sword);
 
   /**
    * Moves the player by the specified amount.

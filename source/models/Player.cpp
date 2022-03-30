@@ -63,6 +63,33 @@ void Player::dies() {
   _hurt_frames = DEAD_FRAMES;
 }
 
+void Player::step(float timestep, cugl::Vec2 forward, bool didDash,
+                  bool didAttack, std::shared_ptr<Sword> sword) {
+  if (didDash) {
+    forward.scale(10);
+  }
+  move(forward);
+  attack(didAttack, sword);
+
+  if (_hurt_frames <= 0) {
+    _player_node->setColor(cugl::Color4::WHITE);
+    _hurt_frames = 0;
+  } else {
+    _hurt_frames--;
+  }
+
+  // CHECK IF RAN OUT OF HEALTH
+  if (_health <= 0 && !isDead) {
+    dies();
+  }
+
+  // CHECK IF HAS BEEN DEAD FOR LONG ENOUGH TO REVIVE
+  if (isDead && _hurt_frames == 0) {
+    setHealth(HEALTH);
+    isDead = false;
+  }
+}
+
 #pragma mark Animation & Drawing
 
 void Player::update(float delta) {
@@ -154,8 +181,23 @@ void Player::animate(float forwardX, float forwardY) {
 }
 
 void Player::move(float forwardX, float forwardY) {
-  setVX(10000 * forwardX);
-  setVY(10000 * forwardY);
+  if (!isDead) {
+    setVX(200 * forwardX);
+    setVY(200 * forwardY);
+    if (forwardX == 0) setVX(0);
+    if (forwardY == 0) setVY(0);
+
+    // Switch states.
+    if (forwardX != 0 || forwardY != 0) {
+      setState(MOVING);
+    } else {
+      setState(IDLE);
+    }
+  } else {
+    setVX(0);
+    setVY(0);
+    setState(IDLE);
+  }
 }
 
 void Player::makeSlash(cugl::Vec2 attackDir, cugl::Vec2 swordPos) {

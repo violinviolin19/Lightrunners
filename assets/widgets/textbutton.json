@@ -26,9 +26,9 @@
                     "patch": {
                         "type": "NinePatch",
                         "data": {
-                            "texture": "button",
+                            "texture": "button_beige",
                             "anchor": [ 0.5, 0.5 ],
-                            "interior": [ 33, 40, 62, 55 ],
+                            "interior": [ 4, 4, 24, 24 ],
                             "color": "#ffffff"
                         },
                         "layout": {
@@ -39,9 +39,9 @@
                     "label": {
                         "type": "Label",
                         "data": {
-                            "font": "proximanova",
+                            "font": "pixelmix",
                             "text": "Option 1",
-                            "foreground": [ 255, 255, 255, 255 ],
+                            "foreground": [ 0, 0, 0, 255 ],
                             "anchor": [ 0.5, 0.5 ],
                             "halign": "center",
                             "valign": "middle"

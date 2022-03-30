@@ -45,6 +45,9 @@ class EnemyModel : public cugl::physics2::CapsuleObstacle {
   /** The enemy type of this enemy. */
   EnemyType _enemy_type;
 
+  /** Enemy unique id. */
+  int _id;
+
   /** Enemy health. */
   int _health;
 
@@ -151,6 +154,20 @@ class EnemyModel : public cugl::physics2::CapsuleObstacle {
   }
 
 #pragma mark Properties
+
+  /**
+   * Returns the unique id of the enemy.
+   *
+   * @return the enemy id.
+   */
+  int getEnemyId() const { return _id; }
+
+  /**
+   * Sets the current enemy's unique id.
+   *
+   * @param id The current enemy's id.
+   */
+  void setEnemyId(int id) { _id = id; }
 
   /**
    * Returns the current health of the enemy.

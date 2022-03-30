@@ -54,9 +54,12 @@ class GameScene : public cugl::Scene2 {
   /** The level controller for the game*/
   std::shared_ptr<LevelController> _level_controller;
 
-  /** The */
+  /** The controllers for the game */
   std::vector<std::shared_ptr<Controller>> _controllers;
-
+  
+  /** A reference to the scene2 map for rendering. */
+  std::shared_ptr<cugl::scene2::SceneNode> _map;
+  
   /** The serializer used to serialize complex data to send through the network.
    */
   cugl::NetworkSerializer _serializer;
@@ -68,6 +71,9 @@ class GameScene : public cugl::Scene2 {
   /** Whether this player is the host. */
   bool _ishost;
 
+  /** Whether this player is a betrayer. */
+  bool _is_betrayer;
+
   /** Whether we quit the game. */
   bool _quit;
 
@@ -76,6 +82,12 @@ class GameScene : public cugl::Scene2 {
 
   /** The number of terminals activated in the world. */
   int _num_terminals_activated;
+
+  /** The milliseconds remaining in the game before it ends. */
+  int _millis_remaining;
+
+  /** The last timestamp at which the timer was updated. */
+  cugl::Timestamp _last_timestamp;
 
  public:
   GameScene() : cugl::Scene2() {}
@@ -93,13 +105,15 @@ class GameScene : public cugl::Scene2 {
   /**
    * Initializes the controller contents, and starts the game.
    *
-   * @param assets    The (loaded) assets for this game mode.
-   * @param level_gen The generated level.
+   * @param assets      The (loaded) assets for this game mode.
+   * @param level_gen   The generated level.
+   * @param is_betrayer True if the game is being played by a betrayer.
    *
    * @return true if the controller is initialized properly, false otherwise.
    */
   bool init(const std::shared_ptr<cugl::AssetManager>& assets,
-            const std::shared_ptr<level_gen::LevelGenerator>& level_gen);
+            const std::shared_ptr<level_gen::LevelGenerator>& level_gen,
+            bool is_betrayer);
 
   /**
    * Sets whether debug mode is active.
@@ -123,6 +137,37 @@ class GameScene : public cugl::Scene2 {
    * @return true if at least half of the terminals have been activated.
    */
   bool checkCooperatorWin();
+
+  /**
+   * Checks how much time is remaining.
+   *
+   * @return milliseconds left in the game.
+   */
+  int getMillisRemaining() { return _millis_remaining; }
+
+  /**
+   * Set the number of milliseconds remaining.
+   *
+   * @param millis left in the game.
+   */
+  void setMillisRemaining(int millis) { _millis_remaining = millis; }
+
+  /**
+   * Updates the number of remaining milliseconds by comparing the last
+   * timestamp it was updated with the current timestamp.
+   *
+   * Note that only the host does this, as clients will just use host timer.
+   *
+   * Has the side effect of updating the last timestamp stored.
+   */
+  void updateMillisRemainingIfHost();
+
+  /**
+   * Returns a string representing the time remaining based on time remaining.
+   *
+   * @param the "minutes:seconds" remaining in the game.
+   */
+  std::string getTimerString();
 
   /**
    * The method called to update the game mode.
@@ -172,6 +217,13 @@ class GameScene : public cugl::Scene2 {
   void setConnection(const std::shared_ptr<cugl::NetworkConnection>& network) {
     _network = network;
   }
+  
+  /**
+   * Sets the map SceneNode.
+   */
+  void setMap(const std::shared_ptr<cugl::scene2::SceneNode>& map) {
+    _map = map;
+  }
 
   /**
    * Sets whether the player is host.
@@ -181,6 +233,13 @@ class GameScene : public cugl::Scene2 {
    * @param host  Whether the player is host.
    */
   void setHost(bool host) { _ishost = host; }
+
+  /**
+   * Sets whether the player is a betrayer or cooperator.
+   *
+   * @param betrayer  Whether the player is a betrayer.
+   */
+  void setBetrayer(bool betrayer) { _is_betrayer = betrayer; }
 
   /**
    * Checks that the network connection is still active.
@@ -211,14 +270,35 @@ class GameScene : public cugl::Scene2 {
   void sendNetworkInfo();
 
   /**
-   * Updates the position of the player with the corresponding player_id in the
-   * _players list.
+   * Broadcasts enemy being hit to the host.
+   *
+   * @param id the enemy that was hit
+   * @param room_id the room the enemy is in
+   */
+  void sendEnemyHitNetworkInfo(int id, int room_id);
+
+  /**
+   * Updates the position of the player with the corresponding player_id in
+   * the _players list.
    *
    * @param player_id The player id
    * @param pos_x The updated player x position
    * @param pos_y The updated player y position
    */
   void updatePlayerInfo(int player_id, float pos_x, float pos_y);
+
+  /**
+   * Updates the health and position of the enemy with the corresponding
+   * enemy_id in the room with id enemy_room;
+   *
+   * @param enemy_id      The enemy id.
+   * @param enemy_room    The room id the enemy is in.
+   * @param enemy_health  The updated enemy health.
+   * @param pos_x         The updated enemy x position.
+   * @param pos_y         The updated enemy y position.
+   */
+  void updateEnemyInfo(int enemy_id, int enemy_room, int enemy_health,
+                       float pos_x, float pos_y);
 
   /**
    * Returns true if the player quits the game.

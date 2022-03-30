@@ -26,6 +26,8 @@ class LevelController : public Controller {
   std::shared_ptr<LevelModel> _level_model;
   /** The room to be removed after moving from neighboring tile. */
   std::shared_ptr<RoomModel> _room_on_chopping_block;
+  /** The id of the next enemy to add, increasing each time. */
+  int next_enemy_id = 0;
 
  public:
   /** Construct a new Level Controller */
