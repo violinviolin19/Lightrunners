@@ -50,9 +50,12 @@ class GameScene : public cugl::Scene2 {
   /** The level controller for the game*/
   std::shared_ptr<LevelController> _level_controller;
 
-  /** The */
+  /** The controllers for the game */
   std::vector<std::shared_ptr<Controller>> _controllers;
-
+  
+  /** A reference to the scene2 map for rendering. */
+  std::shared_ptr<cugl::scene2::SceneNode> _map;
+  
   /** The serializer used to serialize complex data to send through the network.
    */
   cugl::NetworkSerializer _serializer;
@@ -63,6 +66,9 @@ class GameScene : public cugl::Scene2 {
 
   /** Whether this player is the host. */
   bool _ishost;
+
+  /** Whether this player is a betrayer. */
+  bool _is_betrayer;
 
   /** Whether we quit the game. */
   bool _quit;
@@ -95,13 +101,15 @@ class GameScene : public cugl::Scene2 {
   /**
    * Initializes the controller contents, and starts the game.
    *
-   * @param assets    The (loaded) assets for this game mode.
-   * @param level_gen The generated level.
+   * @param assets      The (loaded) assets for this game mode.
+   * @param level_gen   The generated level.
+   * @param is_betrayer True if the game is being played by a betrayer.
    *
    * @return true if the controller is initialized properly, false otherwise.
    */
   bool init(const std::shared_ptr<cugl::AssetManager>& assets,
-            const std::shared_ptr<level_gen::LevelGenerator>& level_gen);
+            const std::shared_ptr<level_gen::LevelGenerator>& level_gen,
+            bool is_betrayer);
 
   /**
    * Sets whether debug mode is active.
@@ -205,6 +213,13 @@ class GameScene : public cugl::Scene2 {
   void setConnection(const std::shared_ptr<cugl::NetworkConnection>& network) {
     _network = network;
   }
+  
+  /**
+   * Sets the map SceneNode.
+   */
+  void setMap(const std::shared_ptr<cugl::scene2::SceneNode>& map) {
+    _map = map;
+  }
 
   /**
    * Sets whether the player is host.
@@ -214,6 +229,13 @@ class GameScene : public cugl::Scene2 {
    * @param host  Whether the player is host.
    */
   void setHost(bool host) { _ishost = host; }
+
+  /**
+   * Sets whether the player is a betrayer or cooperator.
+   *
+   * @param betrayer  Whether the player is a betrayer.
+   */
+  void setBetrayer(bool betrayer) { _is_betrayer = betrayer; }
 
   /**
    * Checks that the network connection is still active.

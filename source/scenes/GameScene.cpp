@@ -5,7 +5,9 @@
 #include <cugl/cugl.h>
 
 #include "../controllers/actions/Attack.h"
+#include "../controllers/actions/Dash.h"
 #include "../controllers/actions/Movement.h"
+#include "../controllers/actions/OpenMap.h"
 #include "../loaders/CustomScene2Loader.h"
 #include "../models/tiles/Wall.h"
 
@@ -14,7 +16,8 @@
 
 bool GameScene::init(
     const std::shared_ptr<cugl::AssetManager>& assets,
-    const std::shared_ptr<level_gen::LevelGenerator>& level_gen) {
+    const std::shared_ptr<level_gen::LevelGenerator>& level_gen,
+    bool is_betrayer) {
   if (_active) return false;
   _active = true;
 
@@ -37,6 +40,21 @@ bool GameScene::init(
       LevelController::alloc(_assets, _world_node, _debug_node, level_gen);
   _controllers.push_back(_level_controller->getHook());
 
+  _map = level_gen->getMap();
+  _map->setContentSize(dim);
+  _map->setPosition(dim / 2);
+  _map->doLayout();
+  _map->setVisible(false);
+
+  for (std::shared_ptr<level_gen::Room>& room : level_gen->getRooms()) {
+    for (std::shared_ptr<level_gen::Edge> edge : room->_edges) {
+      edge->_node->setVisible(false);
+    }
+    room->_node->setVisible(false);
+  }
+
+  level_gen->getSpawnRoom()->_node->setVisible(true);
+
   // Get the world from level controller and attach the listeners.
   _world = _level_controller->getWorld();
   _world->activateCollisionCallbacks(true);
@@ -56,6 +74,8 @@ bool GameScene::init(
       TankController::alloc(_assets, _world, _world_node, _debug_node);
   _turtle_controller =
       TurtleController::alloc(_assets, _world, _world_node, _debug_node);
+
+  setBetrayer(is_betrayer);
 
   populate(dim);
 
@@ -89,7 +109,19 @@ bool GameScene::init(
   terminal_text->setText(terminal_msg);
   terminal_text->setForeground(cugl::Color4::RED);
 
+  auto role_text = ui_layer->getChildByName<cugl::scene2::Label>("role");
+  std::string role_msg = "";
+  if (_is_betrayer) {
+    role_msg = "Role: Betrayer";
+    role_text->setForeground(cugl::Color4::RED);
+  } else {
+    role_msg = "Role: Cooperator";
+    role_text->setForeground(cugl::Color4::GREEN);
+  }
+  role_text->setText(role_msg);
+
   cugl::Scene2::addChild(_world_node);
+  cugl::Scene2::addChild(_map);
   cugl::Scene2::addChild(ui_layer);
   cugl::Scene2::addChild(win_layer);
   cugl::Scene2::addChild(_debug_node);
@@ -113,6 +145,7 @@ void GameScene::populate(cugl::Size dim) {
   std::shared_ptr<cugl::Texture> player = _assets->get<cugl::Texture>("player");
 
   _my_player = Player::alloc(cugl::Vec2::ZERO, "Johnathan");
+  _my_player->setBetrayer(_is_betrayer);
   _players.push_back(_my_player);
   _level_controller->getLevelModel()->setPlayer(_my_player);
 
@@ -192,8 +225,14 @@ void GameScene::update(float timestep) {
     controller->update();
   }
 
+  if (InputController::get<OpenMap>()->didOpenMap()) {
+    _map->setVisible(!_map->isVisible());
+  }
+
   // Movement
+
   _my_player->step(timestep, InputController::get<Movement>()->getMovement(),
+                   InputController::get<Dash>()->isDashing(),
                    InputController::get<Attack>()->isAttacking(), _sword);
   // Animation
   _my_player->animate(InputController::get<Movement>()->getMovement());
@@ -236,6 +275,12 @@ void GameScene::update(float timestep) {
   timer_text->setForeground(cugl::Color4::WHITE);
 
   auto text = ui_layer->getChildByName<cugl::scene2::Label>("health");
+  //
+  //  auto minimap =
+  //  ui_layer->getChildByName<cugl::scene2::SceneNode>("minimap");
+  //  std::unordered_map<int, std::shared_ptr<RoomModel>> rooms =
+  //    _level_controller->getLevelModel()->getRooms();
+
   std::string msg =
       cugl::strtool::format("Health: %d", _my_player->getHealth());
   text->setText(msg);
@@ -245,6 +290,17 @@ void GameScene::update(float timestep) {
   std::string terminal_msg = cugl::strtool::format("Terminals Activated: %d",
                                                    _num_terminals_activated);
   terminal_text->setText(terminal_msg);
+
+  auto role_text = ui_layer->getChildByName<cugl::scene2::Label>("role");
+  std::string role_msg = "";
+  if (_is_betrayer) {
+    role_msg = "Role: Betrayer";
+    role_text->setForeground(cugl::Color4::RED);
+  } else {
+    role_msg = "Role: Cooperator";
+    role_text->setForeground(cugl::Color4::GREEN);
+  }
+  role_text->setText(role_msg);
 
   // POST-UPDATE
   // Check for disposal

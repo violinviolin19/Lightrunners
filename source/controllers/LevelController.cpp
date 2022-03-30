@@ -62,6 +62,23 @@ void LevelController::changeRoom(std::string &door_sensor_name) {
   if (destination_room_id == -1) return;
 
   cugl::Vec2 door_pos = current->getPosOfDestinationDoor(door_sensor_name);
+  
+  // Update the map SceneNodes.
+  for (std::shared_ptr<level_gen::Room> &room : _level_gen->getRooms()) {
+    if (room->_key == current->getKey()) {
+      room->_node->setColor(room->getRoomNodeColor());
+    }
+    if (room->_key == destination_room_id) {
+      room->_node->setColor(cugl::Color4(255, 0, 0, 127));
+      room->_node->setVisible(true);
+      
+      for (std::shared_ptr<level_gen::Edge> edge : room->_edges) {
+        if (edge->_source->_node->isVisible() && edge->_neighbor->_node->isVisible())
+        edge->_node->setVisible(true);
+      }
+    }
+    
+  }
 
   for (std::shared_ptr<EnemyModel> enemy : current->getEnemies())
     enemy->promiseToChangePhysics(false);
