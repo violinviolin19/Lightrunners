@@ -15,9 +15,9 @@ bool Projectile::init(const cugl::Vec2 pos, const cugl::Vec2 v) {
     setVY(0);
   }
   setSensor(true);
-  setDensity(0.00f);
+  setDensity(0.01f);
   setFriction(0.0f);
-  setRestitution(0.00f);
+  setRestitution(0.01f);
   setFixedRotation(true);
 
   setName("projectile");

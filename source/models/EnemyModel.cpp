@@ -45,7 +45,7 @@ void EnemyModel::takeDamage() {
 }
 
 void EnemyModel::addBullet(const cugl::Vec2 p) {
-  cugl::Vec2 diff = p - cugl::Vec2(getPosition().x, getPosition().y);
+  cugl::Vec2 diff = p - getPosition();
   auto bullet = Projectile::alloc(
       cugl::Vec2(getPosition().x, getPosition().y + _offset_from_center.y),
       diff);
