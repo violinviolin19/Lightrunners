@@ -41,7 +41,6 @@ bool Player::init(const cugl::Vec2 pos, string name) {
   _hurt_frames = 0;
   isDead = false;
 
-  CULog("%f", getMass());
   setDensity(0.01f);
   setFriction(0.0f);
   setRestitution(0.01f);
@@ -64,8 +63,8 @@ void Player::dies() {
   _hurt_frames = DEAD_FRAMES;
 }
 
-void Player::step(float timestep, cugl::Vec2 forward, bool didDash, bool didAttack,
-                  std::shared_ptr<Sword> sword) {
+void Player::step(float timestep, cugl::Vec2 forward, bool didDash,
+                  bool didAttack, std::shared_ptr<Sword> sword) {
   if (didDash) {
     forward.scale(10);
   }
