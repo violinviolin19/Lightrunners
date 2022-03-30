@@ -758,11 +758,7 @@
 					};
 					EB74548B1D74D75C002FBAE6 = {
 						CreatedOnToolsVersion = 7.3.1;
-<<<<<<< HEAD
-						DevelopmentTeam = LR67JRR3TA;
-=======
 						DevelopmentTeam = 37AKFHT6H5;
->>>>>>> Add working dash animation and increase maximum velocity of bodies
 					};
 					EBBF18901D74904A008E2001 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -1064,11 +1060,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-<<<<<<< HEAD
-				DEVELOPMENT_TEAM = LR67JRR3TA;
-=======
 				DEVELOPMENT_TEAM = 37AKFHT6H5;
->>>>>>> Add working dash animation and increase maximum velocity of bodies
 				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/iOS-Info.plist";
@@ -1090,11 +1082,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-<<<<<<< HEAD
-				DEVELOPMENT_TEAM = LR67JRR3TA;
-=======
 				DEVELOPMENT_TEAM = 37AKFHT6H5;
->>>>>>> Add working dash animation and increase maximum velocity of bodies
 				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/iOS-Info.plist";
