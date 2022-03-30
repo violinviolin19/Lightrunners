@@ -163,7 +163,8 @@
         "menu": "widgets/menu.json",
         "client": "widgets/client.json",
         "host": "widgets/host.json",
-        "menutitle": "widgets/menutitle.json"
+        "menutitle": "widgets/menutitle.json",
+        "keypad": "widgets/keypad.json"
     },
     "scene2s": {
         "wall-side": {
@@ -593,6 +594,16 @@
                             "layout": {
                                 "priority": 1,
                                 "padding": [ 0, 50, 0, 0 ]
+                            }
+                        },
+                        "host": {
+                            "type": "Widget",
+                            "data": {
+                                "key": "keypad"
+                            },
+                            "layout": {
+                                "priority": 1,
+                                "padding": [ 0, 0, 25, 0 ]
                             }
                         },
                         "players": {
