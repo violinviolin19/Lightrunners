@@ -13,9 +13,6 @@
  */
 class ClientMenuScene : public PeerScene {
  protected:
-  /** The game id label (for updating) */
-  std::shared_ptr<cugl::scene2::TextField> _gameid;
-
   /** The buttons on the keypad used to type code. */
   std::vector<std::shared_ptr<cugl::scene2::Button>> _keypad_buttons;
 

@@ -37,14 +37,15 @@ bool ClientMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
   scene->doLayout();  // Repositions the HUD
 
   _startgame = std::dynamic_pointer_cast<cugl::scene2::Button>(
-      _assets->get<cugl::scene2::SceneNode>("client_center_start"));
+      _assets->get<cugl::scene2::SceneNode>("client_center_info_start"));
   _backout = std::dynamic_pointer_cast<cugl::scene2::Button>(
       _assets->get<cugl::scene2::SceneNode>("client_back"));
-  _gameid = std::dynamic_pointer_cast<cugl::scene2::TextField>(
-      _assets->get<cugl::scene2::SceneNode>("client_center_game_field_text"));
+  _gameid = std::dynamic_pointer_cast<cugl::scene2::Label>(
+      _assets->get<cugl::scene2::SceneNode>(
+          "client_center_info_game_field_text"));
   _player = std::dynamic_pointer_cast<cugl::scene2::Label>(
       _assets->get<cugl::scene2::SceneNode>(
-          "client_center_players_field_text"));
+          "client_center_info_players_field_text"));
 
   for (int i = 0; i <= 9; i++) {
     std::string key = "client_center_keys_" + to_string(i);
@@ -68,12 +69,7 @@ bool ClientMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
 
   _startgame->addListener([=](const std::string& name, bool down) {
     if (down) {
-      // This will call the _gameid listener
-      if (_gameid->hasFocus()) {
-        _gameid->releaseFocus();
-      } else {
-        connect(_gameid->getText());
-      }
+      connect(_gameid->getText());
     }
   });
 
@@ -93,11 +89,6 @@ bool ClientMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
       _gameid->setText(curr_text.substr(0, curr_text.length() - 1));
     }
   });
-
-  _gameid->addExitListener(
-      [this](const std::string& name, const std::string& value) {
-        connect(value);
-      });
 
   // Create the server configuration
   auto json = _assets->get<cugl::JsonValue>("server");
@@ -123,7 +114,6 @@ void ClientMenuScene::setActive(bool value) {
     Scene2::setActive(value);
     if (value) {
       _status = IDLE;
-      _gameid->activate();
       _backout->activate();
       _x_button->activate();
       for (int i = 0; i < _keypad_buttons.size(); i++) {
@@ -136,7 +126,6 @@ void ClientMenuScene::setActive(bool value) {
       configureStartButton();
       // Don't reset the room id
     } else {
-      _gameid->deactivate();
       _startgame->deactivate();
       _backout->deactivate();
       _x_button->deactivate();
