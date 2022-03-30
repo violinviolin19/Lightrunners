@@ -470,9 +470,10 @@
                             "data": {
                                 "key": "textbutton",
                                 "variables": {
-                                    "size": [ 400, 100 ],
-                                    "text": "Waiting",
-                                    "color": "#000088"
+                                    "size": [ 200, 45 ],
+                                    "text": "START GAME",
+                                    "font": "pixelmix_small",
+                                    "color": "#efebe3"
                                 }
                             },
                             "layout": {
@@ -668,9 +669,10 @@
                                     "data": {
                                         "key": "textbutton",
                                         "variables": {
-                                            "size": [ 400, 100 ],
-                                            "text": "Start Game",
-                                            "color": "#000088"
+                                            "size": [ 140, 45 ],
+                                            "text": "JOIN",
+                                            "font": "pixelmix_small",
+                                            "color": "#efebe3"
                                         }
                                     },
                                     "layout": {
@@ -678,6 +680,7 @@
                                         "padding": [ 0, 50, 0, 0 ]
                                     }
                                 }
+
                             },
                             "layout": {
                                 "x_anchor": "center",

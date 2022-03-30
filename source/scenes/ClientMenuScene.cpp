@@ -235,11 +235,11 @@ bool ClientMenuScene::checkConnection() {
 void ClientMenuScene::configureStartButton() {
   if (_status == Status::IDLE) {
     _startgame->activate();
-    updateText(_startgame, "Start Game");
+    updateText(_startgame, "JOIN");
   } else if (_status == Status::JOIN) {
     _startgame->deactivate();
-    updateText(_startgame, "Connecting");
+    updateText(_startgame, "...");
   } else if (_status == Status::WAIT) {
-    updateText(_startgame, "Waiting");
+    updateText(_startgame, "WAIT");
   }
 }
