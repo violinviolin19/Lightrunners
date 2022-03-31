@@ -1,14 +1,14 @@
 #include "Player.h"
 
-#define IDLE_RIGHT 0
-#define IDLE_LEFT 1
-#define IDLE_DOWN 2
-#define IDLE_UP 3
-#define ATTACK_LOW_LIM 10
-#define ATTACK_HIGH_LIM 16
-#define RUN_LOW_LIM 20
-#define RUN_HIGH_LIM 29
-#define ATTACK_FRAMES 14
+#define IDLE_RIGHT 82
+#define IDLE_LEFT 80
+#define IDLE_DOWN 81
+#define IDLE_UP 83
+#define ATTACK_LOW_LIM 0
+#define ATTACK_HIGH_LIM 8
+#define RUN_LOW_LIM 50
+#define RUN_HIGH_LIM 59
+#define ATTACK_FRAMES 16
 #define HEALTH 100
 
 #define WIDTH 24.0f
@@ -112,7 +112,7 @@ void Player::animate(float forwardX, float forwardY) {
     }
     case IDLE: {
       if (_player_node->isFlipHorizontal()) {
-        _player_node->setFrame(10 - IDLE_LEFT);
+        _player_node->setFrame(IDLE_RIGHT);
       } else {
         _player_node->setFrame(IDLE_RIGHT);
       }
@@ -122,7 +122,7 @@ void Player::animate(float forwardX, float forwardY) {
     case ATTACKING: {
       if (_frame_count == 0) {
         if (_player_node->isFlipHorizontal()) {
-          _player_node->setFrame(9 + ATTACK_LOW_LIM);
+          _player_node->setFrame(10 + ATTACK_LOW_LIM);
         } else {
           _player_node->setFrame(ATTACK_LOW_LIM);
         }
@@ -134,8 +134,8 @@ void Player::animate(float forwardX, float forwardY) {
 
         if (_player_node->isFlipHorizontal()) {
           if (_player_node->getFrame() <=
-              19 - ATTACK_HIGH_LIM + ATTACK_LOW_LIM) {
-            _player_node->setFrame(9 + ATTACK_LOW_LIM);
+              20 - ATTACK_HIGH_LIM + ATTACK_LOW_LIM) {
+            _player_node->setFrame(10 + ATTACK_LOW_LIM);
           } else {
             _player_node->setFrame(_player_node->getFrame() - 1);
           }
