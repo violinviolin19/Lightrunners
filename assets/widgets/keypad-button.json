@@ -9,7 +9,7 @@
         "data": {
             "key": "textbutton",
             "variables": {
-                "size": [ 50, 50 ],
+                "size": [ 70, 70 ],
                 "text": "1",
                 "foreground": "#ffffff",
                 "texture": "button"
@@ -21,7 +21,7 @@
             "y_index": 0,
             "x_anchor": "center",
             "y_anchor": "middle",
-            "padding": [ 20, 20, 20, 20 ]
+            "padding": [ 30, 30, 30, 30 ]
         }
     }
 }
