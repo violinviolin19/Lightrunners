@@ -105,6 +105,13 @@
             "wrapS": "clamp",
             "wrapT": "clamp"
         },
+        "energy-slash": {
+            "file": "textures/energy-slash.png",
+            "minfilter": "nearest",
+            "magfilter": "nearest",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
+        },
         "button": {
             "file": "textures/ui/button_rounded.png",
             "minfilter": "nearest",
@@ -146,6 +153,13 @@
             "magfilter": "linear",
             "wrapS": "repeat",
             "wrapT": "repeat"
+        },
+        "terminal-voting-background": {
+            "file": "textures/ui/terminal_screen.png",
+            "minfilter": "nearest",
+            "magfilter": "linear",
+            "wrapS": "clamp",
+            "wrapT": "clamp"
         }
     },
     "jsons": {
@@ -153,6 +167,7 @@
     },
     "widgets": {
         "ui-scene": "widgets/ui-scene.json",
+        "terminal-voting-scene": "widgets/terminal-voting-scene.json",
         "win-scene": "widgets/win-scene.json",
         "world-scene": "widgets/world-scene.json",
         "wall-top": "widgets/wall-top.json",
@@ -185,6 +200,13 @@
             "type": "Widget",
             "data": {
                 "key": "ui-scene",
+                "variables": {}
+            }
+        },
+        "terminal-voting-scene": {
+            "type": "Widget",
+            "data": {
+                "key": "terminal-voting-scene",
                 "variables": {}
             }
         },
@@ -239,8 +261,8 @@
                         "y_alignment": "middle"
                     },
                     "data": {
-                        "anchor": [ 0.5, 0.5 ],
-                        "size": [ 500, 65 ]
+                        "anchor": [0.5, 0.5],
+                        "size": [500, 65]
                     },
                     "children": {
                         "host": {
@@ -248,14 +270,14 @@
                             "data": {
                                 "key": "textbutton",
                                 "variables": {
-                                    "size": [ 175, 55 ],
+                                    "size": [175, 55],
                                     "text": "HOST",
                                     "color": "#efebe3"
                                 }
                             },
                             "layout": {
                                 "priority": 1,
-                                "padding": [ 0, 0, 25, 0 ]
+                                "padding": [0, 0, 25, 0]
                             }
                         },
                         "join": {
@@ -263,20 +285,20 @@
                             "data": {
                                 "key": "textbutton",
                                 "variables": {
-                                    "size": [ 175, 55 ],
+                                    "size": [175, 55],
                                     "text": "JOIN",
                                     "color": "#efebe3"
                                 }
                             },
                             "layout": {
                                 "priority": 1,
-                                "padding": [ 0, 0, 0, 0 ]
+                                "padding": [0, 0, 0, 0]
                             }
                         }
                     },
                     "layout": {
                         "priority": 1,
-                        "padding": [ 0, 25, 0, 50 ]
+                        "padding": [0, 25, 0, 50]
                     }
                 },
                 "instructions": {
@@ -284,7 +306,7 @@
                     "data": {
                         "key": "textbutton",
                         "variables": {
-                            "size": [ 170, 45 ],
+                            "size": [170, 45],
                             "text": "HOW TO PLAY",
                             "font": "pixelmix_small",
                             "color": "#efebe3"
@@ -292,7 +314,7 @@
                     },
                     "layout": {
                         "priority": 1,
-                        "padding": [ 0, 25, 0, 0 ]
+                        "padding": [0, 25, 0, 0]
                     }
                 },
                 "settings": {
@@ -300,7 +322,7 @@
                     "data": {
                         "key": "textbutton",
                         "variables": {
-                            "size": [ 140, 45 ],
+                            "size": [140, 45],
                             "text": "SETTINGS",
                             "font": "pixelmix_small",
                             "color": "#efebe3"
@@ -308,7 +330,7 @@
                     },
                     "layout": {
                         "priority": 1,
-                        "padding": [ 0, 25, 0, 0 ]
+                        "padding": [0, 25, 0, 0]
                     }
                 }
             }
@@ -326,7 +348,7 @@
                     "type": "Button",
                     "data": {
                         "upnode": "up",
-                        "anchor": [ 0.0, 0.0 ]
+                        "anchor": [0.0, 0.0]
                     },
                     "children": {
                         "up": {
@@ -511,7 +533,7 @@
                     "type": "Button",
                     "data": {
                         "upnode": "up",
-                        "anchor": [ 0.0, 0.0 ]
+                        "anchor": [0.0, 0.0]
                     },
                     "children": {
                         "up": {
