@@ -37,18 +37,19 @@ bool ClientMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
   scene->doLayout();  // Repositions the HUD
 
   _startgame = std::dynamic_pointer_cast<cugl::scene2::Button>(
-      _assets->get<cugl::scene2::SceneNode>("client_center_info_start"));
+      _assets->get<cugl::scene2::SceneNode>(
+          "client_center_content_info_start"));
   _backout = std::dynamic_pointer_cast<cugl::scene2::Button>(
       _assets->get<cugl::scene2::SceneNode>("client_back"));
   _gameid = std::dynamic_pointer_cast<cugl::scene2::Label>(
       _assets->get<cugl::scene2::SceneNode>(
-          "client_center_info_game_field_text"));
+          "client_center_content_info_game_field_text"));
   _player = std::dynamic_pointer_cast<cugl::scene2::Label>(
       _assets->get<cugl::scene2::SceneNode>(
-          "client_center_info_players_field_text"));
+          "client_center_content_info_players_field_text"));
 
   for (int i = 0; i <= 9; i++) {
-    std::string key = "client_center_keys_" + to_string(i);
+    std::string key = "client_center_content_keys_" + to_string(i);
     std::shared_ptr<cugl::scene2::Button> button =
         std::dynamic_pointer_cast<cugl::scene2::Button>(
             _assets->get<cugl::scene2::SceneNode>(key));
@@ -56,7 +57,7 @@ bool ClientMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
   }
 
   _x_button = std::dynamic_pointer_cast<cugl::scene2::Button>(
-      _assets->get<cugl::scene2::SceneNode>("client_center_keys_x"));
+      _assets->get<cugl::scene2::SceneNode>("client_center_content_keys_x"));
 
   _status = Status::IDLE;
 
