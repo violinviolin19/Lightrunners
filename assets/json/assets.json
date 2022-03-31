@@ -377,7 +377,7 @@
                     },
                     "data": {
                         "anchor": [ 0.5, 0.0 ],
-                        "size": [ 1000, 685 ]
+                        "size": [ 1000, 670 ]
                     },
                     "children": {
                         "title": {
@@ -502,9 +502,9 @@
                             "data": {
                                 "key": "textbutton",
                                 "variables": {
-                                    "size": [ 200, 60 ],
+                                    "size": [ 220, 75 ],
                                     "text": "START GAME",
-                                    "font": "pixelmix_small",
+                                    "font": "pixelmix",
                                     "color": "#efebe3"
                                 }
                             },
@@ -724,9 +724,9 @@
                                             "data": {
                                                 "key": "textbutton",
                                                 "variables": {
-                                                    "size": [ 140, 60 ],
+                                                    "size": [ 180, 75 ],
                                                     "text": "JOIN",
-                                                    "font": "pixelmix_small",
+                                                    "font": "pixelmix",
                                                     "color": "#efebe3"
                                                 }
                                             },
@@ -740,7 +740,7 @@
                                     "layout": {
                                         "x_anchor": "center",
                                         "y_anchor": "bottom",
-                                        "padding": [ 0, 45, 0, 0 ]
+                                        "padding": [ 0, 30, 0, 0 ]
                                     }
                                 }
                             },
