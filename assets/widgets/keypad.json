@@ -7,7 +7,7 @@
             "height": 4
         },
         "data": {
-            "size": [ 120, 160 ]
+            "size": [ 200, 260 ]
         },
         "layout": {
             "priority": 1,
@@ -130,7 +130,7 @@
                 "data": {
                     "key": "keypad-button",
                     "variables": {
-                        "text": "x",
+                        "text": "X",
                         "x_index": 2,
                         "y_index": 0
                     }

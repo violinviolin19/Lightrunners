@@ -9,9 +9,10 @@
         "data": {
             "key": "textbutton",
             "variables": {
-                "size": [ 34, 34 ],
+                "size": [ 50, 50 ],
                 "text": "1",
-                "color": "#efebe3"
+                "foreground": "#ffffff",
+                "texture": "button"
             }
         },
         "layout": {
@@ -19,7 +20,8 @@
             "x_index": 0,
             "y_index": 0,
             "x_anchor": "center",
-            "y_anchor": "middle"
+            "y_anchor": "middle",
+            "padding": [ 20, 20, 20, 20 ]
         }
     }
 }

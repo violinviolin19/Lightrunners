@@ -381,7 +381,7 @@
                             },
                             "data": {
                                 "anchor": [ 0.5, 0.5 ],
-                                "size": [ 350, 100 ]
+                                "size": [ 370, 100 ]
                             },
                             "children": {
                                 "label": {
@@ -391,11 +391,13 @@
                                         "variables": {
                                             "size": [ 170, 70 ],
                                             "text": "GAME ID:",
-                                            "halign": "center"
+                                            "halign": "center",
+                                            "background": [ 239, 235, 227, 179 ]
                                         }
                                     },
                                     "layout": {
-                                        "priority": 1
+                                        "priority": 1,
+                                        "padding": [ 0, 0, 25, 0 ]
                                     }
                                 },
                                 "field": {
@@ -405,7 +407,9 @@
                                         "variables": {
                                             "size": [ 170, 70 ],
                                             "text": "",
-                                            "halign": "center"
+                                            "halign": "center",
+                                            "foreground": "#ffffff",
+                                            "background": [ 70, 70, 70, 179 ]
                                         }
                                     },
                                     "layout": {
@@ -428,7 +432,7 @@
                             },
                             "data": {
                                 "anchor": [ 0.5, 0.5 ],
-                                "size": [ 350, 100 ]
+                                "size": [ 370, 100 ]
                             },
                             "children": {
                                 "label": {
@@ -438,11 +442,13 @@
                                         "variables": {
                                             "size": [ 170, 70 ],
                                             "text": "PLAYERS:",
-                                            "halign": "center"
+                                            "halign": "center",
+                                            "background": [ 239, 235, 227, 179 ]
                                         }
                                     },
                                     "layout": {
-                                        "priority": 1
+                                        "priority": 1,
+                                        "padding": [ 0, 0, 25, 0 ]
                                     }
                                 },
                                 "field": {
@@ -452,7 +458,9 @@
                                         "variables": {
                                             "size": [ 170, 70 ],
                                             "text": "1",
-                                            "halign": "center"
+                                            "halign": "center",
+                                            "foreground": "#ffffff",
+                                            "background": [ 70, 70, 70, 179 ]
                                         }
                                     },
                                     "layout": {
@@ -580,7 +588,7 @@
                                     },
                                     "data": {
                                         "anchor": [ 0.5, 0.5 ],
-                                        "size": [ 350, 100 ]
+                                        "size": [ 370, 100 ]
                                     },
                                     "children": {
                                         "label": {
@@ -590,11 +598,13 @@
                                                 "variables": {
                                                     "size": [ 170, 70 ],
                                                     "text": "GAME ID:",
-                                                    "halign": "center"
+                                                    "halign": "center",
+                                                    "background": [ 239, 235, 227, 179 ]
                                                 }
                                             },
                                             "layout": {
-                                                "priority": 1
+                                                "priority": 1,
+                                                "padding": [ 0, 0, 25, 0 ]
                                             }
                                         },
                                         "field": {
@@ -604,7 +614,9 @@
                                                 "variables": {
                                                     "size": [ 170, 70 ],
                                                     "text": "",
-                                                    "halign": "center"
+                                                    "halign": "center",
+                                                    "foreground": "#ffffff",
+                                                    "background": [ 70, 70, 70, 179 ]
                                                 }
                                             },
                                             "layout": {
@@ -627,7 +639,7 @@
                                     },
                                     "data": {
                                         "anchor": [ 0.5, 0.5 ],
-                                        "size": [ 350, 100 ]
+                                        "size": [ 370, 100 ]
                                     },
                                     "children": {
                                         "label": {
@@ -637,11 +649,13 @@
                                                 "variables": {
                                                     "size": [ 170, 70 ],
                                                     "text": "PLAYERS:",
-                                                    "halign": "center"
+                                                    "halign": "center",
+                                                    "background": [ 239, 235, 227, 179 ]
                                                 }
                                             },
                                             "layout": {
-                                                "priority": 1
+                                                "priority": 1,
+                                                "padding": [ 0, 0, 25, 0 ]
                                             }
                                         },
                                         "field": {
@@ -651,7 +665,9 @@
                                                 "variables": {
                                                     "size": [ 170, 70 ],
                                                     "text": "1",
-                                                    "halign": "center"
+                                                    "halign": "center",
+                                                    "foreground": "#ffffff",
+                                                    "background": [ 70, 70, 70, 179 ]
                                                 }
                                             },
                                             "layout": {
