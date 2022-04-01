@@ -3591,27 +3591,6 @@
             }
           }
         },
-        "tile-(8-0)": {
-          "type": "Node",
-          "format": {
-            "type": "Anchored"
-          },
-          "layout": {
-            "x_index": 8,
-            "y_index": 0,
-            "x_anchor": "left",
-            "y_anchor": "bottom"
-          },
-          "children": {
-            "tile": {
-              "type": "Widget",
-              "data": {
-                "key": "tile-1",
-                "variables": {}
-              }
-            }
-          }
-        },
         "tile-(9-0)": {
           "type": "Node",
           "format": {
@@ -3709,7 +3688,7 @@
         "y_anchor": "left"
       },
       "children": {
-        "decoration-(7.318147786458333-1.5381479899088542)-0": {
+        "decoration-(7.318147786458333-13.461852010091146)-0": {
           "type": "Node",
           "format": {
             "type": "Anchored"
@@ -3722,7 +3701,7 @@
           },
           "layout": {
             "x_index": 7,
-            "y_index": 1,
+            "y_index": 13,
             "x_anchor": "left",
             "y_anchor": "bottom"
           },
@@ -3734,13 +3713,13 @@
                 "variables": {
                   "priority": -0.95,
                   "x_offset_frac": 0.31814778645833286,
-                  "y_offset_frac": 0.5381479899088542
+                  "y_offset_frac": 0.46185201009114607
                 }
               }
             }
           }
         },
-        "decoration-(7.295925564236111-2.4396297878689235)-1": {
+        "decoration-(7.295925564236111-12.560370212131076)-1": {
           "type": "Node",
           "format": {
             "type": "Anchored"
@@ -3753,7 +3732,7 @@
           },
           "layout": {
             "x_index": 7,
-            "y_index": 2,
+            "y_index": 12,
             "x_anchor": "left",
             "y_anchor": "bottom"
           },
@@ -3765,13 +3744,13 @@
                 "variables": {
                   "priority": -0.95,
                   "x_offset_frac": 0.2959255642361107,
-                  "y_offset_frac": 0.4396297878689235
+                  "y_offset_frac": 0.5603702121310761
                 }
               }
             }
           }
         },
-        "decoration-(7.295925564236111-3.407406955295139)-2": {
+        "decoration-(7.295925564236111-11.592593044704861)-2": {
           "type": "Node",
           "format": {
             "type": "Anchored"
@@ -3784,7 +3763,7 @@
           },
           "layout": {
             "x_index": 7,
-            "y_index": 3,
+            "y_index": 11,
             "x_anchor": "left",
             "y_anchor": "bottom"
           },
@@ -3796,13 +3775,13 @@
                 "variables": {
                   "priority": -0.95,
                   "x_offset_frac": 0.2959255642361107,
-                  "y_offset_frac": 0.40740695529513893
+                  "y_offset_frac": 0.5925930447048611
                 }
               }
             }
           }
         },
-        "decoration-(10.244813368055556-7.417777506510417)-3": {
+        "decoration-(10.244813368055556-7.582222493489583)-3": {
           "type": "Node",
           "format": {
             "type": "Anchored"
@@ -3827,13 +3806,13 @@
                 "variables": {
                   "priority": -0.95,
                   "x_offset_frac": 0.24481336805555642,
-                  "y_offset_frac": 0.4177775065104168
+                  "y_offset_frac": 0.5822224934895832
                 }
               }
             }
           }
         },
-        "decoration-(11.30185275607639-7.391110568576389)-4": {
+        "decoration-(11.30185275607639-7.608889431423611)-4": {
           "type": "Node",
           "format": {
             "type": "Anchored"
@@ -3858,13 +3837,13 @@
                 "variables": {
                   "priority": -0.95,
                   "x_offset_frac": 0.3018527560763893,
-                  "y_offset_frac": 0.39111056857638893
+                  "y_offset_frac": 0.6088894314236111
                 }
               }
             }
           }
         },
-        "decoration-(4.109259711371528-8.598518880208333)-5": {
+        "decoration-(4.109259711371528-6.401481119791667)-5": {
           "type": "Node",
           "format": {
             "type": "Anchored"
@@ -3877,7 +3856,7 @@
           },
           "layout": {
             "x_index": 4,
-            "y_index": 8,
+            "y_index": 6,
             "x_anchor": "left",
             "y_anchor": "bottom"
           },
@@ -3889,13 +3868,13 @@
                 "variables": {
                   "priority": -0.95,
                   "x_offset_frac": 0.10925971137152768,
-                  "y_offset_frac": 0.5985188802083332
+                  "y_offset_frac": 0.4014811197916668
                 }
               }
             }
           }
         },
-        "decoration-(8.21962890625-10.477777777777778)-6": {
+        "decoration-(8.21962890625-4.522222222222222)-6": {
           "type": "Node",
           "format": {
             "type": "Anchored"
@@ -3908,7 +3887,7 @@
           },
           "layout": {
             "x_index": 8,
-            "y_index": 10,
+            "y_index": 4,
             "x_anchor": "left",
             "y_anchor": "bottom"
           },
@@ -3920,13 +3899,13 @@
                 "variables": {
                   "priority": -0.95,
                   "x_offset_frac": 0.21962890624999964,
-                  "y_offset_frac": 0.47777777777777786
+                  "y_offset_frac": 0.5222222222222221
                 }
               }
             }
           }
         },
-        "decoration-(7.251481119791666-11.463704427083334)-7": {
+        "decoration-(7.251481119791666-3.536295572916666)-7": {
           "type": "Node",
           "format": {
             "type": "Anchored"
@@ -3939,7 +3918,7 @@
           },
           "layout": {
             "x_index": 7,
-            "y_index": 11,
+            "y_index": 3,
             "x_anchor": "left",
             "y_anchor": "bottom"
           },
@@ -3951,13 +3930,13 @@
                 "variables": {
                   "priority": -0.95,
                   "x_offset_frac": 0.25148111979166643,
-                  "y_offset_frac": 0.4637044270833339
+                  "y_offset_frac": 0.5362955729166661
                 }
               }
             }
           }
         },
-        "decoration-(8.286295572916666-11.379258897569445)-8": {
+        "decoration-(8.286295572916666-3.6207411024305554)-8": {
           "type": "Node",
           "format": {
             "type": "Anchored"
@@ -3970,7 +3949,7 @@
           },
           "layout": {
             "x_index": 8,
-            "y_index": 11,
+            "y_index": 3,
             "x_anchor": "left",
             "y_anchor": "bottom"
           },
@@ -3982,13 +3961,13 @@
                 "variables": {
                   "priority": -0.95,
                   "x_offset_frac": 0.2862955729166661,
-                  "y_offset_frac": 0.37925889756944464
+                  "y_offset_frac": 0.6207411024305554
                 }
               }
             }
           }
         },
-        "decoration-(9.276665581597221-11.401481119791667)-9": {
+        "decoration-(9.276665581597221-3.598518880208333)-9": {
           "type": "Node",
           "format": {
             "type": "Anchored"
@@ -4001,7 +3980,7 @@
           },
           "layout": {
             "x_index": 9,
-            "y_index": 11,
+            "y_index": 3,
             "x_anchor": "left",
             "y_anchor": "bottom"
           },
@@ -4013,13 +3992,13 @@
                 "variables": {
                   "priority": -0.95,
                   "x_offset_frac": 0.27666558159722143,
-                  "y_offset_frac": 0.4014811197916668
+                  "y_offset_frac": 0.5985188802083332
                 }
               }
             }
           }
         },
-        "decoration-(10.267035590277779-11.379258897569445)-10": {
+        "decoration-(10.267035590277779-3.6207411024305554)-10": {
           "type": "Node",
           "format": {
             "type": "Anchored"
@@ -4032,7 +4011,7 @@
           },
           "layout": {
             "x_index": 10,
-            "y_index": 11,
+            "y_index": 3,
             "x_anchor": "left",
             "y_anchor": "bottom"
           },
@@ -4044,13 +4023,13 @@
                 "variables": {
                   "priority": -0.95,
                   "x_offset_frac": 0.26703559027777857,
-                  "y_offset_frac": 0.37925889756944464
+                  "y_offset_frac": 0.6207411024305554
                 }
               }
             }
           }
         },
-        "decoration-(7.997406684027778-12.839259168836806)-11": {
+        "decoration-(7.997406684027778-2.160740831163194)-11": {
           "type": "Node",
           "format": {
             "type": "Anchored"
@@ -4063,7 +4042,7 @@
           },
           "layout": {
             "x_index": 7,
-            "y_index": 12,
+            "y_index": 2,
             "x_anchor": "left",
             "y_anchor": "bottom"
           },
@@ -4075,13 +4054,13 @@
                 "variables": {
                   "priority": -0.95,
                   "x_offset_frac": 0.9974066840277782,
-                  "y_offset_frac": 0.8392591688368061
+                  "y_offset_frac": 0.16074083116319393
                 }
               }
             }
           }
         },
-        "decoration-(9.254443359375-12.48074001736111)-12": {
+        "decoration-(9.254443359375-2.5192599826388893)-12": {
           "type": "Node",
           "format": {
             "type": "Anchored"
@@ -4094,7 +4073,7 @@
           },
           "layout": {
             "x_index": 9,
-            "y_index": 12,
+            "y_index": 2,
             "x_anchor": "left",
             "y_anchor": "bottom"
           },
@@ -4106,7 +4085,7 @@
                 "variables": {
                   "priority": -0.95,
                   "x_offset_frac": 0.2544433593749993,
-                  "y_offset_frac": 0.4807400173611107
+                  "y_offset_frac": 0.5192599826388893
                 }
               }
             }
@@ -4136,65 +4115,65 @@
         "y_anchor": "left"
       },
       "children": {
-        "enemy-(10.267035590277779-3.3674072265625)-0": {
+        "enemy-(10.267035590277779-11.6325927734375)-0": {
           "type": "Turtle",
           "layout": {
             "x_index": 10.267035590277779,
-            "y_index": 3.3674072265625,
+            "y_index": 11.6325927734375,
             "x_anchor": "left",
             "y_anchor": "bottom"
           }
         },
-        "enemy-(8.264073350694444-6.360740831163194)-1": {
+        "enemy-(8.264073350694444-8.639259168836805)-1": {
           "type": "Shotgunner",
           "layout": {
             "x_index": 8.264073350694444,
-            "y_index": 6.360740831163194,
+            "y_index": 8.639259168836805,
             "x_anchor": "left",
             "y_anchor": "bottom"
           }
         },
-        "enemy-(5.159629991319444-7.239999728732639)-2": {
+        "enemy-(5.159629991319444-7.760000271267361)-2": {
           "type": "Grunt",
           "layout": {
             "x_index": 5.159629991319444,
-            "y_index": 7.239999728732639,
+            "y_index": 7.760000271267361,
             "x_anchor": "left",
             "y_anchor": "bottom"
           }
         },
-        "enemy-(6.283333333333333-8.297037760416666)-3": {
+        "enemy-(6.283333333333333-6.702962239583334)-3": {
           "type": "Grunt",
           "layout": {
             "x_index": 6.283333333333333,
-            "y_index": 8.297037760416666,
+            "y_index": 6.702962239583334,
             "x_anchor": "left",
             "y_anchor": "bottom"
           }
         },
-        "enemy-(10.155924479166666-8.363704427083333)-4": {
+        "enemy-(10.155924479166666-6.6362955729166675)-4": {
           "type": "Tank",
           "layout": {
             "x_index": 10.155924479166666,
-            "y_index": 8.363704427083333,
+            "y_index": 6.6362955729166675,
             "x_anchor": "left",
             "y_anchor": "bottom"
           }
         },
-        "enemy-(4.3025933159722225-9.220741102430555)-5": {
+        "enemy-(4.3025933159722225-5.779258897569445)-5": {
           "type": "Grunt",
           "layout": {
             "x_index": 4.3025933159722225,
-            "y_index": 9.220741102430555,
+            "y_index": 5.779258897569445,
             "x_anchor": "left",
             "y_anchor": "bottom"
           }
         },
-        "enemy-(7.273703342013889-10.3)-6": {
+        "enemy-(7.273703342013889-4.699999999999999)-6": {
           "type": "Tank",
           "layout": {
             "x_index": 7.273703342013889,
-            "y_index": 10.3,
+            "y_index": 4.699999999999999,
             "x_anchor": "left",
             "y_anchor": "bottom"
           }
