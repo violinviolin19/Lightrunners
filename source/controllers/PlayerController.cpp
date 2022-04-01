@@ -9,7 +9,8 @@
 #define ATTACK_FRAMES 18
 #define HURT_FRAMES 10
 #define DEAD_FRAMES 175
-#define SLASH_FRAMES 7 // MAX_LIVE_FRAMES in projectile.cpp MUST be SLASH_FRAMES * 6
+#define SLASH_FRAMES \
+  7  // MAX_LIVE_FRAMES in projectile.cpp MUST be SLASH_FRAMES * 6
 
 #define HEALTH 100
 
@@ -32,7 +33,8 @@ bool PlayerController::init(
 }
 
 void PlayerController::update(float timestep, cugl::Vec2 forward,
-                              bool didAttack, bool didDash, bool holdAttack, std::shared_ptr<Sword> sword) {
+                              bool didAttack, bool didDash, bool holdAttack,
+                              std::shared_ptr<Sword> sword) {
   move(timestep, didDash, forward);
   attack(didAttack, holdAttack, sword);
   updateSlashes(timestep);
@@ -76,15 +78,13 @@ void PlayerController::move(float timestep, bool didDash, cugl::Vec2 forward) {
   }
 }
 
-void PlayerController::attack(bool didAttack, bool holdAttack, std::shared_ptr<Sword> sword) {
+void PlayerController::attack(bool didAttack, bool holdAttack,
+                              std::shared_ptr<Sword> sword) {
   if (!_player->getDead()) {
     if (holdAttack) {
       _player->_hold_attack++;
-      if (_player->_hold_attack >= HOLD_ATTACK_COLOR_LIMIT) {
-        _player->getPlayerNode()->setColor(cugl::Color4::BLUE);
-      }
       if (_player->_hold_attack >= HOLD_ATTACK_COUNT) {
-        _player->getPlayerNode()->setColor(cugl::Color4::WHITE);
+        _player->getPlayerNode()->setColor(cugl::Color4::BLUE);
         _player->_can_make_slash = true;
       }
     } else {
@@ -95,14 +95,19 @@ void PlayerController::attack(bool didAttack, bool holdAttack, std::shared_ptr<S
         // There is not a slash direction.
         if (_player->_attack_frame_count == ATTACK_FRAMES) {
           _player->_frame_count = 0;
-          cugl::Vec2 attackDir = cugl::Vec2(1, 0);
-          if (_player->getPlayerNode()->isFlipHorizontal()) {
+          cugl::Vec2 attackDir = cugl::Vec2(0, 1);
+          if (_player->getMoveDir() == 0) {
             attackDir = cugl::Vec2(-1, 0);
+          } else if (_player->getMoveDir() == 1) {
+            attackDir = cugl::Vec2(0, -1);
+          } else if (_player->getMoveDir() == 2) {
+            attackDir = cugl::Vec2(1, 0);
           }
           if (_player->_can_make_slash) {
             _player->makeSlash(attackDir, sword->getPosition());
             _player->_can_make_slash = false;
             _player->_hold_attack = 0;
+            _player->getPlayerNode()->setColor(cugl::Color4::WHITE);
           }
         }
         sword->setEnabled(true);
@@ -123,14 +128,14 @@ void PlayerController::attack(bool didAttack, bool holdAttack, std::shared_ptr<S
         sword->setEnabled(false);
         _player->_attack_frame_count = ATTACK_FRAMES;
       }
-      
+
       _player->_hold_attack = 0;
     }
-    
+
     // Set the sword adjacent to the player
     sword->moveSword(_player->getPosition() + _player->getOffset(),
                      cugl::Vec2(_player->getVX(), _player->getVY()),
-                     _player->getPlayerNode()->isFlipHorizontal());
+                     _player->getMoveDir());
   }
 }
 
@@ -143,7 +148,12 @@ void PlayerController::updateSlashes(float timestep) {
       _world->addObstacle((*it));
       auto proj_node = cugl::scene2::SpriteNode::alloc(_slash_texture, 1, 7);
       proj_node->setPosition((*it)->getPosition());
-      proj_node->flipHorizontal(_player->getPlayerNode()->isFlipHorizontal());
+      proj_node->flipHorizontal(_player->getMoveDir() == 0);
+      if (_player->getMoveDir() == 1) {
+        proj_node->setAngle(-M_PI / 2);
+      } else if (_player->getMoveDir() == 3) {
+        proj_node->setAngle(M_PI / 2);
+      }
       (*it)->setNode(proj_node);
       _world_node->addChild(proj_node);
       (*it)->setDebugScene(_debug_node);

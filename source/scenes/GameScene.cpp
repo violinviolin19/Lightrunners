@@ -245,7 +245,9 @@ void GameScene::update(float timestep) {
   // Movement
   _player_controller->update(
       timestep, InputController::get<Movement>()->getMovement(),
-      InputController::get<Attack>()->isAttacking(), InputController::get<Dash>()->isDashing(), InputController::get<Attack>()->holdAttack(), _sword);
+      InputController::get<Attack>()->isAttacking(),
+      InputController::get<Dash>()->isDashing(),
+      InputController::get<Attack>()->holdAttack(), _sword);
 
   std::shared_ptr<RoomModel> current_room =
       _level_controller->getLevelModel()->getCurrentRoom();
