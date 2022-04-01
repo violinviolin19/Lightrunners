@@ -355,7 +355,9 @@
                         "up": {
                             "type": "Image",
                             "data": {
-                                "texture": "left"
+                                "texture": "left",
+                                "scale": 4,
+                                "color": "#222222"
                             }
                         }
                     },
@@ -541,7 +543,9 @@
                         "up": {
                             "type": "Image",
                             "data": {
-                                "texture": "left"
+                                "texture": "left",
+                                "scale": 4,
+                                "color": "#222222"
                             }
                         }
                     },
@@ -549,7 +553,7 @@
                         "x_anchor": "left",
                         "y_anchor": "top",
                         "y_offset": -60,
-                        "x_offset": 25,
+                        "x_offset": 35,
                         "absolute": true
                     }
                 },
