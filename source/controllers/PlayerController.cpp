@@ -9,8 +9,7 @@
 #define ATTACK_FRAMES 18
 #define HURT_FRAMES 10
 #define DEAD_FRAMES 175
-#define SLASH_FRAMES \
-  7  // MAX_LIVE_FRAMES in projectile.cpp MUST be SLASH_FRAMES * 6
+#define SLASH_FRAMES 7  // MAX_LIVE_FRAMES in projectile.cpp MUST be SLASH_FRAMES * 6
 
 #define HEALTH 100
 
