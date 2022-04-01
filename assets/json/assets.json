@@ -136,7 +136,7 @@
         "left": {
             "file": "textures/left_arrow.png",
             "minfilter": "nearest",
-            "magfilter": "linear",
+            "magfilter": "nearest",
             "wrapS": "clamp",
             "wrapT": "clamp"
         },
