@@ -115,21 +115,21 @@
         "button": {
             "file": "textures/ui/button_rounded.png",
             "minfilter": "nearest",
-            "magfilter": "linear",
+            "magfilter": "nearest",
             "wrapS": "clamp",
             "wrapT": "clamp"
         },
         "button_white": {
             "file": "textures/ui/button_rounded_white.png",
             "minfilter": "nearest",
-            "magfilter": "linear",
+            "magfilter": "nearest",
             "wrapS": "clamp",
             "wrapT": "clamp"
         },
         "button_beige": {
             "file": "textures/ui/button_rounded_beige.png",
             "minfilter": "nearest",
-            "magfilter": "linear",
+            "magfilter": "nearest",
             "wrapS": "clamp",
             "wrapT": "clamp"
         },
