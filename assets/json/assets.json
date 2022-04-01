@@ -364,8 +364,8 @@
                     "layout": {
                         "x_anchor": "left",
                         "y_anchor": "top",
-                        "y_offset": -60,
-                        "x_offset": 25,
+                        "y_offset": -80,
+                        "x_offset": 45,
                         "absolute": true
                     }
                 },
@@ -552,8 +552,8 @@
                     "layout": {
                         "x_anchor": "left",
                         "y_anchor": "top",
-                        "y_offset": -60,
-                        "x_offset": 35,
+                        "y_offset": -80,
+                        "x_offset": 45,
                         "absolute": true
                     }
                 },
