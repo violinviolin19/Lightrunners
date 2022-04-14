@@ -194,7 +194,11 @@
       "minfilter": "nearest",
       "magfilter": "nearest",
       "wrapS": "clamp",
-      "wrapT": "clamp"
+      "wrapT": "clamp",
+      "atlas": {
+        "leftcap": [ 0, 0, 1, 50 ],
+        "rightcap": [ 467, 0, 468, 50 ]
+      }
     },
     "health-outline": {
       "file": "textures/health-outline.png",
@@ -245,619 +249,661 @@
         "keypad": "widgets/keypad.json",
         "keypad-button": "widgets/keypad-button.json"
     },
-    "scene2s": {
-        "wall-side": {
-            "type": "Widget",
-            "data": {
-                "key": "wall-side",
-                "variables": {}
-            }
-        },
-      "wall-top": {
-        "type": "Widget",
-        "data": {
-          "key": "wall-top",
-          "variables": {}
-        }
+  "scene2s": {
+    "wall-side": {
+      "type": "Widget",
+      "data": {
+        "key": "wall-side",
+        "variables": {}
+      }
+    },
+    "wall-top": {
+      "type": "Widget",
+      "data": {
+        "key": "wall-top",
+        "variables": {}
+      }
+    },
+    "background": {
+      "type": "Widget",
+      "data": {
+        "key": "background",
+        "variables": {}
+      }
+    },
+    "ui-scene": {
+      "type": "Widget",
+      "data": {
+        "key": "ui-scene",
+        "variables": {}
+      }
+    },
+    "terminal-voting-scene": {
+      "type": "Widget",
+      "data": {
+        "key": "terminal-voting-scene",
+        "variables": {}
+      }
+    },
+    "win-scene": {
+      "type": "Widget",
+      "data": {
+        "key": "win-scene",
+        "variables": {}
+      }
+    },
+    "world-scene": {
+      "comments": "This is the root node for the world scene for level 1.",
+      "type": "Order",
+      "data": {
+        "order": "ascend"
       },
-      "background": {
-            "type": "Widget",
-            "data": {
-                "key": "background",
-                "variables": {}
+      "format": {
+        "type": "Anchored"
+      },
+      "layout": {
+        "x_anchor": "left",
+        "y_anchor": "bottom"
+      }
+    },
+    "menu": {
+      "type": "Image",
+      "format": {
+        "type": "Float",
+        "orientation": "vertical",
+        "x_alignment": "center",
+        "y_alignment": "middle"
+      },
+      "data": {
+        "texture": "background"
+      },
+      "children": {
+        "title": {
+          "type": "Widget",
+          "data": {
+            "key": "menutitle",
+            "variables": {
+              "text": "LIGHTRUNNERS"
             }
+          }
         },
-        "ui-scene": {
-            "type": "Widget",
-            "data": {
-                "key": "ui-scene",
-                "variables": {}
-            }
-        },
-        "terminal-voting-scene": {
-            "type": "Widget",
-            "data": {
-                "key": "terminal-voting-scene",
-                "variables": {}
-            }
-        },
-        "win-scene": {
-            "type": "Widget",
-            "data": {
-                "key": "win-scene",
-                "variables": {}
-            }
-        },
-        "world-scene": {
-            "comments": "This is the root node for the world scene for level 1.",
-            "type": "Order",
-            "data": {
-                "order": "ascend"
+        "play": {
+          "type": "Node",
+          "format": {
+            "type": "Float",
+            "orientation": "horizontal",
+            "x_alignment": "center",
+            "y_alignment": "middle"
+          },
+          "data": {
+            "anchor": [ 0.5, 0.5 ],
+            "size": [ 500, 65 ]
+          },
+          "children": {
+            "host": {
+              "type": "Widget",
+              "data": {
+                "key": "textbutton",
+                "variables": {
+                  "size": [ 175, 55 ],
+                  "text": "HOST",
+                  "color": "#efebe3"
+                }
+              },
+              "layout": {
+                "priority": 1,
+                "padding": [ 0, 0, 25, 0 ]
+              }
             },
-            "format": {
-                "type": "Anchored"
-            },
-            "layout": {
+            "join": {
+              "type": "Widget",
+              "data": {
+                "key": "textbutton",
+                "variables": {
+                  "size": [ 175, 55 ],
+                  "text": "JOIN",
+                  "color": "#efebe3"
+                }
+              },
+              "layout": {
+                "priority": 1,
+                "padding": [ 0, 0, 0, 0 ]
+              }
+            }
+          },
+          "layout": {
+            "priority": 1,
+            "padding": [ 0, 25, 0, 50 ]
+          }
+        },
+        "instructions": {
+          "type": "Widget",
+          "data": {
+            "key": "textbutton",
+            "variables": {
+              "size": [ 170, 45 ],
+              "text": "HOW TO PLAY",
+              "font": "pixelmix_small",
+              "color": "#efebe3"
+            }
+          },
+          "layout": {
+            "priority": 1,
+            "padding": [ 0, 25, 0, 0 ]
+          }
+        },
+        "settings": {
+          "type": "Widget",
+          "data": {
+            "key": "textbutton",
+            "variables": {
+              "size": [ 140, 45 ],
+              "text": "SETTINGS",
+              "font": "pixelmix_small",
+              "color": "#efebe3"
+            }
+          },
+          "layout": {
+            "priority": 1,
+            "padding": [ 0, 25, 0, 0 ]
+          }
+        }
+      }
+    },
+    "health": {
+      "type": "Node",
+      "format": {
+        "type": "Anchored"
+      },
+      "children": {
+        "bar": {
+          "type": "Progress",
+          "data": {
+            "anchor": [ 0.5, 0.5 ],
+            "background": "health-fill",
+            "foreground": "health-bar",
+            "left_cap": "health-fill_leftcap",
+            "right_cap": "health-fill_rightcap",
+            "scale": 0.4
+          },
+          "layout": {
+            "x_anchor": "left",
+            "y_anchor": "top",
+            "x_offset": 0.2,
+            "y_offset": -0.13
+          }
+        },
+        "health-outline": {
+          "type": "Image",
+          "format": {
+            "type": "Anchored"
+          },
+          "data": {
+            "texture": "health-outline",
+            "anchor": [ 0.5, 0.5 ],
+            "scale": 0.402
+          },
+          "layout": {
+            "x_anchor": "left",
+            "y_anchor": "top",
+            "x_offset": 0.2,
+            "y_offset": -0.13
+          }
+        }
+      }
+    },
+        "host": {
+          "type": "Image",
+          "format": {
+            "type": "Anchored"
+          },
+          "data": {
+            "texture": "background"
+          },
+          "children": {
+            "back": {
+              "type": "Button",
+              "data": {
+                "upnode": "up",
+                "anchor": [ 0.0, 0.0 ],
+                "size": [ 20, 20 ]
+              },
+              "children": {
+                "up": {
+                  "type": "Image",
+                  "data": {
+                    "texture": "left",
+                    "scale": 4,
+                    "color": "#222222"
+                  }
+                }
+              },
+              "layout": {
                 "x_anchor": "left",
-                "y_anchor": "bottom"
-            }
-        },
-        "menu": {
-            "type": "Image",
-            "format": {
+                "y_anchor": "top",
+                "y_offset": -80,
+                "x_offset": 45,
+                "absolute": true
+              }
+            },
+            "center": {
+              "type": "Node",
+              "format": {
                 "type": "Float",
                 "orientation": "vertical",
                 "x_alignment": "center",
                 "y_alignment": "middle"
-            },
-            "data": {
-                "texture": "background"
-            },
-            "children": {
+              },
+              "data": {
+                "anchor": [ 0.5, 0.0 ],
+                "size": [ 1000, 670 ]
+              },
+              "children": {
                 "title": {
-                    "type": "Widget",
-                    "data": {
-                        "key": "menutitle",
-                        "variables": {
-                            "text": "LIGHTRUNNERS"
-                        }
-                    }
+                  "type": "Widget",
+                  "data": {
+                    "key": "menutitle",
+                    "variables": {
+                      "text": "HOST GAME"
+                    },
+                    "anchor": [ 0.5, 1.0 ]
+                  },
+                  "layout": {
+                    "priority": 1,
+                    "x_anchor": "top",
+                    "y_anchor": "middle"
+                  }
                 },
-                "play": {
-                    "type": "Node",
-                    "format": {
-                        "type": "Float",
-                        "orientation": "horizontal",
-                        "x_alignment": "center",
-                        "y_alignment": "middle"
-                    },
-                    "data": {
-                        "anchor": [ 0.5, 0.5 ],
-                        "size": [ 500, 65 ]
-                    },
-                    "children": {
-                        "host": {
-                            "type": "Widget",
-                            "data": {
-                                "key": "textbutton",
-                                "variables": {
-                                    "size": [ 175, 55 ],
-                                    "text": "HOST",
-                                    "color": "#efebe3"
-                                }
-                            },
-                            "layout": {
-                                "priority": 1,
-                                "padding": [ 0, 0, 25, 0 ]
-                            }
-                        },
-                        "join": {
-                            "type": "Widget",
-                            "data": {
-                                "key": "textbutton",
-                                "variables": {
-                                    "size": [ 175, 55 ],
-                                    "text": "JOIN",
-                                    "color": "#efebe3"
-                                }
-                            },
-                            "layout": {
-                                "priority": 1,
-                                "padding": [ 0, 0, 0, 0 ]
-                            }
-                        }
-                    },
-                    "layout": {
-                        "priority": 1,
-                        "padding": [ 0, 25, 0, 50 ]
-                    }
-                },
-                "instructions": {
-                    "type": "Widget",
-                    "data": {
-                        "key": "textbutton",
+                "game": {
+                  "type": "Node",
+                  "format": {
+                    "type": "Float",
+                    "orientation": "horizontal",
+                    "x_alignment": "center",
+                    "y_alignment": "middle"
+                  },
+                  "data": {
+                    "anchor": [ 0.5, 0.5 ],
+                    "size": [ 370, 100 ]
+                  },
+                  "children": {
+                    "label": {
+                      "type": "Widget",
+                      "data": {
+                        "key": "labelbox",
                         "variables": {
-                            "size": [ 170, 45 ],
-                            "text": "HOW TO PLAY",
-                            "font": "pixelmix_small",
-                            "color": "#efebe3"
+                          "size": [ 170, 70 ],
+                          "text": "GAME ID:",
+                          "halign": "center",
+                          "background": [ 239, 235, 227, 179 ]
                         }
-                    },
-                    "layout": {
+                      },
+                      "layout": {
                         "priority": 1,
-                        "padding": [ 0, 25, 0, 0 ]
-                    }
-                },
-                "settings": {
-                    "type": "Widget",
-                    "data": {
-                        "key": "textbutton",
+                        "padding": [ 0, 0, 25, 0 ]
+                      }
+                    },
+                    "field": {
+                      "type": "Widget",
+                      "data": {
+                        "key": "labelbox",
                         "variables": {
-                            "size": [ 140, 45 ],
-                            "text": "SETTINGS",
-                            "font": "pixelmix_small",
-                            "color": "#efebe3"
+                          "size": [ 170, 70 ],
+                          "text": "",
+                          "halign": "center",
+                          "foreground": "#ffffff",
+                          "background": [ 70, 70, 70, 179 ]
                         }
-                    },
-                    "layout": {
-                        "priority": 1,
-                        "padding": [ 0, 25, 0, 0 ]
+                      },
+                      "layout": {
+                        "priority": 2
+                      }
                     }
+                  },
+                  "layout": {
+                    "priority": 1,
+                    "padding": [ 0, 0, 0, 5 ]
+                  }
+                },
+                "players": {
+                  "type": "Node",
+                  "format": {
+                    "type": "Float",
+                    "orientation": "horizontal",
+                    "x_alignment": "center",
+                    "y_alignment": "middle"
+                  },
+                  "data": {
+                    "anchor": [ 0.5, 0.5 ],
+                    "size": [ 370, 100 ]
+                  },
+                  "children": {
+                    "label": {
+                      "type": "Widget",
+                      "data": {
+                        "key": "labelbox",
+                        "variables": {
+                          "size": [ 170, 70 ],
+                          "text": "PLAYERS:",
+                          "halign": "center",
+                          "background": [ 239, 235, 227, 179 ]
+                        }
+                      },
+                      "layout": {
+                        "priority": 1,
+                        "padding": [ 0, 0, 25, 0 ]
+                      }
+                    },
+                    "field": {
+                      "type": "Widget",
+                      "data": {
+                        "key": "labelbox",
+                        "variables": {
+                          "size": [ 170, 70 ],
+                          "text": "1",
+                          "halign": "center",
+                          "foreground": "#ffffff",
+                          "background": [ 70, 70, 70, 179 ]
+                        }
+                      },
+                      "layout": {
+                        "priority": 2
+                      }
+                    }
+                  },
+                  "layout": {
+                    "priority": 2,
+                    "padding": [ 0, 25, 0, 0 ]
+                  }
+                },
+                "start": {
+                  "type": "Widget",
+                  "data": {
+                    "key": "textbutton",
+                    "variables": {
+                      "size": [ 220, 75 ],
+                      "text": "START GAME",
+                      "font": "pixelmix",
+                      "color": "#efebe3"
+                    }
+                  },
+                  "layout": {
+                    "priority": 3,
+                    "padding": [ 0, 25, 0, 0 ]
+                  }
                 }
+              },
+              "layout": {
+                "x_anchor": "center",
+                "y_anchor": "bottom"
+              }
             }
-        },
-        "host": {
-            "type": "Image",
-            "format": {
-                "type": "Anchored"
-            },
-            "data": {
-                "texture": "background"
-            },
-            "children": {
-                "back": {
-                    "type": "Button",
-                    "data": {
-                        "upnode": "up",
-                        "anchor": [ 0.0, 0.0 ],
-                        "size": [ 20, 20 ]
-                    },
-                    "children": {
-                        "up": {
-                            "type": "Image",
-                            "data": {
-                                "texture": "left",
-                                "scale": 4,
-                                "color": "#222222"
-                            }
-                        }
-                    },
-                    "layout": {
-                        "x_anchor": "left",
-                        "y_anchor": "top",
-                        "y_offset": -80,
-                        "x_offset": 45,
-                        "absolute": true
-                    }
-                },
-                "center": {
-                    "type": "Node",
-                    "format": {
-                        "type": "Float",
-                        "orientation": "vertical",
-                        "x_alignment": "center",
-                        "y_alignment": "middle"
-                    },
-                    "data": {
-                        "anchor": [ 0.5, 0.0 ],
-                        "size": [ 1000, 670 ]
-                    },
-                    "children": {
-                        "title": {
-                            "type": "Widget",
-                            "data": {
-                                "key": "menutitle",
-                                "variables": {
-                                    "text": "HOST GAME"
-                                },
-                                "anchor": [ 0.5, 1.0 ]
-                            },
-                            "layout": {
-                                "priority": 1,
-                                "x_anchor": "top",
-                                "y_anchor": "middle"
-                            }
-                        },
-                        "game": {
-                            "type": "Node",
-                            "format": {
-                                "type": "Float",
-                                "orientation": "horizontal",
-                                "x_alignment": "center",
-                                "y_alignment": "middle"
-                            },
-                            "data": {
-                                "anchor": [ 0.5, 0.5 ],
-                                "size": [ 370, 100 ]
-                            },
-                            "children": {
-                                "label": {
-                                    "type": "Widget",
-                                    "data": {
-                                        "key": "labelbox",
-                                        "variables": {
-                                            "size": [ 170, 70 ],
-                                            "text": "GAME ID:",
-                                            "halign": "center",
-                                            "background": [ 239, 235, 227, 179 ]
-                                        }
-                                    },
-                                    "layout": {
-                                        "priority": 1,
-                                        "padding": [ 0, 0, 25, 0 ]
-                                    }
-                                },
-                                "field": {
-                                    "type": "Widget",
-                                    "data": {
-                                        "key": "labelbox",
-                                        "variables": {
-                                            "size": [ 170, 70 ],
-                                            "text": "",
-                                            "halign": "center",
-                                            "foreground": "#ffffff",
-                                            "background": [ 70, 70, 70, 179 ]
-                                        }
-                                    },
-                                    "layout": {
-                                        "priority": 2
-                                    }
-                                }
-                            },
-                            "layout": {
-                                "priority": 1,
-                                "padding": [ 0, 0, 0, 5 ]
-                            }
-                        },
-                        "players": {
-                            "type": "Node",
-                            "format": {
-                                "type": "Float",
-                                "orientation": "horizontal",
-                                "x_alignment": "center",
-                                "y_alignment": "middle"
-                            },
-                            "data": {
-                                "anchor": [ 0.5, 0.5 ],
-                                "size": [ 370, 100 ]
-                            },
-                            "children": {
-                                "label": {
-                                    "type": "Widget",
-                                    "data": {
-                                        "key": "labelbox",
-                                        "variables": {
-                                            "size": [ 170, 70 ],
-                                            "text": "PLAYERS:",
-                                            "halign": "center",
-                                            "background": [ 239, 235, 227, 179 ]
-                                        }
-                                    },
-                                    "layout": {
-                                        "priority": 1,
-                                        "padding": [ 0, 0, 25, 0 ]
-                                    }
-                                },
-                                "field": {
-                                    "type": "Widget",
-                                    "data": {
-                                        "key": "labelbox",
-                                        "variables": {
-                                            "size": [ 170, 70 ],
-                                            "text": "1",
-                                            "halign": "center",
-                                            "foreground": "#ffffff",
-                                            "background": [ 70, 70, 70, 179 ]
-                                        }
-                                    },
-                                    "layout": {
-                                        "priority": 2
-                                    }
-                                }
-                            },
-                            "layout": {
-                                "priority": 2,
-                                "padding": [ 0, 25, 0, 0 ]
-                            }
-                        },
-                        "start": {
-                            "type": "Widget",
-                            "data": {
-                                "key": "textbutton",
-                                "variables": {
-                                    "size": [ 220, 75 ],
-                                    "text": "START GAME",
-                                    "font": "pixelmix",
-                                    "color": "#efebe3"
-                                }
-                            },
-                            "layout": {
-                                "priority": 3,
-                                "padding": [ 0, 25, 0, 0 ]
-                            }
-                        }
-                    },
-                    "layout": {
-                        "x_anchor": "center",
-                        "y_anchor": "bottom"
-                    }
-                }
-            }
+          }
         },
         "client": {
-            "type": "Image",
-            "format": {
-                "type": "Anchored"
+          "type": "Image",
+          "format": {
+            "type": "Anchored"
+          },
+          "data": {
+            "texture": "background"
+          },
+          "children": {
+            "back": {
+              "type": "Button",
+              "data": {
+                "upnode": "up",
+                "anchor": [ 0.0, 0.0 ],
+                "size": [ 20, 20 ]
+              },
+              "children": {
+                "up": {
+                  "type": "Image",
+                  "data": {
+                    "texture": "left",
+                    "scale": 4,
+                    "color": "#222222"
+                  }
+                }
+              },
+              "layout": {
+                "x_anchor": "left",
+                "y_anchor": "top",
+                "y_offset": -80,
+                "x_offset": 45,
+                "absolute": true
+              }
             },
-            "data": {
-                "texture": "background"
-            },
-            "children": {
-                "back": {
-                    "type": "Button",
-                    "data": {
-                        "upnode": "up",
-                        "anchor": [ 0.0, 0.0 ],
-                        "size": [ 20, 20 ]
+            "center": {
+              "type": "Node",
+              "format": {
+                "type": "Float",
+                "orientation": "vertical",
+                "x_alignment": "center",
+                "y_alignment": "middle"
+              },
+              "data": {
+                "anchor": [ 0.5, 0.0 ],
+                "size": [ 1000, 700 ]
+              },
+              "children": {
+                "title": {
+                  "type": "Widget",
+                  "data": {
+                    "key": "menutitle",
+                    "variables": {
+                      "text": "JOIN GAME"
                     },
-                    "children": {
-                        "up": {
-                            "type": "Image",
-                            "data": {
-                                "texture": "left",
-                                "scale": 4,
-                                "color": "#222222"
-                            }
-                        }
-                    },
-                    "layout": {
-                        "x_anchor": "left",
-                        "y_anchor": "top",
-                        "y_offset": -80,
-                        "x_offset": 45,
-                        "absolute": true
-                    }
+                    "anchor": [ 0.5, 1.0 ]
+                  },
+                  "layout": {
+                    "x_anchor": "center",
+                    "y_anchor": "top",
+                    "padding": [ 0, 25, 0, 75 ]
+                  }
                 },
-                "center": {
-                    "type": "Node",
-                    "format": {
+                "content": {
+                  "type": "Node",
+                  "format": {
+                    "type": "Float",
+                    "orientation": "horizontal",
+                    "x_alignment": "center",
+                    "y_alignment": "bottom"
+                  },
+                  "data": {
+                    "anchor": [ 0.5, 0.0 ],
+                    "size": [ 1000, 350 ]
+                  },
+                  "children": {
+                    "keys": {
+                      "type": "Widget",
+                      "data": {
+                        "key": "keypad",
+                        "size": [ 500, 500 ]
+                      },
+                      "layout": {
+                        "priority": 1
+                      }
+                    },
+                    "info": {
+                      "type": "Node",
+                      "format": {
                         "type": "Float",
                         "orientation": "vertical",
                         "x_alignment": "center",
-                        "y_alignment": "middle"
-                    },
-                    "data": {
+                        "y_alignment": "bottom"
+                      },
+                      "data": {
                         "anchor": [ 0.5, 0.0 ],
-                        "size": [ 1000, 700 ]
-                    },
-                    "children": {
-                        "title": {
-                            "type": "Widget",
-                            "data": {
-                                "key": "menutitle",
+                        "size": [ 500, 500 ]
+                      },
+                      "children": {
+                        "game": {
+                          "type": "Node",
+                          "format": {
+                            "type": "Float",
+                            "orientation": "horizontal",
+                            "x_alignment": "center",
+                            "y_alignment": "bottom"
+                          },
+                          "data": {
+                            "anchor": [ 0.5, 0.5 ],
+                            "size": [ 370, 100 ]
+                          },
+                          "children": {
+                            "label": {
+                              "type": "Widget",
+                              "data": {
+                                "key": "labelbox",
                                 "variables": {
-                                    "text": "JOIN GAME"
-                                },
-                                "anchor": [ 0.5, 1.0 ]
-                            },
-                            "layout": {
-                                "x_anchor": "center",
-                                "y_anchor": "top",
-                                "padding": [ 0, 25, 0, 75 ]
-                            }
-                        },
-                        "content": {
-                            "type": "Node",
-                            "format": {
-                                "type": "Float",
-                                "orientation": "horizontal",
-                                "x_alignment": "center",
-                                "y_alignment": "bottom"
-                            },
-                            "data": {
-                                "anchor": [ 0.5, 0.0 ],
-                                "size": [ 1000, 350 ]
-                            },
-                            "children": {
-                                "keys": {
-                                    "type": "Widget",
-                                    "data": {
-                                        "key": "keypad",
-                                        "size": [ 500, 500 ]
-                                    },
-                                    "layout": {
-                                        "priority": 1
-                                    }
-                                },
-                                "info": {
-                                    "type": "Node",
-                                    "format": {
-                                        "type": "Float",
-                                        "orientation": "vertical",
-                                        "x_alignment": "center",
-                                        "y_alignment": "bottom"
-                                    },
-                                    "data": {
-                                        "anchor": [ 0.5, 0.0 ],
-                                        "size": [ 500, 500 ]
-                                    },
-                                    "children": {
-                                        "game": {
-                                            "type": "Node",
-                                            "format": {
-                                                "type": "Float",
-                                                "orientation": "horizontal",
-                                                "x_alignment": "center",
-                                                "y_alignment": "bottom"
-                                            },
-                                            "data": {
-                                                "anchor": [ 0.5, 0.5 ],
-                                                "size": [ 370, 100 ]
-                                            },
-                                            "children": {
-                                                "label": {
-                                                    "type": "Widget",
-                                                    "data": {
-                                                        "key": "labelbox",
-                                                        "variables": {
-                                                            "size": [ 170, 70 ],
-                                                            "text": "GAME ID:",
-                                                            "halign": "center",
-                                                            "background": [ 239, 235, 227, 179 ]
-                                                        }
-                                                    },
-                                                    "layout": {
-                                                        "priority": 1,
-                                                        "padding": [ 0, 0, 25, 0 ]
-                                                    }
-                                                },
-                                                "field": {
-                                                    "type": "Widget",
-                                                    "data": {
-                                                        "key": "labelbox",
-                                                        "variables": {
-                                                            "size": [ 170, 70 ],
-                                                            "text": "",
-                                                            "halign": "center",
-                                                            "foreground": "#ffffff",
-                                                            "background": [ 70, 70, 70, 179 ]
-                                                        }
-                                                    },
-                                                    "layout": {
-                                                        "priority": 2
-                                                    }
-                                                }
-                                            },
-                                            "layout": {
-                                                "priority": 1,
-                                                "padding": [ 0, 0, 0, 0 ]
-                                            }
-                                        },
-                                        "players": {
-                                            "type": "Node",
-                                            "format": {
-                                                "type": "Float",
-                                                "orientation": "horizontal",
-                                                "x_alignment": "center",
-                                                "y_alignment": "bottom"
-                                            },
-                                            "data": {
-                                                "anchor": [ 0.5, 0.5 ],
-                                                "size": [ 370, 100 ]
-                                            },
-                                            "children": {
-                                                "label": {
-                                                    "type": "Widget",
-                                                    "data": {
-                                                        "key": "labelbox",
-                                                        "variables": {
-                                                            "size": [ 170, 70 ],
-                                                            "text": "PLAYERS:",
-                                                            "halign": "center",
-                                                            "background": [ 239, 235, 227, 179 ]
-                                                        }
-                                                    },
-                                                    "layout": {
-                                                        "priority": 1,
-                                                        "padding": [ 0, 0, 25, 0 ]
-                                                    }
-                                                },
-                                                "field": {
-                                                    "type": "Widget",
-                                                    "data": {
-                                                        "key": "labelbox",
-                                                        "variables": {
-                                                            "size": [ 170, 70 ],
-                                                            "text": "1",
-                                                            "halign": "center",
-                                                            "foreground": "#ffffff",
-                                                            "background": [ 70, 70, 70, 179 ]
-                                                        }
-                                                    },
-                                                    "layout": {
-                                                        "priority": 2
-                                                    }
-                                                }
-                                            },
-                                            "layout": {
-                                                "priority": 2,
-                                                "padding": [ 0, 25, 0, 0 ]
-                                            }
-                                        },
-                                        "start": {
-                                            "type": "Widget",
-                                            "data": {
-                                                "key": "textbutton",
-                                                "variables": {
-                                                    "size": [ 180, 75 ],
-                                                    "text": "JOIN",
-                                                    "font": "pixelmix",
-                                                    "color": "#efebe3"
-                                                }
-                                            },
-                                            "layout": {
-                                                "priority": 3,
-                                                "padding": [ 0, 25, 0, 0 ]
-                                            }
-                                        }
-
-                                    },
-                                    "layout": {
-                                        "x_anchor": "center",
-                                        "y_anchor": "bottom",
-                                        "padding": [ 0, 30, 0, 0 ]
-                                    }
+                                  "size": [ 170, 70 ],
+                                  "text": "GAME ID:",
+                                  "halign": "center",
+                                  "background": [ 239, 235, 227, 179 ]
                                 }
+                              },
+                              "layout": {
+                                "priority": 1,
+                                "padding": [ 0, 0, 25, 0 ]
+                              }
                             },
-                            "layout": {
-                                "x_anchor": "center",
-                                "y_anchor": "bottom"
+                            "field": {
+                              "type": "Widget",
+                              "data": {
+                                "key": "labelbox",
+                                "variables": {
+                                  "size": [ 170, 70 ],
+                                  "text": "",
+                                  "halign": "center",
+                                  "foreground": "#ffffff",
+                                  "background": [ 70, 70, 70, 179 ]
+                                }
+                              },
+                              "layout": {
+                                "priority": 2
+                              }
                             }
+                          },
+                          "layout": {
+                            "priority": 1,
+                            "padding": [ 0, 0, 0, 0 ]
+                          }
+                        },
+                        "players": {
+                          "type": "Node",
+                          "format": {
+                            "type": "Float",
+                            "orientation": "horizontal",
+                            "x_alignment": "center",
+                            "y_alignment": "bottom"
+                          },
+                          "data": {
+                            "anchor": [ 0.5, 0.5 ],
+                            "size": [ 370, 100 ]
+                          },
+                          "children": {
+                            "label": {
+                              "type": "Widget",
+                              "data": {
+                                "key": "labelbox",
+                                "variables": {
+                                  "size": [ 170, 70 ],
+                                  "text": "PLAYERS:",
+                                  "halign": "center",
+                                  "background": [ 239, 235, 227, 179 ]
+                                }
+                              },
+                              "layout": {
+                                "priority": 1,
+                                "padding": [ 0, 0, 25, 0 ]
+                              }
+                            },
+                            "field": {
+                              "type": "Widget",
+                              "data": {
+                                "key": "labelbox",
+                                "variables": {
+                                  "size": [ 170, 70 ],
+                                  "text": "1",
+                                  "halign": "center",
+                                  "foreground": "#ffffff",
+                                  "background": [ 70, 70, 70, 179 ]
+                                }
+                              },
+                              "layout": {
+                                "priority": 2
+                              }
+                            }
+                          },
+                          "layout": {
+                            "priority": 2,
+                            "padding": [ 0, 25, 0, 0 ]
+                          }
+                        },
+                        "start": {
+                          "type": "Widget",
+                          "data": {
+                            "key": "textbutton",
+                            "variables": {
+                              "size": [ 180, 75 ],
+                              "text": "JOIN",
+                              "font": "pixelmix",
+                              "color": "#efebe3"
+                            }
+                          },
+                          "layout": {
+                            "priority": 3,
+                            "padding": [ 0, 25, 0, 0 ]
+                          }
                         }
-                    },
-                    "layout": {
+
+                      },
+                      "layout": {
                         "x_anchor": "center",
                         "y_anchor": "bottom",
-                        "padding": [ 0, 50, 0, 0 ]
+                        "padding": [ 0, 30, 0, 0 ]
+                      }
                     }
+                  },
+                  "layout": {
+                    "x_anchor": "center",
+                    "y_anchor": "bottom"
+                  }
                 }
+              },
+              "layout": {
+                "x_anchor": "center",
+                "y_anchor": "bottom",
+                "padding": [ 0, 50, 0, 0 ]
+              }
             }
+          }
         }
-    },
-    "fonts": {
+      },
+      "fonts": {
         "pixelmix": {
-            "file": "fonts/pixelmix.ttf",
-            "size": 24
+          "file": "fonts/pixelmix.ttf",
+          "size": 24
         },
         "pixelmix_title": {
-            "file": "fonts/pixelmix.ttf",
-            "size": 36
+          "file": "fonts/pixelmix.ttf",
+          "size": 36
         },
-      "pixelmix_small": {
-        "file": "fonts/pixelmix.ttf",
-        "size": 18
-      },
-      "pixelmix_extra_small": {
-            "file": "fonts/pixelmix.ttf",
-            "size": 12
+        "pixelmix_small": {
+          "file": "fonts/pixelmix.ttf",
+          "size": 18
+        },
+        "pixelmix_extra_small": {
+          "file": "fonts/pixelmix.ttf",
+          "size": 12
         },
         "pixelmix_bold": {
-            "file": "fonts/pixelmix_bold.ttf",
-            "size": 36
+          "file": "fonts/pixelmix_bold.ttf",
+          "size": 36
         },
         "pixel32": {
-            "file": "fonts/RetroGame.ttf",
-            "size": 16
+          "file": "fonts/RetroGame.ttf",
+          "size": 16
         }
+      }
     }
-}

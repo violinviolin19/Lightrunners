@@ -99,6 +99,13 @@ bool GameScene::init(
   ui_layer->setContentSize(dim);
   ui_layer->doLayout();
 
+  auto health_layer = assets->get<cugl::scene2::SceneNode>("health");
+  health_layer->setContentSize(dim);
+  health_layer->doLayout();
+
+  _health_bar = std::dynamic_pointer_cast<cugl::scene2::ProgressBar>(
+      assets->get<cugl::scene2::SceneNode>("health_bar"));
+
   auto win_layer = assets->get<cugl::scene2::SceneNode>("win-scene");
   win_layer->setContentSize(dim);
   win_layer->doLayout();
@@ -144,6 +151,7 @@ bool GameScene::init(
   cugl::Scene2::addChild(background_layer);
   cugl::Scene2::addChild(_world_node);
   cugl::Scene2::addChild(_map);
+  cugl::Scene2::addChild(health_layer);
   cugl::Scene2::addChild(ui_layer);
   cugl::Scene2::addChild(terminal_voting_layer);
   cugl::Scene2::addChild(win_layer);
@@ -161,6 +169,7 @@ void GameScene::dispose() {
   if (!_active) return;
   InputController::get()->dispose();
   _active = false;
+  _health_bar->dispose();
 }
 
 void GameScene::populate(cugl::Size dim) {
@@ -237,6 +246,11 @@ void GameScene::update(float timestep) {
         [this](const std::vector<uint8_t>& data) { processData(data); });
     checkConnection();
   }
+
+
+  CULog("%d", _my_player->getHealth());
+
+  _health_bar->setProgress(static_cast<float>(_my_player->getHealth()) / 100);
 
   if (checkCooperatorWin()) {
     auto win_layer = _assets->get<cugl::scene2::SceneNode>("win-scene");
@@ -316,8 +330,6 @@ void GameScene::update(float timestep) {
   name_text->setText(name_msg);
   name_text->setForeground(cugl::Color4::BLACK);
 
-  //auto text = ui_layer->getChildByName<cugl::scene2::Label>("health");
-  //
   //  auto minimap =
   //  ui_layer->getChildByName<cugl::scene2::SceneNode>("minimap");
   //  std::unordered_map<int, std::shared_ptr<RoomModel>> rooms =
