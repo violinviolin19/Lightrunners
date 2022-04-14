@@ -296,8 +296,8 @@
           "layout": {
             "x_anchor": "right",
             "y_anchor": "bottom",
-            "x_offset": -0.20,
-            "y_offset": 0.18
+            "x_offset": -0.21,
+            "y_offset": 0.16
           },
           "children": {
             "up": {
